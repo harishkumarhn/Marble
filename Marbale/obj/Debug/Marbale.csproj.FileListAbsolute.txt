@@ -6,3 +6,12 @@ D:\Projects\Marbale\Marbale\obj\Debug\Marbale.Properties.Resources.resources
 D:\Projects\Marbale\Marbale\obj\Debug\Marbale.csproj.GenerateResource.Cache
 D:\Projects\Marbale\Marbale\obj\Debug\Marbale.exe
 D:\Projects\Marbale\Marbale\obj\Debug\Marbale.pdb
+F:\Marbles\Marble\Marbale\bin\Debug\Marbale.exe.config
+F:\Marbles\Marble\Marbale\obj\Debug\Marbale.exe
+F:\Marbles\Marble\Marbale\obj\Debug\Marbale.pdb
+F:\Marbles\Marble\Marbale\bin\Debug\Marbale.exe
+F:\Marbles\Marble\Marbale\bin\Debug\Marbale.pdb
+F:\Marbles\Marble\Marbale\obj\Debug\Marbale.csprojResolveAssemblyReference.cache
+F:\Marbles\Marble\Marbale\obj\Debug\Marbale.Login.resources
+F:\Marbles\Marble\Marbale\obj\Debug\Marbale.Properties.Resources.resources
+F:\Marbles\Marble\Marbale\obj\Debug\Marbale.csproj.GenerateResource.Cache
