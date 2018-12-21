@@ -1,0 +1,3 @@
+D:\Projects\Marbale\Marbale.Admin\bin\Debug\Marbale.exe.config
+D:\Projects\Marbale\Marbale.Admin\obj\Debug\Marbale.exe
+D:\Projects\Marbale\Marbale.Admin\obj\Debug\Marbale.pdb

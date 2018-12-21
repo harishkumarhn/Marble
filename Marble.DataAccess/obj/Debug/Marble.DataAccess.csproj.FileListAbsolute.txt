@@ -2,3 +2,4 @@ D:\Projects\Marbale\Marble.DataAccess\bin\Debug\Marble.DataAccess.dll
 D:\Projects\Marbale\Marble.DataAccess\bin\Debug\Marble.DataAccess.pdb
 D:\Projects\Marbale\Marble.DataAccess\obj\Debug\Marble.DataAccess.dll
 D:\Projects\Marbale\Marble.DataAccess\obj\Debug\Marble.DataAccess.pdb
+D:\Projects\Marbale\Marble.DataAccess\obj\Debug\Marble.DataAccess.csprojResolveAssemblyReference.cache

@@ -1,0 +1,8 @@
+D:\Projects\Marbale\Marbale.POS\bin\Debug\Marbale.POS.exe.config
+D:\Projects\Marbale\Marbale.POS\bin\Debug\Marbale.POS.exe
+D:\Projects\Marbale\Marbale.POS\bin\Debug\Marbale.POS.pdb
+D:\Projects\Marbale\Marbale.POS\obj\Debug\Marbale.POS.csprojResolveAssemblyReference.cache
+D:\Projects\Marbale\Marbale.POS\obj\Debug\Marbale.POS.Properties.Resources.resources
+D:\Projects\Marbale\Marbale.POS\obj\Debug\Marbale.POS.csproj.GenerateResource.Cache
+D:\Projects\Marbale\Marbale.POS\obj\Debug\Marbale.POS.exe
+D:\Projects\Marbale\Marbale.POS\obj\Debug\Marbale.POS.pdb
