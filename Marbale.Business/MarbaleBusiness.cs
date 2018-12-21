@@ -30,6 +30,7 @@ namespace Marbale.Business
                 setting.DefaultValue = dr.IsNull("DefaultValue") ? "" : dr["DefaultValue"].ToString();
                 setting.Description = dr.IsNull("Description") ? "" : dr["Description"].ToString();
                 setting.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                setting.Caption = dr.IsNull("Caption") ? "" : dr["Caption"].ToString();
                 setting.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                 setting.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                 setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
@@ -50,9 +51,10 @@ namespace Marbale.Business
             foreach (DataRow dr in dataTable.Rows)
             {
                 AppSetting setting = new AppSetting();
-                setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
                 setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                 setting.Value = dr.IsNull("Value") ? "" : dr["Value"].ToString();
+                setting.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
 
                 listSettings.Add(setting);
             }

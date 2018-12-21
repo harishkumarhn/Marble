@@ -25,7 +25,9 @@ namespace Marbale.DataAccess
 
         public DataTable GetAppSettings(string screen)
         {
-            return conn.executeSelectQuery("sp_GetAppSettings");
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@screen", screen);
+            return conn.executeSelectQuery("sp_GetAppSettings", sqlParameters);
         }
         public int UpdateSettings(int id, string name, string description, string defaultvalue,
             string type, string screenGroup,string updatedby, bool active, bool userLevel, bool posLevel)

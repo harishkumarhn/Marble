@@ -29,6 +29,8 @@ namespace Marbale.SiteSetup
 
         private void POSTab_Click(object sender, EventArgs e)
         {
+            var appSettings = marbaleBusiness.GetAppSettings("POS");
+            pos_appSettingsGrid.DataSource = appSettings;
         }
 
         private void configuration_Click(object sender, EventArgs e)
@@ -54,13 +56,14 @@ namespace Marbale.SiteSetup
             var setting = new Settings();
             setting.Id = Convert.ToInt32(settings_grid.Rows[rowIndex].Cells[0].Value);
             setting.Name = Convert.ToString(settings_grid.Rows[rowIndex].Cells[1].Value);
-            setting.Description = Convert.ToString(settings_grid.Rows[rowIndex].Cells[2].Value);
-            setting.DefaultValue = Convert.ToString(settings_grid.Rows[rowIndex].Cells[3].Value);
-            setting.Type = Convert.ToString(settings_grid.Rows[rowIndex].Cells[4].Value);
-            setting.ScreenGroup = Convert.ToString(settings_grid.Rows[rowIndex].Cells[5].Value);
-            setting.Active = Convert.ToBoolean(settings_grid.Rows[rowIndex].Cells[6].Value);
-            setting.UserLevel = Convert.ToBoolean(settings_grid.Rows[rowIndex].Cells[7].Value);
-            setting.PosLevel = Convert.ToBoolean(settings_grid.Rows[rowIndex].Cells[8].Value);
+            setting.Caption = Convert.ToString(settings_grid.Rows[rowIndex].Cells[2].Value);
+            setting.Description = Convert.ToString(settings_grid.Rows[rowIndex].Cells[3].Value);
+            setting.DefaultValue = Convert.ToString(settings_grid.Rows[rowIndex].Cells[4].Value);
+            setting.Type = Convert.ToString(settings_grid.Rows[rowIndex].Cells[5].Value);
+            setting.ScreenGroup = Convert.ToString(settings_grid.Rows[rowIndex].Cells[6].Value);
+            setting.Active = Convert.ToBoolean(settings_grid.Rows[rowIndex].Cells[7].Value);
+            setting.UserLevel = Convert.ToBoolean(settings_grid.Rows[rowIndex].Cells[8].Value);
+            setting.PosLevel = Convert.ToBoolean(settings_grid.Rows[rowIndex].Cells[9].Value);
             setting.LastUpdatedBy = "Harish";
             lstSettings.Add(setting);
 
@@ -85,33 +88,29 @@ namespace Marbale.SiteSetup
             }
         }
 
-        private void txt_skin_TextChanged(object sender, EventArgs e)
+        private void moduleValuesTab_Click(object sender, EventArgs e)
         {
-            lstAppSetting.Add(new AppSetting() {
-                Name = "POS_SKIN_COLOR",
-                ScreenGroup = "POS",
-                Value = txt_skin.Text
-            });
+            var appSettings = marbaleBusiness.GetAppSettings("POS");
+            pos_appSettingsGrid.DataSource = appSettings;
+            pos_appSettingsGrid.Columns[0].Width = 300;
+            pos_appSettingsGrid.Columns[1].Width = 300;
+            pos_appSettingsGrid.BackgroundColor = Color.White;
+
+            pos_appSettingsGrid.Columns[2].Visible = false;
+            pos_appSettingsGrid.Columns[3].Visible = false;
+
         }
 
-        private void cmb_payMode_SelectedIndexChanged(object sender, EventArgs e)
+        private void pos_appSettingsGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            lstAppSetting.Add(new AppSetting()
-            {
-                Name = "DEFAULT_PAY_MODE",
-                ScreenGroup = "POS",
-                Value = cmb_payMode.Text
-            });
-        }
+            var rowIndex = e.RowIndex;
+            var appSetting = new AppSetting();
+            appSetting.Name = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[0].Value);
+            appSetting.Value = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[1].Value);
+            appSetting.ScreenGroup = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[2].Value);
+            appSetting.Type = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[3].Value);
 
-        private void txt_MaxToken_TextChanged(object sender, EventArgs e)
-        {
-            lstAppSetting.Add(new AppSetting()
-            {
-                Name = "MAX_TOKEN_NUMBER",
-                ScreenGroup = "POS",
-                Value = txt_MaxToken.Text
-            });
+            lstAppSetting.Add(appSetting);
         }
 
 
