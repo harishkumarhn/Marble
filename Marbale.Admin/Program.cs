@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Marbale.SiteSetup;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,10 +15,9 @@ namespace Marbale
         [STAThread]
         static void Main()
         {
-            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new SiteConfiguration());
         }
     }
 }
