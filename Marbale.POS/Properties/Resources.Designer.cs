@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Marbale.POS.Properties
-{
-
-
+namespace Marbale.POS.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,49 +22,141 @@ namespace Marbale.POS.Properties
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Marbale.POS.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap backward {
+            get {
+                object obj = ResourceManager.GetObject("backward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Calculator_icon__2_ {
+            get {
+                object obj = ResourceManager.GetObject("Calculator-icon (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap forwards__1_ {
+            get {
+                object obj = ResourceManager.GetObject("forwards (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_bookmark_new_118908__1_ {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_bookmark-new_118908 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_bookmark_new_118908__2_ {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_bookmark-new_118908 (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_Delete_1493279 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_Delete_1493279", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_document_print_118913 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_document-print_118913", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_edit_clear_118917 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_edit-clear_118917", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_payment_1954199 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_payment_1954199", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu {
+            get {
+                object obj = ResourceManager.GetObject("menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

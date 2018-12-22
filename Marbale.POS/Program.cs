@@ -16,7 +16,8 @@ namespace Marbale.POS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new POSForm());
+            Console.ReadLine();
         }
     }
 }

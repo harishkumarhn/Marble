@@ -6,3 +6,15 @@ D:\Projects\Marbale\Marbale.POS\obj\Debug\Marbale.POS.Properties.Resources.resou
 D:\Projects\Marbale\Marbale.POS\obj\Debug\Marbale.POS.csproj.GenerateResource.Cache
 D:\Projects\Marbale\Marbale.POS\obj\Debug\Marbale.POS.exe
 D:\Projects\Marbale\Marbale.POS\obj\Debug\Marbale.POS.pdb
+F:\MarbleProject\Marble\Marbale.POS\bin\Debug\Marbale.POS.exe.config
+F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.exe
+F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.pdb
+F:\MarbleProject\Marble\Marbale.POS\bin\Debug\Marbale.POS.exe
+F:\MarbleProject\Marble\Marbale.POS\bin\Debug\Marbale.POS.pdb
+F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.csprojResolveAssemblyReference.cache
+F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.ShiftForm.resources
+F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.Properties.Resources.resources
+F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.ValidationPopUp.resources
+F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.csproj.GenerateResource.Cache
+F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.POSForm.resources
+F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.CardTask.resources
