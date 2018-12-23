@@ -32,7 +32,6 @@ namespace Marbale.DataAccess
             }
             return conn;
         }
-
         /// <summary>
         /// select data by stored procedure
         /// </summary>
@@ -91,7 +90,6 @@ namespace Marbale.DataAccess
             }
             return dataTable;
         }
-
         /// <method>
         /// Insert sp
         /// </method>
