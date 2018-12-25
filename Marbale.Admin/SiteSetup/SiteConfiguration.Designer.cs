@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.configuration = new System.Windows.Forms.TabControl();
             this.valuesTabPage = new System.Windows.Forms.TabPage();
             this.moduleValuesTab = new System.Windows.Forms.TabControl();
@@ -41,6 +41,7 @@
             this.refresh_pos = new System.Windows.Forms.Button();
             this.save_pos = new System.Windows.Forms.Button();
             this.pos_contentPanel = new System.Windows.Forms.Panel();
+            this.pos_appSettingsGrid = new System.Windows.Forms.DataGridView();
             this.cardsTab = new System.Windows.Forms.TabPage();
             this.settingsTabPage = new System.Windows.Forms.TabPage();
             this.close_settings = new System.Windows.Forms.Button();
@@ -59,7 +60,6 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Name_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pos_appSettingsGrid = new System.Windows.Forms.DataGridView();
             this.configuration.SuspendLayout();
             this.valuesTabPage.SuspendLayout();
             this.moduleValuesTab.SuspendLayout();
@@ -67,9 +67,9 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.pos_actionPanel.SuspendLayout();
             this.pos_contentPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pos_appSettingsGrid)).BeginInit();
             this.settingsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settings_grid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pos_appSettingsGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // configuration
@@ -185,6 +185,25 @@
             this.pos_contentPanel.Name = "pos_contentPanel";
             this.pos_contentPanel.Size = new System.Drawing.Size(871, 406);
             this.pos_contentPanel.TabIndex = 0;
+            // 
+            // pos_appSettingsGrid
+            // 
+            this.pos_appSettingsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.pos_appSettingsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pos_appSettingsGrid.Location = new System.Drawing.Point(0, 0);
+            this.pos_appSettingsGrid.Name = "pos_appSettingsGrid";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.pos_appSettingsGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.pos_appSettingsGrid.Size = new System.Drawing.Size(871, 406);
+            this.pos_appSettingsGrid.TabIndex = 0;
+            this.pos_appSettingsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pos_appSettingsGrid_CellContentClick);
+            this.pos_appSettingsGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.pos_appSettingsGrid_CellValueChanged);
             // 
             // cardsTab
             // 
@@ -337,24 +356,6 @@
             this.cl_Id.HeaderText = "ID";
             this.cl_Id.Name = "cl_Id";
             // 
-            // pos_appSettingsGrid
-            // 
-            this.pos_appSettingsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.pos_appSettingsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pos_appSettingsGrid.Location = new System.Drawing.Point(0, 0);
-            this.pos_appSettingsGrid.Name = "pos_appSettingsGrid";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.pos_appSettingsGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.pos_appSettingsGrid.Size = new System.Drawing.Size(871, 406);
-            this.pos_appSettingsGrid.TabIndex = 0;
-            this.pos_appSettingsGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.pos_appSettingsGrid_CellValueChanged);
-            // 
             // SiteConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -370,9 +371,9 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pos_actionPanel.ResumeLayout(false);
             this.pos_contentPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pos_appSettingsGrid)).EndInit();
             this.settingsTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.settings_grid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pos_appSettingsGrid)).EndInit();
             this.ResumeLayout(false);
 
         }

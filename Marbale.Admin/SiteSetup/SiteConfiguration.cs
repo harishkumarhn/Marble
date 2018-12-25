@@ -91,6 +91,8 @@ namespace Marbale.SiteSetup
         private void moduleValuesTab_Click(object sender, EventArgs e)
         {
             var appSettings = marbaleBusiness.GetAppSettings("POS");
+
+          
             pos_appSettingsGrid.DataSource = appSettings;
             pos_appSettingsGrid.Columns[0].Width = 300;
             pos_appSettingsGrid.Columns[1].Width = 300;
@@ -111,6 +113,11 @@ namespace Marbale.SiteSetup
             appSetting.Type = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[3].Value);
 
             lstAppSetting.Add(appSetting);
+        }
+
+        private void pos_appSettingsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
 

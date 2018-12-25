@@ -44,7 +44,7 @@ namespace Marbale.Business
             return listSettings;
         }
 
-        public List<AppSetting> GetAppSettings(string screen)
+        public List<AppSetting> GetAppSettings(string screen,bool fromAdmin = false)
         {
             var dataTable = marbaleData.GetAppSettings(screen);
             List<AppSetting> listSettings = new List<AppSetting>();

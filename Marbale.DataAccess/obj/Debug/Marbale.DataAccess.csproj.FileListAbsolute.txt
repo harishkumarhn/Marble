@@ -8,3 +8,8 @@ D:\Projects\Marbale\Marbale.DataAccess\bin\Debug\Marbale.DataAccess.pdb
 D:\Projects\Marbale\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.dll
 D:\Projects\Marbale\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.pdb
 D:\Projects\Marbale\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.csprojResolveAssemblyReference.cache
+F:\MarbleProject\Marble\Marbale.DataAccess\bin\Debug\Marbale.DataAccess.dll
+F:\MarbleProject\Marble\Marbale.DataAccess\bin\Debug\Marbale.DataAccess.pdb
+F:\MarbleProject\Marble\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.csprojResolveAssemblyReference.cache
+F:\MarbleProject\Marble\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.dll
+F:\MarbleProject\Marble\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.pdb

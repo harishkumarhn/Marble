@@ -139,6 +139,12 @@
   <ItemGroup>
     <None Include="Resources\iconfinder_edit-clear_118917.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Marbale.Business\Marbale.Business.csproj">
+      <Project>{d3791924-6c85-4aad-8bab-3e3cd23c22e6}</Project>
+      <Name>Marbale.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

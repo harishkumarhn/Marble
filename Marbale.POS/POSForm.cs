@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Marbale.Business;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -110,7 +111,9 @@ namespace Marbale.POS
 
         private void POSForm_Load(object sender, EventArgs e)
         {
+           
             POSOperations pos = new POSOperations();
+         
             CardStatuses = pos.IssuedCards();
 
         }

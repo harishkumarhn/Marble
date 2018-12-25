@@ -18,7 +18,7 @@ namespace Marbale.DataAccess
         public DBConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn = new SqlConnection("Data Source=HARISH-PC\\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
+            conn = new SqlConnection(@"Data Source=SRIDHARNAIK-PC\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
         }
 
         /// <method>
@@ -57,6 +57,7 @@ namespace Marbale.DataAccess
             }
             catch (SqlException e)
             {
+                throw e;
                 // Console.Write("Error - Connection.executeUpdateQuery - Query: " + _query + " \nException: " + e.StackTrace.ToString());
                 return null;
             }

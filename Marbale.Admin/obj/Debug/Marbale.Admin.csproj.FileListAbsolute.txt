@@ -12,3 +12,17 @@ D:\Projects\Marbale\Marbale.Admin\bin\Debug\Marble.Business.pdb
 D:\Projects\Marbale\Marbale.Admin\bin\Debug\Marbale.DataAccess.dll
 D:\Projects\Marbale\Marbale.Admin\bin\Debug\Marbale.DataAccess.pdb
 D:\Projects\Marbale\Marbale.Admin\obj\Debug\Marbale.SiteSetup.SiteConfiguration.resources
+F:\MarbleProject\Marble\Marbale.Admin\bin\Debug\Marbale.exe.config
+F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.exe
+F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.pdb
+F:\MarbleProject\Marble\Marbale.Admin\bin\Debug\Marbale.exe
+F:\MarbleProject\Marble\Marbale.Admin\bin\Debug\Marbale.pdb
+F:\MarbleProject\Marble\Marbale.Admin\bin\Debug\Marble.Business.dll
+F:\MarbleProject\Marble\Marbale.Admin\bin\Debug\Marbale.DataAccess.dll
+F:\MarbleProject\Marble\Marbale.Admin\bin\Debug\Marble.Business.pdb
+F:\MarbleProject\Marble\Marbale.Admin\bin\Debug\Marbale.DataAccess.pdb
+F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Admin.csprojResolveAssemblyReference.cache
+F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Login.resources
+F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Properties.Resources.resources
+F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.SiteSetup.SiteConfiguration.resources
+F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Admin.csproj.GenerateResource.Cache

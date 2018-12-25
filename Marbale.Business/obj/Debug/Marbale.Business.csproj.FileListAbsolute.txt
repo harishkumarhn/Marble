@@ -12,3 +12,10 @@ D:\Projects\Marbale\Marbale.Business\bin\Debug\Marble.Business.dll
 D:\Projects\Marbale\Marbale.Business\bin\Debug\Marble.Business.pdb
 D:\Projects\Marbale\Marbale.Business\bin\Debug\Marbale.DataAccess.dll
 D:\Projects\Marbale\Marbale.Business\bin\Debug\Marbale.DataAccess.pdb
+F:\MarbleProject\Marble\Marbale.Business\bin\Debug\Marble.Business.dll
+F:\MarbleProject\Marble\Marbale.Business\bin\Debug\Marble.Business.pdb
+F:\MarbleProject\Marble\Marbale.Business\bin\Debug\Marbale.DataAccess.dll
+F:\MarbleProject\Marble\Marbale.Business\bin\Debug\Marbale.DataAccess.pdb
+F:\MarbleProject\Marble\Marbale.Business\obj\Debug\Marbale.Business.csprojResolveAssemblyReference.cache
+F:\MarbleProject\Marble\Marbale.Business\obj\Debug\Marble.Business.dll
+F:\MarbleProject\Marble\Marbale.Business\obj\Debug\Marble.Business.pdb
