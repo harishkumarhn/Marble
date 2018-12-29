@@ -44,7 +44,7 @@ namespace Marbale.Business
             return listSettings;
         }
 
-        public List<AppSetting> GetAppSettings(string screen,bool fromAdmin = false)
+        public List<AppSetting> GetAppSettings(string screen)
         {
             var dataTable = marbaleData.GetAppSettings(screen);
             List<AppSetting> listSettings = new List<AppSetting>();
@@ -52,6 +52,7 @@ namespace Marbale.Business
             {
                 AppSetting setting = new AppSetting();
                 setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                setting.Caption = dr.IsNull("Caption") ? "" : dr["Caption"].ToString();
                 setting.Value = dr.IsNull("Value") ? "" : dr["Value"].ToString();
                 setting.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
                 setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
@@ -65,8 +66,8 @@ namespace Marbale.Business
         {
             foreach(var setting in settings)
             {
-                marbaleData.UpdateSettings(setting.Id, setting.Name, setting.Description, setting.DefaultValue, setting.Type,
-                    setting.ScreenGroup, setting.LastUpdatedBy, setting.Active, setting.UserLevel, setting.PosLevel);
+                //marbaleData.UpdateSettings(setting.Id, setting.Name,setting.Caption, setting.Description, setting.DefaultValue, setting.Type,
+                //    setting.ScreenGroup, setting.LastUpdatedBy, setting.Active, setting.UserLevel, setting.PosLevel);
             }
             return true;
         }

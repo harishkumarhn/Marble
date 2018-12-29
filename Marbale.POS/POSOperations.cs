@@ -16,7 +16,7 @@ namespace Marbale.POS
         {
         
             con = new SqlConnection();
-            con.ConnectionString = @"data source=SRIDHARNAIK-PC\SQLEXPRESS;integrated security=true;database=MARBLE";
+            con.ConnectionString = @"data source=SRIDHARNAIK-PC\SQLEXPRESS;integrated security=true;database=MARBALE";
             cmd = new SqlCommand();
             cmd.Connection = con;
         }

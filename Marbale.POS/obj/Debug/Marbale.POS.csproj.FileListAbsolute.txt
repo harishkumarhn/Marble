@@ -18,3 +18,7 @@ F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.ValidationPopUp.resour
 F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.csproj.GenerateResource.Cache
 F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.POSForm.resources
 F:\MarbleProject\Marble\Marbale.POS\obj\Debug\Marbale.POS.CardTask.resources
+F:\MarbleProject\Marble\Marbale.POS\bin\Debug\Marble.Business.dll
+F:\MarbleProject\Marble\Marbale.POS\bin\Debug\Marbale.DataAccess.dll
+F:\MarbleProject\Marble\Marbale.POS\bin\Debug\Marble.Business.pdb
+F:\MarbleProject\Marble\Marbale.POS\bin\Debug\Marbale.DataAccess.pdb

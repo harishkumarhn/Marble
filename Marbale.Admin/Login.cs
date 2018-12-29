@@ -12,6 +12,8 @@ namespace Marbale
 {
     public partial class Login : Form
     {
+        public static string UserName;
+        public static  string Password;
         public Login()
         {
             InitializeComponent();
@@ -33,11 +35,13 @@ namespace Marbale
             bool LoginStatusAdmin = a.LoginAdmin(txtLoginId.Text,txtPassword.Text);
             if (LoginStatusAdmin == true)
             {
-
+                UserName = txtLoginId.Text;
+                Password = txtPassword.Text;
+              
             }
             else
             {
-                MessageBox.Show("UserName and pAssword is wrong");
+                MessageBox.Show("UserName and password is wrong");
             }
         }
     }

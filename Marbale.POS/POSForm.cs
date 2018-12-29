@@ -1,4 +1,6 @@
 ﻿using Marbale.Business;
+using Marble.Business;
+using Marble.Business.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +16,9 @@ namespace Marbale.POS
 {
     public partial class POSForm : Form
     {
+        //LoginModel loginmodel = new LoginModel();
+        MarbaleBusiness marbleb= new MarbaleBusiness();
+        POSBusiness posBusiness = new POSBusiness();
         string CardNumber = "";
         bool status = true;
         IList<POSProperties> CardStatuses = new List<POSProperties>();
@@ -111,16 +116,115 @@ namespace Marbale.POS
 
         private void POSForm_Load(object sender, EventArgs e)
         {
-           
+          
             POSOperations pos = new POSOperations();
+          //  TaskPanel.Hide();
          
+            var dataTable = marbleb.GetAppSettings("POS");
+            ChangePOSColor(dataTable);
             CardStatuses = pos.IssuedCards();
+            var datatable = posBusiness.GetDefaultPaymentDropdown();
+            cmbDefaultCashMode.DataSource = datatable;
+            cmbDefaultCashMode.DisplayMember = "CashMode";
+            cmbDefaultCashMode.ValueMember = "id";
+        }
 
+        private void ChangePOSColor(List<Marble.Business.ViewModels.AppSetting> dataTable)
+        {
+            foreach (var item in dataTable)
+            {
+                if (item.Name == "POS_SKIN_COLOR")
+                {
+                    panel3.BackColor = Color.FromName(item.Value);
+                    break;
+                }
+            }
         }
 
         private void TaskPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ToolSubPanel.Hide();
+            btnTransperCard.Show();
+            //CardValueAmount.Hide();
+            //TaskPanel.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            btnTransperCard.Hide();
+            //CardValueAmount.Show();
+          //  CardAmountPanel.Show();
+        }
+
+        private void cmbDefaultCashMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        //    var datatable = posBusiness.GetDefaultPaymentDropdown();
+        }
+
+        private void btnChangelogin_Click(object sender, EventArgs e)
+        {
+            if (LoginModel.Password == txtCurrentPassword.Text && txtNewPassword.Text==txtRenterNewPassword.Text)
+            {
+           int updateloginCondition=     posBusiness.UpdatePOSUserCredential(txtCurrentPassword.Text);
+           if (updateloginCondition == 1)
+           {
+               lblErrorDisplaymsgPOS.Text = "Upated Successfully";
+           }
+           else
+           {
+               lblErrorDisplaymsgPOS.Text = "Error Occured";
+           }
+            }
+            else
+            {
+                POSDisplayErrorMsg();
+               // MessageBox.Show("Please Enter Correct credentials");
+            }
+        }
+        public void POSDisplayErrorMsg()
+        {
+            lblErrorDisplaymsgPOS.Show();
+            lblErrorDisplaymsgPOS.BackColor = Color.Red;
+            lblErrorDisplaymsgPOS.ForeColor = Color.White;
+            lblErrorDisplaymsgPOS.Text = "Error Occured";
+        }
+        public void ResetErrorMsgPOS()
+        {
+            lblErrorDisplaymsgPOS.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ToolSubPanel.Show();
+        }
+
+        private void btnTransperCard_Click(object sender, EventArgs e)
+        {
+            CardTask cardtask = new CardTask();
+            cardtask.StartPosition = FormStartPosition.CenterParent;
+        }
+
+        private void ChangeSkinColor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+            {
+             CardReaderPanel.BackColor=panel3.BackColor = colorDialog1.Color;
+               
+            }
+
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            var dataTable = marbleb.GetAppSettings("POS");
+            ChangePOSColor(dataTable);
+            ResetErrorMsgPOS();
         }
     }
 }

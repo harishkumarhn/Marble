@@ -1,0 +1,10 @@
+SerPort = new SerialPort("COM8");
+
+ try
+ {
+     SerPort.Open();
+ }
+ catch (Exception ex)
+ {
+     Console.WriteLine("Error opening port: {0}", ex.Message);
+ } 

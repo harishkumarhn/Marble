@@ -28,11 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.TaskPanel = new System.Windows.Forms.Panel();
-            this.btnTransperCard = new System.Windows.Forms.Button();
-            this.panelProduct = new System.Windows.Forms.Panel();
+            this.productpagePanel = new System.Windows.Forms.Panel();
+            this.ToolSubPanel = new System.Windows.Forms.Panel();
+            this.cmbDefaultCashMode = new System.Windows.Forms.ComboBox();
+            this.lblDefaultpaymode = new System.Windows.Forms.Label();
+            this.btnCardReconnect = new System.Windows.Forms.Button();
+            this.lblCardReader = new System.Windows.Forms.Label();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.ChangeSkinColor = new System.Windows.Forms.Button();
+            this.lblChangePOSSkinColor = new System.Windows.Forms.Label();
+            this.btnChangelogin = new System.Windows.Forms.Button();
+            this.txtRenterNewPassword = new System.Windows.Forms.TextBox();
+            this.txtNewPassword = new System.Windows.Forms.TextBox();
+            this.txtCurrentPassword = new System.Windows.Forms.TextBox();
+            this.lblReenterNewPassword = new System.Windows.Forms.Label();
+            this.lblNewPassword = new System.Windows.Forms.Label();
+            this.lblCurrentPassword = new System.Windows.Forms.Label();
             this.btnRefundCard = new System.Windows.Forms.Button();
+            this.btnTransperCard = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnNewForward = new System.Windows.Forms.Button();
             this.btnForwardBackword = new System.Windows.Forms.Button();
@@ -40,7 +53,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ProductbtnTop = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnTransaction = new System.Windows.Forms.Button();
@@ -59,7 +72,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.CardReaderPanel = new System.Windows.Forms.Panel();
             this.txtCreditPlus = new System.Windows.Forms.TextBox();
             this.txtGame = new System.Windows.Forms.TextBox();
             this.txtTime = new System.Windows.Forms.TextBox();
@@ -80,69 +93,228 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblDisplayCardStatus = new System.Windows.Forms.Label();
             this.lblCardNum = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            this.TaskPanel.SuspendLayout();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.productpagePanel.SuspendLayout();
+            this.ToolSubPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.CardReaderPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // productpagePanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.panel1.Controls.Add(this.TaskPanel);
-            this.panel1.Controls.Add(this.panelProduct);
-            this.panel1.Controls.Add(this.btnRefundCard);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(356, 713);
-            this.panel1.TabIndex = 0;
+            this.productpagePanel.AutoSize = true;
+            this.productpagePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.productpagePanel.Controls.Add(this.ToolSubPanel);
+            this.productpagePanel.Controls.Add(this.btnRefundCard);
+            this.productpagePanel.Controls.Add(this.btnTransperCard);
+            this.productpagePanel.Controls.Add(this.panel2);
+            this.productpagePanel.Controls.Add(this.button4);
+            this.productpagePanel.Controls.Add(this.button3);
+            this.productpagePanel.Controls.Add(this.button2);
+            this.productpagePanel.Controls.Add(this.ProductbtnTop);
+            this.productpagePanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.productpagePanel.Location = new System.Drawing.Point(0, 0);
+            this.productpagePanel.Name = "productpagePanel";
+            this.productpagePanel.Size = new System.Drawing.Size(359, 722);
+            this.productpagePanel.TabIndex = 0;
             // 
-            // TaskPanel
+            // ToolSubPanel
             // 
-            this.TaskPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.TaskPanel.Controls.Add(this.btnTransperCard);
-            this.TaskPanel.Location = new System.Drawing.Point(12, 107);
-            this.TaskPanel.Name = "TaskPanel";
-            this.TaskPanel.Size = new System.Drawing.Size(330, 192);
-            this.TaskPanel.TabIndex = 7;
-            this.TaskPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.TaskPanel_Paint);
+            this.ToolSubPanel.AutoSize = true;
+            this.ToolSubPanel.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.ToolSubPanel.Controls.Add(this.cmbDefaultCashMode);
+            this.ToolSubPanel.Controls.Add(this.ChangeSkinColor);
+            this.ToolSubPanel.Controls.Add(this.lblDefaultpaymode);
+            this.ToolSubPanel.Controls.Add(this.btnCardReconnect);
+            this.ToolSubPanel.Controls.Add(this.lblCardReader);
+            this.ToolSubPanel.Controls.Add(this.btnReset);
+            this.ToolSubPanel.Controls.Add(this.lblChangePOSSkinColor);
+            this.ToolSubPanel.Controls.Add(this.btnChangelogin);
+            this.ToolSubPanel.Controls.Add(this.txtRenterNewPassword);
+            this.ToolSubPanel.Controls.Add(this.txtNewPassword);
+            this.ToolSubPanel.Controls.Add(this.txtCurrentPassword);
+            this.ToolSubPanel.Controls.Add(this.lblReenterNewPassword);
+            this.ToolSubPanel.Controls.Add(this.lblNewPassword);
+            this.ToolSubPanel.Controls.Add(this.lblCurrentPassword);
+            this.ToolSubPanel.Location = new System.Drawing.Point(0, 50);
+            this.ToolSubPanel.Name = "ToolSubPanel";
+            this.ToolSubPanel.Size = new System.Drawing.Size(356, 599);
+            this.ToolSubPanel.TabIndex = 6;
+            this.ToolSubPanel.Visible = false;
             // 
-            // btnTransperCard
+            // cmbDefaultCashMode
             // 
-            this.btnTransperCard.Location = new System.Drawing.Point(20, 14);
-            this.btnTransperCard.Name = "btnTransperCard";
-            this.btnTransperCard.Size = new System.Drawing.Size(98, 52);
-            this.btnTransperCard.TabIndex = 0;
-            this.btnTransperCard.Text = "Transfer Card";
-            this.btnTransperCard.UseVisualStyleBackColor = true;
+            this.cmbDefaultCashMode.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDefaultCashMode.FormattingEnabled = true;
+            this.cmbDefaultCashMode.Location = new System.Drawing.Point(180, 363);
+            this.cmbDefaultCashMode.Name = "cmbDefaultCashMode";
+            this.cmbDefaultCashMode.Size = new System.Drawing.Size(121, 27);
+            this.cmbDefaultCashMode.TabIndex = 15;
+            this.cmbDefaultCashMode.SelectedIndexChanged += new System.EventHandler(this.cmbDefaultCashMode_SelectedIndexChanged);
             // 
-            // panelProduct
+            // lblDefaultpaymode
             // 
-            this.panelProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.panelProduct.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelProduct.Location = new System.Drawing.Point(0, 305);
-            this.panelProduct.Name = "panelProduct";
-            this.panelProduct.Size = new System.Drawing.Size(356, 350);
-            this.panelProduct.TabIndex = 6;
+            this.lblDefaultpaymode.AutoSize = true;
+            this.lblDefaultpaymode.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDefaultpaymode.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblDefaultpaymode.Location = new System.Drawing.Point(13, 362);
+            this.lblDefaultpaymode.Name = "lblDefaultpaymode";
+            this.lblDefaultpaymode.Size = new System.Drawing.Size(141, 18);
+            this.lblDefaultpaymode.TabIndex = 14;
+            this.lblDefaultpaymode.Text = "Default Pay Mode";
+            // 
+            // btnCardReconnect
+            // 
+            this.btnCardReconnect.AutoSize = true;
+            this.btnCardReconnect.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnCardReconnect.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCardReconnect.Location = new System.Drawing.Point(179, 272);
+            this.btnCardReconnect.Name = "btnCardReconnect";
+            this.btnCardReconnect.Size = new System.Drawing.Size(143, 38);
+            this.btnCardReconnect.TabIndex = 13;
+            this.btnCardReconnect.Text = "Card-ReConnect";
+            this.btnCardReconnect.UseVisualStyleBackColor = false;
+            // 
+            // lblCardReader
+            // 
+            this.lblCardReader.AutoSize = true;
+            this.lblCardReader.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCardReader.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblCardReader.Location = new System.Drawing.Point(12, 281);
+            this.lblCardReader.Name = "lblCardReader";
+            this.lblCardReader.Size = new System.Drawing.Size(103, 18);
+            this.lblCardReader.TabIndex = 12;
+            this.lblCardReader.Text = "Card Reader";
+            // 
+            // btnReset
+            // 
+            this.btnReset.AutoSize = true;
+            this.btnReset.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnReset.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.Location = new System.Drawing.Point(179, 220);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(143, 38);
+            this.btnReset.TabIndex = 10;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // ChangeSkinColor
+            // 
+            this.ChangeSkinColor.AutoSize = true;
+            this.ChangeSkinColor.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.ChangeSkinColor.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChangeSkinColor.Location = new System.Drawing.Point(11, 221);
+            this.ChangeSkinColor.Name = "ChangeSkinColor";
+            this.ChangeSkinColor.Size = new System.Drawing.Size(143, 38);
+            this.ChangeSkinColor.TabIndex = 9;
+            this.ChangeSkinColor.Text = "Change";
+            this.ChangeSkinColor.UseVisualStyleBackColor = false;
+            this.ChangeSkinColor.Click += new System.EventHandler(this.ChangeSkinColor_Click);
+            // 
+            // lblChangePOSSkinColor
+            // 
+            this.lblChangePOSSkinColor.AutoSize = true;
+            this.lblChangePOSSkinColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChangePOSSkinColor.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblChangePOSSkinColor.Location = new System.Drawing.Point(9, 197);
+            this.lblChangePOSSkinColor.Name = "lblChangePOSSkinColor";
+            this.lblChangePOSSkinColor.Size = new System.Drawing.Size(171, 16);
+            this.lblChangePOSSkinColor.TabIndex = 8;
+            this.lblChangePOSSkinColor.Text = "Change POS Skin Color";
+            // 
+            // btnChangelogin
+            // 
+            this.btnChangelogin.AutoSize = true;
+            this.btnChangelogin.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnChangelogin.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangelogin.Location = new System.Drawing.Point(179, 141);
+            this.btnChangelogin.Name = "btnChangelogin";
+            this.btnChangelogin.Size = new System.Drawing.Size(143, 46);
+            this.btnChangelogin.TabIndex = 7;
+            this.btnChangelogin.Text = "Change";
+            this.btnChangelogin.UseVisualStyleBackColor = false;
+            this.btnChangelogin.Click += new System.EventHandler(this.btnChangelogin_Click);
+            // 
+            // txtRenterNewPassword
+            // 
+            this.txtRenterNewPassword.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.txtRenterNewPassword.Location = new System.Drawing.Point(179, 100);
+            this.txtRenterNewPassword.Multiline = true;
+            this.txtRenterNewPassword.Name = "txtRenterNewPassword";
+            this.txtRenterNewPassword.Size = new System.Drawing.Size(143, 24);
+            this.txtRenterNewPassword.TabIndex = 6;
+            // 
+            // txtNewPassword
+            // 
+            this.txtNewPassword.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.txtNewPassword.Location = new System.Drawing.Point(179, 70);
+            this.txtNewPassword.Multiline = true;
+            this.txtNewPassword.Name = "txtNewPassword";
+            this.txtNewPassword.Size = new System.Drawing.Size(143, 24);
+            this.txtNewPassword.TabIndex = 5;
+            // 
+            // txtCurrentPassword
+            // 
+            this.txtCurrentPassword.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.txtCurrentPassword.Location = new System.Drawing.Point(179, 40);
+            this.txtCurrentPassword.Multiline = true;
+            this.txtCurrentPassword.Name = "txtCurrentPassword";
+            this.txtCurrentPassword.Size = new System.Drawing.Size(143, 24);
+            this.txtCurrentPassword.TabIndex = 3;
+            // 
+            // lblReenterNewPassword
+            // 
+            this.lblReenterNewPassword.AutoSize = true;
+            this.lblReenterNewPassword.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblReenterNewPassword.Location = new System.Drawing.Point(13, 100);
+            this.lblReenterNewPassword.Name = "lblReenterNewPassword";
+            this.lblReenterNewPassword.Size = new System.Drawing.Size(123, 13);
+            this.lblReenterNewPassword.TabIndex = 2;
+            this.lblReenterNewPassword.Text = "Re-Enter New Password";
+            // 
+            // lblNewPassword
+            // 
+            this.lblNewPassword.AutoSize = true;
+            this.lblNewPassword.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblNewPassword.Location = new System.Drawing.Point(56, 70);
+            this.lblNewPassword.Name = "lblNewPassword";
+            this.lblNewPassword.Size = new System.Drawing.Size(78, 13);
+            this.lblNewPassword.TabIndex = 1;
+            this.lblNewPassword.Text = "New Password";
+            // 
+            // lblCurrentPassword
+            // 
+            this.lblCurrentPassword.AutoSize = true;
+            this.lblCurrentPassword.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblCurrentPassword.Location = new System.Drawing.Point(43, 40);
+            this.lblCurrentPassword.Name = "lblCurrentPassword";
+            this.lblCurrentPassword.Size = new System.Drawing.Size(90, 13);
+            this.lblCurrentPassword.TabIndex = 0;
+            this.lblCurrentPassword.Text = "Current Password";
             // 
             // btnRefundCard
             // 
             this.btnRefundCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnRefundCard.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnRefundCard.Location = new System.Drawing.Point(0, 655);
+            this.btnRefundCard.Location = new System.Drawing.Point(0, 664);
             this.btnRefundCard.Name = "btnRefundCard";
-            this.btnRefundCard.Size = new System.Drawing.Size(356, 58);
+            this.btnRefundCard.Size = new System.Drawing.Size(359, 58);
             this.btnRefundCard.TabIndex = 5;
             this.btnRefundCard.Text = "Refund Card";
             this.btnRefundCard.UseVisualStyleBackColor = false;
+            // 
+            // btnTransperCard
+            // 
+            this.btnTransperCard.Location = new System.Drawing.Point(12, 107);
+            this.btnTransperCard.Name = "btnTransperCard";
+            this.btnTransperCard.Size = new System.Drawing.Size(98, 52);
+            this.btnTransperCard.TabIndex = 0;
+            this.btnTransperCard.Text = "Transfer Card";
+            this.btnTransperCard.UseVisualStyleBackColor = true;
+            this.btnTransperCard.Click += new System.EventHandler(this.btnTransperCard_Click);
             // 
             // panel2
             // 
@@ -185,6 +357,7 @@
             // 
             // button4
             // 
+            this.button4.AutoSize = true;
             this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.button4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.Fuchsia;
@@ -194,6 +367,7 @@
             this.button4.TabIndex = 3;
             this.button4.Text = "Tools";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -218,21 +392,24 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "Tasks";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
+            // ProductbtnTop
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Fuchsia;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 41);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Product";
-            this.button1.UseVisualStyleBackColor = false;
+            this.ProductbtnTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.ProductbtnTop.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProductbtnTop.ForeColor = System.Drawing.Color.Fuchsia;
+            this.ProductbtnTop.Location = new System.Drawing.Point(0, 0);
+            this.ProductbtnTop.Name = "ProductbtnTop";
+            this.ProductbtnTop.Size = new System.Drawing.Size(79, 41);
+            this.ProductbtnTop.TabIndex = 0;
+            this.ProductbtnTop.Text = "Product";
+            this.ProductbtnTop.UseVisualStyleBackColor = false;
+            this.ProductbtnTop.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel3
             // 
+            this.panel3.AutoSize = true;
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Location = new System.Drawing.Point(359, 47);
@@ -313,21 +490,22 @@
             this.panel4.Controls.Add(this.btnNew);
             this.panel4.Location = new System.Drawing.Point(359, 519);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(693, 194);
+            this.panel4.Size = new System.Drawing.Size(693, 174);
             this.panel4.TabIndex = 0;
             // 
             // lblErrorDisplaymsgPOS
             // 
             this.lblErrorDisplaymsgPOS.BackColor = System.Drawing.Color.White;
             this.lblErrorDisplaymsgPOS.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblErrorDisplaymsgPOS.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorDisplaymsgPOS.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblErrorDisplaymsgPOS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblErrorDisplaymsgPOS.Location = new System.Drawing.Point(0, 162);
+            this.lblErrorDisplaymsgPOS.Location = new System.Drawing.Point(0, 137);
             this.lblErrorDisplaymsgPOS.Name = "lblErrorDisplaymsgPOS";
-            this.lblErrorDisplaymsgPOS.Size = new System.Drawing.Size(693, 32);
+            this.lblErrorDisplaymsgPOS.Size = new System.Drawing.Size(693, 37);
             this.lblErrorDisplaymsgPOS.TabIndex = 11;
             this.lblErrorDisplaymsgPOS.Text = "ErrorMsg";
             this.lblErrorDisplaymsgPOS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblErrorDisplaymsgPOS.Visible = false;
             // 
             // btnCancel
             // 
@@ -430,33 +608,34 @@
             this.btnNew.TabIndex = 0;
             this.btnNew.UseVisualStyleBackColor = false;
             // 
-            // panel6
+            // CardReaderPanel
             // 
-            this.panel6.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.panel6.Controls.Add(this.txtCreditPlus);
-            this.panel6.Controls.Add(this.txtGame);
-            this.panel6.Controls.Add(this.txtTime);
-            this.panel6.Controls.Add(this.txtBonus);
-            this.panel6.Controls.Add(this.txtcurtesy);
-            this.panel6.Controls.Add(this.txtcredits);
-            this.panel6.Controls.Add(this.txtCardDeposit);
-            this.panel6.Controls.Add(this.txtIssueDate);
-            this.panel6.Controls.Add(this.label13);
-            this.panel6.Controls.Add(this.label14);
-            this.panel6.Controls.Add(this.label10);
-            this.panel6.Controls.Add(this.label11);
-            this.panel6.Controls.Add(this.label12);
-            this.panel6.Controls.Add(this.label9);
-            this.panel6.Controls.Add(this.label8);
-            this.panel6.Controls.Add(this.label7);
-            this.panel6.Controls.Add(this.txtCardNumber);
-            this.panel6.Controls.Add(this.label6);
-            this.panel6.Controls.Add(this.lblDisplayCardStatus);
-            this.panel6.Controls.Add(this.lblCardNum);
-            this.panel6.Location = new System.Drawing.Point(1053, 1);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(310, 712);
-            this.panel6.TabIndex = 6;
+            this.CardReaderPanel.AutoSize = true;
+            this.CardReaderPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.CardReaderPanel.Controls.Add(this.txtCreditPlus);
+            this.CardReaderPanel.Controls.Add(this.txtGame);
+            this.CardReaderPanel.Controls.Add(this.txtTime);
+            this.CardReaderPanel.Controls.Add(this.txtBonus);
+            this.CardReaderPanel.Controls.Add(this.txtcurtesy);
+            this.CardReaderPanel.Controls.Add(this.txtcredits);
+            this.CardReaderPanel.Controls.Add(this.txtCardDeposit);
+            this.CardReaderPanel.Controls.Add(this.txtIssueDate);
+            this.CardReaderPanel.Controls.Add(this.label13);
+            this.CardReaderPanel.Controls.Add(this.label14);
+            this.CardReaderPanel.Controls.Add(this.label10);
+            this.CardReaderPanel.Controls.Add(this.label11);
+            this.CardReaderPanel.Controls.Add(this.label12);
+            this.CardReaderPanel.Controls.Add(this.label9);
+            this.CardReaderPanel.Controls.Add(this.label8);
+            this.CardReaderPanel.Controls.Add(this.label7);
+            this.CardReaderPanel.Controls.Add(this.txtCardNumber);
+            this.CardReaderPanel.Controls.Add(this.label6);
+            this.CardReaderPanel.Controls.Add(this.lblDisplayCardStatus);
+            this.CardReaderPanel.Controls.Add(this.lblCardNum);
+            this.CardReaderPanel.Location = new System.Drawing.Point(1053, 1);
+            this.CardReaderPanel.Name = "CardReaderPanel";
+            this.CardReaderPanel.Size = new System.Drawing.Size(314, 712);
+            this.CardReaderPanel.TabIndex = 6;
             // 
             // txtCreditPlus
             // 
@@ -670,37 +849,44 @@
             this.lblCardNum.TabIndex = 0;
             this.lblCardNum.Text = "Card-Number";
             // 
+            // colorDialog1
+            // 
+            this.colorDialog1.FullOpen = true;
+            // 
             // POSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1362, 713);
-            this.Controls.Add(this.panel6);
+            this.ClientSize = new System.Drawing.Size(1362, 722);
+            this.Controls.Add(this.CardReaderPanel);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.btnMyTransaction);
             this.Controls.Add(this.btnCardDetails);
             this.Controls.Add(this.btnActivities);
             this.Controls.Add(this.btnTransaction);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.productpagePanel);
             this.Name = "POSForm";
             this.Text = "POSForm";
             this.Load += new System.EventHandler(this.POSForm_Load);
-            this.panel1.ResumeLayout(false);
-            this.TaskPanel.ResumeLayout(false);
+            this.productpagePanel.ResumeLayout(false);
+            this.productpagePanel.PerformLayout();
+            this.ToolSubPanel.ResumeLayout(false);
+            this.ToolSubPanel.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
+            this.CardReaderPanel.ResumeLayout(false);
+            this.CardReaderPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel productpagePanel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnNewForward;
         private System.Windows.Forms.Button btnForwardBackword;
@@ -708,9 +894,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ProductbtnTop;
         private System.Windows.Forms.Button btnRefundCard;
-        private System.Windows.Forms.Panel panelProduct;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnTransaction;
         private System.Windows.Forms.Button btnActivities;
@@ -729,7 +914,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblErrorDisplaymsgPOS;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel CardReaderPanel;
         private System.Windows.Forms.Label lblCardNum;
         private System.Windows.Forms.Label lblDisplayCardStatus;
         private System.Windows.Forms.Label label6;
@@ -750,7 +935,22 @@
         private System.Windows.Forms.TextBox txtcredits;
         private System.Windows.Forms.TextBox txtCardDeposit;
         private System.Windows.Forms.TextBox txtIssueDate;
-        private System.Windows.Forms.Panel TaskPanel;
         private System.Windows.Forms.Button btnTransperCard;
+        private System.Windows.Forms.Panel ToolSubPanel;
+        private System.Windows.Forms.Label lblReenterNewPassword;
+        private System.Windows.Forms.Label lblNewPassword;
+        private System.Windows.Forms.Label lblCurrentPassword;
+        private System.Windows.Forms.TextBox txtCurrentPassword;
+        private System.Windows.Forms.TextBox txtRenterNewPassword;
+        private System.Windows.Forms.TextBox txtNewPassword;
+        private System.Windows.Forms.Button btnChangelogin;
+        private System.Windows.Forms.Label lblChangePOSSkinColor;
+        private System.Windows.Forms.Button ChangeSkinColor;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnCardReconnect;
+        private System.Windows.Forms.Label lblCardReader;
+        private System.Windows.Forms.Label lblDefaultpaymode;
+        private System.Windows.Forms.ComboBox cmbDefaultCashMode;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
