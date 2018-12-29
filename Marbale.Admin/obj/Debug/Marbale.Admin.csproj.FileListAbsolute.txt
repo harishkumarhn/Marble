@@ -26,3 +26,5 @@ F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Login.resources
 F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Properties.Resources.resources
 F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.SiteSetup.SiteConfiguration.resources
 F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Admin.csproj.GenerateResource.Cache
+F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Product.ProductForm.resources
+F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Product.ProductSubForms.resources

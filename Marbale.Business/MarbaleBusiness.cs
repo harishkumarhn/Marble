@@ -66,8 +66,8 @@ namespace Marbale.Business
         {
             foreach(var setting in settings)
             {
-                //marbaleData.UpdateSettings(setting.Id, setting.Name,setting.Caption, setting.Description, setting.DefaultValue, setting.Type,
-                //    setting.ScreenGroup, setting.LastUpdatedBy, setting.Active, setting.UserLevel, setting.PosLevel);
+                marbaleData.UpdateSettings(setting.Id, setting.Name,setting.Caption, setting.Description, setting.DefaultValue, setting.Type,
+                    setting.ScreenGroup, setting.LastUpdatedBy, setting.Active, setting.UserLevel, setting.PosLevel);
             }
             return true;
         }
