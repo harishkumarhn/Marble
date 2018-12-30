@@ -47,6 +47,7 @@
     <Compile Include="ViewModels\AppSetting.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="ViewModels\POSModel.cs" />
+    <Compile Include="ViewModels\Product.cs" />
     <Compile Include="ViewModels\Settings.cs" />
   </ItemGroup>
   <ItemGroup>

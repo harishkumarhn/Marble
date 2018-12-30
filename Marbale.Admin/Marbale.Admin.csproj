@@ -54,6 +54,12 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="AdminLoginProperties.cs" />
+    <Compile Include="Products\ProductDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\ProductDetail.Designer.cs">
+      <DependentUpon>ProductDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\ProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
     </Compile>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\ProductDetail.resx">
+      <DependentUpon>ProductDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\ProductForm.resx">
       <DependentUpon>ProductForm.cs</DependentUpon>

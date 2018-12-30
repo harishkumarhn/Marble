@@ -30,3 +30,4 @@ F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Product.ProductForm.reso
 F:\MarbleProject\Marble\Marbale.Admin\obj\Debug\Marbale.Product.ProductSubForms.resources
 D:\Projects\Marbale\Marbale.Admin\obj\Debug\Marbale.Product.ProductForm.resources
 D:\Projects\Marbale\Marbale.Admin\obj\Debug\Marbale.Product.ProductSubForms.resources
+D:\Projects\Marbale\Marbale.Admin\obj\Debug\Marbale.Products.ProductDetail.resources
