@@ -52,15 +52,14 @@ namespace Marbale.DataAccess
                     myAdapter.SelectCommand = cmd;
                     myAdapter.Fill(ds);
                     dataTable = ds.Tables[0];
+                    return dataTable;
+
                 }
             }
             catch (SqlException e)
             {
                 throw e;
-                // Console.Write("Error - Connection.executeUpdateQuery - Query: " + _query + " \nException: " + e.StackTrace.ToString());
-                return null;
             }
-            return dataTable;
         }
         /// <method>
         /// Select with parameter
@@ -86,8 +85,7 @@ namespace Marbale.DataAccess
             }
             catch (SqlException e)
             {
-                // Console.Write("Error - Connection.executeSelectQuery - Query: " + _query + " \nException: " + e.StackTrace.ToString());
-                return null;
+                throw e;
             }
             return dataTable;
         }
@@ -104,16 +102,12 @@ namespace Marbale.DataAccess
                 myCommand.Parameters.AddRange(sqlParameter);
                 myAdapter.InsertCommand = myCommand;
                 myCommand.ExecuteNonQuery();
+                return true;
             }
             catch (SqlException e)
             {
-                Console.Write("Error - Connection.executeInsertQuery - Query: " + _query + " \nException: \n" + e.StackTrace.ToString());
-                return false;
+                throw e;
             }
-            finally
-            {
-            }
-            return true;
         }
         /// <method>
         /// insert/Update sp
@@ -124,18 +118,19 @@ namespace Marbale.DataAccess
             int result = 0;
             try
             {
-               using (SqlCommand cmd = new SqlCommand(sp, conn)) {
+               using (SqlCommand cmd = new SqlCommand(sp, conn)) 
+               {
                     cmd.Connection = openConnection();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddRange(sqlParameter);
                     result = cmd.ExecuteNonQuery();
-                 }
+                    return result;
+               }
             }
             catch (SqlException e)
             {
-               // Console.Write("Error - Connection.executeUpdateQuery - Query: " + _query + " \nException: " + e.StackTrace.ToString());
+                throw e;
             }
-            return result;
         }
     }
 }
