@@ -91,9 +91,26 @@ namespace Marbale.SiteSetup
         private void moduleValuesTab_Click(object sender, EventArgs e)
         {
             var appSettings = marbaleBusiness.GetAppSettings("POS");
-
-          
+            
+       
             pos_appSettingsGrid.DataSource = appSettings;
+            
+            for (int i = 0; i <pos_appSettingsGrid.Rows.Count; i++)
+            {
+
+                if (i % 2 != 0)
+                {
+                    pos_appSettingsGrid.Rows[i].Cells[0].Style.BackColor = System.Drawing.Color.FromArgb(192, 255, 255);
+                    pos_appSettingsGrid.Rows[i].Cells[1].Style.BackColor = System.Drawing.Color.FromArgb(192, 255, 255);
+                    pos_appSettingsGrid.Rows[i].Cells[2].Style.BackColor = System.Drawing.Color.FromArgb(192, 255, 255); 
+                }
+                else
+                {
+                    pos_appSettingsGrid.Rows[i].Cells[0].Style.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                    pos_appSettingsGrid.Rows[i].Cells[1].Style.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                    pos_appSettingsGrid.Rows[i].Cells[2].Style.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                }
+            }
             pos_appSettingsGrid.Columns[0].Width = 300;
             pos_appSettingsGrid.Columns[1].Width = 300;
             pos_appSettingsGrid.BackgroundColor = Color.White;
@@ -102,9 +119,9 @@ namespace Marbale.SiteSetup
             pos_appSettingsGrid.Columns[3].Visible = false;
 
         }
-
         private void pos_appSettingsGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            
             var rowIndex = e.RowIndex;
             var appSetting = new AppSetting();
             appSetting.Name = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[0].Value);
@@ -119,7 +136,5 @@ namespace Marbale.SiteSetup
         {
 
         }
-
-
     }
 }

@@ -52,8 +52,8 @@
             this.ProductPanel = new System.Windows.Forms.Panel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.productlink = new System.Windows.Forms.LinkLabel();
+            this.btnProduct = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.ReportsPanel.SuspendLayout();
             this.SiteSetUpPanel.SuspendLayout();
@@ -71,7 +71,7 @@
             this.panel1.Controls.Add(this.gamePanel);
             this.panel1.Controls.Add(this.btnGame);
             this.panel1.Controls.Add(this.ProductPanel);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnProduct);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -217,6 +217,7 @@
             this.ConfigurationlinkLabel.TabIndex = 4;
             this.ConfigurationlinkLabel.TabStop = true;
             this.ConfigurationlinkLabel.Text = "Configuration";
+            this.ConfigurationlinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ConfigurationlinkLabel_LinkClicked);
             // 
             // btnSiteSetup
             // 
@@ -299,7 +300,7 @@
             this.ProductPanel.BackColor = System.Drawing.Color.Aqua;
             this.ProductPanel.Controls.Add(this.linkLabel3);
             this.ProductPanel.Controls.Add(this.linkLabel2);
-            this.ProductPanel.Controls.Add(this.linkLabel1);
+            this.ProductPanel.Controls.Add(this.productlink);
             this.ProductPanel.Location = new System.Drawing.Point(31, 64);
             this.ProductPanel.Name = "ProductPanel";
             this.ProductPanel.Size = new System.Drawing.Size(119, 80);
@@ -325,28 +326,30 @@
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "discount";
             // 
-            // linkLabel1
+            // productlink
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(35, 14);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(43, 13);
-            this.linkLabel1.TabIndex = 4;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "product";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked_1);
+            this.productlink.AutoSize = true;
+            this.productlink.Location = new System.Drawing.Point(35, 14);
+            this.productlink.Name = "productlink";
+            this.productlink.Size = new System.Drawing.Size(43, 13);
+            this.productlink.TabIndex = 4;
+            this.productlink.TabStop = true;
+            this.productlink.Text = "product";
+            this.productlink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.productlink_LinkClicked);
             // 
-            // button1
+            // btnProduct
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(31, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 31);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Products";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProduct.Location = new System.Drawing.Point(31, 27);
+            this.btnProduct.Name = "btnProduct";
+            this.btnProduct.Size = new System.Drawing.Size(131, 31);
+            this.btnProduct.TabIndex = 1;
+            this.btnProduct.Text = "Products";
+            this.btnProduct.UseVisualStyleBackColor = false;
+            this.btnProduct.Click += new System.EventHandler(this.btnProduct_Click);
+            this.btnProduct.MouseLeave += new System.EventHandler(this.btnProduct_MouseLeave);
+            this.btnProduct.MouseHover += new System.EventHandler(this.btnProduct_MouseHover);
             // 
             // ProductForm
             // 
@@ -379,8 +382,8 @@
         private System.Windows.Forms.Panel ProductPanel;
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.LinkLabel productlink;
+        private System.Windows.Forms.Button btnProduct;
         private System.Windows.Forms.Panel gamePanel;
         private System.Windows.Forms.LinkLabel gamelinkLabel;
         private System.Windows.Forms.LinkLabel GameprofilelinkLabel;

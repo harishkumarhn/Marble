@@ -31,11 +31,11 @@
             this.productpagePanel = new System.Windows.Forms.Panel();
             this.ToolSubPanel = new System.Windows.Forms.Panel();
             this.cmbDefaultCashMode = new System.Windows.Forms.ComboBox();
+            this.ChangeSkinColor = new System.Windows.Forms.Button();
             this.lblDefaultpaymode = new System.Windows.Forms.Label();
             this.btnCardReconnect = new System.Windows.Forms.Button();
             this.lblCardReader = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
-            this.ChangeSkinColor = new System.Windows.Forms.Button();
             this.lblChangePOSSkinColor = new System.Windows.Forms.Label();
             this.btnChangelogin = new System.Windows.Forms.Button();
             this.txtRenterNewPassword = new System.Windows.Forms.TextBox();
@@ -154,6 +154,19 @@
             this.cmbDefaultCashMode.TabIndex = 15;
             this.cmbDefaultCashMode.SelectedIndexChanged += new System.EventHandler(this.cmbDefaultCashMode_SelectedIndexChanged);
             // 
+            // ChangeSkinColor
+            // 
+            this.ChangeSkinColor.AutoSize = true;
+            this.ChangeSkinColor.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.ChangeSkinColor.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChangeSkinColor.Location = new System.Drawing.Point(11, 221);
+            this.ChangeSkinColor.Name = "ChangeSkinColor";
+            this.ChangeSkinColor.Size = new System.Drawing.Size(143, 38);
+            this.ChangeSkinColor.TabIndex = 9;
+            this.ChangeSkinColor.Text = "Change";
+            this.ChangeSkinColor.UseVisualStyleBackColor = false;
+            this.ChangeSkinColor.Click += new System.EventHandler(this.ChangeSkinColor_Click);
+            // 
             // lblDefaultpaymode
             // 
             this.lblDefaultpaymode.AutoSize = true;
@@ -200,19 +213,6 @@
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
-            // ChangeSkinColor
-            // 
-            this.ChangeSkinColor.AutoSize = true;
-            this.ChangeSkinColor.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.ChangeSkinColor.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChangeSkinColor.Location = new System.Drawing.Point(11, 221);
-            this.ChangeSkinColor.Name = "ChangeSkinColor";
-            this.ChangeSkinColor.Size = new System.Drawing.Size(143, 38);
-            this.ChangeSkinColor.TabIndex = 9;
-            this.ChangeSkinColor.Text = "Change";
-            this.ChangeSkinColor.UseVisualStyleBackColor = false;
-            this.ChangeSkinColor.Click += new System.EventHandler(this.ChangeSkinColor_Click);
             // 
             // lblChangePOSSkinColor
             // 

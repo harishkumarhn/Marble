@@ -116,7 +116,13 @@ namespace Marbale.POS
 
         private void POSForm_Load(object sender, EventArgs e)
         {
-          
+           this.MinimumSize = new System.Drawing.Size(this.Width, this.Height);
+
+            // no larger than screen size
+         //   this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, (int)System.Windows.SystemParameters.PrimaryScreenHeight);
+
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             POSOperations pos = new POSOperations();
           //  TaskPanel.Hide();
          
@@ -131,14 +137,8 @@ namespace Marbale.POS
 
         private void ChangePOSColor(List<Marble.Business.ViewModels.AppSetting> dataTable)
         {
-            foreach (var item in dataTable)
-            {
-                if (item.Name == "POS_SKIN_COLOR")
-                {
-                    panel3.BackColor = Color.FromName(item.Value);
-                    break;
-                }
-            }
+
+            panel3.BackColor =Color.FromName(dataTable.Where(o => o.Name == "POS_SKIN_COLOR").Select(o => o.Value).Single());
         }
 
         private void TaskPanel_Paint(object sender, PaintEventArgs e)

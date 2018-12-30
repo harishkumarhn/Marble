@@ -1,4 +1,5 @@
-﻿using Marbale.SiteSetup;
+﻿using Marbale.Product;
+using Marbale.SiteSetup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Marbale
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SiteConfiguration());
+            Application.Run(new ProductForm());
         }
     }
 }

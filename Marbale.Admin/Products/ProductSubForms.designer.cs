@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnclose = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -40,8 +41,7 @@
             this.btnBooking = new System.Windows.Forms.Button();
             this.btnCombo = new System.Windows.Forms.Button();
             this.NonCardSales = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnclose = new System.Windows.Forms.Button();
+            this.btncardsubproduct = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +55,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(993, 26);
             this.panel1.TabIndex = 0;
+            // 
+            // btnclose
+            // 
+            this.btnclose.BackColor = System.Drawing.Color.Red;
+            this.btnclose.Location = new System.Drawing.Point(969, 4);
+            this.btnclose.Name = "btnclose";
+            this.btnclose.Size = new System.Drawing.Size(19, 19);
+            this.btnclose.TabIndex = 15;
+            this.btnclose.Text = "x";
+            this.btnclose.UseVisualStyleBackColor = false;
+            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // panel2
             // 
@@ -163,26 +174,15 @@
             this.NonCardSales.Text = "Non-Card Sales(F&B etc)";
             this.NonCardSales.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // btncardsubproduct
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.button1.Location = new System.Drawing.Point(174, 66);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 78);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Cards";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // btnclose
-            // 
-            this.btnclose.BackColor = System.Drawing.Color.Red;
-            this.btnclose.Location = new System.Drawing.Point(969, 4);
-            this.btnclose.Name = "btnclose";
-            this.btnclose.Size = new System.Drawing.Size(19, 19);
-            this.btnclose.TabIndex = 15;
-            this.btnclose.Text = "x";
-            this.btnclose.UseVisualStyleBackColor = false;
-            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
+            this.btncardsubproduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btncardsubproduct.Location = new System.Drawing.Point(174, 66);
+            this.btncardsubproduct.Name = "btncardsubproduct";
+            this.btncardsubproduct.Size = new System.Drawing.Size(155, 78);
+            this.btncardsubproduct.TabIndex = 9;
+            this.btncardsubproduct.Text = "Cards";
+            this.btncardsubproduct.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -209,7 +209,7 @@
             this.Controls.Add(this.btnBooking);
             this.Controls.Add(this.btnCombo);
             this.Controls.Add(this.NonCardSales);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btncardsubproduct);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -238,7 +238,7 @@
         private System.Windows.Forms.Button btnBooking;
         private System.Windows.Forms.Button btnCombo;
         private System.Windows.Forms.Button NonCardSales;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btncardsubproduct;
         private System.Windows.Forms.Label label1;
     }
 }
