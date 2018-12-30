@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace Marbale.Product
 {
-    public partial class ProductForm : Form
+    public partial class MarbleAdmin : Form
     {
          bool a = false;
-         public ProductForm()
+         public MarbleAdmin()
         {
             InitializeComponent();
         }
@@ -172,6 +172,11 @@ namespace Marbale.Product
         {
             SiteConfiguration sitesetup = new SiteConfiguration();
             sitesetup.ShowDialog();
+        }
+
+        private void panel2_Paint_1(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

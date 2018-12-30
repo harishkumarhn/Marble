@@ -1,6 +1,6 @@
 ﻿namespace Marbale.Product
 {
-    partial class ProductForm
+    partial class MarbleAdmin
     {
         /// <summary>
         /// Required designer variable.
@@ -54,11 +54,14 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.productlink = new System.Windows.Forms.LinkLabel();
             this.btnProduct = new System.Windows.Forms.Button();
+            this.AdminLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.formContainer = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.ReportsPanel.SuspendLayout();
             this.SiteSetUpPanel.SuspendLayout();
             this.gamePanel.SuspendLayout();
             this.ProductPanel.SuspendLayout();
+            this.AdminLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -72,10 +75,10 @@
             this.panel1.Controls.Add(this.btnGame);
             this.panel1.Controls.Add(this.ProductPanel);
             this.panel1.Controls.Add(this.btnProduct);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(183, 734);
+            this.panel1.Size = new System.Drawing.Size(273, 728);
             this.panel1.TabIndex = 1;
             // 
             // ReportsPanel
@@ -351,16 +354,42 @@
             this.btnProduct.MouseLeave += new System.EventHandler(this.btnProduct_MouseLeave);
             this.btnProduct.MouseHover += new System.EventHandler(this.btnProduct_MouseHover);
             // 
-            // ProductForm
+            // AdminLayout
+            // 
+            this.AdminLayout.ColumnCount = 2;
+            this.AdminLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.43096F));
+            this.AdminLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.56904F));
+            this.AdminLayout.Controls.Add(this.panel1, 0, 0);
+            this.AdminLayout.Controls.Add(this.formContainer, 1, 0);
+            this.AdminLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AdminLayout.Location = new System.Drawing.Point(0, 0);
+            this.AdminLayout.Name = "AdminLayout";
+            this.AdminLayout.RowCount = 1;
+            this.AdminLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.AdminLayout.Size = new System.Drawing.Size(1195, 734);
+            this.AdminLayout.TabIndex = 3;
+            // 
+            // formContainer
+            // 
+            this.formContainer.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.formContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.formContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formContainer.Location = new System.Drawing.Point(282, 3);
+            this.formContainer.Name = "formContainer";
+            this.formContainer.Size = new System.Drawing.Size(910, 728);
+            this.formContainer.TabIndex = 2;
+            this.formContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint_1);
+            // 
+            // MarbleAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.BackColor = System.Drawing.SystemColors.Menu;
             this.ClientSize = new System.Drawing.Size(1195, 734);
-            this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "ProductForm";
-            this.Text = "ProductForm";
+            this.Controls.Add(this.AdminLayout);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Name = "MarbleAdmin";
+            this.Text = "Marble Admin";
             this.Load += new System.EventHandler(this.ProductForm_Load_1);
             this.panel1.ResumeLayout(false);
             this.ReportsPanel.ResumeLayout(false);
@@ -371,6 +400,7 @@
             this.gamePanel.PerformLayout();
             this.ProductPanel.ResumeLayout(false);
             this.ProductPanel.PerformLayout();
+            this.AdminLayout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -403,5 +433,7 @@
         private System.Windows.Forms.LinkLabel TransactionlinkLabel;
         private System.Windows.Forms.LinkLabel WirelesslinkLabel;
         private System.Windows.Forms.LinkLabel DashboardlinkLabel;
+        private System.Windows.Forms.TableLayoutPanel AdminLayout;
+        private System.Windows.Forms.Panel formContainer;
     }
 }
