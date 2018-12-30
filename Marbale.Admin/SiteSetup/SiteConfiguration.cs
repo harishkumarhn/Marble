@@ -18,6 +18,7 @@ namespace Marbale.SiteSetup
         List<Settings> lstSettings;
         List<AppSetting> lstAppSetting;
         MarbaleBusiness marbaleBusiness;
+        bool posGridLoadCompleted = false;
         public SiteConfiguration()
         {
             InitializeComponent();
@@ -27,32 +28,39 @@ namespace Marbale.SiteSetup
             lstAppSetting = new List<AppSetting>();
         }
 
-        private void POSTab_Click(object sender, EventArgs e)
-        {
-            var appSettings = marbaleBusiness.GetAppSettings("POS");
-            pos_appSettingsGrid.DataSource = appSettings;
-        }
-
         private void configuration_Click(object sender, EventArgs e)
         {
             var settings = marbaleBusiness.GetSettings();
             settings_grid.DataSource = settings;
+
+            settings_grid.Columns[1].Width = 300;
+            settings_grid.Columns[0].ReadOnly = true;
+            settings_grid.Columns[1].ReadOnly = true;
+
+            settings_grid.Columns[3].Width = 300;
+            settings_grid.ColumnHeadersDefaultCellStyle.BackColor = Color.BurlyWood;
+            settings_grid.RowHeadersDefaultCellStyle.BackColor = Color.BurlyWood;
+            settings_grid.EnableHeadersVisualStyles = false; 
+
+            for (int i = 0; i < settings.Count; i++)
+            {
+                DataGridViewComboBoxCell dropDown = new DataGridViewComboBoxCell();
+                dropDown.DataSource = new List<string>() { "int", "string","bool","datetime" };
+                this.settings_grid[5, i] = dropDown;
+                this.settings_grid[5, i].Value = settings[i].Type;
+            }
+
         }
-
-        private void settings_grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+    
         private void save_settings_Click(object sender, EventArgs e)
         {
             marbaleBusiness.SaveSettings(lstSettings);
+            MessageBox.Show("Setting saved");
         }
 
         private void settings_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             var rowIndex = e.RowIndex;
-            //var colIndex = e.ColumnIndex;
             var setting = new Settings();
             setting.Id = Convert.ToInt32(settings_grid.Rows[rowIndex].Cells[0].Value);
             setting.Name = Convert.ToString(settings_grid.Rows[rowIndex].Cells[1].Value);
@@ -73,6 +81,23 @@ namespace Marbale.SiteSetup
         {
             var settings = marbaleBusiness.GetSettings();
             settings_grid.DataSource = settings;
+
+            settings_grid.Columns[1].Width = 300;
+            settings_grid.Columns[0].ReadOnly = true;
+            settings_grid.Columns[1].ReadOnly = true;
+
+            settings_grid.Columns[3].Width = 300;
+            settings_grid.ColumnHeadersDefaultCellStyle.BackColor = Color.BurlyWood;
+            settings_grid.RowHeadersDefaultCellStyle.BackColor = Color.BurlyWood;
+            settings_grid.EnableHeadersVisualStyles = false; 
+
+            for (int i = 0; i < settings.Count; i++)
+            {
+                DataGridViewComboBoxCell dropDown = new DataGridViewComboBoxCell();
+                dropDown.DataSource = new List<string>() { "int", "string", "bool", "datetime" };
+                this.settings_grid[5, i] = dropDown;
+                this.settings_grid[5, i].Value = settings[i].Type;
+            }
         }
 
         private void close_settings_Click(object sender, EventArgs e)
@@ -82,44 +107,102 @@ namespace Marbale.SiteSetup
 
         private void save_pos_Click(object sender, EventArgs e)
         {
-            if (lstAppSetting.Count > 0)
+            try
             {
-                marbaleBusiness.SavePOSConfiguration(lstAppSetting);
+                if (lstAppSetting.Count > 0)
+                {
+                    var result = marbaleBusiness.SavePOSConfiguration(lstAppSetting);
+                    MessageBox.Show("Data Saved Succesfully");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
         private void moduleValuesTab_Click(object sender, EventArgs e)
         {
             var appSettings = marbaleBusiness.GetAppSettings("POS");
-
-          
             pos_appSettingsGrid.DataSource = appSettings;
             pos_appSettingsGrid.Columns[0].Width = 300;
             pos_appSettingsGrid.Columns[1].Width = 300;
             pos_appSettingsGrid.BackgroundColor = Color.White;
 
+            for(int i = 0 ;i < appSettings.Count ; i++)
+            {
+                if (appSettings[i].Type == "bool")
+                {
+                    DataGridViewCheckBoxCell CheckBoxCell = new DataGridViewCheckBoxCell();
+                    CheckBoxCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                    this.pos_appSettingsGrid[1, i] = CheckBoxCell;
+                    this.pos_appSettingsGrid[1, i].Value = appSettings[i].Value;
+                }
+            }
+
             pos_appSettingsGrid.Columns[2].Visible = false;
             pos_appSettingsGrid.Columns[3].Visible = false;
-
+            pos_appSettingsGrid.Columns[4].Visible = false;
         }
 
         private void pos_appSettingsGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            var rowIndex = e.RowIndex;
-            var appSetting = new AppSetting();
-            appSetting.Name = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[0].Value);
-            appSetting.Value = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[1].Value);
-            appSetting.ScreenGroup = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[2].Value);
-            appSetting.Type = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[3].Value);
+            if (posGridLoadCompleted == true)
+            {
+                var rowIndex = e.RowIndex;
+                var appSetting = new AppSetting();
+                appSetting.Name = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[0].Value);
+                appSetting.Value = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[1].Value);
+                appSetting.Caption = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[2].Value);
+                appSetting.ScreenGroup = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[3].Value);
+                appSetting.Type = Convert.ToString(pos_appSettingsGrid.Rows[rowIndex].Cells[4].Value);
 
-            lstAppSetting.Add(appSetting);
+                lstAppSetting.Add(appSetting);
+            }
         }
 
-        private void pos_appSettingsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void refresh_pos_Click(object sender, EventArgs e)
         {
-
+            getPOSSetings();
         }
 
+        private void getPOSSetings()
+        {
+            var appSettings = marbaleBusiness.GetAppSettings("POS");
+            pos_appSettingsGrid.DataSource = appSettings;
 
+            pos_appSettingsGrid.Columns[0].Width = 300;
+            pos_appSettingsGrid.Columns[1].Width = 300;
+            pos_appSettingsGrid.BackgroundColor = Color.White;
+
+            for (int i = 0; i < appSettings.Count; i++)
+            {
+                if (appSettings[i].Type == "bool")
+                {
+                    DataGridViewCheckBoxCell CheckBoxCell = new DataGridViewCheckBoxCell();
+                    CheckBoxCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                    this.pos_appSettingsGrid[1, i] = CheckBoxCell;
+                    this.pos_appSettingsGrid[1, i].Value = appSettings[i].Value;
+                }
+            }
+
+            pos_appSettingsGrid.Columns[2].Visible = false;
+            pos_appSettingsGrid.Columns[3].Visible = false;
+            pos_appSettingsGrid.Columns[4].Visible = false;
+            posGridLoadCompleted = true;
+        }
+
+        private void moduleValuesTab_Selected(object sender, TabControlEventArgs e)
+        {
+            if (moduleValuesTab.TabPages[moduleValuesTab.SelectedIndex].Text == "POS")
+            {
+                getPOSSetings();
+            }
+        }
+
+        private void close_pos_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
