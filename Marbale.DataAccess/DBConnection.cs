@@ -18,7 +18,7 @@ namespace Marbale.DataAccess
         public DBConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn = new SqlConnection(@"Data Source=SRIDHARNAIK-PC\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
+            conn = new SqlConnection(@"Data Source=HARISH-PC\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
         }
 
         /// <method>
@@ -92,17 +92,17 @@ namespace Marbale.DataAccess
         /// <method>
         /// Insert sp
         /// </method>
-        public bool executeInsertQuery(String _query, SqlParameter[] sqlParameter)
+        public int executeInsertQuery(String sp, SqlParameter[] sqlParameter)
         {
-            SqlCommand myCommand = new SqlCommand();
             try
             {
-                myCommand.Connection = openConnection();
-                myCommand.CommandText = _query;
-                myCommand.Parameters.AddRange(sqlParameter);
-                myAdapter.InsertCommand = myCommand;
-                myCommand.ExecuteNonQuery();
-                return true;
+                using (SqlCommand cmd = new SqlCommand(sp, conn))
+                {
+                    cmd.Connection = openConnection();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddRange(sqlParameter);
+                    return cmd.ExecuteNonQuery();
+                }
             }
             catch (SqlException e)
             {
@@ -115,7 +115,6 @@ namespace Marbale.DataAccess
         public int executeUpdateQuery(String sp, SqlParameter[] sqlParameter)
         {
             SqlCommand myCommand = new SqlCommand();
-            int result = 0;
             try
             {
                using (SqlCommand cmd = new SqlCommand(sp, conn)) 
@@ -123,8 +122,7 @@ namespace Marbale.DataAccess
                     cmd.Connection = openConnection();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddRange(sqlParameter);
-                    result = cmd.ExecuteNonQuery();
-                    return result;
+                    return cmd.ExecuteNonQuery();
                }
             }
             catch (SqlException e)

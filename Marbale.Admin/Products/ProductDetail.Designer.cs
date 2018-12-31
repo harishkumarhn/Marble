@@ -31,6 +31,19 @@
             this.productCardTab = new System.Windows.Forms.TabControl();
             this.pCardPage = new System.Windows.Forms.TabPage();
             this.tbl_pCard = new System.Windows.Forms.TableLayoutPanel();
+            this.gb_price = new System.Windows.Forms.GroupBox();
+            this.txt_finalprice = new System.Windows.Forms.TextBox();
+            this.lbl_finalprice = new System.Windows.Forms.Label();
+            this.txt_efectivePrice = new System.Windows.Forms.TextBox();
+            this.lbl_efectivePrice = new System.Windows.Forms.Label();
+            this.txt_taxPer = new System.Windows.Forms.TextBox();
+            this.lbl_taxPer = new System.Windows.Forms.Label();
+            this.chk_taxInx = new System.Windows.Forms.CheckBox();
+            this.txt_price = new System.Windows.Forms.TextBox();
+            this.txt_faceValue = new System.Windows.Forms.TextBox();
+            this.lbl_taxInx = new System.Windows.Forms.Label();
+            this.lbl_price = new System.Windows.Forms.Label();
+            this.lbl_faceValue = new System.Windows.Forms.Label();
             this.gb_product = new System.Windows.Forms.GroupBox();
             this.chk_VIP = new System.Windows.Forms.CheckBox();
             this.lbl_vip = new System.Windows.Forms.Label();
@@ -52,29 +65,16 @@
             this.lbl_pName = new System.Windows.Forms.Label();
             this.txt_pId = new System.Windows.Forms.TextBox();
             this.lbl_pId = new System.Windows.Forms.Label();
-            this.gb_price = new System.Windows.Forms.GroupBox();
-            this.txt_price = new System.Windows.Forms.TextBox();
-            this.txt_faceValue = new System.Windows.Forms.TextBox();
-            this.lbl_taxInx = new System.Windows.Forms.Label();
-            this.lbl_price = new System.Windows.Forms.Label();
-            this.lbl_faceValue = new System.Windows.Forms.Label();
-            this.chk_taxInx = new System.Windows.Forms.CheckBox();
-            this.txt_taxPer = new System.Windows.Forms.TextBox();
-            this.lbl_taxPer = new System.Windows.Forms.Label();
-            this.txt_efectivePrice = new System.Windows.Forms.TextBox();
-            this.lbl_efectivePrice = new System.Windows.Forms.Label();
-            this.txt_finalprice = new System.Windows.Forms.TextBox();
-            this.lbl_finalprice = new System.Windows.Forms.Label();
             this.pnl_action = new System.Windows.Forms.Panel();
-            this.btn_Save = new System.Windows.Forms.Button();
-            this.btn_refresh = new System.Windows.Forms.Button();
-            this.btn_new = new System.Windows.Forms.Button();
             this.btn_close = new System.Windows.Forms.Button();
+            this.btn_new = new System.Windows.Forms.Button();
+            this.btn_refresh = new System.Windows.Forms.Button();
+            this.btn_Save = new System.Windows.Forms.Button();
             this.productCardTab.SuspendLayout();
             this.pCardPage.SuspendLayout();
             this.tbl_pCard.SuspendLayout();
-            this.gb_product.SuspendLayout();
             this.gb_price.SuspendLayout();
+            this.gb_product.SuspendLayout();
             this.pnl_action.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,6 +117,138 @@
             this.tbl_pCard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71F));
             this.tbl_pCard.Size = new System.Drawing.Size(898, 518);
             this.tbl_pCard.TabIndex = 2;
+            // 
+            // gb_price
+            // 
+            this.gb_price.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.gb_price.Controls.Add(this.txt_finalprice);
+            this.gb_price.Controls.Add(this.lbl_finalprice);
+            this.gb_price.Controls.Add(this.txt_efectivePrice);
+            this.gb_price.Controls.Add(this.lbl_efectivePrice);
+            this.gb_price.Controls.Add(this.txt_taxPer);
+            this.gb_price.Controls.Add(this.lbl_taxPer);
+            this.gb_price.Controls.Add(this.chk_taxInx);
+            this.gb_price.Controls.Add(this.txt_price);
+            this.gb_price.Controls.Add(this.txt_faceValue);
+            this.gb_price.Controls.Add(this.lbl_taxInx);
+            this.gb_price.Controls.Add(this.lbl_price);
+            this.gb_price.Controls.Add(this.lbl_faceValue);
+            this.gb_price.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gb_price.Location = new System.Drawing.Point(3, 177);
+            this.gb_price.Name = "gb_price";
+            this.gb_price.Size = new System.Drawing.Size(347, 266);
+            this.gb_price.TabIndex = 1;
+            this.gb_price.TabStop = false;
+            this.gb_price.Text = "Price";
+            // 
+            // txt_finalprice
+            // 
+            this.txt_finalprice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_finalprice.Location = new System.Drawing.Point(109, 196);
+            this.txt_finalprice.Name = "txt_finalprice";
+            this.txt_finalprice.Size = new System.Drawing.Size(199, 21);
+            this.txt_finalprice.TabIndex = 24;
+            // 
+            // lbl_finalprice
+            // 
+            this.lbl_finalprice.AutoSize = true;
+            this.lbl_finalprice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_finalprice.Location = new System.Drawing.Point(9, 199);
+            this.lbl_finalprice.Name = "lbl_finalprice";
+            this.lbl_finalprice.Size = new System.Drawing.Size(65, 15);
+            this.lbl_finalprice.TabIndex = 23;
+            this.lbl_finalprice.Text = "Final Price";
+            // 
+            // txt_efectivePrice
+            // 
+            this.txt_efectivePrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_efectivePrice.Location = new System.Drawing.Point(109, 162);
+            this.txt_efectivePrice.Name = "txt_efectivePrice";
+            this.txt_efectivePrice.Size = new System.Drawing.Size(199, 21);
+            this.txt_efectivePrice.TabIndex = 22;
+            // 
+            // lbl_efectivePrice
+            // 
+            this.lbl_efectivePrice.AutoSize = true;
+            this.lbl_efectivePrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_efectivePrice.Location = new System.Drawing.Point(9, 165);
+            this.lbl_efectivePrice.Name = "lbl_efectivePrice";
+            this.lbl_efectivePrice.Size = new System.Drawing.Size(83, 15);
+            this.lbl_efectivePrice.TabIndex = 21;
+            this.lbl_efectivePrice.Text = "Effective Price";
+            // 
+            // txt_taxPer
+            // 
+            this.txt_taxPer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_taxPer.Location = new System.Drawing.Point(109, 129);
+            this.txt_taxPer.Name = "txt_taxPer";
+            this.txt_taxPer.Size = new System.Drawing.Size(199, 21);
+            this.txt_taxPer.TabIndex = 20;
+            // 
+            // lbl_taxPer
+            // 
+            this.lbl_taxPer.AutoSize = true;
+            this.lbl_taxPer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_taxPer.Location = new System.Drawing.Point(9, 132);
+            this.lbl_taxPer.Name = "lbl_taxPer";
+            this.lbl_taxPer.Size = new System.Drawing.Size(41, 15);
+            this.lbl_taxPer.TabIndex = 19;
+            this.lbl_taxPer.Text = "Tax %";
+            // 
+            // chk_taxInx
+            // 
+            this.chk_taxInx.AutoSize = true;
+            this.chk_taxInx.Location = new System.Drawing.Point(109, 98);
+            this.chk_taxInx.Name = "chk_taxInx";
+            this.chk_taxInx.Size = new System.Drawing.Size(15, 14);
+            this.chk_taxInx.TabIndex = 18;
+            this.chk_taxInx.UseVisualStyleBackColor = true;
+            // 
+            // txt_price
+            // 
+            this.txt_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_price.Location = new System.Drawing.Point(109, 63);
+            this.txt_price.Name = "txt_price";
+            this.txt_price.Size = new System.Drawing.Size(199, 21);
+            this.txt_price.TabIndex = 4;
+            // 
+            // txt_faceValue
+            // 
+            this.txt_faceValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_faceValue.Location = new System.Drawing.Point(109, 27);
+            this.txt_faceValue.Name = "txt_faceValue";
+            this.txt_faceValue.Size = new System.Drawing.Size(199, 21);
+            this.txt_faceValue.TabIndex = 3;
+            // 
+            // lbl_taxInx
+            // 
+            this.lbl_taxInx.AutoSize = true;
+            this.lbl_taxInx.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_taxInx.Location = new System.Drawing.Point(9, 97);
+            this.lbl_taxInx.Name = "lbl_taxInx";
+            this.lbl_taxInx.Size = new System.Drawing.Size(84, 15);
+            this.lbl_taxInx.TabIndex = 2;
+            this.lbl_taxInx.Text = "Tax Inclusive?";
+            // 
+            // lbl_price
+            // 
+            this.lbl_price.AutoSize = true;
+            this.lbl_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_price.Location = new System.Drawing.Point(9, 66);
+            this.lbl_price.Name = "lbl_price";
+            this.lbl_price.Size = new System.Drawing.Size(35, 15);
+            this.lbl_price.TabIndex = 1;
+            this.lbl_price.Text = "Price";
+            // 
+            // lbl_faceValue
+            // 
+            this.lbl_faceValue.AutoSize = true;
+            this.lbl_faceValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_faceValue.Location = new System.Drawing.Point(9, 30);
+            this.lbl_faceValue.Name = "lbl_faceValue";
+            this.lbl_faceValue.Size = new System.Drawing.Size(68, 15);
+            this.lbl_faceValue.TabIndex = 0;
+            this.lbl_faceValue.Text = "Face Value";
             // 
             // gb_product
             // 
@@ -178,7 +310,6 @@
             this.chk_agCard.Size = new System.Drawing.Size(15, 14);
             this.chk_agCard.TabIndex = 17;
             this.chk_agCard.UseVisualStyleBackColor = true;
-            this.chk_agCard.CheckedChanged += new System.EventHandler(this.chk_agCard_CheckedChanged);
             // 
             // lbl_agCard
             // 
@@ -324,138 +455,6 @@
             this.lbl_pId.TabIndex = 0;
             this.lbl_pId.Text = "Product Id";
             // 
-            // gb_price
-            // 
-            this.gb_price.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.gb_price.Controls.Add(this.txt_finalprice);
-            this.gb_price.Controls.Add(this.lbl_finalprice);
-            this.gb_price.Controls.Add(this.txt_efectivePrice);
-            this.gb_price.Controls.Add(this.lbl_efectivePrice);
-            this.gb_price.Controls.Add(this.txt_taxPer);
-            this.gb_price.Controls.Add(this.lbl_taxPer);
-            this.gb_price.Controls.Add(this.chk_taxInx);
-            this.gb_price.Controls.Add(this.txt_price);
-            this.gb_price.Controls.Add(this.txt_faceValue);
-            this.gb_price.Controls.Add(this.lbl_taxInx);
-            this.gb_price.Controls.Add(this.lbl_price);
-            this.gb_price.Controls.Add(this.lbl_faceValue);
-            this.gb_price.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gb_price.Location = new System.Drawing.Point(3, 177);
-            this.gb_price.Name = "gb_price";
-            this.gb_price.Size = new System.Drawing.Size(347, 266);
-            this.gb_price.TabIndex = 1;
-            this.gb_price.TabStop = false;
-            this.gb_price.Text = "Price";
-            // 
-            // txt_price
-            // 
-            this.txt_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_price.Location = new System.Drawing.Point(109, 63);
-            this.txt_price.Name = "txt_price";
-            this.txt_price.Size = new System.Drawing.Size(199, 21);
-            this.txt_price.TabIndex = 4;
-            // 
-            // txt_faceValue
-            // 
-            this.txt_faceValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_faceValue.Location = new System.Drawing.Point(109, 27);
-            this.txt_faceValue.Name = "txt_faceValue";
-            this.txt_faceValue.Size = new System.Drawing.Size(199, 21);
-            this.txt_faceValue.TabIndex = 3;
-            // 
-            // lbl_taxInx
-            // 
-            this.lbl_taxInx.AutoSize = true;
-            this.lbl_taxInx.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_taxInx.Location = new System.Drawing.Point(9, 97);
-            this.lbl_taxInx.Name = "lbl_taxInx";
-            this.lbl_taxInx.Size = new System.Drawing.Size(84, 15);
-            this.lbl_taxInx.TabIndex = 2;
-            this.lbl_taxInx.Text = "Tax Inclusive?";
-            // 
-            // lbl_price
-            // 
-            this.lbl_price.AutoSize = true;
-            this.lbl_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_price.Location = new System.Drawing.Point(9, 66);
-            this.lbl_price.Name = "lbl_price";
-            this.lbl_price.Size = new System.Drawing.Size(35, 15);
-            this.lbl_price.TabIndex = 1;
-            this.lbl_price.Text = "Price";
-            // 
-            // lbl_faceValue
-            // 
-            this.lbl_faceValue.AutoSize = true;
-            this.lbl_faceValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_faceValue.Location = new System.Drawing.Point(9, 30);
-            this.lbl_faceValue.Name = "lbl_faceValue";
-            this.lbl_faceValue.Size = new System.Drawing.Size(68, 15);
-            this.lbl_faceValue.TabIndex = 0;
-            this.lbl_faceValue.Text = "Face Value";
-            // 
-            // chk_taxInx
-            // 
-            this.chk_taxInx.AutoSize = true;
-            this.chk_taxInx.Location = new System.Drawing.Point(109, 98);
-            this.chk_taxInx.Name = "chk_taxInx";
-            this.chk_taxInx.Size = new System.Drawing.Size(15, 14);
-            this.chk_taxInx.TabIndex = 18;
-            this.chk_taxInx.UseVisualStyleBackColor = true;
-            // 
-            // txt_taxPer
-            // 
-            this.txt_taxPer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_taxPer.Location = new System.Drawing.Point(109, 129);
-            this.txt_taxPer.Name = "txt_taxPer";
-            this.txt_taxPer.Size = new System.Drawing.Size(199, 21);
-            this.txt_taxPer.TabIndex = 20;
-            // 
-            // lbl_taxPer
-            // 
-            this.lbl_taxPer.AutoSize = true;
-            this.lbl_taxPer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_taxPer.Location = new System.Drawing.Point(9, 132);
-            this.lbl_taxPer.Name = "lbl_taxPer";
-            this.lbl_taxPer.Size = new System.Drawing.Size(41, 15);
-            this.lbl_taxPer.TabIndex = 19;
-            this.lbl_taxPer.Text = "Tax %";
-            // 
-            // txt_efectivePrice
-            // 
-            this.txt_efectivePrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_efectivePrice.Location = new System.Drawing.Point(109, 162);
-            this.txt_efectivePrice.Name = "txt_efectivePrice";
-            this.txt_efectivePrice.Size = new System.Drawing.Size(199, 21);
-            this.txt_efectivePrice.TabIndex = 22;
-            // 
-            // lbl_efectivePrice
-            // 
-            this.lbl_efectivePrice.AutoSize = true;
-            this.lbl_efectivePrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_efectivePrice.Location = new System.Drawing.Point(9, 165);
-            this.lbl_efectivePrice.Name = "lbl_efectivePrice";
-            this.lbl_efectivePrice.Size = new System.Drawing.Size(83, 15);
-            this.lbl_efectivePrice.TabIndex = 21;
-            this.lbl_efectivePrice.Text = "Effective Price";
-            // 
-            // txt_finalprice
-            // 
-            this.txt_finalprice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_finalprice.Location = new System.Drawing.Point(109, 196);
-            this.txt_finalprice.Name = "txt_finalprice";
-            this.txt_finalprice.Size = new System.Drawing.Size(199, 21);
-            this.txt_finalprice.TabIndex = 24;
-            // 
-            // lbl_finalprice
-            // 
-            this.lbl_finalprice.AutoSize = true;
-            this.lbl_finalprice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_finalprice.Location = new System.Drawing.Point(9, 199);
-            this.lbl_finalprice.Name = "lbl_finalprice";
-            this.lbl_finalprice.Size = new System.Drawing.Size(65, 15);
-            this.lbl_finalprice.TabIndex = 23;
-            this.lbl_finalprice.Text = "Final Price";
-            // 
             // pnl_action
             // 
             this.tbl_pCard.SetColumnSpan(this.pnl_action, 2);
@@ -469,28 +468,16 @@
             this.pnl_action.Size = new System.Drawing.Size(892, 66);
             this.pnl_action.TabIndex = 2;
             // 
-            // btn_Save
+            // btn_close
             // 
-            this.btn_Save.BackColor = System.Drawing.Color.LightSlateGray;
-            this.btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Save.Location = new System.Drawing.Point(28, 22);
-            this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(103, 31);
-            this.btn_Save.TabIndex = 0;
-            this.btn_Save.Text = "Save";
-            this.btn_Save.UseVisualStyleBackColor = false;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
-            // 
-            // btn_refresh
-            // 
-            this.btn_refresh.BackColor = System.Drawing.Color.LightSlateGray;
-            this.btn_refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_refresh.Location = new System.Drawing.Point(159, 22);
-            this.btn_refresh.Name = "btn_refresh";
-            this.btn_refresh.Size = new System.Drawing.Size(103, 31);
-            this.btn_refresh.TabIndex = 1;
-            this.btn_refresh.Text = "Refresh";
-            this.btn_refresh.UseVisualStyleBackColor = false;
+            this.btn_close.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btn_close.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_close.Location = new System.Drawing.Point(430, 22);
+            this.btn_close.Name = "btn_close";
+            this.btn_close.Size = new System.Drawing.Size(103, 31);
+            this.btn_close.TabIndex = 3;
+            this.btn_close.Text = "Close";
+            this.btn_close.UseVisualStyleBackColor = false;
             // 
             // btn_new
             // 
@@ -503,16 +490,28 @@
             this.btn_new.Text = "New";
             this.btn_new.UseVisualStyleBackColor = false;
             // 
-            // btn_close
+            // btn_refresh
             // 
-            this.btn_close.BackColor = System.Drawing.Color.LightSlateGray;
-            this.btn_close.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_close.Location = new System.Drawing.Point(430, 22);
-            this.btn_close.Name = "btn_close";
-            this.btn_close.Size = new System.Drawing.Size(103, 31);
-            this.btn_close.TabIndex = 3;
-            this.btn_close.Text = "Close";
-            this.btn_close.UseVisualStyleBackColor = false;
+            this.btn_refresh.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btn_refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_refresh.Location = new System.Drawing.Point(159, 22);
+            this.btn_refresh.Name = "btn_refresh";
+            this.btn_refresh.Size = new System.Drawing.Size(103, 31);
+            this.btn_refresh.TabIndex = 1;
+            this.btn_refresh.Text = "Refresh";
+            this.btn_refresh.UseVisualStyleBackColor = false;
+            // 
+            // btn_Save
+            // 
+            this.btn_Save.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Save.Location = new System.Drawing.Point(28, 22);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(103, 31);
+            this.btn_Save.TabIndex = 0;
+            this.btn_Save.Text = "Save";
+            this.btn_Save.UseVisualStyleBackColor = false;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // ProductDetail
             // 
@@ -522,13 +521,14 @@
             this.Controls.Add(this.productCardTab);
             this.Name = "ProductDetail";
             this.Text = "Product Detail";
+            this.Load += new System.EventHandler(this.ProductDetail_Load);
             this.productCardTab.ResumeLayout(false);
             this.pCardPage.ResumeLayout(false);
             this.tbl_pCard.ResumeLayout(false);
-            this.gb_product.ResumeLayout(false);
-            this.gb_product.PerformLayout();
             this.gb_price.ResumeLayout(false);
             this.gb_price.PerformLayout();
+            this.gb_product.ResumeLayout(false);
+            this.gb_product.PerformLayout();
             this.pnl_action.ResumeLayout(false);
             this.ResumeLayout(false);
 

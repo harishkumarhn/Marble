@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Marble.Business.ViewModels
 {
-    public class Product
+    public class ProductObject
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,7 +20,7 @@ namespace Marble.Business.ViewModels
         public bool OnlyVIP { get; set; }
         public int Price { get; set; }
         public int FaceValue { get; set; }
-        public int TaxInclusive { get; set; }
+        public bool TaxInclusive { get; set; }
         public int TaxPercentage { get; set; }
         public int FinalPrice { get; set; }
         public int EffectivePrice { get; set; }
