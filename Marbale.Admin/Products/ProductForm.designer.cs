@@ -63,7 +63,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Aqua;
+            this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
             this.panel1.Controls.Add(this.ReportsPanel);
             this.panel1.Controls.Add(this.ReportButton);
             this.panel1.Controls.Add(this.SiteSetUpPanel);
@@ -80,7 +80,7 @@
             // 
             // ReportsPanel
             // 
-            this.ReportsPanel.BackColor = System.Drawing.Color.Aqua;
+            this.ReportsPanel.BackColor = System.Drawing.Color.LightSkyBlue;
             this.ReportsPanel.Controls.Add(this.POSShiftViewlinkLabel);
             this.ReportsPanel.Controls.Add(this.TransactionlinkLabel);
             this.ReportsPanel.Controls.Add(this.WirelesslinkLabel);
@@ -146,7 +146,7 @@
             // 
             // SiteSetUpPanel
             // 
-            this.SiteSetUpPanel.BackColor = System.Drawing.Color.Aqua;
+            this.SiteSetUpPanel.BackColor = System.Drawing.Color.LightSkyBlue;
             this.SiteSetUpPanel.Controls.Add(this.linkLabel5);
             this.SiteSetUpPanel.Controls.Add(this.POSManagmentlinkLabel);
             this.SiteSetUpPanel.Controls.Add(this.UserRoleslinkLabel);
@@ -233,7 +233,7 @@
             // 
             // gamePanel
             // 
-            this.gamePanel.BackColor = System.Drawing.Color.Aqua;
+            this.gamePanel.BackColor = System.Drawing.Color.LightSkyBlue;
             this.gamePanel.Controls.Add(this.machinelinkLabel);
             this.gamePanel.Controls.Add(this.gamelinkLabel);
             this.gamePanel.Controls.Add(this.GameprofilelinkLabel);
@@ -297,7 +297,7 @@
             // 
             // ProductPanel
             // 
-            this.ProductPanel.BackColor = System.Drawing.Color.Aqua;
+            this.ProductPanel.BackColor = System.Drawing.Color.LightSkyBlue;
             this.ProductPanel.Controls.Add(this.linkLabel3);
             this.ProductPanel.Controls.Add(this.linkLabel2);
             this.ProductPanel.Controls.Add(this.productlink);

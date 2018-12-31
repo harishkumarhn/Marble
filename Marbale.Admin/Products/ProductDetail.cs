@@ -50,5 +50,20 @@ namespace Marbale.Products
 
             marbaleBusiness.AddProduct(product);
         }
+
+        private void btn_refresh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_new_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_close_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

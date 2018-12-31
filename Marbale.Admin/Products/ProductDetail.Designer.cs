@@ -120,7 +120,7 @@
             // 
             // gb_price
             // 
-            this.gb_price.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.gb_price.BackColor = System.Drawing.Color.BurlyWood;
             this.gb_price.Controls.Add(this.txt_finalprice);
             this.gb_price.Controls.Add(this.lbl_finalprice);
             this.gb_price.Controls.Add(this.txt_efectivePrice);
@@ -252,7 +252,7 @@
             // 
             // gb_product
             // 
-            this.gb_product.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.gb_product.BackColor = System.Drawing.Color.BurlyWood;
             this.gb_product.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbl_pCard.SetColumnSpan(this.gb_product, 2);
             this.gb_product.Controls.Add(this.chk_VIP);
@@ -470,7 +470,7 @@
             // 
             // btn_close
             // 
-            this.btn_close.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btn_close.BackColor = System.Drawing.Color.DodgerBlue;
             this.btn_close.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_close.Location = new System.Drawing.Point(430, 22);
             this.btn_close.Name = "btn_close";
@@ -478,10 +478,11 @@
             this.btn_close.TabIndex = 3;
             this.btn_close.Text = "Close";
             this.btn_close.UseVisualStyleBackColor = false;
+            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
             // btn_new
             // 
-            this.btn_new.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btn_new.BackColor = System.Drawing.Color.DodgerBlue;
             this.btn_new.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_new.Location = new System.Drawing.Point(295, 22);
             this.btn_new.Name = "btn_new";
@@ -489,10 +490,11 @@
             this.btn_new.TabIndex = 2;
             this.btn_new.Text = "New";
             this.btn_new.UseVisualStyleBackColor = false;
+            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
             // 
             // btn_refresh
             // 
-            this.btn_refresh.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btn_refresh.BackColor = System.Drawing.Color.DodgerBlue;
             this.btn_refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_refresh.Location = new System.Drawing.Point(159, 22);
             this.btn_refresh.Name = "btn_refresh";
@@ -500,10 +502,11 @@
             this.btn_refresh.TabIndex = 1;
             this.btn_refresh.Text = "Refresh";
             this.btn_refresh.UseVisualStyleBackColor = false;
+            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
             // btn_Save
             // 
-            this.btn_Save.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btn_Save.BackColor = System.Drawing.Color.DodgerBlue;
             this.btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Save.Location = new System.Drawing.Point(28, 22);
             this.btn_Save.Name = "btn_Save";
