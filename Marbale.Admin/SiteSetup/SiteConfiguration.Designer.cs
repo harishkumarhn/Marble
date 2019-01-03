@@ -86,7 +86,7 @@
             this.configuration.Location = new System.Drawing.Point(0, 0);
             this.configuration.Name = "configuration";
             this.configuration.SelectedIndex = 0;
-            this.configuration.Size = new System.Drawing.Size(906, 529);
+            this.configuration.Size = new System.Drawing.Size(1003, 701);
             this.configuration.TabIndex = 0;
             this.configuration.Click += new System.EventHandler(this.configuration_Click);
             // 
@@ -96,7 +96,7 @@
             this.valuesTabPage.Location = new System.Drawing.Point(4, 25);
             this.valuesTabPage.Name = "valuesTabPage";
             this.valuesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.valuesTabPage.Size = new System.Drawing.Size(898, 500);
+            this.valuesTabPage.Size = new System.Drawing.Size(995, 672);
             this.valuesTabPage.TabIndex = 0;
             this.valuesTabPage.Text = "Values";
             this.valuesTabPage.UseVisualStyleBackColor = true;
@@ -109,7 +109,7 @@
             this.moduleValuesTab.Location = new System.Drawing.Point(3, 3);
             this.moduleValuesTab.Name = "moduleValuesTab";
             this.moduleValuesTab.SelectedIndex = 0;
-            this.moduleValuesTab.Size = new System.Drawing.Size(892, 494);
+            this.moduleValuesTab.Size = new System.Drawing.Size(989, 666);
             this.moduleValuesTab.TabIndex = 0;
             this.moduleValuesTab.Selected += new System.Windows.Forms.TabControlEventHandler(this.moduleValuesTab_Selected);
             this.moduleValuesTab.Click += new System.EventHandler(this.moduleValuesTab_Click);
@@ -120,7 +120,7 @@
             this.POSTab.Location = new System.Drawing.Point(4, 25);
             this.POSTab.Name = "POSTab";
             this.POSTab.Padding = new System.Windows.Forms.Padding(3);
-            this.POSTab.Size = new System.Drawing.Size(884, 465);
+            this.POSTab.Size = new System.Drawing.Size(981, 637);
             this.POSTab.TabIndex = 0;
             this.POSTab.Text = "POS";
             this.POSTab.UseVisualStyleBackColor = true;
@@ -137,7 +137,7 @@
             this.posTableLayout.RowCount = 2;
             this.posTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.58785F));
             this.posTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.41215F));
-            this.posTableLayout.Size = new System.Drawing.Size(878, 459);
+            this.posTableLayout.Size = new System.Drawing.Size(975, 631);
             this.posTableLayout.TabIndex = 0;
             // 
             // pos_appSettingsGrid
@@ -163,7 +163,7 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Silver;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             this.pos_appSettingsGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.pos_appSettingsGrid.Size = new System.Drawing.Size(872, 405);
+            this.pos_appSettingsGrid.Size = new System.Drawing.Size(969, 559);
             this.pos_appSettingsGrid.TabIndex = 3;
             this.pos_appSettingsGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.pos_appSettingsGrid_CellValueChanged);
             // 
@@ -174,9 +174,9 @@
             this.pos_actionPanel.Controls.Add(this.refresh_pos);
             this.pos_actionPanel.Controls.Add(this.save_pos);
             this.pos_actionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pos_actionPanel.Location = new System.Drawing.Point(3, 414);
+            this.pos_actionPanel.Location = new System.Drawing.Point(3, 568);
             this.pos_actionPanel.Name = "pos_actionPanel";
-            this.pos_actionPanel.Size = new System.Drawing.Size(872, 42);
+            this.pos_actionPanel.Size = new System.Drawing.Size(969, 60);
             this.pos_actionPanel.TabIndex = 1;
             // 
             // close_pos
@@ -400,7 +400,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 529);
+            this.ClientSize = new System.Drawing.Size(1003, 701);
             this.Controls.Add(this.configuration);
             this.Name = "SiteConfiguration";
             this.Text = "Configuration";

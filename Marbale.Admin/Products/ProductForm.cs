@@ -57,15 +57,13 @@ namespace Marbale.Product
 
         private void btnGame_Click(object sender, EventArgs e)
         {
+           
             if (a == false)
             {
                 ProductPanel.Hide();
-                btnSiteSetup.Top = gamePanel.Top + gamePanel.Height + 10;
-                
-                //panel1.Height = 231;
-               // btnGame.Top = ProductPanel.Top + ProductPanel.Height + 10;
                 btnSiteSetup.Top = gamePanel.Bottom;
                 ReportButton.Top = btnSiteSetup.Bottom;
+                gamePanel.Top = btnGame.Bottom;
                 gamePanel.Show();
                 a = true;
             }
@@ -87,11 +85,8 @@ namespace Marbale.Product
                 gamePanel.Hide();
                 ProductPanel.Hide();
                 ReportButton.Top = SiteSetUpPanel.Top + SiteSetUpPanel.Height + 10;
-
-                //panel1.Height = 231;
-                // btnGame.Top = ProductPanel.Top + ProductPanel.Height + 10;
                 ReportButton.Top = SiteSetUpPanel.Bottom;
-              //  ReportButton.Top = btnSiteSetup.Bottom;
+                SiteSetUpPanel.Top = btnSiteSetup.Bottom;
                 SiteSetUpPanel.Show();
                 a = true;
             }
@@ -100,7 +95,6 @@ namespace Marbale.Product
                 panel1.Height = 0;
                 btnSiteSetup.Top = btnGame.Bottom;
                ReportButton.Top = btnSiteSetup.Bottom;
-              //  ReportButton.Top = btnSiteSetup.Bottom;
                 SiteSetUpPanel.Hide();
                 a = false;
             }
@@ -113,11 +107,6 @@ namespace Marbale.Product
                 SiteSetUpPanel.Hide();
                 ProductPanel.Hide();
                 gamePanel.Hide();
-              //  ReportButton.Top = SiteSetUpPanel.Top + SiteSetUpPanel.Height + 10;
-
-                //panel1.Height = 231;
-                // btnGame.Top = ProductPanel.Top + ProductPanel.Height + 10;
-              //  ReportButton.Top = SiteSetUpPanel.Bottom;
                 ReportsPanel.Top=ReportButton.Bottom;
                 ReportsPanel.Show();
                 a = true;
@@ -133,8 +122,6 @@ namespace Marbale.Product
         {
             if (a == false)
             {
-
-                //panel1.Height = 231;
                 btnGame.Top = ProductPanel.Top + ProductPanel.Height + 10;
                 btnSiteSetup.Top = btnGame.Bottom;
                 ReportButton.Top = btnSiteSetup.Bottom;
@@ -171,6 +158,9 @@ namespace Marbale.Product
         private void ConfigurationlinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             SiteConfiguration sitesetup = new SiteConfiguration();
+            sitesetup.StartPosition = FormStartPosition.Manual;
+          //  sitesetup.Location=formContainer.Location;
+            sitesetup.Location = new Point((sitesetup.Location.X + sitesetup.Width /3));
             sitesetup.ShowDialog();
         }
 

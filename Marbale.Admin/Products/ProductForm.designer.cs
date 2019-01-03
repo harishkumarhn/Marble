@@ -50,8 +50,8 @@
             this.HubslinkLabel = new System.Windows.Forms.LinkLabel();
             this.btnGame = new System.Windows.Forms.Button();
             this.ProductPanel = new System.Windows.Forms.Panel();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkTax = new System.Windows.Forms.LinkLabel();
+            this.linkdiscount = new System.Windows.Forms.LinkLabel();
             this.productlink = new System.Windows.Forms.LinkLabel();
             this.btnProduct = new System.Windows.Forms.Button();
             this.AdminLayout = new System.Windows.Forms.TableLayoutPanel();
@@ -78,7 +78,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(273, 728);
+            this.panel1.Size = new System.Drawing.Size(214, 728);
             this.panel1.TabIndex = 1;
             // 
             // ReportsPanel
@@ -301,33 +301,33 @@
             // ProductPanel
             // 
             this.ProductPanel.BackColor = System.Drawing.Color.Aqua;
-            this.ProductPanel.Controls.Add(this.linkLabel3);
-            this.ProductPanel.Controls.Add(this.linkLabel2);
+            this.ProductPanel.Controls.Add(this.linkTax);
+            this.ProductPanel.Controls.Add(this.linkdiscount);
             this.ProductPanel.Controls.Add(this.productlink);
             this.ProductPanel.Location = new System.Drawing.Point(31, 64);
             this.ProductPanel.Name = "ProductPanel";
             this.ProductPanel.Size = new System.Drawing.Size(119, 80);
             this.ProductPanel.TabIndex = 2;
             // 
-            // linkLabel3
+            // linkTax
             // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(44, 61);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(25, 13);
-            this.linkLabel3.TabIndex = 6;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "Tax";
+            this.linkTax.AutoSize = true;
+            this.linkTax.Location = new System.Drawing.Point(44, 61);
+            this.linkTax.Name = "linkTax";
+            this.linkTax.Size = new System.Drawing.Size(25, 13);
+            this.linkTax.TabIndex = 6;
+            this.linkTax.TabStop = true;
+            this.linkTax.Text = "Tax";
             // 
-            // linkLabel2
+            // linkdiscount
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(35, 38);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(47, 13);
-            this.linkLabel2.TabIndex = 5;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "discount";
+            this.linkdiscount.AutoSize = true;
+            this.linkdiscount.Location = new System.Drawing.Point(35, 38);
+            this.linkdiscount.Name = "linkdiscount";
+            this.linkdiscount.Size = new System.Drawing.Size(47, 13);
+            this.linkdiscount.TabIndex = 5;
+            this.linkdiscount.TabStop = true;
+            this.linkdiscount.Text = "discount";
             // 
             // productlink
             // 
@@ -357,8 +357,8 @@
             // AdminLayout
             // 
             this.AdminLayout.ColumnCount = 2;
-            this.AdminLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.43096F));
-            this.AdminLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.56904F));
+            this.AdminLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.49372F));
+            this.AdminLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 81.50628F));
             this.AdminLayout.Controls.Add(this.panel1, 0, 0);
             this.AdminLayout.Controls.Add(this.formContainer, 1, 0);
             this.AdminLayout.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -374,9 +374,9 @@
             this.formContainer.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.formContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.formContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formContainer.Location = new System.Drawing.Point(282, 3);
+            this.formContainer.Location = new System.Drawing.Point(223, 3);
             this.formContainer.Name = "formContainer";
-            this.formContainer.Size = new System.Drawing.Size(910, 728);
+            this.formContainer.Size = new System.Drawing.Size(969, 728);
             this.formContainer.TabIndex = 2;
             this.formContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint_1);
             // 
@@ -410,8 +410,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnGame;
         private System.Windows.Forms.Panel ProductPanel;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkTax;
+        private System.Windows.Forms.LinkLabel linkdiscount;
         private System.Windows.Forms.LinkLabel productlink;
         private System.Windows.Forms.Button btnProduct;
         private System.Windows.Forms.Panel gamePanel;
