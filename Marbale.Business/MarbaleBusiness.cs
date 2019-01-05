@@ -18,7 +18,7 @@ namespace Marbale.Business
         {
             marbaleData = new MarbaleData();
         }
-
+        #region settings
         public List<Settings> GetSettings()
         {
             try
@@ -110,6 +110,31 @@ namespace Marbale.Business
                 throw e;
             }
         }
+        #endregion
+
+        #region products
+        public ProductObject GetProduct(int id)
+        {
+            return null;
+        }
+        public int AddProduct(ProductObject product)
+        {
+            try
+            {
+                return marbaleData.AddProduct(product.Name, product.Type, product.POSCounter, product.Active, product.DisplayInPOS,
+                    product.Category, product.DisplayGroup, product.AutoGenerateCardNumber, product.OnlyVIP, product.Price,
+                    product.FaceValue, product.EffectivePrice, product.FinalPrice, product.TaxInclusive, product.TaxPercentage);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public int UpdateProduct(ProductObject product)
+        {
+            return 0;
+        }
+        #endregion
 
     }
 }
