@@ -142,8 +142,12 @@ namespace Marbale.Product
         private void productlink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ProductSubForms subform = new ProductSubForms();
-               subform.ShowDialog();
+            subform.StartPosition = FormStartPosition.Manual;
+          //  sitesetup.Location=formContainer.Location;
+            subform.Location = new Point((subform.Location.X + subform.Width / 3));
+            subform.ShowDialog();
         }
+        
 
         private void btnProduct_MouseHover(object sender, EventArgs e)
         {
