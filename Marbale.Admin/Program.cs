@@ -1,4 +1,5 @@
 ﻿using Marbale.Product;
+using Marbale.Products;
 using Marbale.SiteSetup;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Marbale
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MarbleAdmin());
+            Application.Run(new DiscountForm());
         }
     }
 }
