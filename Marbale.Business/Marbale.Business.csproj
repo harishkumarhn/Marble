@@ -45,6 +45,7 @@
     <Compile Include="POSBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AppSetting.cs" />
+    <Compile Include="ViewModels\Discounts.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="ViewModels\POSModel.cs" />
     <Compile Include="ViewModels\Settings.cs" />

@@ -111,5 +111,23 @@ namespace Marbale.Business
             }
         }
 
+
+        public List<Discounts> GetAllDiscounts()
+        {
+            List<Discounts> DiscountList = new List<Discounts>();
+            var dataTable = marbaleData.GetAllDiscounts();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Discounts discount = new Discounts();
+                discount.ActiveFlag = dr.IsNull("active_flag") ? false : bool.Parse(dr["active_flag"].ToString());
+                discount.AtomaticApply = dr.IsNull("automatic_apply") ? false : bool.Parse(dr["automatic_apply"].ToString());
+                discount.CouponMendatory = dr.IsNull("CouponMandatory") ? false : bool.Parse(dr["CouponMandatory"].ToString());
+                discount.DiscountAmount =dr.IsNull("DiscountAmount") ? 0 : float.Parse(dr["DiscountAmount"].ToString());
+
+
+                DiscountList.Add(discount);
+            }
+            return DiscountList;
+        }
     }
 }

@@ -112,5 +112,17 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+
+        public DataTable GetAllDiscounts()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetDiscounts");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
