@@ -20,6 +20,7 @@ namespace Marbale
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new DiscountForm());
+            Application.Run(new Marbale.Products.ProductDetail());
         }
     }
 }

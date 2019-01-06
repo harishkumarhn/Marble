@@ -85,8 +85,7 @@ namespace Marbale.DataAccess
             }
 
         }
-
-
+        
         public DataTable GetDefalutCashMode()
         {
             try
@@ -124,5 +123,37 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public int AddProduct(string name, string type, string posCounter, bool active, bool displayInpos, string category,
+            string displayGroup, bool aCard, bool onlyVIP, int price, int faceValue, int effectivePrice, int finalPrice, bool taxInclusive,
+            int taxPercentage)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[14];
+                sqlParameters[0] = new SqlParameter("@name", name);
+                sqlParameters[1] = new SqlParameter("@type", type);
+                sqlParameters[2] = new SqlParameter("@active", active);
+                sqlParameters[3] = new SqlParameter("@price", price);
+                sqlParameters[4] = new SqlParameter("@effectivePrice", effectivePrice);
+                sqlParameters[5] = new SqlParameter("@faceValue", faceValue);
+                sqlParameters[6] = new SqlParameter("@displayGroup", displayGroup);
+                sqlParameters[7] = new SqlParameter("@displayInPOS", displayInpos);
+                sqlParameters[8] = new SqlParameter("@autoGenerateCardNumber", aCard);
+                sqlParameters[9] = new SqlParameter("@category", category);
+                sqlParameters[10] = new SqlParameter("@onlyVIP", onlyVIP);
+                sqlParameters[11] = new SqlParameter("@posCounter", posCounter);
+                sqlParameters[12] = new SqlParameter("@taxInclusive", taxInclusive);
+                sqlParameters[13] = new SqlParameter("@taxPercentage", taxPercentage);
+
+
+                return conn.executeInsertQuery("sp_InsertProduct", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
     }
 }
