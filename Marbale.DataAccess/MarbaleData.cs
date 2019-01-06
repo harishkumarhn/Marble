@@ -111,6 +111,18 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+
+        public DataTable GetAllDiscounts()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetDiscounts");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public int AddProduct(string name, string type, string posCounter, bool active, bool displayInpos, string category,
             string displayGroup, bool aCard, bool onlyVIP, int price, int faceValue, int effectivePrice, int finalPrice, bool taxInclusive,
             int taxPercentage)
