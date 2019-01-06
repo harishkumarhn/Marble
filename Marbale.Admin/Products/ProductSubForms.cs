@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Marbale.Products;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,13 @@ namespace Marbale.Product
         private void btnclose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btncardsubproduct_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            ProductSetup ps = new ProductSetup();
+            ps.ShowDialog();
         }
     }
 }

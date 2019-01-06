@@ -183,6 +183,7 @@
             this.btncardsubproduct.TabIndex = 9;
             this.btncardsubproduct.Text = "Cards";
             this.btncardsubproduct.UseVisualStyleBackColor = false;
+            this.btncardsubproduct.Click += new System.EventHandler(this.btncardsubproduct_Click);
             // 
             // label1
             // 
