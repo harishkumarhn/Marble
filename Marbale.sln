@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.DataAccess", "Marbale.DataAccess\Marbale.DataAccess.csproj", "{6A6D1608-F1EC-435A-A3EC-10237AB280AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.ManagementStudio", "MarbaleManagementStudio\Marbale.ManagementStudio.csproj", "{01A46233-5E9D-4DE5-8BBF-478C57167DBD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.ManagementStudio", "Marbale.ManagementStudio\Marbale.ManagementStudio.csproj", "{01A46233-5E9D-4DE5-8BBF-478C57167DBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
