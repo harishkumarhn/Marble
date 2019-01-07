@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Marbale.Business;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,12 +9,21 @@ namespace MarbaleManagementStudio.Controllers
 {
     public class DiscountController : Controller
     {
-        //
+        MarbaleBusiness mb;
+        public DiscountController()
+        {
+            this.mb = new MarbaleBusiness();
+        }
+        //semnox
+        
         // GET: /Discount/
 
         public ActionResult Index()
         {
-            return View("Discount");
+            var d = mb.GetAllDiscounts();
+           // ViewData["AllDiscounts"] = d; 
+            ViewBag.AllDiscounts = d;
+            return View("Discount",d);
         }
 
     }
