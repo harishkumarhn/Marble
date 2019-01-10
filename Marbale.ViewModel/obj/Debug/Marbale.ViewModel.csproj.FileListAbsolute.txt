@@ -1,0 +1,5 @@
+D:\Projects\Marbale\Marbale.ViewModel\bin\Debug\Marbale.ViewModel.dll
+D:\Projects\Marbale\Marbale.ViewModel\bin\Debug\Marbale.ViewModel.pdb
+D:\Projects\Marbale\Marbale.ViewModel\obj\Debug\Marbale.ViewModel.csprojResolveAssemblyReference.cache
+D:\Projects\Marbale\Marbale.ViewModel\obj\Debug\Marbale.ViewModel.dll
+D:\Projects\Marbale\Marbale.ViewModel\obj\Debug\Marbale.ViewModel.pdb
