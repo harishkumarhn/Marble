@@ -1,5 +1,4 @@
 ﻿using Marbale.DataAccess;
-using Marble.Business.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marble.Business
+namespace Marbale.Business
 {
    public class POSBusiness
     {

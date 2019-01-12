@@ -43,7 +43,12 @@
     <Compile Include="MarbaleData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Marbale.BusinessObject\Marbale.BusinessObject.csproj">
+      <Project>{b49b19b5-a1c7-4372-8b3b-d4fa9a0981d0}</Project>
+      <Name>Marbale.BusinessObject</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Stored Procedures\sp_GetSettings.sql" />
     <Content Include="Stored Procedures\sp_UpdateAppSettings.sql" />

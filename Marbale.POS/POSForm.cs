@@ -1,7 +1,4 @@
-﻿using Marbale.Business;
-using Marble.Business;
-using Marble.Business.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +8,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Marbale.Business;
+using Marbale.BusinessObject;
 
 namespace Marbale.POS
 {
@@ -135,7 +134,7 @@ namespace Marbale.POS
             cmbDefaultCashMode.ValueMember = "id";
         }
 
-        private void ChangePOSColor(List<Marble.Business.ViewModels.AppSetting> dataTable)
+        private void ChangePOSColor(List<Marbale.BusinessObject.AppSetting> dataTable)
         {
 
             panel3.BackColor =Color.FromName(dataTable.Where(o => o.Name == "POS_SKIN_COLOR").Select(o => o.Value).Single());

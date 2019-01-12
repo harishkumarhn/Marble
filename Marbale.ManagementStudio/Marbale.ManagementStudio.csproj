@@ -230,6 +230,16 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Marbale.BusinessObject\Marbale.BusinessObject.csproj">
+      <Project>{b49b19b5-a1c7-4372-8b3b-d4fa9a0981d0}</Project>
+      <Name>Marbale.BusinessObject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Marbale.Business\Marbale.Business.csproj">
+      <Project>{d3791924-6c85-4aad-8bab-3e3cd23c22e6}</Project>
+      <Name>Marbale.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
