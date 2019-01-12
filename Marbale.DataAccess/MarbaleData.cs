@@ -97,6 +97,7 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+       
 
         public int UpdatePOSUserCredential(string Password)
         {
@@ -154,6 +155,37 @@ namespace Marbale.DataAccess
             }
 
         }
+        public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, int DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[16];
+                sqlParameters[0] = new SqlParameter("@ActiveFlag", ActiveFlag);
+                sqlParameters[1] = new SqlParameter("@AutomaticApply", AutomaticApply);
+                sqlParameters[2] = new SqlParameter("@CouponMendatory", CouponMendatory);
+                sqlParameters[3] = new SqlParameter("@DiscountAmount", DiscountAmount);
+                sqlParameters[4] = new SqlParameter("@DiscountID", DiscountID);
+                sqlParameters[5] = new SqlParameter("@DiscountName", DiscountName);
+                sqlParameters[6] = new SqlParameter("@DiscountPercentage", DiscountPercentage);
+                sqlParameters[7] = new SqlParameter("@DiscountType", DiscountType);
+                sqlParameters[8] = new SqlParameter("@DisplayInPOS", DisplayInPOS);
+                sqlParameters[9] = new SqlParameter("@DisplayOrder", DisplayOrder);
+                sqlParameters[10] = new SqlParameter("@LastUpdatedDate", LastUpdatedDate);
+                sqlParameters[11] = new SqlParameter("@LastUpdatedUser", LastUpdatedUser);
+                sqlParameters[12] = new SqlParameter("@ManagerApproval", ManagerApproval);
+                sqlParameters[13] = new SqlParameter("@MinimumSaleAmount", MinimumSaleAmount);
 
+                sqlParameters[14] = new SqlParameter("@MinimumUsedCredits", MinimumUsedCredits);
+                sqlParameters[15] = new SqlParameter("@RemarkMendatory", RemarkMendatory);
+
+
+
+                return conn.executeInsertQuery("sp_Insert_Discount", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
