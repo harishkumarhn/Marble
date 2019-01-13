@@ -1,6 +1,5 @@
 ﻿using Marbale.Business;
-using Marbale.Business.ViewModels;
-using Marble.Business.ViewModels;
+using Marbale.BusinessObject;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D3791924-6C85-4AAD-8BAB-3E3CD23C22E6}</ProjectGuid>
+    <ProjectGuid>{B49B19B5-A1C7-4372-8B3B-D4FA9A0981D0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Marble.Business</RootNamespace>
-    <AssemblyName>Marble.Business</AssemblyName>
+    <RootNamespace>Marbale.BusinessObject</RootNamespace>
+    <AssemblyName>Marbale.BusinessObject</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,20 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enum\TypeEnum.cs" />
-    <Compile Include="MarbaleBusiness.cs" />
-    <Compile Include="POSBusiness.cs" />
+    <Compile Include="AppSetting.cs" />
+    <Compile Include="Discounts.cs" />
+    <Compile Include="LoginModel.cs" />
+    <Compile Include="POSModel.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Marbale.BusinessObject\Marbale.BusinessObject.csproj">
-      <Project>{b49b19b5-a1c7-4372-8b3b-d4fa9a0981d0}</Project>
-      <Name>Marbale.BusinessObject</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Marbale.DataAccess\Marbale.DataAccess.csproj">
-      <Project>{6a6d1608-f1ec-435a-a3ec-10237ab280af}</Project>
-      <Name>Marbale.DataAccess</Name>
-    </ProjectReference>
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

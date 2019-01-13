@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Marbale.Business;
-using Marble.Business.ViewModels;
+using Marbale.BusinessObject;
 
 namespace MarbaleManagementStudio.Controllers
 {

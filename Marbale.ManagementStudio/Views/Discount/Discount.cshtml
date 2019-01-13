@@ -130,7 +130,7 @@
 </head>
 <body>
 @{
-    Marble.Business.ViewModels.Discounts product = new Marble.Business.ViewModels.Discounts();
+    Marble.Business.ViewModels.Discounts product = new Marbale.BusinessObject.Discounts();
 }
     @{
         var grid = new WebGrid(Model, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
@@ -171,7 +171,7 @@
          )) 
     @if (grid.HasSelection)
     {
-        product = (Marble.Business.ViewModels.Discounts)grid.Rows[grid.SelectedIndex].Value;
+        product = (Marbale.BusinessObject.Discounts)grid.Rows[grid.SelectedIndex].Value;
              <b>DiscountId</b> @product.DiscountID<br />
              <b>DiscountName</b>  @product.DiscountName<br />
              <b>DiscountAmount</b> @product.DiscountAmount<br />

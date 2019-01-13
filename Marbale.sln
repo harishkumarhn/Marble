@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.DataAccess", "Marba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.ManagementStudio", "Marbale.ManagementStudio\Marbale.ManagementStudio.csproj", "{01A46233-5E9D-4DE5-8BBF-478C57167DBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.BusinessObject", "Marbale.BusinessObject\Marbale.BusinessObject.csproj", "{B49B19B5-A1C7-4372-8B3B-D4FA9A0981D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{01A46233-5E9D-4DE5-8BBF-478C57167DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01A46233-5E9D-4DE5-8BBF-478C57167DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01A46233-5E9D-4DE5-8BBF-478C57167DBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B49B19B5-A1C7-4372-8B3B-D4FA9A0981D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B49B19B5-A1C7-4372-8B3B-D4FA9A0981D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B49B19B5-A1C7-4372-8B3B-D4FA9A0981D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B49B19B5-A1C7-4372-8B3B-D4FA9A0981D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{9CCFEFB8-DFAB-4D8A-9EBA-EB0AA310FE78} = {C43FABDF-0E04-4A20-9E1B-5AB056991A36}
 		{01A46233-5E9D-4DE5-8BBF-478C57167DBD} = {C43FABDF-0E04-4A20-9E1B-5AB056991A36}
 		{D3791924-6C85-4AAD-8BAB-3E3CD23C22E6} = {999F5B16-1BDA-4E51-8B15-119FED27ECC6}
+		{B49B19B5-A1C7-4372-8B3B-D4FA9A0981D0} = {999F5B16-1BDA-4E51-8B15-119FED27ECC6}
 		{6A6D1608-F1EC-435A-A3EC-10237AB280AF} = {7E25C3EE-426C-409E-A6C5-FBB2556184BD}
 	EndGlobalSection
 EndGlobal
