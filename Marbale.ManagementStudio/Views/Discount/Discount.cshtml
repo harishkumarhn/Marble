@@ -126,16 +126,21 @@
         .gridHead a:hover {text-decoration:underline;}
         .description { width:auto}
         .select{background-color: #389DF5}
+        .container {
+    width: 30em;
+    overflow-x: auto;
+    white-space: nowrap;
+}
     </style>
 </head>
 <body>
 @{
-    Marble.Business.ViewModels.Discounts product = new Marbale.BusinessObject.Discounts();
+    Marbale.BusinessObject.Discounts product = new Marbale.BusinessObject.Discounts();
 }
     @{
-        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 3, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
         grid.Pager(WebGridPagerModes.NextPrevious);}
-        <div id="gridContent" style="width=500px">
+        <div id="gridContent" style="overflow-x:scroll;overflow-y:hidden;width:987px">
             <a href="#" class="add">Add New Discount</a>
         @grid.GetHtml(tableStyle: "webGrid",
                 headerStyle: "header",
