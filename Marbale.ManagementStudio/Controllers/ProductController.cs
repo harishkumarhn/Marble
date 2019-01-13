@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Marbale.BusinessObject;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +15,9 @@ namespace MarbaleManagementStudio.Controllers
 
         public ActionResult Index()
         {
-            return View("ProductsMenu");
+            ObservableCollection<ProductObject> list = new ObservableCollection<ProductObject>();
+            list.Add(new ProductObject() { Id = 1 });
+            return View("ProductSetup",list);
         }
 
     }

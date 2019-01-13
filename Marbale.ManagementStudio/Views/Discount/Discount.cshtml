@@ -130,10 +130,10 @@
 </head>
 <body>
 @{
-    Marble.Business.ViewModels.Discounts product = new Marbale.BusinessObject.Discounts();
+    Marbale.BusinessObject.Discounts product = new Marbale.BusinessObject.Discounts();
 }
     @{
-        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
         grid.Pager(WebGridPagerModes.NextPrevious);}
         <div id="gridContent" style="width=500px">
             <a href="#" class="add">Add New Discount</a>

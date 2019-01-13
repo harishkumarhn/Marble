@@ -134,7 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\marbalestyle.css" />
     <Content Include="Content\JS\fontawesome.solid.js" />
     <Content Include="Content\JS\fontawesome.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
