@@ -15,6 +15,11 @@ namespace MarbaleManagementStudio.Controllers
 
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult ProductSetup()
+        {
             ObservableCollection<ProductObject> list = new ObservableCollection<ProductObject>();
             list.Add(new ProductObject() { Id = 1 });
             return View("ProductSetup",list);

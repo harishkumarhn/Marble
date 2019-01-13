@@ -1,44 +1,55 @@
-USE [Marbale]
-GO
+USE [Marbale] 
 
-/****** Object:  StoredProcedure [dbo].[sp_Insert_Discount]    Script Date: 1/13/2019 12:29:29 AM ******/
-SET ANSI_NULLS ON
-GO
+go 
 
-SET QUOTED_IDENTIFIER ON
-GO
+/****** Object:  StoredProcedure [dbo].[sp_Insert_Discount]    Script Date: 1/13/2019 12:29:29 AM ******/ 
+SET ansi_nulls ON 
 
-CREATE proc [dbo].[sp_Insert_Discount]
+go 
 
- 
- @AutomaticApply bit=null,
-   @CouponMendatory bit=null, 
-  @DiscountAmount float=null, 
-   @DiscountID int=null,
-    @DiscountName varchar(100)=null, 
-	 @ActiveFlag bit=null, 
-    @DiscountPercentage float=null,
-     @DiscountType varchar(100)=null,
-	  @DisplayInPOS bit=null,
-	   @DisplayOrder int=null, 
-	   @LastUpdatedDate DateTime=null,
-	    @LastUpdatedUser varchar(100)=null,
-	     @ManagerApproval bit=null,
-		  @MinimumSaleAmount float=null, 
-		  @MinimumUsedCredits float=null, 
-		  @RemarkMendatory bit=null
-		  as begin 
-		  insert into discounts
-		  --(discount_id,discount_name,discount_percentage,automatic_apply,minimum_sale_amount,
-		  --minimum_credits,display_in_POS,active_flag,sort_order,manager_approval_required,last_updated_date,
-		  --last_updated_user,discount_type,CouponMandatory,DiscountAmount,RemarksMandatory)
-		  values(@DiscountName,
-		  @DiscountPercentage,@AutomaticApply,@MinimumSaleAmount,@MinimumUsedCredits,@DisplayInPOS,1,
-		  @DisplayOrder,@ManagerApproval,@LastUpdatedDate,@LastUpdatedUser,null,@DiscountType,null,null,@CouponMendatory,null,@DiscountAmount,null,
-		  @RemarkMendatory
-		  )
-		  end
-		  
-GO
+SET quoted_identifier ON 
 
+go 
 
+CREATE PROC [dbo].[Sp_insert_discount] @AutomaticApply     BIT=NULL, 
+                                       @CouponMendatory    BIT=NULL, 
+                                       @DiscountAmount     FLOAT=NULL, 
+                                       @DiscountID         INT=NULL, 
+                                       @DiscountName       VARCHAR(100)=NULL, 
+                                       @ActiveFlag         BIT=NULL, 
+                                       @DiscountPercentage FLOAT=NULL, 
+                                       @DiscountType       VARCHAR(100)=NULL, 
+                                       @DisplayInPOS       BIT=NULL, 
+                                       @DisplayOrder       INT=NULL, 
+                                       @LastUpdatedDate    DATETIME=NULL, 
+                                       @LastUpdatedUser    VARCHAR(100)=NULL, 
+                                       @ManagerApproval    BIT=NULL, 
+                                       @MinimumSaleAmount  FLOAT=NULL, 
+                                       @MinimumUsedCredits FLOAT=NULL, 
+                                       @RemarkMendatory    BIT=NULL 
+AS 
+  BEGIN 
+      INSERT INTO discounts 
+      VALUES     (@DiscountName, 
+                  @DiscountPercentage, 
+                  @AutomaticApply, 
+                  @MinimumSaleAmount, 
+                  @MinimumUsedCredits, 
+                  @DisplayInPOS, 
+                  1, 
+                  @DisplayOrder, 
+                  @ManagerApproval, 
+                  @LastUpdatedDate, 
+                  @LastUpdatedUser, 
+                  NULL, 
+                  @DiscountType, 
+                  NULL, 
+                  NULL, 
+                  @CouponMendatory, 
+                  NULL, 
+                  @DiscountAmount, 
+                  NULL, 
+                  @RemarkMendatory ) 
+  END 
+
+go 

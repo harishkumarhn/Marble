@@ -126,6 +126,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
+    <Compile Include="Controllers\MarbleController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -134,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\images\marbleDefault.jpg" />
     <Content Include="Content\JS\fontawesome.solid.js" />
     <Content Include="Content\JS\fontawesome.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -224,6 +226,8 @@
     <Content Include="Views\Discount\Discount.cshtml" />
     <Content Include="Views\Product\ProductsMenu.cshtml" />
     <Content Include="Views\Product\ProductSetup.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Marble\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

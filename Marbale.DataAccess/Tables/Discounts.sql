@@ -8,7 +8,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[discounts](
+CREATE TABLE [dbo].[Discounts](
 	[discount_id] [int] IDENTITY(1,1) NOT NULL,
 	[discount_name] [nvarchar](50) NOT NULL,
 	[discount_percentage] [int] NULL,
