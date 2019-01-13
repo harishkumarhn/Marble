@@ -9,6 +9,115 @@
 <head>
     <title>WebgridSample</title>
     <script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script>
+        var id = 0;
+        $('#disc').click(function () {
+
+            $('#gridContent').show();
+        })
+
+        $(".add").live("click", function () {
+            debugger
+                var index = $("#grid tbody tr").length + 1;
+                var DiscountId = "DiscountId" + index;
+                var DiscountName = "DiscountName" + index;
+                var DiscountAmount = "DiscountAmount" + index;
+                var CouponMendatory = "CouponMendatory" + index;
+                var DiscountPercentage = "DiscountPercentage" + index;
+                var AutomaticApply = "AutomaticApply" + index;
+                var ActiveFlag = "ActiveFlag" + index;
+                var DisplayOrder = "DisplayOrder" + index;
+                var LastUpdatedDate = "LastUpdatedDate" + index;
+                var LastUpdatedUser = "LastUpdatedUser" + index;
+                var ManagerApprovalRequered = "ManagerApprovalRequered" + index;
+                var MinimumSaleAmount = "MinimumSaleAmount" + index;
+                var MinimumUsedCredits = "MinimumUsedCredits" + index;
+                var RemarkMendatory = "RemarkMendatory" + index;
+                var Save = "Save_" + index;
+                var Cancel = "Cancel_" + index;
+                var tr = '<tr class="alternate-row"><td></td>'+
+
+                     '<td><span> <input id="' + DiscountName + '" type="text" /></span></td>' +
+
+                     '<td><span> <input id="' + DiscountAmount + '" type="text" /></span></td>' +
+                           '<td><span> <input id="' + CouponMendatory + '" type="checkbox" /></span></td>' +
+                     '<td><span> <input id="' + DiscountPercentage + '" type="text" /></span></td>' +
+                      '<td><span> <input id="' + AutomaticApply + '" type="checkbox" /></span></td>' +
+                          '<td><span> <input id="' + ActiveFlag + '" type="checkbox" /></span></td>' +
+                     '<td><span> <input id="' + DisplayOrder + '" type="text" /></span></td>' +
+                           '<td><span> <input id="' + LastUpdatedDate + '" type="text" /></span></td>' +
+                                '<td><span> <input id="' + LastUpdatedUser + '" type="text" /></span></td>' +
+                     '<td><span> <input id="' + ManagerApprovalRequered + '" type="checkbox" /></span></td>' +
+                           '<td><span> <input id="' + MinimumSaleAmount + '" type="text" /></span></td>' +
+                           '<td><span> <input id="' + MinimumUsedCredits + '" type="text" /></span></td>' +
+                     '<td><span> <input id="' + RemarkMendatory + '" type="checkbox" /></span></td>' +
+                      
+                    '<td> <a href="#" id="' + Save + '" class="save">Save</a>'+
+                '</tr>';
+
+ 
+
+                $("#grid tbody").append(tr);
+        });
+        $('#DiscountAmount3').keypress(function () {
+            debugger;
+        });
+
+        $(".save").live("click", function () {
+            debugger
+             id = $("#grid tbody tr").length;
+            var discountObject = {
+                DiscountId : $("#DiscountId" + id).val(),
+
+            DiscountName : $("#DiscountName" + id).val(),
+           
+            DiscountAmount: $("#DiscountAmount" + id).val(),
+               
+            CouponMendatory: $("#CouponMendatory" + id).is(':checked'),
+          //  CouponMendatory : $("#CouponMendatory" + id).val(),
+            DiscountPercentage : $("#DiscountPercentage" + id).val(),
+            AutomaticApply: $("#AutomaticApply" + id).is(':checked'),
+            DiscountAmount : $("#DiscountAmount" + id).val(),
+            DiscountPercentage : $("#DiscountPercentage" + id).val(),
+            DisplayOrder : $("#DisplayOrder" + id).val(),
+
+            LastUpdatedDate : $("#LastUpdatedDate" + id).val(),
+            LastUpdatedUser: $("#LastUpdatedUser" + id).val(),
+
+            ManagerApproval: $("#ManagerApprovalRequered" + id).is(':checked'),
+            DisplayInPOS: $("#DisplayInPOS" + id).is(':checked'),
+            MinimumSaleAmount : $("#MinimumSaleAmount" + id).val(),
+            MinimumUsedCredits : $("#MinimumUsedCredits" + id).val(),
+            AutomaticApply: $("#AutomaticApply" + id).is(':checked'),
+            RemarkMendatory: $("#RemarkMendatory" + id).is(':checked'),
+            ActiveFlag: $("#ActiveFlag" + id).is(':checked'),
+
+            };
+            if (id != "") {
+
+                $.ajax({
+
+                    type: "POST",
+
+                    contentType: "application/json; charset=utf-8",
+                   
+                    url: '@Url.Action("SaveDiscount", "Discount")',
+
+                    data: JSON.stringify({ data: discountObject }),
+
+                dataType: "json",
+
+                beforeSend: function () { },
+
+                success: function (data) {
+                   
+                    location.reload();
+                }
+            });
+        }
+        });
+
+    </script>
     <style type="text/css">
         .webGrid { margin: 4px; border-collapse: collapse; width: 500px;  background-color:#FCFCFC;}
         .header { background-color: #C1D4E6; font-weight: bold; color: #FFF; }
@@ -21,30 +130,66 @@
 </head>
 <body>
 @{
-    MarbaleManagementStudio.Models.Product product = new MarbaleManagementStudio.Models.Product();
+    Marble.Business.ViewModels.Discounts product = new Marble.Business.ViewModels.Discounts();
 }
     @{
-    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow",ajaxUpdateContainerId: "gridContent");
+        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
         grid.Pager(WebGridPagerModes.NextPrevious);}
-        <div id="gridContent">
+        <div id="gridContent" style="width=500px">
+            <a href="#" class="add">Add New Discount</a>
         @grid.GetHtml(tableStyle: "webGrid",
                 headerStyle: "header",
+                htmlAttributes: new { id = "grid" },
                 alternatingRowStyle: "alt",
                 selectedRowStyle: "select",
                 columns: grid.Columns(
-                grid.Column("Id", format: (item) => item.GetSelectLink(item.Id)),
-                grid.Column("Name", " Name"),
-                grid.Column("Description", "Description", style: "description"),
-                grid.Column("Quantity", "Quantity")
+                grid.Column("DiscountID", "DiscountID"),
+                grid.Column("DiscountName", " DiscountName"),
+                grid.Column("DiscountAmount", "DiscountAmount", style: "DiscountAmount"),
+                 grid.Column("CouponMendatory",format: @<text><input name="chkbox" type="checkbox"@(item.CouponMendatory ? "checked='checked'" : "") value="CouponMendatory" /></text>),
+            
+                grid.Column("DiscountPercentage", "DiscountPercentage"),
+                
+                grid.Column("AutomaticApply", format: @<text><input name="chkbox" type="checkbox"@(item.AutomaticApply ? "checked='checked'" : "") value="AutomaticApply" /></text>),
+                grid.Column("ActiveFlag", format: @<text><input name="chkbox" type="checkbox"@(item.ActiveFlag ? "checked='checked'" : "") value="ActiveFlag" /></text>),
+      
+        
+                   grid.Column("DisplayOrder", "DisplayOrder"),
+                grid.Column("LastUpdatedDate", " LastUpdatedDate"),
+                grid.Column("LastUpdatedUser", "LastUpdatedUser"),
+                 grid.Column("ManagerApprovalRequered",format: @<text><input name="chkbox" type="checkbox"@(item.ManagerApproval ? "checked='checked'" : "") value="ManagerApprovalRequered" /></text>),
+                 grid.Column("MinimumSaleAmount", "MinimumSaleAmount"),
+                grid.Column("MinimumUsedCredits","MinimumUsedCredits"),
+                grid.Column("RemarkMendatory",format: @<text><input name="chkbox" type="checkbox"@(item.RemarkMendatory ? "checked='checked'" : "") value="RemarkMendatory" /></text>),
+            
+         grid.Column(header: "Action", format: @<text> 
+
+<a href="#" id="Edit_@product.DiscountID"" class="edit">Edit</a>
+<a href="#" id="Update_@product.DiscountID"" style="display:none" class="update">Update</a><a href="#" id="Cancel_@product.DiscountID" style="display:none"  class="cancel">Cancel</a></text>)
+
+
          )) 
     @if (grid.HasSelection)
-         {
-             product = (MarbaleManagementStudio.Models.Product)grid.Rows[grid.SelectedIndex].Value;
-             <b>Id</b> @product.Id<br />
-             <b>Name</b>  @product.Name<br />
-             <b>Description</b> @product.Description<br />
-             <b>Quantity</b> @product.Quantity<br />
-         }
+    {
+        product = (Marble.Business.ViewModels.Discounts)grid.Rows[grid.SelectedIndex].Value;
+             <b>DiscountId</b> @product.DiscountID<br />
+             <b>DiscountName</b>  @product.DiscountName<br />
+             <b>DiscountAmount</b> @product.DiscountAmount<br />
+             <b>CouponMendatory</b> @product.CouponMendatory<br />
+                 <b>AutomaticApply</b> @product.AutomaticApply<br />
+             <b>ActiveFlag</b>  @product.ActiveFlag<br />
+             <b>DiscountPercentage</b> @product.DiscountPercentage<br />
+             <b>DisplayInPOS</b> @product.DisplayInPOS<br />
+        
+          <b>DisplayOrder</b> @product.DisplayOrder<br />
+             <b>LastUpdatedDate</b>  @product.LastUpdatedDate<br />
+             <b>LastUpdatedUser</b> @product.LastUpdatedUser<br />
+             <b>ManagerApprovalRequered</b> @product.ManagerApproval<br />
+                 <b>MinimumSaleAmount</b> @product.MinimumSaleAmount<br />
+             <b>MinimumUsedCredits</b>  @product.MinimumUsedCredits<br />
+             <b>RemarkMendatory</b> @product.RemarkMendatory<br />
+         
+    }
     </div>     
 </body>
 </html>

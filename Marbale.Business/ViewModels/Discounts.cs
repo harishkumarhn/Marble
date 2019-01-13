@@ -11,9 +11,9 @@ namespace Marble.Business.ViewModels
         public int DiscountID { get; set; }
         public string DiscountName { get; set; }
         public int DiscountPercentage { get; set; }
-        public bool AtomaticApply { get; set; }
+        public bool AutomaticApply { get; set; }
         public float MinimumSaleAmount { get; set; }
-        public float MinimumCredits { get; set; }
+        public float MinimumUsedCredits { get; set; }
         public bool DisplayInPOS { get; set; }
         public bool ActiveFlag { get; set; }
         public int SortOrder { get; set; }
@@ -24,5 +24,8 @@ namespace Marble.Business.ViewModels
         public bool CouponMendatory { get; set; }
         public float DiscountAmount { get; set; }
         public bool RemarkMendatory { get; set; }
+        public int DisplayOrder { get; set; }
+
+        public bool RemarksMandatory { get; set; }
     }
 }

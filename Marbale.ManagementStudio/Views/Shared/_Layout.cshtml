@@ -35,7 +35,7 @@
                             <a href="#">Products</a>
                         </li>
                         <li>
-                            <a href="#">Discounts</a>
+                            <a href="#" id="disc">Discounts</a>
                         </li>
                         <li>
                             <a href="#">Tax</a>
@@ -101,8 +101,10 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#gridContent').hide();
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
+              
             });
         });
     </script>
