@@ -18,7 +18,7 @@ namespace Marbale
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ConfigForm());
+            Application.Run(new Configuration());
         }
     }
 }
