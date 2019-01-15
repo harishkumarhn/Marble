@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{6C782D92-903B-474A-95CD-ADE829DCB1EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marble.Business", "Marble.Business\Marble.Business.csproj", "{D3791924-6C85-4AAD-8BAB-3E3CD23C22E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.Business", "Marbale.Business\Marbale.Business.csproj", "{D3791924-6C85-4AAD-8BAB-3E3CD23C22E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.Admin", "Marbale.Admin\Marbale.Admin.csproj", "{74F80ACE-2056-4F14-AE80-F524CC7CF3DC}"
 EndProject
@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		App.Config = App.Config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marble.DataAccess", "Marble.DataAccess\Marble.DataAccess.csproj", "{6A6D1608-F1EC-435A-A3EC-10237AB280AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.DataAccess", "Marbale.DataAccess\Marbale.DataAccess.csproj", "{6A6D1608-F1EC-435A-A3EC-10237AB280AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

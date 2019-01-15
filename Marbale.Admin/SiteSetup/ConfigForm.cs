@@ -1,4 +1,4 @@
-﻿using Marble.Business;
+﻿using Marbale.Business;
 using Marble.Business.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,17 +15,16 @@ namespace Marbale.SiteSetup
     public partial class ConfigForm : Form
     {
         List<Settings> lstSettings;
-        MarbleBusiness mb;
+        MarbaleBusiness mb;
         public ConfigForm()
         {
             InitializeComponent();
             lstSettings = new List<Settings>();
-            mb = new MarbleBusiness();
+            mb = new MarbaleBusiness();
         }
 
         private void POSTab_Click(object sender, EventArgs e)
         {
-            var marbaleLogic = new MarbleBusiness();
         }
 
         private void configuration_Click(object sender, EventArgs e)

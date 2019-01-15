@@ -104,9 +104,9 @@
     <None Include="Resources\LOGO2.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Marble.Business\Marble.Business.csproj">
+    <ProjectReference Include="..\Marbale.Business\Marbale.Business.csproj">
       <Project>{d3791924-6c85-4aad-8bab-3e3cd23c22e6}</Project>
-      <Name>Marble.Business</Name>
+      <Name>Marbale.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
