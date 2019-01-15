@@ -25,6 +25,7 @@ namespace Marbale.BusinessObject
         public float DiscountAmount { get; set; }
         public bool RemarkMendatory { get; set; }
         public int DisplayOrder { get; set; }
+        public bool Type { get; set; }
 
         public bool RemarksMandatory { get; set; }
     }

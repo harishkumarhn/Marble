@@ -167,7 +167,7 @@ namespace Marbale.Business
         }
         public int SaveDiscount(Discounts discount)
         {
-            int status = marbaleData.SaveDiscount(discount.ActiveFlag,discount.AutomaticApply,discount.CouponMendatory,discount.DiscountAmount,discount.DiscountID,discount.DiscountName,discount.DiscountPercentage,discount.DiscountType,discount.DisplayInPOS,discount.DisplayOrder,discount.LastUpdatedDate,discount.LastUpdatedUser,discount.ManagerApproval,discount.MinimumSaleAmount,discount.MinimumUsedCredits,discount.RemarkMendatory);
+            int status = marbaleData.SaveDiscount(discount.ActiveFlag,discount.AutomaticApply,discount.CouponMendatory,discount.DiscountAmount,discount.DiscountID,discount.DiscountName,discount.DiscountPercentage,discount.DiscountType,discount.DisplayInPOS,discount.DisplayOrder,discount.LastUpdatedDate,discount.LastUpdatedUser,discount.ManagerApproval,discount.MinimumSaleAmount,discount.MinimumUsedCredits,discount.RemarkMendatory,discount.Type);
             return status;
         }
     }
