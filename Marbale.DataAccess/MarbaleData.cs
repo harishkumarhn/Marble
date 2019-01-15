@@ -155,11 +155,11 @@ namespace Marbale.DataAccess
             }
 
         }
-        public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, int DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory)
+        public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, int DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory,bool Type)
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[16];
+                SqlParameter[] sqlParameters = new SqlParameter[17];
                 sqlParameters[0] = new SqlParameter("@ActiveFlag", ActiveFlag);
                 sqlParameters[1] = new SqlParameter("@AutomaticApply", AutomaticApply);
                 sqlParameters[2] = new SqlParameter("@CouponMendatory", CouponMendatory);
@@ -177,7 +177,7 @@ namespace Marbale.DataAccess
 
                 sqlParameters[14] = new SqlParameter("@MinimumUsedCredits", MinimumUsedCredits);
                 sqlParameters[15] = new SqlParameter("@RemarkMendatory", RemarkMendatory);
-
+                sqlParameters[15] = new SqlParameter("@Type", Type);
 
 
                 return conn.executeInsertQuery("sp_Insert_Discount", sqlParameters);
