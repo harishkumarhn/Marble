@@ -7,8 +7,10 @@
 
 @if (Model.Id <= 0)
 {
+    <fieldset>
+        <legend>Product</legend>
 
-    using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    @using (Html.BeginForm("Insert", "Product", FormMethod.Post))
     {
     <table class="formTable">
         <tr>
@@ -72,5 +74,13 @@
             <td>@Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @Value = "AutoGenerateCardNumber", @class = "red" })</td>
         </tr>
     </table>
+
+        <br />
+         <input type="submit" name="submit" value="Save" />
+
     }
+    </fieldset>
 }
+
+<script>
+</script>

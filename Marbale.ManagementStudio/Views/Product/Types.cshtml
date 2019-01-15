@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "ProductTypes";
+}
+
+<h2>ProductTypes</h2>
+@{
+    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10,
+        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "productTypeGrid");
+        grid.Pager(WebGridPagerModes.NextPrevious);
+}
+ <div id="productTypeGrid" class="marbleGrid">
+        @grid.GetHtml(tableStyle: "webGrid",
+                headerStyle: "header",
+                htmlAttributes: new { id = "grid_productType" },
+                alternatingRowStyle: "alt",
+                selectedRowStyle: "select",
+                columns: grid.Columns(
+                
+                grid.Column("Id", "Id"),  
+                grid.Column("Description", format: @<text><input name="textbox" type="text" class="grid-row" value="@(item.Description)" /></text>),
+                grid.Column("Type",format: @<text><input name="textbox" type="text" class="grid-row" value="@(item.Type)" /></text>),
+                grid.Column("ReportGroup",format: @<text><input name="textbox" type="text" class="grid-row" value="@(item.ReportGroup)" /></text>),               
+                grid.Column("Active", format: @<text><input name="chkbox" type="checkbox"@(item.Active ? "checked='checked'" : "") value="Active" /></text>),
+                grid.Column("CardSale", format: @<text><input name="chkbox" type="checkbox"@(item.CardSale ? "checked='checked'" : "") value="CardSale" /></text>),
+                grid.Column("LastUpdatedDate", "LastUpdatedDate"),
+                grid.Column("LastUpdatedBy",format: @<text><input name="textbox" type="text" class="grid-row" value="@(item.LastUpdatedBy)" /></text>)
+
+         )) 
+     <button class="btn btn-primary btn-md" id="save_productTypes" onclick="Save()">Save</button>
+    </div>
+     <script>
+         $(document).ready(function () {
+             var modifiedListIndex = [];
+             $('#grid_productType').on('change', 'input, select, textarea', function () {
+                 debugger;
+                 var row_index = $(this).parent().index();
+                 modifiedListIndex.push(row_index);
+             });             
+         });
+
+         function Save() {
+             var table = $('#grid_productType').data();
+         }
+     </script>   
+

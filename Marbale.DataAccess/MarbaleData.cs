@@ -187,5 +187,17 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+
+        public DataTable GetProductTypes()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetProductTypes");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

@@ -2,26 +2,29 @@
     ViewBag.Title = "ProductsMenu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="@Url.Content("~/content/css/marbalestyle.css")" rel="stylesheet"/>
+<link href="@Url.Content("~/content/css/style.css")" rel="stylesheet"/>
+
 
 <div class="container">
-    <div class="panel panel-primary pbody">
-      <div class="panel-heading heading">Chose by product type</div>
-      <div class="panel-body body">
-          <a href="/product/productsetup" class="btn btn-primary btn-md" role="button">Cards</a>
-          <a href="http://google.co.in" class="btn btn-primary btn-md" role="button">Non Card Sales</a>
-          <a href="http://google.co.in" class="btn btn-primary btn-md" role="button">Combo</a>
-          <a href="http://google.co.in" class="btn btn-primary btn-md" role="button">Bookings</a>
-      </div>
-    </div>
+    <fieldset>
+        <legend><h4>Chose by product type</h4></legend>
+        <div class="panel panel-primary pbody">
+            <div class="panel-body body">
+                <a href="/product/productsetup" class="btn btn-primary btn-md" role="button">Cards</a>
+                <a href="http://google.co.in" class="btn btn-primary btn-md" role="button">Non Card Sales</a>
+                <a href="http://google.co.in" class="btn btn-primary btn-md" role="button">Combo</a>
+                <a href="http://google.co.in" class="btn btn-primary btn-md" role="button">Bookings</a>
+            </div>
+        </div>
+    </fieldset>
 
-    <div class="panel panel-default">
-      <div class="panel-heading heading">Set up</div>
-      <div class="panel-body body">
-          <a href="#">Product Type</a>
-          <a href="#">Product Category</a>
-          <a href="#">Product Modifiers</a>
-      </div>
-    </div>
-  
+    <fieldset>
+        <legend><h4>Set Up</h4</legend>
+            <div class="productSetup">
+                <a href="/product/Types">Product Type</a>
+                <a href="#">Product Category</a>
+                <a href="#">Product Modifiers</a>
+            </div>
+    </fieldset>
+
 </div>

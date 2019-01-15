@@ -49,7 +49,6 @@ namespace Marbale.Business
                 throw e;
             }
         }
-
         public List<AppSetting> GetAppSettings(string screen)
         {
             try
@@ -74,7 +73,6 @@ namespace Marbale.Business
                 throw e;
             }
         }
-
         public bool SaveSettings(List<Settings> settings)
         {
             try
@@ -92,7 +90,6 @@ namespace Marbale.Business
                 throw e;
             }
         }
-        
         public bool SavePOSConfiguration(List<AppSetting> appSetting)
         {
             try
@@ -133,8 +130,34 @@ namespace Marbale.Business
         {
             return 0;
         }
-        #endregion
+        public List<ProductType> GetProductTypes()
+        {        
+            try
+            {
+                var dataTable = marbaleData.GetProductTypes();
+                List<ProductType> listProductTypes = new List<ProductType>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    ProductType pType = new ProductType();
+                    pType.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
+                    pType.CardSale = dr.IsNull("CardSale") ? false : bool.Parse(dr["CardSale"].ToString());
+                    pType.Description = dr.IsNull("Description") ? "" : dr["Description"].ToString();
+                    pType.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    pType.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                    pType.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    pType.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                    pType.ReportGroup = dr.IsNull("ReportGroup") ? "" : dr["ReportGroup"].ToString();
 
+                    listProductTypes.Add(pType);
+                }
+                return listProductTypes;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        #endregion
 
         public List<Discounts> GetAllDiscounts()
         {

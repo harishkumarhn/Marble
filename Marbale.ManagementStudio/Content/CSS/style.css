@@ -176,3 +176,21 @@ a.article:hover {
 .formTable td {
     border: none;
 }
+
+.productSetup a {
+    color:blue;
+    padding-right:50px;
+
+}
+.webGrid { margin: 4px; border-collapse: collapse; width: 500px;  background-color:#FCFCFC;}
+.header { background-color: #598ab9; font-weight: bold; color: #FFF; }
+.webGrid th, .webGrid td { border: 1px solid #C0C0C0; padding: 5px; }
+.alt { background-color: #E4E9F5; color: #000; }
+.gridHead a:hover {text-decoration:underline;}
+.description { width:auto}
+.select{background-color: #389DF5}
+.marbleGrid {
+        overflow-x:scroll;
+        overflow-y:hidden;
+        width:1050px;
+ }
