@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marble.Business.ViewModels
+namespace Marbale.Business.ViewModels
 {
     public class POSVM
     {

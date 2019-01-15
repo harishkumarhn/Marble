@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marble.DataAccess
+namespace Marbale.DataAccess
 {
     public class MarbaleData
     {

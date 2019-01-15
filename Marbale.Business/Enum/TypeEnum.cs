@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marble.Business.Enum
+namespace Marbale.Business.Enum
 {
     public enum TypeEnum
     {

@@ -1,11 +1,11 @@
-﻿using Marble.Business.Enum;
+﻿using Marbale.Business.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marble.Business.ViewModels
+namespace Marbale.Business.ViewModels
 {
     public class Settings
     {
