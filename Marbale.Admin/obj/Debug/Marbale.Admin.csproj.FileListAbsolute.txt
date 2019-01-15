@@ -11,4 +11,4 @@ D:\Projects\Marbale\Marbale.Admin\bin\Debug\Marble.Business.dll
 D:\Projects\Marbale\Marbale.Admin\bin\Debug\Marble.Business.pdb
 D:\Projects\Marbale\Marbale.Admin\bin\Debug\Marbale.DataAccess.dll
 D:\Projects\Marbale\Marbale.Admin\bin\Debug\Marbale.DataAccess.pdb
-D:\Projects\Marbale\Marbale.Admin\obj\Debug\Marbale.SiteSetup.Configuration.resources
+D:\Projects\Marbale\Marbale.Admin\obj\Debug\Marbale.SiteSetup.SiteConfiguration.resources

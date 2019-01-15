@@ -1,6 +1,6 @@
 ﻿namespace Marbale.SiteSetup
 {
-    partial class Configuration
+    partial class SiteConfiguration
     {
         /// <summary>
         /// Required designer variable.

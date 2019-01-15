@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace Marbale.SiteSetup
 {
-    public partial class Configuration : Form
+    public partial class SiteConfiguration : Form
     {
         List<Settings> lstSettings;
         MarbaleBusiness mb;
-        public Configuration()
+        public SiteConfiguration()
         {
             InitializeComponent();
             lstSettings = new List<Settings>();
