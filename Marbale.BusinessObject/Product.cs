@@ -24,6 +24,7 @@ namespace Marbale.BusinessObject
         public int TaxPercentage { get; set; }
         public int FinalPrice { get; set; }
         public int EffectivePrice { get; set; }
+        public string LastUpdatedUser { get; set; }
 
     }
 }

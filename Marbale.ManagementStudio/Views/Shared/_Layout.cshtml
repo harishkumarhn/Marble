@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8" />
      <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="./content/CSS/bootstrap.css">
+    <link rel="stylesheet" href="~/content/css/bootstrap.css">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="./content/CSS/style.css">
-    @*@Styles.Render("~/Content/css")*@
+    <link rel="stylesheet" href="~/content/css/style.css">
     @Scripts.Render("~/bundles/modernizr")
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +14,8 @@
     <title>Marbale Dashboard</title>
 
     <!-- Font Awesome JS -->
-    <script defer src="./content/JS/fontawesome.solid.js"></script>
-    <script defer src="./content/JS/fontawesome.js"></script>
+    <script defer src="~/content/JS/fontawesome.solid.js"></script>
+    <script defer src="~/content/JS/fontawesome.js"></script>
 </head>
 <body>
 
@@ -32,10 +31,10 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="#">Products</a>
+                            <a href="/product">Products</a>
                         </li>
                         <li>
-                            <a href="#" id="disc">Discounts</a>
+                            <a href="/discount" id="disc">Discounts</a>
                         </li>
                         <li>
                             <a href="#">Tax</a>

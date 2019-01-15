@@ -126,15 +126,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
+    <Compile Include="Controllers\MarbleController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Discounts.cs" />
-    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\CSS\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\images\marbleDefault.jpg" />
     <Content Include="Content\JS\fontawesome.solid.js" />
     <Content Include="Content\JS\fontawesome.js" />
     <Content Include="Content\CSS\style.css" />
@@ -181,7 +182,7 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <None Include="Properties\PublishProfiles\Harish.pubxml" />
+    <None Include="Properties\PublishProfiles\MarbleHost.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -214,9 +215,14 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Discount\Discount.cshtml" />
+    <Content Include="Views\Product\ProductSetup.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Marble\Index.cshtml" />
+    <Content Include="Views\Product\CreateProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -247,7 +253,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>4037</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:1064/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
