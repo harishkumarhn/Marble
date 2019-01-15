@@ -22,8 +22,13 @@ namespace MarbaleManagementStudio.Controllers
         {
             ObservableCollection<ProductObject> list = new ObservableCollection<ProductObject>();
             list.Add(new ProductObject() { Id = 1 });
-            return View("ProductSetup",list);
+            return View(list);
         }
 
+        public ActionResult CreateProduct()
+        {
+            var product = new ProductObject();
+            return View(product);
+        }
     }
 }

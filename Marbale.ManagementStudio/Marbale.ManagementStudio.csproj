@@ -224,10 +224,10 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Discount\Discount.cshtml" />
-    <Content Include="Views\Product\ProductsMenu.cshtml" />
     <Content Include="Views\Product\ProductSetup.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Marble\Index.cshtml" />
+    <Content Include="Views\Product\CreateProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
