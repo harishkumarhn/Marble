@@ -38,18 +38,18 @@
             this.Refresh_settings = new System.Windows.Forms.Button();
             this.save_settings = new System.Windows.Forms.Button();
             this.settings_grid = new System.Windows.Forms.DataGridView();
-            this.cl_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Name_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DefaultValue_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DataType_cl = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.ActiveFlag_cl = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.UserLevel_cl = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.POSLevel_cl = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ScreenGroup_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastUpdateBy_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastUpdatedDate_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastUpdateBy_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ScreenGroup_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.POSLevel_cl = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.UserLevel_cl = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ActiveFlag_cl = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DataType_cl = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.DefaultValue_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Name_cl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cl_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.configuration.SuspendLayout();
             this.valuesTabPage.SuspendLayout();
             this.moduleValuesTab.SuspendLayout();
@@ -66,6 +66,7 @@
             this.configuration.SelectedIndex = 0;
             this.configuration.Size = new System.Drawing.Size(909, 530);
             this.configuration.TabIndex = 0;
+            this.configuration.Click += new System.EventHandler(this.configuration_Click);
             // 
             // valuesTabPage
             // 
@@ -131,6 +132,7 @@
             this.close_settings.TabIndex = 3;
             this.close_settings.Text = "Close";
             this.close_settings.UseVisualStyleBackColor = true;
+            this.close_settings.Click += new System.EventHandler(this.close_settings_Click);
             // 
             // Refresh_settings
             // 
@@ -140,6 +142,7 @@
             this.Refresh_settings.TabIndex = 2;
             this.Refresh_settings.Text = "Refresh";
             this.Refresh_settings.UseVisualStyleBackColor = true;
+            this.Refresh_settings.Click += new System.EventHandler(this.Refresh_settings_Click);
             // 
             // save_settings
             // 
@@ -149,52 +152,47 @@
             this.save_settings.TabIndex = 1;
             this.save_settings.Text = "Savr";
             this.save_settings.UseVisualStyleBackColor = true;
+            this.save_settings.Click += new System.EventHandler(this.save_settings_Click);
             // 
             // settings_grid
             // 
             this.settings_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.settings_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cl_Id,
-            this.Name_cl,
-            this.Column1,
-            this.Description_cl,
-            this.DefaultValue_cl,
-            this.DataType_cl,
-            this.ActiveFlag_cl,
-            this.UserLevel_cl,
-            this.POSLevel_cl,
-            this.ScreenGroup_cl,
-            this.LastUpdateBy_cl,
-            this.LastUpdatedDate_cl});
-            this.settings_grid.Location = new System.Drawing.Point(4, 6);
+            this.settings_grid.Location = new System.Drawing.Point(3, 6);
             this.settings_grid.Name = "settings_grid";
             this.settings_grid.Size = new System.Drawing.Size(891, 444);
             this.settings_grid.TabIndex = 0;
+            this.settings_grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.settings_grid_CellContentClick);
+            this.settings_grid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.settings_grid_CellValueChanged);
             // 
-            // cl_Id
+            // LastUpdatedDate_cl
             // 
-            this.cl_Id.HeaderText = "ID";
-            this.cl_Id.Name = "cl_Id";
+            this.LastUpdatedDate_cl.HeaderText = "LastUpdatedDate";
+            this.LastUpdatedDate_cl.Name = "LastUpdatedDate_cl";
             // 
-            // Name_cl
+            // LastUpdateBy_cl
             // 
-            this.Name_cl.HeaderText = "Name";
-            this.Name_cl.Name = "Name_cl";
+            this.LastUpdateBy_cl.HeaderText = "LastUpdated";
+            this.LastUpdateBy_cl.Name = "LastUpdateBy_cl";
             // 
-            // Column1
+            // ScreenGroup_cl
             // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
+            this.ScreenGroup_cl.HeaderText = "ScreenGroup";
+            this.ScreenGroup_cl.Name = "ScreenGroup_cl";
             // 
-            // Description_cl
+            // POSLevel_cl
             // 
-            this.Description_cl.HeaderText = "Description";
-            this.Description_cl.Name = "Description_cl";
+            this.POSLevel_cl.HeaderText = "POSLevel";
+            this.POSLevel_cl.Name = "POSLevel_cl";
             // 
-            // DefaultValue_cl
+            // UserLevel_cl
             // 
-            this.DefaultValue_cl.HeaderText = "DefaultValue";
-            this.DefaultValue_cl.Name = "DefaultValue_cl";
+            this.UserLevel_cl.HeaderText = "UserLevel";
+            this.UserLevel_cl.Name = "UserLevel_cl";
+            // 
+            // ActiveFlag_cl
+            // 
+            this.ActiveFlag_cl.HeaderText = "ActiveFlag";
+            this.ActiveFlag_cl.Name = "ActiveFlag_cl";
             // 
             // DataType_cl
             // 
@@ -203,35 +201,30 @@
             this.DataType_cl.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.DataType_cl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // ActiveFlag_cl
+            // DefaultValue_cl
             // 
-            this.ActiveFlag_cl.HeaderText = "ActiveFlag";
-            this.ActiveFlag_cl.Name = "ActiveFlag_cl";
+            this.DefaultValue_cl.HeaderText = "DefaultValue";
+            this.DefaultValue_cl.Name = "DefaultValue_cl";
             // 
-            // UserLevel_cl
+            // Description_cl
             // 
-            this.UserLevel_cl.HeaderText = "UserLevel";
-            this.UserLevel_cl.Name = "UserLevel_cl";
+            this.Description_cl.HeaderText = "Description";
+            this.Description_cl.Name = "Description_cl";
             // 
-            // POSLevel_cl
+            // Column1
             // 
-            this.POSLevel_cl.HeaderText = "POSLevel";
-            this.POSLevel_cl.Name = "POSLevel_cl";
+            this.Column1.HeaderText = "Column1";
+            this.Column1.Name = "Column1";
             // 
-            // ScreenGroup_cl
+            // Name_cl
             // 
-            this.ScreenGroup_cl.HeaderText = "ScreenGroup";
-            this.ScreenGroup_cl.Name = "ScreenGroup_cl";
+            this.Name_cl.HeaderText = "Name";
+            this.Name_cl.Name = "Name_cl";
             // 
-            // LastUpdateBy_cl
+            // cl_Id
             // 
-            this.LastUpdateBy_cl.HeaderText = "LastUpdated";
-            this.LastUpdateBy_cl.Name = "LastUpdateBy_cl";
-            // 
-            // LastUpdatedDate_cl
-            // 
-            this.LastUpdatedDate_cl.HeaderText = "LastUpdatedDate";
-            this.LastUpdatedDate_cl.Name = "LastUpdatedDate_cl";
+            this.cl_Id.HeaderText = "ID";
+            this.cl_Id.Name = "cl_Id";
             // 
             // ConfigForm
             // 
@@ -262,18 +255,18 @@
         private System.Windows.Forms.Button Refresh_settings;
         private System.Windows.Forms.Button save_settings;
         private System.Windows.Forms.DataGridView settings_grid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cl_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name_cl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description_cl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DefaultValue_cl;
-        private System.Windows.Forms.DataGridViewComboBoxColumn DataType_cl;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ActiveFlag_cl;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn UserLevel_cl;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn POSLevel_cl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ScreenGroup_cl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdateBy_cl;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdatedDate_cl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdateBy_cl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ScreenGroup_cl;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn POSLevel_cl;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn UserLevel_cl;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ActiveFlag_cl;
+        private System.Windows.Forms.DataGridViewComboBoxColumn DataType_cl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DefaultValue_cl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description_cl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name_cl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cl_Id;
 
     }
 }

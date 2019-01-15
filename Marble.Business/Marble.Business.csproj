@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Marble.Business</RootNamespace>
     <AssemblyName>Marble.Business</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,14 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SiteSetup\SiteConfiguration.cs" />
+    <Compile Include="Enum\TypeEnum.cs" />
+    <Compile Include="MarbleBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\POSVM.cs" />
+    <Compile Include="ViewModels\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Marble.Core.Data\Marble.Core.Data.csproj">
-      <Project>{0a3cb634-a6cf-47b0-b40a-fa303e764e3f}</Project>
-      <Name>Marble.Core.Data</Name>
+    <ProjectReference Include="..\Marble.DataAccess\Marble.DataAccess.csproj">
+      <Project>{6a6d1608-f1ec-435a-a3ec-10237ab280af}</Project>
+      <Name>Marble.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

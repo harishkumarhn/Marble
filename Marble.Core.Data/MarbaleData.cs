@@ -16,9 +16,16 @@ namespace Marble.Core.Data
         {
             conn = new DBConnection();
         }
+
+        public DataTable getSettings()
+        {
+            string query = string.Format("select * from appsettings");
+            return conn.executeSelectQuery(query);
+        }
+
         public DataTable searchByName(string _username)
         {
-            string query = string.Format("select * from [t01_user] where t01_firstname like @t01_firstname or t01_lastname like @t01_lastname ");
+            string query = string.Format("select * from appsettings");
             SqlParameter[] sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@t01_firstname", SqlDbType.VarChar);
             sqlParameters[0].Value = Convert.ToString(_username);
@@ -38,5 +45,6 @@ namespace Marble.Core.Data
             sqlParameters[0].Value = Convert.ToString(_id);
             return conn.executeSelectQuery(query, sqlParameters);
         }
+
     }
 }
