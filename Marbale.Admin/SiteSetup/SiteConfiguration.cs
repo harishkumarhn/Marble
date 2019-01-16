@@ -1,5 +1,6 @@
 ﻿using Marbale.Business;
 using Marbale.Business.ViewModels;
+using Marble.Business.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,15 @@ namespace Marbale.SiteSetup
     public partial class SiteConfiguration : Form
     {
         List<Settings> lstSettings;
-        MarbaleBusiness mb;
+        List<AppSetting> lstAppSetting;
+        MarbaleBusiness marbaleBusiness;
         public SiteConfiguration()
         {
             InitializeComponent();
+            marbaleBusiness = new MarbaleBusiness();
+
             lstSettings = new List<Settings>();
-            mb = new MarbaleBusiness();
+            lstAppSetting = new List<AppSetting>();
         }
 
         private void POSTab_Click(object sender, EventArgs e)
@@ -29,7 +33,7 @@ namespace Marbale.SiteSetup
 
         private void configuration_Click(object sender, EventArgs e)
         {
-            var settings = mb.GetSettings();
+            var settings = marbaleBusiness.GetSettings();
             settings_grid.DataSource = settings;
         }
 
@@ -40,7 +44,7 @@ namespace Marbale.SiteSetup
 
         private void save_settings_Click(object sender, EventArgs e)
         {
-            mb.SaveSettings(lstSettings);
+            marbaleBusiness.SaveSettings(lstSettings);
         }
 
         private void settings_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -64,7 +68,7 @@ namespace Marbale.SiteSetup
 
         private void Refresh_settings_Click(object sender, EventArgs e)
         {
-            var settings = mb.GetSettings();
+            var settings = marbaleBusiness.GetSettings();
             settings_grid.DataSource = settings;
         }
 
@@ -72,6 +76,44 @@ namespace Marbale.SiteSetup
         {
             this.Close();
         }
+
+        private void save_pos_Click(object sender, EventArgs e)
+        {
+            if (lstAppSetting.Count > 0)
+            {
+                marbaleBusiness.SavePOSConfiguration(lstAppSetting);
+            }
+        }
+
+        private void txt_skin_TextChanged(object sender, EventArgs e)
+        {
+            lstAppSetting.Add(new AppSetting() {
+                Name = "POS_SKIN_COLOR",
+                ScreenGroup = "POS",
+                Value = txt_skin.Text
+            });
+        }
+
+        private void cmb_payMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lstAppSetting.Add(new AppSetting()
+            {
+                Name = "DEFAULT_PAY_MODE",
+                ScreenGroup = "POS",
+                Value = cmb_payMode.Text
+            });
+        }
+
+        private void txt_MaxToken_TextChanged(object sender, EventArgs e)
+        {
+            lstAppSetting.Add(new AppSetting()
+            {
+                Name = "MAX_TOKEN_NUMBER",
+                ScreenGroup = "POS",
+                Value = txt_MaxToken.Text
+            });
+        }
+
 
     }
 }

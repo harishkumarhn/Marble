@@ -43,7 +43,7 @@
     <Compile Include="Enum\TypeEnum.cs" />
     <Compile Include="MarbaleBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\POSVM.cs" />
+    <Compile Include="ViewModels\AppSetting.cs" />
     <Compile Include="ViewModels\Settings.cs" />
   </ItemGroup>
   <ItemGroup>

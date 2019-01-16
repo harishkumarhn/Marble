@@ -40,5 +40,15 @@ namespace Marbale.DataAccess
             return conn.executeUpdate("sp_UpdateSettings", sqlParameters);
         }
 
+        public int SaveAppSettings(string name, string value, string screen)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[3];
+            sqlParameters[0] = new SqlParameter("@name", name);
+            sqlParameters[1] = new SqlParameter("@value", value);
+            sqlParameters[2] = new SqlParameter("@screen", screen);
+
+            return conn.executeUpdate("sp_InsertOrUpdateAppSetting", sqlParameters);
+        }
+
     }
 }

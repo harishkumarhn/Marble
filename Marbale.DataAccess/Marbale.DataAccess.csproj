@@ -43,8 +43,10 @@
     <Compile Include="MarbaleData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Stored Procedures\" />
+    <Content Include="Stored Procedures\sp_GetSettings.sql" />
+    <Content Include="Stored Procedures\sp_UpdateAppSettings.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,6 @@
 ﻿using Marbale.Business.ViewModels;
 using Marbale.DataAccess;
+using Marble.Business.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -49,12 +50,13 @@ namespace Marbale.Business
             }
             return true;
         }
-        public POSVM GetPOSConfiguration()
+        
+        public bool SavePOSConfiguration(List<AppSetting> appSetting)
         {
-            return null;
-        }
-        public bool SavePOSConfiguration(POSVM posModel)
-        {
+             foreach(var setting in appSetting)
+            {
+                marbaleData.SaveAppSettings(setting.Name,setting.Value,setting.ScreenGroup);
+            }
             return true;
         }
 
