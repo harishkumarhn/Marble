@@ -7,3 +7,4 @@ D:\Projects\Marbale\Marbale.DataAccess\bin\Debug\Marbale.DataAccess.dll
 D:\Projects\Marbale\Marbale.DataAccess\bin\Debug\Marbale.DataAccess.pdb
 D:\Projects\Marbale\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.dll
 D:\Projects\Marbale\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.pdb
+D:\Projects\Marbale\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.csprojResolveAssemblyReference.cache
