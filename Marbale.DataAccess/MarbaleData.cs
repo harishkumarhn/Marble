@@ -12,6 +12,7 @@ namespace Marbale.DataAccess
     public class MarbaleData
     {
         private DBConnection conn;
+
         public MarbaleData()
         {
             conn = new DBConnection();
@@ -22,6 +23,10 @@ namespace Marbale.DataAccess
             return conn.executeSelectQuery("sp_GetSettings");
         }
 
+        public DataTable GetAppSettings(string screen)
+        {
+            return conn.executeSelectQuery("sp_GetAppSettings");
+        }
         public int UpdateSettings(int id, string name, string description, string defaultvalue,
             string type, string screenGroup,string updatedby, bool active, bool userLevel, bool posLevel)
         {
@@ -37,7 +42,7 @@ namespace Marbale.DataAccess
             sqlParameters[8] = new SqlParameter("@poslevel", posLevel);
             sqlParameters[9] = new SqlParameter("@updatedby", updatedby);
 
-            return conn.executeUpdate("sp_UpdateSettings", sqlParameters);
+            return conn.executeUpdateQuery("sp_UpdateSettings", sqlParameters);
         }
 
         public int SaveAppSettings(string name, string value, string screen)
@@ -47,7 +52,7 @@ namespace Marbale.DataAccess
             sqlParameters[1] = new SqlParameter("@value", value);
             sqlParameters[2] = new SqlParameter("@screen", screen);
 
-            return conn.executeUpdate("sp_InsertOrUpdateAppSetting", sqlParameters);
+            return conn.executeUpdateQuery("sp_InsertOrUpdateAppSetting", sqlParameters);
         }
 
     }

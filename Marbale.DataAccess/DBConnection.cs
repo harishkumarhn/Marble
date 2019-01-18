@@ -32,12 +32,12 @@ namespace Marbale.DataAccess
             }
             return conn;
         }
-        /// <method>
-        /// Select Query
-        /// </method>
-        /// <method>
-        /// Select Query
-        /// </method>
+
+        /// <summary>
+        /// select data by stored procedure
+        /// </summary>
+        /// <param name="sp"></param>
+        /// <returns></returns>
         public DataTable executeSelectQuery(String sp)
         {
             DataTable dataTable = new DataTable();
@@ -63,7 +63,7 @@ namespace Marbale.DataAccess
             return dataTable;
         }
         /// <method>
-        /// Select Query
+        /// Select with parameter
         /// </method>
         public DataTable executeSelectQuery(String sp, SqlParameter[] sqlParameter)
         {
@@ -93,7 +93,7 @@ namespace Marbale.DataAccess
         }
 
         /// <method>
-        /// Insert Query
+        /// Insert sp
         /// </method>
         public bool executeInsertQuery(String _query, SqlParameter[] sqlParameter)
         {
@@ -116,35 +116,10 @@ namespace Marbale.DataAccess
             }
             return true;
         }
-
         /// <method>
-        /// Update Query
+        /// insert/Update sp
         /// </method>
-        public bool executeUpdateQuery(String _query, SqlParameter[] sqlParameter)
-        {
-            SqlCommand myCommand = new SqlCommand();
-            try
-            {
-                myCommand.Connection = openConnection();
-                myCommand.CommandText = _query;
-                myCommand.Parameters.AddRange(sqlParameter);
-                myAdapter.UpdateCommand = myCommand;
-                myCommand.ExecuteNonQuery();
-            }
-            catch (SqlException e)
-            {
-                Console.Write("Error - Connection.executeUpdateQuery - Query: " + _query + " \nException: " + e.StackTrace.ToString());
-                return false;
-            }
-            finally
-            {
-            }
-            return true;
-        }
-             /// <method>
-        /// Update Query
-        /// </method>
-        public int executeUpdate(String sp, SqlParameter[] sqlParameter)
+        public int executeUpdateQuery(String sp, SqlParameter[] sqlParameter)
         {
             SqlCommand myCommand = new SqlCommand();
             int result = 0;

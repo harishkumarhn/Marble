@@ -13,6 +13,7 @@ namespace Marbale.Business
     public class MarbaleBusiness
     {
         private MarbaleData marbaleData;
+
         public MarbaleBusiness()
         {
             marbaleData = new MarbaleData();
@@ -41,6 +42,23 @@ namespace Marbale.Business
             }
             return listSettings;
         }
+
+        public List<AppSetting> GetAppSettings(string screen)
+        {
+            var dataTable = marbaleData.GetAppSettings(screen);
+            List<AppSetting> listSettings = new List<AppSetting>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                AppSetting setting = new AppSetting();
+                setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
+                setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                setting.Value = dr.IsNull("Value") ? "" : dr["Value"].ToString();
+
+                listSettings.Add(setting);
+            }
+            return listSettings;
+        }
+
         public bool SaveSettings(List<Settings> settings)
         {
             foreach(var setting in settings)

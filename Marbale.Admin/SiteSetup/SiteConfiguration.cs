@@ -52,15 +52,15 @@ namespace Marbale.SiteSetup
             var rowIndex = e.RowIndex;
             //var colIndex = e.ColumnIndex;
             var setting = new Settings();
-            setting.Id = int.Parse(settings_grid.Rows[rowIndex].Cells[0].Value.ToString());
-            setting.Name = settings_grid.Rows[rowIndex].Cells[1].Value.ToString();
-            setting.Description = settings_grid.Rows[rowIndex].Cells[2].Value.ToString();
-            setting.DefaultValue = settings_grid.Rows[rowIndex].Cells[3].Value.ToString();
-            setting.ScreenGroup = settings_grid.Rows[rowIndex].Cells[4].Value.ToString();
-            setting.Type = settings_grid.Rows[rowIndex].Cells[5].Value.ToString();
-            setting.Active = bool.Parse(settings_grid.Rows[rowIndex].Cells[6].Value.ToString());
-            setting.UserLevel = bool.Parse(settings_grid.Rows[rowIndex].Cells[7].Value.ToString());
-            setting.PosLevel = bool.Parse(settings_grid.Rows[rowIndex].Cells[8].Value.ToString());
+            setting.Id = Convert.ToInt32(settings_grid.Rows[rowIndex].Cells[0].Value);
+            setting.Name = Convert.ToString(settings_grid.Rows[rowIndex].Cells[1].Value);
+            setting.Description = Convert.ToString(settings_grid.Rows[rowIndex].Cells[2].Value);
+            setting.DefaultValue = Convert.ToString(settings_grid.Rows[rowIndex].Cells[3].Value);
+            setting.Type = Convert.ToString(settings_grid.Rows[rowIndex].Cells[4].Value);
+            setting.ScreenGroup = Convert.ToString(settings_grid.Rows[rowIndex].Cells[5].Value);
+            setting.Active = Convert.ToBoolean(settings_grid.Rows[rowIndex].Cells[6].Value);
+            setting.UserLevel = Convert.ToBoolean(settings_grid.Rows[rowIndex].Cells[7].Value);
+            setting.PosLevel = Convert.ToBoolean(settings_grid.Rows[rowIndex].Cells[8].Value);
             setting.LastUpdatedBy = "Harish";
             lstSettings.Add(setting);
 
