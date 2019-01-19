@@ -1,4 +1,4 @@
-﻿namespace Marbale.Product
+﻿namespace Marbale
 {
     partial class ProductSubForms
     {

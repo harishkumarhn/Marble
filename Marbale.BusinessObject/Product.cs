@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Marbale.BusinessObject
 {
-    public class ProductObject
+    public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,4 +1,4 @@
-﻿using Marbale.Product;
+﻿using Marbale;
 using Marbale.SiteSetup;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Marbale
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Marbale.Product.MarbleAdmin());
+            Application.Run(new Marbale.MarbleAdmin());
         }
     }
 }

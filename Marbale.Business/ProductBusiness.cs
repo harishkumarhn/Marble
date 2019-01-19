@@ -109,11 +109,11 @@ namespace Marbale.Business
         #endregion
 
         #region products
-        public ProductObject GetProduct(int id)
+        public Product GetProduct(int id)
         {
             return null;
         }
-        public int AddProduct(ProductObject product)
+        public int AddProduct(Product product)
         {
             try
             {
@@ -124,7 +124,7 @@ namespace Marbale.Business
                 throw e;
             }
         }
-        public int UpdateProduct(ProductObject product)
+        public int UpdateProduct(Product product)
         {
             return 0;
         }

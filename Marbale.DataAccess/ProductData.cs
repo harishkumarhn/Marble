@@ -125,7 +125,7 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-        public int AddProduct(ProductObject product)
+        public int AddProduct(Product product)
         {
             try
             {
@@ -153,7 +153,7 @@ namespace Marbale.DataAccess
             }
 
         }
-        public int UpdateProduct(ProductObject product)
+        public int UpdateProduct(Product product)
         {
             try
             {

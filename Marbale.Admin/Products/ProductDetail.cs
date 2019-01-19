@@ -29,7 +29,7 @@ namespace Marbale.Products
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            ProductObject product = new ProductObject() 
+            Product product = new Product() 
             {
                 Active = this.chk_pActive.Checked,
                 AutoGenerateCardNumber = this.chk_agCard.Checked,
