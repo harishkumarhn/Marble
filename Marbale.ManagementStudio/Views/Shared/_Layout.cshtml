@@ -100,7 +100,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#gridContent').hide();
+           
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
               
@@ -109,6 +109,7 @@
     </script>
 
     @Scripts.Render("~/bundles/jquery")
+      @Scripts.Render("~/bundles/jqueryui")
     @RenderSection("scripts", required: false)
 </body>
 </html>

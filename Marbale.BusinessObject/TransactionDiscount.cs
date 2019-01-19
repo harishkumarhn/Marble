@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Marbale.BusinessObject
 {
-   public class Discounts
+  public  class TransactionDiscount
     {
         public int DiscountID { get; set; }
         public string DiscountName { get; set; }
@@ -14,6 +14,7 @@ namespace Marbale.BusinessObject
         public bool AutomaticApply { get; set; }
         public float MinimumSaleAmount { get; set; }
         public float MinimumUsedCredits { get; set; }
+      
         public bool DisplayInPOS { get; set; }
         public bool ActiveFlag { get; set; }
         public int SortOrder { get; set; }

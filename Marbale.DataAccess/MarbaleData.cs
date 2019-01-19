@@ -159,7 +159,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[17];
+                SqlParameter[] sqlParameters = new SqlParameter[16];
                 sqlParameters[0] = new SqlParameter("@ActiveFlag", ActiveFlag);
                 sqlParameters[1] = new SqlParameter("@AutomaticApply", AutomaticApply);
                 sqlParameters[2] = new SqlParameter("@CouponMendatory", CouponMendatory);
@@ -170,7 +170,7 @@ namespace Marbale.DataAccess
                 sqlParameters[7] = new SqlParameter("@DiscountType", DiscountType);
                 sqlParameters[8] = new SqlParameter("@DisplayInPOS", DisplayInPOS);
                 sqlParameters[9] = new SqlParameter("@DisplayOrder", DisplayOrder);
-                sqlParameters[10] = new SqlParameter("@LastUpdatedDate", LastUpdatedDate);
+                sqlParameters[10] = new SqlParameter("@LastUpdatedDate", DateTime.Now);
                 sqlParameters[11] = new SqlParameter("@LastUpdatedUser", LastUpdatedUser);
                 sqlParameters[12] = new SqlParameter("@ManagerApproval", ManagerApproval);
                 sqlParameters[13] = new SqlParameter("@MinimumSaleAmount", MinimumSaleAmount);
@@ -181,6 +181,18 @@ namespace Marbale.DataAccess
 
 
                 return conn.executeInsertQuery("sp_Insert_Discount", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public DataTable GetAllGameDiscount()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetGameDiscounts");
             }
             catch (Exception e)
             {
