@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Marbale.DataAccess
 {
-    public class MarbaleData
+    public class ProductData
     {
         private DBConnection conn;
 
-        public MarbaleData()
+        public ProductData()
         {
             conn = new DBConnection();
         }

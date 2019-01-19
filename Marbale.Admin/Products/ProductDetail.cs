@@ -14,12 +14,12 @@ namespace Marbale.Products
 {
     public partial class ProductDetail : Form
     {
-        MarbaleBusiness marbaleBusiness;
+        ProductBusiness productBusiness;
 
         public ProductDetail()
         {
             InitializeComponent();
-            marbaleBusiness = new MarbaleBusiness();
+            productBusiness = new ProductBusiness();
         }
 
         private void ProductDetail_Load(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace Marbale.Products
                
             };
 
-            marbaleBusiness.AddProduct(product);
+            productBusiness.AddProduct(product);
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)

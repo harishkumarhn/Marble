@@ -11,13 +11,11 @@ namespace MarbaleManagementStudio.Controllers
 {
     public class ProductController : Controller
     {
-        public MarbaleBusiness mb;
+        public ProductBusiness productBussiness;
         public ProductController()
         {
-            mb = new MarbaleBusiness();
+            productBussiness = new ProductBusiness();
         }
-        //
-        // GET: /Product/
 
         public ActionResult Index()
         {
@@ -48,13 +46,13 @@ namespace MarbaleManagementStudio.Controllers
 
         public ActionResult Types()
         {
-            var productTypes = mb.GetProductTypes();
+            var productTypes = productBussiness.GetProductTypes();
             return View(productTypes);
         }
 
         public int UpdateProductType(List<ProductType> productTypes)
         {
-            return mb.UpdateProductTypes(productTypes);
+            return productBussiness.UpdateProductTypes(productTypes);
         }
     }
 }

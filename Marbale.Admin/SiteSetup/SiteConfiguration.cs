@@ -16,12 +16,12 @@ namespace Marbale.SiteSetup
     {
         List<Settings> lstSettings;
         List<AppSetting> lstAppSetting;
-        MarbaleBusiness marbaleBusiness;
+        ProductBusiness productBusiness;
         bool posGridLoadCompleted = false;
         public SiteConfiguration()
         {
             InitializeComponent();
-            marbaleBusiness = new MarbaleBusiness();
+            productBusiness = new ProductBusiness();
 
             lstSettings = new List<Settings>();
             lstAppSetting = new List<AppSetting>();
@@ -29,7 +29,7 @@ namespace Marbale.SiteSetup
 
         private void configuration_Click(object sender, EventArgs e)
         {
-            var settings = marbaleBusiness.GetSettings();
+            var settings = productBusiness.GetSettings();
             settings_grid.DataSource = settings;
 
             settings_grid.Columns[1].Width = 300;
@@ -53,7 +53,7 @@ namespace Marbale.SiteSetup
     
         private void save_settings_Click(object sender, EventArgs e)
         {
-            marbaleBusiness.SaveSettings(lstSettings);
+            productBusiness.SaveSettings(lstSettings);
             MessageBox.Show("Setting saved");
         }
 
@@ -78,7 +78,7 @@ namespace Marbale.SiteSetup
 
         private void Refresh_settings_Click(object sender, EventArgs e)
         {
-            var settings = marbaleBusiness.GetSettings();
+            var settings = productBusiness.GetSettings();
             settings_grid.DataSource = settings;
 
             settings_grid.Columns[1].Width = 300;
@@ -110,7 +110,7 @@ namespace Marbale.SiteSetup
             {
                 if (lstAppSetting.Count > 0)
                 {
-                    var result = marbaleBusiness.SavePOSConfiguration(lstAppSetting);
+                    var result = productBusiness.SavePOSConfiguration(lstAppSetting);
                     MessageBox.Show("Data Saved Succesfully");
                 }
             }
@@ -122,7 +122,7 @@ namespace Marbale.SiteSetup
 
         private void moduleValuesTab_Click(object sender, EventArgs e)
         {
-            var appSettings = marbaleBusiness.GetAppSettings("POS");
+            var appSettings = productBusiness.GetAppSettings("POS");
             pos_appSettingsGrid.DataSource = appSettings;
             pos_appSettingsGrid.Columns[0].Width = 300;
             pos_appSettingsGrid.Columns[1].Width = 300;
@@ -174,7 +174,7 @@ namespace Marbale.SiteSetup
 
         private void getPOSSetings()
         {
-            var appSettings = marbaleBusiness.GetAppSettings("POS");
+            var appSettings = productBusiness.GetAppSettings("POS");
             pos_appSettingsGrid.DataSource = appSettings;
 
             pos_appSettingsGrid.Columns[0].Width = 300;

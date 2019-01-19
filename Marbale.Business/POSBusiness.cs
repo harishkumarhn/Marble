@@ -10,11 +10,11 @@ namespace Marbale.Business
 {
    public class POSBusiness
     {
-        private MarbaleData marbaleData;
+        private ProductData marbaleData;
 
         public POSBusiness()
         {
-            marbaleData = new MarbaleData();
+            marbaleData = new ProductData();
         }
 
 

@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace Marbale.Business
 {
-    public class MarbaleBusiness
+    public class ProductBusiness
     {
-        private MarbaleData marbaleData;
+        private ProductData productData;
 
-        public MarbaleBusiness()
+        public ProductBusiness()
         {
-            marbaleData = new MarbaleData();
+            productData = new ProductData();
         }
         #region settings
         public List<Settings> GetSettings()
         {
             try
             {
-                var dataTable = marbaleData.GetSettings();
+                var dataTable = productData.GetSettings();
                 List<Settings> listSettings = new List<Settings>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -53,7 +53,7 @@ namespace Marbale.Business
         {
             try
             {
-                var dataTable = marbaleData.GetAppSettings(screen);
+                var dataTable = productData.GetAppSettings(screen);
                 List<AppSetting> listSettings = new List<AppSetting>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -79,7 +79,7 @@ namespace Marbale.Business
             {
                 foreach (var setting in settings)
                 {
-                    marbaleData.UpdateSettings(setting.Id, setting.Name, setting.Caption, setting.Description, setting.DefaultValue, setting.Type,
+                    productData.UpdateSettings(setting.Id, setting.Name, setting.Caption, setting.Description, setting.DefaultValue, setting.Type,
                         setting.ScreenGroup, setting.LastUpdatedBy, setting.Active, setting.UserLevel, setting.PosLevel);
                 }
                 return true;
@@ -96,7 +96,7 @@ namespace Marbale.Business
             {
                 foreach (var setting in appSetting)
                 {
-                    marbaleData.SaveAppSettings(setting.Name, setting.Value, setting.ScreenGroup);
+                    productData.SaveAppSettings(setting.Name, setting.Value, setting.ScreenGroup);
                 }
                 return true;
 
@@ -117,7 +117,7 @@ namespace Marbale.Business
         {
             try
             {
-                return marbaleData.AddProduct(product);
+                return productData.AddProduct(product);
             }
             catch (Exception e)
             {
@@ -132,7 +132,7 @@ namespace Marbale.Business
         {        
             try
             {
-                var dataTable = marbaleData.GetProductTypes();
+                var dataTable = productData.GetProductTypes();
                 List<ProductType> listProductTypes = new List<ProductType>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -160,7 +160,7 @@ namespace Marbale.Business
         {
             try
             {
-               return marbaleData.UpdateProductTypes(types);
+               return productData.UpdateProductTypes(types);
             }
             catch (Exception e)
             {
@@ -177,7 +177,7 @@ namespace Marbale.Business
             DataTable gamedisc = new DataTable();
             List<GameDiscount> gamediscount = new List<GameDiscount>();
             MasterDiscounts m = new MasterDiscounts();
-            DataTable dataTable = marbaleData.GetAllDiscounts();
+            DataTable dataTable = productData.GetAllDiscounts();
             try
             {
                  transactiondiscount = dataTable.AsEnumerable()
@@ -235,14 +235,14 @@ namespace Marbale.Business
         }
         public int SaveDiscount(TransactionDiscount discount)
         {
-            int status = marbaleData.SaveDiscount(discount.ActiveFlag, discount.AutomaticApply, discount.CouponMendatory, discount.DiscountAmount, discount.DiscountID, discount.DiscountName, discount.DiscountPercentage, discount.DiscountType, discount.DisplayInPOS, discount.DisplayOrder, discount.LastUpdatedDate, discount.LastUpdatedUser, discount.ManagerApproval, discount.MinimumSaleAmount, discount.MinimumUsedCredits, discount.RemarkMendatory, discount.Type);
+            int status = productData.SaveDiscount(discount.ActiveFlag, discount.AutomaticApply, discount.CouponMendatory, discount.DiscountAmount, discount.DiscountID, discount.DiscountName, discount.DiscountPercentage, discount.DiscountType, discount.DisplayInPOS, discount.DisplayOrder, discount.LastUpdatedDate, discount.LastUpdatedUser, discount.ManagerApproval, discount.MinimumSaleAmount, discount.MinimumUsedCredits, discount.RemarkMendatory, discount.Type);
             return status;
         }
 
         public List<GameDiscount> GetAllGameDiscount()
         {
             List<GameDiscount> GameDiscountList = new List<GameDiscount>();
-            var dataTable = marbaleData.GetAllGameDiscount();
+            var dataTable = productData.GetAllGameDiscount();
             foreach (DataRow dr in dataTable.Rows)
             {
                 GameDiscount discount = new GameDiscount();

@@ -16,7 +16,7 @@ namespace Marbale.POS
     public partial class POSForm : Form
     {
         //LoginModel loginmodel = new LoginModel();
-        MarbaleBusiness marbleb= new MarbaleBusiness();
+        ProductBusiness marbleb= new ProductBusiness();
         POSBusiness posBusiness = new POSBusiness();
         string CardNumber = "";
         bool status = true;
