@@ -1,0 +1,84 @@
+﻿@model Marbale.BusinessObject.Product
+
+@{
+    ViewBag.Title = "CreateProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/product.css" rel="stylesheet" />
+
+    @using (Html.BeginForm("InsertOrUpdate", "Product", FormMethod.Post))
+    {
+    <table class="formTable">
+         <tr>
+            <td><b style="padding-right: 10px">Id:</b></td>
+            <td>@Html.TextBoxFor(m => m.Id,new { @readonly = "readonly" })</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">Name:</b></td>
+            <td>@Html.TextBoxFor(m => m.Name)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">Price:</b></td>
+            <td>@Html.TextBoxFor(m => m.Price)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">POSCounter:</b></td>
+            <td>@Html.TextBoxFor(m => m.POSCounter)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">TaxPercentage:</b></td>
+            <td>@Html.TextBoxFor(m => m.TaxPercentage)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">Price:</b></td>
+            <td>@Html.TextBoxFor(m => m.Price)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">Category:</b></td>
+            <td>@Html.TextBoxFor(m => m.Category)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">DisplayGroup:</b></td>
+            <td>@Html.TextBoxFor(m => m.DisplayGroup)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">EffectivePrice:</b></td>
+            <td>@Html.TextBoxFor(m => m.EffectivePrice)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">FinalPrice:</b></td>
+            <td>@Html.TextBoxFor(m => m.FinalPrice)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">Type:</b></td>
+            <td>@Html.TextBoxFor(m => m.Type)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">Active:</b></td>
+            <td>@Html.CheckBoxFor(m => m.Active)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">OnlyVIP:</b></td>
+            <td>@Html.CheckBoxFor(m => m.OnlyVIP)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">TaxInclusive:</b></td>
+            <td>@Html.CheckBoxFor(m => m.TaxInclusive)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">DisplayInPOS:</b></td>
+            <td>@Html.CheckBoxFor(m => m.DisplayInPOS)</td>
+        </tr>
+        <tr>
+            <td><b style="padding-right: 10px">AutoGenerateCardNumber:</b></td>
+            <td>@Html.CheckBoxFor(m => m.AutoGenerateCardNumber)</td>
+        </tr>
+    </table>
+
+        <br />
+        
+         <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
+
+    }
+<script>
+</script>

@@ -24,24 +24,26 @@ namespace MarbaleManagementStudio.Controllers
 
         public ActionResult ProductSetup()
         {
-            ObservableCollection<Product> list = new ObservableCollection<Product>();
-            list.Add(new Product() { Id = 1 });
-            return View(list);
+            var products = productBussiness.GetProducts();
+            return View(products);
         }
 
         public ActionResult GetProduct(int id)
         {
-            var product = new Product();
+            var product = productBussiness.GetProductById(id);
+            return View("Create",product);
+        }
+
+        public ActionResult Create(int id)
+        {
+            var product = productBussiness.GetProductById(id);
             return View(product);
         }
 
-        public ActionResult Insert(Product pObject)
+        public int InsertOrUpdate(Product pObject)
         {
-            return null;
-        }
-        public ActionResult Update(Product pObject)
-        {
-            return null;
+            var result = productBussiness.InsertOrUpdateProduct(pObject);
+            return result;
         }
 
         public ActionResult Types()

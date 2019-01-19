@@ -8,12 +8,14 @@
         selectionFieldName: "selectedRow", ajaxUpdateContainerId: "productTypeGrid");
     grid.Pager(WebGridPagerModes.NextPrevious);
 }
+ <a href="#" class="btn btn-primary btn-sml" role="button" onclick="AddType()">Add Type</a>
 <div id="productTypeGrid" class="marbleGrid">
     @grid.GetHtml(tableStyle: "webGrid",
                 headerStyle: "header",
-                htmlAttributes: new { id = "grid_productType" },
+                htmlAttributes: new { id = "grid_productType"},
                 alternatingRowStyle: "alt",
                 selectedRowStyle: "select",
+                rowStyle: "gridrow",
                 columns: grid.Columns(
 
                 grid.Column("Id", "Id"),
@@ -23,7 +25,7 @@
                 grid.Column("Active", format: @<text><input name="chkbox" type="checkbox"@(item.Active ? "checked='checked'" : "")  value="Active" /></text>),
                 grid.Column("CardSale", format: @<text><input name="chkbox" type="checkbox"@(item.CardSale ? "checked='checked'" : "") value="CardSale" /></text>),
                 grid.Column("LastUpdatedDate", "LastUpdatedDate"),
-                grid.Column("LastUpdatedBy", format: @<text><input name="textbox" type="text" value="@(item.LastUpdatedBy)" /></text>)
+                grid.Column("LastUpdatedBy", "LastUpdatedBy")
 
          ))
 </div>
@@ -33,18 +35,37 @@
  <script>
         var modifiedListIndex = [];
         $(document).ready(function () {
-            console.log($.ajax);
-            $('#grid_productType').on('change', 'input, select, textarea', function () {
-                var row_index = $(this).parent().index();
-                modifiedListIndex.push(row_index);
-            });
+            //$('.gridrow').on('change', function (x) {
+            //    //var row_index = $(this).parent().index();
+            //    if (modifiedListIndex.indexOf(x.rowIndex) === -1) {
+            //        modifiedListIndex.push(x.rowIndex);
+            //    }
+            //});
         });
-
+        function setRowIndex(x) {
+            if (modifiedListIndex.indexOf(x.rowIndex) === -1) {
+                modifiedListIndex.push(x.rowIndex);
+            }
+        }
+        function AddType() {
+            var index = $("#grid2 tbody tr").length + 1;
+            var tr = '<tr class="gridrow" onchange= setRowIndex(this)><td></td>' +
+                       '<td><input type="text" /></td>' +
+                       '<td><input type="text" /></td>' +
+                       '<td><input type="text" /></td>' +
+                       '<td><input type="checkbox"/></td>' +
+                       '<td><input type="checkbox"/></td>' +
+                       '<td></td>' +
+                       '<td></td>' +
+            '</tr>';
+            $("#grid_productType tbody").append(tr);
+        }
         function Save() {
 
             var pTypes = [];
-            for (var i = 0; i < modifiedListIndex.length; i++) {
-                var htmlRow = $('#grid_productType tbody>tr')[modifiedListIndex[i]];
+            var index = $("#grid_productType tbody tr").length;
+            for (var i = 0; i < index; i++) {
+                var htmlRow = $('#grid_productType tbody>tr')[i];
 
                 var id = $($('td', htmlRow)[0]).text();
 

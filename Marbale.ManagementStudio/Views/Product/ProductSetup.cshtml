@@ -18,24 +18,29 @@
                 alternatingRowStyle: "alt",
                 selectedRowStyle: "select",
                 columns: grid.Columns(                
-                grid.Column("Id", "Id"),                
-                grid.Column("Name", " Name"),
-                grid.Column("Type", "Type"),
-                grid.Column("POSCounter","POSCounter"),
+                grid.Column("Id", "Id"),
+                grid.Column("edit",format: @<button onclick="EditProduct(@(item.Id))">|||</button>),               
+                grid.Column("Name", format: @<text><input name="textbox" type="text" value="@(item.Name)" /></text>),
+                grid.Column("Type", format: @<text><input name="textbox" type="text" value="@(item.Type)" /></text>),
+                grid.Column("POSCounter",format: @<text><input name="textbox" type="text" value="@(item.POSCounter)" /></text>),
                 grid.Column("Active", format: @<text><input name="chkbox" type="checkbox"@(item.Active ? "checked='checked'" : "") value="Active" /></text>),
                 grid.Column("DisplayInPOS", format: @<text><input name="chkbox" type="checkbox"@(item.DisplayInPOS ? "checked='checked'" : "") value="DisplayInPOS" /></text>),
-                grid.Column("DisplayGroup", "DisplayGroup"),
-                grid.Column("Category" ,"Category"),
-                grid.Column("LastUpdatedUser", "LastUpdatedUser"),
+                grid.Column("DisplayGroup",format: @<text><input name="textbox" type="text" value="@(item.DisplayGroup)" /></text>),
+                grid.Column("Category" ,format: @<text><input name="textbox" type="text" value="@(item.Category)" /></text>),
                 grid.Column("AutoGenerateCardNumber",format: @<text><input name="chkbox" type="checkbox"@(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="AutoGenerateCardNumber" /></text>),
                 grid.Column("OnlyVIP",format: @<text><input name="chkbox" type="checkbox"@(item.OnlyVIP ? "checked='checked'" : "") value="OnlyVIP" /></text>),
-                grid.Column("Price", "Price"),
-                grid.Column("FaceValue", " FaceValue"),
+                grid.Column("Price", format: @<text><input name="textbox" type="text" value="@(item.Price)" /></text>),
+                grid.Column("FaceValue", format: @<text><input name="textbox" type="text" value="@(item.FaceValue)" /></text>),
                 grid.Column("TaxInclusive", format: @<text><input name="chkbox" type="checkbox"@(item.TaxInclusive ? "checked='checked'" : "") value="TaxInclusive" /></text>),
-                grid.Column("TaxPercentage","TaxPercentage"),
-                grid.Column("FinalPrice", "FinalPrice"),
-                grid.Column("FaceValue", " FaceValue"),
-                grid.Column("EffectivePrice","EffectivePrice")
-
-         )) 
+                grid.Column("TaxPercentage",format: @<text><input name="textbox" type="text" value="@(item.TaxPercentage)" /></text>),
+                grid.Column("FinalPrice", format: @<text><input name="textbox" type="text" value="@(item.FinalPrice)" /></text>),
+                grid.Column("EffectivePrice",format: @<text><input name="textbox" type="text" value="@(item.EffectivePrice)" /></text>),
+                grid.Column("LastUpdatedBy", "LastUpdatedUser"),
+                grid.Column("LastUpdatedBy", "LastUpdatedDate"))
+         )
     </div>   
+<script>
+    function EditProduct(id) {
+        window.open("/product/GetProduct/"+id, "Marbale", "width=500,height=500");
+    }
+</script>
