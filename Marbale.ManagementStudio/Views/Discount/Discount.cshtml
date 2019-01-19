@@ -270,8 +270,8 @@
                  grid.Column("LastUpdatedUser",format: @<text><input name="textbox" type="text" class="grid-row" id="LastUpdatedUser@(item.DiscountID)" value="@(item.LastUpdatedUser)" /></text>),
                  grid.Column("ManagerApprovalRequered", format: @<text><input name="chkbox" type="checkbox"@(item.ManagerApproval ? "checked='checked'" : "") id="ManagerApproval@(item.DiscountID)" value="ManagerApprovalRequered" /></text>,style: "grid-row"),
                  grid.Column("MinimumSaleAmount",format: @<text><input name="textbox" type="text" class="grid-row"id="MinimumSaleAmount@(item.DiscountID)" value="@(item.MinimumSaleAmount)" /></text>),
-                grid.Column("MinimumUsedCredits",format: @<text><input name="textbox" type="text" class="grid-row" id="MinimumUsedCredits@(item.DiscountID)" value="@(item.MinimumUsedCredits)" /></text>),
-                grid.Column("RemarkMendatory", format: @<text><input name="chkbox" type="checkbox"@(item.RemarkMendatory ? "checked='checked'" : "") id="RemarkMendatory@(item.DiscountID)" value="RemarkMendatory" /></text>,style: "grid-row")
+                 grid.Column("MinimumUsedCredits",format: @<text><input name="textbox" type="text" class="grid-row" id="MinimumUsedCredits@(item.DiscountID)" value="@(item.MinimumUsedCredits)" /></text>),
+                 grid.Column("RemarkMendatory", format: @<text><input name="chkbox" type="checkbox"@(item.RemarkMendatory ? "checked='checked'" : "") id="RemarkMendatory@(item.DiscountID)" value="RemarkMendatory" /></text>,style: "grid-row")
 
 
 

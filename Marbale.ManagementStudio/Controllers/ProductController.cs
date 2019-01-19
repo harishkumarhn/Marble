@@ -41,6 +41,10 @@ namespace MarbaleManagementStudio.Controllers
         {
             return null;
         }
+        public ActionResult Update(ProductObject pObject)
+        {
+            return null;
+        }
 
         public ActionResult Types()
         {
@@ -48,9 +52,9 @@ namespace MarbaleManagementStudio.Controllers
             return View(productTypes);
         }
 
-        public int UpdateProductType(List<ProductType> productTypeList)
+        public int UpdateProductType(List<ProductType> productTypes)
         {
-            return 0;
+            return mb.UpdateProductTypes(productTypes);
         }
     }
 }

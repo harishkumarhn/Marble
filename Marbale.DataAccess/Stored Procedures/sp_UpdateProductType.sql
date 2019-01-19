@@ -1,7 +1,7 @@
 USE [Marbale]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_UpdateProductType]    Script Date: 1/15/2019 10:39:19 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_UpdateProductType]    Script Date: 1/19/2019 5:11:42 PM ******/
 SET ANSI_NULLS ON
 GO
 

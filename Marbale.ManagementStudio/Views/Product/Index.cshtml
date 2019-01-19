@@ -2,12 +2,11 @@
     ViewBag.Title = "ProductsMenu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="@Url.Content("~/content/css/style.css")" rel="stylesheet"/>
-
+<link href="~/Content/css/product.css" rel="stylesheet" />
 
 <div class="container">
-    <fieldset>
-        <legend><h4>Chose by product type</h4></legend>
+    <fieldset class="productFieldset">
+        <legend>Chose by product type</legend>
         <div class="panel panel-primary pbody">
             <div class="panel-body body">
                 <a href="/product/productsetup" class="btn btn-primary btn-md" role="button">Cards</a>
@@ -18,8 +17,8 @@
         </div>
     </fieldset>
 
-    <fieldset>
-        <legend><h4>Set Up</h4</legend>
+    <fieldset class="productFieldset">
+        <legend>Set up</legend>
             <div class="productSetup">
                 <a href="/product/Types">Product Type</a>
                 <a href="#">Product Category</a>

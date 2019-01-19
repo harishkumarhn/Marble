@@ -117,9 +117,7 @@ namespace Marbale.Business
         {
             try
             {
-                return marbaleData.AddProduct(product.Name, product.Type, product.POSCounter, product.Active, product.DisplayInPOS,
-                    product.Category, product.DisplayGroup, product.AutoGenerateCardNumber, product.OnlyVIP, product.Price,
-                    product.FaceValue, product.EffectivePrice, product.FinalPrice, product.TaxInclusive, product.TaxPercentage);
+                return marbaleData.AddProduct(product);
             }
             catch(Exception e)
             {
@@ -151,6 +149,18 @@ namespace Marbale.Business
                     listProductTypes.Add(pType);
                 }
                 return listProductTypes;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public int UpdateProductTypes(List<ProductType> types)
+        {
+            try
+            {
+               return marbaleData.UpdateProductTypes(types);
             }
             catch (Exception e)
             {

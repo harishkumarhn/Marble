@@ -21,7 +21,6 @@ namespace Marbale.Business
         public DataTable GetDefaultPaymentDropdown()
         {
             DataTable dataTable = marbaleData.GetDefalutCashMode();
-           // List<POSModel> listSettings = new List<POSModel>();
             return dataTable;
         }
 

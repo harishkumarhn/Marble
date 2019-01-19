@@ -135,10 +135,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\product.css" />
     <Content Include="Content\images\marbleDefault.jpg" />
+    <Content Include="Content\JS\bootstrap.min.js" />
     <Content Include="Content\JS\fontawesome.solid.js" />
     <Content Include="Content\JS\fontawesome.js" />
     <Content Include="Content\CSS\style.css" />
+    <Content Include="Content\JS\popper.min.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />

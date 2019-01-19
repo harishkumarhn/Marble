@@ -1,4 +1,5 @@
-﻿using Marbale.DataAccess;
+﻿using Marbale.BusinessObject;
+using Marbale.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -124,30 +125,55 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-        public int AddProduct(string name, string type, string posCounter, bool active, bool displayInpos, string category,
-            string displayGroup, bool aCard, bool onlyVIP, int price, int faceValue, int effectivePrice, int finalPrice, bool taxInclusive,
-            int taxPercentage)
+        public int AddProduct(ProductObject product)
         {
             try
             {
                 SqlParameter[] sqlParameters = new SqlParameter[14];
-                sqlParameters[0] = new SqlParameter("@name", name);
-                sqlParameters[1] = new SqlParameter("@type", type);
-                sqlParameters[2] = new SqlParameter("@active", active);
-                sqlParameters[3] = new SqlParameter("@price", price);
-                sqlParameters[4] = new SqlParameter("@effectivePrice", effectivePrice);
-                sqlParameters[5] = new SqlParameter("@faceValue", faceValue);
-                sqlParameters[6] = new SqlParameter("@displayGroup", displayGroup);
-                sqlParameters[7] = new SqlParameter("@displayInPOS", displayInpos);
-                sqlParameters[8] = new SqlParameter("@autoGenerateCardNumber", aCard);
-                sqlParameters[9] = new SqlParameter("@category", category);
-                sqlParameters[10] = new SqlParameter("@onlyVIP", onlyVIP);
-                sqlParameters[11] = new SqlParameter("@posCounter", posCounter);
-                sqlParameters[12] = new SqlParameter("@taxInclusive", taxInclusive);
-                sqlParameters[13] = new SqlParameter("@taxPercentage", taxPercentage);
-
+                sqlParameters[0] = new SqlParameter("@name", product.Name);
+                sqlParameters[1] = new SqlParameter("@type", product.Type);
+                sqlParameters[2] = new SqlParameter("@active", product.Active);
+                sqlParameters[3] = new SqlParameter("@price", product.Price);
+                sqlParameters[4] = new SqlParameter("@effectivePrice", product.EffectivePrice);
+                sqlParameters[5] = new SqlParameter("@faceValue", product.FaceValue);
+                sqlParameters[6] = new SqlParameter("@displayGroup", product.DisplayGroup);
+                sqlParameters[7] = new SqlParameter("@displayInPOS", product.DisplayInPOS);
+                sqlParameters[8] = new SqlParameter("@autoGenerateCardNumber", product.AutoGenerateCardNumber);
+                sqlParameters[9] = new SqlParameter("@category", product.Category);
+                sqlParameters[10] = new SqlParameter("@onlyVIP", product.OnlyVIP);
+                sqlParameters[11] = new SqlParameter("@posCounter", product.POSCounter);
+                sqlParameters[12] = new SqlParameter("@taxInclusive", product.TaxInclusive);
+                sqlParameters[13] = new SqlParameter("@taxPercentage", product.TaxPercentage);
 
                 return conn.executeInsertQuery("sp_InsertProduct", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+        public int UpdateProduct(ProductObject product)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[14];
+                sqlParameters[0] = new SqlParameter("@name", product.Name);
+                sqlParameters[1] = new SqlParameter("@type", product.Type);
+                sqlParameters[2] = new SqlParameter("@active", product.Active);
+                sqlParameters[3] = new SqlParameter("@price", product.Price);
+                sqlParameters[4] = new SqlParameter("@effectivePrice", product.EffectivePrice);
+                sqlParameters[5] = new SqlParameter("@faceValue", product.FaceValue);
+                sqlParameters[6] = new SqlParameter("@displayGroup", product.DisplayGroup);
+                sqlParameters[7] = new SqlParameter("@displayInPOS", product.DisplayInPOS);
+                sqlParameters[8] = new SqlParameter("@autoGenerateCardNumber", product.AutoGenerateCardNumber);
+                sqlParameters[9] = new SqlParameter("@category", product.Category);
+                sqlParameters[10] = new SqlParameter("@onlyVIP", product.OnlyVIP);
+                sqlParameters[11] = new SqlParameter("@posCounter", product.POSCounter);
+                sqlParameters[12] = new SqlParameter("@taxInclusive", product.TaxInclusive);
+                sqlParameters[13] = new SqlParameter("@taxPercentage", product.TaxPercentage);
+                sqlParameters[14] = new SqlParameter("@taxPercentage", product.Id);
+                return conn.executeInsertQuery("sp_UpdateProduct", sqlParameters);
             }
             catch (Exception e)
             {
@@ -187,7 +213,6 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-
         public DataTable GetProductTypes()
         {
             try
@@ -198,6 +223,30 @@ namespace Marbale.DataAccess
             {
                 throw e;
             }
+        }
+        public int UpdateProductTypes(List<ProductType> types)
+        {
+            try
+            {
+                foreach (var type in types)
+                {
+                        SqlParameter[] sqlParameters = new SqlParameter[7];
+                        sqlParameters[0] = new SqlParameter("@id", type.Id);
+                        sqlParameters[1] = new SqlParameter("@type", type.Type);
+                        sqlParameters[2] = new SqlParameter("@description", type.Description);
+                        sqlParameters[3] = new SqlParameter("@reportgroup", type.ReportGroup);
+                        sqlParameters[4] = new SqlParameter("@cardsale", type.CardSale);
+                        sqlParameters[5] = new SqlParameter("@active", type.Active);
+                        sqlParameters[6] = new SqlParameter("@lastUpdatedBy", type.LastUpdatedBy == null ? "Harish":type.LastUpdatedBy);
+                        conn.executeUpdateQuery("sp_UpdateOrInsertProductType", sqlParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return 0;
+
         }
     }
 }
