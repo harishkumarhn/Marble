@@ -185,7 +185,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[17];
+                SqlParameter[] sqlParameters = new SqlParameter[16];
                 sqlParameters[0] = new SqlParameter("@ActiveFlag", ActiveFlag);
                 sqlParameters[1] = new SqlParameter("@AutomaticApply", AutomaticApply);
                 sqlParameters[2] = new SqlParameter("@CouponMendatory", CouponMendatory);
@@ -196,7 +196,7 @@ namespace Marbale.DataAccess
                 sqlParameters[7] = new SqlParameter("@DiscountType", DiscountType);
                 sqlParameters[8] = new SqlParameter("@DisplayInPOS", DisplayInPOS);
                 sqlParameters[9] = new SqlParameter("@DisplayOrder", DisplayOrder);
-                sqlParameters[10] = new SqlParameter("@LastUpdatedDate", LastUpdatedDate);
+                sqlParameters[10] = new SqlParameter("@LastUpdatedDate", DateTime.Now);
                 sqlParameters[11] = new SqlParameter("@LastUpdatedUser", LastUpdatedUser);
                 sqlParameters[12] = new SqlParameter("@ManagerApproval", ManagerApproval);
                 sqlParameters[13] = new SqlParameter("@MinimumSaleAmount", MinimumSaleAmount);
@@ -224,21 +224,34 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+
+        public DataTable GetAllGameDiscount()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetGameDiscounts");
+            }
+            
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public int UpdateProductTypes(List<ProductType> types)
         {
             try
             {
                 foreach (var type in types)
                 {
-                        SqlParameter[] sqlParameters = new SqlParameter[7];
-                        sqlParameters[0] = new SqlParameter("@id", type.Id);
-                        sqlParameters[1] = new SqlParameter("@type", type.Type);
-                        sqlParameters[2] = new SqlParameter("@description", type.Description);
-                        sqlParameters[3] = new SqlParameter("@reportgroup", type.ReportGroup);
-                        sqlParameters[4] = new SqlParameter("@cardsale", type.CardSale);
-                        sqlParameters[5] = new SqlParameter("@active", type.Active);
-                        sqlParameters[6] = new SqlParameter("@lastUpdatedBy", type.LastUpdatedBy == null ? "Harish":type.LastUpdatedBy);
-                        conn.executeUpdateQuery("sp_UpdateOrInsertProductType", sqlParameters);
+                    SqlParameter[] sqlParameters = new SqlParameter[7];
+                    sqlParameters[0] = new SqlParameter("@id", type.Id);
+                    sqlParameters[1] = new SqlParameter("@type", type.Type);
+                    sqlParameters[2] = new SqlParameter("@description", type.Description);
+                    sqlParameters[3] = new SqlParameter("@reportgroup", type.ReportGroup);
+                    sqlParameters[4] = new SqlParameter("@cardsale", type.CardSale);
+                    sqlParameters[5] = new SqlParameter("@active", type.Active);
+                    sqlParameters[6] = new SqlParameter("@lastUpdatedBy", type.LastUpdatedBy == null ? "Harish" : type.LastUpdatedBy);
+                    conn.executeUpdateQuery("sp_UpdateOrInsertProductType", sqlParameters);
                 }
             }
             catch (Exception e)
@@ -246,7 +259,7 @@ namespace Marbale.DataAccess
                 throw e;
             }
             return 0;
-
         }
+        
     }
 }

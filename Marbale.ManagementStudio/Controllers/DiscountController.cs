@@ -17,12 +17,13 @@ namespace MarbaleManagementStudio.Controllers
 
         public ActionResult Index()
         {
-            ObservableCollection<Discounts> inventoryList = new ObservableCollection<Discounts>();
-            var datatable = b.GetAllDiscounts();
+            ObservableCollection<MasterDiscounts> inventoryList = new ObservableCollection<MasterDiscounts>();
+           MasterDiscounts datatable= b.GetAllDiscounts();
+ 
             return View("Discount", datatable);
         }
-      
-        public ActionResult SaveDiscount(Discounts data)
+
+        public ActionResult SaveDiscount(TransactionDiscount data)
         {
             int s = b.SaveDiscount(data);
            // return View();
