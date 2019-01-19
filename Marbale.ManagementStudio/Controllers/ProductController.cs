@@ -1,4 +1,5 @@
-﻿using Marbale.BusinessObject;
+﻿using Marbale.Business;
+using Marbale.BusinessObject;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,11 @@ namespace MarbaleManagementStudio.Controllers
 {
     public class ProductController : Controller
     {
+        public MarbaleBusiness mb;
+        public ProductController()
+        {
+            mb = new MarbaleBusiness();
+        }
         //
         // GET: /Product/
 
@@ -25,10 +31,26 @@ namespace MarbaleManagementStudio.Controllers
             return View(list);
         }
 
-        public ActionResult CreateProduct()
+        public ActionResult GetProduct(int id)
         {
             var product = new ProductObject();
             return View(product);
+        }
+
+        public ActionResult Insert(ProductObject pObject)
+        {
+            return null;
+        }
+
+        public ActionResult Types()
+        {
+            var productTypes = mb.GetProductTypes();
+            return View(productTypes);
+        }
+
+        public int UpdateProductType(List<ProductType> productTypeList)
+        {
+            return 0;
         }
     }
 }

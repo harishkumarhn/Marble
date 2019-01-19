@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "ProductTypes";
+}
+<html>
+<head>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        var modifiedListIndex = [];
+        $(document).ready(function () {
+            $('#grid_productType').on('change', 'input, select, textarea', function () {
+                var row_index = $(this).parent().index();
+                modifiedListIndex.push(row_index);
+            });
+        });
+
+        function Save() {
+
+            var ary = [];
+            for (var i = 0; i < modifiedListIndex.length; i++) {
+                var htmlRow = $('#grid_productType tbody>tr')[modifiedListIndex[i]];
+
+                var id = $($('td', htmlRow)[0]).text();
+
+                var description = $($('td input', htmlRow)[0]).val();
+                var type = $($('td input', htmlRow)[1]).val();
+                var reportGroup = $($('td input', htmlRow)[2]).val();
+
+                var active = $("td input[type='checkbox']", htmlRow)[0].checked;
+                var cardSale = $("td input[type='checkbox']", htmlRow)[1].checked;
+
+                ary.push({
+                    Id: id, Description: description,
+                    Type: type,
+                    ReportGroup: reportGroup,
+                    Active: active,
+                    CardSale: cardSale
+                });
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: '@Url.Action("UpdateProductType", "Product")',
+                    data: JSON.stringify({ data: ary }),
+                    dataType: "json",
+                    done: function (data) {
+                        alert('Data Saved');
+                    },
+                    fail: function (e) {
+                        alert(e);
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>ProductTypes</h2>
+@{
+    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10,
+        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "productTypeGrid");
+    grid.Pager(WebGridPagerModes.NextPrevious);
+}
+<div id="productTypeGrid" class="marbleGrid">
+    @grid.GetHtml(tableStyle: "webGrid",
+                headerStyle: "header",
+                htmlAttributes: new { id = "grid_productType" },
+                alternatingRowStyle: "alt",
+                selectedRowStyle: "select",
+                columns: grid.Columns(
+
+                grid.Column("Id", "Id", style: "class_id"),
+                grid.Column("Description", format: @<text><input name="textbox" type="text" class="class_desc" value="@(item.Description)" /></text>),
+                grid.Column("Type", format: @<text><input name="textbox" type="text" class="class_type" value="@(item.Type)" /></text>),
+                grid.Column("ReportGroup", format: @<text><input name="textbox" type="text" class="class_report" value="@(item.ReportGroup)" /></text>),
+                grid.Column("Active", format: @<text><input name="chkbox" type="checkbox"@(item.Active ? "checked='checked'" : "") class="class_active" value="Active" /></text>),
+                grid.Column("CardSale", format: @<text><input name="chkbox" type="checkbox"@(item.CardSale ? "checked='checked'" : "") class="class_card" value="CardSale" /></text>),
+                grid.Column("LastUpdatedDate", "LastUpdatedDate", style: "class_udate"),
+                grid.Column("LastUpdatedBy", format: @<text><input name="textbox" type="text" class="class_user" value="@(item.LastUpdatedBy)" /></text>)
+
+         ))
+    <button class="btn btn-primary btn-md" id="save_productTypes" onclick="Save()">Save</button>
+</div>
+</body>
+</html>
+
+
+
+

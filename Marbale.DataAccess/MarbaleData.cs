@@ -188,6 +188,18 @@ namespace Marbale.DataAccess
             }
         }
 
+        public DataTable GetProductTypes()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetProductTypes");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public DataTable GetAllGameDiscount()
         {
             try
