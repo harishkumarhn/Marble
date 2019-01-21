@@ -221,7 +221,7 @@
     <Content Include="Views\Product\ProductSetup.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Marble\Index.cshtml" />
-    <Content Include="Views\Product\CreateProduct.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Product\Types.cshtml" />
     <Content Include="Views\Product\Category.cshtml" />
   </ItemGroup>

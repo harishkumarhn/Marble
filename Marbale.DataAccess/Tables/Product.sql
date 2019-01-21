@@ -1,7 +1,7 @@
 USE [Marbale]
 GO
 
-/****** Object:  Table [dbo].[Product]    Script Date: 12/31/2018 6:21:48 PM ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 1/19/2019 7:20:14 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -24,7 +24,9 @@ CREATE TABLE [dbo].[Product](
 	[TaxInclusive] [bit] NULL,
 	[TaxPercentage] [int] NULL,
 	[FinalPrice] [int] NULL,
-	[EffectivePrice] [int] NULL
+	[EffectivePrice] [int] NULL,
+	[LastUpdatedBy] [varchar](50) NULL,
+	[LastUpdatedDate] [datetime] NULL
 ) ON [PRIMARY]
 GO
 
