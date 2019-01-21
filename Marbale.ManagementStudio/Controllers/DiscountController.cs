@@ -17,9 +17,7 @@ namespace MarbaleManagementStudio.Controllers
 
         public ActionResult Index()
         {
-            ObservableCollection<MasterDiscounts> inventoryList = new ObservableCollection<MasterDiscounts>();
            MasterDiscounts datatable= b.GetAllDiscounts();
- 
             return View("Discount", datatable);
         }
 

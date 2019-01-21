@@ -224,6 +224,17 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetProductCategory()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetProductCategory");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
         public DataTable GetAllGameDiscount()
         {
@@ -260,6 +271,16 @@ namespace Marbale.DataAccess
             }
             return 0;
         }
+        public int SaveProductCategory(Category cat)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[4];
+            sqlParameters[0] = new SqlParameter("@id", cat.Id);
+            sqlParameters[1] = new SqlParameter("@Name", cat.Name);
+            sqlParameters[2] = new SqlParameter("@Active", cat.Active);
+            sqlParameters[3] = new SqlParameter("@ParentCategory", cat.ParentCategory);
+            return conn.executeUpdateQuery("sp_UpdateOrInsertProductCategory", sqlParameters); 
+        }
+        
         
     }
 }

@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Category";
+}
+
+<h2>Category</h2>
+<style>
+    .placebutton {
+        display: block;
+        margin-left: auto;
+        margin-right: 37px;
+    }
+</style>
+  
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var modifiedListIndex = [];
+    $('.add').click(function () {
+        debugger
+        var index = $("#grid tbody tr").length + 1;
+        var Id = "Id" + index;
+        var Name = "Name" + index;
+        var Active = "Active" + index;
+        var parentCategory = "ParentCategory" + index;
+        //var Save = "Save_" + index;
+        //var Cancel = "Cancel_" + index;
+        var tr = '<tr class="alternate-row"><td></td>' +
+            
+             '<td><span> <input id="' + Name + '" type="text" /></span></td>' +
+
+          
+                   '<td><span> <input id="' + Active + '" type="checkbox" /></span></td>' +
+             '<td><span> <input id="' + parentCategory + '" type="text" /></span></td>' +
+              
+        '</tr>';
+
+
+
+        $("#grid tbody").append(tr);
+    });
+    $('#grid').on('change', 'input, select, textarea', function () {
+        debugger
+        var row_id = $(this)[0].id.match(/\d+/)[0];
+        modifiedListIndex.push(row_id);
+    });
+        $('#save').click(function () {
+            //  var htmlRow = $('#grid_productType tbody>tr')[modifiedListIndex[i]];
+            debugger;
+            var id = modifiedListIndex[modifiedListIndex.length-1];
+            var discountObject = {
+                Id :$('#Id'+id).val(),
+                 Name : $('#Name' + id).val(),
+                 Active: $("#Active" + id).is(':checked'),
+             ParentCategory : $('#ParentCategory' + id).val()
+        }
+
+        //debugger;
+        //id = $("#grid tbody tr").length;
+        //var discountObject = {
+        //    Id: $("#Id" + id).val(),
+        //    Name: $("#Name" + id).val(),
+        //    Active: $("#Active" + id).is(':checked'),
+        //    ParentCategory: $("#ParentCategory" + id).val()
+        //};
+
+
+        if (id != "") {
+
+            $.ajax({
+
+                type: "POST",
+
+                contentType: "application/json; charset=utf-8",
+
+                url: '@Url.Action("SaveProductCategory", "Product")',
+
+                        data: JSON.stringify({ data: discountObject }),
+
+                        dataType: "json",
+
+                        beforeSend: function () { },
+
+                        success: function (data) {
+                           
+
+                            location.reload();
+                            $('#displayMessage').text('data added succesfully').addClass('success');
+                        }
+                    });
+                }
+
+         });
+    })
+
+
+</script>
+
+@{
+    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10,
+        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "productGrid");
+        grid.Pager(WebGridPagerModes.NextPrevious);
+}
+
+ <div id="productGrid" class="marbleGrid">
+       <a href="#" class="add">Add New Category</a>
+        @grid.GetHtml(tableStyle: "webGrid",
+                headerStyle: "header",
+                htmlAttributes: new { id = "grid" },
+                alternatingRowStyle: "alt",
+                selectedRowStyle: "select",
+                columns: grid.Columns(                
+                grid.Column("Id",format: @<text><input name="textbox" type="text" class="grid-row" id="Id@(item.Id)" value="@(item.Id)" readonly  style="width: 81px"/ ></text>),                
+                grid.Column("Name", format: @<text><input name="textbox" type="text" class="grid-row" id="Name@(item.Id)" value="@(item.Name)" / ></text>),
+                grid.Column("Active",  format: @<text><input name="chkbox" type="checkbox"@(item.Active ? "checked='checked'" : "") id="Active@(item.Id)" value="@(item.Active ? "checked='checked'" : "")" /></text>),
+                grid.Column("ParentCategory", format: @<text><input name="textbox" type="text" class="grid-row" id="ParentCategory@(item.Id)" value="@(item.ParentCategory)" / ></text>)
+         )) 
+             <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                <input type="submit" value="SAVE" class="btn btn-success position-btn" id="save" />
+            </div>
+                  <button type="button" class="btn btn-primary placebutton" onclick="history.back();">Back</button>
+        </div>
+    
+    </div>   

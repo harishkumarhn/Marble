@@ -261,5 +261,44 @@ namespace Marbale.Business
 
         }
         #endregion
+
+        public List<Category> GetProductCategory()
+        {
+            try
+            {
+                var dataTable = productData.GetProductCategory();
+                List<Category> listProductCat = new List<Category>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    Category pCat = new Category();
+                    pCat.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
+                    pCat.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    pCat.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                    pCat.ParentCategory = dr.IsNull("ParentCategory") ? "" : (dr["ParentCategory"].ToString());
+                    listProductCat.Add(pCat);
+                }
+                return listProductCat;
+            }
+                
+            catch (Exception)
+            {
+                
+                throw;
+            }
+           
+        }
+
+        public int SaveProductCategory(Category cat)
+        {
+            try
+            {
+                return productData.SaveProductCategory(cat);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }
