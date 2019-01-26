@@ -10,12 +10,18 @@
     <title>WebgridSample</title>
     <script>
         $(document).ready(function () {
+            var modifiedListIndex = [];
             $('#ui-id-1').addClass('buttoncolor-change');
             var id = 0;
             $('#disc').click(function () {
 
                 $('#gridContent').show();
             })
+            $('#grid').on('change', 'input, select, textarea', function () {
+                debugger
+                var row_id = $(this)[0].id.match(/\d+/)[0];
+                modifiedListIndex.push(row_id);
+            });
             $("#gridContent").on('input', '[id^="DiscountAmount"]', function () {
 
                 if ($("#DiscountAmount" + $("#grid tbody tr").length).val() == "") {
@@ -78,66 +84,7 @@
 
                 $("#grid tbody").append(tr);
             });
-            $('.edit').on("click", function (e) {
-                debugger
-                $('#save').hide();
-                $('#update').show();
-                var id = $(this).closest("tr").find("td:eq(1)").html();
-                var discountObject = {
-                    DiscountId: $("#DiscountId" + id).val(),
-
-                    DiscountName: $("#DiscountName" + id).val(),
-
-                    DiscountAmount: $("#DiscountAmount" + id).val(),
-
-                    CouponMendatory: $("#CouponMendatory" + id).is(':checked'),
-                    //  CouponMendatory : $("#CouponMendatory" + id).val(),
-                    DiscountPercentage: $("#DiscountPercentage" + id).val(),
-                    AutomaticApply: $("#AutomaticApply" + id).is(':checked'),
-                    DiscountAmount: $("#DiscountAmount" + id).val(),
-                    DiscountPercentage: $("#DiscountPercentage" + id).val(),
-                    DisplayOrder: $("#DisplayOrder" + id).val(),
-
-                    LastUpdatedDate: $("#LastUpdatedDate" + id).val(),
-                    LastUpdatedUser: $("#LastUpdatedUser" + id).val(),
-
-                    ManagerApproval: $("#ManagerApprovalRequered" + id).is(':checked'),
-                    DisplayInPOS: $("#DisplayInPOS" + id).is(':checked'),
-                    MinimumSaleAmount: $("#MinimumSaleAmount" + id).val(),
-                    MinimumUsedCredits: $("#MinimumUsedCredits" + id).val(),
-                    AutomaticApply: $("#AutomaticApply" + id).is(':checked'),
-                    RemarkMendatory: $("#RemarkMendatory" + id).is(':checked'),
-                    ActiveFlag: $("#ActiveFlag" + id).is(':checked'),
-                    Type: 0
-                }
-                if (id != "") {
-
-                    $.ajax({
-
-                        type: "POST",
-
-                        contentType: "application/json; charset=utf-8",
-
-                        url: '@Url.Action("SaveDiscount1", "Discount")',
-
-                    data: JSON.stringify({ data: discountObject }),
-
-                    dataType: "json",
-
-                    beforeSend: function () { },
-
-                    success: function (data) {
-
-                        //  location.reload();
-                    }
-
-
-
-                });
-            }
-
-
-        })
+            
             $('#ui-id-1').click(function () {
                 $('#backdiscount').hide();
                 $('#savediscount').hide();
@@ -221,7 +168,9 @@
 
             });
             $("#save").click(function () {
-                id = $("#grid tbody tr").length;
+               // id = $("#grid tbody tr").length;
+                var id = modifiedListIndex[modifiedListIndex.length - 1];
+            
                 var discountObject = {
                     DiscountId: $("#DiscountId" + id).val(),
                     DiscountName: $("#DiscountName" + id).val(),
@@ -424,20 +373,20 @@
 
                 selectedRowStyle: "select",
                 columns: grid.Columns(
-                 grid.Column("DiscountID", "DiscountID"),
-                 grid.Column("DiscountName", format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountName@(item.DiscountID)" value="@(item.DiscountName)" readonly/ ></text>),
-                 grid.Column("DiscountAmount", format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountAmount@(item.DiscountID)" value="@(item.DiscountAmount)" readonly /></text>),
+                 grid.Column("DiscountID",format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountId@(item.DiscountID)" value="@(item.DiscountID)" readonly / ></text>),
+                 grid.Column("DiscountName", format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountName@(item.DiscountID)" value="@(item.DiscountName)" / ></text>),
+                 grid.Column("DiscountAmount", format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountAmount@(item.DiscountID)" value="@(item.DiscountAmount)"  /></text>),
                  grid.Column("CouponMendatory", format: @<text><input name="chkbox" type="checkbox"@(item.CouponMendatory ? "checked='checked'" : "")  id="CouponMendatory@(item.DiscountID)" value="CouponMendatory" /></text>, style: "grid-row"),
-                 grid.Column("DiscountPercentage", format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountPercentage@(item.DiscountID)" value="@(item.DiscountPercentage)"  readonly/></text>),
+                 grid.Column("DiscountPercentage", format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountPercentage@(item.DiscountID)" value="@(item.DiscountPercentage)"  /></text>),
                  grid.Column("AutomaticApply", format: @<text><input name="chkbox" type="checkbox"@(item.AutomaticApply ? "checked='checked'" : "") id="AutomaticApply@(item.DiscountID)" value="AutomaticApply" /></text>, style: "grid-row"),
                  grid.Column("ActiveFlag", format: @<text><input name="chkbox" type="checkbox"@(item.ActiveFlag ? "checked='checked'" : "") id="ActiveFlag@(item.DiscountID)" value="ActiveFlag" /></text>, style: "grid-row"),
-                 grid.Column("DisplayOrder", format: @<text><input name="textbox" type="text" class="grid-row" id="DisplayOrder@(item.DiscountID)" value="@(item.DisplayOrder)"  readonly/></text>),
-                 grid.Column("LastUpdatedDate", format: @<text><input name="textbox" type="text" class="grid-row" id="LastUpdatedDate@(item.DiscountID)" value="@(item.LastUpdatedDate)" readonly /></text>),
-                 grid.Column("LastUpdatedUser", format: @<text><input name="textbox" type="text" class="grid-row" id="LastUpdatedUser@(item.DiscountID)" value="@(item.LastUpdatedUser)" readonly /></text>),
+                 grid.Column("DisplayOrder", format: @<text><input name="textbox" type="text" class="grid-row" id="DisplayOrder@(item.DiscountID)" value="@(item.DisplayOrder)"  /></text>),
+                 grid.Column("LastUpdatedDate", format: @<text><input name="textbox" type="text" class="grid-row" id="LastUpdatedDate@(item.DiscountID)" value="@(item.LastUpdatedDate)"  /></text>),
+                 grid.Column("LastUpdatedUser", format: @<text><input name="textbox" type="text" class="grid-row" id="LastUpdatedUser@(item.DiscountID)" value="@(item.LastUpdatedUser)"  /></text>),
                  grid.Column("ManagerApprovalRequered", format: @<text><input name="chkbox" type="checkbox"@(item.ManagerApproval ? "checked='checked'" : "") id="ManagerApproval@(item.DiscountID)" value="ManagerApprovalRequered" /></text>, style: "grid-row"),
-                 grid.Column("MinimumSaleAmount", format: @<text><input name="textbox" type="text" class="grid-row"id="MinimumSaleAmount@(item.DiscountID)" value="@(item.MinimumSaleAmount)" readonly /></text>),
-                grid.Column("MinimumUsedCredits", format: @<text><input name="textbox" type="text" class="grid-row" id="MinimumUsedCredits@(item.DiscountID)" value="@(item.MinimumUsedCredits)" readonly/></text>),
-                grid.Column("RemarkMendatory", format: @<text><input name="chkbox" type="checkbox"@(item.RemarkMendatory ? "checked='checked'" : "") id="RemarkMendatory@(item.DiscountID)" value="RemarkMendatory" readonly /></text>, style: "grid-row")
+                 grid.Column("MinimumSaleAmount", format: @<text><input name="textbox" type="text" class="grid-row"id="MinimumSaleAmount@(item.DiscountID)" value="@(item.MinimumSaleAmount)"  /></text>),
+                grid.Column("MinimumUsedCredits", format: @<text><input name="textbox" type="text" class="grid-row" id="MinimumUsedCredits@(item.DiscountID)" value="@(item.MinimumUsedCredits)" /></text>),
+                grid.Column("RemarkMendatory", format: @<text><input name="chkbox" type="checkbox"@(item.RemarkMendatory ? "checked='checked'" : "") id="RemarkMendatory@(item.DiscountID)" value="RemarkMendatory"  /></text>, style: "grid-row")
        ))
 
         </div>
