@@ -12,11 +12,15 @@
 }
  <div id="productGrid" class="marbleGrid">
        <a href="#" class="add">Add New Product</a>
-        @grid.GetHtml(tableStyle: "webGrid",
-                headerStyle: "header",
+        @grid.GetHtml(
+                  tableStyle: "webgrid-table",
+                  headerStyle: "webgrid-header",
+                  footerStyle: "webgrid-footer",
+                  selectedRowStyle: "webgrid-selected-row",
+                 rowStyle: "webgrid-row-style",
                 htmlAttributes: new { id = "grid" },
                 alternatingRowStyle: "alt",
-                selectedRowStyle: "select",
+                //selectedRowStyle: "select",
                 columns: grid.Columns(                
                 grid.Column("Id", "Id"),
                 grid.Column("edit",format: @<button onclick="EditProduct(@(item.Id))">|||</button>),               
