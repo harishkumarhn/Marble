@@ -56,5 +56,22 @@ namespace MarbaleManagementStudio.Controllers
         {
             return productBussiness.UpdateProductTypes(productTypes);
         }
+        public ActionResult Category()
+        {
+            List<string> domains = new List<string>();
+            domains.Add("DomainA");
+
+            ViewBag.Dropdow = domains.Select(m => new SelectListItem { Text = "hello", Value = "1" });
+            var procat = productBussiness.GetProductCategory();
+            return View(procat);
+        }
+        public ActionResult SaveProductCategory(Category data)
+        {
+            productBussiness.SaveProductCategory(data);
+        //  var procat=  productBussiness.GetProductCategory();
+         // return View("Category", procat);
+             return Json(1, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
