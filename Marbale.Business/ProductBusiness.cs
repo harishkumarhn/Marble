@@ -149,9 +149,29 @@ namespace Marbale.Business
         {
             try
             {
-                var dataTable = productData.GetProducts();
+                var typeListDataTable = productData.GetProductTypeLookUp();
+                var typeList = new List<IdValue>();
+                foreach (DataRow dr in typeListDataTable.Rows)
+                {
+                    IdValue idValues = new IdValue();
+                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                    typeList.Add(idValues);
+                }
+
+                var catrgoryListDataTable = productData.GetProductCategoryLookUp();
+                var categoryList = new List<IdValue>();
+                foreach (DataRow dr in catrgoryListDataTable.Rows)
+                {
+                    IdValue idValues = new IdValue();
+                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                    categoryList.Add(idValues);
+                }
+
+                var productDataTable = productData.GetProducts();
                 List<Product> products = new List<Product>();
-                foreach (DataRow dr in dataTable.Rows)
+                foreach (DataRow dr in productDataTable.Rows)
                 {
                     Product product = new Product();
                     product.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
@@ -172,6 +192,9 @@ namespace Marbale.Business
                     product.TaxPercentage = dr.IsNull("TaxPercentage") ? 0 : Convert.ToInt32(dr["TaxPercentage"]);
                     product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
                     product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
+
+                    product.TypeList = typeList;
+                    product.CategoryList = categoryList;
 
                     products.Add(product);
                 }

@@ -25,7 +25,8 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult ProductSetup()
         {
             var products = productBussiness.GetProducts();
-            return View(products);
+            ViewBag.productDetails = products;
+            return View();
         }
 
         public ActionResult GetProduct(int id)

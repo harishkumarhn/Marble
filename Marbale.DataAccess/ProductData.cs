@@ -136,6 +136,28 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetProductTypeLookUp()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetProductTypeLookUp");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public DataTable GetProductCategoryLookUp()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetProductCategoryLookUp");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public DataTable GetProductById(int id)
         {
             try

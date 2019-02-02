@@ -1,16 +1,17 @@
-﻿@{
+﻿@*@model Marbale.BusinessObject.Product*@
+@{
     ViewBag.Title = "ProductSetup";
     Layout =  "~/Views/Shared/_Layout.cshtml";
 }
  
 <link href="~/Content/css/product.css" rel="stylesheet" />
 
-@{
-    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10,
+@*@{
+    var grid = new WebGrid(Model., canPage: true, rowsPerPage: 10,
         selectionFieldName: "selectedRow", ajaxUpdateContainerId: "productGrid");
         grid.Pager(WebGridPagerModes.NextPrevious);
-}
- <div id="productGrid" class="marbleGrid">
+}*@
+@* <div id="productGrid" class="marbleGrid">
        <a href="#" class="add">Add New Product</a>
         @grid.GetHtml(
                   tableStyle: "webgrid-table",
@@ -25,7 +26,7 @@
                 grid.Column("Id", "Id"),
                 grid.Column("edit",format: @<button onclick="EditProduct(@(item.Id))">|||</button>),               
                 grid.Column("Name", format: @<text><input name="textbox" type="text" value="@(item.Name)" /></text>),
-                grid.Column("Type", format: @<text><input name="textbox" type="text" value="@(item.Type)" /></text>),
+                grid.Column("Type", format: @item => Html.DropDownList("value", (IEnumerable<SelectListItem>)Model.Product[0].TypeList))),
                 grid.Column("POSCounter",format: @<text><input name="textbox" type="text" value="@(item.POSCounter)" /></text>),
                 grid.Column("Active", format: @<text><input name="chkbox" type="checkbox"@(item.Active ? "checked='checked'" : "") value="Active" /></text>),
                 grid.Column("DisplayInPOS", format: @<text><input name="chkbox" type="checkbox"@(item.DisplayInPOS ? "checked='checked'" : "") value="DisplayInPOS" /></text>),
@@ -42,8 +43,89 @@
                 grid.Column("LastUpdatedBy", "LastUpdatedUser"),
                 grid.Column("LastUpdatedBy", "LastUpdatedDate"))
          )
-    </div>   
+    </div>   *@
+<div>  
+    <table id="t01">  
+        <thead>  
+            <th>ID</th>  
+            <th>Edit</th>  
+            <th>Name</th>  
+            <th>Type</th>  
+            <th>Category</th>
+            <th>POSCounter</th>  
+            <th>Active</th>  
+            <th>DisplayInPOS</th>  
+            <th>DisplayGroup</th>  
+            <th>Category</th>  
+            <th>AutoGenerateCardNumber</th>  
+            <th>OnlyVIP</th>  
+            <th>Price</th>  
+            <th>FaceValue</th>  
+            <th>TaxInclusive</th>  
+            <th>FinalPrice</th>  
+            <th>EffectivePrice</th>  
+            <th>LastUpdatedBy</th>  
+            <th>LastUpdatedDate</th>  
+        </thead>  
+@foreach (var item in ViewBag.productDetails)  
+{  
+    <tr> 
+        <td> @item.Id  </td>
+        <td> <button>--</button>  </td>
+        <td> @item.Name  </td>
+        <td> <select name="TypeList" id="TypeList">
+              @foreach (var dow in item.TypeList)
+              {
+                if(@item.Type == @dow.Value)
+                {
+                    <option value="@dow.Value" selected>@dow.Value</option>
+                }
+                else
+                {
+                    <option value="@dow.Value">@dow.Value</option>
+                }
+              }
+            </select> 
+        </td>
+        <td> <select name="categoryList" id="categoryList">
+              @foreach (var dow in item.TypeList)
+              {
+                if(@item.Type == @dow.Value)
+                {
+                    <option value="@dow.Value" selected>@dow.Value</option>
+                }
+                else
+                {
+                    <option value="@dow.Value">@dow.Value</option>
+                }
+              }
+            </select> 
+        </td>
+        <td> <input type="text" value="@item.POSCounter" />  </td>
+        <td> <input type="checkbox" value="@item.Active" />  </td>
+        <td> <input type="checkbox" value="@item.DisplayInPOS" />  </td>
+        <td> <input type="text" value="@item.DisplayGroup" />  </td>
+        <td> <input type="text" value="@item.AutoGenerateCardNumber" />  </td>
+        <td> <input type="checkbox" value="@item.OnlyVIP" />  </td>
+        <td> <input type="text" value="@item.Price" />  </td>
+        <td> <input type="text" value="@item.FaceValue" />  </td>
+        <td> <input type="text" value="@item.TaxInclusive" />  </td>
+        <td> <input type="text" value="@item.FinalPrice" />  </td>
+        <td> <input type="text" value="@item.EffectivePrice" />  </td>
+        <td> <input type="text" value="@item.LastUpdatedBy" />  </td>
+        <td> <input type="text" value="@item.LastUpdatedDate" />  </td>
+    </tr>  
+}  
+  
+    </table>  
+</div>  
 <script>
+    var typeList = null;
+    @if (ViewBag.productDetails.Count > 0)
+    {
+         @: typeList = '@ViewBag.productDetails[0].TypeList';
+    }
+    console.log(typeList);
     function EditProduct(id) {
         window.open("/product/GetProduct/"+id, "Marbale", "width=500,height=500");
     }

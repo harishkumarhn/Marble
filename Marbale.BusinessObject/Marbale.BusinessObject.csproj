@@ -42,6 +42,7 @@
     <Compile Include="AppSetting.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="GameDiscount.cs" />
+    <Compile Include="IdValue.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="MasterDiscounts.cs" />
     <Compile Include="POSModel.cs" />

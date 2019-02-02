@@ -27,5 +27,8 @@ namespace Marbale.BusinessObject
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDate { get; set; }
 
+        public List<IdValue> TypeList { get; set; }
+        public List<IdValue> CategoryList { get; set; }
+
     }
 }
