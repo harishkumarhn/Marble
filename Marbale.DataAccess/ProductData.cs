@@ -70,15 +70,31 @@ namespace Marbale.DataAccess
             }
         }
 
-        public int SaveAppSettings(string name, string value, string screen)
+        public int SaveAppSettings(POSModel model)
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[3];
-                sqlParameters[0] = new SqlParameter("@name", name);
-                sqlParameters[1] = new SqlParameter("@value", value);
-                sqlParameters[2] = new SqlParameter("@screen", screen);
-                return conn.executeUpdateQuery("sp_InsertOrUpdateAppSetting", sqlParameters);
+                SqlParameter[] sqlParameters = new SqlParameter[19];
+                sqlParameters[0] = new SqlParameter("@AllowPrint", model.AllowPrint);
+                sqlParameters[1] = new SqlParameter("@CancelTransactionRequiresManagerAproval", model.CancelTransactionRequiresManagerAproval);
+                sqlParameters[2] = new SqlParameter("@DefalutCashMode", model.DefalutCashMode);
+                sqlParameters[3] = new SqlParameter("@EnableCardDetailskInPOS", model.EnableCardDetailskInPOS);
+                sqlParameters[4] = new SqlParameter("@EnableDiscountInPOS", model.EnableDiscountInPOS);
+                sqlParameters[5] = new SqlParameter("@EnableProductInPOS", model.EnableProductInPOS);
+                sqlParameters[6] = new SqlParameter("@EnableRefundInPOS", model.EnableRefundInPOS);
+                sqlParameters[7] = new SqlParameter("@EnableTaskInPOS", model.EnableTaskInPOS);
+                sqlParameters[8] = new SqlParameter("@EnableTransactionInPOS", model.EnableTransactionInPOS);
+                sqlParameters[9] = new SqlParameter("@FullScreenInPOS", model.FullScreenInPOS);
+                sqlParameters[10] = new SqlParameter("@POSInactiveTimeOut", model.POSInactiveTimeOut);
+                sqlParameters[11] = new SqlParameter("@POSSkinColor", model.POSSkinColor);
+                sqlParameters[12] = new SqlParameter("@PreferedNonCashPayment", model.PreferedNonCashPayment);
+                sqlParameters[13] = new SqlParameter("@ReturnWithinDays", model.ReturnWithinDays);
+                sqlParameters[14] = new SqlParameter("@ShowDisplayGroupInPOS", model.ShowDisplayGroupInPOS);
+                sqlParameters[15] = new SqlParameter("@TransactionREprintRequiresManagerAproval", model.TransactionREprintRequiresManagerAproval);
+                sqlParameters[16] = new SqlParameter("@UserReaderpid", model.UserReaderpid);
+                sqlParameters[17] = new SqlParameter("@UserReadervid", model.UserReadervid);
+                sqlParameters[18] = new SqlParameter("@id", model.id);
+                return conn.executeUpdateQuery("sp_InsertOrUpdatePOSSetting", sqlParameters);
             }
             catch (Exception e)
             {

@@ -49,21 +49,21 @@ namespace Marbale.Business
                 throw e;
             }
         }
-        public List<AppSetting> GetAppSettings(string screen)
+        public List<POSModel> GetAppSettings(string screen)
         {
             try
             {
                 var dataTable = productData.GetAppSettings(screen);
-                List<AppSetting> listSettings = new List<AppSetting>();
+                List<POSModel> listSettings = new List<POSModel>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    AppSetting setting = new AppSetting();
-                    setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    setting.Caption = dr.IsNull("Caption") ? "" : dr["Caption"].ToString();
-                    setting.Value = dr.IsNull("Value") ? "" : dr["Value"].ToString();
-                    setting.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
-                    setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
-
+                    POSModel setting = new POSModel();
+                    setting.id = dr.IsNull("id") ? 0 : int.Parse(dr["id"].ToString());
+                    setting.AllowPrint = dr.IsNull("AllowPrint") ? false :bool.Parse(dr["AllowPrint"].ToString());
+                    setting.POSSkinColor = dr.IsNull("POSSkinColor") ? "" : dr["POSSkinColor"].ToString();
+                    setting.EnableTaskInPOS = dr.IsNull("Value") ? false :bool.Parse( dr["Value"].ToString());
+                    setting.EnableTransactionInPOS = dr.IsNull("EnableTransactionInPOS") ? false:bool.Parse(dr["EnableTransactionInPOS"].ToString());
+                    setting.ReturnWithinDays = dr.IsNull("ReturnWithinDays") ? 0 : int.Parse(dr["ReturnWithinDays"].ToString());
                     listSettings.Add(setting);
                 }
                 return listSettings;
@@ -90,14 +90,13 @@ namespace Marbale.Business
                 throw e;
             }
         }
-        public bool SavePOSConfiguration(List<AppSetting> appSetting)
+        public bool SavePOSConfiguration(POSModel setting)
         {
             try
             {
-                foreach (var setting in appSetting)
-                {
-                    productData.SaveAppSettings(setting.Name, setting.Value, setting.ScreenGroup);
-                }
+               
+                    productData.SaveAppSettings(setting);
+                
                 return true;
 
             }
