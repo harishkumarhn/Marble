@@ -167,7 +167,7 @@ namespace Marbale.Business
                 {
                     IdValue idValues = new IdValue();
                     idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                    idValues.Value = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     categoryList.Add(idValues);
                 }
 
@@ -260,6 +260,61 @@ namespace Marbale.Business
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+        public List<Category> GetProductCategory()
+        {
+            try
+            {
+                var ctys = new List<IdValue>();
+                ctys.Add(new IdValue() { Id = 0, Value = "Select" });
+                var dataTable = productData.GetProductCategory();
+                List<Category> listProductCat = new List<Category>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    Category pCat = new Category();
+                    pCat.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
+                    pCat.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    pCat.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                    pCat.ParentCategory = dr.IsNull("ParentCategory") ? "" : (dr["ParentCategory"].ToString());
+                    listProductCat.Add(pCat);
+                }
+                if (listProductCat.Count != 0)
+                {
+                    foreach (var cty in listProductCat)
+                    {
+                        ctys.Add(new IdValue() { Id = cty.Id, Value = cty.Name });
+                    }
+                }
+                else
+                {
+                    listProductCat.Add(new Category());
+                }
+                foreach (var cty in listProductCat)
+                {
+                    cty.Categories = ctys;
+                }
+                return listProductCat;
+            }
+
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public int UpdateProductCategory(List<Category> categories)
+        {
+            try
+            {
+                return productData.UpdateProductCategory(categories);
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
         #endregion
@@ -357,60 +412,5 @@ namespace Marbale.Business
         }
         #endregion
 
-        public List<Category> GetProductCategory()
-        {
-            try
-            {
-                var ctys = new List<IdValue>();
-                ctys.Add(new IdValue() { Id = 0, Value = "Select" });
-                var dataTable = productData.GetProductCategory();
-                List<Category> listProductCat = new List<Category>();
-                foreach (DataRow dr in dataTable.Rows)
-                {
-                    Category pCat = new Category();
-                    pCat.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
-                    pCat.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    pCat.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    pCat.ParentCategory = dr.IsNull("ParentCategory") ? "" : (dr["ParentCategory"].ToString());
-                    listProductCat.Add(pCat);
-                }
-                if (listProductCat.Count != 0)
-                {
-                    foreach (var cty in listProductCat)
-                    {
-                        ctys.Add(new IdValue() { Id = cty.Id, Value = cty.Name });
-                    }
-                }
-                else
-                {
-                    listProductCat.Add(new Category());
-                }
-                foreach (var cty in listProductCat)
-                {
-                    cty.Categories = ctys;
-                }
-                return listProductCat;
-            }
-
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        }
-
-        public int UpdateProductCategory(List<Category> categories)
-        {
-            try
-            {
-                return productData.UpdateProductCategory(categories);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
     }
 }

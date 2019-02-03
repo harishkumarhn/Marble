@@ -50,9 +50,9 @@
             </select> 
         </td>
         <td> <select name="categoryList" id="categoryList" class="gridText">
-              @foreach (var dow in item.TypeList)
+              @foreach (var dow in item.CategoryList)
               {
-                if(@item.Type == @dow.Value)
+                if(@item.Category == @dow.Value)
                 {
                     <option value="@dow.Value" selected>@dow.Value</option>
                 }
@@ -91,7 +91,7 @@
               }
         typeListOptions = typeListOptions + '</select></td>'; 
         var categoryListOptions = '';
-              @foreach (var dow in ViewBag.productDetails[0].TypeList)
+              @foreach (var dow in ViewBag.productDetails[0].CategoryList)
               {
                    @: categoryListOptions = categoryListOptions + '<option value="" >@dow.Value</option>';
               }
