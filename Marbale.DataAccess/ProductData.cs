@@ -45,8 +45,8 @@ namespace Marbale.DataAccess
             }
         }
 
-        public int UpdateSettings(int id, string name, string caption,string description, string defaultvalue,
-            string type, string screenGroup,string updatedby, bool active, bool userLevel, bool posLevel)
+        public int UpdateSettings(int id, string name, string caption, string description, string defaultvalue,
+            string type, string screenGroup, string updatedby, bool active, bool userLevel, bool posLevel)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace Marbale.DataAccess
             }
 
         }
-        
+
         public DataTable GetDefalutCashMode()
         {
             try
@@ -98,7 +98,7 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-       
+
 
         public int UpdatePOSUserCredential(string Password)
         {
@@ -136,6 +136,28 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetProductTypeLookUp()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetProductTypeLookUp");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public DataTable GetProductCategoryLookUp()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetProductCategoryLookUp");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public DataTable GetProductById(int id)
         {
             try
@@ -154,19 +176,19 @@ namespace Marbale.DataAccess
             try
             {
                 SqlParameter[] sqlParameters = new SqlParameter[16];
-                sqlParameters[0] = new SqlParameter("@name", product.Name);
-                sqlParameters[1] = new SqlParameter("@type", product.Type);
+                sqlParameters[0] = new SqlParameter("@name", string.IsNullOrEmpty(product.Name) ? "" : product.Name);
+                sqlParameters[1] = new SqlParameter("@type", string.IsNullOrEmpty(product.Type) ? "" : product.Type);
                 sqlParameters[2] = new SqlParameter("@active", product.Active);
                 sqlParameters[3] = new SqlParameter("@price", product.Price);
                 sqlParameters[4] = new SqlParameter("@effectivePrice", product.EffectivePrice);
                 sqlParameters[5] = new SqlParameter("@finalPrice", product.FinalPrice);
                 sqlParameters[6] = new SqlParameter("@faceValue", product.FaceValue);
-                sqlParameters[7] = new SqlParameter("@displayGroup", product.DisplayGroup);
+                sqlParameters[7] = new SqlParameter("@displayGroup", string.IsNullOrEmpty(product.DisplayGroup) ? "" : product.DisplayGroup);
                 sqlParameters[8] = new SqlParameter("@displayInPOS", product.DisplayInPOS);
                 sqlParameters[9] = new SqlParameter("@autoGenerateCardNumber", product.AutoGenerateCardNumber);
-                sqlParameters[10] = new SqlParameter("@category", product.Category);
+                sqlParameters[10] = new SqlParameter("@category", string.IsNullOrEmpty(product.Category) ? "" : product.Category);
                 sqlParameters[11] = new SqlParameter("@onlyVIP", product.OnlyVIP);
-                sqlParameters[12] = new SqlParameter("@posCounter", product.POSCounter);
+                sqlParameters[12] = new SqlParameter("@posCounter", string.IsNullOrEmpty(product.POSCounter) ? "" : product.POSCounter);
                 sqlParameters[13] = new SqlParameter("@taxInclusive", product.TaxInclusive);
                 sqlParameters[14] = new SqlParameter("@taxPercentage", product.TaxPercentage);
                 sqlParameters[15] = new SqlParameter("@id", product.Id);
@@ -180,7 +202,7 @@ namespace Marbale.DataAccess
             }
 
         }
-        public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, int DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory,bool Type)
+        public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, int DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory, bool Type)
         {
             try
             {
@@ -241,7 +263,7 @@ namespace Marbale.DataAccess
             {
                 return conn.executeSelectQuery("sp_GetGameDiscounts");
             }
-            
+
             catch (Exception e)
             {
                 throw e;
@@ -270,16 +292,27 @@ namespace Marbale.DataAccess
             }
             return 0;
         }
-        public int SaveProductCategory(Category cat)
+        public int UpdateProductCategory(List<Category> categories)
         {
-            SqlParameter[] sqlParameters = new SqlParameter[4];
-            sqlParameters[0] = new SqlParameter("@id", cat.Id);
-            sqlParameters[1] = new SqlParameter("@Name", cat.Name);
-            sqlParameters[2] = new SqlParameter("@Active", cat.Active);
-            sqlParameters[3] = new SqlParameter("@ParentCategory", cat.ParentCategory);
-            return conn.executeUpdateQuery("sp_UpdateOrInsertProductCategory", sqlParameters); 
+            try
+            {
+                foreach (var cat in categories)
+                {
+                    SqlParameter[] sqlParameters = new SqlParameter[4];
+                    sqlParameters[0] = new SqlParameter("@id", cat.Id);
+                    sqlParameters[1] = new SqlParameter("@Name", cat.Name);
+                    sqlParameters[2] = new SqlParameter("@Active", cat.Active);
+                    sqlParameters[3] = new SqlParameter("@ParentCategory", cat.ParentCategory);
+                    return conn.executeUpdateQuery("sp_UpdateOrInsertProductCategory", sqlParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return 0;
         }
-        
-        
+
+
     }
 }

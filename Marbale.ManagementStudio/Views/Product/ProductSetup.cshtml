@@ -8,7 +8,7 @@
 <div>  
     <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Product</a>
 
-    <table id="productsTable" class="table marbleTable">  
+    <table id="marbleTable" class="table marbleTable">  
         <thead>  
             <th>ID</th>  
             <th>Edit</th>  
@@ -31,7 +31,7 @@
         </thead>  
         @foreach (var item in ViewBag.productDetails)  
         {  
-            <tr  onchange="UpdatedList(this)"> 
+            <tr onchange="UpdatedList(this)"> 
         <td> @item.Id  </td>
         <td> <button onClick="EditProduct(@item.Id)">-</button>  </td>
         <td> <input type="text" value="@item.Name" class="gridText" />  </td>
@@ -97,33 +97,32 @@
               }
         categoryListOptions = categoryListOptions + ' </select> </td>';
 
-        var newRow = '<tr> <td> <a href="#"></a> </td>  <td>  </td>' +
+        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>  <td>  </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <select name="TypeList" id="TypeList">' + typeListOptions +
         '<td> <select name="categoryList" id="categoryList">' + categoryListOptions +
         '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="checkbox" checked="" />  </td>' +
-        '<td> <input type="checkbox" checked="" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
         '<td> <input type="text" value="" class="gridText" />  </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="checkbox" checked="" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="checkbox" checked="" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <input type="text" value="" class="gridText" disabled/>  </td>' +
         '<td> <input type="text" value="" class="gridText" disabled/>  </td>' + '</tr>';
-        $('#productsTable tr:last').after(newRow);
+        $('#marbleTable tr:last').after(newRow);
     }
     function SaveProducts() {
         var products = [];
-        var table = document.getElementById('productsTable');
+        var table = document.getElementById('marbleTable');
         for (var r = 1, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
-            for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
                     products.push({
-                        Id: table.rows[r].cells[0].value,
+                        Id: table.rows[r].cells[0].innerHTML,
                         Name: table.rows[r].cells[2].children[0].value,
                         Type: table.rows[r].cells[3].children[0].value,
                         Category: table.rows[r].cells[4].children[0].value,
@@ -139,8 +138,8 @@
                         FinalPrice: table.rows[r].cells[14].children[0].value,
                         EffectivePrice: table.rows[r].cells[15].children[0].value,
 
+
                     });
-                }
             }
         }
         $.ajax({
@@ -151,6 +150,7 @@
                 dataType: "json",
                 success: function (data) {
                     alert('Data Saved');
+                    location.reload();
                 },
                 error: function (e) {
                     alert(e);
@@ -164,6 +164,6 @@
         }
     }
     function EditProduct(id) {
-        window.open("/product/GetProduct/"+id, "Marbale", "width=700,height=700");
+        window.open("/product/Edit/"+id, "Marbale", "width=700,height=700");
     }
 </script>
