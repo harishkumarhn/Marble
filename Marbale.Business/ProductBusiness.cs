@@ -49,21 +49,21 @@ namespace Marbale.Business
                 throw e;
             }
         }
-        public List<POSModel> GetAppSettings(string screen)
+        public List<AppSetting> GetAppSettings(string screen)
         {
             try
             {
                 var dataTable = productData.GetAppSettings(screen);
-                List<POSModel> listSettings = new List<POSModel>();
+                List<AppSetting> listSettings = new List<AppSetting>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    POSModel setting = new POSModel();
-                    setting.id = dr.IsNull("id") ? 0 : int.Parse(dr["id"].ToString());
-                    setting.AllowPrint = dr.IsNull("AllowPrint") ? false :bool.Parse(dr["AllowPrint"].ToString());
-                    setting.POSSkinColor = dr.IsNull("POSSkinColor") ? "" : dr["POSSkinColor"].ToString();
-                    setting.EnableTaskInPOS = dr.IsNull("Value") ? false :bool.Parse( dr["Value"].ToString());
-                    setting.EnableTransactionInPOS = dr.IsNull("EnableTransactionInPOS") ? false:bool.Parse(dr["EnableTransactionInPOS"].ToString());
-                    setting.ReturnWithinDays = dr.IsNull("ReturnWithinDays") ? 0 : int.Parse(dr["ReturnWithinDays"].ToString());
+                    AppSetting setting = new AppSetting();
+                    setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                    setting.Caption = dr.IsNull("Caption") ? "" : dr["Caption"].ToString();
+                    setting.Value = dr.IsNull("Value") ? "" : dr["Value"].ToString();
+                    setting.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                    setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
+
                     listSettings.Add(setting);
                 }
                 return listSettings;
@@ -90,13 +90,14 @@ namespace Marbale.Business
                 throw e;
             }
         }
-        public bool SavePOSConfiguration(POSModel setting)
+        public bool SavePOSConfiguration(List<AppSetting> appSetting)
         {
             try
             {
-               
-                    productData.SaveAppSettings(setting);
-                
+                foreach (var setting in appSetting)
+                {
+                    productData.SaveAppSettings(setting.Name, setting.Value, setting.ScreenGroup);
+                }
                 return true;
 
             }
@@ -148,39 +149,19 @@ namespace Marbale.Business
         {
             try
             {
-                var typeListDataTable = productData.GetProductTypeLookUp();
-                var typeList = new List<IdValue>();
-                typeList.Add(new IdValue() { Id = 0, Value = "Select" });
-                foreach (DataRow dr in typeListDataTable.Rows)
-                {
-                    IdValue idValues = new IdValue();
-                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
-                    typeList.Add(idValues);
-                }
-
-                var catrgoryListDataTable = productData.GetProductCategoryLookUp();
-                var categoryList = new List<IdValue>();
-                categoryList.Add(new IdValue() { Id = 0, Value = "Select" });
-                foreach (DataRow dr in catrgoryListDataTable.Rows)
-                {
-                    IdValue idValues = new IdValue();
-                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
-                    categoryList.Add(idValues);
-                }
-
-                var productDataTable = productData.GetProducts();
+                var dataTable = productData.GetProducts();
                 List<Product> products = new List<Product>();
-                foreach (DataRow dr in productDataTable.Rows)
+                foreach (DataRow dr in dataTable.Rows)
                 {
                     Product product = new Product();
                     product.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                     product.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
-                    product.DisplayInPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
                     product.DisplayGroup = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
+                    product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
                     product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     product.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
@@ -191,18 +172,8 @@ namespace Marbale.Business
                     product.TaxPercentage = dr.IsNull("TaxPercentage") ? 0 : Convert.ToInt32(dr["TaxPercentage"]);
                     product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
                     product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
-                    product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
-
-                    product.TypeList = typeList;
-                    product.CategoryList = categoryList;
 
                     products.Add(product);
-                }
-                if (products.Count == 0)
-                {
-                    var p = new Product() { TypeList = typeList, CategoryList = categoryList };
-                    products.Add(p);
                 }
                 return products;
 
