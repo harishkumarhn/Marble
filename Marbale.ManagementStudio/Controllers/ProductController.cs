@@ -46,7 +46,15 @@ namespace MarbaleManagementStudio.Controllers
             var result = productBussiness.InsertOrUpdateProduct(pObject);
             return result;
         }
-
+        public int UpdateProducts(List<Product> products)
+        {
+            var result = 0;
+            foreach (var product in products)
+            {
+                result = productBussiness.InsertOrUpdateProduct(product);
+            }
+            return result;
+        }
         public ActionResult Types()
         {
             var productTypes = productBussiness.GetProductTypes();

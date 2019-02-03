@@ -125,7 +125,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ConfigarationController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\MarbleController.cs" />
     <Compile Include="Controllers\ProductController.cs" />

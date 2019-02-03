@@ -8,7 +8,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[productCategory](
+CREATE TABLE [dbo].[ProductCategory](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](100) NULL,
 	[Active] [bit] NULL,

@@ -150,6 +150,7 @@ namespace Marbale.Business
             {
                 var typeListDataTable = productData.GetProductTypeLookUp();
                 var typeList = new List<IdValue>();
+                typeList.Add(new IdValue() { Id = 0, Value = "Select" });
                 foreach (DataRow dr in typeListDataTable.Rows)
                 {
                     IdValue idValues = new IdValue();
@@ -160,6 +161,7 @@ namespace Marbale.Business
 
                 var catrgoryListDataTable = productData.GetProductCategoryLookUp();
                 var categoryList = new List<IdValue>();
+                categoryList.Add(new IdValue() { Id = 0, Value = "Select" });
                 foreach (DataRow dr in catrgoryListDataTable.Rows)
                 {
                     IdValue idValues = new IdValue();
@@ -177,10 +179,8 @@ namespace Marbale.Business
                     product.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
+                    product.DisplayInPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
                     product.DisplayGroup = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
-                    product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
-                    product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
                     product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     product.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
@@ -191,11 +191,18 @@ namespace Marbale.Business
                     product.TaxPercentage = dr.IsNull("TaxPercentage") ? 0 : Convert.ToInt32(dr["TaxPercentage"]);
                     product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
                     product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
+                    product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
 
                     product.TypeList = typeList;
                     product.CategoryList = categoryList;
 
                     products.Add(product);
+                }
+                if (products.Count == 0)
+                {
+                    var p = new Product() { TypeList = typeList, CategoryList = categoryList };
+                    products.Add(p);
                 }
                 return products;
 

@@ -1,51 +1,14 @@
-﻿@*@model Marbale.BusinessObject.Product*@
-@{
+﻿@{
     ViewBag.Title = "ProductSetup";
     Layout =  "~/Views/Shared/_Layout.cshtml";
 }
  
 <link href="~/Content/css/product.css" rel="stylesheet" />
 
-@*@{
-    var grid = new WebGrid(Model., canPage: true, rowsPerPage: 10,
-        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "productGrid");
-        grid.Pager(WebGridPagerModes.NextPrevious);
-}*@
-@* <div id="productGrid" class="marbleGrid">
-       <a href="#" class="add">Add New Product</a>
-        @grid.GetHtml(
-                  tableStyle: "webgrid-table",
-                  headerStyle: "webgrid-header",
-                  footerStyle: "webgrid-footer",
-                  selectedRowStyle: "webgrid-selected-row",
-                 rowStyle: "webgrid-row-style",
-                htmlAttributes: new { id = "grid" },
-                alternatingRowStyle: "alt",
-                //selectedRowStyle: "select",
-                columns: grid.Columns(                
-                grid.Column("Id", "Id"),
-                grid.Column("edit",format: @<button onclick="EditProduct(@(item.Id))">|||</button>),               
-                grid.Column("Name", format: @<text><input name="textbox" type="text" value="@(item.Name)" /></text>),
-                grid.Column("Type", format: @item => Html.DropDownList("value", (IEnumerable<SelectListItem>)Model.Product[0].TypeList))),
-                grid.Column("POSCounter",format: @<text><input name="textbox" type="text" value="@(item.POSCounter)" /></text>),
-                grid.Column("Active", format: @<text><input name="chkbox" type="checkbox"@(item.Active ? "checked='checked'" : "") value="Active" /></text>),
-                grid.Column("DisplayInPOS", format: @<text><input name="chkbox" type="checkbox"@(item.DisplayInPOS ? "checked='checked'" : "") value="DisplayInPOS" /></text>),
-                grid.Column("DisplayGroup",format: @<text><input name="textbox" type="text" value="@(item.DisplayGroup)" /></text>),
-                grid.Column("Category" ,format: @<text><input name="textbox" type="text" value="@(item.Category)" /></text>),
-                grid.Column("AutoGenerateCardNumber",format: @<text><input name="chkbox" type="checkbox"@(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="AutoGenerateCardNumber" /></text>),
-                grid.Column("OnlyVIP",format: @<text><input name="chkbox" type="checkbox"@(item.OnlyVIP ? "checked='checked'" : "") value="OnlyVIP" /></text>),
-                grid.Column("Price", format: @<text><input name="textbox" type="text" value="@(item.Price)" /></text>),
-                grid.Column("FaceValue", format: @<text><input name="textbox" type="text" value="@(item.FaceValue)" /></text>),
-                grid.Column("TaxInclusive", format: @<text><input name="chkbox" type="checkbox"@(item.TaxInclusive ? "checked='checked'" : "") value="TaxInclusive" /></text>),
-                grid.Column("TaxPercentage",format: @<text><input name="textbox" type="text" value="@(item.TaxPercentage)" /></text>),
-                grid.Column("FinalPrice", format: @<text><input name="textbox" type="text" value="@(item.FinalPrice)" /></text>),
-                grid.Column("EffectivePrice",format: @<text><input name="textbox" type="text" value="@(item.EffectivePrice)" /></text>),
-                grid.Column("LastUpdatedBy", "LastUpdatedUser"),
-                grid.Column("LastUpdatedBy", "LastUpdatedDate"))
-         )
-    </div>   *@
 <div>  
-    <table id="t01">  
+    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Product</a>
+
+    <table id="productsTable" class="table marbleTable">  
         <thead>  
             <th>ID</th>  
             <th>Edit</th>  
@@ -56,7 +19,6 @@
             <th>Active</th>  
             <th>DisplayInPOS</th>  
             <th>DisplayGroup</th>  
-            <th>Category</th>  
             <th>AutoGenerateCardNumber</th>  
             <th>OnlyVIP</th>  
             <th>Price</th>  
@@ -67,13 +29,13 @@
             <th>LastUpdatedBy</th>  
             <th>LastUpdatedDate</th>  
         </thead>  
-@foreach (var item in ViewBag.productDetails)  
-{  
-    <tr> 
+        @foreach (var item in ViewBag.productDetails)  
+        {  
+            <tr  onchange="UpdatedList(this)"> 
         <td> @item.Id  </td>
-        <td> <button>--</button>  </td>
-        <td> @item.Name  </td>
-        <td> <select name="TypeList" id="TypeList">
+        <td> <button onClick="EditProduct(@item.Id)">-</button>  </td>
+        <td> <input type="text" value="@item.Name" class="gridText" />  </td>
+        <td> <select name="TypeList" id="TypeList" class="gridText">
               @foreach (var dow in item.TypeList)
               {
                 if(@item.Type == @dow.Value)
@@ -87,7 +49,7 @@
               }
             </select> 
         </td>
-        <td> <select name="categoryList" id="categoryList">
+        <td> <select name="categoryList" id="categoryList" class="gridText">
               @foreach (var dow in item.TypeList)
               {
                 if(@item.Type == @dow.Value)
@@ -101,32 +63,107 @@
               }
             </select> 
         </td>
-        <td> <input type="text" value="@item.POSCounter" />  </td>
-        <td> <input type="checkbox" value="@item.Active" />  </td>
-        <td> <input type="checkbox" value="@item.DisplayInPOS" />  </td>
-        <td> <input type="text" value="@item.DisplayGroup" />  </td>
-        <td> <input type="text" value="@item.AutoGenerateCardNumber" />  </td>
-        <td> <input type="checkbox" value="@item.OnlyVIP" />  </td>
-        <td> <input type="text" value="@item.Price" />  </td>
-        <td> <input type="text" value="@item.FaceValue" />  </td>
-        <td> <input type="text" value="@item.TaxInclusive" />  </td>
-        <td> <input type="text" value="@item.FinalPrice" />  </td>
-        <td> <input type="text" value="@item.EffectivePrice" />  </td>
-        <td> <input type="text" value="@item.LastUpdatedBy" />  </td>
-        <td> <input type="text" value="@item.LastUpdatedDate" />  </td>
+        <td> <input type="text" value="@item.POSCounter" class="gridText" />  </td>
+        <td> <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />  </td>
+        <td> <input type="checkbox"  @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />  </td>
+        <td> <input type="text" value="@item.DisplayGroup" class="gridText" />  </td>
+        <td> <input type="checkbox"  @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber"/>  </td>
+        <td> <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />  </td>
+        <td> <input type="text" value="@item.Price" class="gridText"/>  </td>
+        <td> <input type="text" value="@item.FaceValue" class="gridText"/>  </td>
+        <td> <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" />  </td>
+        <td> <input type="text" value="@item.FinalPrice" class="gridText"/>  </td>
+        <td> <input type="text" value="@item.EffectivePrice" class="gridText"/>  </td>
+        <td> <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>  </td>
+        <td> <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>  </td>
     </tr>  
-}  
-  
-    </table>  
+        }  
+    </table>
+    
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()">Save</button>    
 </div>  
 <script>
-    var typeList = null;
-    @if (ViewBag.productDetails.Count > 0)
-    {
-         @: typeList = '@ViewBag.productDetails[0].TypeList';
+    function AddProduct() {
+        var typeListOptions = '';
+              @foreach (var dow in ViewBag.productDetails[0].TypeList)
+              {
+                 @: typeListOptions = typeListOptions + '<option value="">@dow.Value</option>';
+              }
+        typeListOptions = typeListOptions + '</select></td>'; 
+        var categoryListOptions = '';
+              @foreach (var dow in ViewBag.productDetails[0].TypeList)
+              {
+                   @: categoryListOptions = categoryListOptions + '<option value="" >@dow.Value</option>';
+              }
+        categoryListOptions = categoryListOptions + ' </select> </td>';
+
+        var newRow = '<tr> <td> <a href="#"></a> </td>  <td>  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <select name="TypeList" id="TypeList">' + typeListOptions +
+        '<td> <select name="categoryList" id="categoryList">' + categoryListOptions +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="checkbox" checked="" />  </td>' +
+        '<td> <input type="checkbox" checked="" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="checkbox" checked="" />  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="checkbox" checked="" />  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' +
+        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' + '</tr>';
+        $('#productsTable tr:last').after(newRow);
     }
-    console.log(typeList);
+    function SaveProducts() {
+        var products = [];
+        var table = document.getElementById('productsTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+            for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+                    products.push({
+                        Id: table.rows[r].cells[0].value,
+                        Name: table.rows[r].cells[2].children[0].value,
+                        Type: table.rows[r].cells[3].children[0].value,
+                        Category: table.rows[r].cells[4].children[0].value,
+                        POSCounter: table.rows[r].cells[5].children[0].value,
+                        Active: table.rows[r].cells[6].children[0].checked,
+                        DisplayInPOS: table.rows[r].cells[7].children[0].checked,
+                        DisplayGroup: table.rows[r].cells[8].children[0].value,
+                        AutoGenerateCardNumber: table.rows[r].cells[9].children[0].checked,
+                        OnlyVIP: table.rows[r].cells[10].children[0].checked,
+                        TaxInclusive: table.rows[r].cells[11].children[0].checked,
+                        Price: table.rows[r].cells[12].children[0].value,
+                        FaceValue: table.rows[r].cells[13].children[0].value,
+                        FinalPrice: table.rows[r].cells[14].children[0].value,
+                        EffectivePrice: table.rows[r].cells[15].children[0].value,
+
+                    });
+                }
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateProducts", "Product")',
+            data: JSON.stringify({ products: products }),
+                dataType: "json",
+                success: function (data) {
+                    alert('Data Saved');
+                },
+                error: function (e) {
+                    alert(e);
+                }
+         });
+    }
+    var updatedArray = [];
+    function UpdatedList(x) {
+        if (!updatedArray.includes(x.rowIndex)) {
+            updatedArray.push(x.rowIndex);
+        }
+    }
     function EditProduct(id) {
-        window.open("/product/GetProduct/"+id, "Marbale", "width=500,height=500");
+        window.open("/product/GetProduct/"+id, "Marbale", "width=700,height=700");
     }
 </script>
