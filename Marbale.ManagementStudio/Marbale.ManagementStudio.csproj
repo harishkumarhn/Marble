@@ -128,7 +128,6 @@
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\MarbleController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\SiteSetupController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

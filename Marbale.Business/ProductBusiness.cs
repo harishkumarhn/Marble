@@ -225,7 +225,7 @@ namespace Marbale.Business
             }
         }
         public List<ProductType> GetProductTypes()
-        {        
+        {
             try
             {
                 var dataTable = productData.GetProductTypes();
@@ -255,7 +255,7 @@ namespace Marbale.Business
         {
             try
             {
-               return productData.UpdateProductTypes(types);
+                return productData.UpdateProductTypes(types);
             }
             catch (Exception e)
             {
@@ -275,22 +275,22 @@ namespace Marbale.Business
             DataTable dataTable = productData.GetAllDiscounts();
             try
             {
-                 transactiondiscount = dataTable.AsEnumerable()
-                                .Where(r => r.Field<string>("discount_type") == "T")
-                                .CopyToDataTable();
+                transactiondiscount = dataTable.AsEnumerable()
+                               .Where(r => r.Field<string>("discount_type") == "T")
+                               .CopyToDataTable();
             }
             catch { }
             try
             {
-                 gamedisc = dataTable.AsEnumerable()
-                                .Where(r => r.Field<string>("discount_type") != "T")
-                                .CopyToDataTable();
+                gamedisc = dataTable.AsEnumerable()
+                               .Where(r => r.Field<string>("discount_type") != "T")
+                               .CopyToDataTable();
             }
             catch { }
             MasterDiscounts masterdiscount = new MasterDiscounts();
             foreach (DataRow dr in transactiondiscount.Rows)
             {
-               
+
                 TransactionDiscount discount = new TransactionDiscount();
                 discount.DiscountID = dr.IsNull("discount_id") ? 0 : int.Parse(dr["discount_id"].ToString());
                 discount.DiscountName = dr.IsNull("discount_name") ? "" : (dr["discount_name"].ToString());
@@ -311,7 +311,7 @@ namespace Marbale.Business
             }
             foreach (DataRow dr in gamedisc.Rows)
             {
-              
+
                 GameDiscount discount = new GameDiscount();
                 discount.DiscountID = dr.IsNull("discount_id") ? 0 : int.Parse(dr["discount_id"].ToString());
                 discount.DiscountName = dr.IsNull("discount_name") ? "" : (dr["discount_name"].ToString());
@@ -325,8 +325,8 @@ namespace Marbale.Business
 
             return masterdiscount;
 
-           
-           
+
+
         }
         public int SaveDiscount(TransactionDiscount discount)
         {
@@ -344,7 +344,7 @@ namespace Marbale.Business
                 discount.DiscountID = dr.IsNull("discount_id") ? 0 : int.Parse(dr["discount_id"].ToString());
                 discount.DiscountName = dr.IsNull("discount_name") ? "" : (dr["discount_name"].ToString());
                 discount.DiscountPercentage = dr.IsNull("discount_percentage") ? 0 : int.Parse(dr["discount_percentage"].ToString());
-              
+
                 discount.ActiveFlag = dr.IsNull("active_flag") ? false : bool.Parse(dr["active_flag"].ToString());
                 discount.MinimumUsedCredits = dr.IsNull("minimum_credits") ? 0 : int.Parse(dr["minimum_credits"].ToString());
                 discount.LastUpdatedDate = Convert.ToDateTime(dr.IsNull("last_updated_date") ? "01/01/2019" : (dr["last_updated_date"].ToString()));
@@ -361,6 +361,8 @@ namespace Marbale.Business
         {
             try
             {
+                var ctys = new List<IdValue>();
+                ctys.Add(new IdValue() { Id = 0, Value = "Select" });
                 var dataTable = productData.GetProductCategory();
                 List<Category> listProductCat = new List<Category>();
                 foreach (DataRow dr in dataTable.Rows)
@@ -372,26 +374,41 @@ namespace Marbale.Business
                     pCat.ParentCategory = dr.IsNull("ParentCategory") ? "" : (dr["ParentCategory"].ToString());
                     listProductCat.Add(pCat);
                 }
+                if (listProductCat.Count != 0)
+                {
+                    foreach (var cty in listProductCat)
+                    {
+                        ctys.Add(new IdValue() { Id = cty.Id, Value = cty.Name });
+                    }
+                }
+                else
+                {
+                    listProductCat.Add(new Category());
+                }
+                foreach (var cty in listProductCat)
+                {
+                    cty.Categories = ctys;
+                }
                 return listProductCat;
             }
-                
+
             catch (Exception)
             {
-                
+
                 throw;
             }
-           
+
         }
 
         public int UpdateProductCategory(List<Category> categories)
         {
             try
             {
-                //var categories = productData.UpdateProductCategory(categories);
+                return productData.UpdateProductCategory(categories);
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }

@@ -62,12 +62,9 @@ namespace MarbaleManagementStudio.Controllers
         }
         public ActionResult Category()
         {
-            List<string> domains = new List<string>();
-            domains.Add("DomainA");
-
-            ViewBag.Dropdow = domains.Select(m => new SelectListItem { Text = "hello", Value = "1" });
-            var procat = productBussiness.GetProductCategory();
-            return View(procat);
+            var categories = productBussiness.GetProductCategory();
+            ViewBag.categories = categories;
+            return View();
         }
         public int UpdateProductCategories(List<Category> categories)
         {

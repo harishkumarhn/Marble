@@ -2,9 +2,9 @@
     ViewBag.Title = "ProductCategory";
 }
 
-<h3>ProductTypes</h3>
+<h3>Product Category</h3>
 <div>  
-    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductType()">Add Product Type</a>
+    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductCategory()">Add Product Category</a>
 
     <table id="marbleTable" class="table">  
         <thead>  
@@ -12,19 +12,16 @@
             <th>Name</th>  
             <th>ParentCategory</th> 
             <th>Active</th> 
-            <th>LastUpdatedBy</th>  
-            <th>LastUpdatedDate</th>  
         </thead>  
-        @foreach (var item in ViewBag.productTypes)  
+        @foreach (var item in ViewBag.categories)  
         {  
             <tr onchange="UpdatedList(this)"> 
         <td> @item.Id  </td>
-        <td> <button onClick="EditProductType(@item.Id)">-</button>  </td>
         <td> <input type="text" value="@item.Name" class="gridText" />  </td>
         <td> <select name="categoryList" id="categoryList" class="gridText">
               @foreach (var dow in item.Categories)
               {
-                if(@item.Type == @dow.Value)
+                if(@item.ParentCategory == @dow.Value)
                 {
                     <option value="@dow.Value" selected>@dow.Value</option>
                 }
@@ -36,39 +33,37 @@
             </select> 
         </td>
         <td> <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />  </td>
-        <td> <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>  </td>
-        <td> <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>  </td>
     </tr>  
         }  
     </table>
     
-    <button class="btn btn-primary btn-md" role="button" onclick="SaveProductTypes()">Save</button>    
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveProductCategory()">Save</button>    
 </div>  
 <script>
-    function AddProductType() {
+    function AddProductCategory() {
+        var categoryListOptions = '';
+              @foreach (var dow in ViewBag.categories[0].Categories)
+              {
+                 @: categoryListOptions = categoryListOptions + '<option value="">@dow.Value</option>';
+              }
+        categoryListOptions = categoryListOptions + '</select></td>';
 
-        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>  <td>  </td>' +
+        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' +
-        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' + '</tr>';
-        $('#productsTable tr:last').after(newRow);
+         '<td> <select name="categoryList" id="categoryList">' + categoryListOptions +
+        '<td> <input type="checkbox" />  </td>' + '</tr>';
+        $('#marbleTable tr:last').after(newRow);
     }
-    function SaveProductTypes() {
-        var productTypes = [];
-        var table = document.getElementById('productsTable');
+    function SaveProductCategory() {
+        var productCategories = [];
+        var table = document.getElementById('marbleTable');
         for (var r = 1, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
-                productTypes.push({
+                productCategories.push({
                     Id: table.rows[r].cells[0].innerHTML,
-                    Type: table.rows[r].cells[2].children[0].value,
-                    Description: table.rows[r].cells[3].children[0].value,
-                    ReportGroup: table.rows[r].cells[4].children[0].value,
-                    Active: table.rows[r].cells[5].children[0].checked,
-                    CardSale: table.rows[r].cells[6].children[0].checked
+                    Name: table.rows[r].cells[1].children[0].value,
+                    ParentCategory: table.rows[r].cells[2].children[0].value,
+                    Active: table.rows[r].cells[3].children[0].checked,
                 });
             }
         }
@@ -76,7 +71,7 @@
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: '@Url.Action("UpdateProductCategories", "Product")',
-            data: JSON.stringify({ productTypes: productCategories }),
+            data: JSON.stringify({ categories: productCategories }),
             dataType: "json",
             success: function (data) {
                 alert('Data Saved');
@@ -94,121 +89,3 @@
         }
     }
 </script>
-
-
-
-
-
-
-  
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var modifiedListIndex = [];
-    $('.add').click(function () {
-        debugger
-        var index = $("#grid tbody tr").length + 1;
-        var Id = "Id" + index;
-        var Name = "Name" + index;
-        var Active = "Active" + index;
-        var parentCategory = "ParentCategory" + index;
-        //var Save = "Save_" + index;
-        //var Cancel = "Cancel_" + index;
-        var tr = '<tr class="alternate-row"><td></td>' +
-            
-             '<td><span> <input id="' + Name + '" type="text" /></span></td>' +
-
-          
-                   '<td><span> <input id="' + Active + '" type="checkbox" /></span></td>' +
-             '<td><span> <input id="' + parentCategory + '" type="text" /></span></td>' +
-              
-        '</tr>';
-
-
-
-        $("#grid tbody").append(tr);
-    });
-    $('#grid').on('change', 'input, select, textarea', function () {
-        debugger
-        var row_id = $(this)[0].id.match(/\d+/)[0];
-        modifiedListIndex.push(row_id);
-    });
-        $('#save').click(function () {
-            //  var htmlRow = $('#grid_productType tbody>tr')[modifiedListIndex[i]];
-            debugger;
-            var id = modifiedListIndex[modifiedListIndex.length-1];
-            var discountObject = {
-                Id :$('#Id'+id).val(),
-                 Name : $('#Name' + id).val(),
-                 Active: $("#Active" + id).is(':checked'),
-             ParentCategory : $('#ParentCategory' + id).val()
-        }
-
-        //debugger;
-        //id = $("#grid tbody tr").length;
-        //var discountObject = {
-        //    Id: $("#Id" + id).val(),
-        //    Name: $("#Name" + id).val(),
-        //    Active: $("#Active" + id).is(':checked'),
-        //    ParentCategory: $("#ParentCategory" + id).val()
-        //};
-
-
-        if (id != "") {
-
-            $.ajax({
-
-                type: "POST",
-
-                contentType: "application/json; charset=utf-8",
-
-                url: '@Url.Action("SaveProductCategory", "Product")',
-
-                        data: JSON.stringify({ data: discountObject }),
-
-                        dataType: "json",
-
-                        beforeSend: function () { },
-
-                        success: function (data) {
-                           
-
-                            location.reload();
-                            $('#displayMessage').text('data added succesfully').addClass('success');
-                        }
-                    });
-                }
-
-         });
-    })
-
-
-</script>
-
-@{
-    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10,
-        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "productGrid");
-        grid.Pager(WebGridPagerModes.NextPrevious);
-}
-
- <div id="productGrid" class="marbleGrid">
-       <a href="#" class="add">Add New Category</a>
-        @grid.GetHtml(tableStyle: "webGrid",
-                headerStyle: "header",
-                htmlAttributes: new { id = "grid" },
-                alternatingRowStyle: "alt",
-                selectedRowStyle: "select",
-                columns: grid.Columns(                
-                grid.Column("Id",format: @<text><input name="textbox" type="text" class="grid-row" id="Id@(item.Id)" value="@(item.Id)" readonly  style="width: 81px"/ ></text>),                
-                grid.Column("Name", format: @<text><input name="textbox" type="text" class="grid-row" id="Name@(item.Id)" value="@(item.Name)" / ></text>),
-                grid.Column("Active",  format: @<text><input name="chkbox" type="checkbox"@(item.Active ? "checked='checked'" : "") id="Active@(item.Id)" value="@(item.Active ? "checked='checked'" : "")" /></text>),
-                grid.Column("ParentCategory", format: @<text><input name="textbox" type="text" class="grid-row" id="ParentCategory@(item.Id)" value="@(item.ParentCategory)" / ></text>)
-         )) 
-             <div class="form-group">
-            <div class="col-md-offset-4 col-md-8">
-                <input type="submit" value="SAVE" class="btn btn-success position-btn" id="save" />
-            </div>
-                  <button type="button" class="btn btn-primary placebutton" onclick="history.back();">Back</button>
-        </div>
-    
-    </div>   
