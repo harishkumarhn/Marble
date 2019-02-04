@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Configuration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Configuration</h2>
+<div class="config">
+    <div>
+        <button class="btn btn-primary btn-lg" onclick="getValues()">Values</button>
+        <button class="btn btn-primary btn-lg" onclick="getSettings()">Settings</button>
+    </div>
+    <div id="container">    </div>
+
+</div>
+<script>
+    function getValues() {
+        $('#container').load('/SiteSetup/Values');
+    }
+    function getSettings() {
+        $('#container').load('/SiteSetup/Settings');
+    }
+</script>

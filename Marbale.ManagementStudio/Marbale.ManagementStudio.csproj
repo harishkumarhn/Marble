@@ -230,6 +230,8 @@
     <Content Include="Views\Shared\_CardTabPartial.cshtml" />
     <Content Include="Views\SiteSetup\Configuration.cshtml" />
     <Content Include="Views\SiteSetup\POS.cshtml" />
+    <Content Include="Views\SiteSetup\Values.cshtml" />
+    <Content Include="Views\SiteSetup\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
