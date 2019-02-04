@@ -2,103 +2,94 @@
     ViewBag.Title = "ProductTypes";
 }
 
-<h2>ProductTypes</h2>
-@{
-    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10,
-        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "productTypeGrid");
-    grid.Pager(WebGridPagerModes.NextPrevious);
-}
- <a href="#" class="btn btn-primary btn-sml" role="button" onclick="AddType()">Add Type</a>
-<div id="productTypeGrid" class="marbleGrid">
-    @grid.GetHtml(tableStyle: "webGrid",
-                headerStyle: "header",
-                htmlAttributes: new { id = "grid_productType"},
-                alternatingRowStyle: "alt",
-                selectedRowStyle: "select",
-                rowStyle: "gridrow",
-                columns: grid.Columns(
+<h3>ProductTypes</h3>
+<div>  
+    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductType()">Add Product Type</a>
 
-                grid.Column("Id", "Id"),
-                grid.Column("Description", format: @<text><input name="textbox" type="text" value="@(item.Description)" /></text>),
-                grid.Column("Type", format: @<text><input name="textbox" type="text" value="@(item.Type)" /></text>),
-                grid.Column("ReportGroup", format: @<text><input name="textbox" type="text" value="@(item.ReportGroup)" /></text>),
-                grid.Column("Active", format: @<text><input name="chkbox" type="checkbox"@(item.Active ? "checked='checked'" : "")  value="Active" /></text>),
-                grid.Column("CardSale", format: @<text><input name="chkbox" type="checkbox"@(item.CardSale ? "checked='checked'" : "") value="CardSale" /></text>),
-                grid.Column("LastUpdatedDate", "LastUpdatedDate"),
-                grid.Column("LastUpdatedBy", "LastUpdatedBy")
+    <table id="marbleTable" class="table">  
+        <thead>  
+            <th>ID</th>  
+            <th>Edit</th>
+            <th>Type</th>  
+            <th>Description</th> 
+            <th>ReportGroup</th> 
+            <th>CardSale</th>
+            <th>Active</th> 
+            <th>LastUpdatedBy</th>  
+            <th>LastUpdatedDate</th>  
+        </thead>  
+        @foreach (var item in ViewBag.productTypes)  
+        {  
+            <tr onchange="UpdatedList(this)"> 
+        <td> @item.Id  </td>
+        <td> <button onClick="EditProductType(@item.Id)">-</button>  </td>
+        <td> <input type="text" value="@item.Type" class="gridText" />  </td>
+        <td> <input type="text" value="@item.Description" class="gridText" />  </td>
+        <td> <input type="text" value="@item.ReportGroup" class="gridText" />  </td>
+        <td> <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />  </td>
+        <td> <input type="checkbox"  @(item.CardSale ? "checked='checked'" : "") value="@item.CardSale" />  </td>
+        <td> <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>  </td>
+        <td> <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>  </td>
+    </tr>  
+        }  
+    </table>
+    
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveProductTypes()">Save</button>    
+</div>  
+<script>
+    function AddProductType() {
 
-         ))
-</div>
-    <button class="btn btn-primary btn-md" id="save_productTypes" onclick="Save()">Save</button>
-
-
- <script>
-        var modifiedListIndex = [];
-        $(document).ready(function () {
-            //$('.gridrow').on('change', function (x) {
-            //    //var row_index = $(this).parent().index();
-            //    if (modifiedListIndex.indexOf(x.rowIndex) === -1) {
-            //        modifiedListIndex.push(x.rowIndex);
-            //    }
-            //});
+        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>  <td>  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' +
+        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' + '</tr>';
+        $('#productsTable tr:last').after(newRow);
+    }
+    function SaveProductTypes() {
+        var productTypes = [];
+        var table = document.getElementById('productsTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                productTypes.push({
+                    Id: table.rows[r].cells[0].innerHTML,
+                    Type: table.rows[r].cells[2].children[0].value,
+                    Description: table.rows[r].cells[3].children[0].value,
+                    ReportGroup: table.rows[r].cells[4].children[0].value,
+                    Active: table.rows[r].cells[5].children[0].checked,
+                    CardSale: table.rows[r].cells[6].children[0].checked
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateProductType", "Product")',
+            data: JSON.stringify({ productTypes: productTypes }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
         });
-        function setRowIndex(x) {
-            if (modifiedListIndex.indexOf(x.rowIndex) === -1) {
-                modifiedListIndex.push(x.rowIndex);
-            }
+    }
+    var updatedArray = [];
+    function UpdatedList(x) {
+        if (!updatedArray.includes(x.rowIndex)) {
+            updatedArray.push(x.rowIndex);
         }
-        function AddType() {
-            var index = $("#grid2 tbody tr").length + 1;
-            var tr = '<tr class="gridrow" onchange= setRowIndex(this)><td></td>' +
-                       '<td><input type="text" /></td>' +
-                       '<td><input type="text" /></td>' +
-                       '<td><input type="text" /></td>' +
-                       '<td><input type="checkbox"/></td>' +
-                       '<td><input type="checkbox"/></td>' +
-                       '<td></td>' +
-                       '<td></td>' +
-            '</tr>';
-            $("#grid_productType tbody").append(tr);
-        }
-        function Save() {
+    }
+    function EditProductType(id) {
+        window.open("/product/GetProduct/" + id, "Marbale", "width=700,height=700");
+    }
+</script>
 
-            var pTypes = [];
-            var index = $("#grid_productType tbody tr").length;
-            for (var i = 0; i < index; i++) {
-                var htmlRow = $('#grid_productType tbody>tr')[i];
-
-                var id = $($('td', htmlRow)[0]).text();
-
-                var description = $($('td input', htmlRow)[0]).val();
-                var type = $($('td input', htmlRow)[1]).val();
-                var reportGroup = $($('td input', htmlRow)[2]).val();
-
-                var active = $("td input[type='checkbox']", htmlRow)[0].checked;
-                var cardSale = $("td input[type='checkbox']", htmlRow)[1].checked;
-
-                pTypes.push({
-                    Id: id, Description: description,
-                    Type: type,
-                    ReportGroup: reportGroup,
-                    Active: active,
-                    CardSale: cardSale
-                });               
-            }
-            $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                url: '@Url.Action("UpdateProductType", "Product")',
-                    data: JSON.stringify({ productTypes: pTypes }),
-                    dataType: "json",
-                    success: function (data) {
-                        alert('Data Saved');
-                    },
-                    error: function (e) {
-                        alert(e);
-                    }
-           });
-        }
- </script>
 
 
 

@@ -12,5 +12,6 @@ namespace Marbale.BusinessObject
         public string Name { get; set; }
         public bool Active { get; set; }
         public string ParentCategory { get; set; }
+        public List<IdValue> Categories { get; set; }
     }
 }

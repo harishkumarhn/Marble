@@ -1,16 +1,105 @@
 ﻿@{
-    ViewBag.Title = "Category";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ProductCategory";
 }
 
-<h2>Category</h2>
-<style>
-    .placebutton {
-        display: block;
-        margin-left: auto;
-        margin-right: 37px;
+<h3>ProductTypes</h3>
+<div>  
+    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductType()">Add Product Type</a>
+
+    <table id="marbleTable" class="table">  
+        <thead>  
+            <th>ID</th>  
+            <th>Name</th>  
+            <th>ParentCategory</th> 
+            <th>Active</th> 
+            <th>LastUpdatedBy</th>  
+            <th>LastUpdatedDate</th>  
+        </thead>  
+        @foreach (var item in ViewBag.productTypes)  
+        {  
+            <tr onchange="UpdatedList(this)"> 
+        <td> @item.Id  </td>
+        <td> <button onClick="EditProductType(@item.Id)">-</button>  </td>
+        <td> <input type="text" value="@item.Name" class="gridText" />  </td>
+        <td> <select name="categoryList" id="categoryList" class="gridText">
+              @foreach (var dow in item.Categories)
+              {
+                if(@item.Type == @dow.Value)
+                {
+                    <option value="@dow.Value" selected>@dow.Value</option>
+                }
+                else
+                {
+                    <option value="@dow.Value">@dow.Value</option>
+                }
+              }
+            </select> 
+        </td>
+        <td> <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />  </td>
+        <td> <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>  </td>
+        <td> <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>  </td>
+    </tr>  
+        }  
+    </table>
+    
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveProductTypes()">Save</button>    
+</div>  
+<script>
+    function AddProductType() {
+
+        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>  <td>  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' +
+        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' + '</tr>';
+        $('#productsTable tr:last').after(newRow);
     }
-</style>
+    function SaveProductTypes() {
+        var productTypes = [];
+        var table = document.getElementById('productsTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                productTypes.push({
+                    Id: table.rows[r].cells[0].innerHTML,
+                    Type: table.rows[r].cells[2].children[0].value,
+                    Description: table.rows[r].cells[3].children[0].value,
+                    ReportGroup: table.rows[r].cells[4].children[0].value,
+                    Active: table.rows[r].cells[5].children[0].checked,
+                    CardSale: table.rows[r].cells[6].children[0].checked
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateProductCategories", "Product")',
+            data: JSON.stringify({ productTypes: productCategories }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+    var updatedArray = [];
+    function UpdatedList(x) {
+        if (!updatedArray.includes(x.rowIndex)) {
+            updatedArray.push(x.rowIndex);
+        }
+    }
+</script>
+
+
+
+
+
+
   
 
 <script type="text/javascript">

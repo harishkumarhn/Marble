@@ -28,14 +28,8 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.productDetails = products;
             return View();
         }
-
-        public ActionResult GetProduct(int id)
-        {
-            var product = productBussiness.GetProductById(id);
-            return View("Create",product);
-        }
-
-        public ActionResult Create(int id)
+        
+        public ActionResult Edit(int id)
         {
             var product = productBussiness.GetProductById(id);
             return View(product);
@@ -58,6 +52,7 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult Types()
         {
             var productTypes = productBussiness.GetProductTypes();
+            ViewBag.productTypes = productTypes;
             return View(productTypes);
         }
 
@@ -74,12 +69,9 @@ namespace MarbaleManagementStudio.Controllers
             var procat = productBussiness.GetProductCategory();
             return View(procat);
         }
-        public ActionResult SaveProductCategory(Category data)
+        public int UpdateProductCategories(List<Category> categories)
         {
-            productBussiness.SaveProductCategory(data);
-        //  var procat=  productBussiness.GetProductCategory();
-         // return View("Category", procat);
-             return Json(1, JsonRequestBehavior.AllowGet);
+            return productBussiness.UpdateProductCategory(categories);
         }
 
     }

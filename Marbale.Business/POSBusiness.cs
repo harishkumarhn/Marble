@@ -17,7 +17,6 @@ namespace Marbale.Business
             marbaleData = new ProductData();
         }
 
-
         public DataTable GetDefaultPaymentDropdown()
         {
             DataTable dataTable = marbaleData.GetDefalutCashMode();

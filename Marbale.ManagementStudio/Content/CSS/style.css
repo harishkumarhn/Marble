@@ -188,7 +188,8 @@ a.article:hover {
         overflow-y:hidden;
         width:1050px;
  }
-.table marbleTable {
+#marbleTable {
+        line-height: 17px;
         overflow-x:scroll;
         overflow-y:hidden;
         width:1050px !important;
