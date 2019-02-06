@@ -136,6 +136,19 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetProductsByScreenGroup(string screenGroup)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@screenGroup", screenGroup);
+                return conn.executeSelectQuery("sp_GetProductsByScreenGroup", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public DataTable GetProductTypeLookUp()
         {
             try
