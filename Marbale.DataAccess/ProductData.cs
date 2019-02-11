@@ -141,7 +141,7 @@ namespace Marbale.DataAccess
             try
             {
                 SqlParameter[] sqlParameters = new SqlParameter[1];
-                sqlParameters[0] = new SqlParameter("@screenGroup", screenGroup);
+                sqlParameters[0] = new SqlParameter("@screen", screenGroup);
                 return conn.executeSelectQuery("sp_GetProductsByScreenGroup", sqlParameters);
             }
             catch (Exception e)

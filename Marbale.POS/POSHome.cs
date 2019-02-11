@@ -1,5 +1,7 @@
 ﻿using Marbale.Business;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Marbale.POS
@@ -15,7 +17,47 @@ namespace Marbale.POS
 
         private void POSHome_Load(object sender, EventArgs e)
         {
-          //  var produts = posBussiness.GetProductsByScreenGroup("POS");
+            UpdateProductsTab();
+        }
+
+        public void DisplayProduct(int productId)
+        {
+
+        }
+
+        private void UpdateProductsTab()
+        {
+            var products = posBussiness.GetProductsByScreenGroup("POS");
+
+            if (products.Count > 0)
+            {
+                productsFlowLayout.Controls.Clear();
+                for (int i = 0; i < products.Count; i++)
+                {
+                    Button button = new Button();
+                    button.Tag = products[i].Id;
+                    button.Name = products[i].Name + '_' + products[i].Id;
+                    button.Font = new Font("Microsoft Sans Serif", 13);
+                    button.Width = 150;
+                    button.Height = 80;
+                    button.BackColor = Color.DeepSkyBlue;
+                    button.Text = products[i].Name;
+
+                    button.Click += (obj, eArgs) =>
+                    {
+                        DisplayProduct(Convert.ToInt32(((Control)obj).Tag));
+                    };
+                    productsFlowLayout.Controls.Add(button);
+                }
+            }
+        }
+
+        private void pos_left_Selected(object sender, TabControlEventArgs e)
+        {
+            if (pos_left.TabPages[pos_left.SelectedIndex].Text == "Product")
+            {
+                UpdateProductsTab();
+            }
         }
     }
 }
