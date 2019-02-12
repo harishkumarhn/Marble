@@ -227,11 +227,11 @@
     <Content Include="Views\Product\Category.cshtml" />
     <Content Include="Views\Shared\_settingsPartial.cshtml" />
     <Content Include="Views\Shared\_ValuesTab.cshtml" />
-    <Content Include="Views\Shared\_CardTabPartial.cshtml" />
     <Content Include="Views\SiteSetup\Configuration.cshtml" />
     <Content Include="Views\SiteSetup\POS.cshtml" />
     <Content Include="Views\SiteSetup\Values.cshtml" />
     <Content Include="Views\SiteSetup\Settings.cshtml" />
+    <Content Include="Views\SiteSetup\Card.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

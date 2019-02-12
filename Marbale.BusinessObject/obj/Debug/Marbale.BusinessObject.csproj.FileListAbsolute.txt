@@ -1,0 +1,5 @@
+F:\MarbleProject\Marble\Marbale.BusinessObject\bin\Debug\Marbale.BusinessObject.dll
+F:\MarbleProject\Marble\Marbale.BusinessObject\bin\Debug\Marbale.BusinessObject.pdb
+F:\MarbleProject\Marble\Marbale.BusinessObject\obj\Debug\Marbale.BusinessObject.dll
+F:\MarbleProject\Marble\Marbale.BusinessObject\obj\Debug\Marbale.BusinessObject.pdb
+F:\MarbleProject\Marble\Marbale.BusinessObject\obj\Debug\Marbale.BusinessObject.csprojResolveAssemblyReference.cache

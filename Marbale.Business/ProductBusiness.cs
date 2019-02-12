@@ -22,6 +22,17 @@ namespace Marbale.Business
         {
             try
             {
+                var typeListDataTable = productData.GetProductTypeLookUp();
+                var typeList = new List<IdValue>();
+                typeList.Add(new IdValue() { Id = 0, Value = "Select" });
+                foreach (DataRow dr in typeListDataTable.Rows)
+                {
+                    IdValue idValues = new IdValue();
+                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                    typeList.Add(idValues);
+                }
+                
                 var dataTable = productData.GetSettings();
                 List<Settings> listSettings = new List<Settings>();
                 foreach (DataRow dr in dataTable.Rows)
@@ -39,9 +50,10 @@ namespace Marbale.Business
                     setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
                     setting.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
                     setting.UserLevel = dr.IsNull("UserLevel") ? false : bool.Parse(dr["UserLevel"].ToString());
-
+                    setting.BasicDataTypes = typeList;
                     listSettings.Add(setting);
                 }
+                
                 return listSettings;
             }
             catch (Exception e)
@@ -58,9 +70,9 @@ namespace Marbale.Business
                 foreach (DataRow dr in dataTable.Rows)
                 {
                     AppSetting setting = new AppSetting();
-                    setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    setting.Caption = dr.IsNull("Caption") ? "" : dr["Caption"].ToString();
-                    setting.Value = dr.IsNull("Value") ? "" : dr["Value"].ToString();
+                    setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();//
+                    setting.Caption = dr.IsNull("Caption") ? "" : dr["Caption"].ToString();//label
+                    setting.Value = dr.IsNull("Value") ? "" : dr["Value"].ToString();// current values
                     setting.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
                     setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
 
@@ -167,7 +179,7 @@ namespace Marbale.Business
                 {
                     IdValue idValues = new IdValue();
                     idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                    idValues.Value = "";
                     categoryList.Add(idValues);
                 }
 
@@ -387,6 +399,7 @@ namespace Marbale.Business
         {
             try
             {
+                return 0;
                 //var categories = productData.UpdateProductCategory(categories);
             }
             catch (Exception)
