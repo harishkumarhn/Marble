@@ -20,9 +20,36 @@ namespace Marbale.POS
         {
             UpdateProductsTab();
             text_CardNumber.Select();
-            List<CardDetail> cd = new List<CardDetail>();
-            cd.Add(new CardDetail() {Name = "Issue Date",Value = "2001"});
-            dataGrid_card.DataSource = cd;
+
+            dataGrid_card.DataSource = GetDefaultCardInfo();
+            dataGrid_card.Columns[0].DefaultCellStyle.BackColor = Color.Black;
+            dataGrid_card.Columns[0].DefaultCellStyle.BackColor = Color.Black;
+            dataGrid_card.Columns[0].DefaultCellStyle.ForeColor = Color.White;
+
+            foreach (DataGridViewRow row in dataGrid_card.Rows)
+            {
+                row.Height = 25;
+                row.DefaultCellStyle.Font = new Font("Bookshelf", 10.5F, FontStyle.Bold);
+            }
+        }
+        public List<CardDetail> GetDefaultCardInfo()
+        {
+            List<CardDetail> cardDetails = new List<CardDetail>();
+            cardDetails.Add(new CardDetail() { Name = "Issue Date", Value = DateTime.Now.ToShortDateString()});
+            cardDetails.Add(new CardDetail() { Name = "Card Deposit", Value = "0.00" });
+            cardDetails.Add(new CardDetail() { Name = "Card Credit", Value = "0.00" });
+            cardDetails.Add(new CardDetail() { Name = "Courtesy", Value = "0.00" });
+            cardDetails.Add(new CardDetail() { Name = "Card Deposit", Value = "0.00" });
+            cardDetails.Add(new CardDetail() { Name = "Bonus", Value = "0.00" });
+            cardDetails.Add(new CardDetail() { Name = "Time", Value = "0.00" });
+            cardDetails.Add(new CardDetail() { Name = "Games", Value = "" });
+            cardDetails.Add(new CardDetail() { Name = "Credit Plus", Value = "0.00" });
+            cardDetails.Add(new CardDetail() { Name = "Tickets", Value = "0.00" });
+            cardDetails.Add(new CardDetail() { Name = "Loyality Points", Value = "0.00" });
+            cardDetails.Add(new CardDetail() { Name = "Recharged/Spent", Value = "0.0000" });
+
+            return cardDetails;
+
         }
 
         public void DisplayProduct(int productId)
@@ -67,7 +94,12 @@ namespace Marbale.POS
 
         private void text_CardNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-             e.Handled = true;
+           //  e.Handled = true;
+        }
+
+        private void dataGrid_card_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

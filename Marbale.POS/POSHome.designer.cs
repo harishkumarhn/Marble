@@ -430,14 +430,17 @@
             // 
             // dataGrid_card
             // 
+            this.dataGrid_card.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGrid_card.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGrid_card.ColumnHeadersVisible = false;
             this.dataGrid_card.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGrid_card.Location = new System.Drawing.Point(3, 132);
             this.dataGrid_card.Name = "dataGrid_card";
             this.dataGrid_card.RowHeadersVisible = false;
+            this.dataGrid_card.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGrid_card.Size = new System.Drawing.Size(246, 311);
             this.dataGrid_card.TabIndex = 2;
+            this.dataGrid_card.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_card_CellContentClick);
             // 
             // POSHome
             // 
