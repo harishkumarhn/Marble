@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Marbale.BusinessObject
 {
-    public class POSModel
+    public class CardDetail
     {
-        public string DefalutCashMode { get; set; }
-        public List<CardDetail> Card { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

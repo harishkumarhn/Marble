@@ -1,4 +1,5 @@
 ﻿using Marbale.Business;
+using Marbale.BusinessObject;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -18,6 +19,10 @@ namespace Marbale.POS
         private void POSHome_Load(object sender, EventArgs e)
         {
             UpdateProductsTab();
+            text_CardNumber.Select();
+            List<CardDetail> cd = new List<CardDetail>();
+            cd.Add(new CardDetail() {Name = "Issue Date",Value = "2001"});
+            dataGrid_card.DataSource = cd;
         }
 
         public void DisplayProduct(int productId)
@@ -58,6 +63,11 @@ namespace Marbale.POS
             {
                 UpdateProductsTab();
             }
+        }
+
+        private void text_CardNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+             e.Handled = true;
         }
     }
 }

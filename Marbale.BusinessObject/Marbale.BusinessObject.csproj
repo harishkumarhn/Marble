@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSetting.cs" />
+    <Compile Include="CardDetail.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="GameDiscount.cs" />
     <Compile Include="IdValue.cs" />
