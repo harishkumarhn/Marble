@@ -22,7 +22,7 @@ namespace Marbale.Business
         {
             try
             {
-                var typeListDataTable = productData.GetProductTypeLookUp();
+                var typeListDataTable = productData.ProductDatatypes();
                 var typeList = new List<IdValue>();
                 typeList.Add(new IdValue() { Id = 0, Value = "Select" });
                 foreach (DataRow dr in typeListDataTable.Rows)

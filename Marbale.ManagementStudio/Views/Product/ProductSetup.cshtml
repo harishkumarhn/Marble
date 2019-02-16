@@ -12,7 +12,7 @@
 <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content" style="width: 700px;height: 700px;">
+    <div class="modal-content" style="width: 900px;height: 700px;">
       <div class="modal-header" style="background-color: cornflowerblue">
         <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -20,7 +20,6 @@
         </button>
       </div>
       <div class="modal-body" id="modelbody">
-        ...
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -34,7 +33,7 @@
     <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Product</a>
 
     <table id="marbleTable" class="table marbleTable">  
-        <thead>  
+        <thead class="thead-dark">  
             <th>ID</th>  
             <th>Edit</th>  
             <th>Name</th>  
@@ -111,10 +110,10 @@ New
 </button>
 </div>  
 <script>
-    //function targetmodel() {
-
-    //    $('#modelbody').load('/SiteSetup/Values');
-    //}
+    function targetmodel() {
+        debugger
+        $('#modelbody').load('/Product/Edit');
+    }
     function AddProduct() {
         var typeListOptions = '';
               @foreach (var dow in ViewBag.productDetails[0].TypeList)

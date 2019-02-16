@@ -26,9 +26,21 @@ namespace Marbale.BusinessObject
         public int EffectivePrice { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDate { get; set; }
-
+        public int Credits { get; set; }
+        public int Courtesy { get; set; }
+        public int Bonus { get; set; }
+        public int Games { get; set; }
+        public int CreditsPlus { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
+        public string TaxName { get; set; }
+        public decimal Taxpercent { get; set; }
+        public string LastUpdatedUser { get; set; }
+        public int CardValidFor { get; set; }
         public List<IdValue> TypeList { get; set; }
         public List<IdValue> CategoryList { get; set; }
 
+
+        
     }
 }

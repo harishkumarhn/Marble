@@ -4,8 +4,8 @@
 
 <h4>Settings Grid</h4>
 <div>
-<table id="marbleTable" class="table marbleTable">  
-        <thead>  
+<table id="marbleTable" class="table marbleTable table-bordered" style="display: block; height: 500px; overflow-y: auto">  
+        <thead class="thead-dark">  
             <th>Id</th>  
             <th>Name</th>  
             <th>Caption</th>  
@@ -58,9 +58,10 @@
     
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()">Save</button>    
 </div>
-
-<script>
+<style>
   
+</style>
+<script>
     function SaveProducts() {
         debugger
         var settings = [];
@@ -101,6 +102,7 @@
     }
     var updatedArray = [];
     function UpdatedList(x) {
+        debugger
         if (!updatedArray.includes(x.rowIndex)) {
             updatedArray.push(x.rowIndex);
         }

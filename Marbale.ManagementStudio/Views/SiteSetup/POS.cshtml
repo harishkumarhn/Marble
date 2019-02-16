@@ -70,7 +70,7 @@ listItems.Add(new SelectListItem
            
     <div>  @Html.DropDownList("Default Cash Mode", listItems, new { @class = "defalut-width ar" })</div></br></br>
 </div><br />
-   <text> &nbsp; &nbsp; &nbsp;</text>   <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()">Save</button>   
+   <text> &nbsp; &nbsp; &nbsp;</text>   <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveProducts()">Save</button>   
 </div>
       
     </div>
@@ -134,6 +134,11 @@ listItems.Add(new SelectListItem
     text-align:right;
     padding-right:10px;
 }
+      .button-pos {
+        position: absolute;
+        right: 805px;
+        top: 869px;
+    }
 
 input,button, label,.ar {
     float:left;

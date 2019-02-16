@@ -28,6 +28,11 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.productDetails = products;
             return View();
         }
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            return View();
+        }
         
         public ActionResult Edit(int id)
         {
@@ -35,10 +40,10 @@ namespace MarbaleManagementStudio.Controllers
             return View(product);
         }
 
-        public int InsertOrUpdate(Product pObject)
+        public ActionResult InsertOrUpdate(Product pObject)
         {
             var result = productBussiness.InsertOrUpdateProduct(pObject);
-            return result;
+            return RedirectToAction("ProductSetup", "Product");
         }
         public int UpdateProducts(List<Product> products)
         {
