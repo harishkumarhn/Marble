@@ -57,6 +57,14 @@
             this.lab_CardNumber = new System.Windows.Forms.Label();
             this.lab_CardType = new System.Windows.Forms.Label();
             this.dataGrid_card = new System.Windows.Forms.DataGridView();
+            this.txt_Comments = new System.Windows.Forms.RichTextBox();
+            this.panel_Actions = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_LogOut = new System.Windows.Forms.Button();
+            this.btn_KeyPad = new System.Windows.Forms.Button();
+            this.btn_Launch = new System.Windows.Forms.Button();
+            this.btn_Tasks = new System.Windows.Forms.Button();
+            this.btn_Refresh = new System.Windows.Forms.Button();
+            this.dataGrid_CardSummary = new System.Windows.Forms.DataGridView();
             this.posLayoutPanel_container.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -67,6 +75,8 @@
             this.right_pos.SuspendLayout();
             this.card_number_status.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_card)).BeginInit();
+            this.panel_Actions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_CardSummary)).BeginInit();
             this.SuspendLayout();
             // 
             // posLayoutPanel_container
@@ -348,6 +358,9 @@
             this.right_pos.Controls.Add(this.card_number_status, 0, 0);
             this.right_pos.Controls.Add(this.lab_CardType, 0, 1);
             this.right_pos.Controls.Add(this.dataGrid_card, 0, 3);
+            this.right_pos.Controls.Add(this.txt_Comments, 0, 5);
+            this.right_pos.Controls.Add(this.panel_Actions, 0, 6);
+            this.right_pos.Controls.Add(this.dataGrid_CardSummary, 0, 4);
             this.right_pos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.right_pos.Location = new System.Drawing.Point(775, 3);
             this.right_pos.Name = "right_pos";
@@ -359,6 +372,7 @@
             this.right_pos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.18115F));
             this.right_pos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.63587F));
             this.right_pos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.549761F));
+            this.right_pos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.right_pos.Size = new System.Drawing.Size(252, 728);
             this.right_pos.TabIndex = 3;
             // 
@@ -442,6 +456,99 @@
             this.dataGrid_card.TabIndex = 2;
             this.dataGrid_card.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_card_CellContentClick);
             // 
+            // txt_Comments
+            // 
+            this.txt_Comments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_Comments.Location = new System.Drawing.Point(3, 581);
+            this.txt_Comments.Name = "txt_Comments";
+            this.txt_Comments.Size = new System.Drawing.Size(246, 93);
+            this.txt_Comments.TabIndex = 4;
+            this.txt_Comments.Text = "";
+            // 
+            // panel_Actions
+            // 
+            this.panel_Actions.ColumnCount = 5;
+            this.panel_Actions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panel_Actions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panel_Actions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panel_Actions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panel_Actions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panel_Actions.Controls.Add(this.btn_LogOut, 4, 0);
+            this.panel_Actions.Controls.Add(this.btn_KeyPad, 3, 0);
+            this.panel_Actions.Controls.Add(this.btn_Launch, 2, 0);
+            this.panel_Actions.Controls.Add(this.btn_Tasks, 1, 0);
+            this.panel_Actions.Controls.Add(this.btn_Refresh, 0, 0);
+            this.panel_Actions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_Actions.Location = new System.Drawing.Point(3, 680);
+            this.panel_Actions.Name = "panel_Actions";
+            this.panel_Actions.RowCount = 1;
+            this.panel_Actions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.panel_Actions.Size = new System.Drawing.Size(246, 45);
+            this.panel_Actions.TabIndex = 5;
+            // 
+            // btn_LogOut
+            // 
+            this.btn_LogOut.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_LogOut.Location = new System.Drawing.Point(199, 3);
+            this.btn_LogOut.Name = "btn_LogOut";
+            this.btn_LogOut.Size = new System.Drawing.Size(44, 39);
+            this.btn_LogOut.TabIndex = 4;
+            this.btn_LogOut.Text = "LogOut";
+            this.btn_LogOut.UseVisualStyleBackColor = true;
+            // 
+            // btn_KeyPad
+            // 
+            this.btn_KeyPad.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_KeyPad.Location = new System.Drawing.Point(150, 3);
+            this.btn_KeyPad.Name = "btn_KeyPad";
+            this.btn_KeyPad.Size = new System.Drawing.Size(43, 39);
+            this.btn_KeyPad.TabIndex = 3;
+            this.btn_KeyPad.Text = "Key-Pad";
+            this.btn_KeyPad.UseVisualStyleBackColor = true;
+            // 
+            // btn_Launch
+            // 
+            this.btn_Launch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Launch.Location = new System.Drawing.Point(101, 3);
+            this.btn_Launch.Name = "btn_Launch";
+            this.btn_Launch.Size = new System.Drawing.Size(43, 39);
+            this.btn_Launch.TabIndex = 2;
+            this.btn_Launch.Text = "Launch";
+            this.btn_Launch.UseVisualStyleBackColor = true;
+            // 
+            // btn_Tasks
+            // 
+            this.btn_Tasks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Tasks.Location = new System.Drawing.Point(52, 3);
+            this.btn_Tasks.Name = "btn_Tasks";
+            this.btn_Tasks.Size = new System.Drawing.Size(43, 39);
+            this.btn_Tasks.TabIndex = 1;
+            this.btn_Tasks.Text = "Tasks";
+            this.btn_Tasks.UseVisualStyleBackColor = true;
+            // 
+            // btn_Refresh
+            // 
+            this.btn_Refresh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Refresh.Location = new System.Drawing.Point(3, 3);
+            this.btn_Refresh.Name = "btn_Refresh";
+            this.btn_Refresh.Size = new System.Drawing.Size(43, 39);
+            this.btn_Refresh.TabIndex = 0;
+            this.btn_Refresh.Text = "Refresh";
+            this.btn_Refresh.UseVisualStyleBackColor = true;
+            // 
+            // dataGrid_CardSummary
+            // 
+            this.dataGrid_CardSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid_CardSummary.ColumnHeadersVisible = false;
+            this.dataGrid_CardSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGrid_CardSummary.Location = new System.Drawing.Point(3, 449);
+            this.dataGrid_CardSummary.Name = "dataGrid_CardSummary";
+            this.dataGrid_CardSummary.RowHeadersVisible = false;
+            this.dataGrid_CardSummary.RowHeadersWidth = 60;
+            this.dataGrid_CardSummary.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGrid_CardSummary.Size = new System.Drawing.Size(246, 126);
+            this.dataGrid_CardSummary.TabIndex = 6;
+            // 
             // POSHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -463,6 +570,8 @@
             this.card_number_status.ResumeLayout(false);
             this.card_number_status.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_card)).EndInit();
+            this.panel_Actions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_CardSummary)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -498,5 +607,13 @@
         private System.Windows.Forms.Label lab_CardSatusValue;
         private System.Windows.Forms.Label lab_CardType;
         private System.Windows.Forms.DataGridView dataGrid_card;
+        private System.Windows.Forms.RichTextBox txt_Comments;
+        private System.Windows.Forms.TableLayoutPanel panel_Actions;
+        private System.Windows.Forms.Button btn_LogOut;
+        private System.Windows.Forms.Button btn_KeyPad;
+        private System.Windows.Forms.Button btn_Launch;
+        private System.Windows.Forms.Button btn_Tasks;
+        private System.Windows.Forms.Button btn_Refresh;
+        private System.Windows.Forms.DataGridView dataGrid_CardSummary;
     }
 }
