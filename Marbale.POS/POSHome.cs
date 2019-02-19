@@ -3,6 +3,7 @@ using Marbale.BusinessObject;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Permissions;
 using System.Windows.Forms;
 
 namespace Marbale.POS
@@ -10,18 +11,21 @@ namespace Marbale.POS
     public partial class POSHome : Form
     {
         POSBusiness posBussiness;
-        Color SkinColor;
+        string cardNumber = "";
+        string tempCardNumber = "";
+             
+        Color skinColor;
         public POSHome()
         {
             posBussiness = new POSBusiness();  
             InitializeComponent();
-            SkinColor = Color.Gray;
+            skinColor = Color.Gray;
         }
 
         private void POSHome_Load(object sender, EventArgs e)
         {
             UpdateProductsTab();
-            text_CardNumber.Select();
+           // text_CardNumber.Select();
 
             dataGrid_card.DataSource = GetDefaultCardInfo();
             dataGrid_card.Columns[0].DefaultCellStyle.BackColor = Color.Black;
@@ -34,7 +38,7 @@ namespace Marbale.POS
             }
 
             dataGrid_CardSummary.DataSource = GetDefaultCardSummary();
-            dataGrid_CardSummary.Columns[0].DefaultCellStyle.BackColor = SkinColor;
+            dataGrid_CardSummary.Columns[0].DefaultCellStyle.BackColor = skinColor;
             dataGrid_CardSummary.Columns[0].DefaultCellStyle.ForeColor = Color.White;
 
             foreach (DataGridViewRow row in dataGrid_CardSummary.Rows)
@@ -121,9 +125,26 @@ namespace Marbale.POS
            //  e.Handled = true;
         }
 
-        private void dataGrid_card_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void POSHome_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (tempCardNumber.Length == 10)
+            {
+                tempCardNumber = "";
+            }
+            if (tempCardNumber.Length == 9)
+            {
+                tempCardNumber = tempCardNumber + e.KeyChar;
+                if (tempCardNumber.Length == 10)
+                {
+                    cardNumber = tempCardNumber;
+                    lab_CardNumber.Text = cardNumber;
+                }
+            }
+            else
+            {
+                tempCardNumber = tempCardNumber + e.KeyChar;
+            }
         }
+        
     }
 }
