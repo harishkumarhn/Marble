@@ -3,6 +3,7 @@ using Marbale.BusinessObject;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Permissions;
 using System.Windows.Forms;
 
 namespace Marbale.POS
@@ -10,19 +11,23 @@ namespace Marbale.POS
     public partial class POSHome : Form
     {
         POSBusiness posBussiness;
+        string cardNumber = "";
+        string tempCardNumber = "";
+             
+        Color skinColor;
         public POSHome()
         {
             posBussiness = new POSBusiness();  
             InitializeComponent();
+            skinColor = Color.Gray;
         }
 
         private void POSHome_Load(object sender, EventArgs e)
         {
             UpdateProductsTab();
-            text_CardNumber.Select();
+           // text_CardNumber.Select();
 
             dataGrid_card.DataSource = GetDefaultCardInfo();
-            dataGrid_card.Columns[0].DefaultCellStyle.BackColor = Color.Black;
             dataGrid_card.Columns[0].DefaultCellStyle.BackColor = Color.Black;
             dataGrid_card.Columns[0].DefaultCellStyle.ForeColor = Color.White;
 
@@ -31,24 +36,47 @@ namespace Marbale.POS
                 row.Height = 25;
                 row.DefaultCellStyle.Font = new Font("Bookshelf", 10.5F, FontStyle.Bold);
             }
+
+            dataGrid_CardSummary.DataSource = GetDefaultCardSummary();
+            dataGrid_CardSummary.Columns[0].DefaultCellStyle.BackColor = skinColor;
+            dataGrid_CardSummary.Columns[0].DefaultCellStyle.ForeColor = Color.White;
+
+            foreach (DataGridViewRow row in dataGrid_CardSummary.Rows)
+            {
+                row.Height = 24;
+                row.DefaultCellStyle.Font = new Font("Bookshelf", 10.5F, FontStyle.Bold);
+            }
         }
-        public List<CardDetail> GetDefaultCardInfo()
+        public List<KeyValue> GetDefaultCardInfo()
         {
-            List<CardDetail> cardDetails = new List<CardDetail>();
-            cardDetails.Add(new CardDetail() { Name = "Issue Date", Value = DateTime.Now.ToShortDateString()});
-            cardDetails.Add(new CardDetail() { Name = "Card Deposit", Value = "0.00" });
-            cardDetails.Add(new CardDetail() { Name = "Card Credit", Value = "0.00" });
-            cardDetails.Add(new CardDetail() { Name = "Courtesy", Value = "0.00" });
-            cardDetails.Add(new CardDetail() { Name = "Card Deposit", Value = "0.00" });
-            cardDetails.Add(new CardDetail() { Name = "Bonus", Value = "0.00" });
-            cardDetails.Add(new CardDetail() { Name = "Time", Value = "0.00" });
-            cardDetails.Add(new CardDetail() { Name = "Games", Value = "" });
-            cardDetails.Add(new CardDetail() { Name = "Credit Plus", Value = "0.00" });
-            cardDetails.Add(new CardDetail() { Name = "Tickets", Value = "0.00" });
-            cardDetails.Add(new CardDetail() { Name = "Loyality Points", Value = "0.00" });
-            cardDetails.Add(new CardDetail() { Name = "Recharged/Spent", Value = "0.0000" });
+            List<KeyValue> cardDetails = new List<KeyValue>();
+            cardDetails.Add(new KeyValue() { Key = "Issue Date", Value = DateTime.Now.ToShortDateString()});
+            cardDetails.Add(new KeyValue() { Key = "Card Deposit", Value = "0.00" });
+            cardDetails.Add(new KeyValue() { Key = "Card Credit", Value = "0.00" });
+            cardDetails.Add(new KeyValue() { Key = "Courtesy", Value = "0.00" });
+            cardDetails.Add(new KeyValue() { Key = "Card Deposit", Value = "0.00" });
+            cardDetails.Add(new KeyValue() { Key = "Bonus", Value = "0.00" });
+            cardDetails.Add(new KeyValue() { Key = "Time", Value = "0.00" });
+            cardDetails.Add(new KeyValue() { Key = "Games", Value = "" });
+            cardDetails.Add(new KeyValue() { Key = "Credit Plus", Value = "0.00" });
+            cardDetails.Add(new KeyValue() { Key = "Tickets", Value = "0.00" });
+            cardDetails.Add(new KeyValue() { Key = "Loyality Points", Value = "0.00" });
+            cardDetails.Add(new KeyValue() { Key = "Recharged/Spent", Value = "0.0000" });
 
             return cardDetails;
+
+        }
+
+        public List<KeyValue> GetDefaultCardSummary()
+        {
+            List<KeyValue> cardSummary = new List<KeyValue>();
+            cardSummary.Add(new KeyValue() { Key = "Total", Value = DateTime.Now.ToShortDateString() });
+            cardSummary.Add(new KeyValue() { Key = "Balance", Value = "0.00" });
+            cardSummary.Add(new KeyValue() { Key = "Tendered", Value = "0.00" });
+            cardSummary.Add(new KeyValue() { Key = "Change", Value = "0.00" });
+            cardSummary.Add(new KeyValue() { Key = "Tip Amount", Value = "0.00" });
+
+            return cardSummary;
 
         }
 
@@ -97,9 +125,26 @@ namespace Marbale.POS
            //  e.Handled = true;
         }
 
-        private void dataGrid_card_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void POSHome_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (tempCardNumber.Length == 10)
+            {
+                tempCardNumber = "";
+            }
+            if (tempCardNumber.Length == 9)
+            {
+                tempCardNumber = tempCardNumber + e.KeyChar;
+                if (tempCardNumber.Length == 10)
+                {
+                    cardNumber = tempCardNumber;
+                    lab_CardNumber.Text = cardNumber;
+                }
+            }
+            else
+            {
+                tempCardNumber = tempCardNumber + e.KeyChar;
+            }
         }
+        
     }
 }

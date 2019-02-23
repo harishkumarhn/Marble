@@ -53,10 +53,19 @@
             this.card_number_status = new System.Windows.Forms.TableLayoutPanel();
             this.lab_CardSatusValue = new System.Windows.Forms.Label();
             this.lab_card_status = new System.Windows.Forms.Label();
-            this.text_CardNumber = new System.Windows.Forms.TextBox();
+            this.lab_Card = new System.Windows.Forms.Label();
             this.lab_CardNumber = new System.Windows.Forms.Label();
             this.lab_CardType = new System.Windows.Forms.Label();
             this.dataGrid_card = new System.Windows.Forms.DataGridView();
+            this.txt_Comments = new System.Windows.Forms.RichTextBox();
+            this.panel_Actions = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_LogOut = new System.Windows.Forms.Button();
+            this.btn_KeyPad = new System.Windows.Forms.Button();
+            this.btn_Launch = new System.Windows.Forms.Button();
+            this.btn_Tasks = new System.Windows.Forms.Button();
+            this.btn_Refresh = new System.Windows.Forms.Button();
+            this.dataGrid_CardSummary = new System.Windows.Forms.DataGridView();
+            this.panel_userProfile = new System.Windows.Forms.Panel();
             this.posLayoutPanel_container.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -67,6 +76,8 @@
             this.right_pos.SuspendLayout();
             this.card_number_status.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_card)).BeginInit();
+            this.panel_Actions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_CardSummary)).BeginInit();
             this.SuspendLayout();
             // 
             // posLayoutPanel_container
@@ -282,16 +293,18 @@
             // 
             // menu_btn
             // 
+            this.menu_btn.BackColor = System.Drawing.Color.White;
             this.menu_btn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menu_btn.Location = new System.Drawing.Point(171, 3);
             this.menu_btn.Name = "menu_btn";
             this.menu_btn.Size = new System.Drawing.Size(26, 43);
             this.menu_btn.TabIndex = 1;
             this.menu_btn.Text = "|||";
-            this.menu_btn.UseVisualStyleBackColor = true;
+            this.menu_btn.UseVisualStyleBackColor = false;
             // 
             // next_btn
             // 
+            this.next_btn.BackColor = System.Drawing.Color.White;
             this.next_btn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.next_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.next_btn.Location = new System.Drawing.Point(203, 3);
@@ -299,7 +312,7 @@
             this.next_btn.Size = new System.Drawing.Size(25, 43);
             this.next_btn.TabIndex = 2;
             this.next_btn.Text = ">";
-            this.next_btn.UseVisualStyleBackColor = true;
+            this.next_btn.UseVisualStyleBackColor = false;
             // 
             // pos_lb
             // 
@@ -348,6 +361,10 @@
             this.right_pos.Controls.Add(this.card_number_status, 0, 0);
             this.right_pos.Controls.Add(this.lab_CardType, 0, 1);
             this.right_pos.Controls.Add(this.dataGrid_card, 0, 3);
+            this.right_pos.Controls.Add(this.txt_Comments, 0, 5);
+            this.right_pos.Controls.Add(this.panel_Actions, 0, 6);
+            this.right_pos.Controls.Add(this.dataGrid_CardSummary, 0, 4);
+            this.right_pos.Controls.Add(this.panel_userProfile, 0, 2);
             this.right_pos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.right_pos.Location = new System.Drawing.Point(775, 3);
             this.right_pos.Name = "right_pos";
@@ -359,6 +376,7 @@
             this.right_pos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.18115F));
             this.right_pos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.63587F));
             this.right_pos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.549761F));
+            this.right_pos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.right_pos.Size = new System.Drawing.Size(252, 728);
             this.right_pos.TabIndex = 3;
             // 
@@ -369,8 +387,8 @@
             this.card_number_status.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.card_number_status.Controls.Add(this.lab_CardSatusValue, 1, 1);
             this.card_number_status.Controls.Add(this.lab_card_status, 0, 1);
-            this.card_number_status.Controls.Add(this.text_CardNumber, 1, 0);
-            this.card_number_status.Controls.Add(this.lab_CardNumber, 0, 0);
+            this.card_number_status.Controls.Add(this.lab_Card, 0, 0);
+            this.card_number_status.Controls.Add(this.lab_CardNumber, 1, 0);
             this.card_number_status.Dock = System.Windows.Forms.DockStyle.Fill;
             this.card_number_status.Location = new System.Drawing.Point(3, 3);
             this.card_number_status.Name = "card_number_status";
@@ -399,24 +417,25 @@
             this.lab_card_status.TabIndex = 2;
             this.lab_card_status.Text = "Status";
             // 
-            // text_CardNumber
+            // lab_Card
             // 
-            this.text_CardNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.text_CardNumber.Location = new System.Drawing.Point(126, 3);
-            this.text_CardNumber.Name = "text_CardNumber";
-            this.text_CardNumber.Size = new System.Drawing.Size(117, 20);
-            this.text_CardNumber.TabIndex = 6;
-            this.text_CardNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.text_CardNumber_KeyPress);
+            this.lab_Card.AutoSize = true;
+            this.lab_Card.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lab_Card.Location = new System.Drawing.Point(3, 0);
+            this.lab_Card.Name = "lab_Card";
+            this.lab_Card.Size = new System.Drawing.Size(99, 16);
+            this.lab_Card.TabIndex = 0;
+            this.lab_Card.Text = "Card Number";
             // 
             // lab_CardNumber
             // 
             this.lab_CardNumber.AutoSize = true;
-            this.lab_CardNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_CardNumber.Location = new System.Drawing.Point(3, 0);
+            this.lab_CardNumber.Font = new System.Drawing.Font("Century Schoolbook", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lab_CardNumber.Location = new System.Drawing.Point(126, 0);
             this.lab_CardNumber.Name = "lab_CardNumber";
-            this.lab_CardNumber.Size = new System.Drawing.Size(99, 16);
-            this.lab_CardNumber.TabIndex = 0;
-            this.lab_CardNumber.Text = "Card Number";
+            this.lab_CardNumber.Size = new System.Drawing.Size(14, 20);
+            this.lab_CardNumber.TabIndex = 6;
+            this.lab_CardNumber.Text = "-";
             // 
             // lab_CardType
             // 
@@ -434,13 +453,119 @@
             this.dataGrid_card.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGrid_card.ColumnHeadersVisible = false;
             this.dataGrid_card.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGrid_card.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGrid_card.Enabled = false;
             this.dataGrid_card.Location = new System.Drawing.Point(3, 132);
             this.dataGrid_card.Name = "dataGrid_card";
             this.dataGrid_card.RowHeadersVisible = false;
             this.dataGrid_card.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGrid_card.Size = new System.Drawing.Size(246, 311);
             this.dataGrid_card.TabIndex = 2;
-            this.dataGrid_card.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_card_CellContentClick);
+            // 
+            // txt_Comments
+            // 
+            this.txt_Comments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_Comments.Location = new System.Drawing.Point(3, 581);
+            this.txt_Comments.Name = "txt_Comments";
+            this.txt_Comments.Size = new System.Drawing.Size(246, 93);
+            this.txt_Comments.TabIndex = 4;
+            this.txt_Comments.Text = "";
+            // 
+            // panel_Actions
+            // 
+            this.panel_Actions.ColumnCount = 5;
+            this.panel_Actions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panel_Actions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panel_Actions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panel_Actions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panel_Actions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panel_Actions.Controls.Add(this.btn_LogOut, 4, 0);
+            this.panel_Actions.Controls.Add(this.btn_KeyPad, 3, 0);
+            this.panel_Actions.Controls.Add(this.btn_Launch, 2, 0);
+            this.panel_Actions.Controls.Add(this.btn_Tasks, 1, 0);
+            this.panel_Actions.Controls.Add(this.btn_Refresh, 0, 0);
+            this.panel_Actions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_Actions.Location = new System.Drawing.Point(3, 680);
+            this.panel_Actions.Name = "panel_Actions";
+            this.panel_Actions.RowCount = 1;
+            this.panel_Actions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.panel_Actions.Size = new System.Drawing.Size(246, 45);
+            this.panel_Actions.TabIndex = 5;
+            // 
+            // btn_LogOut
+            // 
+            this.btn_LogOut.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_LogOut.Location = new System.Drawing.Point(199, 3);
+            this.btn_LogOut.Name = "btn_LogOut";
+            this.btn_LogOut.Size = new System.Drawing.Size(44, 39);
+            this.btn_LogOut.TabIndex = 4;
+            this.btn_LogOut.Text = "LogOut";
+            this.btn_LogOut.UseVisualStyleBackColor = true;
+            // 
+            // btn_KeyPad
+            // 
+            this.btn_KeyPad.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_KeyPad.Location = new System.Drawing.Point(150, 3);
+            this.btn_KeyPad.Name = "btn_KeyPad";
+            this.btn_KeyPad.Size = new System.Drawing.Size(43, 39);
+            this.btn_KeyPad.TabIndex = 3;
+            this.btn_KeyPad.Text = "Key-Pad";
+            this.btn_KeyPad.UseVisualStyleBackColor = true;
+            // 
+            // btn_Launch
+            // 
+            this.btn_Launch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Launch.Location = new System.Drawing.Point(101, 3);
+            this.btn_Launch.Name = "btn_Launch";
+            this.btn_Launch.Size = new System.Drawing.Size(43, 39);
+            this.btn_Launch.TabIndex = 2;
+            this.btn_Launch.Text = "Launch";
+            this.btn_Launch.UseVisualStyleBackColor = true;
+            // 
+            // btn_Tasks
+            // 
+            this.btn_Tasks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Tasks.Location = new System.Drawing.Point(52, 3);
+            this.btn_Tasks.Name = "btn_Tasks";
+            this.btn_Tasks.Size = new System.Drawing.Size(43, 39);
+            this.btn_Tasks.TabIndex = 1;
+            this.btn_Tasks.Text = "Tasks";
+            this.btn_Tasks.UseVisualStyleBackColor = true;
+            // 
+            // btn_Refresh
+            // 
+            this.btn_Refresh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Refresh.Location = new System.Drawing.Point(3, 3);
+            this.btn_Refresh.Name = "btn_Refresh";
+            this.btn_Refresh.Size = new System.Drawing.Size(43, 39);
+            this.btn_Refresh.TabIndex = 0;
+            this.btn_Refresh.Text = "Refresh";
+            this.btn_Refresh.UseVisualStyleBackColor = true;
+            // 
+            // dataGrid_CardSummary
+            // 
+            this.dataGrid_CardSummary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGrid_CardSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid_CardSummary.ColumnHeadersVisible = false;
+            this.dataGrid_CardSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGrid_CardSummary.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGrid_CardSummary.Enabled = false;
+            this.dataGrid_CardSummary.Location = new System.Drawing.Point(3, 449);
+            this.dataGrid_CardSummary.Name = "dataGrid_CardSummary";
+            this.dataGrid_CardSummary.RowHeadersVisible = false;
+            this.dataGrid_CardSummary.RowHeadersWidth = 60;
+            this.dataGrid_CardSummary.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGrid_CardSummary.Size = new System.Drawing.Size(246, 126);
+            this.dataGrid_CardSummary.TabIndex = 6;
+            // 
+            // panel_userProfile
+            // 
+            this.panel_userProfile.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel_userProfile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_userProfile.Location = new System.Drawing.Point(3, 81);
+            this.panel_userProfile.Name = "panel_userProfile";
+            this.panel_userProfile.Size = new System.Drawing.Size(246, 45);
+            this.panel_userProfile.TabIndex = 7;
             // 
             // POSHome
             // 
@@ -448,9 +573,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1030, 734);
             this.Controls.Add(this.posLayoutPanel_container);
+            this.KeyPreview = true;
             this.Name = "POSHome";
             this.Text = "POSHome";
             this.Load += new System.EventHandler(this.POSHome_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.POSHome_KeyPress);
             this.posLayoutPanel_container.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -463,6 +590,8 @@
             this.card_number_status.ResumeLayout(false);
             this.card_number_status.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_card)).EndInit();
+            this.panel_Actions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_CardSummary)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -493,10 +622,19 @@
         private System.Windows.Forms.TableLayoutPanel right_pos;
         private System.Windows.Forms.TableLayoutPanel card_number_status;
         private System.Windows.Forms.Label lab_card_status;
-        private System.Windows.Forms.Label lab_CardNumber;
-        private System.Windows.Forms.TextBox text_CardNumber;
+        private System.Windows.Forms.Label lab_Card;
         private System.Windows.Forms.Label lab_CardSatusValue;
         private System.Windows.Forms.Label lab_CardType;
         private System.Windows.Forms.DataGridView dataGrid_card;
+        private System.Windows.Forms.RichTextBox txt_Comments;
+        private System.Windows.Forms.TableLayoutPanel panel_Actions;
+        private System.Windows.Forms.Button btn_LogOut;
+        private System.Windows.Forms.Button btn_KeyPad;
+        private System.Windows.Forms.Button btn_Launch;
+        private System.Windows.Forms.Button btn_Tasks;
+        private System.Windows.Forms.Button btn_Refresh;
+        private System.Windows.Forms.DataGridView dataGrid_CardSummary;
+        private System.Windows.Forms.Label lab_CardNumber;
+        private System.Windows.Forms.Panel panel_userProfile;
     }
 }

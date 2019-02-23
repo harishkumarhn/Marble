@@ -9,6 +9,6 @@ namespace Marbale.BusinessObject
     public class POSModel
     {
         public string DefalutCashMode { get; set; }
-        public List<CardDetail> Card { get; set; }
+        public List<KeyValue> Card { get; set; }
     }
 }

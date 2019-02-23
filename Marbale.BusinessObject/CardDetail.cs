@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Marbale.BusinessObject
 {
-    public class CardDetail
+    public class KeyValue
     {
-        public string Name { get; set; }
+        public string Key { get; set; }
         public string Value { get; set; }
     }
 }
