@@ -1,40 +1,30 @@
 ﻿@{
     Layout = null;
 }
-
-
-
-
 <button class="tablinks" id="postab" onclick="getposdetails()">POS</button>
-
 <button class="tablinks" id="cardtab" onclick="getCardDetails()">Card</button>
 </br><br /><br /><br />
 <div id="valuesContainer">
     
 </div>
-
-
 <script>
+    $(document).ready(function () {
+        $('#loading').show();
+        getposdetails();
+        $("#postab").addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+        $('#loading').hide();
+    })
     function getposdetails() {
-        $('#valuesContainer').load('/SiteSetup/POS', {ValType:'pos'});
+        $('#loading').show();
+        $('#valuesContainer').load('/SiteSetup/POS', { ValType: 'pos' });
+        $('#loading').hide();
     }
     function getCardDetails() {
         $('#valuesContainer').load('/SiteSetup/Card');
     }
-    $(document).ready(function () {
-        $('#postab').click(function () {
-
-           // $('#cardtab').removeClass('buttoncolor-change');
-            $('#postab').addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+    $('.tablinks').click(function () {
+            $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
         });
-        $('#cardtab').click(function () {
-
-            // $('#cardtab').removeClass('buttoncolor-change');
-            $('#cardtab').addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
-        });
-       
-    })
-
 </script>
 <style>
 

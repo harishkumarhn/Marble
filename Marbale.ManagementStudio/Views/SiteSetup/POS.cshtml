@@ -68,7 +68,7 @@ listItems.Add(new SelectListItem
        <div class="demo">
   <div> <text> &nbsp; &nbsp; &nbsp;</text> <label>Default Cash Mode</label></div>
            
-    <div>  @Html.DropDownList("Default Cash Mode", listItems, new { @class = "defalut-width ar" })</div></br></br>
+    <div>  @Html.DropDownList("Default Cash Mode", listItems, new { @class = "defalut-width ar",@name="myInput" })</div></br></br>
 </div><br />
    <text> &nbsp; &nbsp; &nbsp;</text>   <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveProducts()">Save</button>   
 </div>
@@ -77,7 +77,6 @@ listItems.Add(new SelectListItem
 <script>
     var appSettings = [];
     $('input[name=myInput]').change(function () {
-        debugger
         var d = {
             Name: this.id,
             Value: this.value,
@@ -86,13 +85,21 @@ listItems.Add(new SelectListItem
         appSettings.push(d);
     });
     $('input[name=allcheck]').change(function () {
- debugger
         var d = {
             Name: this.id,
             Value: $(this).is(":checked"),
             ScreenGroup: 'POS'
         };
         appSettings.push(d);
+    });
+    $("#Default_Cash_Mode").change(function () {
+        debugger
+       
+        var dropdn = {
+            Name: this.id,
+            Value: $('#Default_Cash_Mode').find(":selected").text()
+        }
+        appSettings.push(dropdn);
     });
     function SaveProducts() {
         $.ajax({

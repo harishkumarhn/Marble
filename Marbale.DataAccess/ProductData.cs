@@ -136,6 +136,19 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetProductsByScreenGroup(string screenGroup)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@screen", screenGroup);
+                return conn.executeSelectQuery("sp_GetProductsByScreenGroup", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public DataTable GetProductTypeLookUp()
         {
             try
@@ -175,7 +188,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[27];
+                SqlParameter[] sqlParameters = new SqlParameter[26];
                 sqlParameters[0] = new SqlParameter("@name", string.IsNullOrEmpty(product.Name) ? "" : product.Name);
                 sqlParameters[1] = new SqlParameter("@type", string.IsNullOrEmpty(product.Type) ? "" : product.Type);
                 sqlParameters[2] = new SqlParameter("@active", product.Active);
@@ -199,11 +212,11 @@ namespace Marbale.DataAccess
                 sqlParameters[19] = new SqlParameter("@StartDate", product.StartDate);
                 sqlParameters[20] = new SqlParameter("@LastUpdatedDate", product.LastUpdatedDate);
                 sqlParameters[21] = new SqlParameter("@Games", product.Games);
-                sqlParameters[23] = new SqlParameter("@CreditsPlus", product.CreditsPlus);
-                sqlParameters[24] = new SqlParameter("@Credits", product.Credits);
+                sqlParameters[22] = new SqlParameter("@CreditsPlus", product.CreditsPlus);
+                sqlParameters[23] = new SqlParameter("@Credits", product.Credits);
 
-                sqlParameters[25] = new SqlParameter("@CardValidFor", product.CardValidFor);
-                sqlParameters[26] = new SqlParameter("@ExpiryDate", product.ExpiryDate);
+                sqlParameters[24] = new SqlParameter("@CardValidFor", product.CardValidFor);
+                sqlParameters[25] = new SqlParameter("@ExpiryDate", product.ExpiryDate);
 
                 return conn.executeUpdateQuery("sp_InsertOrUpdateProduct", sqlParameters);
             }

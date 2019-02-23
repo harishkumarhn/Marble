@@ -12,8 +12,8 @@
 <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content" style="width: 900px;height: 700px;">
-      <div class="modal-header" style="background-color: cornflowerblue">
+    <div class="modal-content" style="width: 900px;height: 592px;">
+      <div class="modal-header" style="background-color: crimson">
         <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -21,10 +21,10 @@
       </div>
       <div class="modal-body" id="modelbody">
       </div>
-      <div class="modal-footer">
+    @*  <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      </div>*@
     </div>
   </div>
 </div>
@@ -74,9 +74,9 @@
             </select> 
         </td>
         <td> <select name="categoryList" id="categoryList" class="gridText">
-              @foreach (var dow in item.TypeList)
+              @foreach (var dow in item.CategoryList)
               {
-                if(@item.Type == @dow.Value)
+                if(@item.Category == @dow.Value)
                 {
                     <option value="@dow.Value" selected>@dow.Value</option>
                 }
@@ -122,7 +122,7 @@ New
               }
         typeListOptions = typeListOptions + '</select></td>'; 
         var categoryListOptions = '';
-              @foreach (var dow in ViewBag.productDetails[0].TypeList)
+              @foreach (var dow in ViewBag.productDetails[0].CategoryList)
               {
                    @: categoryListOptions = categoryListOptions + '<option value="" >@dow.Value</option>';
               }
@@ -136,7 +136,7 @@ New
         '<td> <input type="checkbox" />  </td>' +
         '<td> <input type="checkbox" />  </td>' +
         '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
         '<td> <input type="checkbox" />  </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
@@ -168,7 +168,6 @@ New
                         FaceValue: table.rows[r].cells[13].children[0].value,
                         FinalPrice: table.rows[r].cells[14].children[0].value,
                         EffectivePrice: table.rows[r].cells[15].children[0].value,
-
 
                     });
             }

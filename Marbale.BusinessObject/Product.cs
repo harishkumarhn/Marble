@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.ComponentModel.DataAnnotations;
 namespace Marbale.BusinessObject
 {
     public class Product
     {
         public int Id { get; set; }
+         [Required(ErrorMessage = "Please enter Product name.")]
         public string Name { get; set; }
         public string Type { get; set; }
         public string POSCounter { get; set; }
