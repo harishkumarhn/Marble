@@ -20,6 +20,8 @@ namespace Marbale.BusinessObject
         public bool PosLevel { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDate { get; set; }
+        public List<IdValue> BasicDataTypes { get; set; }
+
 
     }
 }

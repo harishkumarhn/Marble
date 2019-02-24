@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "POS";
+    Layout = null;
+}
+
+<h2>POS</h2>
+<div style="background-color:lightblue;height: 500px;">
+    </br>
+<div id="valuesContainer">
+   
+      @foreach (var item in ViewBag.POSForm)
+      {
+          String type = item.Type.ToString();
+          switch (type)
+          {
+              case "string":
+               <div>                        
+                            <div class="inputwrap demo">
+                             <text> &nbsp; &nbsp; &nbsp;</text>   <label> <b>@item.Caption </b>:</label>
+                     <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+
+                            </div>
+                    </div>
+
+                  break;
+                  case "bool":
+                 
+                     <div>
+                          <div class="inputwrap demo">
+                             <text> &nbsp; &nbsp; &nbsp;</text>  <label> <b>@item.Caption </b>:</label>
+                       <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br /> </div>
+
+                
+     </div>
+                  break;
+                  case"int":
+                    <div>
+                          <div class="inputwrap demo">
+                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
+                     <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br /> </div>
+                        </div>
+                    
+                  break;
+                  
+          }
+                  
+      }
+       
+                       @{
+List<SelectListItem> listItems = new List<SelectListItem>();
+listItems.Add(new SelectListItem
+  {
+      Text = "Cash",
+      Value = "1",
+      Selected = true
+  });
+listItems.Add(new SelectListItem
+ {
+     Text = "Credit Card",
+     Value = "2"
+ });
+listItems.Add(new SelectListItem
+ {
+     Text = "Game Card",
+     Value = "3"
+ });
+        }
+       <div class="demo">
+  <div> <text> &nbsp; &nbsp; &nbsp;</text> <label>Default Cash Mode</label></div>
+           
+    <div>  @Html.DropDownList("Default Cash Mode", listItems, new { @class = "defalut-width ar" })</div></br></br>
+</div><br />
+   <text> &nbsp; &nbsp; &nbsp;</text>   <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveProducts()">Save</button>   
+</div>
+      
+    </div>
+<script>
+    var appSettings = [];
+    $('input[name=myInput]').change(function () {
+        debugger
+        var d = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'POS'
+        };
+        appSettings.push(d);
+    });
+    $('input[name=allcheck]').change(function () {
+ debugger
+        var d = {
+            Name: this.id,
+            Value: $(this).is(":checked"),
+            ScreenGroup: 'POS'
+        };
+        appSettings.push(d);
+    });
+    function SaveProducts() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateAppSettings", "SiteSetup")',
+
+            data: JSON.stringify({ appSettings: appSettings }),
+
+                        dataType: "json",
+
+                        beforeSend: function () { },
+
+                        success: function (data) {
+                            appSettings = [];
+                            location.reload();
+                            $('#displayMessage').text('data added succesfully').addClass('success');
+                        }
+                            });
+   
+    }
+    $(document).ready(function () {
+        $('input[name="allcheck"]').each(function (index) {
+            if ($(this).val().toLowerCase() == "true")
+                ($(this).prop('checked', true));
+        });
+
+    });
+</script>
+
+<style>
+    .defalut-width {
+        width: 280px;
+            height: 46px;
+    }
+    label {
+    width:480px;
+    clear:left;
+    text-align:right;
+    padding-right:10px;
+}
+      .button-pos {
+        position: absolute;
+        right: 805px;
+        top: 869px;
+    }
+
+input,button, label,.ar {
+    float:left;
+}
+</style>

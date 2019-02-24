@@ -128,6 +128,7 @@
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\MarbleController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SiteSetupController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -225,9 +226,11 @@
     <Content Include="Views\Product\Category.cshtml" />
     <Content Include="Views\Shared\_settingsPartial.cshtml" />
     <Content Include="Views\Shared\_ValuesTab.cshtml" />
-    <Content Include="Views\Shared\_CardTabPartial.cshtml" />
     <Content Include="Views\SiteSetup\Configuration.cshtml" />
     <Content Include="Views\SiteSetup\POS.cshtml" />
+    <Content Include="Views\SiteSetup\Values.cshtml" />
+    <Content Include="Views\SiteSetup\Settings.cshtml" />
+    <Content Include="Views\SiteSetup\Card.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>

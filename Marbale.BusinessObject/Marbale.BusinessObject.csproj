@@ -39,19 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSetting.cs" />
-    <Compile Include="CardDetail.cs" />
-    <Compile Include="Category.cs" />
-    <Compile Include="GameDiscount.cs" />
+    <Compile Include="NameValue.cs" />
+    <Compile Include="Setting\AppSetting.cs" />
+    <Compile Include="Card\CardDetail.cs" />
+    <Compile Include="Product\ProductCategory.cs" />
+    <Compile Include="Discount\GameDiscount.cs" />
     <Compile Include="IdValue.cs" />
-    <Compile Include="LoginModel.cs" />
-    <Compile Include="MasterDiscounts.cs" />
-    <Compile Include="POSModel.cs" />
-    <Compile Include="Product.cs" />
-    <Compile Include="ProductType.cs" />
+    <Compile Include="POS\LoginModel.cs" />
+    <Compile Include="Discount\MasterDiscounts.cs" />
+    <Compile Include="POS\POSModel.cs" />
+    <Compile Include="Product\Product.cs" />
+    <Compile Include="Product\ProductType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="TransactionDiscount.cs" />
+    <Compile Include="Setting\Settings.cs" />
+    <Compile Include="Discount\TransactionDiscount.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SiteSetup\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

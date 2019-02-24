@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+
+<button class="tablinks" id="postab" onclick="getposdetails()">POS</button>
+
+<button class="tablinks" id="cardtab" onclick="getCardDetails()">Card</button>
+</br><br /><br /><br />
+<div id="valuesContainer">
+    
+</div>
+
+
+<script>
+    function getposdetails() {
+        $('#valuesContainer').load('/SiteSetup/POS', {ValType:'pos'});
+    }
+    function getCardDetails() {
+        $('#valuesContainer').load('/SiteSetup/Card');
+    }
+    $(document).ready(function () {
+        $('#postab').click(function () {
+
+           // $('#cardtab').removeClass('buttoncolor-change');
+            $('#postab').addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+        });
+        $('#cardtab').click(function () {
+
+            // $('#cardtab').removeClass('buttoncolor-change');
+            $('#cardtab').addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+        });
+       
+    })
+
+</script>
+<style>
+
+      .tablinks {
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+      .buttoncolor-change {
+            background-color: cornflowerblue;
+        }
+    .valuesContainer {
+        position: absolute;
+   
+    left: 350px;
+    width: 655px;
+  
+    }
+ 
+</style>

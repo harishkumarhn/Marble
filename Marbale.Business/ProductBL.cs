@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Marbale.Business
 {
-    public class ProductBusiness
+    public class ProductBL
     {
         private ProductData productData;
 
-        public ProductBusiness()
+        public ProductBL()
         {
             productData = new ProductData();
         }
@@ -22,6 +22,17 @@ namespace Marbale.Business
         {
             try
             {
+                var typeListDataTable = productData.ProductDatatypes();
+                var typeList = new List<IdValue>();
+                typeList.Add(new IdValue() { Id = 0, Value = "Select" });
+                foreach (DataRow dr in typeListDataTable.Rows)
+                {
+                    IdValue idValues = new IdValue();
+                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                    typeList.Add(idValues);
+                }
+                
                 var dataTable = productData.GetSettings();
                 List<Settings> listSettings = new List<Settings>();
                 foreach (DataRow dr in dataTable.Rows)
@@ -39,9 +50,10 @@ namespace Marbale.Business
                     setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
                     setting.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
                     setting.UserLevel = dr.IsNull("UserLevel") ? false : bool.Parse(dr["UserLevel"].ToString());
-
+                    setting.BasicDataTypes = typeList;
                     listSettings.Add(setting);
                 }
+                
                 return listSettings;
             }
             catch (Exception e)
@@ -58,9 +70,9 @@ namespace Marbale.Business
                 foreach (DataRow dr in dataTable.Rows)
                 {
                     AppSetting setting = new AppSetting();
-                    setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    setting.Caption = dr.IsNull("Caption") ? "" : dr["Caption"].ToString();
-                    setting.Value = dr.IsNull("Value") ? "" : dr["Value"].ToString();
+                    setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();//
+                    setting.Caption = dr.IsNull("Caption") ? "" : dr["Caption"].ToString();//label
+                    setting.Value = dr.IsNull("Value") ? "" : dr["Value"].ToString();// current values
                     setting.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
                     setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
 
@@ -262,21 +274,21 @@ namespace Marbale.Business
                 throw e;
             }
         }
-        public List<Category> GetProductCategory()
+        public List<ProductCategory> GetProductCategory()
         {
             try
             {
                 var ctys = new List<IdValue>();
                 ctys.Add(new IdValue() { Id = 0, Value = "Select" });
                 var dataTable = productData.GetProductCategory();
-                List<Category> listProductCat = new List<Category>();
+                List<ProductCategory> listProductCat = new List<ProductCategory>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    Category pCat = new Category();
+                    ProductCategory pCat = new ProductCategory();
                     pCat.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                     pCat.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                     pCat.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    pCat.ParentCategory = dr.IsNull("ParentCategory") ? "" : (dr["ParentCategory"].ToString());
+                    pCat.Category = dr.IsNull("ParentCategory") ? "" : (dr["ParentCategory"].ToString());
                     listProductCat.Add(pCat);
                 }
                 if (listProductCat.Count != 0)
@@ -288,7 +300,7 @@ namespace Marbale.Business
                 }
                 else
                 {
-                    listProductCat.Add(new Category());
+                    listProductCat.Add(new ProductCategory());
                 }
                 foreach (var cty in listProductCat)
                 {
@@ -305,7 +317,7 @@ namespace Marbale.Business
 
         }
 
-        public int UpdateProductCategory(List<Category> categories)
+        public int UpdateProductCategory(List<ProductCategory> categories)
         {
             try
             {

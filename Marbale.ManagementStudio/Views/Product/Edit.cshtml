@@ -2,13 +2,15 @@
 
 @{
     ViewBag.Title = "CreateProduct";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 <link href="~/Content/css/product.css" rel="stylesheet" />
 
     @using (Html.BeginForm("InsertOrUpdate", "Product", FormMethod.Post))
     {
+        <div id="editpopup">
     <table class="formTable">
+        <div>
          <tr>
             <td><b style="padding-right: 10px">Id:</b></td>
             <td>@Html.TextBoxFor(m => m.Id,new { @readonly = "readonly" })</td>
@@ -53,6 +55,61 @@
             <td><b style="padding-right: 10px">Type:</b></td>
             <td>@Html.TextBoxFor(m => m.Type)</td>
         </tr>
+
+          <tr>
+            <td><b style="padding-right: 10px">Card Face Value:</b></td>
+            <td>@Html.TextBoxFor(m => m.FaceValue)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Credits:</b></td>
+            <td>@Html.TextBoxFor(m => m.Credits)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Courteesy:</b></td>
+            <td>@Html.TextBoxFor(m => m.Courtesy)</td>
+
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Bonus:</b></td>
+            <td>@Html.TextBoxFor(m => m.Bonus)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Games:</b></td>
+            <td>@Html.TextBoxFor(m => m.Games)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Credits Plus:</b></td>
+            <td>@Html.TextBoxFor(m => m.CreditsPlus)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Start Date:</b></td>
+            <td>@Html.TextBoxFor(m => m.StartDate)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Expiry Date:</b></td>
+            <td>@Html.TextBoxFor(m => m.ExpiryDate)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Tax Name:</b></td>
+            <td>@Html.TextBoxFor(m => m.TaxName)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Tax %:</b></td>
+            <td>@Html.TextBoxFor(m => m.Taxpercent)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Last Updated User:</b></td>
+            <td>@Html.TextBoxFor(m => m.LastUpdatedUser)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Last Updated Date:</b></td>
+            <td>@Html.TextBoxFor(m => m.LastUpdatedDate)</td>
+        </tr>
+           <tr>
+            <td><b style="padding-right: 10px">Card Valid For:</b></td>
+            <td>@Html.TextBoxFor(m => m.CardValidFor)</td>
+        </tr>
+       
         <tr>
             <td><b style="padding-right: 10px">Active:</b></td>
             <td>@Html.CheckBoxFor(m => m.Active)</td>
@@ -78,7 +135,7 @@
         <br />
         
          <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
-
+            </div>
     }
 <script>
 </script>

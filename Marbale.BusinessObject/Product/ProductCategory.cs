@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Marbale.BusinessObject
 {
-  public  class Category
+  public class ProductCategory
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Active { get; set; }
-        public string ParentCategory { get; set; }
+        public string Category { get; set; }
         public List<IdValue> Categories { get; set; }
     }
 }

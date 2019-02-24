@@ -11,7 +11,7 @@ namespace MarbaleManagementStudio.Controllers
 {
     public class DiscountController : Controller
     {
-        ProductBusiness b = new ProductBusiness();
+        ProductBL b = new ProductBL();
         //
         // GET: /Discount/
 
