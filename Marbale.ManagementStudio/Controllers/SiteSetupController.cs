@@ -51,12 +51,11 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.CardForm = datatable;
             return PartialView();
         }
-        public ActionResult UpdateSettings(List<Settings> settings)
+        public string UpdateSettings(List<Settings> settings)
         {
             bool status = pb.SaveSettings(settings);
-            return View();
+            return "Updated";
         }
-        
 
     }
 }

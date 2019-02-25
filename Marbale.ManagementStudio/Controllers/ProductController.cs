@@ -42,10 +42,9 @@ namespace MarbaleManagementStudio.Controllers
 
         public ActionResult InsertOrUpdate(Product pObject)
         {
-            if (ModelState.IsValid)
-            {
+           
                 var result = productBussiness.InsertOrUpdateProduct(pObject);
-            }
+            
                 return RedirectToAction("ProductSetup", "Product");
             
         }
