@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Marbale.Business
 {
-   public class POSBusiness
+   public class POSBL
     {
         private ProductData marbaleData;
 
-        public POSBusiness()
+        public POSBL()
         {
             marbaleData = new ProductData();
         }

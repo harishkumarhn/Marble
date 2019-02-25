@@ -10,14 +10,14 @@ namespace Marbale.POS
 {
     public partial class POSHome : Form
     {
-        POSBusiness posBussiness;
+        POSBL posBussiness;
         string cardNumber = "";
         string tempCardNumber = "";
              
         Color skinColor;
         public POSHome()
         {
-            posBussiness = new POSBusiness();  
+            posBussiness = new POSBL();  
             InitializeComponent();
             skinColor = Color.Gray;
         }

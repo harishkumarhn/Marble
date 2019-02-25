@@ -11,10 +11,10 @@ namespace MarbaleManagementStudio.Controllers
 {
     public class ProductController : Controller
     {
-        public ProductBusiness productBussiness;
+        public ProductBL productBussiness;
         public ProductController()
         {
-            productBussiness = new ProductBusiness();
+            productBussiness = new ProductBL();
         }
 
         public ActionResult Index()
@@ -74,7 +74,7 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.categories = categories;
             return View();
         }
-        public int UpdateProductCategories(List<Category> categories)
+        public int UpdateProductCategories(List<ProductCategory> categories)
         {
             return productBussiness.UpdateProductCategory(categories);
         }

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Marbale.Business
 {
-    public class ProductBusiness
+    public class ProductBL
     {
         private ProductData productData;
 
-        public ProductBusiness()
+        public ProductBL()
         {
             productData = new ProductData();
         }
@@ -274,21 +274,21 @@ namespace Marbale.Business
                 throw e;
             }
         }
-        public List<Category> GetProductCategory()
+        public List<ProductCategory> GetProductCategory()
         {
             try
             {
                 var ctys = new List<IdValue>();
                 ctys.Add(new IdValue() { Id = 0, Value = "Select" });
                 var dataTable = productData.GetProductCategory();
-                List<Category> listProductCat = new List<Category>();
+                List<ProductCategory> listProductCat = new List<ProductCategory>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    Category pCat = new Category();
+                    ProductCategory pCat = new ProductCategory();
                     pCat.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                     pCat.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                     pCat.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    pCat.ParentCategory = dr.IsNull("ParentCategory") ? "" : (dr["ParentCategory"].ToString());
+                    pCat.Category = dr.IsNull("ParentCategory") ? "" : (dr["ParentCategory"].ToString());
                     listProductCat.Add(pCat);
                 }
                 if (listProductCat.Count != 0)
@@ -300,7 +300,7 @@ namespace Marbale.Business
                 }
                 else
                 {
-                    listProductCat.Add(new Category());
+                    listProductCat.Add(new ProductCategory());
                 }
                 foreach (var cty in listProductCat)
                 {
@@ -317,7 +317,7 @@ namespace Marbale.Business
 
         }
 
-        public int UpdateProductCategory(List<Category> categories)
+        public int UpdateProductCategory(List<ProductCategory> categories)
         {
             try
             {

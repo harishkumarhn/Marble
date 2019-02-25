@@ -16,12 +16,12 @@ namespace Marbale.SiteSetup
     {
         List<Settings> lstSettings;
         List<AppSetting> lstAppSetting;
-        ProductBusiness productBusiness;
+        ProductBL productBusiness;
         bool posGridLoadCompleted = false;
         public SiteConfiguration()
         {
             InitializeComponent();
-            productBusiness = new ProductBusiness();
+            productBusiness = new ProductBL();
 
             lstSettings = new List<Settings>();
             lstAppSetting = new List<AppSetting>();

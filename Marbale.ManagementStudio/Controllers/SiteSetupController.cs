@@ -10,7 +10,7 @@ namespace MarbaleManagementStudio.Controllers
 {
     public class SiteSetupController : Controller
     {
-        ProductBusiness pb = new ProductBusiness();
+        ProductBL pb = new ProductBL();
        
         //
         // GET: /SiteSetup/

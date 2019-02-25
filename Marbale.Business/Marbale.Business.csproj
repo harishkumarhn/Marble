@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminBL.cs" />
     <Compile Include="Enum\TypeEnum.cs" />
-    <Compile Include="ProductBusiness.cs" />
-    <Compile Include="POSBusiness.cs" />
+    <Compile Include="ProductBL.cs" />
+    <Compile Include="POSBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiteSetupBL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Marbale.BusinessObject\Marbale.BusinessObject.csproj">
