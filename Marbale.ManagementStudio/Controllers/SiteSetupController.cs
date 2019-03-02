@@ -11,7 +11,7 @@ namespace MarbaleManagementStudio.Controllers
     public class SiteSetupController : Controller
     {
         ProductBL pb = new ProductBL();
-       
+
         //
         // GET: /SiteSetup/
 
@@ -21,20 +21,17 @@ namespace MarbaleManagementStudio.Controllers
         }
         public ActionResult Settings()
         {
-           
-        var datatable = pb.GetSettings();
-        ViewBag.GetSetting = datatable;
+            var settings = pb.GetSettings();
+            ViewBag.GetSetting = settings;
             return View();
         }
         public ActionResult UpdateAppSettings(List<AppSetting> appSettings)
         {
-
             bool status = pb.SavePOSConfiguration(appSettings);
             return Json(status, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Values()
         {
-           
             return PartialView();
         }
         public ActionResult POS(string ValType)
@@ -42,7 +39,7 @@ namespace MarbaleManagementStudio.Controllers
             var datatable = pb.GetAppSettings(ValType);
 
             ViewBag.POSForm = datatable;
-    
+
             return PartialView();
         }
         public ActionResult Card()

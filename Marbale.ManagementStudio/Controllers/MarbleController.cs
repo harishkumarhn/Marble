@@ -9,7 +9,6 @@ namespace MarbaleManagementStudio.Controllers
 {
     public class MarbleController : Controller
     {
-
         private AdminBL admin;
         public MarbleController()
         {
