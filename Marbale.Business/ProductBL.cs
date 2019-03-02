@@ -72,7 +72,7 @@ namespace Marbale.Business
                     AppSetting setting = new AppSetting();
                     setting.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();//
                     setting.Caption = dr.IsNull("Caption") ? "" : dr["Caption"].ToString();//label
-                    setting.Value = dr.IsNull("Value") ? "" : dr["Value"].ToString();// current values
+                    setting.Value = dr.IsNull("DefaultValue") ? "" : dr["DefaultValue"].ToString();// current values
                     setting.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
                     setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
 

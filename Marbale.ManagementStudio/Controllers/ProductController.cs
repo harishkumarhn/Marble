@@ -33,7 +33,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
-        
+
         public ActionResult Edit(int id)
         {
             var product = productBussiness.GetProductById(id);
@@ -42,11 +42,8 @@ namespace MarbaleManagementStudio.Controllers
 
         public ActionResult InsertOrUpdate(Product pObject)
         {
-           
-                var result = productBussiness.InsertOrUpdateProduct(pObject);
-            
-                return RedirectToAction("ProductSetup", "Product");
-            
+            var result = productBussiness.InsertOrUpdateProduct(pObject);
+            return RedirectToAction("ProductSetup", "Product");
         }
         public int UpdateProducts(List<Product> products)
         {
