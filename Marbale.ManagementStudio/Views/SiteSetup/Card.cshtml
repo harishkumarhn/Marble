@@ -3,7 +3,7 @@
 }
 
 <h2>Card</h2>
-<div id="valuesContainer"style="background-color:lightcoral">
+<div id="valuesContainer"style="background-color:lightblue;">
     
       @foreach (var item in ViewBag.CardForm)
       {
@@ -40,6 +40,24 @@
 
     <button class="btn btn-primary btn-md" role="button" onclick="SaveAppSettings()">Save</button> 
 </div>
+<style>
+        label {
+    width:480px;
+    clear:left;
+    text-align:right;
+    padding-right:10px;
+}
+      .button-pos {
+        position: absolute;
+        right: 805px;
+        top: 869px;
+    }
+
+input,button, label,.ar {
+    float:left;
+}
+
+</style>
 <script>
     var appSettings = [];
     $('input[name=myInput]').change(function () {
@@ -75,7 +93,7 @@
 
             success: function (data) {
                 appSettings = [];
-                location.reload();
+                
               
             }
           });
@@ -83,7 +101,7 @@
     $(document).ready(function () {
         $('input[name="allcheck"]').each(function (index) {
             debugger
-            if ($(this).val() == "true")
+            if ($(this).val().toLowerCase() == "true")
 
                 ($(this).prop('checked', true));
         });
