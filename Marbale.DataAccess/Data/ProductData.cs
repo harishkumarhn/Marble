@@ -327,7 +327,7 @@ namespace Marbale.DataAccess
                     sqlParameters[1] = new SqlParameter("@Name", cat.Name);
                     sqlParameters[2] = new SqlParameter("@Active", cat.Active);
                     sqlParameters[3] = new SqlParameter("@ParentCategory", cat.ParentCategory);
-                    return conn.executeUpdateQuery("sp_UpdateOrInsertProductCategory", sqlParameters);
+                    return conn.executeUpdateQuery("sp_InsertUpdateOrProductCategory", sqlParameters);
                 }
             }
             catch (Exception e)
@@ -346,8 +346,7 @@ namespace Marbale.DataAccess
                 return conn.executeSelectQuery("sp_GetProductDatatypes");
             }
             catch (Exception)
-            {
-                
+            {                
                 throw;
             }
            
