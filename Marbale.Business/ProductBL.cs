@@ -1,18 +1,21 @@
 ﻿using Marbale.BusinessObject;
+using Marbale.BusinessObject.Messages;
 using Marbale.DataAccess;
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Marbale.Business
 {
     public class ProductBL
     {
         private ProductData productData;
-
+        
         public ProductBL()
         {
             productData = new ProductData();
@@ -22,6 +25,7 @@ namespace Marbale.Business
         {
             try
             {
+                
                 var typeListDataTable = productData.ProductDatatypes();
                 var typeList = new List<IdValue>();
                 typeList.Add(new IdValue() { Id = 0, Value = "Select" });
@@ -208,6 +212,7 @@ namespace Marbale.Business
                     product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
 
                     product.TypeList = typeList;
+                   
                     product.CategoryList = categoryList;
 
                     products.Add(product);
@@ -421,6 +426,39 @@ namespace Marbale.Business
             }
             return GameDiscountList;
 
+        }
+        #endregion
+        #region Messages
+        public List<MessagesModel> GetAllMessages()
+        {
+            List<MessagesModel> messageList = new List<MessagesModel>();
+          var datatable=  productData.GetAllMessages();
+          foreach (DataRow dr in datatable.Rows)
+          {
+              MessagesModel message = new MessagesModel();
+              message.MessageNo = dr.IsNull("MessageNo") ? 0 : int.Parse(dr["MessageNo"].ToString());
+              message.MessageName = dr.IsNull("MessageName") ? "" : (dr["MessageName"].ToString());
+              message.MessageDescription = dr.IsNull("MessageDescription") ? "" : (dr["MessageDescription"].ToString());
+              messageList.Add(message);
+          }
+          return messageList;
+           
+        }
+        public int UpdateMessages(List<MessagesModel>messages)
+        {
+            try
+            {
+                foreach (var message in messages)
+                {
+                    productData.UpdateMessages(message);
+                }
+                return 1;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
         #endregion
 

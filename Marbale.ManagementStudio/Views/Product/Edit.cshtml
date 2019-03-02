@@ -4,8 +4,8 @@
     ViewBag.Title = "CreateProduct";
     Layout = null;
 }
- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-<link href="~/Content/css/product.css" rel="stylesheet" />
+@* <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />*@
+@*<link href="~/Content/css/product.css" rel="stylesheet" />*@
 
     @using (Html.BeginForm("InsertOrUpdate", "Product", FormMethod.Post))
     {
@@ -14,12 +14,12 @@
                   <div id="productclass" style="border:2px solid black;border-color:cornsilk">
     <div class="form-group row" >
       <div class="col-xs-2">
-        <label for="ex1"> <b >Id:</b></label>  @Html.TextBoxFor(m => m.Id,new { @readonly = "readonly",@class="form-control" })
+        <label for="ex1"> <b >Id:</b></label>  @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "form-control" })
        
       </div>
       <div class="col-xs-3">
         <label for="ex2"><b>Name:</b></label>
-        @Html.TextBoxFor(m => m.Name, new { @class="form-control",placeholder = @Html.DisplayNameFor(n => n.Name)})
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.Name) })
 @*@Html.ValidationMessageFor(m => m.Name, "Please enter student name.", new { @class = "text-danger" })*@
 
 
@@ -27,35 +27,43 @@
         
       <div class="col-xs-1">
         <label for="ex3">Active:</label>
-     @Html.CheckBoxFor(m => m.Active, new { @class="form-control" ,@style="position:absolute;width:20px;"})
+     @Html.CheckBoxFor(m => m.Active, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
          <div class="col-xs-2">
         <label for="ex3">DisplayInPOS:</label>
-     @Html.CheckBoxFor(m => m.DisplayInPOS, new { @class="form-control",@style="position:absolute;width:20px;"})
+     @Html.CheckBoxFor(m => m.DisplayInPOS, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
            <div class="col-xs-3">
         <label for="ex4">POS Counter:</label>
-     @Html.TextBoxFor(m => m.POSCounter, new { @class="form-control"})
+     @Html.TextBoxFor(m => m.POSCounter, new { @class = "form-control" })
       </div>
        
     </div>
 
                     <div class="form-group row">
       <div class="col-xs-2">
-        <label for="ex3"> <b >DisplayGroup:</b></label>  @Html.TextBoxFor(m => m.DisplayGroup,new {@class="form-control" })
+        <label for="ex3"> <b >DisplayGroup:</b></label>  @Html.TextBoxFor(m => m.DisplayGroup, new { @class = "form-control" })
        
       </div>
       <div class="col-xs-3">
         <label for="ex4">Auto Generate CardNumber:</label>
-     @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class="form-control" ,@style="position:absolute;width:20px;"})
+     @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
          <div class="col-xs-1">
         <label for="ex3">OnlyVIP:</label>
-     @Html.CheckBoxFor(m => m.OnlyVIP, new { @class="form-control",@style="position:absolute;width:20px;"})
+     @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
                           <div class="col-xs-3">
         <label for="ex3">Category:</label>
-    @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
+                              <select name="categoryList" id="categoryList" class="form-control" style="height: 35px">
+              @foreach (var dow in Session["CategoryList"] as List<Marbale.BusinessObject.IdValue>)
+              {
+                
+                    <option value="@dow.Value">@dow.Value</option>
+                  
+              }
+            </select> 
+   @* @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })*@
       </div>
     </div>
    </div>
@@ -63,27 +71,27 @@
                   <div class="pricediv" style="border:2px solid black;border-color:cornsilk">
        <div class="form-group row">
       <div class="col-xs-2">
-        <label for="ex3"> <b >Card Face Value:</b></label>  @Html.TextBoxFor(m => m.FaceValue,new {@class="form-control" })
+        <label for="ex3"> <b >Card Face Value:</b></label>  @Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control" })
       </div>
       <div class="col-xs-2">
         <label for="ex1">Price:</label>
-    @Html.TextBoxFor(m => m.Price,new {@class="form-control" })
+    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
       </div>
          <div class="col-xs-2">
         <label for="ex2">TaxInclusive:</label>
-    @Html.CheckBoxFor(m => m.TaxInclusive, new { @class="form-control",@style="position:absolute;width:20px;"})
+    @Html.CheckBoxFor(m => m.TaxInclusive, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
                 <div class="col-xs-2">
         <label for="ex3">Final Price:</label>
-    @Html.TextBoxFor(m => m.FinalPrice,new {@class="form-control" })
+    @Html.TextBoxFor(m => m.FinalPrice, new { @class = "form-control" })
       </div>
                         <div class="col-xs-2">
         <label for="ex4">Effective Price:</label>
-  @Html.TextBoxFor(m => m.EffectivePrice,new {@class="form-control" })
+  @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "form-control" })
       </div>
                                  <div class="col-xs-2">
         <label for="ex4">Tax %:</label>
-  @Html.TextBoxFor(m => m.Taxpercent,new {@class="form-control" })
+  @Html.TextBoxFor(m => m.Taxpercent, new { @class = "form-control" })
       </div>
     </div>
                       </div>
@@ -91,39 +99,39 @@
                   <div class="Entitlement" style="border:2px solid black;border-color:cornsilk">
                     <div class="form-group row">
       <div class="col-xs-2">
-        <label for="ex3"> <b >Credits:</b></label> @Html.TextBoxFor(m => m.Credits,new {@class="form-control" })
+        <label for="ex3"> <b >Credits:</b></label> @Html.TextBoxFor(m => m.Credits, new { @class = "form-control" })
        
       </div>
       <div class="col-xs-2">
         <label for="ex1">Courtesy:</label>
-    @Html.TextBoxFor(m => m.Courtesy,new {@class="form-control" })
+    @Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control" })
       </div>
                 <div class="col-xs-2">
         <label for="ex3">Bonus:</label>
-    @Html.TextBoxFor(m => m.Bonus,new {@class="form-control" })
+    @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
       </div>
                         <div class="col-xs-2">
         <label for="ex4">CardValidFor:</label>
-  @Html.TextBoxFor(m => m.CardValidFor,new {@class="form-control" })
+  @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control" })
       </div>
     </div></div>
                   <b style="color:indianred">Miscellaneous:</b>
                   <div class="Miscellaneousclass" style="border:2px solid black;border-color:cornsilk">
       <div class="form-group row">
       <div class="col-xs-3">
-        <label for="ex1"> <b >StartDate:</b></label>@Html.TextBoxFor(m => m.StartDate,new {@class="form-control datepicker" ,@id="StartDate"})
+        <label for="ex1"> <b >StartDate:</b></label>@Html.TextBoxFor(m => m.StartDate, new { @class = "form-control datepicker", @id = "StartDate" })
       </div>
       <div class="col-xs-3">
         <label for="ex2">ExpiryDate:</label>
-    @Html.TextBoxFor(m => m.ExpiryDate ,new {@class="form-control" })
+    @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control" })
       </div>
                 <div class="col-xs-3">
         <label for="ex3">Last Updated User:</label>
-    @Html.TextBoxFor(m => m.LastUpdatedUser ,new {@class="form-control" })
+    @Html.TextBoxFor(m => m.LastUpdatedUser, new { @class = "form-control" })
       </div>
                         <div class="col-xs-3">
         <label for="ex4">LastUpdatedDate:</label>
-  @Html.TextBoxFor(m => m.LastUpdatedDate ,new {@class="form-control" })
+  @Html.TextBoxFor(m => m.LastUpdatedDate, new { @class = "form-control" })
       </div>
     </div></div>
                      

@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject;
+using Marbale.BusinessObject.Messages;
 using Marbale.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -125,6 +126,18 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetAllMessages()
+        {
+            return conn.executeSelectQuery("sp_GetMessages");
+        }
+        public int UpdateMessages(MessagesModel messages)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[3];
+            sqlParameters[0] = new SqlParameter("@MessageNo", messages.MessageNo);
+            sqlParameters[1] = new SqlParameter("@MessageName", messages.MessageName);
+            sqlParameters[2] = new SqlParameter("@MessageDescription", messages.MessageDescription);
+            return conn.executeUpdateQuery("sp_UpdateMessages", sqlParameters);
+        }
         public DataTable GetProducts()
         {
             try
@@ -226,6 +239,7 @@ namespace Marbale.DataAccess
             }
 
         }
+        
         public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, int DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory, bool Type)
         {
             try
