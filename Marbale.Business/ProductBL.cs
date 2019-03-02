@@ -288,7 +288,7 @@ namespace Marbale.Business
                     pCat.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                     pCat.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                     pCat.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    pCat.Category = dr.IsNull("ParentCategory") ? "" : (dr["ParentCategory"].ToString());
+                    pCat.ParentCategory = dr.IsNull("ParentCategory") ? "" : (dr["ParentCategory"].ToString());
                     listProductCat.Add(pCat);
                 }
                 if (listProductCat.Count != 0)
