@@ -45,10 +45,16 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.CardForm = datatable;
             return PartialView();
         }
+
         public string UpdateSettings(List<Settings> settings)
         {
             bool status = siteSetup.SaveSettings(settings);
             return "Updated";
+        }
+
+        public ActionResult UserRoles()
+        {
+            return View();
         }
 
     }

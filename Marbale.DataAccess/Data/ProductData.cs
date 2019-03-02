@@ -19,9 +19,6 @@ namespace Marbale.DataAccess
             conn = new DBConnection();
         }
 
-        
-
-
         public DataTable GetDefalutCashMode()
         {
             try

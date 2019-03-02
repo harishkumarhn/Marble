@@ -233,6 +233,7 @@
     <Content Include="Views\SiteSetup\Settings.cshtml" />
     <Content Include="Views\SiteSetup\Card.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\SiteSetup\UserRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
