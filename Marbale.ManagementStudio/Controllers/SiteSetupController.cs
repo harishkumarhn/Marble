@@ -1,17 +1,14 @@
-﻿using Marbale.Business;
-using Marbale.BusinessObject;
+﻿using Marbale.BusinessObject;
 using Marbale.BusinessObject.Messages;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MarbaleManagementStudio.Controllers
 {
     public class SiteSetupController : Controller
     {
-        ProductBL pb = new ProductBL();
+        SiteSetupBL siteSetup = new SiteSetupBL();
 
         //
         // GET: /SiteSetup/
@@ -22,13 +19,13 @@ namespace MarbaleManagementStudio.Controllers
         }
         public ActionResult Settings()
         {
-            var settings = pb.GetSettings();
+            var settings = siteSetup.GetSettings();
             ViewBag.GetSetting = settings;
             return View();
         }
         public ActionResult UpdateAppSettings(List<AppSetting> appSettings)
         {
-            bool status = pb.SavePOSConfiguration(appSettings);
+            bool status = siteSetup.SavePOSConfiguration(appSettings);
             return Json(status, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Values()
@@ -37,7 +34,7 @@ namespace MarbaleManagementStudio.Controllers
         }
         public ActionResult POS(string ValType)
         {
-            var datatable = pb.GetAppSettings(ValType);
+            var datatable = siteSetup.GetAppSettings(ValType);
 
             ViewBag.POSForm = datatable;
 
@@ -45,13 +42,14 @@ namespace MarbaleManagementStudio.Controllers
         }
         public ActionResult Card()
         {
-            var datatable = pb.GetAppSettings("Card");
+            var datatable = siteSetup.GetAppSettings("Card");
             ViewBag.CardForm = datatable;
             return PartialView();
         }
+
         public string UpdateSettings(List<Settings> settings)
         {
-            bool status = pb.SaveSettings(settings);
+            bool status = siteSetup.SaveSettings(settings);
             return "Updated";
         }
         public ActionResult Messages()
@@ -69,7 +67,9 @@ namespace MarbaleManagementStudio.Controllers
           }
           return status;
             
-          
+        public ActionResult UserRoles()
+        {
+            return View();
         }
 
     }
