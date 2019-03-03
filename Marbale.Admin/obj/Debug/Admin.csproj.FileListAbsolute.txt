@@ -1,9 +1,0 @@
-D:\Projects\Marbale\Marbale\bin\Debug\Marbale.exe.config
-D:\Projects\Marbale\Marbale\bin\Debug\Marbale.exe
-D:\Projects\Marbale\Marbale\bin\Debug\Marbale.pdb
-D:\Projects\Marbale\Marbale\obj\Debug\Admin.csprojResolveAssemblyReference.cache
-D:\Projects\Marbale\Marbale\obj\Debug\Marbale.Login.resources
-D:\Projects\Marbale\Marbale\obj\Debug\Marbale.Properties.Resources.resources
-D:\Projects\Marbale\Marbale\obj\Debug\Admin.csproj.GenerateResource.Cache
-D:\Projects\Marbale\Marbale\obj\Debug\Marbale.exe
-D:\Projects\Marbale\Marbale\obj\Debug\Marbale.pdb
