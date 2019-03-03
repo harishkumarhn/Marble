@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Marbale.BusinessObject.Messages;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -96,6 +97,18 @@ namespace Marbale.DataAccess
                 throw;
             }
 
+        }
+        public DataTable GetAllMessages()
+        {
+            return conn.executeSelectQuery("sp_GetMessages");
+        }
+        public int UpdateMessages(MessagesModel messages)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[3];
+            sqlParameters[0] = new SqlParameter("@MessageNo", messages.MessageNo);
+            sqlParameters[1] = new SqlParameter("@MessageName", messages.MessageName);
+            sqlParameters[2] = new SqlParameter("@MessageDescription", messages.MessageDescription);
+            return conn.executeUpdateQuery("sp_UpdateMessages", sqlParameters);
         }
     }
 }
