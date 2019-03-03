@@ -14,6 +14,7 @@ namespace MarbaleManagementStudio.Controllers
         public ProductBL productBussiness;
         public ProductController()
         {
+          
             productBussiness = new ProductBL();
         }
 
@@ -25,18 +26,21 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult ProductSetup()
         {
             var products = productBussiness.GetProducts();
+            Session["CategoryList"] = products[0].CategoryList;
             ViewBag.productDetails = products;
             return View();
         }
         [HttpGet]
         public ActionResult Edit()
         {
+             
             return View();
         }
 
         public ActionResult Edit(int id)
         {
             var product = productBussiness.GetProductById(id);
+
             return View(product);
         }
 

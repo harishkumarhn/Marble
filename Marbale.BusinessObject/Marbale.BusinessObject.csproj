@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messages\MessagesModel.cs" />
     <Compile Include="NameValue.cs" />
     <Compile Include="Setting\AppSetting.cs" />
     <Compile Include="Card\CardDetail.cs" />

@@ -1,5 +1,6 @@
 ﻿using Marbale.Business;
 using Marbale.BusinessObject;
+using Marbale.BusinessObject.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,23 @@ namespace MarbaleManagementStudio.Controllers
         {
             bool status = pb.SaveSettings(settings);
             return "Updated";
+        }
+        public ActionResult Messages()
+        {
+            var datatable = pb.GetAllMessages();
+            ViewBag.Messages = datatable;
+            return View();
+        }
+        public int UpdateMessages(List<MessagesModel> messageObject)
+        {
+          int status=  pb.UpdateMessages(messageObject);
+          if (status == 1)
+          {
+               RedirectToAction("SiteSetUp", "Messages");
+          }
+          return status;
+            
+          
         }
 
     }
