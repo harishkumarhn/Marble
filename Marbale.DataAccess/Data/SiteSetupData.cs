@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject.Messages;
+using Marbale.BusinessObject.SiteSetup;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -97,6 +98,42 @@ namespace Marbale.DataAccess
                 throw;
             }
 
+        }
+        public DataTable GetUserRoles()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetUserRoles");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public int InsertOrUpdateUserRoles(List<UserRole> userRoles)
+        {
+            try
+            {
+                foreach (var role in userRoles)
+                {
+                    SqlParameter[] sqlParameters = new SqlParameter[8];
+                    sqlParameters[0] = new SqlParameter("@Id", role.Id);
+                    sqlParameters[1] = new SqlParameter("@Role", role.Role);
+                    sqlParameters[2] = new SqlParameter("@Description", role.Description);
+                    sqlParameters[3] = new SqlParameter("@ManagerFlag", role.ManagerFlag);
+                    sqlParameters[4] = new SqlParameter("@POSClockInOut", role.POSClockInOut);
+                    sqlParameters[5] = new SqlParameter("@AllowPOSAccess", role.AllowPOSAccess);
+                    sqlParameters[6] = new SqlParameter("@AllowShiftOpenClose", role.AllowShiftOpenClose);
+                    sqlParameters[7] = new SqlParameter("@LastUpdatedBy", role.LastUpdatedBy == null ? "Harish" : role.LastUpdatedBy);
+                    conn.executeUpdateQuery("sp_InsertOrUpdateUserRole", sqlParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return 0;
         }
         public DataTable GetAllMessages()
         {

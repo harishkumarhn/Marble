@@ -14,7 +14,6 @@ namespace MarbaleManagementStudio.Controllers
         public ProductBL productBussiness;
         public ProductController()
         {
-          
             productBussiness = new ProductBL();
         }
 
@@ -30,10 +29,10 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.productDetails = products;
             return View();
         }
+
         [HttpGet]
         public ActionResult Edit()
         {
-             
             return View();
         }
 

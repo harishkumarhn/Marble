@@ -4,3 +4,109 @@
 }
 
 <h2>UserRole</h2>
+<a href="#" class="btn btn-primary btn-md" role="button" onclick="AddUserRole()">Add UserRole</a>
+<div class="userRoleContainer">
+    <div class="userRole">
+        <table id="marbleTable" class="table marbleTable">
+            <thead class="thead-dark">
+                <th>ID</th>
+                <th>Role</th>
+                <th>Description</th>
+                @*<th>Manager Flag</th>*@
+                <th>AllowPOSAccess</th>
+                <th>POS ClockInOut</th>
+                <th>AllowShift OpenClose</th>
+                <th>Last Updated By</th>
+                <th>Last Updated Date</th>
+            </thead>
+            @foreach (var item in ViewBag.userRoles)
+            {  
+                <tr onchange="UpdatedList(this)">
+                    <td>
+                        @item.Id  
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Role" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Description" class="gridText" />
+                    </td>
+                    @*<td>
+                        <input type="checkbox"  @(item.ManagerFlag ? "checked='checked'" : "") value="@item.ManagerFlag" />
+                    </td>*@
+                    <td>
+                        <input type="checkbox"  @(item.AllowPOSAccess ? "checked='checked'" : "") value="@item.AllowPOSAccess" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.POSClockInOut ? "checked='checked'" : "") value="@item.POSClockInOut" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.AllowShiftOpenClose ? "checked='checked'" : "") value="@item.AllowShiftOpenClose" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
+                    </td>
+                </tr>  
+            }
+        </table>
+        <button class="btn btn-primary btn-md" role="button" onclick="SaveUserRoles()">Save</button>
+    </div>
+    <div class="userModuleAccess">
+    </div>
+
+</div>
+<script>
+    function AddUserRole() {
+        var newRow = '<tr onchange = UpdatedList(this)>' + 
+        '<td> <a href="#"></a> </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        //'<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' +
+        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' + '</tr>';
+        $('#marbleTable tr:last').after(newRow);
+    }
+    function SaveUserRoles() {
+        var userRoles = [];
+        var table = document.getElementById('marbleTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                userRoles.push({
+                    Id: table.rows[r].cells[0].innerHTML,
+                    Role: table.rows[r].cells[1].children[0].value,
+                    Description: table.rows[r].cells[2].children[0].value,
+                    //ManagerFlag: table.rows[r].cells[3].children[0].value,
+                    AllowPOSAccess: table.rows[r].cells[4].children[0].checked,
+                    POSClockInOut: table.rows[r].cells[5].children[0].checked,
+                    AllowShiftOpenClose: table.rows[r].cells[6].children[0].checked
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateUserRoles", "SiteSetup")',
+            data: JSON.stringify({ userRoles: userRoles }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+    var updatedArray = [];
+    function UpdatedList(x) {
+        if (!updatedArray.includes(x.rowIndex)) {
+            updatedArray.push(x.rowIndex);
+        }
+    }
+</script>

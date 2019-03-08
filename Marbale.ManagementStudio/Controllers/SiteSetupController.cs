@@ -1,5 +1,6 @@
 ﻿using Marbale.BusinessObject;
 using Marbale.BusinessObject.Messages;
+using Marbale.BusinessObject.SiteSetup;
 using Marble.Business;
 using System;
 using System.Collections.Generic;
@@ -71,8 +72,14 @@ namespace MarbaleManagementStudio.Controllers
             
         public ActionResult UserRoles()
         {
+            var userRoles = siteSetup.GetUserRoles();
+            ViewBag.userRoles = userRoles;
             return View();
         }
-
+        public int UpdateUserRoles(List<UserRole> userRoles)
+        {
+            var result = siteSetup.InsertOrUpdateUserRoles(userRoles);
+            return 0;
+        }
     }
 }

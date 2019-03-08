@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject;
+using Marbale.BusinessObject.SiteSetup;
 using Marbale.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -121,6 +122,39 @@ namespace Marble.Business
 
         #endregion
 
+        public List<UserRole> GetUserRoles()
+        {
+            var dataTable = siteSetupData.GetUserRoles();
+            List<UserRole> userRoles = new List<UserRole>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                UserRole userRole = new UserRole();
+                userRole.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                userRole.Role = dr.IsNull("Role") ? "" : dr["Role"].ToString();
+                userRole.Description = dr.IsNull("Description") ? "" : dr["Description"].ToString();
+                userRole.ManagerFlag = dr.IsNull("ManagerFlag") ? false : bool.Parse(dr["ManagerFlag"].ToString());
+                userRole.AllowPOSAccess = dr.IsNull("AllowPOSAccess") ? false : bool.Parse(dr["AllowPOSAccess"].ToString());
+                userRole.AllowShiftOpenClose = dr.IsNull("AllowShiftOpenClose") ? false : bool.Parse(dr["AllowShiftOpenClose"].ToString());
+                userRole.POSClockInOut = dr.IsNull("POSClockInOut") ? false : bool.Parse(dr["POSClockInOut"].ToString());
+                userRole.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                userRole.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                userRoles.Add(userRole);
+            }
 
+            return userRoles;
+
+        }
+
+        public int InsertOrUpdateUserRoles(List<UserRole> userRoles)
+        {
+            try
+            {
+                return siteSetupData.InsertOrUpdateUserRoles(userRoles);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
