@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -136,6 +137,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\kendo.common.min.css" />
+    <Content Include="Content\css\kendo.default.css" />
     <Content Include="Content\css\kendo.common-material.min.css" />
     <Content Include="Content\css\kendo.material.min.css" />
     <Content Include="Content\css\layout.css" />
@@ -145,6 +148,7 @@
     <Content Include="Content\JS\bootstrap.min.js" />
     <Content Include="Content\JS\fontawesome.solid.js" />
     <Content Include="Content\JS\fontawesome.js" />
+    <Content Include="Content\JS\kendo.all.min.js" />
     <Content Include="Content\JS\kendo.all.min.js" />
     <Content Include="Content\JS\popper.min.js" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -242,6 +246,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\css\fonts\" />
+    <Folder Include="Content\css\Material\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -9,21 +9,21 @@
     <div class="userRole">
         <table id="marbleTable" class="table marbleTable">
             <thead class="thead-dark">
-                <th>ID</th>
-                <th>Role</th>
-                <th>Description</th>
-                @*<th>Manager Flag</th>*@
-                <th>AllowPOSAccess</th>
-                <th>POS ClockInOut</th>
-                <th>AllowShift OpenClose</th>
-                <th>Last Updated By</th>
-                <th>Last Updated Date</th>
+            <th>ID</th>
+            <th>Role</th>
+            <th>Description</th>
+            @*<th>Manager Flag</th>*@
+            <th>AllowPOSAccess</th>
+            <th>POS ClockInOut</th>
+            <th>AllowShift OpenClose</th>
+            <th>Last Updated By</th>
+            <th>Last Updated Date</th>
             </thead>
             @foreach (var item in ViewBag.userRoles)
-            {  
+            {
                 <tr onchange="UpdatedList(this)">
                     <td>
-                        @item.Id  
+                        @item.Id
                     </td>
                     <td>
                         <input type="text" value="@item.Role" class="gridText" />
@@ -32,35 +32,136 @@
                         <input type="text" value="@item.Description" class="gridText" />
                     </td>
                     @*<td>
-                        <input type="checkbox"  @(item.ManagerFlag ? "checked='checked'" : "") value="@item.ManagerFlag" />
-                    </td>*@
+                            <input type="checkbox"  @(item.ManagerFlag ? "checked='checked'" : "") value="@item.ManagerFlag" />
+                        </td>*@
                     <td>
-                        <input type="checkbox"  @(item.AllowPOSAccess ? "checked='checked'" : "") value="@item.AllowPOSAccess" />
+                        <input type="checkbox" @(item.AllowPOSAccess ? "checked='checked'" : "") value="@item.AllowPOSAccess" />
                     </td>
                     <td>
-                        <input type="checkbox"  @(item.POSClockInOut ? "checked='checked'" : "") value="@item.POSClockInOut" />
+                        <input type="checkbox" @(item.POSClockInOut ? "checked='checked'" : "") value="@item.POSClockInOut" />
                     </td>
                     <td>
-                        <input type="checkbox"  @(item.AllowShiftOpenClose ? "checked='checked'" : "") value="@item.AllowShiftOpenClose" />
+                        <input type="checkbox" @(item.AllowShiftOpenClose ? "checked='checked'" : "") value="@item.AllowShiftOpenClose" />
                     </td>
                     <td>
-                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
+                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled />
                     </td>
                     <td>
-                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
+                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled />
                     </td>
-                </tr>  
+                </tr>
             }
         </table>
         <button class="btn btn-primary btn-md" role="button" onclick="SaveUserRoles()">Save</button>
     </div>
     <div class="userModuleAccess">
-    </div>
+        <link href="~/Content/css/kendo.common.min.css" rel="stylesheet" />
+        <link href="~/Content/css/kendo.default.css" rel="stylesheet" />
+        <script src="~/Content/JS/kendo.all.min.js"></script>
+            <div class="demo-section k-content">
+                <div id="treeview"></div>
+            </div>
+            <script>
 
+                homogeneous = new kendo.data.HierarchicalDataSource({
+                    transport: {
+                        read: {
+                            url: "http://github-ci-staging.azurewebsites.net/api/Automobiles/DataSource",
+                            dataType: "json"
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "value",
+                            children: "items",
+                            checked: { from: "Checked", type: "boolean" }
+                        }
+                    }
+                });
+
+                $("#treeview").kendoTreeView({
+                    dataSource: [
+                                  {
+                                      "name": "Automobiles",
+                                      "value": 1,
+                                      "items": [
+                                        {
+                                            "name": "Bus",
+                                            "value": 2,
+                                            "items": [
+                                              {
+                                                  "name": "Ford",
+                                                  "value": 3,
+                                                   checked: true
+                                              },
+                                              {
+                                                  "name": "BMW",
+                                                  "value": 4
+                                              }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Car",
+                                            "value": 5,
+                                            "items": [
+                                              {
+                                                  "name": "Honda",
+                                                  "value": 6
+                                              },
+                                              {
+                                                  "name": "Ford",
+                                                  "value": 7
+                                              }
+                                            ]
+                                        }
+                                      ]
+                                  }
+                    ],
+                    dataTextField: ["name"],
+                    checkboxes: {
+                        checkChildren: true
+                    },
+                    dataBound: function (e) {
+                        var treeView = $('#treeview').data('kendoTreeView');
+                        //   treeView.expand(".k-item");
+                    }
+                });
+                function saveData() {
+                    debugger;
+                    var node;
+                    var checkedNodes = [];
+                    var nodes = $('#treeview').data('kendoTreeView').dataSource.view();
+
+                    for (var i = 0; i < nodes.length; i++) {
+                        node = nodes[i];
+                        if (node.checked) {
+                            checkedNodes.push(node);
+                        } else if (node.hasChildren) {
+                            var modules = node.items;
+                            for (var j = 0; j < modules.length; j++) {
+                                var pages = modules[j].items;
+                                for (var k = 0; k < childItems.length; k++) {
+                                    if (childItems[k].checked) {
+                                        checkedNodes.push(childItems[k]);
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    console.log(checkedNodes);
+                }
+
+            </script>
+        </div>
+        <button onclick="saveData()">
+            Save
+        </button>
 </div>
 <script>
     function AddUserRole() {
-        var newRow = '<tr onchange = UpdatedList(this)>' + 
+        var newRow = '<tr onchange = UpdatedList(this)>' +
         '<td> <a href="#"></a> </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <input type="text" value="" class="gridText" />  </td>' +
