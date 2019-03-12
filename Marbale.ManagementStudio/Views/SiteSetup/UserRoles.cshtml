@@ -63,10 +63,10 @@
             </div>
             <script>
 
-                homogeneous = new kendo.data.HierarchicalDataSource({
+                moduleActions = new kendo.data.HierarchicalDataSource({
                     transport: {
                         read: {
-                            url: "http://github-ci-staging.azurewebsites.net/api/Automobiles/DataSource",
+                            url: "/sitesetup/ModuleActionPermission",
                             dataType: "json"
                         }
                     },
@@ -80,43 +80,7 @@
                 });
 
                 $("#treeview").kendoTreeView({
-                    dataSource: [
-                                  {
-                                      "name": "Automobiles",
-                                      "value": 1,
-                                      "items": [
-                                        {
-                                            "name": "Bus",
-                                            "value": 2,
-                                            "items": [
-                                              {
-                                                  "name": "Ford",
-                                                  "value": 3,
-                                                   checked: true
-                                              },
-                                              {
-                                                  "name": "BMW",
-                                                  "value": 4
-                                              }
-                                            ]
-                                        },
-                                        {
-                                            "name": "Car",
-                                            "value": 5,
-                                            "items": [
-                                              {
-                                                  "name": "Honda",
-                                                  "value": 6
-                                              },
-                                              {
-                                                  "name": "Ford",
-                                                  "value": 7
-                                              }
-                                            ]
-                                        }
-                                      ]
-                                  }
-                    ],
+                    dataSource: moduleActions,
                     dataTextField: ["name"],
                     checkboxes: {
                         checkChildren: true

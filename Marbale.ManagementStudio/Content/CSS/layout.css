@@ -1,4 +1,4 @@
-﻿/*
+﻿*
     DEMO STYLE
 */
 
@@ -166,8 +166,4 @@ a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
-}
-
-.list-unstyled collapse show {
-    visibility: visible !important;
 }

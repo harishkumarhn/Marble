@@ -156,5 +156,14 @@ namespace Marble.Business
                 throw e;
             }
         }
+
+        public List<Module> GetModuleActions(string userId)
+        {
+            List<Module> List = new List<Module>();
+            List<Page> pages = new List<Page>();
+            pages.Add(new Page() { name = "setup",value = 2,@checked = true});
+            List.Add(new Module() { name = "Product", value = 1, @checked = true, items = pages });
+            return List;
+        }
     }
 }

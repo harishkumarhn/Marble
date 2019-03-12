@@ -14,3 +14,7 @@
     display: block;
     width: 1059px;
  }
+
+.gridText {
+    border-style:none;
+}
