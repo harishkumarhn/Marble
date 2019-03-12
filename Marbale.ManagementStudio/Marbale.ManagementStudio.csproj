@@ -136,12 +136,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\kendo.common-material.min.css" />
+    <Content Include="Content\css\kendo.material.min.css" />
+    <Content Include="Content\css\layout.css" />
     <Content Include="Content\css\product.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\images\marbleDefault.jpg" />
     <Content Include="Content\JS\bootstrap.min.js" />
     <Content Include="Content\JS\fontawesome.solid.js" />
     <Content Include="Content\JS\fontawesome.js" />
-    <Content Include="Content\CSS\style.css" />
+    <Content Include="Content\JS\kendo.all.min.js" />
     <Content Include="Content\JS\popper.min.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -252,6 +256,9 @@
       <Project>{d3791924-6c85-4aad-8bab-3e3cd23c22e6}</Project>
       <Name>Marbale.Business</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

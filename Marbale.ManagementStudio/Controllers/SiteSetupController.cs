@@ -81,5 +81,10 @@ namespace MarbaleManagementStudio.Controllers
             var result = siteSetup.InsertOrUpdateUserRoles(userRoles);
             return 0;
         }
+        //public JsonResult ModuleActionPermission()
+        //{
+        //    return Json(GetTreedata(), JsonRequestBehavior.AllowGet);  
+        //}
     }
+
 }
