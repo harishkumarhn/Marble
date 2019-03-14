@@ -5,6 +5,8 @@ using Marble.Business;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Linq;
+using MarbaleManagementStudio.Models;
 
 namespace MarbaleManagementStudio.Controllers
 {
@@ -83,7 +85,76 @@ namespace MarbaleManagementStudio.Controllers
         }
         public JsonResult ModuleActionPermission()
         {
-            return Json(siteSetup.GetModuleActions(""), JsonRequestBehavior.AllowGet);
+            List<Module> moduleTree = new List<Module>();
+
+            var moduleActions = siteSetup.GetModuleActions();
+
+
+            List<string> modules = new List<string>();
+            foreach (var module in moduleActions.GroupBy(x => x.Module))
+            {
+                modules.Add(module.ToList()[0].Module);
+            }
+
+            foreach (var moduleName in modules)
+            {
+                Module module = new Module();
+                module.name = moduleName;
+
+                List<Root> roots = new List<Root>();
+                module.items = roots;
+                
+                var rootsInModule = moduleActions.FindAll(x => x.Module == moduleName).ToList();
+                var rootsArray = rootsInModule.GroupBy(x => x.Root).Select(t => t.First());
+
+                foreach (var rootItem in rootsArray)
+                {
+                    Root rootObj = new Root();
+
+                    rootObj.name = rootItem.Root;
+                    rootObj.items = new List<Page>();
+
+                    var pagesInRoot = moduleActions.FindAll(x => x.Root == rootItem.Root).ToList();
+                    List<string> pagesArray = new List<string>();
+                    foreach (var page in pagesInRoot)
+                    {
+                        rootObj.items.Add(new Page() { name = page.Page });
+                    }
+                    roots.Add(rootObj);
+
+                }
+
+                moduleTree.Add(module);
+            }
+
+
+            //var modules = moduleActions.GroupBy(x => x.Module);
+
+            //foreach (var module in modules)
+            //{
+            //    var moduleName = module.ToList()[0].Module;
+            //    var roots = module.GroupBy(x => x.Root);
+
+            //    foreach (var root in roots)
+            //    {
+            //        Module action = new Module();
+            //        action.name = root.ToList()[0].Root;
+            //        action.value = root.ToList()[0].Id;
+            //        action.items = new List<Root>();
+
+            //        var pages = root.GroupBy(x => x.Page);
+            //        foreach (var page in pages)
+            //        {
+            //            var root = new Root();
+            //            item.name = page.ToList()[0].Page;
+            //            item.value = page.ToList()[0].Id;
+            //            action.items.Add(item);
+            //        }
+            //        moduleTree.Add(action);                   
+            //    }
+            //}
+
+            return Json(moduleTree, JsonRequestBehavior.AllowGet);
         }
     }
 

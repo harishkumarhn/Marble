@@ -157,13 +157,43 @@ namespace Marble.Business
             }
         }
 
-        public List<Module> GetModuleActions(string userId)
+        public List<AppModuleAction> GetModuleActions()
         {
-            List<Module> List = new List<Module>();
-            List<Page> pages = new List<Page>();
-            pages.Add(new Page() { name = "setup",value = 2,@checked = true});
-            List.Add(new Module() { name = "Product", value = 1, @checked = true, items = pages });
-            return List;
+            var dataTable = siteSetupData.GetAppModuleActions();
+            List<AppModuleAction> appModuleActions = new List<AppModuleAction>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                AppModuleAction appModuleAction = new AppModuleAction();
+                appModuleAction.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                appModuleAction.Module = dr.IsNull("Module") ? "" : dr["Module"].ToString();
+                appModuleAction.Root = dr.IsNull("Root") ? "" : dr["Root"].ToString();
+                appModuleAction.Page = dr.IsNull("Page") ? "" : dr["Page"].ToString();
+                appModuleAction.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
+                appModuleAction.DisplayOrder = dr.IsNull("DisplayOrder") ? 0 : int.Parse(dr["DisplayOrder"].ToString());
+                appModuleActions.Add(appModuleAction);
+            }
+
+            return appModuleActions;
+        }
+
+        public List<AppModuleAction> GetModuleActionsByRole(int roleId)
+        {
+            var dataTable = siteSetupData.GetModuleActionsByRole(roleId);
+            List<AppModuleAction> appModuleActions = new List<AppModuleAction>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                AppModuleAction appModuleAction = new AppModuleAction();
+                appModuleAction.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                appModuleAction.Module = dr.IsNull("Module") ? "" : dr["Module"].ToString();
+                appModuleAction.Root = dr.IsNull("Root") ? "" : dr["Root"].ToString();
+                appModuleAction.Page = dr.IsNull("Page") ? "" : dr["Page"].ToString();
+                appModuleAction.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
+                appModuleAction.DisplayOrder = dr.IsNull("DisplayOrder") ? 0 : int.Parse(dr["DisplayOrder"].ToString());
+                appModuleAction.Checked = dr.IsNull("IsChecked") ? false : bool.Parse(dr["IsChecked"].ToString());
+                appModuleActions.Add(appModuleAction);
+            }
+
+            return appModuleActions;
         }
     }
 }

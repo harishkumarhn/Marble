@@ -147,5 +147,31 @@ namespace Marbale.DataAccess
             sqlParameters[2] = new SqlParameter("@MessageDescription", messages.MessageDescription);
             return conn.executeUpdateQuery("sp_UpdateMessages", sqlParameters);
         }
+        public DataTable GetAppModuleActions()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetAppModuleActions");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetModuleActionsByRole(int roleId)
+        {
+
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@id", roleId);
+                return conn.executeSelectQuery("sp_GetRoleModuleActions", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
