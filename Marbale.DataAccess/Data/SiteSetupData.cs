@@ -110,5 +110,7 @@ namespace Marbale.DataAccess
             sqlParameters[2] = new SqlParameter("@MessageDescription", messages.MessageDescription);
             return conn.executeUpdateQuery("sp_UpdateMessages", sqlParameters);
         }
+
+       
     }
 }

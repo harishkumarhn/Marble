@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject;
+using Marbale.BusinessObject.Tax;
 using Marbale.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -322,5 +323,59 @@ namespace Marbale.Business
         }
         #endregion
 
+
+        public MasterTax GetAllTaxes()
+        {
+            DataTable Taxset = productData.GetTaxSet();
+            DataTable TaxStructure = productData.GetTaxStructure();
+            MasterTax taxlist = new MasterTax();
+            List<TaxSet> taxsetlist = new List<TaxSet>();
+            List<TaxStructure> taxstructurelist = new List<TaxStructure>();
+
+            foreach (DataRow dr in Taxset.Rows)
+            {
+                TaxSet tmodel = new TaxSet();
+                tmodel.TaxId = dr.IsNull("TaxId") ? 0 : int.Parse(dr["TaxId"].ToString());
+                tmodel.TaxName = dr.IsNull("TaxName") ? "" : (dr["TaxName"].ToString());
+                tmodel.TaxPercent = dr.IsNull("TaxPercent") ? 0 : decimal.Parse(dr["TaxPercent"].ToString());
+                tmodel.ActiveFlag = dr.IsNull("ActiveFlag") ? false : bool.Parse(dr["ActiveFlag"].ToString());
+                taxlist.Taxset.Add(tmodel);
+            }
+
+            foreach (DataRow dr in TaxStructure.Rows)
+            {
+                TaxStructure tsmodel = new TaxStructure();
+                tsmodel.TaxId = dr.IsNull("TaxId") ? 0 : int.Parse(dr["TaxId"].ToString());
+                tsmodel.TaxStructureId = dr.IsNull("TaxStructureId") ? 0 : int.Parse(dr["TaxStructureId"].ToString());
+                tsmodel.TaxStructureName = dr.IsNull("TaxStructureName") ? "" : (dr["TaxStructureName"].ToString());
+                tsmodel.TaxStructurePercentage = dr.IsNull("TaxStructurePercentage") ? 0 : decimal.Parse(dr["TaxStructurePercentage"].ToString());
+                taxlist.Taxstructure.Add(tsmodel);
+            }
+            return taxlist;
+        }
+
+        public int InsertUpdateTax(TaxSet taxmaster)
+        {
+            try
+            {
+                return productData.InsertUpdateTax(taxmaster);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public int InsertUpdateTax(TaxStructure taxstructure)
+        {
+            try
+            {
+                return productData.InsertUpdateTax(taxstructure);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

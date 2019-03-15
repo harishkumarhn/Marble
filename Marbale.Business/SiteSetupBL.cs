@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject;
+using Marbale.BusinessObject.Messages;
 using Marbale.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -121,6 +122,37 @@ namespace Marble.Business
 
         #endregion
 
+        public List<MessagesModel> GetAllMessages()
+        {
+            var dataTable = siteSetupData.GetAllMessages();
+          List<MessagesModel> message = new List<MessagesModel>();
+          foreach (DataRow dr in dataTable.Rows)
+          {
+              MessagesModel m = new MessagesModel();
+              m.MessageNo = dr.IsNull("MessageNo") ? 0 : int.Parse(dr["MessageNo"].ToString());
+              m.MessageName = dr.IsNull("MessageName") ? "" : (dr["MessageName"].ToString());
+              m.MessageDescription = dr.IsNull("MessageDescription") ? "" : (dr["MessageDescription"].ToString());
+              message.Add(m);
+          }
+          return message;
+        }
+        public int UpdateMessages(List<MessagesModel> messageObject)
+        {
+            try
+            {
+                foreach (var item in messageObject)
+                {
+                    siteSetupData.UpdateMessages(item);
+                }
+                return 1;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+             
+        }
 
     }
 }

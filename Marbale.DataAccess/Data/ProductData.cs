@@ -273,5 +273,51 @@ namespace Marbale.DataAccess
         }
 
 
+
+        public DataTable GetTaxSet()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetTaxSet");
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public DataTable GetTaxStructure()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetTaxStructure");
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public int InsertUpdateTax(BusinessObject.Tax.TaxSet taxset)
+        {
+           
+                SqlParameter[] sqlParameters = new SqlParameter[4];
+                sqlParameters[0] = new SqlParameter("@TaxId", taxset.TaxId);
+                sqlParameters[1] = new SqlParameter("@TaxName", taxset.TaxName);
+                sqlParameters[2] = new SqlParameter("@TaxPercent", taxset.TaxPercent);
+                sqlParameters[3] = new SqlParameter("@ActiveFlag", taxset.ActiveFlag);
+             return   conn.executeUpdateQuery("sp_InsertOrUpdateTax", sqlParameters);
+            
+        }
+        public int InsertUpdateTax(BusinessObject.Tax.TaxStructure taxstructure)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[4];
+            sqlParameters[0] = new SqlParameter("@TaxId", taxstructure.TaxId);
+            sqlParameters[1] = new SqlParameter("@TaxStructureId", taxstructure.TaxStructureId);
+            sqlParameters[2] = new SqlParameter("@TaxStructurePercentage", taxstructure.TaxStructurePercentage);
+            sqlParameters[3] = new SqlParameter("@TaxStructureName", taxstructure.TaxStructureName);
+            return conn.executeUpdateQuery("sp_InsertOrUpdateTaxStructure", sqlParameters);
+        }
     }
 }
