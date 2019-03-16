@@ -6,27 +6,26 @@
 <h2>UserRole</h2>
 <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddUserRole()">Add UserRole</a>
 <div class="userRoleContainer">
-    <div class="userRole">
         <table id="marbleTable" class="table marbleTable">
             <thead class="thead-dark">
-            <th>ID</th>
-            <th>Role</th>
-            <th>Description</th>
-            @*<th>Manager Flag</th>*@
-            <th>AllowPOSAccess</th>
-            <th>POS ClockInOut</th>
-            <th>AllowShift OpenClose</th>
-            <th>Last Updated By</th>
-            <th>Last Updated Date</th>
+                <th>ID</th>
+                <th>Role</th>
+                <th>Description</th>
+                @*<th>Manager Flag</th>*@
+                <th>AllowPOSAccess</th>
+                <th>POS ClockInOut</th>
+                <th>AllowShift OpenClose</th>
+                <th>Last Updated By</th>
+                <th>Last Updated Date</th>
             </thead>
             @foreach (var item in ViewBag.userRoles)
             {
-                <tr onchange="UpdatedList(this)">
+                <tr onchange="UpdatedList(this)" tabindex ="@item.Id" onfocus="UpdateTree(this)">
                     <td>
                         @item.Id
                     </td>
                     <td>
-                        <input type="text" value="@item.Role" class="gridText" />
+                        <input type="text" value="@item.Role" class="gridText" onfocus="UpdateTree(this)" />
                     </td>
                     <td>
                         <input type="text" value="@item.Description" class="gridText" />
@@ -52,76 +51,16 @@
                 </tr>
             }
         </table>
-        <button class="btn btn-primary btn-md" role="button" onclick="SaveUserRoles()">Save</button>
-    </div>
     <div class="userModuleAccess">
         <link href="~/Content/css/kendo.common.min.css" rel="stylesheet" />
         <link href="~/Content/css/kendo.default.css" rel="stylesheet" />
         <script src="~/Content/JS/kendo.all.min.js"></script>
-            <div class="demo-section k-content">
-                <div id="treeview"></div>
-            </div>
-            <script>
-
-                moduleActions = new kendo.data.HierarchicalDataSource({
-                    transport: {    
-                        read: {
-                            url: "/sitesetup/ModuleActionPermission",
-                            dataType: "json"
-                        }
-                    },
-                    schema: {
-                        model: {
-                            id: "value",
-                            children: "items",
-                            checked: { from: "Checked", type: "boolean" }
-                        }
-                    }
-                });
-
-                $("#treeview").kendoTreeView({
-                    dataSource: moduleActions,
-                    dataTextField: ["name"],
-                    checkboxes: {
-                        checkChildren: true
-                    },
-                    dataBound: function (e) {
-                        var treeView = $('#treeview').data('kendoTreeView');
-                        //   treeView.expand(".k-item");
-                    }
-                });
-                function saveData() {
-                    debugger;
-                    var node;
-                    var checkedNodes = [];
-                    var nodes = $('#treeview').data('kendoTreeView').dataSource.view();
-
-                    for (var i = 0; i < nodes.length; i++) {
-                        node = nodes[i];
-                        if (node.checked) {
-                            checkedNodes.push(node);
-                        } else if (node.hasChildren) {
-                            var modules = node.items;
-                            for (var j = 0; j < modules.length; j++) {
-                                var pages = modules[j].items;
-                                for (var k = 0; k < childItems.length; k++) {
-                                    if (childItems[k].checked) {
-                                        checkedNodes.push(childItems[k]);
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-
-                    console.log(checkedNodes);
-                }
-
-            </script>
+        <div class="demo-section k-content">
+            <div id="treeview"></div>
+            <div id="result"></div>
         </div>
-        <button onclick="saveData()">
-            Save
-        </button>
+    </div>
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveUserRoles()">Save</button>
 </div>
 <script>
     function AddUserRole() {
@@ -169,9 +108,71 @@
         });
     }
     var updatedArray = [];
-    function UpdatedList(x) {
-        if (!updatedArray.includes(x.rowIndex)) {
-            updatedArray.push(x.rowIndex);
+    function UpdatedList(row) {
+        if (!updatedArray.includes(row.rowIndex)) {
+            updatedArray.push(row.rowIndex);
+        }
+    }
+    moduleActions = new kendo.data.HierarchicalDataSource({
+        transport: {
+            read: {
+                url: "/sitesetup/ModuleActionPermission",
+                dataType: "json"
+            }
+        },
+        schema: {
+            model: {
+                id: "value",
+                children: "items"
+            }
+        }
+    });
+
+    $("#treeview").kendoTreeView({
+        dataSource: moduleActions,
+        dataTextField: ["name"],
+        checkboxes: {
+            checkChildren: true
+        },
+        check: onCheck,
+        dataBound: function (e) {
+            var treeView = $('#treeview').data('kendoTreeView');
+            treeView.expand(".k-item"); // in order to highlight the check boxes we need to expand and collpse
+            treeView.collapse(".k-item");
+        }
+    });
+    function checkedNodeIds(nodes, checkedNodes) {
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].checked) {
+                checkedNodes.push(nodes[i].id);
+
+            }
+
+            if (nodes[i].hasChildren) {
+                checkedNodeIds(nodes[i].children.view(), checkedNodes);
+            }
+        }
+    }
+    // show checked node IDs on datasource change  
+    function onCheck() {
+        var checkedNodes = [],
+            treeView = $("#treeview").data("kendoTreeView"),
+            message;
+
+        checkedNodeIds(treeView.dataSource.view(), checkedNodes);
+
+        if (checkedNodes.length > 0) {
+            message = "IDs of checked nodes: " + checkedNodes.join(",");
+        } else {
+            message = "No nodes checked.";
+        }
+
+        $("#result").html(message);
+    }
+    var treeId;
+    function UpdateTree(row) {
+        if (!updatedArray.includes(row.rowIndex)) {
+            updatedArray.push(row.rowIndex);
         }
     }
 </script>

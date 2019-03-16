@@ -126,6 +126,14 @@ namespace Marbale.DataAccess
                     sqlParameters[6] = new SqlParameter("@AllowShiftOpenClose", role.AllowShiftOpenClose);
                     sqlParameters[7] = new SqlParameter("@LastUpdatedBy", role.LastUpdatedBy == null ? "Harish" : role.LastUpdatedBy);
                     conn.executeUpdateQuery("sp_InsertOrUpdateUserRole", sqlParameters);
+
+                    if (!string.IsNullOrWhiteSpace(role.AavalibleModuleActions))
+                    {
+                        SqlParameter[] sqlParams = new SqlParameter[2];
+                        sqlParams[0] = new SqlParameter("@RoleId", role.Id);
+                        sqlParams[1] = new SqlParameter("@PageIds", role.Role);
+                        conn.executeUpdateQuery("sp_InsertUserRoleModuleAction", sqlParams);
+                    }
                 }
             }
             catch (Exception e)
