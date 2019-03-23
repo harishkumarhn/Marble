@@ -21,3 +21,33 @@
 .gridText {
     border-style:none;
 }
+.userRoleTbl {
+    width: 820px;
+    float: left;
+}
+.action {
+    position: absolute;
+    top: 500px;
+}
+.actionTreeHeader {
+    font-family: inherit;
+    margin-left: 15px;
+    font-weight: 700;
+}
+.k-treeview .k-checkbox-label{
+    margin-left: 5px;
+    top: 5px;
+}
+.k-treeview .k-item {
+    background-color: beige;
+}
+.k-block, .k-content, .k-dropdown .k-input, .k-popup, .k-widget {
+    color: #444;
+    background-color: steelblue !important;
+}
+.userModuleAccess {
+    width: 250px;
+    float: right;
+    margin-right: -13px;
+}
+

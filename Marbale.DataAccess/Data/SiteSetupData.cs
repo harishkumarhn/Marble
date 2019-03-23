@@ -129,9 +129,21 @@ namespace Marbale.DataAccess
 
                     if (!string.IsNullOrWhiteSpace(role.AavalibleModuleActions))
                     {
+                        if (role.AavalibleModuleActions.Contains("-Module") || role.AavalibleModuleActions.Contains("-Root"))
+                        {
+                            string[] arr = role.AavalibleModuleActions.Split(',');
+                            arr = arr.Skip(1).ToArray(); 
+                            role.AavalibleModuleActions = "";
+                            foreach(var item in arr)
+                            {
+                                role.AavalibleModuleActions = role.AavalibleModuleActions + item + ",";
+                            }
+                            role.AavalibleModuleActions = role.AavalibleModuleActions.Substring(0, role.AavalibleModuleActions.Length - 1);
+
+                        }
                         SqlParameter[] sqlParams = new SqlParameter[2];
-                        sqlParams[0] = new SqlParameter("@RoleId", role.Id);
-                        sqlParams[1] = new SqlParameter("@PageIds", role.Role);
+                        sqlParams[0] = new SqlParameter("@RoleId", role.Id.ToString());
+                        sqlParams[1] = new SqlParameter("@PageIds", role.AavalibleModuleActions);
                         conn.executeUpdateQuery("sp_InsertUserRoleModuleAction", sqlParams);
                     }
                 }

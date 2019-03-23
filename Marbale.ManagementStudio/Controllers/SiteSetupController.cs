@@ -83,11 +83,15 @@ namespace MarbaleManagementStudio.Controllers
             var result = siteSetup.InsertOrUpdateUserRoles(userRoles);
             return 0;
         }
-        public JsonResult ModuleActionPermission()
+        public JsonResult ModuleActionPermission(int roleId)
         {
             List<Module> moduleTree = new List<Module>();
-
-            var moduleActions = siteSetup.GetModuleActions();
+            var moduleActions = siteSetup.GetModuleActionsByRole(roleId);
+            GetTreeViewModel(moduleTree, moduleActions);
+            return Json(moduleTree, JsonRequestBehavior.AllowGet);
+        }
+        private static void GetTreeViewModel(List<Module> moduleTree, List<AppModuleAction> moduleActions)
+        {
             List<string> modules = new List<string>();
             foreach (var module in moduleActions.GroupBy(x => x.Module))
             {
@@ -98,11 +102,11 @@ namespace MarbaleManagementStudio.Controllers
             {
                 Module module = new Module();
                 module.name = moduleName;
-                module.value = moduleName +"-Module";
+                module.value = moduleName + "-Module";
 
                 List<Root> roots = new List<Root>();
                 module.items = roots;
-                
+
                 var rootsInModule = moduleActions.FindAll(x => x.Module == moduleName).ToList();
                 var rootsArray = rootsInModule.GroupBy(x => x.Root).Select(t => t.First());
 
@@ -118,9 +122,9 @@ namespace MarbaleManagementStudio.Controllers
                     List<string> pagesArray = new List<string>();
                     foreach (var page in pagesInRoot)
                     {
-                        rootObj.items.Add(new Page() 
-                        { 
-                            name = page.Page ,
+                        rootObj.items.Add(new Page()
+                        {
+                            name = page.Page,
                             value = page.Id.ToString(),
                             @checked = page.Checked
                         });
@@ -131,7 +135,6 @@ namespace MarbaleManagementStudio.Controllers
 
                 moduleTree.Add(module);
             }
-            return Json(moduleTree, JsonRequestBehavior.AllowGet);
         }
     }
 
