@@ -244,6 +244,8 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\SiteSetup\UserRoles.cshtml" />
     <Content Include="Views\SiteSetup\Messages.cshtml" />
+    <Content Include="Views\SiteSetup\Users.cshtml" />
+    <Content Include="Views\SiteSetup\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

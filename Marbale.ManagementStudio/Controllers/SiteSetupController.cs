@@ -14,6 +14,8 @@ namespace MarbaleManagementStudio.Controllers
     {
         SiteSetupBL siteSetup = new SiteSetupBL();
 
+        
+
         //
         // GET: /SiteSetup/
 
@@ -71,7 +73,7 @@ namespace MarbaleManagementStudio.Controllers
         //    }
         //    return status;
         //}
-            
+        #region User role
         public ActionResult UserRoles()
         {
             var userRoles = siteSetup.GetUserRoles();
@@ -136,6 +138,35 @@ namespace MarbaleManagementStudio.Controllers
                 moduleTree.Add(module);
             }
         }
+        #endregion
+        #region Users
+        public ActionResult Users()
+        {
+            var users = siteSetup.GetUsers();
+            ViewBag.users = users;
+            return View();
+        }
+        public ActionResult EditUser(int id)
+        {
+            var user = siteSetup.GetUserById(id);
+            return View(user);
+        }
+
+        public int InsertOrUpdateUsers(List<User> users)
+        {
+            var result = siteSetup.InsertOrUpdateUsers(users);
+            return 0;
+        }
+
+        public int AddOrEditUser(User user)
+        {
+            List<User> users = new List<User>();
+            users.Add(user);
+            var result = siteSetup.InsertOrUpdateUsers(users);
+            return 0;
+        }
+
+        #endregion
     }
 
 }

@@ -12,7 +12,7 @@
                 <th>ID</th>
                 <th>Role</th>
                 <th>Description</th>
-                @*<th>Manager Flag</th>*@
+                <th>Manager Flag</th>
                 <th>AllowPOSAccess</th>
                 <th>POS ClockInOut</th>
                 <th>AllowShift OpenClose</th>
@@ -31,9 +31,9 @@
                     <td onclick="UpdateTree(this)">
                         <input type="text" value="@item.Description" class="gridText" />
                     </td>
-                    @*<td>
-                            <input type="checkbox"  @(item.ManagerFlag ? "checked='checked'" : "") value="@item.ManagerFlag" />
-                        </td>*@
+                    <td onclick="UpdateTree(this)">
+                         <input type="checkbox"  @(item.ManagerFlag ? "checked='checked'" : "") value="@item.ManagerFlag" />
+                    </td>
                     <td onclick="UpdateTree(this)">
                         <input type="checkbox" @(item.AllowPOSAccess ? "checked='checked'" : "") value="@item.AllowPOSAccess" />
                     </td>
@@ -78,7 +78,7 @@
         '<td> <a href="#"></a> </td>' +
         '<td> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <input type="text" value="" class="gridText" />  </td>' +
-        //'<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
         '<td> <input type="checkbox" />  </td>' +
         '<td> <input type="checkbox" />  </td>' +
         '<td> <input type="checkbox" />  </td>' +
@@ -107,7 +107,7 @@
                     Id: table.rows[r].cells[0].innerHTML,
                     Role: table.rows[r].cells[1].children[0].value,
                     Description: table.rows[r].cells[2].children[0].value,
-                    //ManagerFlag: table.rows[r].cells[3].children[0].value,
+                    ManagerFlag: table.rows[r].cells[3].children[0].checked,
                     AllowPOSAccess: table.rows[r].cells[4].children[0].checked,
                     POSClockInOut: table.rows[r].cells[5].children[0].checked,
                     AllowShiftOpenClose: table.rows[r].cells[6].children[0].checked,
