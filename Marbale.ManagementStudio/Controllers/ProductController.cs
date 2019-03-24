@@ -43,6 +43,10 @@ namespace MarbaleManagementStudio.Controllers
 
             return View(product);
         }
+        public ActionResult ClosePopUp()
+        {
+            return View();
+        }
 
         public ActionResult InsertOrUpdate(Product pObject)
         {

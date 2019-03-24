@@ -7,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Marbale.BusinessObject.SiteSetup;
 namespace Marble.Business
 {
     public class SiteSetupBL
@@ -154,5 +154,35 @@ namespace Marble.Business
              
         }
 
+
+        public int UpdateTaskType(List<Marbale.BusinessObject.SiteSetup.TaskTypeModel> tasktype)
+        {
+            int s = 0;
+            foreach (var item in tasktype)
+            {
+                 s= siteSetupData.UpdateTaskType(item);
+            }
+            return s;
+           
+            
+        }
+
+        public List<TaskTypeModel> GetTaskType()
+        {
+            var datatable = siteSetupData.GetTaskType();
+            List<TaskTypeModel> tasktype = new List<TaskTypeModel>();
+            foreach (DataRow dr in datatable.Rows)
+            {
+                TaskTypeModel m = new TaskTypeModel();
+                m.TaskTypeId = dr.IsNull("TaskTypeId") ? 0 : int.Parse(dr["TaskTypeId"].ToString());
+                m.TaskType = dr.IsNull("TaskType") ? "" : (dr["TaskType"].ToString());
+                m.TaskTypeName = dr.IsNull("TaskTypeName") ? "" : (dr["TaskTypeName"].ToString());
+                m.RequiresManagerApproval = dr.IsNull("RequiresManagerApproval") ? false : bool.Parse(dr["RequiresManagerApproval"].ToString());
+                m.DispalyinPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
+                tasktype.Add(m);
+            }
+            return tasktype;
+
+        }
     }
 }

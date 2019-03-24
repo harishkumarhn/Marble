@@ -55,13 +55,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting\Settings.cs" />
     <Compile Include="Discount\TransactionDiscount.cs" />
+    <Compile Include="SiteSetup\TaskTypeModel.cs" />
     <Compile Include="Tax\MasterTax.cs" />
     <Compile Include="Tax\TaxSet.cs" />
     <Compile Include="Tax\TaxStructure.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SiteSetup\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

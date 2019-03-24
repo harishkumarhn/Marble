@@ -111,6 +111,29 @@ namespace Marbale.DataAccess
             return conn.executeUpdateQuery("sp_UpdateMessages", sqlParameters);
         }
 
-       
+
+
+        public int UpdateTaskType(BusinessObject.SiteSetup.TaskTypeModel tasktype)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[5];
+            sqlParameters[0] = new SqlParameter("@TaskTypeId", tasktype.TaskTypeId);
+            sqlParameters[1] = new SqlParameter("@TaskType", tasktype.TaskType);
+            sqlParameters[2] = new SqlParameter("@TaskTypeName", tasktype.TaskTypeName);
+            sqlParameters[3] = new SqlParameter("@RequiresManagerApproval", tasktype.RequiresManagerApproval);
+            sqlParameters[4] = new SqlParameter("@DispalyinPOS", tasktype.DispalyinPOS);
+            return conn.executeUpdateQuery("sp_UpdateTaskType", sqlParameters);
+        }
+
+        public DataTable GetTaskType()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetTaskType");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -144,7 +144,7 @@ namespace Marbale.DataAccess
                 sqlParameters[17] = new SqlParameter("@LastUpdatedUser", string.IsNullOrEmpty(product.LastUpdatedUser) ? "" : product.LastUpdatedUser);
                 sqlParameters[18] = new SqlParameter("@TaxName", product.TaxName);
                 sqlParameters[19] = new SqlParameter("@StartDate", product.StartDate);
-                sqlParameters[20] = new SqlParameter("@LastUpdatedDate", product.LastUpdatedDate);
+                sqlParameters[20] = new SqlParameter("@LastUpdatedDate", DateTime.Now);
                 sqlParameters[21] = new SqlParameter("@Games", product.Games);
                 sqlParameters[22] = new SqlParameter("@CreditsPlus", product.CreditsPlus);
                 sqlParameters[23] = new SqlParameter("@Credits", product.Credits);

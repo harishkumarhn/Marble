@@ -8,7 +8,7 @@
 <div class="taxsetmodel">
 <div id="taxtable">
  <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Tax</a>
-    <table id="marbleTable" class="table marbleTable">  
+    <table id="marbleTable" class="table marbleTable" style="background-color:indianred;">  
         <thead>  
             <th>ID</th>  
             <th>Tax Name</th>  
@@ -33,6 +33,7 @@
     </table>
     </div>
  <button class="btn btn-primary btn-md" role="button" onclick="SaveTax()">Save</button> 
+      <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
     </div> 
     <br /><br />
     <div id="taxstructure">
@@ -70,16 +71,12 @@
         $('#marbleTable tr:last').after(newRow);
     }
     function UpdatedList(x) {
-        debugger;
         updatedArray = [];
             updatedArray.push(x.rowIndex);
     }
     function SaveTax() {
-        debugger
       var table=  document.getElementById('marbleTable');
       var id = updatedArray[0];
-      //var id = table.tBodies[0].rows[listid-1].firstElementChild.textContent.trim();
-       
         var TaxName = $('#TaxName' + id).val();
         var TaxPercent = $('#TaxPercent' + id).val();
         var ActiveFlag = $('#ActiveFlag' + id).val();
@@ -108,6 +105,17 @@
 
 </script>
 <style>
-    .highlight { background-color: darkmagenta; }
+    table {
+  border-collapse: collapse;
+ 
+}
+       input {
+        border:none;
+        background-color:indianred;
+    }
+    table, th, td {
+  border: 1px solid black;
+}
+.highlight { background-color: darkmagenta; }
 </style>
     
