@@ -11,10 +11,7 @@
 <table id="messagesTable" class="table messagesTable table-bordered" style="display: block; height: 500px; overflow-x: auto">  
         <thead class="back-color">  
             <th >MessageNo</th>  
-           
-            <th>Message</th>  
-           
-               
+            <th>Message</th>    
         </thead>  
         @foreach (var item in ViewBag.Messages)  
         {  
@@ -27,7 +24,8 @@
         }  
     </table>
     
-    <button class="btn btn-primary btn-md" role="button" onclick="SaveMeesages()">Save</button>    
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveMeesages()">Save</button>  
+     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>  
 </div>
 <style>
     .back-color {
@@ -41,9 +39,7 @@
     }
 </style>
      <script>
-        
          function SaveMeesages() {
-             debugger
              var messageObject = [];
              var table = document.getElementById('messagesTable');
              for (var r = 1, n = table.rows.length; r < n; r++) {
@@ -63,9 +59,7 @@
                  data: JSON.stringify({ messageObject: messageObject }),
             dataType: "json",
             success: function (data) {
-                debugger
                 $('#successMessages').text('Data Saved Successfully');
-
             },
             error: function (e) {
               
@@ -73,10 +67,8 @@
             }
         });
     }
-         
          var updatedArray = [];
          function UpdatedList(x) {
-             debugger
              if (!updatedArray.includes(x.rowIndex)) {
                  updatedArray.push(x.rowIndex);
              }

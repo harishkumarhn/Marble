@@ -1,5 +1,6 @@
 ﻿using Marbale.BusinessObject;
 using Marbale.BusinessObject.SiteSetup;
+using Marbale.BusinessObject.Messages;
 using Marbale.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Marbale.BusinessObject.SiteSetup;
 namespace Marble.Business
 {
     public class SiteSetupBL
@@ -140,11 +141,70 @@ namespace Marble.Business
                 userRole.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                 userRoles.Add(userRole);
             }
-
             return userRoles;
+        }
+        public List<MessagesModel> GetAllMessages()
+        {
+            var dataTable = siteSetupData.GetAllMessages();
+          List<MessagesModel> message = new List<MessagesModel>();
+          foreach (DataRow dr in dataTable.Rows)
+          {
+              MessagesModel m = new MessagesModel();
+              m.MessageNo = dr.IsNull("MessageNo") ? 0 : int.Parse(dr["MessageNo"].ToString());
+              m.MessageName = dr.IsNull("MessageName") ? "" : (dr["MessageName"].ToString());
+              m.MessageDescription = dr.IsNull("MessageDescription") ? "" : (dr["MessageDescription"].ToString());
+              message.Add(m);
+          }
+          return message;
+        }
+        public int UpdateMessages(List<MessagesModel> messageObject)
+        {
+            try
+            {
+                foreach (var item in messageObject)
+                {
+                    siteSetupData.UpdateMessages(item);
+                }
+                return 1;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+             
         }
 
+
+        public int UpdateTaskType(List<Marbale.BusinessObject.SiteSetup.TaskTypeModel> tasktype)
+        {
+            int s = 0;
+            foreach (var item in tasktype)
+            {
+                 s= siteSetupData.UpdateTaskType(item);
+            }
+            return s;
+           
+            
+        }
+
+        public List<TaskTypeModel> GetTaskType()
+        {
+            var datatable = siteSetupData.GetTaskType();
+            List<TaskTypeModel> tasktype = new List<TaskTypeModel>();
+            foreach (DataRow dr in datatable.Rows)
+            {
+                TaskTypeModel m = new TaskTypeModel();
+                m.TaskTypeId = dr.IsNull("TaskTypeId") ? 0 : int.Parse(dr["TaskTypeId"].ToString());
+                m.TaskType = dr.IsNull("TaskType") ? "" : (dr["TaskType"].ToString());
+                m.TaskTypeName = dr.IsNull("TaskTypeName") ? "" : (dr["TaskTypeName"].ToString());
+                m.RequiresManagerApproval = dr.IsNull("RequiresManagerApproval") ? false : bool.Parse(dr["RequiresManagerApproval"].ToString());
+                m.DispalyinPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
+                tasktype.Add(m);
+            }
+            return tasktype;
+
+        }
         public int InsertOrUpdateUserRoles(List<UserRole> userRoles)
         {
             try

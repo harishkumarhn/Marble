@@ -58,6 +58,10 @@
     <Compile Include="SiteSetup\AppModuleAction.cs" />
     <Compile Include="SiteSetup\User.cs" />
     <Compile Include="SiteSetup\UserRole.cs" />
+    <Compile Include="SiteSetup\TaskTypeModel.cs" />
+    <Compile Include="Tax\MasterTax.cs" />
+    <Compile Include="Tax\TaxSet.cs" />
+    <Compile Include="Tax\TaxStructure.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
