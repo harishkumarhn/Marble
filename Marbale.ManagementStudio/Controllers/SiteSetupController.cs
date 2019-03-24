@@ -13,9 +13,6 @@ namespace MarbaleManagementStudio.Controllers
     public class SiteSetupController : Controller
     {
         SiteSetupBL siteSetup = new SiteSetupBL();
-
-        
-
         //
         // GET: /SiteSetup/
 
@@ -146,7 +143,7 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.users = users;
             return View();
         }
-        public ActionResult EditUser(int id)
+        public ActionResult EditUser(int id = 0)
         {
             var user = siteSetup.GetUserById(id);
             return View(user);

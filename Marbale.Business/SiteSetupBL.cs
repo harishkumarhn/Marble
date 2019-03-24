@@ -265,8 +265,50 @@ namespace Marble.Business
         {
             User user = new User();
 
+            List<IdValue> rolesList;
+            List<IdValue> statusList;
+            GetUserRoleAndStatusList(out rolesList, out statusList);
+            if (id > 0)
+            {
+                var dataTable = siteSetupData.GetUserById(id);
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    user.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    user.Role = dr.IsNull("Role") ? "" : dr["Role"].ToString();
+                    user.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                    user.LoginId = dr.IsNull("LoginId") ? "" : dr["LoginId"].ToString();
+                    user.Manager = dr.IsNull("Manager") ? "" : dr["Manager"].ToString();
+                    user.Department = dr.IsNull("Department") ? "" : dr["Department"].ToString();
+                    user.Email = dr.IsNull("Email") ? "" : dr["Email"].ToString();
+                    user.CreatedBy = dr.IsNull("CreatedBy") ? "" : dr["CreatedBy"].ToString();
+                    user.LastLoginTime = dr.IsNull("LastLoginTime") ? new DateTime() : Convert.ToDateTime(dr["LastLoginTime"].ToString());
+                    user.LastLogoutTime = dr.IsNull("LastLogoutTime") ? new DateTime() : Convert.ToDateTime(dr["LastLogoutTime"].ToString());
+                    user.EmpStartDate = dr.IsNull("EmpStartDate") ? new DateTime() : Convert.ToDateTime(dr["EmpStartDate"].ToString());
+                    user.EmpEndDate = dr.IsNull("EmpEndDate") ? new DateTime() : Convert.ToDateTime(dr["EmpEndDate"].ToString());
+                    user.EmpEndReason = dr.IsNull("EmpEndReason") ? "" : dr["EmpEndReason"].ToString();
+                    user.Status = dr.IsNull("Status") ? "" : dr["Status"].ToString();
+                    user.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
+                    user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                    user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
+
+                    user.Roles = rolesList;
+                    user.Statuses = statusList;
+                }
+            }
+            else
+            {
+                user.Roles = rolesList;
+                user.Statuses = statusList;
+            }
+            return user;
+
+        }
+
+        private void GetUserRoleAndStatusList(out List<IdValue> rolesList, out List<IdValue> statusList)
+        {
             var roles = GetUserRoles();
-            var rolesList = new List<IdValue>();
+            rolesList = new List<IdValue>();
             rolesList.Add(new IdValue() { Id = 0, Value = "Select" });
             foreach (var role in roles)
             {
@@ -276,39 +318,10 @@ namespace Marble.Business
                 rolesList.Add(idValues);
             }
 
-            var statusList = new List<IdValue>();
+            statusList = new List<IdValue>();
             statusList.Add(new IdValue() { Id = 0, Value = "Select" });
             statusList.Add(new IdValue() { Id = 0, Value = "Active" });
             statusList.Add(new IdValue() { Id = 0, Value = "Inactive" });
-
-            var dataTable = siteSetupData.GetUserById(id);
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                user.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                user.Role = dr.IsNull("Role") ? "" : dr["Role"].ToString();
-                user.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                user.LoginId = dr.IsNull("LoginId") ? "" : dr["LoginId"].ToString();
-                user.Manager = dr.IsNull("Manager") ? "" : dr["Manager"].ToString();
-                user.Department = dr.IsNull("Department") ? "" : dr["Department"].ToString();
-                user.Email = dr.IsNull("Email") ? "" : dr["Email"].ToString();
-                user.CreatedBy = dr.IsNull("CreatedBy") ? "" : dr["CreatedBy"].ToString();
-                user.LastLoginTime = dr.IsNull("LastLoginTime") ? new DateTime() : Convert.ToDateTime(dr["LastLoginTime"].ToString());
-                user.LastLogoutTime = dr.IsNull("LastLogoutTime") ? new DateTime() : Convert.ToDateTime(dr["LastLogoutTime"].ToString());
-                user.EmpStartDate = dr.IsNull("EmpStartDate") ? new DateTime() : Convert.ToDateTime(dr["EmpStartDate"].ToString());
-                user.EmpEndDate = dr.IsNull("EmpEndDate") ? new DateTime() : Convert.ToDateTime(dr["EmpEndDate"].ToString());
-                user.EmpEndReason = dr.IsNull("EmpEndReason") ? "" : dr["EmpEndReason"].ToString();
-                user.Status = dr.IsNull("Status") ? "" : dr["Status"].ToString();
-                user.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
-                user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
-                user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
-
-                user.Roles = rolesList;
-                user.Statuses = statusList;
-            }
-
-            return user;
-
         }
 
     }

@@ -150,6 +150,9 @@
     </button>
 </div>
 <script>
+    function targetmodel() {
+        $('#modelbody').load('/SiteSetup/EditUser');
+    }
     function AddUser() {
         var rolesOptions = '';
         var statusListOptions = '';
@@ -202,10 +205,10 @@
                 users.push({
                     Id: table.rows[r].cells[0].innerHTML,
                     Name: table.rows[r].cells[2].children[0].value,
-                    Role: table.rows[r].cells[3].children[0].value,
+                    Role: table.rows[r].cells[3].children[0].selectedOptions[0].innerText,
                     Email: table.rows[r].cells[4].children[0].value,
                     LoginId: table.rows[r].cells[5].children[0].value,
-                    Status: table.rows[r].cells[6].children[0].value,
+                    Status: table.rows[r].cells[6].children[0].selectedOptions[0].innerText,
                     POSCounter: table.rows[r].cells[7].children[0].value,
                     Department: table.rows[r].cells[8].children[0].value,
                     Manager: table.rows[r].cells[9].children[0].value,

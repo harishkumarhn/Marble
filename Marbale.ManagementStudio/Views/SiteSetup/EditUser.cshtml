@@ -15,17 +15,17 @@
                         <label for="ex1"><b>Id:</b></label>
                         @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "form-control" })
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
                         <label for="ex2"><b>Name:</b></label>
                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.Name) })
                     </div>
 
-                     <div class="col-xs-3">
+                     <div class="col-xs-2">
                         <label for="ex2"><b>LoginId:</b></label>
                         @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.LoginId) })
                     </div>
 
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
                         <label for="ex2"><b>Email:</b></label>
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.Email) })
                     </div>
@@ -35,16 +35,16 @@
                 <div class="form-group row">
 
                     <div class="col-xs-2">
-                        <label for="ex3"><b>Manager:</b></label>
+                        <label for="ex4"><b>Manager:</b></label>
                         @Html.TextBoxFor(m => m.Manager, new { @class = "form-control" })
                     </div>
                      <div class="col-xs-2">
-                        <label for="ex3"><b>Department:</b></label>
+                        <label for="ex4"><b>Department:</b></label>
                         @Html.TextBoxFor(m => m.Department, new { @class = "form-control" })
                     </div>
                    
-                    <div class="col-xs-3">
-                        <label for="ex3">Status:</label>
+                    <div class="col-xs-2">
+                        <label for="ex4"><b>Status:</b></label>
                         <select name="categoryList" id="categoryList" class="form-control" style="height: 35px">
                             @foreach (var status in Model.Statuses)
                             {
@@ -52,16 +52,16 @@
                             }
                         </select>
                     </div>
-                     <div class="col-xs-3">
-                        <label for="ex4">Company Admin</label>
+                     <div class="col-xs-2">
+                        <label for="ex4"><b> Admin</b></label>
                         @Html.CheckBoxFor(m => m.CompanyAdmin, new { @class = "form-control", @style = "position:absolute;width:20px;" })
                     </div>
                 </div>
             </div>
             <div class="pricediv" style="border: 2px solid black; border-color: cornsilk">
                 <div class="form-group row">
-                     <div class="col-xs-3">
-                        <label for="ex3">Role:</label>
+                     <div class="col-xs-2">
+                        <label for="ex4"><b>Role:</b></label>
                         <select name="Roles" id="Roles" class="form-control" style="height: 35px">
                             @foreach (var role in Model.Roles)
                             {
@@ -70,12 +70,12 @@
                         </select>
                     </div>
 
-                    <div class="col-xs-3">
-                        <label for="ex4">POS Counter:</label>
+                    <div class="col-xs-2">
+                        <label for="ex4"><b>POS Counter:</b></label>
                         @Html.TextBoxFor(m => m.POSCounter, new { @class = "form-control" })
                     </div>
-                    <div class="col-xs-3">
-                        <label for="ex4">Invalid Attempts</label>
+                    <div class="col-xs-2">
+                        <label for="ex4"><b>Invalid Attempts</b></label>
                         @Html.LabelFor(m => m.InvalidAttempts, new { @class = "form-control" })
                     </div>
                    
@@ -86,26 +86,26 @@
                 <div class="form-group row">
                     
                     <div class="col-xs-2">
-                        <label for="ex4">Employment Start Date:</label>
+                        <label for="ex4"><b>Employment Start Date:</b></label>
                         @Html.TextBoxFor(m => m.EmpStartDate, new { @class = "form-control" })
                     </div>
 
                     <div class="col-xs-2">
-                        <label for="ex4">Employment End Date:</label>
+                        <label for="ex4"><b>Employment End Date:</b></label>
                         @Html.TextBoxFor(m => m.EmpEndDate, new { @class = "form-control" })
                     </div>
                     <div class="col-xs-2">
-                        <label for="ex4">Employment End Reason:</label>
+                        <label for="ex4"><b>Employment End Reason:</b></label>
                         @Html.TextBoxFor(m => m.EmpEndReason, new { @class = "form-control" })
                     </div>
 
                     <div class="col-xs-2">
-                        <label for="ex3"><b>LastLoginTime:</b></label>
+                        <label for="ex4"><b>LastLoginTime:</b></label>
                         @Html.LabelFor(m => m.LastLoginTime, new { @class = "form-control" })
 
                     </div>
                     <div class="col-xs-2">
-                        <label for="ex1">LastLogoutTime:</label>
+                        <label for="ex1"><b>LastLogoutTime:</b></label>
                         @Html.LabelFor(m => m.LastLogoutTime, new { @class = "form-control" })
                     </div>
                    
@@ -113,16 +113,16 @@
             </div>
             <div class="Miscellaneousclass" style="border: 2px solid black; border-color: cornsilk">
                 <div class="form-group row">
-                    <div class="col-xs-3">
-                        <label for="ex2">CreatedBy:</label>
+                    <div class="col-xs-2">
+                        <label for="ex2"><b>CreatedBy:</b></label>
                         @Html.TextBoxFor(m => m.CreatedBy, new { @class = "form-control" })
                     </div>
-                    <div class="col-xs-3">
-                        <label for="ex2">CreationDate:</label>
+                    <div class="col-xs-2">
+                        <label for="ex2"><b>CreationDate:</b></label>
                         @Html.LabelFor(m => m.CreationDate, new { @class = "form-control" })
                     </div>
-                    <div class="col-xs-3">
-                        <label for="ex4">LastUpdatedDate:</label>
+                    <div class="col-xs-2">
+                        <label for="ex4"><b>LastUpdatedDate:</b></label>
                         @Html.LabelFor(m => m.LastUpdatedDate, new { @class = "form-control" })
                     </div>
                 </div>
