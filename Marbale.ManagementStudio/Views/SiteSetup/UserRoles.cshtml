@@ -8,7 +8,7 @@
         <div class="second" style="width: 1019px;">
             <table id="marbleTable" class="table marbleTable userRoleTbl">
                 <thead class="thead-dark">
-                    <th>ID</th>
+                    <th hidden>ID</th>
                     <th>Role</th>
                     <th>Description</th>
                     <th>Manager Flag</th>
@@ -21,7 +21,7 @@
                 @foreach (var item in ViewBag.userRoles)
                 {
                     <tr onchange="UpdatedList(this)" tabindex ="@item.Id">
-                        <td onclick="UpdateTree(this)">
+                        <td onclick="UpdateTree(this)" hidden>
                             @item.Id
                         </td>
                         <td onclick="UpdateTree(this)">

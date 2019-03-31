@@ -27,12 +27,12 @@
     </div>
 </div>
 <div class="first">
-    <div class="second">
+    <div class="second" style="margin-left:20.2em; ">
         <table id="marbleTable" class="table">
-            <thead class="thead-dark">
+            <thead>
                 <th class="headerCol">ID</th>
-                <th>Edit</th>
-                <th>Name</th>
+                <th class="headerCol" style="left:55px">Edit</th>
+                <th class="headerCol" style="left:100px">Name</th>
                 <th>Type</th>
                 <th>Category</th>
                 <th>POSCounter</th>
@@ -53,10 +53,10 @@
             {  
                 <tr onchange="UpdatedList(this)">
                     <td class="headerCol">@item.Id  </td>
-                    <td>
+                    <td class="headerCol" style="left:55px">
                         <button onClick="EditProduct(@item.Id)">-</button>
                     </td>
-                    <td>
+                    <td class="headerCol" style="left:100px">
                         <input type="text" value="@item.Name" class="gridText" />
                     </td>
                     <td>
@@ -168,8 +168,8 @@
               }
         categoryListOptions = categoryListOptions + ' </select> </td>';
 
-        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>  <td>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        var newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>  <td class="headerCol" style="left:55px">  </td>' +
+        '<td class="headerCol" style="left:100px"> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <select name="TypeList" id="TypeList">' + typeListOptions +
         '<td> <select name="categoryList" id="categoryList">' + categoryListOptions +
         '<td> <input type="text" value="" class="gridText" />  </td>' +

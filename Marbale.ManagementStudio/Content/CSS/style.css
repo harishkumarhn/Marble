@@ -42,27 +42,31 @@
 }
 
 
-  div.second { 
-            width: 1280px;
-            height:414px;
+div.second { 
+            width: 1009px; 
             overflow-x:scroll;  
-            margin-left:3.2em; 
+            margin-left:5em; 
             overflow-y:visible;
             padding-bottom:1px;
- }
-   div.first {
+            height: auto;
+        }
+        div.first {
             width: auto;
             overflow-y: scroll;
             overflow-x: hidden;
-            height: 415px;           
+            height: 391px;           
             padding-bottom: 1px;
             position: absolute;
             left:0;
             top:auto;
- }
+        }
 .headerCol {
-  position:absolute;
-  width:2em;
-  left:20px;
+   position: absolute; 
+            width:5em; 
+            left:20px;
+            top:auto;
+            border-right: 0px none black; 
+            border-top-width:3px; /*only relevant for first row*/
+            margin-top:-3px; /*compensate for top border*/
  }
 
