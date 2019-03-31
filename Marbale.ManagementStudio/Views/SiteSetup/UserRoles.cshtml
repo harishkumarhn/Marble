@@ -1,74 +1,75 @@
 ﻿@{
-    ViewBag.Title = "UserRole";
+    ViewBag.Title = "User Role";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>UserRole</h2>
-<a href="#" class="btn btn-primary btn-md" role="button" onclick="AddUserRole()">Add UserRole</a>
 <div class="userRoleContainer">
-    <div class>
-        <table id="marbleTable" class="table marbleTable userRoleTbl">
-            <thead class="thead-dark">
-                <th>ID</th>
-                <th>Role</th>
-                <th>Description</th>
-                <th>Manager Flag</th>
-                <th>AllowPOSAccess</th>
-                <th>POS ClockInOut</th>
-                <th>AllowShift OpenClose</th>
-                <th>Last Updated By</th>
-                <th>Last Updated Date</th>
-            </thead>
-            @foreach (var item in ViewBag.userRoles)
-            {
-                <tr onchange="UpdatedList(this)" tabindex ="@item.Id">
-                    <td onclick="UpdateTree(this)">
-                        @item.Id
-                    </td>
-                    <td onclick="UpdateTree(this)">
-                        <input type="text" value="@item.Role" class="gridText"/>
-                    </td>
-                    <td onclick="UpdateTree(this)">
-                        <input type="text" value="@item.Description" class="gridText" />
-                    </td>
-                    <td onclick="UpdateTree(this)">
-                         <input type="checkbox"  @(item.ManagerFlag ? "checked='checked'" : "") value="@item.ManagerFlag" />
-                    </td>
-                    <td onclick="UpdateTree(this)">
-                        <input type="checkbox" @(item.AllowPOSAccess ? "checked='checked'" : "") value="@item.AllowPOSAccess" />
-                    </td>
-                    <td onclick="UpdateTree(this)">
-                        <input type="checkbox" @(item.POSClockInOut ? "checked='checked'" : "") value="@item.POSClockInOut" />
-                    </td>
-                    <td onclick="UpdateTree(this)">
-                        <input type="checkbox" @(item.AllowShiftOpenClose ? "checked='checked'" : "") value="@item.AllowShiftOpenClose" />
-                    </td>
-                    <td onclick="UpdateTree(this)">
-                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled />
-                    </td>
-                    <td onclick="UpdateTree(this)">
-                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled />
-                    </td>
-                </tr>
-            }
-        </table>
-        <div class="userModuleAccess">
-            <link href="~/Content/css/kendo.common.min.css" rel="stylesheet" />
-            <link href="~/Content/css/kendo.default.css" rel="stylesheet" />
-            <script src="~/Content/JS/kendo.all.min.js"></script>
-            <div class="demo-section k-content">
-                <div>
-                  <span class="actionTreeHeader">Module Action Tree</span>
-                </div>
-                <div id="parent">
-                    <div id="treeview"></div>
-                </div>
-                <div id="result"></div>
+    <div class="first">
+        <div class="second" style="width: 1019px;">
+            <table id="marbleTable" class="table marbleTable userRoleTbl">
+                <thead class="thead-dark">
+                    <th>ID</th>
+                    <th>Role</th>
+                    <th>Description</th>
+                    <th>Manager Flag</th>
+                    <th>AllowPOSAccess</th>
+                    <th>POS ClockInOut</th>
+                    <th>AllowShift OpenClose</th>
+                    <th>Last Updated By</th>
+                    <th>Last Updated Date</th>
+                </thead>
+                @foreach (var item in ViewBag.userRoles)
+                {
+                    <tr onchange="UpdatedList(this)" tabindex ="@item.Id">
+                        <td onclick="UpdateTree(this)">
+                            @item.Id
+                        </td>
+                        <td onclick="UpdateTree(this)">
+                            <input type="text" value="@item.Role" class="gridText"/>
+                        </td>
+                        <td onclick="UpdateTree(this)">
+                            <input type="text" value="@item.Description" class="gridText" />
+                        </td>
+                        <td onclick="UpdateTree(this)">
+                            <input type="checkbox"  @(item.ManagerFlag ? "checked='checked'" : "") value="@item.ManagerFlag" />
+                        </td>
+                        <td onclick="UpdateTree(this)">
+                            <input type="checkbox" @(item.AllowPOSAccess ? "checked='checked'" : "") value="@item.AllowPOSAccess" />
+                        </td>
+                        <td onclick="UpdateTree(this)">
+                            <input type="checkbox" @(item.POSClockInOut ? "checked='checked'" : "") value="@item.POSClockInOut" />
+                        </td>
+                        <td onclick="UpdateTree(this)">
+                            <input type="checkbox" @(item.AllowShiftOpenClose ? "checked='checked'" : "") value="@item.AllowShiftOpenClose" />
+                        </td>
+                        <td onclick="UpdateTree(this)">
+                            <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled />
+                        </td>
+                        <td onclick="UpdateTree(this)">
+                            <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled />
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <div class="userModuleAccess">
+        <link href="~/Content/css/kendo.common.min.css" rel="stylesheet" />
+        <link href="~/Content/css/kendo.default.css" rel="stylesheet" />
+        <script src="~/Content/JS/kendo.all.min.js"></script>
+        <div class="demo-section k-content">
+            <div>
+                <span class="actionTreeHeader">Module Action Tree</span>
             </div>
+            <div id="parent">
+                <div id="treeview"></div>
+            </div>
+            <div id="result"></div>
         </div>
     </div>
     <div class="action">
         <button class="btn btn-primary btn-md" role="button" onclick="SaveUserRoles()">Save</button>
+        <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddUserRole()">Add UserRole</a>
     </div>
 
 </div>
@@ -101,7 +102,7 @@
         var table = document.getElementById('marbleTable');
         for (var r = 1, n = table.rows.length; r < n; r++) {
             var moduleActions = '';
-            if(r == selectedRow) {
+            if (r == selectedRow) {
                 moduleActions = selectedTreeItems;
             }
             if (updatedArray.includes(r)) {
