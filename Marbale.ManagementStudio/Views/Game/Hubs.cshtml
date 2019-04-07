@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Hubs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="first">
+    <div class="second" style="margin-left:17.0em; ">
+        <table id="marbleTable" class="table">
+            <thead>
+                <th class="headerCol">ID</th>
+                <th class="headerCol" style="left:55px">Name</th>
+                <th>Address</th>
+                <th>Frequency</th>
+                <th>Note</th>
+                <th>Active</th>
+                <th>MacAddress</th>
+                <th>IPAddress</th>
+                <th>TCP Port</th>
+                <th>Configure</th>
+            </thead>
+            @foreach (var item in ViewBag.hubDetails)
+            {  
+                <tr onchange="UpdatedList(this)">
+                    <td class="headerCol">@item.Id  </td>
+                    <td class="headerCol" style="left:55px">
+                        <input type="text" value="@item.Name" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Address" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Frequency" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Note" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.MacAddress" class="gridText"/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.IPAddress" class="gridText"/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.TCPPort" class="gridText"/>
+                    </td>
+                    <td>
+                        <button onClick="ConfigureHub(@item.Id)">-</button>
+                    </td>
+                </tr>  
+            }
+        </table>
+    </div>
+</div>
+<div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveHubs()">Save</button>
+    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddHub()">Add</a>
+</div>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').collapse({
+            toggle: false
+        });
+    })
+    function AddHub() {
+        var newRow = '<tr onchange=UpdatedList(this)> '+
+        '<td class="headerCol"> <a href="#"></a> </td> ' +
+        ' <td class="headerCol" style="left:55px"> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="button" value="" class="gridText" onclick = ConfigureHub()/>  </td>' + '</tr>';
+        $('#marbleTable tr:last').after(newRow);
+    }
+    function SaveHubs() {
+        var hubs = [];
+        var table = document.getElementById('marbleTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                hubs.push({
+                    Id: table.rows[r].cells[0].innerHTML,
+                    Name: table.rows[r].cells[1].children[0].value,
+                    Address: table.rows[r].cells[2].children[0].value,
+                    Frequency: table.rows[r].cells[3].children[0].value,
+                    Note: table.rows[r].cells[4].children[0].value,
+                    Active: table.rows[r].cells[5].children[0].checked,
+                    MacAddress: table.rows[r].cells[6].children[0].value,
+                    IPAddress: table.rows[r].cells[7].children[0].value,
+                    TCPPort: table.rows[r].cells[8].children[0].value,
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateHubs", "Game")',
+            data: JSON.stringify({ hubs: hubs }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+    var updatedArray = [];
+    function UpdatedList(x) {
+        if (!updatedArray.includes(x.rowIndex)) {
+            updatedArray.push(x.rowIndex);
+        }
+    }
+    function ConfigureHub() {
+
+    }
+</script>
