@@ -66,6 +66,58 @@ namespace Marble.Business
                  throw e;
              }
          }
+
+         public List<GameProfile> GetGameProfiles()
+         {
+             try
+             {
+                 var gameProfileDataTable = gameData.GetGameProfiles();
+                 List<GameProfile> gameProfiles = new List<GameProfile>();
+                 foreach (DataRow dr in gameProfileDataTable.Rows)
+                 {
+                     GameProfile gameProfile = new GameProfile();
+                     gameProfile.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                     gameProfile.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                     gameProfile.VIPPrice = dr.IsNull("VIPPrice") ? 0 : int.Parse(dr["VIPPrice"].ToString());
+                     gameProfile.NormalPrice = dr.IsNull("NormalPrice") ? 0 : int.Parse(dr["NormalPrice"].ToString());
+
+                     gameProfile.BonusAllowed = dr.IsNull("BonusAllowed") ? false : bool.Parse(dr["BonusAllowed"].ToString());
+                     gameProfile.CreditAllowed = dr.IsNull("CreditAllowed") ? false : bool.Parse(dr["CreditAllowed"].ToString());
+                     gameProfile.CourtesyAllowed = dr.IsNull("CourtesyAllowed") ? false : bool.Parse(dr["CourtesyAllowed"].ToString());
+                     gameProfile.TimeAllowed = dr.IsNull("TimeAllowed") ? false : bool.Parse(dr["TimeAllowed"].ToString());
+                     gameProfile.TiketAllowedOnBonus = dr.IsNull("TiketAllowedOnBonus") ? false : bool.Parse(dr["TiketAllowedOnBonus"].ToString());
+                     gameProfile.TiketAllowedOnCourtesy = dr.IsNull("TiketAllowedOnCourtesy") ? false : bool.Parse(dr["TiketAllowedOnCourtesy"].ToString());
+                     gameProfile.TiketAllowedOnCredit = dr.IsNull("TiketAllowedOnCredit") ? false : bool.Parse(dr["TiketAllowedOnCredit"].ToString());
+                     gameProfile.TiketAllowedOnTime = dr.IsNull("TiketAllowedOnTime") ? false : bool.Parse(dr["TiketAllowedOnTime"].ToString());
+                     gameProfile.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                     gameProfile.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+
+                     gameProfiles.Add(gameProfile);
+                 }
+                 if (gameProfiles.Count == 0)
+                 {
+                     var p = new GameProfile();
+                     gameProfiles.Add(p);
+                 }
+                 return gameProfiles;
+
+             }
+             catch (Exception e)
+             {
+                 throw e;
+             }
+         }
+         public int InsertOrUpdateGameProfile(GameProfile gameProfile)
+         {
+             try
+             {
+                 return gameData.InsertOrUpdateGameProfile(gameProfile);
+             }
+             catch (Exception e)
+             {
+                 throw e;
+             }
+         }
        
     }
 }

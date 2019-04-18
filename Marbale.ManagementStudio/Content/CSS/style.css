@@ -1,4 +1,7 @@
-﻿
+﻿#container {
+    border-style:outset;
+}
+
 #pageSubmenu li {
     width:100%;
     height:100%;
@@ -43,18 +46,18 @@
 
 
 div.second { 
-            width: 1009px; 
+            width: 1060px; 
             overflow-x:scroll;  
             margin-left:5em; 
             overflow-y:visible;
             padding-bottom:1px;
-            height: auto;
+            height: 490px;
         }
         div.first {
             width: auto;
             overflow-y: scroll;
             overflow-x: hidden;
-            height: 391px;           
+            height: 491px;           
             padding-bottom: 1px;
             position: absolute;
             left:0;
@@ -67,6 +70,6 @@ div.second {
             top:auto;
             border-right: 0px none black; 
             border-top-width:3px; /*only relevant for first row*/
-            margin-top:-3px; /*compensate for top border*/
+            /*margin-top:-3px;*/ /*compensate for top border*/
  }
 

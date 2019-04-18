@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <!-- Bootstrap CSS CDN -->
+    <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="~/content/css/bootstrap.css">
 
     <!-- Our Custom CSS -->
@@ -24,12 +24,12 @@
 </head>
 <body>
 
-       <div class="wrapper">
+    <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
-             <div id="dismiss">
-	                <i class="fas fa-arrow-left"></i>
-	            </div>
+            <div id="dismiss">
+                <i class="fas fa-arrow-left"></i>
+            </div>
             <div class="sidebar-header">
                 <h3>Marbale Dashboard</h3>
             </div>
@@ -50,13 +50,13 @@
                     </ul>
                 </li>
                 <li class="active">
-                    <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Games</a>
+                    <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Communication</a>
                     <ul class="collapse list-unstyled" id="gameSubmenu">
                         <li>
                             <a href="/game/hubs">Hubs</a>
                         </li>
                         <li>
-                            <a href="/game/profile" >Game Profile</a>
+                            <a href="/game/profiles">Game Profile</a>
                         </li>
                         <li>
                             <a href="/game/games">Games</a>
@@ -69,13 +69,13 @@
                         <li>
                             <a href="/SiteSetup/configuration" id="config">Configaration</a>
                         </li>
-                        <li>                        
+                        <li>
                             <a href="/SiteSetup/users" id="users">Users</a>
                         </li>
                         <li>
                             <a href="/SiteSetup/userRoles" id="userRole">User Roles</a>
                         </li>
-						<li>
+                        <li>
                             <a href="/SiteSetup/Messages">Messages</a>
                         </li>
                         <li>
@@ -101,23 +101,25 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <b style="margin-left:20px; font-family: sans-serif;">@ViewBag.Title</b>
+                        <b style="margin-left: 20px; font-family: sans-serif;">@ViewBag.Title</b>
                     </div>
                 </div>
             </nav>
 
-           <div id="pageContent">
-               @RenderBody()
-           </div>
+            <div id="pageContent">
+                <div id="container">
+                    @RenderBody()
+                </div>
+            </div>
         </div>
     </div>
-    <div id="loading" style="display:none">
-  <p>  <img src="~/Scripts/ajax-loader%20(1).gif"  style="position: absolute;
-    top: 479px;
-    left: 700px;"/></p>
- @* <p><img src="loading.gif" /> Please Wait</p>*@
-</div>
-<div class="overlay"></div>
+    <div id="loading" style="display: none">
+        <p>
+            <img src="~/Scripts/ajax-loader%20(1).gif" style="position: absolute; top: 479px; left: 700px;" />
+        </p>
+        @* <p><img src="loading.gif" /> Please Wait</p>*@
+    </div>
+    <div class="overlay"></div>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({

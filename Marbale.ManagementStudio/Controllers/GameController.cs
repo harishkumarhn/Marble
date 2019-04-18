@@ -14,7 +14,6 @@ namespace MarbaleManagementStudio.Controllers
             gameBussiness = new GameBL();
         }
 
-
         public ActionResult Index()
         {
             return View();
@@ -32,6 +31,21 @@ namespace MarbaleManagementStudio.Controllers
             foreach (var hub in hubs)
             {
                 result = gameBussiness.InsertOrUpdateHub(hub);
+            }
+            return result;
+        }
+        public ActionResult Profiles()
+        {
+            var gameProfiles = gameBussiness.GetGameProfiles();
+            ViewBag.gameProfiles = gameProfiles;
+            return View();
+        }
+        public int UpdateProfiles(List<GameProfile> gameProfiles)
+        {
+            var result = 0;
+            foreach (var gameProfile in gameProfiles)
+            {
+                result = gameBussiness.InsertOrUpdateGameProfile(gameProfile);
             }
             return result;
         }
