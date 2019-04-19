@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Marbale.POS
+namespace Marbale.Inventory
 {
     static class Program
     {
@@ -16,8 +16,7 @@ namespace Marbale.POS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MarblePOS());
-            Console.ReadLine();
+            Application.Run(new frmInventory());
         }
     }
 }
