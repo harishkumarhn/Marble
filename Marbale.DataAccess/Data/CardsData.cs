@@ -100,9 +100,15 @@ namespace Marbale.DataAccess.Data
             return conn.executeInsertQuery("InsertDeleteInventory", sqlParameters);
         }
 
-        public DataTable GetInventory()
+        public DataTable GetInventory(Inventory inventory)
         {
-            return conn.executeSelectQuery("GetInventory");
+         
+
+            SqlParameter[] sqlParameters = new SqlParameter[2];
+            sqlParameters[0] = new SqlParameter("@From", inventory.From);
+            sqlParameters[1] = new SqlParameter("@To", inventory.To);
+            return conn.executeSelectQuery("GetInventory", sqlParameters);
+       
         }
     }
 }

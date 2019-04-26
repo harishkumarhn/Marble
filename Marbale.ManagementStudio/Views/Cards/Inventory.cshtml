@@ -158,8 +158,13 @@
         }, 10);
     });
     $('#submitinventory').click(function () {
+        debugger
+        var myObject = {
+            From: $('#From').val(),
+            To:$('#To').val()
+        };
         var url = '@Url.Content("~/Cards/GetInventory")';
-        $.getJSON(url, function (data) {
+        $.getJSON(url,myObject, function (data) {
             $("#cardtableinventory tbody").html('');
             debugger
             var html;

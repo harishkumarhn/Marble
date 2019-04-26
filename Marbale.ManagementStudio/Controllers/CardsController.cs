@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace MarbaleManagementStudio.Controllers
 {
@@ -66,12 +67,13 @@ namespace MarbaleManagementStudio.Controllers
              }
          }
         #endregion
-
+    
         #region Inventory
+      
          public ActionResult Inventory()
          {
-           
-              List<Inventory>data = cardBussiness.GetInventory();
+           Inventory m = new Marbale.BusinessObject.Cards.Inventory();
+              List<Inventory>data = cardBussiness.GetInventory(m);
               if (data.Count > 0)
               {
                   ViewBag.TotalNumberOfCards = data[0].TotalNumberOfCards;
@@ -87,9 +89,9 @@ namespace MarbaleManagementStudio.Controllers
          int NoOfCards=    cardBussiness.AddDeleteInventory(inventory);
          return NoOfCards;
          }
-         public ActionResult GetInventory()
+         public ActionResult GetInventory(Inventory myObject)
          {
-             List<Inventory> inventory = cardBussiness.GetInventory();
+             List<Inventory> inventory = cardBussiness.GetInventory(myObject);
              return Json(inventory, JsonRequestBehavior.AllowGet);
          }
 

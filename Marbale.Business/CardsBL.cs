@@ -101,7 +101,7 @@ namespace Marble.Business
        public int AddDeleteInventory(Inventory inventory)
        {
         var status=   cardData.AddDeleteInventory(inventory);
-        var data = cardData.GetInventory();
+        var data = cardData.GetInventory(inventory);
         int TotalNumberOfCards = GetTotalNumberOfCards(data);
         return TotalNumberOfCards;
 
@@ -118,10 +118,10 @@ namespace Marble.Business
            return inv.TotalNumberOfCards;
        }
 
-       public List<Inventory> GetInventory()
+       public List<Inventory> GetInventory(Inventory inventory)
        {
            List<Inventory> inventorylist = new List<Inventory>();
-           var dataTable = cardData.GetInventory();
+           var dataTable = cardData.GetInventory(inventory);
            foreach (DataRow dr in dataTable.Rows)
            {
                Inventory inv = new Inventory();
