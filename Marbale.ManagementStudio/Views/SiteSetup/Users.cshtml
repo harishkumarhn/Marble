@@ -3,7 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Users</h2>
 <div>
     <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
         aria-hidden="true">
@@ -21,133 +20,140 @@
         </div>
     </div>
 </div>
-<div>
-    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddUser()">Add User</a>
+<div class="first">
+    <div class="second">
 
-    <table id="marbleTable" class="table marbleTable">
-        <thead class="thead-dark">
-            <th>ID</th>
-            <th>Edit</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Email</th>
-            <th>LoginId</th>
-            <th>Status</th>
-            <th>POSCounter</th>
-            <th>Department</th>
-            <th>Manager</th>
-            <th>CompanyAdmin</th>
-            <th>EmpStartDate</th>
-            <th>EmpEndDate</th>
-            <th>EmpEndResone</th>
-            <th>PasswordChangeDate</th>
-            <th>Invalid Attempts</th>
-            <th>LastLoginTime</th>
-            <th>LastLogoutTime</th>
-            <th>CreationDate</th>
-            <th>CreatedBy</th>
-            <th>LastUpdatedBy</th>
-            <th>LastUpdatedDate</th>
-        </thead>
-        @foreach (var item in ViewBag.users)
-        {  
-            <tr onchange="UpdatedList(this)">
-                <td>@item.Id  </td>
-                 <td>
-                    <button onClick="EditUser(@item.Id)">-</button>
-                </td>
-                <td>
-                    <input type="text" value="@item.Name" class="gridText" />
-                </td>
-                <td>
-                    <select name="Roles" id="Roles" class="gridText">
-                        @foreach (var dow in item.Roles)
-                        {
-                            if (@item.Role == @dow.Value)
+        <table id="marbleTable" class="table marbleTable">
+            <thead class="thead-dark">
+                <th>ID</th>
+                <th>Edit</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>LoginId</th>
+                <th>Status</th>
+                <th>POSCounter</th>
+                <th>Department</th>
+                <th>Manager</th>
+                <th>CompanyAdmin</th>
+                <th>EmpStartDate</th>
+                <th>EmpEndDate</th>
+                <th>EmpEndResone</th>
+                <th>PasswordChangeDate</th>
+                <th>Invalid Attempts</th>
+                <th>LastLoginTime</th>
+                <th>LastLogoutTime</th>
+                <th>CreationDate</th>
+                <th>CreatedBy</th>
+                <th>LastUpdatedBy</th>
+                <th>LastUpdatedDate</th>
+            </thead>
+            @foreach (var item in ViewBag.users)
+            {  
+                <tr onchange="UpdatedList(this)">
+                    <td>@item.Id  </td>
+                    <td>
+                        <button onClick="EditUser(@item.Id)">-</button>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Name" class="gridText" />
+                    </td>
+                    <td>
+                        <select name="Roles" id="Roles" class="gridText">
+                            @foreach (var dow in item.Roles)
                             {
-                            <option value="@dow.Value" selected>@dow.Value</option>
+                                if (@item.Role == @dow.Value)
+                                {
+                                <option value="@dow.Value" selected>@dow.Value</option>
+                                }
+                                else
+                                {
+                                <option value="@dow.Value">@dow.Value</option>
+                                }
                             }
-                            else
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Email" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LoginId" class="gridText" />
+                    </td>
+                    <td>
+                        <select name="Statuses" id="Statuses" class="gridText">
+                            @foreach (var dow in item.Statuses)
                             {
-                            <option value="@dow.Value">@dow.Value</option>
+                                if (@item.Status == @dow.Value)
+                                {
+                                <option value="@dow.Value" selected>@dow.Value</option>
+                                }
+                                else
+                                {
+                                <option value="@dow.Value">@dow.Value</option>
+                                }
                             }
-                        }
-                    </select>
-                </td>
-                <td>
-                    <input type="text" value="@item.Email" class="gridText" />
-                </td>
-                 <td>
-                    <input type="text" value="@item.LoginId" class="gridText" />
-                </td>
-                <td>
-                    <select name="Statuses" id="Statuses" class="gridText">
-                        @foreach (var dow in item.Statuses)
-                        {
-                            if (@item.Status == @dow.Value)
-                            {
-                            <option value="@dow.Value" selected>@dow.Value</option>
-                            }
-                            else
-                            {
-                            <option value="@dow.Value">@dow.Value</option>
-                            }
-                        }
-                    </select>
-                </td>
-                <td>
-                    <input type="text" value="@item.POSCounter" class="gridText" />
-                </td>
-                 <td>
-                    <input type="text" value="@item.Department" class="gridText"/>
-                </td>
-                 <td>
-                    <input type="text" value="@item.Manager" class="gridText"/>
-                </td>
-                <td>
-                    <input type="checkbox"  @(item.CompanyAdmin ? "checked='checked'" : "") value="@item.CompanyAdmin" />
-                </td>
-                <td>
-                    <input type="text" value="@item.EmpStartDate" class="gridText" />
-                </td>
-                <td>
-                    <input type="text" value="@item.EmpEndDate" class="gridText"/>
-                </td>
-                <td>
-                    <input type="text" value="@item.EmpEndReason" class="gridText" />
-                </td>
-                <td>
-                    <input type="text" value="@item.PaswardChangeDate" class="gridText" disabled/>
-                </td>
-                 <td>
-                    <input type="text" value="@item.InvalidAttempts" class="gridText" disabled/>
-                </td>
-                <td>
-                    <input type="text" value="@item.LastLoginTime" class="gridText" disabled/>
-                </td>
-                <td>
-                    <input type="text" value="@item.LastLogoutTime" class="gridText" disabled/>
-                </td>
-                <td>
-                    <input type="text" value="@item.CreationDate" class="gridText" disabled/>
-                </td>
-                <td>
-                    <input type="text" value="@item.CreatedBy" class="gridText" disabled/>
-                </td>
-                <td>
-                    <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
-                </td>
-                <td>
-                    <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
-                </td>
-            </tr>  
-        }
-    </table>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.POSCounter" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Department" class="gridText"/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Manager" class="gridText"/>
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.CompanyAdmin ? "checked='checked'" : "") value="@item.CompanyAdmin" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.EmpStartDate" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.EmpEndDate" class="gridText"/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.EmpEndReason" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.PaswardChangeDate" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.InvalidAttempts" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastLoginTime" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastLogoutTime" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.CreationDate" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.CreatedBy" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
+                    </td>
+                </tr>  
+            }
+        </table>
+
+    </div>
+</div>
+<div class="action">
 
     <button class="btn btn-primary btn-md" role="button" onclick="SaveUsers()">Save</button>
+    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddUser()">Add User</a>
+
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
+
 </div>
 <script>
     function targetmodel() {
@@ -157,9 +163,10 @@
         var rolesOptions = '';
         var statusListOptions = '';
 
-        @if(ViewBag.users.Count > 0){
-              foreach (var dow in ViewBag.users[0].Roles)
-              {
+        @if (ViewBag.users.Count > 0)
+        {
+            foreach (var dow in ViewBag.users[0].Roles)
+            {
                  @: rolesOptions = rolesOptions + '<option value="">@dow.Value</option>';
               }
         @: rolesOptions = rolesOptions + '</select></td>';
@@ -172,7 +179,7 @@
         else
         {
             @: rolesOptions = '<option value="">Select</option>';
-            @: statusListOptions = '<option value="">Select</option>';
+                    @: statusListOptions = '<option value="">Select</option>';
         }
         var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>  <td>  </td>' +
         '<td> <input type="text" value="" class="gridText" />  </td>' +

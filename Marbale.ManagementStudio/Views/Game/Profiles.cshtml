@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Profiles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="first">
+    <div class="second" style="margin-left: 15.0em;width: 1090px;">
+        <table id="marbleTable" class="table">
+            <thead>
+                <th class="headerCol" hidden>ID</th>
+                <th class="headerCol" style="top: 72px;">Name</th>
+                <th>Normal Price</th>
+                <th>VIP Price</th>
+                <th>Credit Allowed</th>
+                <th>Bonus Allowed</th>
+                <th>Courtesy Allowed</th>
+                <th>Time Allowed</th>
+                <th>Configure</th>
+                <th>Tiket Allowed On Credit</th>
+                <th>Tiket Allowed On Bonus</th>
+                <th>Tiket Allowed On Courtesy</th>
+                <th>Tiket Allowed On Time</th>
+                <th>Last UpdatedBy</th>
+                <th>Last UpdatedDate</th>
+            </thead>
+            @foreach (var item in ViewBag.gameProfiles)
+            {  
+                <tr onchange="UpdatedList(this)">
+                    <td class="headerCol" hidden>@item.Id  </td>
+                    <td class="headerCol">
+                        <input type="text" value="@item.Name" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.NormalPrice" class="gridText" />
+                    </td>
+                     <td>
+                        <input type="text" value="@item.VIPPrice" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.CreditAllowed ? "checked='checked'" : "") value="@item.CreditAllowed" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.BonusAllowed ? "checked='checked'" : "") value="@item.BonusAllowed" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.CourtesyAllowed ? "checked='checked'" : "") value="@item.CourtesyAllowed" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.TimeAllowed ? "checked='checked'" : "") value="@item.TimeAllowed" />
+                    </td>
+                    <td>
+                        <button onclick="ConfigureGameProfile()">-</button>
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.TiketAllowedOnCredit ? "checked='checked'" : "") value="@item.TiketAllowedOnCredit" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.TiketAllowedOnBonus ? "checked='checked'" : "") value="@item.TiketAllowedOnBonus" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.TiketAllowedOnCourtesy ? "checked='checked'" : "") value="@item.TiketAllowedOnCourtesy" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.TiketAllowedOnTime ? "checked='checked'" : "") value="@item.TiketAllowedOnTime" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
+                    </td>
+
+                </tr>  
+            }
+        </table>
+    </div>
+</div>
+<div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveGameProfiles()">Save</button>
+    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddGameProfile()">Add</a>
+</div>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').collapse({
+            toggle: false
+        });
+    })
+    function AddGameProfile() {
+        var newRow = '<tr onchange=UpdatedList(this)> ' +
+        '<td class="headerCol" hidden> <a href="#"></a> </td> ' +
+        ' <td class="headerCol"> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="button" value="" class="gridText" onclick = ConfigureGameProfile()/>  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="checkbox" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" disabled />  </td>' +
+        '<td> <input type="text" value="" class="gridText" disabled />  </td>' + '</tr>';
+        $('#marbleTable tr:last').after(newRow);
+    }
+    function SaveGameProfiles() {
+        var gameProfiles = [];
+        var table = document.getElementById('marbleTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                gameProfiles.push({
+                    Id: table.rows[r].cells[0].innerHTML,
+                    Name: table.rows[r].cells[1].children[0].value,
+                    NormalPrice: table.rows[r].cells[2].children[0].value,
+                    VIPPrice: table.rows[r].cells[3].children[0].value,
+                    CreditAllowed: table.rows[r].cells[4].children[0].checked,
+                    BonusAllowed: table.rows[r].cells[5].children[0].checked,
+                    CourtesyAllowed: table.rows[r].cells[6].children[0].checked,
+                    TimeAllowed: table.rows[r].cells[7].children[0].checked,
+                    TiketAllowedOnCredit: table.rows[r].cells[9].children[0].checked,
+                    TiketAllowedOnBonus: table.rows[r].cells[10].children[0].checked,
+                    TiketAllowedOnCourtesy: table.rows[r].cells[11].children[0].checked,
+                    TiketAllowedOnTime: table.rows[r].cells[12].children[0].checked
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateProfiles", "Game")',
+            data: JSON.stringify({ gameProfiles: gameProfiles }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+    var updatedArray = [];
+    function UpdatedList(x) {
+        if (!updatedArray.includes(x.rowIndex)) {
+            updatedArray.push(x.rowIndex);
+        }
+    }
+    function ConfigureGameProfile() {
+
+    }
+</script>
+

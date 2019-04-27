@@ -70,6 +70,21 @@ namespace MarbaleManagementStudio.Controllers
             }
             return status;
         }
+        #region Limit
+        public ActionResult Limit()
+        {
+            var datatable = siteSetup.GetAppSettings("Limit");
+            ViewBag.LimitForm = datatable;
+            return View();
+        }
+        public ActionResult Transaction()
+        {
+            var datatable = siteSetup.GetAppSettings("Transaction");
+            ViewBag.Transaction = datatable;
+            return View();
+        }
+        #endregion
+
         #region User role
         public ActionResult UserRoles()
         {

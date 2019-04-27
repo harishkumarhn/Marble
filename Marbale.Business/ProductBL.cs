@@ -34,7 +34,7 @@ namespace Marbale.Business
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
                     product.DisplayGroup = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
-                    product.LastUpdatedBy = dr.IsNull("LastUpdatedUser") ? "" : dr["LastUpdatedUser"].ToString();
+                    product.LastUpdatedBy = dr.IsNull("LastUpdatedUser") ? "" : dr["LastUpdatedBy"].ToString();
                     product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "POS";
+    ViewBag.Title = "Limits";
     Layout = null;
 }
 
@@ -7,7 +7,7 @@
     </br>
 <div id="valuesContainer">
    
-      @foreach (var item in ViewBag.POSForm)
+      @foreach (var item in ViewBag.LimitForm)
       {
           String type = item.Type.ToString();
           switch (type)
@@ -45,32 +45,8 @@
                   
       }
        
-                       @{
-List<SelectListItem> listItems = new List<SelectListItem>();
-listItems.Add(new SelectListItem
-  {
-      Text = "Cash",
-      Value = "1",
-      Selected = true
-  });
-listItems.Add(new SelectListItem
- {
-     Text = "Credit Card",
-     Value = "2"
- });
-listItems.Add(new SelectListItem
- {
-     Text = "Game Card",
-     Value = "3"
- });
-        }
-       <div class="demo">
-  <div> <text> &nbsp; &nbsp; &nbsp;</text> <label>Default Cash Mode</label></div>
-           
-    <div>  @Html.DropDownList("Default Cash Mode", listItems, new { @class = "defalut-width ar",@name="myInput" })</div></br></br>
-</div><br />
-   <text> &nbsp; &nbsp; &nbsp;</text>   <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveProducts()">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveLimits()">Save</button>   
+     <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a>
 </div>
       
     </div>
@@ -80,28 +56,12 @@ listItems.Add(new SelectListItem
         var d = {
             Name: this.id,
             Value: this.value,
-            ScreenGroup: 'POS'
+            ScreenGroup: 'Limit'
         };
         appSettings.push(d);
     });
-    $('input[name=allcheck]').change(function () {
-        var d = {
-            Name: this.id,
-            Value: $(this).is(":checked"),
-            ScreenGroup: 'POS'
-        };
-        appSettings.push(d);
-    });
-    $("#Default_Cash_Mode").change(function () {
-        debugger
-       
-        var dropdn = {
-            Name: this.id,
-            Value: $('#Default_Cash_Mode').find(":selected").text()
-        }
-        appSettings.push(dropdn);
-    });
-    function SaveProducts() {
+
+    function SaveLimits() {
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
@@ -115,17 +75,14 @@ listItems.Add(new SelectListItem
 
                         success: function (data) {
                             appSettings = [];
-                            location.reload();
+                          //  location.reload();
                             $('#displayMessage').text('data added succesfully').addClass('success');
                         }
                             });
    
     }
     $(document).ready(function () {
-        $('input[name="allcheck"]').each(function (index) {
-            if ($(this).val().toLowerCase() == "true")
-                ($(this).prop('checked', true));
-        });
+     
 
     });
 </script>
@@ -143,8 +100,13 @@ listItems.Add(new SelectListItem
 }
       .button-pos {
         position: absolute;
-        right: 805px;
-        top: 869px;
+    left: 290px;
+    top: 533px;
+    }
+    .button-close {
+        position: absolute;
+    left: 795px;
+    top: 533px;
     }
 
 input,button, label,.ar {

@@ -1,41 +1,59 @@
 ﻿@{
-    ViewBag.Title = "ProductTypes";
+    ViewBag.Title = "Product Types";
 }
 
-<h3>ProductTypes</h3>
-<div>  
-    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductType()">Add Product Type</a>
+<div class="first">
+    <div class="second">
 
-    <table id="marbleTable" class="table">  
-        <thead>  
-            <th>ID</th>  
-            <th>Edit</th>
-            <th>Type</th>  
-            <th>Description</th> 
-            <th>ReportGroup</th> 
-            <th>CardSale</th>
-            <th>Active</th> 
-            <th>LastUpdatedBy</th>  
-            <th>LastUpdatedDate</th>  
-        </thead>  
-        @foreach (var item in ViewBag.productTypes)  
-        {  
-            <tr onchange="UpdatedList(this)"> 
-        <td> @item.Id  </td>
-        <td> <button onClick="EditProductType(@item.Id)">-</button>  </td>
-        <td> <input type="text" value="@item.Type" class="gridText" />  </td>
-        <td> <input type="text" value="@item.Description" class="gridText" />  </td>
-        <td> <input type="text" value="@item.ReportGroup" class="gridText" />  </td>
-        <td> <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />  </td>
-        <td> <input type="checkbox"  @(item.CardSale ? "checked='checked'" : "") value="@item.CardSale" />  </td>
-        <td> <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>  </td>
-        <td> <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>  </td>
-    </tr>  
-        }  
-    </table>
-    
-    <button class="btn btn-primary btn-md" role="button" onclick="SaveProductTypes()">Save</button>    
-</div>  
+        <table id="marbleTable" class="table">
+            <thead>
+                <th>ID</th>
+                <th>Edit</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>ReportGroup</th>
+                <th>CardSale</th>
+                <th>Active</th>
+                <th>LastUpdatedBy</th>
+                <th>LastUpdatedDate</th>
+            </thead>
+            @foreach (var item in ViewBag.productTypes)
+            {  
+                <tr onchange="UpdatedList(this)">
+                    <td>@item.Id  </td>
+                    <td>
+                        <button onClick="EditProductType(@item.Id)">-</button>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Type" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Description" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.ReportGroup" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.CardSale ? "checked='checked'" : "") value="@item.CardSale" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
+                    </td>
+                </tr>  
+            }
+        </table>
+    </div>
+</div>
+<div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveProductTypes()">Save</button>
+    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductType()">Add Product Type</a>
+</div>
 <script>
     function AddProductType() {
 

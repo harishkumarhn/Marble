@@ -128,6 +128,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\MarbleController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SiteSetupController.cs" />
@@ -233,6 +234,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\mCustomScroller.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -269,9 +271,13 @@
     <Content Include="Views\Shared\ClosePopUp.cshtml" />
     <Content Include="Views\SiteSetup\Users.cshtml" />
     <Content Include="Views\SiteSetup\EditUser.cshtml" />
+    <Content Include="Views\Game\Hubs.cshtml" />
+    <Content Include="Views\Game\Profiles.cshtml" />
     <Content Include="Views\Cards\Cards.cshtml" />
     <Content Include="Views\Cards\ViewCards.cshtml" />
     <Content Include="Views\Cards\Inventory.cshtml" />
+    <Content Include="Views\SiteSetup\Limit.cshtml" />
+    <Content Include="Views\SiteSetup\Transaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
