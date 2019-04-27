@@ -3,6 +3,8 @@
 }
 <button class="tablinks" id="postab" onclick="getposdetails()">POS</button>
 <button class="tablinks" id="cardtab" onclick="getCardDetails()">Card</button>
+<button class="tablinks" id="limittab" onclick="getLimitDetails()">Limits</button>
+<button class="tablinks" id="Transactiontab" onclick="getTransactionDetails()">Transaction</button>
 </br><br /><br /><br />
 <div id="valuesContainer">
     
@@ -14,6 +16,12 @@
         $("#postab").addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
         $('#loading').hide();
     })
+    function getTransactionDetails() {
+        $('#valuesContainer').load('/SiteSetup/Transaction', { ValType: 'Transaction' });
+    }
+    function getLimitDetails() {
+        $('#valuesContainer').load('/SiteSetup/Limit', { ValType: 'Limit' });
+    }
     function getposdetails() {
         $('#loading').show();
         $('#valuesContainer').load('/SiteSetup/POS', { ValType: 'pos' });

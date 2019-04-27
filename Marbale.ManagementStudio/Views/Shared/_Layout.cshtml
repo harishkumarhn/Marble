@@ -6,13 +6,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Bootstrap CSS CDN -->
+     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="~/content/css/bootstrap.css">
 
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="~/content/css/style.css">
     <link rel="stylesheet" href="~/content/css/layout.css">
 
+
+
+  
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Content/JS/bootstrap.min.js"></script>
 
@@ -24,7 +27,7 @@
 </head>
 <body>
 
-    <div class="wrapper">
+       <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div id="dismiss">
@@ -52,7 +55,7 @@
                 <li class="active">
                     <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Communication</a>
                     <ul class="collapse list-unstyled" id="gameSubmenu">
-                        <li>
+                <li>
                             <a href="/game/hubs">Hubs</a>
                         </li>
                         <li>
@@ -75,12 +78,28 @@
                         <li>
                             <a href="/SiteSetup/userRoles" id="userRole">User Roles</a>
                         </li>
-                        <li>
+						<li>
                             <a href="/SiteSetup/Messages">Messages</a>
                         </li>
                         <li>
                             <a href="/TaskType/TaskType/TaskType">Task-Type</a>
                         </li>
+
+                    </ul>
+                </li>
+                     <li>
+                    <a href="#pageSubmenucards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cards</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenucards">
+                        <li>
+                            <a href="/Cards/ViewCards" id="viewcard">View Card</a>
+                        </li>
+                        <li>                        
+                            <a id="newcards">New Cards</a>
+                        </li>
+                        <li>
+                            <a  id="inventery">Inventory</a>
+                        </li>
+						
                     </ul>
                 </li>
             </ul>
@@ -106,20 +125,32 @@
                 </div>
             </nav>
 
-            <div id="pageContent">
+           <div id="pageContent">
                 <div id="container">
-                    @RenderBody()
-                </div>
-            </div>
+               @RenderBody()
+           </div>
         </div>
     </div>
-    <div id="loading" style="display: none">
-        <p>
-            <img src="~/Scripts/ajax-loader%20(1).gif" style="position: absolute; top: 479px; left: 700px;" />
-        </p>
-        @* <p><img src="loading.gif" /> Please Wait</p>*@
+
+    <div>
+        <div class="modal fade" id="newcardmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 900px;height: 810px;" id="newproductmodel">
+                <div class="modal-header" style="background-color: blueviolet">
+                    <h5 class="modal-title" id="newupdatecardmodal" style="text-align:center">Add Card</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modelbody"></div></div></div></div>
     </div>
+
+    </div>
+ 
     <div class="overlay"></div>
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({
@@ -138,7 +169,30 @@
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
         });
+        $('#inventery').click(function () {
+            $(".modal-body").html("");
+            $('#newcardmodel .modal-content').css('height', 590);
+            $('#newcardmodel .modal-content').css('width', 719);
+            $('#newupdatecardmodal').text("Inventory").addClass('modal-centre');
+            $('#newcardmodel').modal('show');
+
+            $('#modelbody').load('/Cards/Inventory');
+        });
+        $('#newcards').click(function () {
+            $(".modal-body").html("");
+            $('#newcardmodel .modal-content').css('height', 810);
+            $('#newcardmodel .modal-content').css('width', 900);
+            $('#newupdatecardmodal').text("Add Card").addClass('modal-centre');
+            $('#newcardmodel').modal('show');
+            $('#modelbody').load('Cards/Cards');
+        });
     </script>
 
 </body>
 </html>
+<style>
+    .modal-centre {
+        position: absolute;
+    right: 430px;
+    }
+</style>

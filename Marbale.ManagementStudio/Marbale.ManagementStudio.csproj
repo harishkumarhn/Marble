@@ -126,6 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\MarbleController.cs" />
@@ -148,6 +149,12 @@
     <Content Include="Content\css\layout.css" />
     <Content Include="Content\css\product.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\DatetimePicker\index.html" />
+    <Content Include="Content\DatetimePicker\jquery.datepicker2.css" />
+    <Content Include="Content\DatetimePicker\jquery.datepicker2.js" />
+    <Content Include="Content\DatetimePicker\jquery.datepicker2.min.js" />
+    <Content Include="Content\DatetimePicker\moment-with-locales.js" />
+    <Content Include="Content\DatetimePicker\moment.js" />
     <Content Include="Content\images\marbleDefault.jpg" />
     <Content Include="Content\JS\bootstrap.min.js" />
     <Content Include="Content\JS\fontawesome.solid.js" />
@@ -155,6 +162,11 @@
     <Content Include="Content\JS\kendo.all.min.js" />
     <Content Include="Content\JS\kendo.all.min.js" />
     <Content Include="Content\JS\popper.min.js" />
+    <Content Include="Content\PluginTab\index.html" />
+    <Content Include="Content\PluginTab\LICENSE.txt" />
+    <Content Include="Content\PluginTab\src\css\base.css" />
+    <Content Include="Content\PluginTab\src\css\swichTab.css" />
+    <Content Include="Content\PluginTab\src\js\jquery.swichTab.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -198,6 +210,10 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\PluginTab\README.md" />
+    <Content Include="Content\DatetimePicker\jquery.datepicker2.less" />
+    <Content Include="Content\DatetimePicker\LICENSE" />
+    <Content Include="Content\DatetimePicker\README.md" />
     <None Include="Properties\PublishProfiles\MarbleHost.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ajax-loader %281%29.gif" />
@@ -258,6 +274,11 @@
     <Content Include="Views\Game\Hubs.cshtml" />
     <Content Include="Views\Game\Profiles.cshtml" />
     <Content Include="Views\Game\Games.cshtml" />
+    <Content Include="Views\Cards\Cards.cshtml" />
+    <Content Include="Views\Cards\ViewCards.cshtml" />
+    <Content Include="Views\Cards\Inventory.cshtml" />
+    <Content Include="Views\SiteSetup\Limit.cshtml" />
+    <Content Include="Views\SiteSetup\Transaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

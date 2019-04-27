@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AdminBL.cs" />
     <Compile Include="GameBL.cs" />
+    <Compile Include="CardsBL.cs" />
     <Compile Include="Enum\TypeEnum.cs" />
     <Compile Include="ProductBL.cs" />
     <Compile Include="POSBL.cs" />
