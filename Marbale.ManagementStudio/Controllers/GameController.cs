@@ -49,6 +49,20 @@ namespace MarbaleManagementStudio.Controllers
             }
             return result;
         }
-
+        public ActionResult Games()
+        {
+            var games = gameBussiness.GetGames();
+            ViewBag.games = games;
+            return View();
+        }
+        public int UpdateGames(List<Game> games)
+        {
+            var result = 0;
+            foreach (var game in games)
+            {
+                result = gameBussiness.InsertOrUpdateGame(game);
+            }
+            return result;
+        }
     }
 }

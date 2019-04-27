@@ -118,6 +118,58 @@ namespace Marble.Business
                  throw e;
              }
          }
+         public List<Game> GetGames()
+         {
+             try
+             {
+                 var gameDataTable = gameData.GetGames();
+                 List<Game> games = new List<Game>();
+                 List<GameProfile> profiles = new List<GameProfile>();
+                 profiles.Add(new GameProfile() { Id = 0, Name = "Select" });
+                 profiles.AddRange(GetGameProfiles());
+                 foreach (DataRow dr in gameDataTable.Rows)
+                 {
+                     Game game = new Game();
+                     game.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                     game.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                     game.Description = dr.IsNull("Description") ? "" : dr["Description"].ToString();
+                     game.GameProfile = dr.IsNull("GameProfile") ? 0 : int.Parse(dr["GameProfile"].ToString());
+                     game.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
+                     game.GameCompanyName = dr.IsNull("GameCompanyName") ? "" : dr["GameCompanyName"].ToString();
+                     game.VIPPrice = dr.IsNull("VIPPrice") ? 0 : int.Parse(dr["VIPPrice"].ToString());
+                     game.NormalPrice = dr.IsNull("NormalPrice") ? 0 : int.Parse(dr["NormalPrice"].ToString());
+                     game.RepeatPlayDiscountPercentage = dr.IsNull("RepeatPlayDiscountPercentage") ? 0 : int.Parse(dr["RepeatPlayDiscountPercentage"].ToString());
+                     game.GameProfiles = profiles;
+                     game.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                     game.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+
+                     games.Add(game);
+                 }
+                 if (games.Count == 0)
+                 {
+                     var obj = new Game();
+                     obj.GameProfiles = profiles;
+                     games.Add(obj);
+                 }
+                 return games;
+
+             }
+             catch (Exception e)
+             {
+                 throw e;
+             }
+         }
+         public int InsertOrUpdateGame(Game game)
+         {
+             try
+             {
+                 return gameData.InsertOrUpdateGame(game);
+             }
+             catch (Exception e)
+             {
+                 throw e;
+             }
+         }
        
     }
 }

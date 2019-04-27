@@ -91,5 +91,43 @@ namespace Marbale.DataAccess
             }
 
         }
+        public DataTable GetGames()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetGames");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public int InsertOrUpdateGame(Game game)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[11];
+
+                sqlParameters[0] = new SqlParameter("@id", game.Id);
+                sqlParameters[1] = new SqlParameter("@name", string.IsNullOrEmpty(game.Name) ? "" : game.Name);
+                sqlParameters[2] = new SqlParameter("@description", string.IsNullOrEmpty(game.Description) ? "" : game.Description);
+                sqlParameters[3] = new SqlParameter("@notes", string.IsNullOrEmpty(game.Notes) ? "" : game.Notes);
+                sqlParameters[4] = new SqlParameter("@gameCompanyName", string.IsNullOrEmpty(game.GameCompanyName) ? "" : game.GameCompanyName);
+                sqlParameters[5] = new SqlParameter("@repeatPlayDiscountPercentage", game.RepeatPlayDiscountPercentage);
+                sqlParameters[6] = new SqlParameter("@gameProfile", game.GameProfile);                
+                sqlParameters[7] = new SqlParameter("@normalPrice", game.NormalPrice);
+                sqlParameters[8] = new SqlParameter("@vipPrice", game.VIPPrice);
+                sqlParameters[9] = new SqlParameter("@lastUpdatedBy", string.IsNullOrEmpty(game.LastUpdatedBy) ? "" : game.LastUpdatedBy);
+                sqlParameters[10] = new SqlParameter("@lastUpdatedDate", DateTime.Now);
+
+
+                return conn.executeUpdateQuery("sp_InsertOrUpdateGame", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
     }
 }
