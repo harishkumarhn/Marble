@@ -129,5 +129,38 @@ namespace Marbale.DataAccess
             }
 
         }
+        public DataTable GetMachines()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetMachines");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public int InsertOrUpdateMachine(Machine machine)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[11];
+
+                sqlParameters[0] = new SqlParameter("@id", machine.Id);
+                sqlParameters[1] = new SqlParameter("@name", string.IsNullOrEmpty(machine.Name) ? "" : machine.Name);
+                sqlParameters[3] = new SqlParameter("@notes", string.IsNullOrEmpty(machine.Notes) ? "" : machine.Notes);
+                sqlParameters[8] = new SqlParameter("@vipPrice", machine.VIPPrice);
+                sqlParameters[9] = new SqlParameter("@lastUpdatedBy", string.IsNullOrEmpty(machine.LastUpdatedBy) ? "" : machine.LastUpdatedBy);
+                sqlParameters[10] = new SqlParameter("@lastUpdatedDate", DateTime.Now);
+
+
+                return conn.executeUpdateQuery("sp_InsertOrUpdateMachine", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
     }
 }

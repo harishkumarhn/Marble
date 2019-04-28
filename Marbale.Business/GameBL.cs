@@ -170,6 +170,50 @@ namespace Marble.Business
                  throw e;
              }
          }
-       
+         public List<Machine> GetMachines()
+         {
+             try
+             {
+                 var gameDataTable = gameData.GetGames();
+                 List<Machine> machines = new List<Machine>();
+                 List<GameProfile> profiles = new List<GameProfile>();
+                 profiles.Add(new GameProfile() { Id = 0, Name = "Select" });
+                 profiles.AddRange(GetGameProfiles());
+                 foreach (DataRow dr in gameDataTable.Rows)
+                 {
+                     Machine machine = new Machine();
+                     machine.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                     machine.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                     machine.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
+                     machine.VIPPrice = dr.IsNull("VIPPrice") ? 0 : int.Parse(dr["VIPPrice"].ToString());
+                     machine.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                     machine.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+
+                     machines.Add(machine);
+                 }
+                 if (machines.Count == 0)
+                 {
+                     var obj = new Machine();
+                     machines.Add(obj);
+                 }
+                 return machines;
+
+             }
+             catch (Exception e)
+             {
+                 throw e;
+             }
+         }
+         public int InsertOrUpdateMachine(Machine machine)
+         {
+             try
+             {
+                 return gameData.InsertOrUpdateMachine(machine);
+             }
+             catch (Exception e)
+             {
+                 throw e;
+             }
+         }
     }
 }

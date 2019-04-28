@@ -64,5 +64,20 @@ namespace MarbaleManagementStudio.Controllers
             }
             return result;
         }
+        public ActionResult Machines()
+        {
+            var machines = gameBussiness.GetMachines();
+            ViewBag.machines = machines;
+            return View();
+        }
+        public int UpdateMachines(List<Machine> machines)
+        {
+            var result = 0;
+            foreach (var machine in machines)
+            {
+                result = gameBussiness.InsertOrUpdateMachine(machine);
+            }
+            return result;
+        }
     }
 }
