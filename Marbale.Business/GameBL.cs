@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Marbale.BusinessObject.Game;
+using Marble.Business.Enum;
 
 namespace Marble.Business
 {
@@ -174,26 +175,53 @@ namespace Marble.Business
          {
              try
              {
-                 var gameDataTable = gameData.GetGames();
+                 var gameDataTable = gameData.GetMachines();
                  List<Machine> machines = new List<Machine>();
-                 List<GameProfile> profiles = new List<GameProfile>();
-                 profiles.Add(new GameProfile() { Id = 0, Name = "Select" });
-                 profiles.AddRange(GetGameProfiles());
+
+                 List<Hub> hubs = new List<Hub>();
+                 hubs.Add(new Hub() { Id = 0, Name = "Select" });
+                 hubs.AddRange(GetHubs());
+
+                 List<IdValue> readers = new List<IdValue>();
+                 readers.Add(new IdValue() { Id = 0, Value = "Select" });
+                
+
+                 List<IdValue> themes = new List<IdValue>();
+                 themes.Add(new IdValue() { Id = 0, Value = "Select" });
+
                  foreach (DataRow dr in gameDataTable.Rows)
                  {
                      Machine machine = new Machine();
                      machine.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                      machine.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                     machine.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
+                     machine.HubName = dr.IsNull("HubName") ? "" : dr["HubName"].ToString();
+                     machine.MachineAddress = dr.IsNull("MachineAddress") ? "" : dr["MachineAddress"].ToString();
+                     machine.HubAddress = dr.IsNull("HubAddress") ? "" : dr["HubAddress"].ToString();
+                     machine.EffectiveMachineAddress = dr.IsNull("EffectiveMachineAddress") ? "" : dr["EffectiveMachineAddress"].ToString();
+                     machine.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                      machine.VIPPrice = dr.IsNull("VIPPrice") ? 0 : int.Parse(dr["VIPPrice"].ToString());
+                     machine.PurchasePrice = dr.IsNull("PurchasePrice") ? 0 : int.Parse(dr["PurchasePrice"].ToString());
+                     machine.ReaderType = dr.IsNull("ReaderType") ? "" : dr["ReaderType"].ToString();
+                     machine.SoftwareVersion = dr.IsNull("SoftwareVersion") ? "" : dr["SoftwareVersion"].ToString();
+                     machine.Theme = dr.IsNull("Theme") ? "" : dr["Theme"].ToString();
+                     machine.TicketMode = dr.IsNull("TicketMode") ? "" : dr["TicketMode"].ToString();
+                     machine.TicketAllowed = dr.IsNull("TicketAllowed") ? false : bool.Parse(dr["TicketAllowed"].ToString());
+                     machine.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
                      machine.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                      machine.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+
+                     machine.AvalibleHubs = hubs;
+                     machine.AvalibleReaders = readers;
+                     machine.AvalibleThemes = themes;
 
                      machines.Add(machine);
                  }
                  if (machines.Count == 0)
                  {
                      var obj = new Machine();
+                     obj.AvalibleHubs = hubs;
+                     obj.AvalibleReaders = readers;
+                     obj.AvalibleThemes = themes;
                      machines.Add(obj);
                  }
                  return machines;

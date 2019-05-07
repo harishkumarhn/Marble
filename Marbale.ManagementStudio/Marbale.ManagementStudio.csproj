@@ -279,6 +279,7 @@
     <Content Include="Views\Cards\Inventory.cshtml" />
     <Content Include="Views\SiteSetup\Limit.cshtml" />
     <Content Include="Views\SiteSetup\Transaction.cshtml" />
+    <Content Include="Views\Game\Machines.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

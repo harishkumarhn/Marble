@@ -144,16 +144,24 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[11];
+                SqlParameter[] sqlParameters = new SqlParameter[16];
 
                 sqlParameters[0] = new SqlParameter("@id", machine.Id);
                 sqlParameters[1] = new SqlParameter("@name", string.IsNullOrEmpty(machine.Name) ? "" : machine.Name);
-                sqlParameters[3] = new SqlParameter("@notes", string.IsNullOrEmpty(machine.Notes) ? "" : machine.Notes);
-                sqlParameters[8] = new SqlParameter("@vipPrice", machine.VIPPrice);
-                sqlParameters[9] = new SqlParameter("@lastUpdatedBy", string.IsNullOrEmpty(machine.LastUpdatedBy) ? "" : machine.LastUpdatedBy);
-                sqlParameters[10] = new SqlParameter("@lastUpdatedDate", DateTime.Now);
-
-
+                sqlParameters[2] = new SqlParameter("@gameName", string.IsNullOrEmpty(machine.GameName) ? "" : machine.GameName);
+                sqlParameters[3] = new SqlParameter("@hubName", string.IsNullOrEmpty(machine.HubName) ? "" : machine.HubName);
+                sqlParameters[4] = new SqlParameter("@hubAddress", string.IsNullOrEmpty(machine.HubAddress) ? "" : machine.HubAddress);
+                sqlParameters[5] = new SqlParameter("@machineAddress", string.IsNullOrEmpty(machine.MachineAddress) ? "" : machine.MachineAddress);
+                sqlParameters[6] = new SqlParameter("@readerType", string.IsNullOrEmpty(machine.ReaderType) ? "" : machine.ReaderType);
+                sqlParameters[7] = new SqlParameter("@softwareVersion", string.IsNullOrEmpty(machine.SoftwareVersion) ? "" : machine.SoftwareVersion);
+                sqlParameters[8] = new SqlParameter("@theme", string.IsNullOrEmpty(machine.Theme) ? "" : machine.Theme);
+                sqlParameters[9] = new SqlParameter("@effectiveMachineAddress", string.IsNullOrEmpty(machine.EffectiveMachineAddress) ? "" : machine.EffectiveMachineAddress);
+                sqlParameters[10] = new SqlParameter("@notes", string.IsNullOrEmpty(machine.Notes) ? "" : machine.Notes);
+                sqlParameters[11] = new SqlParameter("@vipPrice", machine.VIPPrice);
+                sqlParameters[12] = new SqlParameter("@purchasePrice", machine.PurchasePrice);
+                sqlParameters[13] = new SqlParameter("@active", machine.Active);
+                sqlParameters[14] = new SqlParameter("@lastUpdatedBy", string.IsNullOrEmpty(machine.LastUpdatedBy) ? "" : machine.LastUpdatedBy);
+                sqlParameters[15] = new SqlParameter("@lastUpdatedDate", DateTime.Now);
                 return conn.executeUpdateQuery("sp_InsertOrUpdateMachine", sqlParameters);
             }
             catch (Exception e)
