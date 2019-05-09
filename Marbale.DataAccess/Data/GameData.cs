@@ -144,7 +144,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[16];
+                SqlParameter[] sqlParameters = new SqlParameter[18];
 
                 sqlParameters[0] = new SqlParameter("@id", machine.Id);
                 sqlParameters[1] = new SqlParameter("@name", string.IsNullOrEmpty(machine.Name) ? "" : machine.Name);
@@ -160,8 +160,10 @@ namespace Marbale.DataAccess
                 sqlParameters[11] = new SqlParameter("@vipPrice", machine.VIPPrice);
                 sqlParameters[12] = new SqlParameter("@purchasePrice", machine.PurchasePrice);
                 sqlParameters[13] = new SqlParameter("@active", machine.Active);
-                sqlParameters[14] = new SqlParameter("@lastUpdatedBy", string.IsNullOrEmpty(machine.LastUpdatedBy) ? "" : machine.LastUpdatedBy);
-                sqlParameters[15] = new SqlParameter("@lastUpdatedDate", DateTime.Now);
+                sqlParameters[14] = new SqlParameter("@ticketAllowed", machine.TicketAllowed);
+                sqlParameters[15] = new SqlParameter("@ticketMode", string.IsNullOrEmpty(machine.TicketMode) ? "" : machine.TicketMode);
+                sqlParameters[16] = new SqlParameter("@lastUpdatedBy", string.IsNullOrEmpty(machine.LastUpdatedBy) ? "" : machine.LastUpdatedBy);
+                sqlParameters[17] = new SqlParameter("@lastUpdatedDate", DateTime.Now);
                 return conn.executeUpdateQuery("sp_InsertOrUpdateMachine", sqlParameters);
             }
             catch (Exception e)

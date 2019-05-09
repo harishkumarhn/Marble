@@ -184,16 +184,20 @@ namespace Marble.Business
 
                  List<IdValue> readers = new List<IdValue>();
                  readers.Add(new IdValue() { Id = 0, Value = "Select" });
-                
+                 readers.Add(new IdValue() { Id = 0, Value = "Reader1" });
+                 readers.Add(new IdValue() { Id = 0, Value = "Reader2" });                
 
                  List<IdValue> themes = new List<IdValue>();
                  themes.Add(new IdValue() { Id = 0, Value = "Select" });
+                 themes.Add(new IdValue() { Id = 0, Value = "Theme1" });
+                 themes.Add(new IdValue() { Id = 0, Value = "Theme2" });
 
                  foreach (DataRow dr in gameDataTable.Rows)
                  {
                      Machine machine = new Machine();
                      machine.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                      machine.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                     machine.GameName = dr.IsNull("GameName") ? "" : dr["GameName"].ToString();
                      machine.HubName = dr.IsNull("HubName") ? "" : dr["HubName"].ToString();
                      machine.MachineAddress = dr.IsNull("MachineAddress") ? "" : dr["MachineAddress"].ToString();
                      machine.HubAddress = dr.IsNull("HubAddress") ? "" : dr["HubAddress"].ToString();

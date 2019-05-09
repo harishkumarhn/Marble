@@ -100,7 +100,7 @@
         var gameProfiles = '';
               @foreach (var dow in ViewBag.games[0].GameProfiles)
               {
-                 @: gameProfiles = gameProfiles + '<option value="">@dow.Name</option>';
+                 @: gameProfiles = gameProfiles + '<option value="@dow.Name">@dow.Name</option>';
               }
         gameProfiles = gameProfiles + '</select></td>';
 
