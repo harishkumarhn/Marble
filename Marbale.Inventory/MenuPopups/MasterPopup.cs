@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace Marbale.Inventory.MenuPopups
 {
+    /// <summary>
+    /// POP up window
+    /// </summary>
     public partial class MasterPopup : Form
     {
         public MasterPopup()
