@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace Marbale.Inventory
 {
+    /// <summary>
+    /// Home page for inventory
+    /// </summary>
     public partial class InventoryHome : MaterialSkin.Controls.MaterialForm
     {
         public InventoryHome()
