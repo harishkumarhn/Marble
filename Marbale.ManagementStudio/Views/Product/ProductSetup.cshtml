@@ -1,9 +1,10 @@
 ﻿@{
-    ViewBag.Title = "ProductSetup";
+    ViewBag.Title = "Product Setup";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="~/Content/css/product.css" rel="stylesheet" />
+
 <div>
     <!-- Button trigger modal -->
 
@@ -12,7 +13,7 @@
     <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width: 900px; height: 610px;">
+            <div class="modal-content" style="width: 900px; height: 610px;" id="newproductmodel">
                 <div class="modal-header" style="background-color: crimson">
                     <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -21,127 +22,135 @@
                 </div>
                 <div class="modal-body" id="modelbody">
                 </div>
-                @*  <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>*@
             </div>
         </div>
     </div>
 </div>
-<div>
-    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Product</a>
-
-    <table id="marbleTable" class="table marbleTable">
-        <thead class="thead-dark">
-            <th>ID</th>
-            <th>Edit</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Category</th>
-            <th>POSCounter</th>
-            <th>Active</th>
-            <th>DisplayInPOS</th>
-            <th>DisplayGroup</th>
-            <th>AutoGenerateCardNumber</th>
-            <th>OnlyVIP</th>
-            <th>Price</th>
-            <th>FaceValue</th>
-            <th>TaxInclusive</th>
-            <th>FinalPrice</th>
-            <th>EffectivePrice</th>
-            <th>LastUpdatedBy</th>
-            <th>LastUpdatedDate</th>
-        </thead>
-        @foreach (var item in ViewBag.productDetails)
-        {  
-            <tr onchange="UpdatedList(this)">
-                <td>@item.Id  </td>
-                <td>
-                    <button onClick="EditProduct(@item.Id)">-</button>
-                </td>
-                <td>
-                    <input type="text" value="@item.Name" class="gridText" />
-                </td>
-                <td>
-                    <select name="TypeList" id="TypeList" class="gridText">
-                        @foreach (var dow in item.TypeList)
-                        {
-                            if (@item.Type == @dow.Value)
+<div class="first">
+    <div class="second" style="margin-left:20.2em; ">
+        <table id="marbleTable" class="table">
+            <thead>
+                <th class="headerCol">ID</th>
+                <th class="headerCol" style="left:55px">Edit</th>
+                <th class="headerCol" style="left:100px">Name</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>POSCounter</th>
+                <th>Active</th>
+                <th>DisplayInPOS</th>
+                <th>DisplayGroup</th>
+                <th>AutoGenerateCardNumber</th>
+                <th>OnlyVIP</th>
+                <th>Price</th>
+                <th>FaceValue</th>
+                <th>TaxInclusive</th>
+                <th>FinalPrice</th>
+                <th>EffectivePrice</th>
+                <th>LastUpdatedBy</th>
+                <th>LastUpdatedDate</th>
+            </thead>
+            @foreach (var item in ViewBag.productDetails)
+            {  
+                <tr onchange="UpdatedList(this)">
+                    <td class="headerCol">@item.Id  </td>
+                    <td class="headerCol" style="left:55px">
+                        <button onClick="EditProduct(@item.Id)">-</button>
+                    </td>
+                    <td class="headerCol" style="left:100px">
+                        <input type="text" value="@item.Name" class="gridText" />
+                    </td>
+                    <td>
+                        <select name="TypeList" id="TypeList" class="gridText">
+                            @foreach (var dow in item.TypeList)
                             {
-                            <option value="@dow.Value" selected>@dow.Value</option>
+                                if (@item.Type == @dow.Value)
+                                {
+                                <option value="@dow.Value" selected>@dow.Value</option>
+                                }
+                                else
+                                {
+                                <option value="@dow.Value">@dow.Value</option>
+                                }
                             }
-                            else
+                        </select>
+                    </td>
+                    <td>
+                        <select name="categoryList" id="categoryList" class="gridText">
+                            @foreach (var dow in item.CategoryList)
                             {
-                            <option value="@dow.Value">@dow.Value</option>
+                                if (@item.Category == @dow.Value)
+                                {
+                                <option value="@dow.Value" selected>@dow.Value</option>
+                                }
+                                else
+                                {
+                                <option value="@dow.Value">@dow.Value</option>
+                                }
                             }
-                        }
-                    </select>
-                </td>
-                <td>
-                    <select name="categoryList" id="categoryList" class="gridText">
-                        @foreach (var dow in item.CategoryList)
-                        {
-                            if (@item.Category == @dow.Value)
-                            {
-                            <option value="@dow.Value" selected>@dow.Value</option>
-                            }
-                            else
-                            {
-                            <option value="@dow.Value">@dow.Value</option>
-                            }
-                        }
-                    </select>
-                </td>
-                <td>
-                    <input type="text" value="@item.POSCounter" class="gridText" />
-                </td>
-                <td>
-                    <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
-                </td>
-                <td>
-                    <input type="checkbox"  @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />
-                </td>
-                <td>
-                    <input type="text" value="@item.DisplayGroup" class="gridText" />
-                </td>
-                <td>
-                    <input type="checkbox"  @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber"/>
-                </td>
-                <td>
-                    <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
-                </td>
-                <td>
-                    <input type="text" value="@item.Price" class="gridText"/>
-                </td>
-                <td>
-                    <input type="text" value="@item.FaceValue" class="gridText"/>
-                </td>
-                <td>
-                    <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" />
-                </td>
-                <td>
-                    <input type="text" value="@item.FinalPrice" class="gridText"/>
-                </td>
-                <td>
-                    <input type="text" value="@item.EffectivePrice" class="gridText"/>
-                </td>
-                <td>
-                    <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
-                </td>
-                <td>
-                    <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
-                </td>
-            </tr>  
-        }
-    </table>
-
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.POSCounter" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.DisplayGroup" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber"/>
+                    </td>
+                    <td>
+                        <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Price" class="gridText"/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.FaceValue" class="gridText"/>
+                    </td>
+                    <td>
+                        <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.FinalPrice" class="gridText"/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.EffectivePrice" class="gridText"/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
+                    </td>
+                </tr>  
+            }
+        </table>
+    </div>
+</div>
+<div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()">Save</button>
+    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Product</a>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
+    <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
 </div>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').collapse({
+            toggle: false
+        });
+    })
+    $("#newproductmodel").draggable({
+        handle: ".modal-header"
+    });
     function targetmodel() {
         $('#modelbody').load('/Product/Edit');
     }
@@ -159,8 +168,8 @@
               }
         categoryListOptions = categoryListOptions + ' </select> </td>';
 
-        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>  <td>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        var newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>  <td class="headerCol" style="left:55px">  </td>' +
+        '<td class="headerCol" style="left:100px"> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <select name="TypeList" id="TypeList">' + typeListOptions +
         '<td> <select name="categoryList" id="categoryList">' + categoryListOptions +
         '<td> <input type="text" value="" class="gridText" />  </td>' +

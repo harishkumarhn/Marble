@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -125,24 +126,47 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\MarbleController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SiteSetupController.cs" />
+    <Compile Include="Controllers\TaskTypeController.cs" />
+    <Compile Include="Controllers\TaxController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModuleRootPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\kendo.common.min.css" />
+    <Content Include="Content\css\kendo.default.css" />
+    <Content Include="Content\css\kendo.common-material.min.css" />
+    <Content Include="Content\css\kendo.material.min.css" />
+    <Content Include="Content\css\layout.css" />
     <Content Include="Content\css\product.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\DatetimePicker\index.html" />
+    <Content Include="Content\DatetimePicker\jquery.datepicker2.css" />
+    <Content Include="Content\DatetimePicker\jquery.datepicker2.js" />
+    <Content Include="Content\DatetimePicker\jquery.datepicker2.min.js" />
+    <Content Include="Content\DatetimePicker\moment-with-locales.js" />
+    <Content Include="Content\DatetimePicker\moment.js" />
     <Content Include="Content\images\marbleDefault.jpg" />
     <Content Include="Content\JS\bootstrap.min.js" />
     <Content Include="Content\JS\fontawesome.solid.js" />
     <Content Include="Content\JS\fontawesome.js" />
-    <Content Include="Content\CSS\style.css" />
+    <Content Include="Content\JS\kendo.all.min.js" />
+    <Content Include="Content\JS\kendo.all.min.js" />
     <Content Include="Content\JS\popper.min.js" />
+    <Content Include="Content\PluginTab\index.html" />
+    <Content Include="Content\PluginTab\LICENSE.txt" />
+    <Content Include="Content\PluginTab\src\css\base.css" />
+    <Content Include="Content\PluginTab\src\css\swichTab.css" />
+    <Content Include="Content\PluginTab\src\js\jquery.swichTab.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -186,6 +210,10 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\PluginTab\README.md" />
+    <Content Include="Content\DatetimePicker\jquery.datepicker2.less" />
+    <Content Include="Content\DatetimePicker\LICENSE" />
+    <Content Include="Content\DatetimePicker\README.md" />
     <None Include="Properties\PublishProfiles\MarbleHost.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ajax-loader %281%29.gif" />
@@ -206,9 +234,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\mCustomScroller.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -225,8 +256,6 @@
     <Content Include="Views\Marble\Index.cshtml" />
     <Content Include="Views\Product\Types.cshtml" />
     <Content Include="Views\Product\Category.cshtml" />
-    <Content Include="Views\Shared\_settingsPartial.cshtml" />
-    <Content Include="Views\Shared\_ValuesTab.cshtml" />
     <Content Include="Views\SiteSetup\Configuration.cshtml" />
     <Content Include="Views\SiteSetup\POS.cshtml" />
     <Content Include="Views\SiteSetup\Values.cshtml" />
@@ -235,10 +264,27 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\SiteSetup\UserRoles.cshtml" />
     <Content Include="Views\SiteSetup\Messages.cshtml" />
+    <Content Include="Views\Tax\Tax.cshtml" />
+    <Content Include="Views\Tax\TaxStructure.cshtml" />
+    <Content Include="Views\SiteSetup\TaskType.cshtml" />
+    <Content Include="Views\TaskType\TaskType.cshtml" />
+    <Content Include="Views\Shared\ClosePopUp.cshtml" />
+    <Content Include="Views\SiteSetup\Users.cshtml" />
+    <Content Include="Views\SiteSetup\EditUser.cshtml" />
+    <Content Include="Views\Game\Hubs.cshtml" />
+    <Content Include="Views\Game\Profiles.cshtml" />
+    <Content Include="Views\Game\Games.cshtml" />
+    <Content Include="Views\Cards\Cards.cshtml" />
+    <Content Include="Views\Cards\ViewCards.cshtml" />
+    <Content Include="Views\Cards\Inventory.cshtml" />
+    <Content Include="Views\SiteSetup\Limit.cshtml" />
+    <Content Include="Views\SiteSetup\Transaction.cshtml" />
+    <Content Include="Views\Game\Machines.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Content\css\fonts\" />
+    <Folder Include="Content\css\Material\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -252,6 +298,9 @@
       <Project>{d3791924-6c85-4aad-8bab-3e3cd23c22e6}</Project>
       <Name>Marbale.Business</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

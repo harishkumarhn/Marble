@@ -24,6 +24,7 @@ namespace MarbaleManagementStudio.Controllers
 
         public ActionResult ProductSetup()
         {
+           
             var products = productBussiness.GetProducts();
             Session["CategoryList"] = products[0].CategoryList;
             ViewBag.productDetails = products;
@@ -41,6 +42,10 @@ namespace MarbaleManagementStudio.Controllers
             var product = productBussiness.GetProductById(id);
 
             return View(product);
+        }
+        public ActionResult ClosePopUp()
+        {
+            return View();
         }
 
         public ActionResult InsertOrUpdate(Product pObject)

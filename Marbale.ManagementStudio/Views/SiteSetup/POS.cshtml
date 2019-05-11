@@ -3,7 +3,6 @@
     Layout = null;
 }
 
-<h2>POS</h2>
 <div style="background-color:lightblue;height: 500px;">
     </br>
 <div id="valuesContainer">
@@ -71,6 +70,7 @@ listItems.Add(new SelectListItem
     <div>  @Html.DropDownList("Default Cash Mode", listItems, new { @class = "defalut-width ar",@name="myInput" })</div></br></br>
 </div><br />
    <text> &nbsp; &nbsp; &nbsp;</text>   <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveProducts()">Save</button>   
+     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
 </div>
       
     </div>
