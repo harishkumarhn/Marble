@@ -16,7 +16,7 @@ namespace Marbale.Inventory
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmInventory());
+            Application.Run(new InventoryHome());
         }
     }
 }

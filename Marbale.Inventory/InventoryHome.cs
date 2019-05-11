@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Marbale.Inventory
 {
-    public partial class frmInventory : Form
+    public partial class InventoryHome : MaterialSkin.Controls.MaterialForm
     {
-        public frmInventory()
+        public InventoryHome()
         {
             InitializeComponent();
         }

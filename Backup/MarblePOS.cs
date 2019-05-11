@@ -60,6 +60,7 @@ namespace Marbale.POS
 
         }
 
+
         private void UpdateProductsTab()
         {
             List<Product> lstProducts = posBussiness.GetProductsByScreenGroup("POS");
@@ -121,7 +122,7 @@ namespace Marbale.POS
         }
 
 
-        private void updateCardDetailsGrid()
+        void updateCardDetailsGrid()
         {
             //dgvCardDetails.Columns[1].DefaultCellStyle = Utilities.gridViewNumericCellStyle();
             dgvCardDetails.RowsDefaultCellStyle = null;
@@ -168,7 +169,7 @@ namespace Marbale.POS
             //dgvCardDetails.Location = new Point(0, panelCardSwipe.Height - dgvCardDetails.Rows.GetRowsHeight(DataGridViewElementStates.Displayed) - 3);
         }
 
-        private void CreateCardGrid()
+        void CreateCardGrid()
         {
             dgvCard.RowsDefaultCellStyle = null;
             dgvCard.Columns[1].DefaultCellStyle.SelectionBackColor = Color.White;
@@ -191,60 +192,6 @@ namespace Marbale.POS
             dgvCard.Rows.Add();
             dgvCard.Rows[2].Cells[0].Value = "Recharged / Spent";
             dgvCard.Rows[2].Cells[1].Style.Font = new Font("arial", 11, FontStyle.Bold);
-        }
-
-        private void ChangeLayout()
-        {
-            //int panelWidth1 = MarbleSplitContainer.Panel1.Width;
-            //int panelWidth2 = MarbleSplitContainer.Panel2.Width;
-
-            //MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Width - MarbleSplitContainer.SplitterWidth-1000;
-
-            if (tbHomeControls.Parent == MarbleSplitContainer.Panel1)
-            {
-                //MarbleSplitContainer.Panel1.Width = panelWidth2;
-                //MarbleSplitContainer.Panel2.Width = panelWidth1;
-                MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Panel2.Width;
-
-                MarbleSplitContainer.Panel1.Controls.Remove(tbHomeControls);
-                MarbleSplitContainer.Panel1.Controls.Remove(panelButtons);
-                MarbleSplitContainer.Panel2.Controls.Add(tbHomeControls);
-                MarbleSplitContainer.Panel2.Controls.Add(panelButtons);
-
-                tbHomeControls.Width = MarbleSplitContainer.Panel2.Width;
-                tbHomeControls.Height = MarbleSplitContainer.Panel2.Height - panelButtons.Height;
-
-                MarbleSplitContainer.Panel2.Controls.Remove(pnlCardDetails);
-                MarbleSplitContainer.Panel1.Controls.Add(pnlCardDetails);
-
-                pnlCardDetails.Size = MarbleSplitContainer.Panel1.ClientSize;
-            }
-            else
-            {
-                MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Panel2.Width;
-                MarbleSplitContainer.Panel1.Controls.Add(tbHomeControls);
-                MarbleSplitContainer.Panel1.Controls.Add(panelButtons);
-                MarbleSplitContainer.Panel2.Controls.Remove(tbHomeControls);
-                MarbleSplitContainer.Panel2.Controls.Remove(panelButtons);
-
-                tbHomeControls.Width = MarbleSplitContainer.Panel1.Width;
-                tbHomeControls.Height = MarbleSplitContainer.Panel1.Height - panelButtons.Height -2;
-
-                MarbleSplitContainer.Panel2.Controls.Add(pnlCardDetails);
-                MarbleSplitContainer.Panel1.Controls.Remove(pnlCardDetails);
-
-                pnlCardDetails.Size = MarbleSplitContainer.Panel2.ClientSize; 
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void btnTask_Click(object sender, EventArgs e)
-        {
-            ChangeLayout();
         }
     }
 }
