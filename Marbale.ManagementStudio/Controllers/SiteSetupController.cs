@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
 using MarbaleManagementStudio.Models;
+using System.Net;
+using System.Net.Mail;
+using System.Web;
+using System.IO;
 
 namespace MarbaleManagementStudio.Controllers
 {
@@ -26,14 +30,56 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.GetSetting = settings;
             return View();
         }
+        #region EmailSedning
+        public void email_send(HttpPostedFileBase fileUploader, HttpPostedFileBase fileUploader1)
+        {
+            var datatable = siteSetup.GetAppSettings("Email");
+            List<AppSetting> app = new List<AppSetting>();
+            app = datatable.ToList();
+            var DisplayNameFor_PDF_Creation = app[2].Value;
+            var SMTP_Host_Name_ip_address = app[3].Value;
+            var Port_Number_of_SMTP_Host = app[4].Value;
+            var SMTP_Login_Username = app[5].Value;
+            var SMTP_Login_Password = app[6].Value;
+            var Display_Name_for_From_Address = app[7].Value;
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient(SMTP_Host_Name_ip_address);
+            mail.From = new MailAddress(SMTP_Login_Username);
+            mail.To.Add(Display_Name_for_From_Address);
+            mail.Subject = "Test Mail of Marble From Shridhar";
+            mail.Body = "Sample Message from SHridhar";
+            if (!string.IsNullOrEmpty(app[0].Value))
+            {
+                var filename =  app[0].Value;
+                mail.Attachments.Add(new Attachment(filename));
+            }
+            if (!string.IsNullOrEmpty(app[0].Value))
+            {
+                var filename = app[1].Value;
+                mail.Attachments.Add(new Attachment(filename));
+            }
+        
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential(SMTP_Login_Username, SMTP_Login_Password);
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+        }
+
+        #endregion
+        #region Appsettings
         public ActionResult UpdateAppSettings(List<AppSetting> appSettings)
         {
+           
+
             bool status = siteSetup.SavePOSConfiguration(appSettings);
             return Json(status, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Values()
         {
-            return PartialView();
+            List<Buttons> buttons = siteSetup.GetAllValuesButtons();
+            return View(buttons);
         }
         public ActionResult POS(string ValType)
         {
@@ -48,6 +94,12 @@ namespace MarbaleManagementStudio.Controllers
             var datatable = siteSetup.GetAppSettings("Card");
             ViewBag.CardForm = datatable;
             return PartialView();
+        }
+        public ActionResult BackUp(string ValType)
+        {
+            var datatable = siteSetup.GetAppSettings("BackUp");
+            ViewBag.BackupRestore = datatable;
+            return View();
         }
 
         public string UpdateSettings(List<Settings> settings)
@@ -70,6 +122,7 @@ namespace MarbaleManagementStudio.Controllers
             }
             return status;
         }
+        #endregion
         #region Limit
         public ActionResult Limit()
         {
@@ -77,10 +130,42 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.LimitForm = datatable;
             return View();
         }
+         #endregion
+        #region Transaction
         public ActionResult Transaction()
         {
             var datatable = siteSetup.GetAppSettings("Transaction");
             ViewBag.Transaction = datatable;
+            return View();
+        }
+        #endregion
+
+        #region Email
+        public ActionResult Email()
+        {
+            var datatable = siteSetup.GetAppSettings("Email");
+            ViewBag.Email = datatable;
+            return View();
+        }
+        #endregion
+
+        #region Signage
+        public ActionResult Signage()
+        {
+            var datatable = siteSetup.GetAppSettings("Signage");
+            ViewBag.SignageForm = datatable;
+            return View();
+
+           
+        }
+
+
+        #endregion
+        #region Server
+        public ActionResult Server()
+        {
+            var datatable = siteSetup.GetAppSettings("Server");
+            ViewBag.Server = datatable;
             return View();
         }
         #endregion
@@ -179,6 +264,7 @@ namespace MarbaleManagementStudio.Controllers
         }
 
         #endregion
+
     }
 
 }

@@ -1,10 +1,19 @@
-﻿@{
+﻿@model IEnumerable<Marbale.BusinessObject.Buttons>
+@{
     Layout = null;
 }
-<button class="tablinks" id="postab" onclick="getposdetails()">POS</button>
+@foreach (var item in Model)
+{
+    <button class="@item.Class" id="@item.Id" onclick="@item.MethodName"title="@item.Tittle">@item.Text</button>
+}
+@*<button class="tablinks" id="postab" onclick="getposdetails()"title="get pos info">POS</button>
 <button class="tablinks" id="cardtab" onclick="getCardDetails()">Card</button>
 <button class="tablinks" id="limittab" onclick="getLimitDetails()">Limits</button>
 <button class="tablinks" id="Transactiontab" onclick="getTransactionDetails()">Transaction</button>
+<button class="tablinks" id="Emailtab" onclick="getEmailDetails()">Email</button>
+<button class="tablinks" id="Signagetab" onclick="getSignageDetails()">Signage</button>
+<button class="tablinks" id="Servertab" onclick="getServerDetails()">Server</button>*@
+
 </br><br /><br /><br />
 <div id="valuesContainer">
     
@@ -19,13 +28,28 @@
     function getTransactionDetails() {
         $('#valuesContainer').load('/SiteSetup/Transaction', { ValType: 'Transaction' });
     }
+    function getServerDetails() {
+        $('#valuesContainer').load('/SiteSetup/Server', { ValType: 'Transaction' });
+    }
+    function getSignageDetails() {
+        $('#valuesContainer').load('/SiteSetup/Signage', { ValType: 'Signage' });
+    }
+    function getEmailDetails()
+    {
+        $('#valuesContainer').load('/SiteSetup/Email', { ValType: 'Transaction' });
+        }
     function getLimitDetails() {
         $('#valuesContainer').load('/SiteSetup/Limit', { ValType: 'Limit' });
     }
     function getposdetails() {
-        $('#loading').show();
+     
         $('#valuesContainer').load('/SiteSetup/POS', { ValType: 'pos' });
-        $('#loading').hide();
+       
+    }
+    function getBackupDetails() {
+        debugger;
+        $('#valuesContainer').load('/SiteSetup/BackUp', { ValType: 'pos' });
+
     }
     function getCardDetails() {
         $('#valuesContainer').load('/SiteSetup/Card');

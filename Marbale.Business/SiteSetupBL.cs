@@ -384,5 +384,25 @@ namespace Marble.Business
             statusList.Add(new IdValue() { Id = 0, Value = "Inactive" });
         }
 
+
+
+
+        public List<Buttons> GetAllValuesButtons()
+        {
+            List<Buttons> bList = new List<Buttons>();
+            var dataTable = siteSetupData.GetAllValuesButtons();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Buttons b = new Buttons();
+                b.Id = dr.IsNull("ButtonId") ? "" : dr["ButtonId"].ToString();
+                b.Class = dr.IsNull("Class") ? "" : dr["Class"].ToString();
+                b.MethodName = dr.IsNull("MethodName") ? "" : dr["MethodName"].ToString();
+                b.Text = dr.IsNull("Text") ? "" : dr["Text"].ToString();
+                b.Tittle = dr.IsNull("Tittle") ? "" : dr["Tittle"].ToString();
+                bList.Add(b);
+             //   b.Department = dr.IsNull("Department") ? "" : dr["Department"].ToString();
+            }
+            return bList;
+        }
     }
 }

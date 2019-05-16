@@ -22,3 +22,35 @@ D:\Projects\Marbale\MarbaleManagementStudio\bin\System.Web.WebPages.Razor.xml
 D:\Projects\Marbale\MarbaleManagementStudio\obj\Debug\Marbale.ManagementStudio.csprojResolveAssemblyReference.cache
 D:\Projects\Marbale\MarbaleManagementStudio\obj\Debug\MarbaleManagementStudio.dll
 D:\Projects\Marbale\MarbaleManagementStudio\obj\Debug\MarbaleManagementStudio.pdb
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\MarbaleManagementStudio.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\MarbaleManagementStudio.pdb
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\Antlr3.Runtime.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\EntityFramework.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\Marbale.BusinessObject.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\Marble.Business.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\Microsoft.Web.Infrastructure.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\Newtonsoft.Json.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.Helpers.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.Mvc.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.Optimization.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.Providers.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.Razor.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.WebPages.Deployment.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.WebPages.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.WebPages.Razor.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\WebGrease.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\Marbale.DataAccess.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\Marbale.BusinessObject.pdb
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\Marble.Business.pdb
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.Helpers.xml
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\EntityFramework.xml
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\Newtonsoft.Json.xml
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.Mvc.xml
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.Razor.xml
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.WebPages.xml
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.WebPages.Deployment.xml
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\System.Web.WebPages.Razor.xml
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\bin\Marbale.DataAccess.pdb
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\obj\Debug\Marbale.ManagementStudio.csprojResolveAssemblyReference.cache
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\obj\Debug\MarbaleManagementStudio.dll
+F:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\obj\Debug\MarbaleManagementStudio.pdb

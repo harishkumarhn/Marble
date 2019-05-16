@@ -13,3 +13,10 @@ F:\MarbleProject\Marble\Marbale.DataAccess\bin\Debug\Marbale.DataAccess.pdb
 F:\MarbleProject\Marble\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.csprojResolveAssemblyReference.cache
 F:\MarbleProject\Marble\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.dll
 F:\MarbleProject\Marble\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.pdb
+F:\MarbleProject\Marble - Copy\Marbale.DataAccess\bin\Debug\Marbale.DataAccess.dll
+F:\MarbleProject\Marble - Copy\Marbale.DataAccess\bin\Debug\Marbale.DataAccess.pdb
+F:\MarbleProject\Marble - Copy\Marbale.DataAccess\bin\Debug\Marbale.BusinessObject.dll
+F:\MarbleProject\Marble - Copy\Marbale.DataAccess\bin\Debug\Marbale.BusinessObject.pdb
+F:\MarbleProject\Marble - Copy\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.csprojResolveAssemblyReference.cache
+F:\MarbleProject\Marble - Copy\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.dll
+F:\MarbleProject\Marble - Copy\Marbale.DataAccess\obj\Debug\Marbale.DataAccess.pdb
