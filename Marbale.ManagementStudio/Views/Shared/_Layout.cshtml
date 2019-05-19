@@ -67,6 +67,9 @@
                          <li>
                             <a href="/game/machines">Machines</a>
                         </li>
+                        <li>
+                            <a id="configuration">Configuration</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -188,6 +191,14 @@
             $('#newupdatecardmodal').text("Add Card").addClass('modal-centre');
             $('#newcardmodel').modal('show');
             $('#modelbody').load('Cards/Cards');
+        });
+        $('#configuration').click(function () {
+            $(".modal-body").html("");
+            $('#newcardmodel .modal-content').css('height', 810);
+            $('#newcardmodel .modal-content').css('width', 900);
+            $('#newupdatecardmodal').text("Configuration").addClass('modal-centre');
+            $('#newcardmodel').modal('show');
+            $('#modelbody').load('game/configuration');
         });
     </script>
 

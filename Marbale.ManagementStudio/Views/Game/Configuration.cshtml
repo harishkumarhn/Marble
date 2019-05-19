@@ -1,0 +1,160 @@
+﻿@model MarbaleManagementStudio.Models.Configuration
+
+@{
+    ViewBag.Title = "Configuration";
+    Layout = null;
+}
+
+<legend>Configuration</legend>
+
+@using (Html.BeginForm("UpdateConfiguration", "Game", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div style="width:900px;float:left">
+            <div style="width:450px;float:left">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.StartInPhysicalTicketMode)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.StartInPhysicalTicketMode)
+                    @Html.ValidationMessageFor(model => model.StartInPhysicalTicketMode)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.NumberOfCoins)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.NumberOfCoins)
+                    @Html.ValidationMessageFor(model => model.NumberOfCoins)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.TicketPulseWidth)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.TicketPulseWidth)
+                    @Html.ValidationMessageFor(model => model.TicketPulseWidth)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.TicketPulseGap)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.TicketPulseGap)
+                    @Html.ValidationMessageFor(model => model.TicketPulseGap)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ReverseDisplayDirection)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ReverseDisplayDirection)
+                    @Html.ValidationMessageFor(model => model.ReverseDisplayDirection)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.BalanceDelay)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.BalanceDelay)
+                    @Html.ValidationMessageFor(model => model.BalanceDelay)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MinSecondsBetweenRepeatPlay)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MinSecondsBetweenRepeatPlay)
+                    @Html.ValidationMessageFor(model => model.MinSecondsBetweenRepeatPlay)
+                </div>
+                 <div class="editor-label">
+                    @Html.LabelFor(model => model.OutOfServiceTheme)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.OutOfServiceTheme)
+                    @Html.ValidationMessageFor(model => model.OutOfServiceTheme)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CoinPulseWidth)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CoinPulseWidth)
+                    @Html.ValidationMessageFor(model => model.CoinPulseWidth)
+                </div>
+            </div>
+            <div style="width:450px;float:left">
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CoinPulseGap)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CoinPulseGap)
+                    @Html.ValidationMessageFor(model => model.CoinPulseGap)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SensorInterval)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SensorInterval)
+                    @Html.ValidationMessageFor(model => model.SensorInterval)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.DisableTickets)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.DisableTickets)
+                    @Html.ValidationMessageFor(model => model.DisableTickets)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CardRetries)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CardRetries)
+                    @Html.ValidationMessageFor(model => model.CardRetries)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.DisplayLanguage)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.DisplayLanguage)
+                    @Html.ValidationMessageFor(model => model.DisplayLanguage)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MaxTicketPerGamePlay)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MaxTicketPerGamePlay)
+                    @Html.ValidationMessageFor(model => model.MaxTicketPerGamePlay)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.OutOfService)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.OutOfService)
+                    @Html.ValidationMessageFor(model => model.OutOfService)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.GamePlayDuration)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.GamePlayDuration)
+                    @Html.ValidationMessageFor(model => model.GamePlayDuration)
+                </div>
+            </div>
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+

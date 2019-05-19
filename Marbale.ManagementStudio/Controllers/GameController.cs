@@ -1,6 +1,10 @@
-﻿using Marbale.BusinessObject.Game;
+﻿using Marbale.BusinessObject;
+using Marbale.BusinessObject.Game;
+using MarbaleManagementStudio.Models;
 using Marble.Business;
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Web.Mvc;
 
 namespace MarbaleManagementStudio.Controllers
@@ -9,9 +13,11 @@ namespace MarbaleManagementStudio.Controllers
     public class GameController : Controller
     {
         public GameBL gameBussiness;
+        public SiteSetupBL siteSetupBussiness;
         public GameController()
         {
             gameBussiness = new GameBL();
+            siteSetupBussiness = new SiteSetupBL();
         }
 
         public ActionResult Index()
@@ -78,6 +84,34 @@ namespace MarbaleManagementStudio.Controllers
                 result = gameBussiness.InsertOrUpdateMachine(machine);
             }
             return result;
+        }
+        public ActionResult Configuration()
+        {
+            var configurations = siteSetupBussiness.GetAppSettings("Configuration");
+            Configuration conf = new Configuration();
+
+            foreach (var setting in configurations)
+            {
+                PropertyInfo propertyInfo = conf.GetType().GetProperty(setting.Name);
+                propertyInfo.SetValue(conf, Convert.ChangeType(setting.Value, propertyInfo.PropertyType), null);
+            }
+            return View();
+        }
+        public bool UpdateConfiguration(Configuration configurations)
+        {
+            var configurationList = new List<AppSetting>();
+            foreach (PropertyInfo propertyInfo in configurations.GetType().GetProperties())
+            {
+                var setting = new AppSetting();
+                if (propertyInfo.CanRead)
+                {
+                    setting.Name = propertyInfo.Name;
+                    setting.Value = propertyInfo.GetValue(configurations, null).ToString();
+                    setting.ScreenGroup = "Configuration";
+                }
+                configurationList.Add(setting);
+            }
+            return siteSetupBussiness.SaveGameConfiguration(configurationList);
         }
     }
 }
