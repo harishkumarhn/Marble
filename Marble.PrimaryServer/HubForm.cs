@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject.Game;
+using Marble.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,19 +15,20 @@ namespace Marble.PrimaryServer
     public partial class HubForm : Form
     {
         List<ActiveHubMachine> machines;
-        int hubCount;
-        public HubForm(List<ActiveHubMachine> machines, int hubCount)
+        GameBL gameBL;
+        int hubId;
+        public HubForm(int hubId)
         {
-            this.machines = machines;
-            this.hubCount = hubCount;
+            this.gameBL = new GameBL();
+            this.hubId = hubId;
             InitializeComponent();
         }
 
         private void HubForm_Load(object sender, EventArgs e)
         {
-            this.hub_dataGridView.DataSource = this.machines;
+            var machines = this.gameBL.GetActiveHubMachines(hubId);
+            this.hub_dataGridView.DataSource = machines;
             this.lab_Header.Text = this.machines[0].HubName;
-            this.Text = "Hub " + hubCount;
         }
 
         private void btn_shutDown_Click(object sender, EventArgs e)
@@ -36,7 +38,7 @@ namespace Marble.PrimaryServer
 
         private void btn_restart_Click(object sender, EventArgs e)
         {
-            HubForm hForm = new HubForm(this.machines, this.hubCount);
+            HubForm hForm = new HubForm(this.hubId);
             hForm.Show();
             this.Close();
         }

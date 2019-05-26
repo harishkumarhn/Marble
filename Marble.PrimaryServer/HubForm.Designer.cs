@@ -73,7 +73,7 @@
             // 
             this.lab_Header.AutoSize = true;
             this.lab_Header.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_Header.Location = new System.Drawing.Point(224, 6);
+            this.lab_Header.Location = new System.Drawing.Point(15, 0);
             this.lab_Header.Name = "lab_Header";
             this.lab_Header.Size = new System.Drawing.Size(34, 17);
             this.lab_Header.TabIndex = 0;

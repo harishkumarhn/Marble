@@ -247,12 +247,12 @@ namespace Marble.Business
                  throw e;
              }
          }
-         public List<ActiveHubMachine> GetActiveHubMachines()
+         public List<ActiveHubMachine> GetActiveHubMachines(int hubId)
          {
              List<ActiveHubMachine> activeHubMachines = new List<ActiveHubMachine>();
              try
              {
-                 var hubDataTable = gameData.GetActiveHubMachines();
+                 var hubDataTable = gameData.GetActiveHubMachines(hubId);
                  foreach (DataRow dr in hubDataTable.Rows)
                  {
                      ActiveHubMachine aHM = new ActiveHubMachine();

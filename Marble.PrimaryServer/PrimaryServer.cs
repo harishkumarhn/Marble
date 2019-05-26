@@ -127,19 +127,15 @@ namespace Marble.PrimaryServer
         private void StartServers()
         {
             this.richText_primaryServer.Text = "Server Started\n";
-            var activeHubMachines = gameBL.GetActiveHubMachines();
-
-            var groupedResult = from s in activeHubMachines
-                                group s by s.HubName;
-
+            var hubs = gameBL.GetHubs();// GetActiveHubMachines();
             //iterate each group        
             int i = 1;
-            foreach (var hub in groupedResult)
+            foreach (var hub in hubs)
             {
-                HubForm hForm = new HubForm(hub.ToList(), i);
+                HubForm hForm = new HubForm(hub.Id);
                 hForm.Show();
                 i++;
-                richText_primaryServer.AppendText("Hub " + hub.ToList()[0].HubName + " started\n");
+                richText_primaryServer.AppendText("Hub " + hub.Name + " started\n");
             }
         }
         private void ShutDownServers()
