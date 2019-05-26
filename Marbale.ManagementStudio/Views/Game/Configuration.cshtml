@@ -7,12 +7,12 @@
 
 <legend>Configuration</legend>
 
-@using (Html.BeginForm("UpdateConfiguration", "Game", FormMethod.Post))
+@using (Html.BeginForm("UpdateConfiguration","Game",FormMethod.Post))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <div style="width:900px;float:left">
+        <div style="width:900px;">
             <div style="width:450px;float:left">
                 <div class="editor-label">
                     @Html.LabelFor(model => model.StartInPhysicalTicketMode)
@@ -20,6 +20,7 @@
                 <div class="editor-field">
                     @Html.EditorFor(model => model.StartInPhysicalTicketMode)
                     @Html.ValidationMessageFor(model => model.StartInPhysicalTicketMode)
+
                 </div>
 
                 <div class="editor-label">
@@ -152,9 +153,40 @@
                 </div>
             </div>
         </div>
-        <p>
-            <input type="submit" value="Save" />
+        <p style="bottom: 11px;position: fixed;">
+            <input type="button" class="btn btn-primary btn-md" value="Save" onclick="SaveConfiguration(this)" />
         </p>
     </fieldset>
 }
 
+<script>
+    $(document).ready(function () {
+       
+    })
+    function SaveConfiguration(btnClicked) {
+        var $form = $(btnClicked).parents('form');
+        $.ajax({
+            type: "POST",
+            url: $form.attr('action'),
+            data: $form.serialize(),
+            error: function (xhr, status, error) {
+                //do something about the error
+            },
+            success: function (response) {
+                //do something with response
+                alert('Data saved');
+
+            }
+        });
+
+        return false;// if it's a link to prevent post
+
+    }
+    var updatedArray = [];
+    function UpdatedList(x) {
+        if (!updatedArray.includes(x.rowIndex)) {
+            updatedArray.push(x.rowIndex);
+        }
+    }
+    
+ </script>

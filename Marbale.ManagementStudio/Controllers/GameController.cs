@@ -93,7 +93,15 @@ namespace MarbaleManagementStudio.Controllers
             foreach (var setting in configurations)
             {
                 PropertyInfo propertyInfo = conf.GetType().GetProperty(setting.Name);
+                if(propertyInfo.PropertyType.Name == "Boolean")
+                {
+                    setting.Value = string.IsNullOrWhiteSpace(setting.Value) ? "false" : setting.Value;
+                    propertyInfo.SetValue(conf, Convert.ChangeType(Convert.ToBoolean(setting.Value), propertyInfo.PropertyType), null);
+                }
+                else
+                {
                 propertyInfo.SetValue(conf, Convert.ChangeType(setting.Value, propertyInfo.PropertyType), null);
+                }
             }
             return View();
         }

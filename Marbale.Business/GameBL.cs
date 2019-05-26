@@ -247,5 +247,27 @@ namespace Marble.Business
                  throw e;
              }
          }
+         public List<ActiveHubMachine> GetActiveHubMachines()
+         {
+             List<ActiveHubMachine> activeHubMachines = new List<ActiveHubMachine>();
+             try
+             {
+                 var hubDataTable = gameData.GetActiveHubMachines();
+                 foreach (DataRow dr in hubDataTable.Rows)
+                 {
+                     ActiveHubMachine aHM = new ActiveHubMachine();
+                     aHM.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                     aHM.Machine = dr.IsNull("Machine") ? "" : dr["Machine"].ToString();
+                     aHM.HubName = dr.IsNull("HubName") ? "" : dr["HubName"].ToString();
+                     activeHubMachines.Add(aHM);
+                 }
+             }
+             catch (Exception ex)
+             {
+                 return null;
+             }
+             return activeHubMachines;
+
+         }
     }
 }

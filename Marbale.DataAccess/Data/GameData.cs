@@ -172,5 +172,16 @@ namespace Marbale.DataAccess
             }
 
         }
+        public DataTable GetActiveHubMachines()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetActiveHubMachines");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
