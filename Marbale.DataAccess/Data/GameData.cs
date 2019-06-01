@@ -172,5 +172,19 @@ namespace Marbale.DataAccess
             }
 
         }
+        public DataTable GetActiveHubMachines(int hubId)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+
+                sqlParameters[0] = new SqlParameter("@id", hubId);
+                return conn.executeSelectQuery("sp_GetActiveHubMachines",sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

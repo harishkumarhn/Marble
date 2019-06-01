@@ -137,6 +137,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\ModuleRootPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -280,6 +281,7 @@
     <Content Include="Views\SiteSetup\Limit.cshtml" />
     <Content Include="Views\SiteSetup\Transaction.cshtml" />
     <Content Include="Views\Game\Machines.cshtml" />
+    <Content Include="Views\Game\Configuration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
