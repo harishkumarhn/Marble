@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevExpress.Data.19.1.3\lib\net452\DevExpress.Data.v19.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
       <Private>True</Private>
@@ -50,11 +54,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProduct.Designer.cs">
+      <DependentUpon>frmProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="InventoryHome.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InventoryHome.Designer.cs">
       <DependentUpon>InventoryHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\frmCategory.Designer.cs">
+      <DependentUpon>frmCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\frmLocation.Designer.cs">
+      <DependentUpon>frmLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmLocationType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\frmLocationType.Designer.cs">
+      <DependentUpon>frmLocationType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmTax.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\frmTax.Designer.cs">
+      <DependentUpon>frmTax.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmUOM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\frmUOM.Designer.cs">
+      <DependentUpon>frmUOM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\frmVendor.Designer.cs">
+      <DependentUpon>frmVendor.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuPopups\MasterPopup.cs">
       <SubType>Form</SubType>
@@ -64,8 +116,32 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmProduct.resx">
+      <DependentUpon>frmProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InventoryHome.resx">
       <DependentUpon>InventoryHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmCategory.resx">
+      <DependentUpon>frmCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmLocation.resx">
+      <DependentUpon>frmLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmLocationType.resx">
+      <DependentUpon>frmLocationType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmTax.resx">
+      <DependentUpon>frmTax.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmUOM.resx">
+      <DependentUpon>frmUOM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmVendor.resx">
+      <DependentUpon>frmVendor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPopups\MasterPopup.resx">
       <DependentUpon>MasterPopup.cs</DependentUpon>
@@ -93,7 +169,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Marbale.BusinessObject\Marbale.BusinessObject.csproj">
+      <Project>{B49B19B5-A1C7-4372-8B3B-D4FA9A0981D0}</Project>
+      <Name>Marbale.BusinessObject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Marbale.Business\Marbale.Business.csproj">
+      <Project>{D3791924-6C85-4AAD-8BAB-3E3CD23C22E6}</Project>
+      <Name>Marbale.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

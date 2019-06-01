@@ -46,6 +46,11 @@
     <Compile Include="Game\Hub.cs" />
     <Compile Include="Cards\CardsModel.cs" />
     <Compile Include="Cards\Inventory.cs" />
+    <Compile Include="Inventory\Category.cs" />
+    <Compile Include="Inventory\Location.cs" />
+    <Compile Include="Inventory\LocationType.cs" />
+    <Compile Include="Inventory\UnitOfMeasure.cs" />
+    <Compile Include="Inventory\Vendor.cs" />
     <Compile Include="Messages\MessagesModel.cs" />
     <Compile Include="NameValue.cs" />
     <Compile Include="Setting\AppSetting.cs" />

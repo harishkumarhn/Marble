@@ -1,5 +1,7 @@
 ﻿using Marbale.Business;
 using Marbale.BusinessObject;
+using Marbale.POS.CardDevice;
+using Marbale.POS.Common;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -26,7 +28,66 @@ namespace Marbale.POS
         {
             UpdateProductsTab();
             updateCardDetailsGrid();
+            registerAdditionalCardReaders();
         }
+
+        class Device
+        {
+            internal string DeviceName;
+            internal string DeviceType;
+            internal string DeviceSubType;
+            internal string VID, PID, OptString;
+        }
+
+        void registerAdditionalCardReaders()
+        {
+            List<Device> deviceList = new List<Device>();
+
+            if (Devices.PrimaryCardReader == null)
+            {
+                string USBReaderVID = "VID_FFFF";  //USB_READER_VID
+                string USBReaderPID = "PID_0035"; //USB_READER_PID
+                string USBReaderOptionalString = "0000"; //USB_READER_OPT_STRING
+
+                if (USBReaderVID.Trim() != string.Empty)
+                {
+                    Device device = new Device();
+                    device.DeviceName = "Default";
+                    device.DeviceType = "CardReader";
+                    device.DeviceSubType = "KeyboardWedge";
+                    device.VID = USBReaderVID;
+                    device.PID = USBReaderPID;
+                    device.OptString = USBReaderOptionalString;
+
+                    deviceList.Add(device);
+                }
+            }
+
+            EventHandler currEventHandler = new EventHandler(CardScanCompleteEventHandle);
+            
+        }
+
+        private void CardScanCompleteEventHandle(object sender, EventArgs e)
+        {
+            if (e is DeviceScannedEventArgs)
+            {
+                DeviceScannedEventArgs checkScannedEvent = e as DeviceScannedEventArgs;
+
+                string CardNumber = checkScannedEvent.Message; // LEFT_TRIM_CARD_NUMBER, RIGHT_TRIM_CARD_NUMBER
+
+                if (System.Text.RegularExpressions.Regex.Matches(CardNumber, "0").Count >= 8)
+                {
+                    return;
+                }
+                HandleCardRead(CardNumber, sender as DeviceClass);
+            }
+        }
+
+        private void HandleCardRead(string CardNumber, DeviceClass readerDevice)
+        {
+            //code to handle card number
+        }
+
         public List<KeyValue> GetDefaultCardInfo()
         {
             List<KeyValue> cardDetails = new List<KeyValue>();
@@ -212,7 +273,7 @@ namespace Marbale.POS
                 MarbleSplitContainer.Panel2.Controls.Add(panelButtons);
 
                 tbHomeControls.Width = MarbleSplitContainer.Panel2.Width;
-                tbHomeControls.Height = MarbleSplitContainer.Panel2.Height - panelButtons.Height;
+                //tbHomeControls.Height = 603; //MarbleSplitContainer.Panel2.Height - panelButtons.Height;
 
                 MarbleSplitContainer.Panel2.Controls.Remove(pnlCardDetails);
                 MarbleSplitContainer.Panel1.Controls.Add(pnlCardDetails);
@@ -228,7 +289,7 @@ namespace Marbale.POS
                 MarbleSplitContainer.Panel2.Controls.Remove(panelButtons);
 
                 tbHomeControls.Width = MarbleSplitContainer.Panel1.Width;
-                tbHomeControls.Height = MarbleSplitContainer.Panel1.Height - panelButtons.Height -2;
+                //tbHomeControls.Height = 603; // MarbleSplitContainer.Panel1.Height - panelButtons.Height ;
 
                 MarbleSplitContainer.Panel2.Controls.Add(pnlCardDetails);
                 MarbleSplitContainer.Panel1.Controls.Remove(pnlCardDetails);
