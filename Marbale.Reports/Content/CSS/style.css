@@ -55,3 +55,23 @@
 .dateFilterContainer {
     margin-left: 400px;
 }
+.menu {
+    width: 17%;
+}
+.menuItems {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 100%;
+}
+.dateFilter {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    margin-left: 179px;
+}
+.nav-tabs {
+    font-size: 16px;
+    font-weight: 600;
+}
+.tab-pane {
+    margin-bottom: 20px;
+}
