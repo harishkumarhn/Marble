@@ -161,17 +161,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\CSS\bootstrap-datepicker3.css" />
+    <Content Include="Content\JS\bootstrap-datepicker.min.js" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ReportMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\CSS\bootstrap-datetimepicker.css" />
-    <Content Include="Content\CSS\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\CSS\bootstrap.css" />
     <Content Include="Content\CSS\bootstrap.min.css" />
     <Content Include="Content\CSS\jquery.datetimepicker.css" />
@@ -182,8 +184,6 @@
     <Content Include="Content\CSS\layout.css" />
     <Content Include="Content\CSS\product.css" />
     <Content Include="Content\CSS\style.css" />
-    <Content Include="Content\JS\bootstrap-datetimepicker.fr.js" />
-    <Content Include="Content\JS\bootstrap-datetimepicker.js" />
     <Content Include="Content\JS\bootstrap.min.js" />
     <Content Include="Content\JS\fontawesome.js" />
     <Content Include="Content\JS\fontawesome.solid.js" />
@@ -299,6 +299,9 @@
     <Content Include="Views\Report\Run.cshtml" />
     <Content Include="Views\Report\Schedule.cshtml" />
     <Content Include="Views\Report\Management.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Report\AllReports.cshtml" />
+    <Content Include="Views\Transaction\TransactionReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

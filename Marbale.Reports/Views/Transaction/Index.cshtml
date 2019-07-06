@@ -1,0 +1,13 @@
+﻿@{
+    Layout = null;
+}
+<h2>Transaction</h2>
+<table id="marbleTable" class="table">
+            @foreach (var item in ViewBag.models)
+            {  
+                <tr>
+                    <td>  <a href="@item.Column1.URL">@item.Column1.DisplayName</a>  </td>
+                    <td>  <a href="@item.Column2.URL">@item.Column2.DisplayName</a>  </td>
+                </tr>  
+            }
+</table>
