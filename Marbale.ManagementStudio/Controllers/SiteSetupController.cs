@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace MarbaleManagementStudio.Controllers
 {
@@ -31,7 +32,7 @@ namespace MarbaleManagementStudio.Controllers
             return View();
         }
         #region EmailSedning
-        public void email_send(HttpPostedFileBase fileUploader, HttpPostedFileBase fileUploader1)
+        public  void email_send(HttpPostedFileBase fileUploader, HttpPostedFileBase fileUploader1)
         {
             var datatable = siteSetup.GetAppSettings("Email");
             List<AppSetting> app = new List<AppSetting>();
@@ -62,8 +63,16 @@ namespace MarbaleManagementStudio.Controllers
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential(SMTP_Login_Username, SMTP_Login_Password);
             SmtpServer.EnableSsl = true;
-
-            SmtpServer.Send(mail);
+            try
+            {
+                SmtpServer.Send(mail);
+            }
+            catch (Exception ex)
+            {
+               
+                throw;
+            }
+           
 
         }
 
@@ -123,6 +132,8 @@ namespace MarbaleManagementStudio.Controllers
             return status;
         }
         #endregion
+
+
         #region Limit
         public ActionResult Limit()
         {
@@ -140,6 +151,14 @@ namespace MarbaleManagementStudio.Controllers
         }
         #endregion
 
+        #region Price
+        public ActionResult Price()
+        {
+            var datatable = siteSetup.GetAppSettings("Price");
+            ViewBag.Price = datatable;
+            return View();
+        }
+        #endregion
         #region Email
         public ActionResult Email()
         {
@@ -148,7 +167,47 @@ namespace MarbaleManagementStudio.Controllers
             return View();
         }
         #endregion
-
+        #region Print
+        public ActionResult Print()
+        {
+            var datatable = siteSetup.GetAppSettings("Print");
+            ViewBag.Print = datatable;
+            return View();
+        }
+        #endregion
+        #region Formats
+        public ActionResult Formats()
+        {
+            var datatable = siteSetup.GetAppSettings("Formats");
+            ViewBag.Formats = datatable;
+            return View();
+        }
+        #endregion
+        #region Inventory
+        public ActionResult Inventory()
+        {
+            var datatable = siteSetup.GetAppSettings("Inventory");
+            ViewBag.Inventory = datatable;
+            return View();
+        }
+        #endregion
+        #region Redemption
+        public ActionResult Redemption()
+        {
+            var datatable = siteSetup.GetAppSettings("Redemption");
+            ViewBag.Redemption = datatable;
+            return View();
+        }
+        #endregion
+        #region Payment
+        public ActionResult Payment()
+        {
+            var datatable = siteSetup.GetAppSettings("Payment");
+            ViewBag.Payment = datatable;
+           // await ViewBag.Payment;
+            return View();
+        }
+        #endregion
         #region Signage
         public ActionResult Signage()
         {
@@ -263,6 +322,20 @@ namespace MarbaleManagementStudio.Controllers
             return 0;
         }
 
+        #endregion
+        #region Customer
+        public ActionResult Customer()
+        {
+            List<AppSetting> data = siteSetup.GetAppSettings("customer");
+            var types = new List<customIDVa>();
+            types.Add(new customIDVa() { Value = 0, Text = "NotUsed" });
+            types.Add(new customIDVa() { Value = 1, Text = "Option" });
+            types.Add(new customIDVa() { Value = 2, Text = "Mendatory" });
+        //    ViewBag.PartialTypes = types;
+         //   List<CustomDropdown> myLevels = Enum.GetValues(typeof(CustomDropdown)).Cast<CustomDropdown>().ToList();
+            ViewBag.RequiredLevel = new SelectList(types);
+            return View(data);
+        }
         #endregion
 
     }

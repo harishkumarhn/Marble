@@ -25,6 +25,14 @@ namespace Marbale.BusinessObject
         public string Tittle { get; set; }
         public string MethodName { get; set; }
         public string Text { get; set; }
+        public string BRTag { get; set; }
 
+    }
+    public enum CustomDropdown
+    {
+         NotUsed,
+       Option,
+       Mendatory,
+      
     }
 }

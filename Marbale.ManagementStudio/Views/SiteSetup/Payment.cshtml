@@ -1,14 +1,17 @@
-﻿@{
-    ViewBag.Title = "Signage";
+﻿@model Marbale.BusinessObject.AppSetting
+@{
+    ViewBag.Title = "Payment";
     Layout = null;
 }
 
-<div >
-    </br>
+<div style="background-color:lightblue;height: 500px;">
+ 
+ 
 <div id="valuesContainer" style="background-color:orangered">
    
-      @foreach (var item in ViewBag.SignageForm)
+      @foreach (var item in ViewBag.Payment)
       {
+          int a = 1;
           String type = item.Type.ToString();
           switch (type)
           {
@@ -16,6 +19,7 @@
                <div>                        
                             <div class="inputwrap demo">
                              <text> &nbsp; &nbsp; &nbsp;</text>   <label> <b>@item.Caption </b>:</label>
+                              
                      <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
 
                             </div>
@@ -32,61 +36,94 @@
                 
      </div>
                   break;
-                  case"int":
+                            case "file":
+                
+ 
+    
+         <div>
+                          <div class="inputwrap demo">
+                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
+                     <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br /> </div>
+           
+                        </div>
+
+
+      
+
+                
+    
+              break;
+                            case "int":
                     <div>
                           <div class="inputwrap demo">
                          <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
                      <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br /> </div>
                         </div>
                     
-                  break;
-                     case"color":
-                    <div>
-                          <div class="inputwrap demo" id="colorpickerdemo">
-                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
-                     <input type="text" value="@item.Value" class="colorwell" name="myInput" id="@item.Name"/><br /> </div>
-                        </div>
-                    
-                  break;
-                  
+              break;
+
           }
-                  
+
       }
+    
+      </div>
+ @*          <input type="submit"  class="button-email btn btn-primary"/>*@
 
-
-<div id="colorpicker"></div>
-       <div id="picker"></div>
-  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveLimits()">Save</button>   
+      
+  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>   
      <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a>
 </div>
       
-    </div>
-<script src="~/Content/Fabrastics/farbtastic.js"></script>
-<link href="~/Content/Fabrastics/farbtastic.css" rel="stylesheet" />
+  
 <script>
-    $(document).ready(function () {
-        var f = $.farbtastic('#colorpicker');
-        $('.colorwell')
-            .each(function () {
-                f.linkTo(this);
-            })
-            .focus(function () {
-                f.linkTo(this);
-            });
-
-    });
     var appSettings = [];
-    $('input[name=myInput]').blur(function () {
+    var appSettings1 = [];
+    $('input[name=myInput]').change(function () {
         debugger
         var d = {
             Name: this.id,
             Value: this.value,
-            ScreenGroup: 'Signage'
+            ScreenGroup: 'Formats'
+        };
+      
+        appSettings.push(d);
+    });
+    $('input[name=fileUploader]').change(function (e) {
+        debugger
+        var d1 = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Price'
+        };
+
+        appSettings.push(d1);
+       // console.log(this.files[0].mozFullPath);
+    })
+    $('input[name=fileUploader1]').change(function (e) {
+        debugger
+        var d1 = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Email'
+        };
+
+        appSettings.push(d1);
+        // console.log(this.files[0].mozFullPath);
+    })
+   
+    $('input[name=allcheck]').change(function () {
+        debugger
+        var d = {
+            Name: this.id,
+            Value: $(this).is(":checked"),
+            ScreenGroup: 'Formats'
         };
         appSettings.push(d);
     });
 
-    function SaveLimits() {
+   // formData.append('file', $('#PDF_WRITER_PRINTER')[0].files[0]);
+    function SaveEmail() {
+        debugger
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
@@ -106,7 +143,15 @@
                             });
    
     }
- 
+    $(document).ready(function () {
+        $('input[name="allcheck"]').each(function (index) {
+            debugger
+            if ($(this).val().toLowerCase() == "true")
+
+                ($(this).prop('checked', true));
+        });
+    });
+
 </script>
 
 <style>
@@ -114,21 +159,26 @@
         width: 280px;
             height: 46px;
     }
+    .button-pos {
+           top: 686px;
+    position: absolute;
+    left: 500px;
+    }
     label {
     width:480px;
     clear:left;
     text-align:right;
     padding-right:10px;
 }
-      .button-pos {
-        position: absolute;
-    left: 290px;
-    top: 533px;
+      .button-email {
+     position: absolute;
+    left: 319px;
+    bottom: 132px;
     }
     .button-close {
-        position: absolute;
-    left: 795px;
-    top: 533px;
+        top: 685px;
+    position: absolute;
+    left: 587px;
     }
 
 input,button, label,.ar {

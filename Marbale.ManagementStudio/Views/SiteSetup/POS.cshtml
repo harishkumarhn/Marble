@@ -3,9 +3,9 @@
     Layout = null;
 }
 
-<div style="background-color:lightblue;height: 500px;">
+<div style="background-color:orangered;height: 500px;">
     </br>
-<div id="valuesContainer">
+<div id="valuesContainer" style="background-color:orangered">
    
       @foreach (var item in ViewBag.POSForm)
       {
@@ -70,7 +70,7 @@ listItems.Add(new SelectListItem
     <div>  @Html.DropDownList("Default Cash Mode", listItems, new { @class = "defalut-width ar",@name="myInput" })</div></br></br>
 </div><br />
    <text> &nbsp; &nbsp; &nbsp;</text>   <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveProducts()">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+     <a href="/Product/ClosePopUp" class="btn btn-primary btn-closes">Close</a>
 </div>
       
     </div>
@@ -131,6 +131,11 @@ listItems.Add(new SelectListItem
 </script>
 
 <style>
+    .btn-closes {
+        top: 821px;
+        position: absolute;
+        right: 630px;
+    }
     .defalut-width {
         width: 280px;
             height: 46px;
@@ -142,9 +147,8 @@ listItems.Add(new SelectListItem
     padding-right:10px;
 }
       .button-pos {
-        position: absolute;
-        right: 805px;
-        top: 869px;
+          position: absolute;
+    top: 822px;
     }
 
 input,button, label,.ar {

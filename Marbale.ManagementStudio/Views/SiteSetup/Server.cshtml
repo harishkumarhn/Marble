@@ -4,10 +4,10 @@
     Layout = null;
 }
 
-<div style="background-color:lightblue;height: 500px;">
+<div>
  
  
-<div id="valuesContainer">
+<div id="valuesContainer" style="background-color:orangered">
    
       @foreach (var item in ViewBag.Server)
       {
@@ -154,6 +154,11 @@
 </script>
 
 <style>
+    .button-pos {
+        left: 463px;
+        top: 1412px;
+        position: absolute;
+    }
     .defalut-width {
         width: 280px;
             height: 46px;
@@ -170,10 +175,8 @@
     bottom: 132px;
     }
     .button-close {
-           position: absolute;
-    left: 646px;
-  
-    top: 576px;
+        top: 1412px;
+    position: absolute;
     }
 
 input,button, label,.ar {

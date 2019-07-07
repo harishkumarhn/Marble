@@ -14,7 +14,7 @@
 <button class="tablinks" id="Signagetab" onclick="getSignageDetails()">Signage</button>
 <button class="tablinks" id="Servertab" onclick="getServerDetails()">Server</button>*@
 
-</br><br /><br /><br />
+</br><br /><br /><br /></br></br>
 <div id="valuesContainer">
     
 </div>
@@ -27,6 +27,12 @@
     })
     function getTransactionDetails() {
         $('#valuesContainer').load('/SiteSetup/Transaction', { ValType: 'Transaction' });
+    }
+    function getFormatsInfo() {
+        $('#valuesContainer').load('/SiteSetup/Formats', { ValType: 'Formats' });
+    }
+    function getPrintDetails() {
+        $('#valuesContainer').load('/SiteSetup/Print', { ValType: 'Print' });
     }
     function getServerDetails() {
         $('#valuesContainer').load('/SiteSetup/Server', { ValType: 'Transaction' });
@@ -42,17 +48,28 @@
         $('#valuesContainer').load('/SiteSetup/Limit', { ValType: 'Limit' });
     }
     function getposdetails() {
-     
         $('#valuesContainer').load('/SiteSetup/POS', { ValType: 'pos' });
-       
     }
     function getBackupDetails() {
-        debugger;
         $('#valuesContainer').load('/SiteSetup/BackUp', { ValType: 'pos' });
-
+    }
+    function getPriceDetails() {
+        $('#valuesContainer').load('/SiteSetup/Price', { ValType: 'price' });
     }
     function getCardDetails() {
         $('#valuesContainer').load('/SiteSetup/Card');
+    }
+    function getInventoryInfo() {
+        $('#valuesContainer').load('/SiteSetup/Inventory');
+    }
+    function getRedInfo() {
+        $('#valuesContainer').load('/SiteSetup/Redemption');
+    }
+    function getPaymentInfo() {
+        $('#valuesContainer').load('/SiteSetup/Payment');
+    }
+    function getCustomerDetails() {
+        $('#valuesContainer').load('/SiteSetup/Customer');
     }
     $('.tablinks').click(function () {
             $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');

@@ -4,10 +4,10 @@
     Layout = null;
 }
 
-<div style="background-color:lightblue;height: 500px;">
+<div>
  
  
-<div id="valuesContainer">
+<div id="valuesContainer" style="background-color:orangered">
    
       @foreach (var item in ViewBag.BackupRestore)
       {
@@ -154,6 +154,11 @@
 </script>
 
 <style>
+    .button-pos {
+        top: 625px;
+        position: absolute;
+        left: 500px;
+    }
     .defalut-width {
         width: 280px;
             height: 46px;
@@ -170,10 +175,10 @@
     bottom: 132px;
     }
     .button-close {
-           position: absolute;
-    left: 646px;
+             top: 625px;
+    position: absolute;
   
-    top: 576px;
+
     }
 
 input,button, label,.ar {

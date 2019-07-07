@@ -399,10 +399,13 @@ namespace Marble.Business
                 b.MethodName = dr.IsNull("MethodName") ? "" : dr["MethodName"].ToString();
                 b.Text = dr.IsNull("Text") ? "" : dr["Text"].ToString();
                 b.Tittle = dr.IsNull("Tittle") ? "" : dr["Tittle"].ToString();
+                b.BRTag = dr.IsNull("BRTag") ? "" : dr["BRTag"].ToString();
                 bList.Add(b);
              //   b.Department = dr.IsNull("Department") ? "" : dr["Department"].ToString();
             }
             return bList;
         }
+
+   
     }
 }

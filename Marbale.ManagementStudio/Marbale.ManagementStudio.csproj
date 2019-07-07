@@ -293,6 +293,13 @@
     <Content Include="Views\SiteSetup\Signage.cshtml" />
     <Content Include="Views\SiteSetup\Server.cshtml" />
     <Content Include="Views\SiteSetup\BackUp.cshtml" />
+    <Content Include="Views\SiteSetup\Price.cshtml" />
+    <Content Include="Views\SiteSetup\Print.cshtml" />
+    <Content Include="Views\SiteSetup\Formats.cshtml" />
+    <Content Include="Views\SiteSetup\Inventory.cshtml" />
+    <Content Include="Views\SiteSetup\Redemption.cshtml" />
+    <Content Include="Views\SiteSetup\Payment.cshtml" />
+    <Content Include="Views\SiteSetup\Customer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
