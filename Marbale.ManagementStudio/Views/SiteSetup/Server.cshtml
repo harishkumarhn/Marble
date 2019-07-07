@@ -1,14 +1,17 @@
-﻿@{
-    ViewBag.Title = "Limits";
+﻿@model Marbale.BusinessObject.AppSetting
+@{
+    ViewBag.Title = "Server";
     Layout = null;
 }
 
-<div style="background-color:orangered;height: 500px;">
-    </br>
-<div id="valuesContainer">
+<div>
+ 
+ 
+<div id="valuesContainer" style="background-color:orangered">
    
-      @foreach (var item in ViewBag.LimitForm)
+      @foreach (var item in ViewBag.Server)
       {
+          int a = 1;
           String type = item.Type.ToString();
           switch (type)
           {
@@ -16,6 +19,7 @@
                <div>                        
                             <div class="inputwrap demo">
                              <text> &nbsp; &nbsp; &nbsp;</text>   <label> <b>@item.Caption </b>:</label>
+                              
                      <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
 
                             </div>
@@ -32,36 +36,94 @@
                 
      </div>
                   break;
-                  case"int":
+                            case "file":
+                
+ 
+    
+         <div>
+                          <div class="inputwrap demo">
+                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
+                     <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br /> </div>
+           
+                        </div>
+
+
+      
+
+                
+    
+              break;
+                            case "int":
                     <div>
                           <div class="inputwrap demo">
                          <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
                      <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br /> </div>
                         </div>
                     
-                  break;
-                  
+              break;
+
           }
-                  
+
       }
-       
-  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveLimits()">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary button-closes">Close</a>
+    
+      </div>
+ @*          <input type="submit"  class="button-email btn btn-primary"/>*@
+
+      
+  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>   
+     <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a>
 </div>
       
-    </div>
+  
 <script>
     var appSettings = [];
+    var appSettings1 = [];
     $('input[name=myInput]').change(function () {
+        debugger
         var d = {
             Name: this.id,
             Value: this.value,
-            ScreenGroup: 'Limit'
+            ScreenGroup: 'Server'
+        };
+      
+        appSettings.push(d);
+    });
+    $('input[name=fileUploader]').change(function (e) {
+        debugger
+        var d1 = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Server'
+        };
+
+        appSettings.push(d1);
+       // console.log(this.files[0].mozFullPath);
+    })
+    $('input[name=fileUploader1]').change(function (e) {
+        debugger
+        var d1 = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Email'
+        };
+
+        appSettings.push(d1);
+        // console.log(this.files[0].mozFullPath);
+    })
+   
+    $('input[name=allcheck]').change(function () {
+        debugger
+        var d = {
+            Name: this.id,
+            Value: $(this).is(":checked"),
+            ScreenGroup: 'Email'
         };
         appSettings.push(d);
     });
 
-    function SaveLimits() {
+   // formData.append('file', $('#PDF_WRITER_PRINTER')[0].files[0]);
+    function SaveEmail() {
+        debugger
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
@@ -82,12 +144,21 @@
    
     }
     $(document).ready(function () {
-     
+        $('input[name="allcheck"]').each(function (index) {
+            debugger
+            if ($(this).val().toLowerCase() == "true")
 
+                ($(this).prop('checked', true));
+        });
     });
 </script>
 
 <style>
+    .button-pos {
+        left: 463px;
+        top: 1412px;
+        position: absolute;
+    }
     .defalut-width {
         width: 280px;
             height: 46px;
@@ -98,15 +169,14 @@
     text-align:right;
     padding-right:10px;
 }
-      .button-pos {
-      
-         position: absolute;
-    top: 700px;
+      .button-email {
+     position: absolute;
+    left: 319px;
+    bottom: 132px;
     }
-    .button-closes {
-            position:absolute;
-         top: 700px;
-    left: 396px;
+    .button-close {
+        top: 1412px;
+    position: absolute;
     }
 
 input,button, label,.ar {

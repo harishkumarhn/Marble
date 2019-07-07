@@ -11,4 +11,10 @@ namespace Marbale.BusinessObject
         public int Id { get; set; }
         public string Value { get; set; }
     }
+    public class customIDVa
+    {
+        public int Value { get; set; }
+        public string Text { get; set; }
+
+    }
 }

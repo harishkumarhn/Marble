@@ -1,13 +1,13 @@
 ﻿@{
-    ViewBag.Title = "Limits";
+    ViewBag.Title = "Signage";
     Layout = null;
 }
 
-<div style="background-color:orangered;height: 500px;">
+<div >
     </br>
-<div id="valuesContainer">
+<div id="valuesContainer" style="background-color:orangered">
    
-      @foreach (var item in ViewBag.LimitForm)
+      @foreach (var item in ViewBag.SignageForm)
       {
           String type = item.Type.ToString();
           switch (type)
@@ -40,23 +40,48 @@
                         </div>
                     
                   break;
+                     case"color":
+                    <div>
+                          <div class="inputwrap demo" id="colorpickerdemo">
+                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
+                     <input type="text" value="@item.Value" class="colorwell" name="myInput" id="@item.Name"/><br /> </div>
+                        </div>
+                    
+                  break;
                   
           }
                   
       }
-       
+
+
+<div id="colorpicker"></div>
+       <div id="picker"></div>
   <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveLimits()">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary button-closes">Close</a>
+     <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a>
 </div>
       
     </div>
+<script src="~/Content/Fabrastics/farbtastic.js"></script>
+<link href="~/Content/Fabrastics/farbtastic.css" rel="stylesheet" />
 <script>
+    $(document).ready(function () {
+        var f = $.farbtastic('#colorpicker');
+        $('.colorwell')
+            .each(function () {
+                f.linkTo(this);
+            })
+            .focus(function () {
+                f.linkTo(this);
+            });
+
+    });
     var appSettings = [];
-    $('input[name=myInput]').change(function () {
+    $('input[name=myInput]').blur(function () {
+        debugger
         var d = {
             Name: this.id,
             Value: this.value,
-            ScreenGroup: 'Limit'
+            ScreenGroup: 'Signage'
         };
         appSettings.push(d);
     });
@@ -81,10 +106,7 @@
                             });
    
     }
-    $(document).ready(function () {
-     
-
-    });
+ 
 </script>
 
 <style>
@@ -99,14 +121,14 @@
     padding-right:10px;
 }
       .button-pos {
-      
-         position: absolute;
-    top: 700px;
+        position: absolute;
+    left: 290px;
+    top: 533px;
     }
-    .button-closes {
-            position:absolute;
-         top: 700px;
-    left: 396px;
+    .button-close {
+        position: absolute;
+    left: 795px;
+    top: 533px;
     }
 
 input,button, label,.ar {

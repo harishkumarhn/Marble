@@ -18,4 +18,21 @@ namespace Marbale.BusinessObject
         public string ScreenGroup { get; set; }
         public string Type { get; set; }
     }
+    public class Buttons
+    {
+        public string Id { get; set; }
+        public string Class { get; set; }
+        public string Tittle { get; set; }
+        public string MethodName { get; set; }
+        public string Text { get; set; }
+        public string BRTag { get; set; }
+
+    }
+    public enum CustomDropdown
+    {
+         NotUsed,
+       Option,
+       Mendatory,
+      
+    }
 }

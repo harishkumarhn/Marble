@@ -1,14 +1,17 @@
-﻿@{
-    ViewBag.Title = "POS";
+﻿@model Marbale.BusinessObject.AppSetting
+@{
+    ViewBag.Title = "Payment";
     Layout = null;
 }
 
-<div style="background-color:orangered;height: 500px;">
-    </br>
+<div style="background-color:lightblue;height: 500px;">
+ 
+ 
 <div id="valuesContainer" style="background-color:orangered">
    
-      @foreach (var item in ViewBag.POSForm)
+      @foreach (var item in ViewBag.Payment)
       {
+          int a = 1;
           String type = item.Type.ToString();
           switch (type)
           {
@@ -16,6 +19,7 @@
                <div>                        
                             <div class="inputwrap demo">
                              <text> &nbsp; &nbsp; &nbsp;</text>   <label> <b>@item.Caption </b>:</label>
+                              
                      <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
 
                             </div>
@@ -32,76 +36,94 @@
                 
      </div>
                   break;
-                  case"int":
+                            case "file":
+                
+ 
+    
+         <div>
+                          <div class="inputwrap demo">
+                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
+                     <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br /> </div>
+           
+                        </div>
+
+
+      
+
+                
+    
+              break;
+                            case "int":
                     <div>
                           <div class="inputwrap demo">
                          <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
                      <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br /> </div>
                         </div>
                     
-                  break;
-                  
+              break;
+
           }
-                  
+
       }
-       
-                       @{
-List<SelectListItem> listItems = new List<SelectListItem>();
-listItems.Add(new SelectListItem
-  {
-      Text = "Cash",
-      Value = "1",
-      Selected = true
-  });
-listItems.Add(new SelectListItem
- {
-     Text = "Credit Card",
-     Value = "2"
- });
-listItems.Add(new SelectListItem
- {
-     Text = "Game Card",
-     Value = "3"
- });
-        }
-       <div class="demo">
-  <div> <text> &nbsp; &nbsp; &nbsp;</text> <label>Default Cash Mode</label></div>
-           
-    <div>  @Html.DropDownList("Default Cash Mode", listItems, new { @class = "defalut-width ar",@name="myInput" })</div></br></br>
-</div><br />
-   <text> &nbsp; &nbsp; &nbsp;</text>   <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveProducts()">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary btn-closes">Close</a>
+    
+      </div>
+ @*          <input type="submit"  class="button-email btn btn-primary"/>*@
+
+      
+  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>   
+     <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a>
 </div>
       
-    </div>
+  
 <script>
     var appSettings = [];
+    var appSettings1 = [];
     $('input[name=myInput]').change(function () {
+        debugger
         var d = {
             Name: this.id,
             Value: this.value,
-            ScreenGroup: 'POS'
+            ScreenGroup: 'Formats'
         };
+      
         appSettings.push(d);
     });
+    $('input[name=fileUploader]').change(function (e) {
+        debugger
+        var d1 = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Price'
+        };
+
+        appSettings.push(d1);
+       // console.log(this.files[0].mozFullPath);
+    })
+    $('input[name=fileUploader1]').change(function (e) {
+        debugger
+        var d1 = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Email'
+        };
+
+        appSettings.push(d1);
+        // console.log(this.files[0].mozFullPath);
+    })
+   
     $('input[name=allcheck]').change(function () {
+        debugger
         var d = {
             Name: this.id,
             Value: $(this).is(":checked"),
-            ScreenGroup: 'POS'
+            ScreenGroup: 'Formats'
         };
         appSettings.push(d);
     });
-    $("#Default_Cash_Mode").change(function () {
+
+   // formData.append('file', $('#PDF_WRITER_PRINTER')[0].files[0]);
+    function SaveEmail() {
         debugger
-       
-        var dropdn = {
-            Name: this.id,
-            Value: $('#Default_Cash_Mode').find(":selected").text()
-        }
-        appSettings.push(dropdn);
-    });
-    function SaveProducts() {
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
@@ -115,7 +137,7 @@ listItems.Add(new SelectListItem
 
                         success: function (data) {
                             appSettings = [];
-                            location.reload();
+                          //  location.reload();
                             $('#displayMessage').text('data added succesfully').addClass('success');
                         }
                             });
@@ -123,22 +145,24 @@ listItems.Add(new SelectListItem
     }
     $(document).ready(function () {
         $('input[name="allcheck"]').each(function (index) {
+            debugger
             if ($(this).val().toLowerCase() == "true")
+
                 ($(this).prop('checked', true));
         });
-
     });
+
 </script>
 
 <style>
-    .btn-closes {
-        top: 821px;
-        position: absolute;
-        right: 630px;
-    }
     .defalut-width {
         width: 280px;
             height: 46px;
+    }
+    .button-pos {
+           top: 686px;
+    position: absolute;
+    left: 500px;
     }
     label {
     width:480px;
@@ -146,9 +170,15 @@ listItems.Add(new SelectListItem
     text-align:right;
     padding-right:10px;
 }
-      .button-pos {
-          position: absolute;
-    top: 822px;
+      .button-email {
+     position: absolute;
+    left: 319px;
+    bottom: 132px;
+    }
+    .button-close {
+        top: 685px;
+    position: absolute;
+    left: 587px;
     }
 
 input,button, label,.ar {

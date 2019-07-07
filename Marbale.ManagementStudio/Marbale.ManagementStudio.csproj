@@ -156,6 +156,16 @@
     <Content Include="Content\DatetimePicker\jquery.datepicker2.min.js" />
     <Content Include="Content\DatetimePicker\moment-with-locales.js" />
     <Content Include="Content\DatetimePicker\moment.js" />
+    <Content Include="Content\Fabrastics\CHANGELOG.html" />
+    <Content Include="Content\Fabrastics\demo1.html" />
+    <Content Include="Content\Fabrastics\demo2.html" />
+    <Content Include="Content\Fabrastics\farbtastic.css" />
+    <Content Include="Content\Fabrastics\farbtastic.js" />
+    <Content Include="Content\Fabrastics\LICENSE.txt" />
+    <Content Include="Content\Fabrastics\marker.png" />
+    <Content Include="Content\Fabrastics\mask.png" />
+    <Content Include="Content\Fabrastics\README.html" />
+    <Content Include="Content\Fabrastics\wheel.png" />
     <Content Include="Content\images\marbleDefault.jpg" />
     <Content Include="Content\JS\bootstrap.min.js" />
     <Content Include="Content\JS\fontawesome.solid.js" />
@@ -215,6 +225,7 @@
     <Content Include="Content\DatetimePicker\jquery.datepicker2.less" />
     <Content Include="Content\DatetimePicker\LICENSE" />
     <Content Include="Content\DatetimePicker\README.md" />
+    <Content Include="Content\Fabrastics\.DS_Store" />
     <None Include="Properties\PublishProfiles\MarbleHost.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ajax-loader %281%29.gif" />
@@ -283,6 +294,17 @@
     <Content Include="Views\SiteSetup\Transaction.cshtml" />
     <Content Include="Views\Game\Machines.cshtml" />
     <Content Include="Views\Game\Configuration.cshtml" />
+    <Content Include="Views\SiteSetup\Email.cshtml" />
+    <Content Include="Views\SiteSetup\Signage.cshtml" />
+    <Content Include="Views\SiteSetup\Server.cshtml" />
+    <Content Include="Views\SiteSetup\BackUp.cshtml" />
+    <Content Include="Views\SiteSetup\Price.cshtml" />
+    <Content Include="Views\SiteSetup\Print.cshtml" />
+    <Content Include="Views\SiteSetup\Formats.cshtml" />
+    <Content Include="Views\SiteSetup\Inventory.cshtml" />
+    <Content Include="Views\SiteSetup\Redemption.cshtml" />
+    <Content Include="Views\SiteSetup\Payment.cshtml" />
+    <Content Include="Views\SiteSetup\Customer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

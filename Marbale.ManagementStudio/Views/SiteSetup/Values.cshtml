@@ -1,11 +1,20 @@
-﻿@{
+﻿@model IEnumerable<Marbale.BusinessObject.Buttons>
+@{
     Layout = null;
 }
-<button class="tablinks" id="postab" onclick="getposdetails()">POS</button>
+@foreach (var item in Model)
+{
+    <button class="@item.Class" id="@item.Id" onclick="@item.MethodName"title="@item.Tittle">@item.Text</button>
+}
+@*<button class="tablinks" id="postab" onclick="getposdetails()"title="get pos info">POS</button>
 <button class="tablinks" id="cardtab" onclick="getCardDetails()">Card</button>
 <button class="tablinks" id="limittab" onclick="getLimitDetails()">Limits</button>
 <button class="tablinks" id="Transactiontab" onclick="getTransactionDetails()">Transaction</button>
-</br><br /><br /><br />
+<button class="tablinks" id="Emailtab" onclick="getEmailDetails()">Email</button>
+<button class="tablinks" id="Signagetab" onclick="getSignageDetails()">Signage</button>
+<button class="tablinks" id="Servertab" onclick="getServerDetails()">Server</button>*@
+
+</br><br /><br /><br /></br></br>
 <div id="valuesContainer">
     
 </div>
@@ -19,16 +28,48 @@
     function getTransactionDetails() {
         $('#valuesContainer').load('/SiteSetup/Transaction', { ValType: 'Transaction' });
     }
+    function getFormatsInfo() {
+        $('#valuesContainer').load('/SiteSetup/Formats', { ValType: 'Formats' });
+    }
+    function getPrintDetails() {
+        $('#valuesContainer').load('/SiteSetup/Print', { ValType: 'Print' });
+    }
+    function getServerDetails() {
+        $('#valuesContainer').load('/SiteSetup/Server', { ValType: 'Transaction' });
+    }
+    function getSignageDetails() {
+        $('#valuesContainer').load('/SiteSetup/Signage', { ValType: 'Signage' });
+    }
+    function getEmailDetails()
+    {
+        $('#valuesContainer').load('/SiteSetup/Email', { ValType: 'Transaction' });
+        }
     function getLimitDetails() {
         $('#valuesContainer').load('/SiteSetup/Limit', { ValType: 'Limit' });
     }
     function getposdetails() {
-        $('#loading').show();
         $('#valuesContainer').load('/SiteSetup/POS', { ValType: 'pos' });
-        $('#loading').hide();
+    }
+    function getBackupDetails() {
+        $('#valuesContainer').load('/SiteSetup/BackUp', { ValType: 'pos' });
+    }
+    function getPriceDetails() {
+        $('#valuesContainer').load('/SiteSetup/Price', { ValType: 'price' });
     }
     function getCardDetails() {
         $('#valuesContainer').load('/SiteSetup/Card');
+    }
+    function getInventoryInfo() {
+        $('#valuesContainer').load('/SiteSetup/Inventory');
+    }
+    function getRedInfo() {
+        $('#valuesContainer').load('/SiteSetup/Redemption');
+    }
+    function getPaymentInfo() {
+        $('#valuesContainer').load('/SiteSetup/Payment');
+    }
+    function getCustomerDetails() {
+        $('#valuesContainer').load('/SiteSetup/Customer');
     }
     $('.tablinks').click(function () {
             $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
