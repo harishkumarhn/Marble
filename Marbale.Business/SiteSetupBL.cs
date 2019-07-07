@@ -400,5 +400,37 @@ namespace Marble.Business
             statusList.Add(new IdValue() { Id = 0, Value = "Inactive" });
         }
 
+        public User ValidateUser(string username, string password)
+        {
+            DataTable dt = siteSetupData.ValidateUser(username, password);
+            User user = new User();
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    user.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    user.Role = dr.IsNull("Role") ? "" : dr["Role"].ToString();
+                    user.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                    user.LoginId = dr.IsNull("LoginId") ? "" : dr["LoginId"].ToString();
+                    user.Manager = dr.IsNull("Manager") ? "" : dr["Manager"].ToString();
+                    user.Department = dr.IsNull("Department") ? "" : dr["Department"].ToString();
+                    //user.Email = dr.IsNull("Email") ? "" : dr["Email"].ToString();
+                    user.CreatedBy = dr.IsNull("CreatedBy") ? "" : dr["CreatedBy"].ToString();
+                    user.LastLoginTime = dr.IsNull("LastLoginTime") ? new DateTime() : Convert.ToDateTime(dr["LastLoginTime"].ToString());
+                    //user.LastLogoutTime = dr.IsNull("LastLogoutTime") ? new DateTime() : Convert.ToDateTime(dr["LastLogoutTime"].ToString());
+                    user.EmpStartDate = dr.IsNull("EmpStartDate") ? new DateTime() : Convert.ToDateTime(dr["EmpStartDate"].ToString());
+                    user.EmpEndDate = dr.IsNull("EmpEndDate") ? new DateTime() : Convert.ToDateTime(dr["EmpEndDate"].ToString());
+                    user.EmpEndReason = dr.IsNull("EmpEndReason") ? "" : dr["EmpEndReason"].ToString();
+                    user.Status = dr.IsNull("Status") ? "" : dr["Status"].ToString();
+                    user.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
+                    user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                    user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
+                    break;
+                }
+            }
+            return user;
+        }
     }
 }

@@ -83,6 +83,16 @@ namespace Marbale.POS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Cancel_Button {
+            get {
+                object obj = ResourceManager.GetObject("Cancel_Button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cancel_Transaction {
             get {
                 object obj = ResourceManager.GetObject("Cancel_Transaction", resourceCulture);
@@ -213,9 +223,29 @@ namespace Marbale.POS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Login_Button {
+            get {
+                object obj = ResourceManager.GetObject("Login_Button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap menu {
             get {
                 object obj = ResourceManager.GetObject("menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Password_16_25 {
+            get {
+                object obj = ResourceManager.GetObject("Password_16_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,6 +296,26 @@ namespace Marbale.POS.Properties {
         internal static System.Drawing.Bitmap Transfer_Card {
             get {
                 object obj = ResourceManager.GetObject("Transfer_Card", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Username_16_25 {
+            get {
+                object obj = ResourceManager.GetObject("Username_16_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Username_16_251 {
+            get {
+                object obj = ResourceManager.GetObject("Username_16_251", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

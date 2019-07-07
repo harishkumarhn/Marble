@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject;
+using Marbale.BusinessObject.SiteSetup;
 using Marbale.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,12 @@ namespace Marbale.Business
    public class POSBL
     {
         private ProductData marbaleData;
+        private SiteSetupData siteSetupdata;
 
         public POSBL()
         {
             marbaleData = new ProductData();
+            siteSetupdata = new SiteSetupData();
         }
 
         public DataTable GetDefaultPaymentDropdown()
@@ -65,5 +68,8 @@ namespace Marbale.Business
                 throw e;
             }
         }
+
+
+        
     }
 }

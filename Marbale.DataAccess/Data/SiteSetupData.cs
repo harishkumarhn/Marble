@@ -212,10 +212,22 @@ namespace Marbale.DataAccess
 
             return 0;
         }
+
+        public DataTable ValidateUser(string username, string password)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[2];
+            sqlParameters[0] = new SqlParameter("@loginId", username);
+            sqlParameters[1] = new SqlParameter("@password", password);
+
+            return conn.executeSelectQuery("sp_ValidateUser", sqlParameters);
+        }
+
         public DataTable GetAllMessages()
         {
             return conn.executeSelectQuery("sp_GetMessages");
         }
+
+
         public int UpdateMessages(MessagesModel messages)
         {
             SqlParameter[] sqlParameters = new SqlParameter[3];
