@@ -3,7 +3,8 @@
 }
 
 <h2>Card</h2>
-<div id="valuesContainer"style="background-color:lightblue;">
+<div style="background-color:orangered;height: 500px;">
+<div id="valuesContainer" >
     
       @foreach (var item in ViewBag.CardForm)
       {
@@ -38,9 +39,9 @@
                   
       }
 
-    <button class="btn btn-primary btn-md" role="button" onclick="SaveAppSettings()">Save</button> 
-     
-</div>
+    <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveAppSettings()">Save</button> 
+        @* <a href="/Product/ClosePopUp" class="btn btn-primary btn-md ">Close</a>*@
+</div></div>
 <style>
         label {
     width:480px;
@@ -49,9 +50,9 @@
     padding-right:10px;
 }
       .button-pos {
-        position: absolute;
-        right: 805px;
-        top: 869px;
+           left: 346px;
+    bottom: -33px;
+    position: absolute;
     }
 
 input,button, label,.ar {

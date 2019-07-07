@@ -74,6 +74,7 @@ namespace Marbale.DataAccess
         {
             try
             {
+                
                 SqlParameter[] sqlParameters = new SqlParameter[3];
                 sqlParameters[0] = new SqlParameter("@name", name);
                 sqlParameters[1] = new SqlParameter("@value", value);
@@ -285,6 +286,19 @@ namespace Marbale.DataAccess
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        public DataTable GetAllValuesButtons()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetAllValuesButtons");
+            }
+
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

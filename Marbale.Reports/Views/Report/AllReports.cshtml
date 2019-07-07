@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+<h3>All</h3>
+<h4>Transaction</h4>
+<table id="marbleTable" class="table">
+            @foreach (var item in ViewBag.models)
+            {  
+                if(item.Name == "Transaction")
+                {
+                   <tr>
+                       <td>
+                           <a onclick="OpenWindow('@item.Column1.URL.Replace("\\", "-")')" href="#">@item.Column1.DisplayName</a>
+                       </td>
+                       <td>
+                           <a onclick="OpenWindow('@item.Column2.URL.Replace("\\", "-")')" href="#">@item.Column2.DisplayName</a>
+                       </td>                        
+                  </tr>
+                }
+            }
+</table>
+<script>
+    function OpenWindow(urlString) {
+        urlString = urlString.replace(/-/g, "\\");
+        var url = new URL(window.location.href.replace('#','') + urlString);
+        url.searchParams.set('fromDate', document.getElementById('fromDate').value);
+        url.searchParams.set('toDate', document.getElementById('toDate').value);
+        url.searchParams.set('fromTime', document.getElementById('fromTime').value);
+        url.searchParams.set('toTime', document.getElementById('toTime').value);
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+</script>
