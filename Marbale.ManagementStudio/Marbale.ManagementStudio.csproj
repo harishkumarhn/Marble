@@ -137,6 +137,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\ModuleRootPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -228,6 +229,7 @@
     <None Include="Properties\PublishProfiles\MarbleHost.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ajax-loader %281%29.gif" />
+    <Content Include="Scripts\Copy of jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -284,11 +286,14 @@
     <Content Include="Views\SiteSetup\EditUser.cshtml" />
     <Content Include="Views\Game\Hubs.cshtml" />
     <Content Include="Views\Game\Profiles.cshtml" />
+    <Content Include="Views\Game\Games.cshtml" />
     <Content Include="Views\Cards\Cards.cshtml" />
     <Content Include="Views\Cards\ViewCards.cshtml" />
     <Content Include="Views\Cards\Inventory.cshtml" />
     <Content Include="Views\SiteSetup\Limit.cshtml" />
     <Content Include="Views\SiteSetup\Transaction.cshtml" />
+    <Content Include="Views\Game\Machines.cshtml" />
+    <Content Include="Views\Game\Configuration.cshtml" />
     <Content Include="Views\SiteSetup\Email.cshtml" />
     <Content Include="Views\SiteSetup\Signage.cshtml" />
     <Content Include="Views\SiteSetup\Server.cshtml" />

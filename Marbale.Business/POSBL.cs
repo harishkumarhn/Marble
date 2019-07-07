@@ -33,7 +33,7 @@ namespace Marbale.Business
         {
             try
             {
-                var dataTable = marbaleData.GetProductsByScreenGroup(screenGroup);
+                DataTable dataTable = marbaleData.GetProductsByScreenGroup(screenGroup);
                 List<Product> products = new List<Product>();
                 foreach (DataRow dr in dataTable.Rows)
                 {

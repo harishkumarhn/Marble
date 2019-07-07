@@ -120,6 +120,22 @@ namespace Marble.Business
                 throw e;
             }
         }
+        public bool SaveGameConfiguration(List<AppSetting> appSetting)
+        {
+            try
+            {
+                foreach (var setting in appSetting)
+                {
+                    siteSetupData.SaveAppSettings(setting.Name, setting.Value, setting.ScreenGroup);
+                }
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
         #endregion
 
