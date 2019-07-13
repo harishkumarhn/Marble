@@ -32,6 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JTextBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\MarbleDlls\JTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="JTextBox2">
+      <HintPath>..\..\MarbleDlls\JTextBox2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardDevice\DeviceClass.cs" />
     <Compile Include="CardTask.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -51,12 +59,20 @@
       <DependentUpon>CardTask.cs</DependentUpon>
     </Compile>
     <Compile Include="CardTasks.cs" />
+    <Compile Include="Common\Device.cs" />
+    <Compile Include="Common\StaticData.cs" />
     <Compile Include="DataConnectionExcess.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="MarblePOS.cs">
       <SubType>Form</SubType>
@@ -96,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MarblePOS.resx">
       <DependentUpon>MarblePOS.cs</DependentUpon>
@@ -181,8 +200,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Button.png" />
+    <None Include="Resources\Transfer_Card.png" />
+    <None Include="Resources\Clear_Transaction.png" />
+    <None Include="Resources\Cancel_Transaction.png" />
+    <None Include="Resources\Load_Tickets.png" />
+    <None Include="Resources\Load_Bonus.png" />
+    <None Include="Resources\Load_Multiple.png" />
+    <None Include="Resources\Consolidate_Cards.png" />
     <Content Include="Resources\Manual.png" />
     <Content Include="Resources\New_Product.png" />
+    <None Include="Resources\Save_Transaction1.png" />
+    <None Include="Resources\Save_Transaction.png" />
+    <None Include="Resources\Payment.png" />
+    <None Include="Resources\Print.png" />
     <Content Include="Resources\RefundCard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

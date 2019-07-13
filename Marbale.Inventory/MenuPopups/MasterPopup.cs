@@ -19,5 +19,23 @@ namespace Marbale.Inventory.MenuPopups
         {
             InitializeComponent();
         }
+
+        private void MasterPopup_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnCategory_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+
+
+        }
+
+        private void MasterPopup_Leave(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

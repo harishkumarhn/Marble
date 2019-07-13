@@ -1,7 +1,7 @@
 USE [Marbale]
 GO
 
-/****** Object:  Table [dbo].[trx_header]    Script Date: 6/8/2019 10:52:01 AM ******/
+/****** Object:  Table [dbo].[TransactionHeader]    Script Date: 23/06/2019 19:21:16 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -25,7 +25,7 @@ CREATE TABLE [dbo].[TransactionHeader](
 	[PrimaryCardId] [int] NULL,
 	[OrderId] [int] NULL,
 	[POSTypeId] [int] NULL,
-	[Guid] [uniqueidentifier] NULL,
+	[Guid] [uniqueidentifier] NULL CONSTRAINT [DF_TransactionHeader_Guid]  DEFAULT (newid()),
 	[SiteId] [int] NULL,
 	[TrxNummber] [nvarchar](20) NULL,
 	[Remarks] [nvarchar](100) NULL,
@@ -40,7 +40,7 @@ CREATE TABLE [dbo].[TransactionHeader](
 	[Original_System_Reference] [nvarchar](100) NULL,
 	[CustomerId] [int] NULL,
 	[ExternalSystemReference] [nvarchar](200) NULL,
-	[ReprintCount] [int] NULL,
+	[ReprintCount] [int] NULL DEFAULT ((0)),
 	[OriginalTrxID] [int] NULL,
 	[MasterEntityId] [int] NULL,
  CONSTRAINT [PK_TransactionHeader] PRIMARY KEY CLUSTERED 
@@ -48,13 +48,6 @@ CREATE TABLE [dbo].[TransactionHeader](
 	[TrxId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[TransactionHeader] ADD  CONSTRAINT [DF_TransactionHeader_Guid]  DEFAULT (newid()) FOR [Guid]
-GO
-
-ALTER TABLE [dbo].[TransactionHeader] ADD  DEFAULT ((0)) FOR [ReprintCount]
-GO
 
 GO
 

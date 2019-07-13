@@ -11,12 +11,13 @@ SET quoted_identifier ON
 
 go 
 
+-- DROP PROC sp_InsertOrUpdateCustomer
 -- ============================================= 
 -- Author:    @Author,,Name 
 -- Create date: @Create Date,, 
 -- Description:  @Description,, 
 -- ============================================= 
-CREATE PROCEDURE dbo.Sp_InsertOrUpdateCustomer @CustomerId        INT, 
+CREATE PROCEDURE dbo.sp_InsertOrUpdateCustomer @CustomerId        INT, 
                                                @CustomerName      NVARCHAR(50), 
                                                @Address1          NVARCHAR(50), 
                                                @Address2          NVARCHAR(50), 
@@ -40,26 +41,23 @@ CREATE PROCEDURE dbo.Sp_InsertOrUpdateCustomer @CustomerId        INT,
                                                @Company           NVARCHAR(200), 
                                                @Designation       NVARCHAR(200), 
                                                @PhotoFileName     NVARCHAR(100), 
-                                               @Guid 
-UNIQUEIDENTIFIER, 
-                                               @SiteId            INT, 
-                                               @UniqueID          VARCHAR(100), 
+                                               @UniqueID          VARCHAR(100) = NULL, 
                                                @Username          NVARCHAR(50), 
                                                @FBUserId          NVARCHAR(20), 
                                                @FBAccessToken     NVARCHAR(20), 
                                                @TWAccessToken     NVARCHAR(20), 
                                                @TWAccessSecret    NVARCHAR(20), 
-                                               @RightHanded       BIT, 
-                                               @TeamUser          BIT, 
-                                               @SynchStatus       BIT, 
-                                               @Verified          CHAR(1), 
+                                               @RightHanded       BIT = false,
+                                               @TeamUser          BIT = false, 
+                                               @Verified          CHAR(1) = 'N', 
                                                @Password          NVARCHAR(100), 
                                                @LastLoginTime     DATETIME, 
                                                @ExternalSystemRef NVARCHAR(50), 
                                                @IsValid           BIT, 
                                                @DownloadBatchId   INT, 
                                                @IDProofFileName   NVARCHAR(100), 
-                                               @Title             NVARCHAR(20) 
+                                               @Title             NVARCHAR(20), 
+											   @custId  INT OUT
 AS 
   BEGIN 
       -- SET NOCOUNT ON added to prevent extra result sets from 
@@ -97,8 +95,6 @@ AS
                    company = @Company, 
                    designation = @Designation, 
                    photofilename = @PhotoFileName, 
-                   [guid] = @Guid, 
-                   siteid = @SiteId, 
                    uniqueid = @UniqueID, 
                    username = @Username, 
                    fbuserid = @FBUserId, 
@@ -107,7 +103,6 @@ AS
                    twaccesssecret = @TWAccessSecret, 
                    righthanded = @RightHanded, 
                    teamuser = @TeamUser, 
-                   synchstatus = @SynchStatus, 
                    verified = @Verified, 
                    [password] = @Password, 
                    lastlogintime = @LastLoginTime, 
@@ -117,6 +112,8 @@ AS
                    idprooffilename = @IDProofFileName, 
                    title = @Title 
             WHERE  customerid = @CustomerId 
+
+			set @custId = @CustomerId
         END 
       ELSE 
         BEGIN 
@@ -146,7 +143,6 @@ AS
                          [designation], 
                          [photofilename], 
                          [guid], 
-                         [siteid], 
                          [uniqueid], 
                          [username], 
                          [fbuserid], 
@@ -155,7 +151,6 @@ AS
                          [twaccesssecret], 
                          [righthanded], 
                          [teamuser], 
-                         [synchstatus], 
                          [verified], 
                          [password], 
                          [lastlogintime], 
@@ -164,6 +159,7 @@ AS
                          [downloadbatchid], 
                          [idprooffilename], 
                          [title]) 
+
             VALUES      (@CustomerName, 
                          @Address1, 
                          @Address2, 
@@ -187,8 +183,7 @@ AS
                          @Company, 
                          @Designation, 
                          @PhotoFileName, 
-                         @Guid, 
-                         @SiteId, 
+                         NEWID(), 
                          @UniqueID, 
                          @Username, 
                          @FBUserId, 
@@ -197,7 +192,6 @@ AS
                          @TWAccessSecret, 
                          @RightHanded, 
                          @TeamUser, 
-                         @SynchStatus, 
                          @Verified, 
                          @Password, 
                          @LastLoginTime, 
@@ -206,9 +200,16 @@ AS
                          @DownloadBatchId, 
                          @IDProofFileName, 
                          @Title) 
+
+						 SET @custId = (SELECT SCOPE_IDENTITY())
+
+				
         END 
+
+				 select @custId
 
       COMMIT TRAN 
   END 
 
 go 
+

@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.pnlHomeControls = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnTools = new System.Windows.Forms.Button();
+            this.btnReturnToVendor = new System.Windows.Forms.Button();
+            this.btnAdjustInventory = new System.Windows.Forms.Button();
+            this.btnReceive = new System.Windows.Forms.Button();
+            this.btnProducts = new System.Windows.Forms.Button();
+            this.btnIssue = new System.Windows.Forms.Button();
+            this.btnOrder = new System.Windows.Forms.Button();
+            this.btnMaster = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.pnlHomeControls.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,163 +47,179 @@
             this.pnlHomeControls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlHomeControls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(152)))), ((int)(((byte)(218)))));
-            this.pnlHomeControls.Controls.Add(this.button9);
-            this.pnlHomeControls.Controls.Add(this.button8);
-            this.pnlHomeControls.Controls.Add(this.button7);
-            this.pnlHomeControls.Controls.Add(this.button6);
-            this.pnlHomeControls.Controls.Add(this.button5);
-            this.pnlHomeControls.Controls.Add(this.button4);
-            this.pnlHomeControls.Controls.Add(this.button3);
-            this.pnlHomeControls.Controls.Add(this.button2);
-            this.pnlHomeControls.Controls.Add(this.button1);
-            this.pnlHomeControls.Location = new System.Drawing.Point(0, 64);
+            this.pnlHomeControls.Controls.Add(this.btnExit);
+            this.pnlHomeControls.Controls.Add(this.btnTools);
+            this.pnlHomeControls.Controls.Add(this.btnReturnToVendor);
+            this.pnlHomeControls.Controls.Add(this.btnAdjustInventory);
+            this.pnlHomeControls.Controls.Add(this.btnReceive);
+            this.pnlHomeControls.Controls.Add(this.btnProducts);
+            this.pnlHomeControls.Controls.Add(this.btnIssue);
+            this.pnlHomeControls.Controls.Add(this.btnOrder);
+            this.pnlHomeControls.Controls.Add(this.btnMaster);
+            this.pnlHomeControls.Location = new System.Drawing.Point(0, 0);
             this.pnlHomeControls.Name = "pnlHomeControls";
             this.pnlHomeControls.Size = new System.Drawing.Size(1223, 60);
             this.pnlHomeControls.TabIndex = 0;
             // 
-            // button1
+            // btnExit
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(2, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 54);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Master";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.Color.White;
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExit.Location = new System.Drawing.Point(863, 3);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(106, 54);
+            this.btnExit.TabIndex = 8;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // button2
+            // btnTools
             // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(326, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 54);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Order";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnTools.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTools.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTools.ForeColor = System.Drawing.Color.White;
+            this.btnTools.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTools.Location = new System.Drawing.Point(756, 3);
+            this.btnTools.Name = "btnTools";
+            this.btnTools.Size = new System.Drawing.Size(106, 54);
+            this.btnTools.TabIndex = 7;
+            this.btnTools.Text = "Tools";
+            this.btnTools.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnReturnToVendor
             // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(218, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 54);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Issue";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnReturnToVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturnToVendor.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReturnToVendor.ForeColor = System.Drawing.Color.White;
+            this.btnReturnToVendor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReturnToVendor.Location = new System.Drawing.Point(649, 3);
+            this.btnReturnToVendor.Name = "btnReturnToVendor";
+            this.btnReturnToVendor.Size = new System.Drawing.Size(106, 54);
+            this.btnReturnToVendor.TabIndex = 6;
+            this.btnReturnToVendor.Text = "Return To Vendor";
+            this.btnReturnToVendor.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnAdjustInventory
             // 
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(110, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(107, 54);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Product";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnAdjustInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdjustInventory.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdjustInventory.ForeColor = System.Drawing.Color.White;
+            this.btnAdjustInventory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAdjustInventory.Location = new System.Drawing.Point(542, 3);
+            this.btnAdjustInventory.Name = "btnAdjustInventory";
+            this.btnAdjustInventory.Size = new System.Drawing.Size(106, 54);
+            this.btnAdjustInventory.TabIndex = 5;
+            this.btnAdjustInventory.Text = "Adjust Inventory";
+            this.btnAdjustInventory.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnReceive
             // 
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(434, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(107, 54);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Receive";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnReceive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReceive.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReceive.ForeColor = System.Drawing.Color.White;
+            this.btnReceive.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReceive.Location = new System.Drawing.Point(434, 3);
+            this.btnReceive.Name = "btnReceive";
+            this.btnReceive.Size = new System.Drawing.Size(107, 54);
+            this.btnReceive.TabIndex = 4;
+            this.btnReceive.Text = "Receive";
+            this.btnReceive.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnProducts
             // 
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(542, 3);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(106, 54);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Adjust Inventory";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProducts.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProducts.ForeColor = System.Drawing.Color.White;
+            this.btnProducts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnProducts.Location = new System.Drawing.Point(110, 3);
+            this.btnProducts.Name = "btnProducts";
+            this.btnProducts.Size = new System.Drawing.Size(107, 54);
+            this.btnProducts.TabIndex = 3;
+            this.btnProducts.Text = "Products";
+            this.btnProducts.UseVisualStyleBackColor = true;
+            this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
             // 
-            // button7
+            // btnIssue
             // 
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(649, 3);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(106, 54);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Return To Vendor";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIssue.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIssue.ForeColor = System.Drawing.Color.White;
+            this.btnIssue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnIssue.Location = new System.Drawing.Point(218, 3);
+            this.btnIssue.Name = "btnIssue";
+            this.btnIssue.Size = new System.Drawing.Size(107, 54);
+            this.btnIssue.TabIndex = 2;
+            this.btnIssue.Text = "Issue";
+            this.btnIssue.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // btnOrder
             // 
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button8.Location = new System.Drawing.Point(756, 3);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(106, 54);
-            this.button8.TabIndex = 7;
-            this.button8.Text = "Tools";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btnOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrder.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOrder.ForeColor = System.Drawing.Color.White;
+            this.btnOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOrder.Location = new System.Drawing.Point(326, 3);
+            this.btnOrder.Name = "btnOrder";
+            this.btnOrder.Size = new System.Drawing.Size(107, 54);
+            this.btnOrder.TabIndex = 1;
+            this.btnOrder.Text = "Order";
+            this.btnOrder.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // btnMaster
             // 
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.ForeColor = System.Drawing.Color.White;
-            this.button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button9.Location = new System.Drawing.Point(863, 3);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(106, 54);
-            this.button9.TabIndex = 8;
-            this.button9.Text = "Exit";
-            this.button9.UseVisualStyleBackColor = true;
+            this.btnMaster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMaster.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMaster.ForeColor = System.Drawing.Color.White;
+            this.btnMaster.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMaster.Location = new System.Drawing.Point(2, 3);
+            this.btnMaster.Name = "btnMaster";
+            this.btnMaster.Size = new System.Drawing.Size(107, 54);
+            this.btnMaster.TabIndex = 0;
+            this.btnMaster.Text = "Master";
+            this.btnMaster.UseVisualStyleBackColor = true;
+            this.btnMaster.Click += new System.EventHandler(this.btnMaster_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(84)))), ((int)(((byte)(96)))));
+            this.statusStrip1.Location = new System.Drawing.Point(0, 547);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1223, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // InventoryHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1223, 569);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pnlHomeControls);
+            this.IsMdiContainer = true;
             this.Name = "InventoryHome";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Marble Inventory";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlHomeControls.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel pnlHomeControls;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button btnMaster;
+        private System.Windows.Forms.Button btnAdjustInventory;
+        private System.Windows.Forms.Button btnReceive;
+        private System.Windows.Forms.Button btnProducts;
+        private System.Windows.Forms.Button btnIssue;
+        private System.Windows.Forms.Button btnOrder;
+        private System.Windows.Forms.Button btnTools;
+        private System.Windows.Forms.Button btnReturnToVendor;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }

@@ -45,11 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminBL.cs" />
+    <Compile Include="InventoryBL\CategoryBL.cs" />
     <Compile Include="Enum\ThemeEnum.cs" />
     <Compile Include="Enum\ReaderEnum.cs" />
     <Compile Include="GameBL.cs" />
     <Compile Include="CardsBL.cs" />
     <Compile Include="Enum\TypeEnum.cs" />
+    <Compile Include="InventoryBL\LocationBL.cs" />
+    <Compile Include="InventoryBL\LocationTypeBL.cs" />
+    <Compile Include="InventoryBL\UnitOfMeasureBL.cs" />
+    <Compile Include="InventoryBL\VendorBL.cs" />
     <Compile Include="ProductBL.cs" />
     <Compile Include="POSBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
