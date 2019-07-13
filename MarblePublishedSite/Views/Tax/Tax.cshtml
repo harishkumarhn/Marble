@@ -1,0 +1,121 @@
+﻿@model Marbale.BusinessObject.Tax.MasterTax
+@{
+    ViewBag.Title = "Tax";
+}
+
+<h2>Tax</h2>
+<div>
+<div class="taxsetmodel">
+<div id="taxtable">
+ <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Tax</a>
+    <table id="marbleTable" class="table marbleTable" style="background-color:indianred;">  
+        <thead>  
+            <th>ID</th>  
+            <th>Tax Name</th>  
+            <th>Tax Percentage</th> 
+            <th>Active Flag</th> 
+        </thead>  
+        @if(Model.Taxset!=null)
+     {
+            int count=1;
+        foreach (var item1 in Model.Taxset)  
+        {  
+           
+        <tr onchange= "UpdatedList(this)"> 
+        <td onclick="Getvalues(@item1.TaxId)"> <input type="text" id="TaxId@(count)" value="@item1.TaxId" disabled >   </td>
+        <td onclick="Getvalues(@item1.TaxId)"> <input type="text" value="@item1.TaxName" class="gridText"  id="TaxName@(count)"/>  </td>
+        <td onclick="Getvalues(@item1.TaxId)"> <input type="number" value="@item1.TaxPercent" class="gridText" id="TaxPercent@(count)" />  </td>
+        <td onclick="Getvalues(@item1.TaxId)"> <input type="checkbox"  @(item1.ActiveFlag ? "checked='checked'" : "") value="@item1.ActiveFlag"  id="ActiveFlag@(count)"/>  </td>
+    </tr> 
+            count++;
+            }   
+     }
+    </table>
+    </div>
+ <button class="btn btn-primary btn-md" role="button" onclick="SaveTax()">Save</button> 
+      <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+    </div> 
+    <br /><br />
+    <div id="taxstructure">
+
+        </div>
+    </div>
+<script>
+    $("#marbleTable tr").click(function () {
+        var selected = $(this).hasClass("highlight");
+        $("#marbleTable tr").removeClass("highlight");
+        if (!selected)
+            $(this).addClass("highlight");
+    });
+
+    var GetvaluesList = [];
+    function Getvalues(x) {
+       debugger
+        GetvaluesList = [];
+        GetvaluesList.push(x);
+        localStorage['TaxId'] = GetvaluesList[0];
+        $('#taxstructure').load('/Tax/GetTaxStructure', { TaxId: GetvaluesList[0]});
+    }
+
+
+    function AddProduct() {
+        var index = $("#marbleTable tbody tr").length + 1;
+        var TaxId = "TaxId" + index;
+        var TaxName = "TaxName" + index;
+        var TaxPercent = "TaxPercent" + index;
+        var ActiveFlag = "ActiveFlag" + index;
+        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>' +
+     '<td> <input type="text" class="gridText" id="' + TaxName + '" />  </td>' +
+     '<td> <input type="number" class="gridText"  id="' + TaxPercent + '" />  </td>' +
+     '<td> <input type="checkbox" id="' + ActiveFlag + '"/></td>' + '</tr>';
+        $('#marbleTable tr:last').after(newRow);
+    }
+    function UpdatedList(x) {
+        updatedArray = [];
+            updatedArray.push(x.rowIndex);
+    }
+    function SaveTax() {
+      var table=  document.getElementById('marbleTable');
+      var id = updatedArray[0];
+        var TaxName = $('#TaxName' + id).val();
+        var TaxPercent = $('#TaxPercent' + id).val();
+        var ActiveFlag = $('#ActiveFlag' + id).val();
+        var taxmaster = {
+            TaxId: $('#TaxId' + id).val(),
+            TaxName: $('#TaxName' + id).val(),
+             TaxPercent: $('#TaxPercent' + id).val(),
+             ActiveFlag: $("#ActiveFlag" + id).is(':checked')
+        };
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("InsertUpdateTax", "Tax")',
+            data: JSON.stringify({ taxmaster: taxmaster }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+
+
+</script>
+<style>
+    table {
+  border-collapse: collapse;
+ 
+}
+       input {
+        border:none;
+        background-color:indianred;
+    }
+    table, th, td {
+  border: 1px solid black;
+}
+.highlight { background-color: darkmagenta; }
+</style>
+    

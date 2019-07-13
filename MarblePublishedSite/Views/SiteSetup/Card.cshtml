@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Card";
+}
+
+<h2>Card</h2>
+<div style="background-color:orangered;height: 500px;">
+<div id="valuesContainer" >
+    
+      @foreach (var item in ViewBag.CardForm)
+      {
+          String type = item.Type.ToString();
+          switch (type)
+          {
+              case "string":
+             
+                            <div class="inputwrap">
+                                <label> <b>@item.Caption </b>:</label>
+                       <input type="text" value="@item.Value" id="@item.Name" name="myInput"/><br /></div>
+                 
+                  break;
+                  case "bool":
+               
+                          <div class="inputwrap">
+                               <label> <b>@item.Caption </b>:</label>
+                        <input type="checkbox" value="@item.Value" id="@item.Name" class="checktrue" name="allcheck"/> </div>
+
+                   
+                  break;
+                  case"int":
+                     
+                          <div class="inputwrap">
+                               <label> <b>@item.Caption </b>:</label>
+                       <input type="number" value="@item.Value" id="@item.Name" class="gridText" name="myInput"/> </div>
+
+                     
+                  break;
+                  
+          }
+                  
+      }
+
+    <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveAppSettings()">Save</button> 
+        @* <a href="/Product/ClosePopUp" class="btn btn-primary btn-md ">Close</a>*@
+</div></div>
+<style>
+        label {
+    width:480px;
+    clear:left;
+    text-align:right;
+    padding-right:10px;
+}
+      .button-pos {
+           left: 346px;
+    bottom: -33px;
+    position: absolute;
+    }
+
+input,button, label,.ar {
+    float:left;
+}
+
+</style>
+<script>
+    var appSettings = [];
+    $('input[name=myInput]').change(function () {
+        debugger
+        var d = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Card'
+        };
+        appSettings.push(d);
+    });
+    $('input[name=allcheck]').change(function () {
+        debugger
+        var d = {
+            Name: this.id,
+            Value: $(this).is(":checked"),
+            ScreenGroup: 'Card'
+        };
+        appSettings.push(d);
+    });
+
+    function SaveAppSettings() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateAppSettings", "SiteSetup")',
+
+            data: JSON.stringify({ appSettings: appSettings }),
+
+            dataType: "json",
+
+            beforeSend: function () { },
+
+            success: function (data) {
+                appSettings = [];
+                
+              
+            }
+          });
+    }
+    $(document).ready(function () {
+        $('input[name="allcheck"]').each(function (index) {
+            debugger
+            if ($(this).val().toLowerCase() == "true")
+
+                ($(this).prop('checked', true));
+        });
+    });
+</script>
+
+

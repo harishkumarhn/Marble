@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Messages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <label id="successMessages" class="pos-text"></label>
+</div>
+<div>
+<table id="messagesTable" class="table messagesTable table-bordered" style="display: block; height: 500px; overflow-x: auto">  
+        <thead class="back-color">  
+            <th >MessageNo</th>  
+            <th>Message</th>    
+        </thead>  
+        @foreach (var item in ViewBag.Messages)  
+        {  
+            <tr onchange="UpdatedList(this)"> 
+        <td > @item.MessageNo  </td>
+    
+        <td> <input type="text" value="@item.MessageDescription" class="gridText" style="width: 958px;">  </td>
+        <td> <input type="hidden" value="@item.MessageName" style="display:none">  </td>
+    </tr>  
+        }  
+    </table>
+    
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveMeesages()">Save</button>  
+     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>  
+</div>
+<style>
+    .back-color {
+        background-color:blueviolet;
+    }
+    .pos-text {
+           left: 650px;
+    position: absolute;
+    top: 135px;
+        color: blue;
+    }
+</style>
+     <script>
+         function SaveMeesages() {
+             var messageObject = [];
+             var table = document.getElementById('messagesTable');
+             for (var r = 1, n = table.rows.length; r < n; r++) {
+                 if (updatedArray.includes(r)) {
+                     messageObject.push({
+                         MessageNo: table.rows[r].cells[0].innerHTML,
+                         MessageDescription: table.rows[r].cells[1].children[0].value,
+                         MessageName: table.rows[r].cells[2].children[0].value,
+                    
+                     });
+                 }
+             }
+             $.ajax({
+                 type: "POST",
+                 contentType: "application/json; charset=utf-8",
+                 url: '@Url.Action("UpdateMessages", "SiteSetup")',
+                 data: JSON.stringify({ messageObject: messageObject }),
+            dataType: "json",
+            success: function (data) {
+                $('#successMessages').text('Data Saved Successfully');
+            },
+            error: function (e) {
+              
+                alert(e);
+            }
+        });
+    }
+         var updatedArray = [];
+         function UpdatedList(x) {
+             if (!updatedArray.includes(x.rowIndex)) {
+                 updatedArray.push(x.rowIndex);
+             }
+         }
+     </script>    
