@@ -128,5 +128,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public Customer.Customers customer { get; set; }
 
         public List<Discounts.DiscountLine> discountLines = new List<Discounts.DiscountLine>();
+
+        public int LineId;
     }
 }

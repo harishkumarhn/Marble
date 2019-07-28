@@ -45,6 +45,7 @@
     <Compile Include="Data\CardsData.cs" />
     <Compile Include="Data\LocationData.cs" />
     <Compile Include="Data\LocationTypeData.cs" />
+    <Compile Include="Data\TransactionData.cs" />
     <Compile Include="Data\UnitOfMeasureData.cs" />
     <Compile Include="Data\VendorData.cs" />
     <Compile Include="DBConnection.cs" />

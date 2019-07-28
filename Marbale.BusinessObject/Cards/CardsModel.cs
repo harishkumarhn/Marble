@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Marbale.BusinessObject.Cards
 {
-   public class CardsModel
+    public class CardsModel
     {
         public int CardId { get; set; }
         public string CardNumber { get; set; }
@@ -36,5 +36,14 @@ namespace Marbale.BusinessObject.Cards
         public bool TechnicianCard { get; set; }
         public DateTime ToDate { get; set; }
         public float CreditsPlayed { get; set; }
+
+        public bool RefundFlag { get; set; }
+        public bool ValidFlag { get; set; }
+
+        public int CustomerId { get; set; }
+
+        public int LoyaltyPoints { get; set; }
+
+        public int CardTypeId { get; set; }
     }
 }
