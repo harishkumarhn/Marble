@@ -35,10 +35,10 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-            frmLogin frmLogin = new frmLogin();
-            frmLogin.ShowDialog();
-            if (!frmLogin.isLoginSuccess)
-                Environment.Exit(0);
+            //frmLogin frmLogin = new frmLogin();
+            //frmLogin.ShowDialog();
+            //if (!frmLogin.isLoginSuccess)
+            //    Environment.Exit(0);
         }
 
         private void POSHome_Load(object sender, EventArgs e)
@@ -102,7 +102,17 @@ namespace Marbale.POS
 
         private void HandleCardRead(string CardNumber, DeviceClass readerDevice)
         {
-            //code to handle card number
+            ClearCard();
+
+            CurrentCard = null;
+
+            TransactionBL trxBL = new TransactionBL();
+            CurrentCard = trxBL.GetCard(0, CardNumber);
+
+            if(CurrentCard == null || CurrentCard.card_id == 0)
+                CurrentCard = new Card();
+
+            DisplayCardDetails();
         }
 
         public List<KeyValue> GetDefaultCardInfo()
@@ -179,7 +189,6 @@ namespace Marbale.POS
 
             CreateTransactionLine(product);
         }
-
 
         public void CreateTransactionLine(Product product)
         {
@@ -712,27 +721,44 @@ namespace Marbale.POS
             ClearTransaction();
         }
 
+        private void DisplayCardDetails()
+        {
+            if (CurrentCard == null)
+                ClearCard();
+            else
+            {
+                lblCardNotext.Text = CurrentCard.CardNumber;
+                lblCardStatustext.Text = CurrentCard.CardStatus;
+                if (CurrentCard.customer != null)
+                {
+                    Customer = CurrentCard.customer;
+                }
+                PopulateCustomer();
+            }
+        }
 
         private void ClearTransaction()
         {
             dgvTransaction.Rows.Clear();
             Transaction = null;
             ClearCustomer();
+            ClearCard();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
             if (Transaction == null)
                 return;
 
             if(Customer != null)
                 Transaction.customer = Customer;
 
+            if (CurrentCard != null)
+                Transaction.Card = CurrentCard;
+
             TransactionBL trxBL = new TransactionBL();
             int trxId = trxBL.SaveTransaction(Transaction);
             
-
             ClearTransaction();
         }
 
@@ -795,6 +821,8 @@ namespace Marbale.POS
             {
                 TransactionBL trxBL = new TransactionBL();
                 Customer = trxBL.GetCustomer(0, txtPhoneno.Text.Trim());
+
+                if(Customer != null && Customer.customer_id > 0)
                 PopulateCustomer();
             }
         }
@@ -820,6 +848,23 @@ namespace Marbale.POS
                     cmbGender.SelectedIndex = 0;
 
                 //dtpDOB.Value = Customer.birth_date;
+            }
+        }
+
+        void ClearCard()
+        {
+            lblCardNotext.Text = string.Empty;
+            lblCardStatustext.Text = string.Empty;
+        }
+
+        private void lblCardNumber_Click(object sender, EventArgs e)
+        {
+            frmGenericDataEntry frm = new frmGenericDataEntry();
+            frm.ShowDialog();
+
+            if (!string.IsNullOrEmpty(frm.cardNumber))
+            {
+                HandleCardRead(frm.cardNumber, null);
             }
         }
     }

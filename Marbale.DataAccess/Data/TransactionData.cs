@@ -29,6 +29,12 @@ namespace Marbale.DataAccess.Data
                 if (trx.customer != null)
                     trx.CustomerId = SaveCustomer(trx.customer);
 
+                if (trx.Card != null)
+                {
+                    trx.Card.customer_id = trx.CustomerId;
+                    trx.PrimaryCardId = SaveCard(trx.Card);
+                }
+
                 SqlParameter[] sqlParameters = new SqlParameter[27];
 
                 sqlParameters[0] = new SqlParameter("@trxId", SqlDbType.Int);
@@ -365,45 +371,153 @@ namespace Marbale.DataAccess.Data
             }
         }
 
-        public int InsertOrUpdateCards(CardsModel card)
+        public int SaveCard(Card card)
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[24];
+                SqlParameter[] sqlParameters = new SqlParameter[29];
 
-                sqlParameters[0] = new SqlParameter("@CardId", card.CardId);
-                sqlParameters[1] = new SqlParameter("@CardNumber", card.CardNumber);
-                sqlParameters[2] = new SqlParameter("@IssueDate", card.IssueDate);
-                sqlParameters[3] = new SqlParameter("@FaceValue", card.FaceValue);
-                sqlParameters[4] = new SqlParameter("@RefundDate", card.RefundDate);
-                sqlParameters[5] = new SqlParameter("@RefundFlag", card.RefundFlag);
-                sqlParameters[6] = new SqlParameter("@RefundAmount", card.RefundAmount);
-                sqlParameters[7] = new SqlParameter("@ValidFlag", card.ValidFlag);
-                sqlParameters[8] = new SqlParameter("@TicketCount", card.TicketCount);
+                sqlParameters[0] = new SqlParameter("@CardId", card.card_id);
+
+                if (!string.IsNullOrEmpty(card.CardNumber))
+                {
+                    sqlParameters[1] = new SqlParameter("@CardNumber", card.CardNumber);
+                }
+                else
+                {
+                    sqlParameters[1] = new SqlParameter("@CardNumber", DBNull.Value);
+                }
+
+                if (card.issue_date != DateTime.MinValue)
+                {
+                    sqlParameters[2] = new SqlParameter("@IssueDate", card.issue_date);
+                }
+                else
+                {
+                    sqlParameters[2] = new SqlParameter("@IssueDate", DBNull.Value);
+                }
+                
+                sqlParameters[3] = new SqlParameter("@FaceValue", card.face_value);
+
+                if (card.refund_date != DateTime.MinValue)
+                {
+                    sqlParameters[4] = new SqlParameter("@RefundDate", card.refund_date);
+                }
+                else
+                {
+                    sqlParameters[4] = new SqlParameter("@RefundDate", DBNull.Value);
+                }
+
+                
+                sqlParameters[5] = new SqlParameter("@RefundFlag", card.refund_flag);
+                sqlParameters[6] = new SqlParameter("@RefundAmount", card.refund_amount);
+                sqlParameters[7] = new SqlParameter("@ValidFlag", card.valid_flag);
+                sqlParameters[8] = new SqlParameter("@TicketCount", card.ticket_count);
                 sqlParameters[9] = new SqlParameter("@LastUpdated", DateTime.Now);
-                sqlParameters[10] = new SqlParameter("@Credits", card.Credits);
-                sqlParameters[11] = new SqlParameter("@Courtesy", card.Courtesy);
-                sqlParameters[12] = new SqlParameter("@Bonus", card.Bonus);
-                sqlParameters[13] = new SqlParameter("@CustomerId", card.CustomerId);
-                sqlParameters[14] = new SqlParameter("@CreditsPlayed", card.CreditsPlayed);
-                sqlParameters[15] = new SqlParameter("@TicketAllowed", card.TicketAllowed);
-                sqlParameters[16] = new SqlParameter("@RealTicketMode", card.RealTicketMode);
-                sqlParameters[17] = new SqlParameter("@VIPCustomer", card.VIPCustomer);
-                sqlParameters[18] = new SqlParameter("@Notes", card.Note);
-                sqlParameters[19] = new SqlParameter("@StartDateTime", card.StartTime);
-                sqlParameters[20] = new SqlParameter("@LastTimePlayed", card.LastPlayTime);
-                sqlParameters[21] = new SqlParameter("@LastUpdatedBy", card.LastUpdatedBy);
-                sqlParameters[22] = new SqlParameter("@TechnicianCard", card.TechnicianCard);
-                sqlParameters[23] = new SqlParameter("@TechGames", card.TechGames);
+                sqlParameters[10] = new SqlParameter("@Credits", card.credits);
+                sqlParameters[11] = new SqlParameter("@Courtesy", card.courtesy);
+                sqlParameters[12] = new SqlParameter("@Bonus", card.bonus);
+                sqlParameters[13] = new SqlParameter("@CustomerId", card.customer_id);
+                sqlParameters[14] = new SqlParameter("@CreditsPlayed", card.credits_played);
+                sqlParameters[15] = new SqlParameter("@TicketAllowed", card.ticket_allowed);
+                sqlParameters[16] = new SqlParameter("@RealTicketMode", card.real_ticket_mode);
+                sqlParameters[17] = new SqlParameter("@VIPCustomer", card.vip_customer);
+
+                if (!string.IsNullOrEmpty(card.notes))
+                {
+                    sqlParameters[18] = new SqlParameter("@Notes", card.notes);
+                }
+                else
+                {
+                    sqlParameters[18] = new SqlParameter("@Notes", DBNull.Value);
+                }
+
+                if (card.start_time != DateTime.MinValue)
+                {
+                    sqlParameters[19] = new SqlParameter("@StartDateTime", card.start_time);
+
+                }
+                else
+                {
+                    sqlParameters[19] = new SqlParameter("@StartDateTime", DBNull.Value);
+                }
+
+                if (card.last_played_time != DateTime.MinValue)
+                {
+                    sqlParameters[20] = new SqlParameter("@LastTimePlayed", card.last_played_time);
+                }
+                else
+                {
+                    sqlParameters[20] = new SqlParameter("@LastTimePlayed", DBNull.Value);
+                }
+
+                if (!string.IsNullOrEmpty(card.lastUpdatedBy))
+                {
+                    sqlParameters[21] = new SqlParameter("@LastUpdatedBy", card.lastUpdatedBy);
+                }
+                else
+                {
+                    sqlParameters[21] = new SqlParameter("@LastUpdatedBy", DBNull.Value);
+                }
+                   
+                sqlParameters[22] = new SqlParameter("@TechnicianCard", card.technician_card);
+                sqlParameters[23] = new SqlParameter("@TechGames", card.tech_games);
+              
+    
                 sqlParameters[24] = new SqlParameter("@TimerResetCard", card.TimerResetCard);
-                sqlParameters[25] = new SqlParameter("@LoyaltyPoints", card.LoyaltyPoints);
-                sqlParameters[26] = new SqlParameter("@LoyaltyPoints", card.CardTypeId);
-                sqlParameters[15] = new SqlParameter("@ExpiryDate", card.ExpiryDate);
 
-                sqlParameters[10] = new SqlParameter("@CrdId", SqlDbType.Int);
-                sqlParameters[10].Direction = ParameterDirection.Output;
+                sqlParameters[25] = new SqlParameter("@LoyaltyPoints", card.loyalty_points);
 
-                return conn.executeInsertQuery("sp_InsertOrUpdateCards", sqlParameters);
+                sqlParameters[26] = new SqlParameter("@CardTypeId", card.CardTypeId);
+
+                if (card.ExpiryDate != DateTime.MinValue)
+                {
+                    sqlParameters[27] = new SqlParameter("@ExpiryDate", card.ExpiryDate);
+                }
+                else
+                {
+                    sqlParameters[27] = new SqlParameter("@ExpiryDate", DBNull.Value);
+
+                }
+
+                sqlParameters[28] = new SqlParameter("@CrdId", SqlDbType.Int);
+                sqlParameters[28].Direction = ParameterDirection.Output;
+
+                 conn.executeInsertQuery("sp_InsertOrUpdateCard", sqlParameters);
+
+                return Convert.ToInt32(sqlParameters[28].Value);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public DataTable GetCard(int cardId, string cardNumber)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[2];
+
+                if (cardId != 0)
+                {
+                    sqlParameters[0] = new SqlParameter("@cardId", cardId);
+                }
+                else
+                {
+                    sqlParameters[0] = new SqlParameter("@cardId", DBNull.Value);
+                }
+
+                if (!string.IsNullOrEmpty(cardNumber))
+                {
+                    sqlParameters[1] = new SqlParameter("@cardNumber", cardNumber);
+                }
+                else
+                {
+                    sqlParameters[1] = new SqlParameter("@cardNumber", DBNull.Value);
+                }
+
+                return conn.executeSelectQuery("sp_GetCard", sqlParameters);
             }
             catch (Exception e)
             {

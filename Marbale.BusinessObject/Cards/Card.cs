@@ -55,5 +55,6 @@ namespace Marbale.BusinessObject.Cards
         public double TotalRechargeAmount;
         public double creditPlusItemPurchase;
         public string lastUpdatedBy;
+        public bool TimerResetCard;
     }
 }

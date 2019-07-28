@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Marbale.BusinessObject.Customer;
+using Marbale.BusinessObject.Cards;
 
 namespace Marble.Business
 {
@@ -50,6 +51,61 @@ namespace Marble.Business
             }
 
             return customer;
+        }
+
+        public Card GetCard(int cardId, string cardNumber)
+        {
+            DataTable dt = trxData.GetCard(cardId, cardNumber);
+
+            Card card = new Card();
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                card = new Card();
+
+                card.card_id = dt.Rows[0]["CardId"] == DBNull.Value ?  0 : Convert.ToInt32(dt.Rows[0]["CardId"]);
+                card.CardNumber = dt.Rows[0]["CardNumber"] == DBNull.Value ? string.Empty : dt.Rows[0]["CardNumber"].ToString();
+                card.issue_date = dt.Rows[0]["IssueDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[0]["IssueDate"]);
+
+                card.CardStatus = "ISSUED";
+
+                card.ExpiryDate = dt.Rows[0]["ExpiryDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[0]["ExpiryDate"]);
+                card.lastUpdatedBy = dt.Rows[0]["LastUpdatedBy"] == DBNull.Value ? string.Empty : dt.Rows[0]["LastUpdatedBy"].ToString();
+                card.last_update_time = dt.Rows[0]["LastUpdated"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[0]["LastUpdated"]);
+                card.face_value = dt.Rows[0]["FaceValue"] == DBNull.Value ? 0 : float.Parse(dt.Rows[0]["FaceValue"].ToString());
+                card.last_played_time = dt.Rows[0]["LastTimePlayed"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[0]["LastTimePlayed"]);
+                card.notes = dt.Rows[0]["Notes"] == DBNull.Value ? string.Empty : dt.Rows[0]["Notes"].ToString();
+                card.refund_date = dt.Rows[0]["RefundDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[0]["RefundDate"]);
+                card.ticket_allowed = dt.Rows[0]["TicketAllowed"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["TicketAllowed"]);
+                card.customer_id = dt.Rows[0]["CustomerId"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["CustomerId"]);
+
+                //card.refund_amount = dr.IsNull("RefundAmount") ? 0 : float.Parse(dr["RefundAmount"].ToString());
+
+                //card.start_time = dr.IsNull("StartTime") ? new DateTime() : Convert.ToDateTime(dr["StartTime"].ToString());
+                //card.tech_games = dr.IsNull("TechGames") ? "" : dr["TechGames"].ToString();
+                //card.TimerResetCard = dr.IsNull("TimerResetCard") ? false : bool.Parse(dr["TimerResetCard"].ToString());
+                //card.vip_customer = dr.IsNull("VIPCustomer") ? false : bool.Parse(dr["VIPCustomer"].ToString());
+
+                //card.credits = dr.IsNull("Credits") ? 0 : float.Parse(dr["Credits"].ToString());
+                //card.credits_played = dr.IsNull("CreditsPlayed") ? 0 : float.Parse(dr["CreditsPlayed"].ToString());
+
+
+                //card.courtesy = dr.IsNull("Courtesy") ? 0 : float.Parse(dr["Courtesy"].ToString());
+                //card.bonus = dr.IsNull("Bonus") ? 0 : float.Parse(dr["Bonus"].ToString());
+                //card.real_ticket_mode = dr.IsNull("RealTicketMode") ? false : bool.Parse(dr["RealTicketMode"].ToString());
+                //card.ticket_count = dr.IsNull("TicketCount") ? 0 : int.Parse(dr["TicketCount"].ToString());
+
+                if (card.customer_id != 0)
+                card.customer = GetCustomer(card.customer_id, string.Empty);
+            }
+            else
+            {
+                card = new Card();
+                card.CardNumber = cardNumber;
+                card.CardStatus = "NEW";
+            }
+
+            return card;
         }
     }
 }
