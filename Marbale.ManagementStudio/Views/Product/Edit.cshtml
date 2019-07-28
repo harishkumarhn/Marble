@@ -5,8 +5,8 @@
     Layout = null;
 }
 
-@* <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />*@
-@*<link href="~/Content/css/product.css" rel="stylesheet" />*@
+
+
 
     @using (Html.BeginForm("InsertOrUpdate", "Product", FormMethod.Post))
     {
@@ -14,27 +14,25 @@
               <form>
                   <div id="productclass" style="border:2px solid black;border-color:cornsilk">
     <div class="form-group row" >
-      <div class="col-xs-2">
+      <div class="col-md-2">
         <label for="ex1"> <b >Id:</b></label>  @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "form-control" })
        
       </div>
-      <div class="col-xs-3">
+      <div class="col-md-3">
         <label for="ex2"><b>Name:</b></label>
         @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.Name) })
-@*@Html.ValidationMessageFor(m => m.Name, "Please enter student name.", new { @class = "text-danger" })*@
-
-
+@Html.ValidationMessageFor(model => model.Name,"", new {@class = "text-danger" })
       </div>
         
-      <div class="col-xs-1">
+      <div class="col-md-1">
         <label for="ex3">Active:</label>
      @Html.CheckBoxFor(m => m.Active, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
-         <div class="col-xs-2">
+         <div class="col-md-2">
         <label for="ex3">DisplayInPOS:</label>
      @Html.CheckBoxFor(m => m.DisplayInPOS, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
-           <div class="col-xs-3">
+           <div class="col-md-2">
         <label for="ex4">POS Counter:</label>
      @Html.TextBoxFor(m => m.POSCounter, new { @class = "form-control" })
       </div>
@@ -42,40 +40,35 @@
     </div>
 
                     <div class="form-group row">
-      <div class="col-xs-2">
+      <div class="col-md-2">
         <label for="ex3"> <b >DisplayGroup:</b></label>  @Html.TextBoxFor(m => m.DisplayGroup, new { @class = "form-control" })
        
       </div>
-      <div class="col-xs-3">
+      <div class="col-md-3">
         <label for="ex4">Auto Generate CardNumber:</label>
      @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
-         <div class="col-xs-1">
+         <div class="col-md-1">
         <label for="ex3">OnlyVIP:</label>
      @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
-                          <div class="col-xs-3">
+                          <div class="col-md-3">
         <label for="ex3">Category:</label>
-                              <select name="categoryList" id="categoryList" class="form-control" style="height: 35px">
-              @foreach (var dow in Session["CategoryList"] as List<Marbale.BusinessObject.IdValue>)
-              {
-                
-                    <option value="@dow.Value">@dow.Value</option>
-                  
-              }
-            </select> 
-   @* @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })*@
+                 @Html.DropDownListFor(m => m.Category,new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value",selectedValue:string.IsNullOrEmpty(Model.Category)?"SELECT":Model.Category), new {@class="form-control",@style="height: 35px"})
+
+@Html.ValidationMessageFor(model => model.Category,"", new {@class = "text-danger" })
       </div>
-                                             <div class="col-xs-3">
+                                             <div class="col-md-3">
         <label for="ex3">Product Type:</label>
-                              <select name="categoryList" id="categoryList" class="form-control" style="height: 35px">
+                                                        @Html.DropDownListFor(m => m.Type,new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value",selectedValue:string.IsNullOrEmpty(Model.Type)?"SELECT":Model.Type), new {@class="form-control",@style="height: 35px"})
+     @*                         <select name="categoryList" id="categoryList" class="form-control" style="height: 35px">
               @foreach (var dow in Session["CategoryList"] as List<Marbale.BusinessObject.IdValue>)
               {
                 
                     <option value="@dow.Value">@dow.Value</option>
                   
               }
-            </select> 
+            </select> *@
    @* @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })*@
       </div>
     </div>
@@ -83,26 +76,27 @@
                <b style="color:green">Price:</b>
                   <div class="pricediv" style="border:2px solid black;border-color:cornsilk">
        <div class="form-group row">
-      <div class="col-xs-2">
+      <div class="col-md-2">
         <label for="ex3"> <b >Card Face Value:</b></label>  @Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control" })
       </div>
-      <div class="col-xs-2">
+      <div class="col-md-2">
         <label for="ex1">Price:</label>
     @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+          @Html.ValidationMessageFor(model => model.Price,"", new {@class = "text-danger" })
       </div>
-         <div class="col-xs-2">
+         <div class="col-md-2">
         <label for="ex2">TaxInclusive:</label>
     @Html.CheckBoxFor(m => m.TaxInclusive, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
-                <div class="col-xs-2">
+                <div class="col-md-2">
         <label for="ex3">Final Price:</label>
     @Html.TextBoxFor(m => m.FinalPrice, new { @class = "form-control" })
       </div>
-                        <div class="col-xs-2">
+                        <div class="col-md-2">
         <label for="ex4">Effective Price:</label>
   @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "form-control" })
       </div>
-                                 <div class="col-xs-2">
+                                 <div class="col-md-2">
         <label for="ex4">Tax %:</label>
   @Html.TextBoxFor(m => m.Taxpercent, new { @class = "form-control" })
       </div>
@@ -111,71 +105,71 @@
 <b style="color:cadetblue">Entitlement</b>
                   <div class="Entitlement" style="border:2px solid black;border-color:cornsilk">
                     <div class="form-group row">
-      <div class="col-xs-2">
+      <div class="col-md-2">
         <label for="ex3"> <b >Credits:</b></label> @Html.TextBoxFor(m => m.Credits, new { @class = "form-control" })
        
       </div>
-      <div class="col-xs-2">
+      <div class="col-md-2">
         <label for="ex1">Courtesy:</label>
     @Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control" })
       </div>
-                <div class="col-xs-2">
+                <div class="col-md-2">
         <label for="ex3">Bonus:</label>
     @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
       </div>
-                        <div class="col-xs-2">
+                        <div class="col-md-2">
         <label for="ex4">CardValidFor:</label>
-  @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control" })
+  @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control",@readonly="readonly" })
       </div>
     </div></div>
                   <b style="color:indianred">Miscellaneous:</b>
                   <div class="Miscellaneousclass" style="border:2px solid black;border-color:cornsilk">
       <div class="form-group row">
-      <div class="col-xs-3">
-        <label for="ex1"> <b >StartDate:</b></label>@Html.TextBoxFor(m => m.StartDate, new { @class = "form-control datepicker", @id = "StartDate" })
+      <div class="col-md-3">
+        <label for="ex1"> <b >StartDate:</b></label>@Html.TextBoxFor(m => m.StartDate, new { @class = "form-control datepicker", @id = "StartDate",@readonly="readonly" })
       </div>
-      <div class="col-xs-3">
+      <div class="col-md-3">
         <label for="ex2">ExpiryDate:</label>
-    @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control" })
+    @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control",@readonly="readonly" })
           @*  <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>*@
       </div>
-                <div class="col-xs-3">
+                <div class="col-md-3">
         <label for="ex3">Last Updated User:</label>
     @Html.TextBoxFor(m => m.LastUpdatedUser, new { @class = "form-control",@readonly="readonly" })
       </div>
-                        <div class="col-xs-3">
+                        <div class="col-md-3">
         <label for="ex4">LastUpdatedDate:</label>
-  @Html.TextBoxFor(m => m.LastUpdatedDate, new { @class = "form-control",@readonly="readonly" })
+  @Html.TextBoxFor(m => m.LastUpdatedDate, new { @class = "form-control",@readonly="readonly"})
 
       </div>
-          @*<div class="col-xs-3">
-           
-                    <input type='text' id='datetimepicker2'>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>*@
     </div></div>
                      
   </form>
 
          <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
-             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <input type="submit" name="submit" value="Duplicate" class="btn btn-primary btn-md" />
+@*               <button type="button" class="btn btn-primary" onclick="SaveDuplicate();">Duplicate</button>*@
+             <button type="button" class="btn btn-secondary close1" data-dismiss="modal">Close</button>
             </div>
     }
-<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
+		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+		<script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
+@*<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+@*<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>*@
 <script type="text/javascript">
-    $('#ExpiryDate').datepicker({
-        minDate: new Date(),
-        changeYear: true
+    $('.close1').click(function () {
+        location.reload();
+
     });
-    $('#StartDate').datepicker({
-        // locale: 'ru'
-    });
+
 </script>
 <style>
     .checkboxs {

@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace Marbale.Business
 {
-    public class ProductBL
+    public class ProductBL:SiteSetupData
     {
         private ProductData productData;
-
+      //  SiteSetupData ab = new ProductBL();
+       
         public ProductBL()
         {
             productData = new ProductData();
@@ -21,7 +22,7 @@ namespace Marbale.Business
        
         #region products
         public Product GetProductById(int id)
-        {
+        {   
             try
             {
                 var dataTable = productData.GetProductById(id);
@@ -29,6 +30,8 @@ namespace Marbale.Business
                 foreach (DataRow dr in dataTable.Rows)
                 {
                     product = new Product();
+                    product.DisplayInPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
+                    product.Bonus = dr.IsNull("Bonus") ? 0 : int.Parse(dr["Bonus"].ToString());
                     product.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                     product.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
@@ -36,7 +39,7 @@ namespace Marbale.Business
                     product.DisplayGroup = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
                     product.LastUpdatedBy = dr.IsNull("LastUpdatedUser") ? "" : dr["LastUpdatedBy"].ToString();
                     product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
-                    product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                    product.TaxName = dr.IsNull("TaxName") ? "" : dr["TaxName"].ToString();
                     product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
                     product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     product.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
@@ -47,6 +50,13 @@ namespace Marbale.Business
                     product.TaxPercentage = dr.IsNull("TaxPercentage") ? 0 : Convert.ToInt32(dr["TaxPercentage"]);
                     product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
                     product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
+                    product.StartDate = dr.IsNull("StartDate") ? new DateTime() : Convert.ToDateTime(dr["StartDate"]);
+                    product.Games = dr.IsNull("Games") ? 0 : Convert.ToInt32(dr["Games"]);
+                    product.Credits = dr.IsNull("Credits") ? 0 : Convert.ToInt32(dr["Credits"]);
+                    product.CardValidFor = dr.IsNull("CardValidFor") ? 0 : Convert.ToInt32(dr["CardValidFor"]);
+                    product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
+                    product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToInt32(dr["Courtesy"]);
+
                 }
                 return product;
             }
@@ -62,7 +72,7 @@ namespace Marbale.Business
             {
                 var typeListDataTable = productData.GetProductTypeLookUp();
                 var typeList = new List<IdValue>();
-                typeList.Add(new IdValue() { Id = 0, Value = "Select" });
+                typeList.Add(new IdValue() { Id = null, Value = "Select" });
                 foreach (DataRow dr in typeListDataTable.Rows)
                 {
                     IdValue idValues = new IdValue();
@@ -73,7 +83,7 @@ namespace Marbale.Business
 
                 var catrgoryListDataTable = productData.GetProductCategoryLookUp();
                 var categoryList = new List<IdValue>();
-                categoryList.Add(new IdValue() { Id = 0, Value = "Select" });
+                categoryList.Add(new IdValue() { Id = null, Value = "Select" });
                 foreach (DataRow dr in catrgoryListDataTable.Rows)
                 {
                     IdValue idValues = new IdValue();
