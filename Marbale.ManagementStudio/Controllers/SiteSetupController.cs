@@ -34,44 +34,44 @@ namespace MarbaleManagementStudio.Controllers
         #region EmailSedning
         public  void email_send(HttpPostedFileBase fileUploader, HttpPostedFileBase fileUploader1)
         {
-            var datatable = siteSetup.GetAppSettings("Email");
-            List<AppSetting> app = new List<AppSetting>();
-            app = datatable.ToList();
-            var DisplayNameFor_PDF_Creation = app[2].Value;
-            var SMTP_Host_Name_ip_address = app[3].Value;
-            var Port_Number_of_SMTP_Host = app[4].Value;
-            var SMTP_Login_Username = app[5].Value;
-            var SMTP_Login_Password = app[6].Value;
-            var Display_Name_for_From_Address = app[7].Value;
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient(SMTP_Host_Name_ip_address);
-            mail.From = new MailAddress(SMTP_Login_Username);
-            mail.To.Add(Display_Name_for_From_Address);
-            mail.Subject = "Test Mail of Marble From Shridhar";
-            mail.Body = "Sample Message from SHridhar";
-            if (!string.IsNullOrEmpty(app[0].Value))
-            {
-                var filename =  app[0].Value;
-                mail.Attachments.Add(new Attachment(filename));
-            }
-            if (!string.IsNullOrEmpty(app[0].Value))
-            {
-                var filename = app[1].Value;
-                mail.Attachments.Add(new Attachment(filename));
-            }
+            //var datatable = siteSetup.GetAppSettings("Email");
+            //List<AppSetting> app = new List<AppSetting>();
+            //app = datatable.ToList();
+            //var DisplayNameFor_PDF_Creation = app[2].Value;
+            //var SMTP_Host_Name_ip_address = app[3].Value;
+            //var Port_Number_of_SMTP_Host = app[4].Value;
+            //var SMTP_Login_Username = app[5].Value;
+            //var SMTP_Login_Password = app[6].Value;
+            //var Display_Name_for_From_Address = app[7].Value;
+            //MailMessage mail = new MailMessage();
+            //SmtpClient SmtpServer = new SmtpClient(SMTP_Host_Name_ip_address);
+            //mail.From = new MailAddress(SMTP_Login_Username);
+            //mail.To.Add(Display_Name_for_From_Address);
+            //mail.Subject = "Test Mail of Marble From Shridhar";
+            //mail.Body = "Sample Message from SHridhar";
+            //if (!string.IsNullOrEmpty(app[0].Value))
+            //{
+            //    var filename =  app[0].Value;
+            //    mail.Attachments.Add(new Attachment(filename));
+            //}
+            //if (!string.IsNullOrEmpty(app[0].Value))
+            //{
+            //    var filename = app[1].Value;
+            //    mail.Attachments.Add(new Attachment(filename));
+            //}
         
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential(SMTP_Login_Username, SMTP_Login_Password);
-            SmtpServer.EnableSsl = true;
-            try
-            {
-                SmtpServer.Send(mail);
-            }
-            catch (Exception ex)
-            {
+            //SmtpServer.Port = 587;
+            //SmtpServer.Credentials = new System.Net.NetworkCredential(SMTP_Login_Username, SMTP_Login_Password);
+            //SmtpServer.EnableSsl = true;
+            //try
+            //{
+            //    SmtpServer.Send(mail);
+            //}
+            //catch (Exception ex)
+            //{
                
-                throw;
-            }
+            //    throw;
+            //}
            
 
         }
