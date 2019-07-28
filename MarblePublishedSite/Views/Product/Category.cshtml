@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Product Category";
+}
+
+<div class="first">
+    <div class="second">
+
+        <table id="marbleTable" class="table">
+            <thead>
+                <th class="headerCol">ID</th>
+                <th>Name</th>
+                <th>ParentCategory</th>
+                <th>Active</th>
+            </thead>
+            @foreach (var item in ViewBag.categories)
+            {  
+                <tr onchange="UpdatedList(this)">
+                    <td class="headerCol">@item.Id  </td>
+                    <td>
+                        <input type="text" value="@item.Name" class="gridText" />
+                    </td>
+                    <td>
+                        <select name="categoryList" id="categoryList" class="gridText">
+                            @foreach (var dow in item.Categories)
+                            {
+                                if (@item.ParentCategory == @dow.Value)
+                                {
+                                <option value="@dow.Value" selected>@dow.Value</option>
+                                }
+                                else
+                                {
+                                <option value="@dow.Value">@dow.Value</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
+                    </td>
+                </tr>  
+            }
+        </table>
+
+    </div>
+
+</div>
+<div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveProductCategory()">Save</button>
+    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductCategory()">Add Product Category</a>
+</div>
+<script>
+    function AddProductCategory() {
+        var categoryListOptions = '';
+              @foreach (var dow in ViewBag.categories[0].Categories)
+              {
+                 @: categoryListOptions = categoryListOptions + '<option value="">@dow.Value</option>';
+              }
+        categoryListOptions = categoryListOptions + '</select></td>';
+
+        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+         '<td> <select name="categoryList" id="categoryList">' + categoryListOptions +
+        '<td> <input type="checkbox" />  </td>' + '</tr>';
+        $('#marbleTable tr:last').after(newRow);
+    }
+    function SaveProductCategory() {
+        var productCategories = [];
+        var table = document.getElementById('marbleTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                productCategories.push({
+                    Id: table.rows[r].cells[0].innerHTML,
+                    Name: table.rows[r].cells[1].children[0].value,
+                    Category: table.rows[r].cells[2].children[0].value,
+                    Active: table.rows[r].cells[3].children[0].checked,
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateProductCategories", "Product")',
+            data: JSON.stringify({ categories: productCategories }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+    var updatedArray = [];
+    function UpdatedList(x) {
+        if (!updatedArray.includes(x.rowIndex)) {
+            updatedArray.push(x.rowIndex);
+        }
+    }
+</script>

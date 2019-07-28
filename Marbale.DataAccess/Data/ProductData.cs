@@ -122,7 +122,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[26];
+                SqlParameter[] sqlParameters = new SqlParameter[16];
                 sqlParameters[0] = new SqlParameter("@name", string.IsNullOrEmpty(product.Name) ? "" : product.Name);
                 sqlParameters[1] = new SqlParameter("@type", string.IsNullOrEmpty(product.Type) ? "" : product.Type);
                 sqlParameters[2] = new SqlParameter("@active", product.Active);
@@ -139,18 +139,6 @@ namespace Marbale.DataAccess
                 sqlParameters[13] = new SqlParameter("@taxInclusive", product.TaxInclusive);
                 sqlParameters[14] = new SqlParameter("@taxPercentage", product.TaxPercentage);
                 sqlParameters[15] = new SqlParameter("@id", product.Id);
-                //
-                sqlParameters[16] = new SqlParameter("@Bonus", product.Bonus);
-                sqlParameters[17] = new SqlParameter("@LastUpdatedUser", string.IsNullOrEmpty(product.LastUpdatedUser) ? "" : product.LastUpdatedUser);
-                sqlParameters[18] = new SqlParameter("@TaxName", product.TaxName);
-                sqlParameters[19] = new SqlParameter("@StartDate", product.StartDate);
-                sqlParameters[20] = new SqlParameter("@LastUpdatedDate", DateTime.Now);
-                sqlParameters[21] = new SqlParameter("@Games", product.Games);
-                sqlParameters[22] = new SqlParameter("@CreditsPlus", product.CreditsPlus);
-                sqlParameters[23] = new SqlParameter("@Credits", product.Credits);
-
-                sqlParameters[24] = new SqlParameter("@CardValidFor", product.CardValidFor);
-                sqlParameters[25] = new SqlParameter("@ExpiryDate", product.ExpiryDate);
 
                 return conn.executeUpdateQuery("sp_InsertOrUpdateProduct", sqlParameters);
             }

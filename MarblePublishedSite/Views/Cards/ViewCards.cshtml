@@ -1,0 +1,242 @@
+﻿@model Marbale.BusinessObject.Cards.CardsModel
+@{
+    ViewBag.Title = "ViewCards";
+}
+<div>
+    @using (Html.BeginForm("ViewCards", "Cards", FormMethod.Get))
+    {
+        <div>
+            <div class="form-group row">
+                <div class="col-md-1">
+                    <label for="ex4"><b>VIP Customer:</b></label>
+                    @Html.CheckBoxFor(m => m.VIPCustomer, new { @class = "form-control", @style = "position:absolute;width:20px;" })
+                </div>
+                <div class="col-md-1">
+                    <label for="ex3"><b>Technician Card:</b></label>
+                    @Html.CheckBoxFor(m => m.TechnicianCard, new { @class = "form-control", @style = "position:absolute;width:20px;" })
+                </div>
+                <div class="col-md-1">
+                    <label for="ex3"><b>Valid Card:</b></label>
+                    @Html.CheckBoxFor(m => m.TechnicianCard, new { @class = "form-control", @style = "position:absolute;width:20px;" })
+                </div>
+                <div class="col-md-2">
+                    <label for="ex2"><b>CardNumber:</b></label>
+                    @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CardNumber) })
+                </div>
+
+                <div class="col-md-2">
+                    <label for="ex3"><b>IssueDate:</b></label>
+                    @Html.TextBoxFor(m => m.IssueDate, new { @class = "form-control", data_select = "datepicker" })
+                </div>
+                <div class="col-md-2">
+                    <label for="ex3"><b>To:</b></label>
+                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", data_select = "datepicker" })
+                </div>
+                <div class="col-md-2">
+                    <label for="ex4"><b>Custemer Name:</b></label>
+                    @Html.TextBoxFor(m => m.Custemer, new { @class = "form-control" })
+                </div>
+
+            </div>
+            <input type="submit" name="submit" value="Search" class="btn btn-primary btn-md" />
+        </div>
+    }
+</div>
+<h2>ViewCards</h2>
+<div>
+
+    <table id="cardtable" class="table marbleTable">
+        <thead class="thead-dark">
+            <th>CardId</th>
+            <th>CardNumber</th>
+            <th>TechCardType</th>
+            <th>IssueDate</th>
+
+            <th>VIPCustomer</th>
+            <th>TimerResetCard</th>
+            <th>FaceValue</th>
+            <th>Custemer</th>
+            <th>RefundDate</th>
+            <th>LastUpdatedTime</th>
+            <th>LastUpdatedBy</th>
+            <th>RefundAmount</th>
+
+            <th>Notes</th>
+            <th>StartTime</th>
+            <th>LastPlayTime</th>
+            <th>TechGame</th>
+            <th>TechnicianCard</th>
+
+            <th>Credits</th>
+            <th>Credit Plus</th>
+            <th>Courtesy</th>
+            <th>Bonus</th>
+            <th>CreditsPlayed</th>
+            <th>Ticket Count</th>
+            <th>Ticket Allowed</th>
+            <th>Real Ticket Mode</th>
+
+
+
+        </thead>
+        @if (ViewBag.cardsDetails != null)
+        {
+            foreach (var item in ViewBag.cardsDetails)
+            {  
+            <tr onclick="UpdatedList(@item.CardId)">
+                <td>@item.CardId  </td>
+
+                <td>
+                    <input type="text" value="@item.CardNumber" class="gridText" />
+                </td>
+                <td>
+                    <select name="TypeList" id="TypeList" class="gridText">
+                        @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TechCardType"])
+                        {
+
+                            if (Convert.ToInt32((@item.TechCardType)) == @dow.Id)
+                            {
+                            <option value="@dow.Value" selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                            <option value="@dow.Value">@dow.Value</option>
+                            }
+                        }
+                    </select>
+                </td>
+
+                <td>
+                    <input type="text" value="@item.IssueDate" class="gridText" />
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.VIPCustomer ? "checked='checked'" : "") value="@item.VIPCustomer" />
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.TimerResetCard ? "checked='checked'" : "") value="@item.TimerResetCard" />
+                </td>
+                <td>
+                    <input type="text" value="@item.FaceValue" class="gridText" />
+                </td>
+                <td>
+                    <input type="text" value="@item.Custemer" class="gridText"/>
+                </td>
+                @*    <td>
+                    <input type="text" value="@item.FaceValue" class="gridText"/>
+                </td>*@
+
+                <td>
+                    <input type="text" value="@item.RefundDate" class="gridText"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.LastUpdatedTime" class="gridText"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.LastUpdatedBy" class="gridText"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.RefundAmount" class="gridText"/>
+                </td>
+
+                <td>
+                    <input type="text" value="@item.Note" class="gridText"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.StartTime" class="gridText"/>
+                </td>
+
+                <td>
+                    <input type="text" value="@item.LastPlayTime" class="gridText"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.TechGames" class="gridText"/>
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.TechnicianCard ? "checked='checked'" : "") value="@item.TechnicianCard" />
+                </td>
+
+
+                <td>
+                    <input type="text" value="@item.Credits" class="gridText"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.CreditPlus" class="gridText"/>
+                </td>
+
+                <td>
+                    <input type="text" value="@item.Courtesy" class="gridText"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.Bonus" class="gridText"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.CreditsPlayed" class="gridText"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.TicketCount" class="gridText"/>
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.RealTicketMode ? "checked='checked'" : "") value="@item.RealTicketMode" />
+                </td>
+
+            </tr>  
+            }
+        }
+    </table>
+    <button type="button" class="btn btn-primary" data-toggle="modal" id="newcard">
+        New Card
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" id="updatecard" onclick="EditCard();">
+        Update Card
+    </button>
+</div>
+<style>
+    .highlight {
+        background-color: cadetblue;
+    }
+
+    input {
+        border: none;
+    }
+</style>
+
+<link href="~/Content/DatetimePicker/jquery.datepicker2.css" rel="stylesheet" />
+<script src="~/Content/DatetimePicker/jquery.datepicker2.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+    });
+
+    $('#newcard').click(function () {
+        $(".modal-body").html("");
+        $('#newupdatecardmodal').text("Add Card").addClass('modal-centre');
+        $('#newcardmodel').modal('show');
+
+        $('#modelbody').load('Cards/Cards');
+    });
+    function UpdatedList(x) {
+        updatedArray = [];
+        updatedArray.push(x);
+    }
+    $("#cardtable tr").click(function () {
+        var selected = $(this).hasClass("highlight");
+        $("#cardtable tr").removeClass("highlight");
+        if (!selected)
+            $(this).addClass("highlight");
+    });
+    $("#cardtable tr").on('dblclick', function (e) {
+        debugger;
+        EditCard();
+    });
+    function EditCard() {
+        $('#newupdatecardmodal').text("Update Card").addClass('modal-centre');
+        $('#newcardmodel').modal('show');
+        $('#modelbody').load('/Cards/Cards', { "CardId": updatedArray[0] });
+        //window.open("/product/Edit/"+id, "Marbale", "width=700,height=700");
+    }
+
+</script>

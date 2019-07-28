@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "ProductsMenu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/product.css" rel="stylesheet" />
+
+<div class="container">
+    <fieldset class="productFieldset">
+        <legend>Chose by product type</legend>
+        <div class="panel panel-primary pbody">
+            <div class="panel-body body">
+                <a href="/product/productsetup" class="btn btn-primary btn-lg round" role="button">Cards</a>
+                <a href="http://google.co.in" class="btn btn-primary btn-lg round" role="button">Non Card Sales</a>
+                <a href="http://google.co.in" class="btn btn-primary btn-lg round" role="button">Combo</a>
+                <a href="http://google.co.in" class="btn btn-primary btn-lg round" role="button">Bookings</a>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="productFieldset">
+        <legend>Set up</legend>
+            <div class="productSetup">
+                <a href="/product/Types">Product Type</a>
+                <a href="/product/Category">Product Category</a>
+                <a href="#">Product Modifiers</a>
+            </div>
+    </fieldset>
+
+</div>
+<style>
+    .round   {  border-radius: 72px;
+  
+    width: 200px;
+    height: 97px;
+    padding: 31px;
+    }
+   
+</style>
