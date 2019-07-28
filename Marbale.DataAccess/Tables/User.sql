@@ -1,22 +1,26 @@
 USE [Marbale]
 GO
 
-/****** Object:  Table [dbo].[UserRole]    Script Date: 3/23/2019 12:15:52 PM ******/
+/****** Object:  Table [dbo].[User]    Script Date: 28/07/2019 21:31:17 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
+SET ANSI_PADDING ON
+GO
+
 CREATE TABLE [dbo].[User](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](100) NULL,
 	[LoginId] [varchar](100) NULL,
+	[Password] [nvarchar](100) NULL,
 	[Role] [varchar](200) NULL,
 	[Status] [varchar](max) NULL,
 	[POSCounter] [varchar](500) NULL,
 	[PasswordChangeDate] [datetime] NULL,
-	[InvalidAttempts] int NULL,
+	[InvalidAttempts] [int] NULL,
 	[Email] [varchar](200) NULL,
 	[CompanyAdmin] [bit] NULL,
 	[Department] [varchar](200) NULL,
@@ -31,6 +35,10 @@ CREATE TABLE [dbo].[User](
 	[LastUpdatedBy] [varchar](500) NULL,
 	[LastUpdatedDate] [datetime] NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
 GO
 
 
