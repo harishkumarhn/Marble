@@ -32,12 +32,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JTextBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MarbleDlls\JTextBox.dll</HintPath>
+    <Reference Include="JTextBox">
+      <HintPath>..\External References\JTextBox.dll</HintPath>
     </Reference>
     <Reference Include="JTextBox2">
-      <HintPath>..\..\MarbleDlls\JTextBox2.dll</HintPath>
+      <HintPath>..\External References\JTextBox2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

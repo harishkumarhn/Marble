@@ -35,10 +35,10 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-            //frmLogin frmLogin = new frmLogin();
-            //frmLogin.ShowDialog();
-            //if (!frmLogin.isLoginSuccess)
-            //    Environment.Exit(0);
+            frmLogin frmLogin = new frmLogin();
+            frmLogin.ShowDialog();
+            if (!frmLogin.isLoginSuccess)
+                Environment.Exit(0);
         }
 
         private void POSHome_Load(object sender, EventArgs e)
