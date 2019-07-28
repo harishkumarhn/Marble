@@ -455,6 +455,27 @@ namespace Marble.Business
             }
             return user;
         }
+        public ProductKey GetProductKey()
+        {
+            DataTable dt = siteSetupData.GetProductKey();
+            ProductKey pk = new ProductKey();
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    pk.SiteId = dr.IsNull("SiteId") ? 0 : int.Parse(dr["SiteId"].ToString());
+                    pk.SiteKey = dr.IsNull("SiteKey") ? "" : dr["SiteKey"].ToString();
+                    pk.LicenseKey = dr.IsNull("LicenseKey") ? "" : dr["LicenseKey"].ToString();
+                    break;
+                }
+            }
+            return pk;
+        }
+        public int UpdateProductKey(ProductKey pk)
+        {
+           return siteSetupData.UpdateProductKey(pk);
+        }
 
     }
 }

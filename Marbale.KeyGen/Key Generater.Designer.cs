@@ -49,6 +49,7 @@
             this.lab_sk_decode = new System.Windows.Forms.Label();
             this.txt_lk_decode = new System.Windows.Forms.TextBox();
             this.lab_lk_decode = new System.Windows.Forms.Label();
+            this.lab_validation = new System.Windows.Forms.Label();
             this.tabs_KeyGen.SuspendLayout();
             this.GenerateKey.SuspendLayout();
             this.Decode.SuspendLayout();
@@ -68,6 +69,7 @@
             // GenerateKey
             // 
             this.GenerateKey.BackColor = System.Drawing.Color.White;
+            this.GenerateKey.Controls.Add(this.lab_validation);
             this.GenerateKey.Controls.Add(this.chk_never);
             this.GenerateKey.Controls.Add(this.btn_generate);
             this.GenerateKey.Controls.Add(this.btn_close);
@@ -281,6 +283,16 @@
             this.lab_lk_decode.TabIndex = 5;
             this.lab_lk_decode.Text = "License Key";
             // 
+            // lab_validation
+            // 
+            this.lab_validation.AutoSize = true;
+            this.lab_validation.ForeColor = System.Drawing.Color.Red;
+            this.lab_validation.Location = new System.Drawing.Point(12, 7);
+            this.lab_validation.Name = "lab_validation";
+            this.lab_validation.Size = new System.Drawing.Size(79, 13);
+            this.lab_validation.TabIndex = 9;
+            this.lab_validation.Text = "Invalid Licence";
+            // 
             // KeyGenerater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,6 +301,7 @@
             this.Controls.Add(this.tabs_KeyGen);
             this.Name = "KeyGenerater";
             this.Text = "KeyGenerater";
+            this.Load += new System.EventHandler(this.KeyGenerater_Load);
             this.tabs_KeyGen.ResumeLayout(false);
             this.GenerateKey.ResumeLayout(false);
             this.GenerateKey.PerformLayout();
@@ -321,6 +334,7 @@
         private System.Windows.Forms.Label lab_sk_decode;
         private System.Windows.Forms.TextBox txt_lk_decode;
         private System.Windows.Forms.Label lab_lk_decode;
+        private System.Windows.Forms.Label lab_validation;
     }
 }
 

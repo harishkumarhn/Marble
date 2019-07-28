@@ -87,6 +87,9 @@
                         <li>
                             <a href="/TaskType/TaskType/TaskType">Task-Type</a>
                         </li>
+                        <li>
+                            <a id="productKey">Product Key</a>
+                        </li>
 
                     </ul>
                 </li>
@@ -193,6 +196,14 @@
             $('#newupdatecardmodal').text("Configuration").addClass('modal-centre');
             $('#newcardmodel').modal('show');
             $('#modelbody').load('game/configuration');
+        });
+        $('#productKey').click(function () {
+            $(".modal-body").html("");
+            $('#newcardmodel .modal-Content').css('height', 730);
+            $('#newcardmodel .modal-Content').css('width', 900);
+            $('#newupdatecardmodal').text("productKey").addClass('modal-centre');
+            $('#newcardmodel').modal('show');
+            $('#modelbody').load('siteSetup/ProductKey');
         });
     </script>
 

@@ -305,6 +305,7 @@
     <Content Include="Views\SiteSetup\Redemption.cshtml" />
     <Content Include="Views\SiteSetup\Payment.cshtml" />
     <Content Include="Views\SiteSetup\Customer.cshtml" />
+    <Content Include="Views\SiteSetup\ProductKey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
