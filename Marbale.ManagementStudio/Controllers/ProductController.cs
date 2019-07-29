@@ -53,6 +53,11 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
+        public JsonResult DeleteProducts(int Id)
+        {
+            int result = productBussiness.DeleteProductbyId(Id);
+            return Json(1, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult InsertOrUpdate(Product pObject,string submit)
         {

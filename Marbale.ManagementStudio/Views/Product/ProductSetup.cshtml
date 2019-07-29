@@ -51,7 +51,7 @@
             </thead>
             @foreach (var item in ViewBag.productDetails)
             {  
-                <tr onchange="UpdatedList(this)">
+                <tr onchange="UpdatedList(this)" onclick="getIdOfProduct(@item.Id)">
                     <td class="headerCol">@item.Id  </td>
                     <td class="headerCol" style="left:55px">
                         <button onClick="EditProduct(@item.Id)">-</button>
@@ -140,10 +140,15 @@
         New
     </button>
     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+      <button class="btn btn-primary btn-md" role="button" onclick="DeleteProducts()"  id="deleteproduct">Delete</button>
 </div>
+<style>
+    .highlight { background-color: darkmagenta; }
+</style>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
     var newRow = 0;
+    var IdforDelete = 0;
     $(document).ready(function () {
        
         $('.dropdown-toggle').collapse({
@@ -154,6 +159,35 @@
         location.reload();
 
     });
+    //$("#marbleTable tr .headerCol").click(function () {
+    //    debugger
+    //    var selected = $(this).hasClass("highlight");
+    //    $("#marbleTable tr").removeClass("highlight");
+    //    if (!selected)
+    //        $("#marbleTable tr .headerCol").addClass("highlight");
+    //});
+    function DeleteProducts() {
+      debugger
+      var  Id = IdforDelete;
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("DeleteProducts", "Product")',
+            data: { Id: Id },
+            dataType: "json",
+            success: function (data) {
+               
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+    function getIdOfProduct(Id) {
+        IdforDelete = Id;
+     
+    }
     $(':input').on('change', function () {
         debugger
         $("#saveproduct").attr("disabled", false);
@@ -265,6 +299,7 @@
     }
     var updatedArray = [];
     function UpdatedList(x) {
+        debugger;
         if (!updatedArray.includes(x.rowIndex)) {
             updatedArray.push(x.rowIndex);
         }

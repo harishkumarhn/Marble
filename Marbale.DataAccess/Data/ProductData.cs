@@ -319,5 +319,14 @@ namespace Marbale.DataAccess
             sqlParameters[3] = new SqlParameter("@TaxStructureName", taxstructure.TaxStructureName);
             return conn.executeUpdateQuery("sp_InsertOrUpdateTaxStructure", sqlParameters);
         }
+
+        public int DeleteProductbyId(int Id)
+        {
+
+
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@Id",Id);
+            return conn.executeUpdateQuery("DeleteProductById", sqlParameters);
+        }
     }
 }

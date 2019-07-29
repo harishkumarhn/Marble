@@ -387,5 +387,17 @@ namespace Marbale.Business
                 throw e;
             }
         }
+
+        public int DeleteProductbyId(int Id)
+        {
+            try
+            {
+                return productData.DeleteProductbyId(Id);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
