@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Marbale.BusinessObject.Game;
+using Marble.Business.Enum;
 
 namespace Marble.Business
 {
@@ -118,6 +119,155 @@ namespace Marble.Business
                  throw e;
              }
          }
-       
+         public List<Game> GetGames()
+         {
+             try
+             {
+                 var gameDataTable = gameData.GetGames();
+                 List<Game> games = new List<Game>();
+                 List<GameProfile> profiles = new List<GameProfile>();
+                 profiles.Add(new GameProfile() { Id = 0, Name = "Select" });
+                 profiles.AddRange(GetGameProfiles());
+                 foreach (DataRow dr in gameDataTable.Rows)
+                 {
+                     Game game = new Game();
+                     game.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                     game.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                     game.Description = dr.IsNull("Description") ? "" : dr["Description"].ToString();
+                     game.GameProfile = dr.IsNull("GameProfile") ? 0 : int.Parse(dr["GameProfile"].ToString());
+                     game.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
+                     game.GameCompanyName = dr.IsNull("GameCompanyName") ? "" : dr["GameCompanyName"].ToString();
+                     game.VIPPrice = dr.IsNull("VIPPrice") ? 0 : int.Parse(dr["VIPPrice"].ToString());
+                     game.NormalPrice = dr.IsNull("NormalPrice") ? 0 : int.Parse(dr["NormalPrice"].ToString());
+                     game.RepeatPlayDiscountPercentage = dr.IsNull("RepeatPlayDiscountPercentage") ? 0 : int.Parse(dr["RepeatPlayDiscountPercentage"].ToString());
+                     game.GameProfiles = profiles;
+                     game.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                     game.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+
+                     games.Add(game);
+                 }
+                 if (games.Count == 0)
+                 {
+                     var obj = new Game();
+                     obj.GameProfiles = profiles;
+                     games.Add(obj);
+                 }
+                 return games;
+
+             }
+             catch (Exception e)
+             {
+                 throw e;
+             }
+         }
+         public int InsertOrUpdateGame(Game game)
+         {
+             try
+             {
+                 return gameData.InsertOrUpdateGame(game);
+             }
+             catch (Exception e)
+             {
+                 throw e;
+             }
+         }
+         public List<Machine> GetMachines()
+         {
+             try
+             {
+                 var gameDataTable = gameData.GetMachines();
+                 List<Machine> machines = new List<Machine>();
+
+                 List<Hub> hubs = new List<Hub>();
+                 hubs.Add(new Hub() { Id = 0, Name = "Select" });
+                 hubs.AddRange(GetHubs());
+
+                 List<IdValue> readers = new List<IdValue>();
+                 readers.Add(new IdValue() { Id = 0, Value = "Select" });
+                 readers.Add(new IdValue() { Id = 0, Value = "Reader1" });
+                 readers.Add(new IdValue() { Id = 0, Value = "Reader2" });                
+
+                 List<IdValue> themes = new List<IdValue>();
+                 themes.Add(new IdValue() { Id = 0, Value = "Select" });
+                 themes.Add(new IdValue() { Id = 0, Value = "Theme1" });
+                 themes.Add(new IdValue() { Id = 0, Value = "Theme2" });
+
+                 foreach (DataRow dr in gameDataTable.Rows)
+                 {
+                     Machine machine = new Machine();
+                     machine.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                     machine.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                     machine.GameName = dr.IsNull("GameName") ? "" : dr["GameName"].ToString();
+                     machine.HubName = dr.IsNull("HubName") ? "" : dr["HubName"].ToString();
+                     machine.MachineAddress = dr.IsNull("MachineAddress") ? "" : dr["MachineAddress"].ToString();
+                     machine.HubAddress = dr.IsNull("HubAddress") ? "" : dr["HubAddress"].ToString();
+                     machine.EffectiveMachineAddress = dr.IsNull("EffectiveMachineAddress") ? "" : dr["EffectiveMachineAddress"].ToString();
+                     machine.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
+                     machine.VIPPrice = dr.IsNull("VIPPrice") ? 0 : int.Parse(dr["VIPPrice"].ToString());
+                     machine.PurchasePrice = dr.IsNull("PurchasePrice") ? 0 : int.Parse(dr["PurchasePrice"].ToString());
+                     machine.ReaderType = dr.IsNull("ReaderType") ? "" : dr["ReaderType"].ToString();
+                     machine.SoftwareVersion = dr.IsNull("SoftwareVersion") ? "" : dr["SoftwareVersion"].ToString();
+                     machine.Theme = dr.IsNull("Theme") ? "" : dr["Theme"].ToString();
+                     machine.TicketMode = dr.IsNull("TicketMode") ? "" : dr["TicketMode"].ToString();
+                     machine.TicketAllowed = dr.IsNull("TicketAllowed") ? false : bool.Parse(dr["TicketAllowed"].ToString());
+                     machine.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
+                     machine.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                     machine.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+
+                     machine.AvalibleHubs = hubs;
+                     machine.AvalibleReaders = readers;
+                     machine.AvalibleThemes = themes;
+
+                     machines.Add(machine);
+                 }
+                 if (machines.Count == 0)
+                 {
+                     var obj = new Machine();
+                     obj.AvalibleHubs = hubs;
+                     obj.AvalibleReaders = readers;
+                     obj.AvalibleThemes = themes;
+                     machines.Add(obj);
+                 }
+                 return machines;
+
+             }
+             catch (Exception e)
+             {
+                 throw e;
+             }
+         }
+         public int InsertOrUpdateMachine(Machine machine)
+         {
+             try
+             {
+                 return gameData.InsertOrUpdateMachine(machine);
+             }
+             catch (Exception e)
+             {
+                 throw e;
+             }
+         }
+         public List<ActiveHubMachine> GetActiveHubMachines(int hubId)
+         {
+             List<ActiveHubMachine> activeHubMachines = new List<ActiveHubMachine>();
+             try
+             {
+                 var hubDataTable = gameData.GetActiveHubMachines(hubId);
+                 foreach (DataRow dr in hubDataTable.Rows)
+                 {
+                     ActiveHubMachine aHM = new ActiveHubMachine();
+                     aHM.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                     aHM.Machine = dr.IsNull("Machine") ? "" : dr["Machine"].ToString();
+                     aHM.HubName = dr.IsNull("HubName") ? "" : dr["HubName"].ToString();
+                     activeHubMachines.Add(aHM);
+                 }
+             }
+             catch (Exception ex)
+             {
+                 return null;
+             }
+             return activeHubMachines;
+
+         }
     }
 }

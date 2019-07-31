@@ -58,6 +58,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MarblePOS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MarblePOS.designer.cs">
+      <DependentUpon>MarblePOS.cs</DependentUpon>
+    </Compile>
     <Compile Include="POSHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ValidationPopUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +97,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MarblePOS.resx">
+      <DependentUpon>MarblePOS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="POSHome.resx">
       <DependentUpon>POSHome.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +107,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ValidationPopUp.resx">
       <DependentUpon>ValidationPopUp.cs</DependentUpon>
@@ -160,6 +178,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\right1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Button.png" />
+    <Content Include="Resources\Manual.png" />
+    <Content Include="Resources\New_Product.png" />
+    <Content Include="Resources\RefundCard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

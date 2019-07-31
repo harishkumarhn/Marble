@@ -40,10 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Machine.cs" />
+    <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameProfile.cs" />
     <Compile Include="Game\Hub.cs" />
     <Compile Include="Cards\CardsModel.cs" />
     <Compile Include="Cards\Inventory.cs" />
+    <Compile Include="Game\ActiveHubMachine.cs" />
     <Compile Include="Messages\MessagesModel.cs" />
     <Compile Include="NameValue.cs" />
     <Compile Include="Setting\AppSetting.cs" />
@@ -67,7 +70,9 @@
     <Compile Include="Tax\TaxSet.cs" />
     <Compile Include="Tax\TaxStructure.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Report\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
