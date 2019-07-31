@@ -1,5 +1,6 @@
 ﻿using Marbale.Business;
 using Marbale.BusinessObject;
+using MarbaleManagementStudio.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 namespace MarbaleManagementStudio.Controllers
 {
   
-    
+    [LogCustomExceptionFilter]
     public class ProductController : Controller
     {
         public ProductBL productBussiness;
