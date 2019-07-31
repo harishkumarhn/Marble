@@ -1,65 +1,65 @@
-USE marbale 
+USE [Marbale]
+GO
 
-go 
+/****** Object:  StoredProcedure [dbo].[sp_InsertOrUpdateCustomer]    Script Date: 27/07/2019 15:24:10 ******/
+DROP PROCEDURE [dbo].[sp_InsertOrUpdateCustomer]
+GO
 
-/****** Object:  StoredProcedure dbo.sp_InsertOrUpdateGame    Script Date: 6/22/2019 10:07:54 PM ******/
-SET ansi_nulls ON 
+/****** Object:  StoredProcedure [dbo].[sp_InsertOrUpdateCustomer]    Script Date: 27/07/2019 15:24:10 ******/
+SET ANSI_NULLS ON
+GO
 
-go 
+SET QUOTED_IDENTIFIER ON
+GO
 
-SET quoted_identifier ON 
 
-go 
-
+-- DROP PROC sp_InsertOrUpdateCustomer
 -- ============================================= 
 -- Author:    @Author,,Name 
 -- Create date: @Create Date,, 
 -- Description:  @Description,, 
 -- ============================================= 
-CREATE PROCEDURE dbo.Sp_InsertOrUpdateCustomer @CustomerId        INT, 
-                                               @CustomerName      NVARCHAR(50), 
-                                               @Address1          NVARCHAR(50), 
-                                               @Address2          NVARCHAR(50), 
-                                               @Address3          NVARCHAR(50), 
-                                               @City              NVARCHAR(50), 
-                                               @State             NVARCHAR(50), 
-                                               @Pin               NVARCHAR(50), 
-                                               @Country           NVARCHAR(50), 
-                                               @Email             NVARCHAR(50), 
+CREATE PROCEDURE [dbo].[sp_InsertOrUpdateCustomer] @CustomerId        INT, 
+                                               @CustomerName      NVARCHAR(50) = NULL, 
+                                               @Address1          NVARCHAR(50) = NULL, 
+                                               @Address2          NVARCHAR(50) = NULL,  
+                                               @Address3          NVARCHAR(50)= NULL, 
+                                               @City              NVARCHAR(50)= NULL, 
+                                               @State             NVARCHAR(50)= NULL, 
+                                               @Pin               NVARCHAR(50)= NULL,  
+                                               @Country           NVARCHAR(50) = NULL, 
+                                               @Email             NVARCHAR(50)= NULL, 
                                                @Gender            CHAR(1), 
-                                               @DateOfBirth       DATETIME, 
-                                               @Anniversary       DATETIME, 
-                                               @ContactPhone1     NVARCHAR(50), 
-                                               @ContactPhone2     NVARCHAR(50), 
-                                               @Notes             NVARCHAR(max), 
-                                               @LastUpdatedDate   DATETIME, 
-                                               @LastUpdatedUser   NVARCHAR(50), 
-                                               @MiddleName        NVARCHAR(50), 
-                                               @LastName          NVARCHAR(50), 
-                                               @CustomDataSetId   INT, 
-                                               @Company           NVARCHAR(200), 
-                                               @Designation       NVARCHAR(200), 
-                                               @PhotoFileName     NVARCHAR(100), 
-                                               @Guid 
-UNIQUEIDENTIFIER, 
-                                               @SiteId            INT, 
-                                               @UniqueID          VARCHAR(100), 
-                                               @Username          NVARCHAR(50), 
-                                               @FBUserId          NVARCHAR(20), 
-                                               @FBAccessToken     NVARCHAR(20), 
-                                               @TWAccessToken     NVARCHAR(20), 
-                                               @TWAccessSecret    NVARCHAR(20), 
-                                               @RightHanded       BIT, 
-                                               @TeamUser          BIT, 
-                                               @SynchStatus       BIT, 
-                                               @Verified          CHAR(1), 
-                                               @Password          NVARCHAR(100), 
-                                               @LastLoginTime     DATETIME, 
-                                               @ExternalSystemRef NVARCHAR(50), 
-                                               @IsValid           BIT, 
-                                               @DownloadBatchId   INT, 
-                                               @IDProofFileName   NVARCHAR(100), 
-                                               @Title             NVARCHAR(20) 
+                                               @DateOfBirth       DATETIME = NULL, 
+                                               @Anniversary       DATETIME= NULL,
+                                               @ContactPhone1     NVARCHAR(50) = NULL, 
+                                               @ContactPhone2     NVARCHAR(50) = NULL, 
+                                               @Notes             NVARCHAR(max) = NULL, 
+                                               @LastUpdatedDate   DATETIME = NULL, 
+                                               @LastUpdatedUser   NVARCHAR(50) = NULL, 
+                                               @MiddleName        NVARCHAR(50) = NULL,  
+                                               @LastName          NVARCHAR(50) = NULL,
+                                               @CustomDataSetId   INT = 0,
+                                               @Company           NVARCHAR(200) = NULL, 
+                                               @Designation       NVARCHAR(200) = NULL, 
+                                               @PhotoFileName     NVARCHAR(100) = NULL, 
+                                               @UniqueID          VARCHAR(100) = NULL, 
+                                               @Username          NVARCHAR(50) = NULL, 
+                                               @FBUserId          NVARCHAR(20) = NULL, 
+                                               @FBAccessToken     NVARCHAR(20) = NULL, 
+                                               @TWAccessToken     NVARCHAR(20) = NULL, 
+                                               @TWAccessSecret    NVARCHAR(20) = NULL, 
+                                               @RightHanded       BIT = false,
+                                               @TeamUser          BIT = false, 
+                                               @Verified          CHAR(1) = 'N', 
+                                               @Password          NVARCHAR(100) = NULL, 
+                                               @LastLoginTime     DATETIME = NULL, 
+                                               @ExternalSystemRef NVARCHAR(50) = NULL, 
+                                               @IsValid           BIT = 0, 
+                                               @DownloadBatchId   INT = 0, 
+                                               @IDProofFileName   NVARCHAR(100) = NULL, 
+                                               @Title             NVARCHAR(20) = NULL, 
+											   @custId  INT OUT
 AS 
   BEGIN 
       -- SET NOCOUNT ON added to prevent extra result sets from 
@@ -97,8 +97,6 @@ AS
                    company = @Company, 
                    designation = @Designation, 
                    photofilename = @PhotoFileName, 
-                   [guid] = @Guid, 
-                   siteid = @SiteId, 
                    uniqueid = @UniqueID, 
                    username = @Username, 
                    fbuserid = @FBUserId, 
@@ -107,7 +105,6 @@ AS
                    twaccesssecret = @TWAccessSecret, 
                    righthanded = @RightHanded, 
                    teamuser = @TeamUser, 
-                   synchstatus = @SynchStatus, 
                    verified = @Verified, 
                    [password] = @Password, 
                    lastlogintime = @LastLoginTime, 
@@ -117,6 +114,8 @@ AS
                    idprooffilename = @IDProofFileName, 
                    title = @Title 
             WHERE  customerid = @CustomerId 
+
+			set @custId = @CustomerId
         END 
       ELSE 
         BEGIN 
@@ -146,7 +145,6 @@ AS
                          [designation], 
                          [photofilename], 
                          [guid], 
-                         [siteid], 
                          [uniqueid], 
                          [username], 
                          [fbuserid], 
@@ -155,7 +153,6 @@ AS
                          [twaccesssecret], 
                          [righthanded], 
                          [teamuser], 
-                         [synchstatus], 
                          [verified], 
                          [password], 
                          [lastlogintime], 
@@ -164,6 +161,7 @@ AS
                          [downloadbatchid], 
                          [idprooffilename], 
                          [title]) 
+
             VALUES      (@CustomerName, 
                          @Address1, 
                          @Address2, 
@@ -187,8 +185,7 @@ AS
                          @Company, 
                          @Designation, 
                          @PhotoFileName, 
-                         @Guid, 
-                         @SiteId, 
+                         NEWID(), 
                          @UniqueID, 
                          @Username, 
                          @FBUserId, 
@@ -197,7 +194,6 @@ AS
                          @TWAccessSecret, 
                          @RightHanded, 
                          @TeamUser, 
-                         @SynchStatus, 
                          @Verified, 
                          @Password, 
                          @LastLoginTime, 
@@ -206,9 +202,18 @@ AS
                          @DownloadBatchId, 
                          @IDProofFileName, 
                          @Title) 
+
+						 SET @custId = (SELECT SCOPE_IDENTITY())
+
+				
         END 
+
+				 select @custId
 
       COMMIT TRAN 
   END 
 
-go 
+
+GO
+
+

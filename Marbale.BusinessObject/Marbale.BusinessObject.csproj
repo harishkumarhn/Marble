@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cards\Card.cs" />
+    <Compile Include="Customers\Customers.cs" />
+    <Compile Include="Discount\Discounts.cs" />
     <Compile Include="Game\Machine.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameProfile.cs" />
@@ -47,6 +50,11 @@
     <Compile Include="Cards\CardsModel.cs" />
     <Compile Include="Cards\Inventory.cs" />
     <Compile Include="Game\ActiveHubMachine.cs" />
+    <Compile Include="Inventory\Category.cs" />
+    <Compile Include="Inventory\Location.cs" />
+    <Compile Include="Inventory\LocationType.cs" />
+    <Compile Include="Inventory\UnitOfMeasure.cs" />
+    <Compile Include="Inventory\Vendor.cs" />
     <Compile Include="Messages\MessagesModel.cs" />
     <Compile Include="NameValue.cs" />
     <Compile Include="Setting\AppSetting.cs" />
@@ -63,12 +71,14 @@
     <Compile Include="Setting\Settings.cs" />
     <Compile Include="Discount\TransactionDiscount.cs" />
     <Compile Include="SiteSetup\AppModuleAction.cs" />
+    <Compile Include="SiteSetup\ProductKey.cs" />
     <Compile Include="SiteSetup\User.cs" />
     <Compile Include="SiteSetup\UserRole.cs" />
     <Compile Include="SiteSetup\TaskTypeModel.cs" />
     <Compile Include="Tax\MasterTax.cs" />
     <Compile Include="Tax\TaxSet.cs" />
     <Compile Include="Tax\TaxStructure.cs" />
+    <Compile Include="Transaction\Transaction.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Report\" />

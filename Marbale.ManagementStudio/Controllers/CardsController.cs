@@ -21,7 +21,8 @@ namespace MarbaleManagementStudio.Controllers
         {
             cardBussiness = new CardsBL();
         }
-         [HttpGet]
+
+        [HttpGet]
         public ActionResult Cards()
         {
             var data = cardBussiness.gettechcardtype();
@@ -30,7 +31,8 @@ namespace MarbaleManagementStudio.Controllers
             //Session["CategoryList"] = products[0].CategoryList;
             return View();
         }
-    [HttpGet]
+
+         [HttpGet]
          public ActionResult ViewCards(CardsModel c)
          {
              var data1 = cardBussiness.gettechcardtype();

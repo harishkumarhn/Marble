@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.SqlServer.Management.Smo;
-using Microsoft.SqlServer.Management.Common; 
+using Microsoft.SqlServer.Management.Common;
 
 namespace Marble.PrimaryServer
 {

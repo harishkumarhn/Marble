@@ -1,0 +1,186 @@
+﻿@model Marbale.BusinessObject.Cards.CardsModel
+@{
+   
+    Layout = null;
+}
+
+<div>
+    @using (Html.BeginForm("InsertOrUpdateCards", "Cards", FormMethod.Post))
+    {
+        <div>
+            <b style="color: cadetblue">Main</b>
+            <div id="mainclass" style="border: 2px solid black; border-color: cornsilk">
+                <div class="form-group row">
+
+                    <div class="col-md-1">
+                        <label for="ex1"><b>CardId:</b></label>
+                        @Html.TextBoxFor(m => m.CardId, new { @readonly = "readonly", @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex2"><b>CardNumber:</b></label>
+                        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CardNumber) })
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="ex3"><b>IssueDate:</b></label>
+                        @Html.TextBoxFor(m => m.IssueDate, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex3"><b>FaceValue:</b></label>
+                        @Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex4"><b>Custemer:</b></label>
+                        @Html.TextBoxFor(m => m.Custemer, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-1">
+                        <label for="ex4"><b>VIP Customer:</b></label>
+                        @Html.CheckBoxFor(m => m.VIPCustomer, new { @class = "form-control", @style = "position:absolute;width:20px;" })
+                    </div>
+
+                </div>
+            </div>
+            
+            <b style="color: cadetblue">Value</b>
+            <div id="valueclass" style="border: 2px solid black; border-color: cornsilk">
+                <div class="form-group row">
+
+                    <div class="col-md-2">
+                        <label for="ex1"><b>Credits:</b></label>
+                        @Html.TextBoxFor(m => m.Credits, new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex2"><b>Credit Plus:</b></label>
+                        @Html.TextBoxFor(m => m.CreditPlus, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CreditPlus) })
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="ex3"><b>Courtesy:</b></label>
+                        @Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex3"><b>Bonus:</b></label>
+                        @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex4"><b>CreditsPlayed:</b></label>
+                        @Html.TextBoxFor(m => m.CreditsPlayed, new { @class = "form-control" })
+                    </div>
+
+                </div>
+            </div>
+
+            <b style="color: chocolate">Game Time</b>  <b style="color: darkblue; position: absolute; right: 475px">Refund/Expiry</b>
+
+            <div id="gametimeclass" style="border: 2px solid black; border-color: cornsilk">
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <label for="ex1"><b>StartTime:</b></label>
+                        @Html.TextBoxFor(m => m.StartTime, new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex2"><b>Last Play time:</b></label>
+                        @Html.TextBoxFor(m => m.LastPlayTime, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.LastPlayTime) })
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <label for="ex1"><b>Expiry Date:</b></label>
+                        @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ex3"><b>Refund Amount:</b></label>
+                        @Html.TextBoxFor(m => m.RefundAmount, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex2"><b>Refund Date:</b></label>
+                        @Html.TextBoxFor(m => m.RefundDate, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <b style="color: deeppink">Ticket</b>
+            <div id="ticketclass" style="border: 2px solid black; border-color: cornsilk">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label for="ex1"><b>Ticket Count:</b></label>
+                        @Html.TextBoxFor(m => m.TicketCount, new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ex3"><b>Ticket Allowed:</b></label>
+                        @Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex2"><b>Real Ticket Mode:</b></label>
+                        @Html.CheckBoxFor(m => m.RealTicketMode, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+
+            <b style="color: deeppink">miscellaneous</b>
+            <div id="miscolaniuseclass" style="border: 2px solid black; border-color: cornsilk">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label for="ex1"><b>Last Updated Time:</b></label>
+                        @Html.TextBoxFor(m => m.LastUpdatedTime, new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ex3"><b>Last Updated By:</b></label>
+                        @Html.TextBoxFor(m => m.LastUpdatedBy, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex2"><b>Notes:</b></label>
+                        @Html.TextAreaFor(m => m.Note, 2, 10, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <b style="color: lightseagreen">Technician</b>
+            <div id="technicianclass" style="border: 2px solid black; border-color: cornsilk">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label for="ex2"><b>Tech Card Type:</b></label>
+                        @Html.DropDownListFor(m => m.TechCardType, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TechCardType"], "Id", "Value"), new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ex3"><b>Tech Game:</b></label>
+                        @Html.TextBoxFor(m => m.TechGames, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ex2"><b>Timer Reset Card:</b></label>
+                        @Html.CheckBoxFor(m => m.TimerResetCard, new { @class = "form-control check-boxs" })
+                    </div>
+                </div>
+            </div>
+            <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    }
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#newcardmodel').modal('show');
+    })
+    //var $j = jQuery.noConflict();
+
+    //$j('#ExpiryDate').datepicker();
+    $('.check-boxs').change(function () {
+        if ($('#TimerResetCard').is(':checked')) {
+            debugger
+            $("#TechCardType").prop("disabled", true);
+        }
+        else {
+            $("#TechCardType").prop("disabled", false);
+        }
+
+    });
+
+</script>

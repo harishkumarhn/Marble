@@ -4,23 +4,21 @@
     <title>Marbale Dashboard</title>
 
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" Content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" Content="IE=edge">
      <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="~/content/css/bootstrap.css">
-    <link href="~/Content/CSS/bootstrap-datetimepicker.css" rel="stylesheet" />
-    <link href="~/Content/CSS/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/CSS/bootstrap.css">
 
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="~/content/css/style.css">
-    <link rel="stylesheet" href="~/content/css/layout.css">
+    <link rel="stylesheet" href="~/Content/CSS/style.css">
+    <link rel="stylesheet" href="~/Content/CSS/layout.css">
       
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Content/JS/bootstrap.min.js"></script>
 
     <script src="~/Content/JS/popper.min.js"></script>
-    <script defer src="~/content/JS/fontawesome.solid.js"></script>
-    <script defer src="~/content/JS/fontawesome.js"></script>
+    <script defer src="~/Content/JS/fontawesome.solid.js"></script>
+    <script defer src="~/Content/JS/fontawesome.js"></script>
 
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -89,6 +87,9 @@
                         <li>
                             <a href="/TaskType/TaskType/TaskType">Task-Type</a>
                         </li>
+                        <li>
+                            <a id="productKey">Product Key</a>
+                        </li>
 
                     </ul>
                 </li>
@@ -111,7 +112,7 @@
         </nav>
 
         <!-- Page Content  -->
-        <div id="content">
+        <div id="Content">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -141,7 +142,7 @@
         <div class="modal fade" id="newcardmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-    <div class="modal-content" style="width: 900px;height: 810px;" id="newproductmodel">
+    <div class="modal-Content" style="width: 900px;height: 810px;" id="newproductmodel">
                 <div class="modal-header" style="background-color: blueviolet">
                     <h5 class="modal-title" id="newupdatecardmodal" style="text-align:center">Add Card</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -173,8 +174,8 @@
         });
         $('#inventery').click(function () {
             $(".modal-body").html("");
-            $('#newcardmodel .modal-content').css('height', 590);
-            $('#newcardmodel .modal-content').css('width', 719);
+            $('#newcardmodel .modal-Content').CSS('height', 590);
+            $('#newcardmodel .modal-Content').CSS('width', 719);
             $('#newupdatecardmodal').text("Inventory").addClass('modal-centre');
             $('#newcardmodel').modal('show');
 
@@ -182,19 +183,27 @@
         });
         $('#newcards').click(function () {
             $(".modal-body").html("");
-            $('#newcardmodel .modal-content').css('height', 810);
-            $('#newcardmodel .modal-content').css('width', 900);
+            $('#newcardmodel .modal-Content').CSS('height', 810);
+            $('#newcardmodel .modal-Content').CSS('width', 900);
             $('#newupdatecardmodal').text("Add Card").addClass('modal-centre');
             $('#newcardmodel').modal('show');
             $('#modelbody').load('Cards/Cards');
         });
         $('#configuration').click(function () {
             $(".modal-body").html("");
-            $('#newcardmodel .modal-content').css('height', 730);
-            $('#newcardmodel .modal-content').css('width', 900);
+            $('#newcardmodel .modal-Content').css('height', 730);
+            $('#newcardmodel .modal-Content').css('width', 900);
             $('#newupdatecardmodal').text("Configuration").addClass('modal-centre');
             $('#newcardmodel').modal('show');
             $('#modelbody').load('game/configuration');
+        });
+        $('#productKey').click(function () {
+            $(".modal-body").html("");
+            $('#newcardmodel .modal-Content').css('height', 730);
+            $('#newcardmodel .modal-Content').css('width', 900);
+            $('#newupdatecardmodal').text("productKey").addClass('modal-centre');
+            $('#newcardmodel').modal('show');
+            $('#modelbody').load('siteSetup/ProductKey');
         });
     </script>
 

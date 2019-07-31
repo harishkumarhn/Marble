@@ -7,7 +7,7 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
+-- DROP TABLE  [TransactionLines]
 CREATE TABLE [dbo].[TransactionLines](
 	[TrxId] [int] NOT NULL,
 	[LineId] [int] NOT NULL,

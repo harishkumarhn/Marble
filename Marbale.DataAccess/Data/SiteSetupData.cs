@@ -213,10 +213,22 @@ namespace Marbale.DataAccess
 
             return 0;
         }
+
+        public DataTable ValidateUser(string username, string password)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[2];
+            sqlParameters[0] = new SqlParameter("@loginId", username);
+            sqlParameters[1] = new SqlParameter("@password", password);
+
+            return conn.executeSelectQuery("sp_ValidateUser", sqlParameters);
+        }
+
         public DataTable GetAllMessages()
         {
             return conn.executeSelectQuery("sp_GetMessages");
         }
+
+
         public int UpdateMessages(MessagesModel messages)
         {
             SqlParameter[] sqlParameters = new SqlParameter[3];
@@ -288,6 +300,33 @@ namespace Marbale.DataAccess
             {
                 throw;
             }
+        }
+        public DataTable GetProductKey()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_getProducyKey");
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public int UpdateProductKey(ProductKey pk)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[3];
+                sqlParameters[0] = new SqlParameter("@SiteId", pk.SiteId);
+                sqlParameters[1] = new SqlParameter("@SiteKey", pk.SiteKey);
+                sqlParameters[2] = new SqlParameter("@LicenseKey", pk.LicenseKey);
+                return conn.executeUpdateQuery("sp_UpdateProductKey", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
         }
     }
 }

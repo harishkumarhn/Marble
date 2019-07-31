@@ -142,14 +142,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\kendo.common.min.css" />
-    <Content Include="Content\css\kendo.default.css" />
-    <Content Include="Content\css\kendo.common-material.min.css" />
-    <Content Include="Content\css\kendo.material.min.css" />
-    <Content Include="Content\css\layout.css" />
-    <Content Include="Content\css\product.css" />
-    <Content Include="Content\css\style.css" />
+    <Content Include="Content\CSS\bootstrap.css" />
+    <Content Include="Content\CSS\kendo.common.min.css" />
+    <Content Include="Content\CSS\kendo.default.css" />
+    <Content Include="Content\CSS\kendo.common-material.min.css" />
+    <Content Include="Content\CSS\kendo.material.min.css" />
+    <Content Include="Content\CSS\layout.css" />
+    <Content Include="Content\CSS\product.css" />
+    <Content Include="Content\CSS\style.css" />
     <Content Include="Content\DatetimePicker\index.html" />
     <Content Include="Content\DatetimePicker\jquery.datepicker2.css" />
     <Content Include="Content\DatetimePicker\jquery.datepicker2.js" />
@@ -226,10 +226,10 @@
     <Content Include="Content\DatetimePicker\LICENSE" />
     <Content Include="Content\DatetimePicker\README.md" />
     <Content Include="Content\Fabrastics\.DS_Store" />
+    <None Include="Properties\PublishProfiles\Harish.pubxml" />
     <None Include="Properties\PublishProfiles\MarbleHost.pubxml" />
+    <None Include="Properties\PublishProfiles\MarbleSite.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\ajax-loader %281%29.gif" />
-    <Content Include="Scripts\Copy of jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -305,11 +305,12 @@
     <Content Include="Views\SiteSetup\Redemption.cshtml" />
     <Content Include="Views\SiteSetup\Payment.cshtml" />
     <Content Include="Views\SiteSetup\Customer.cshtml" />
+    <Content Include="Views\SiteSetup\ProductKey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\css\fonts\" />
-    <Folder Include="Content\css\Material\" />
+    <Folder Include="Content\CSS\fonts\" />
+    <Folder Include="Content\CSS\Material\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
