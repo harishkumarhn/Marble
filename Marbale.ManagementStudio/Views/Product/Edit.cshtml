@@ -60,7 +60,7 @@
       </div>
                                              <div class="col-md-3">
         <label for="ex3">Product Type:</label>
-                                                        @Html.DropDownListFor(m => m.Type,new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value",selectedValue:string.IsNullOrEmpty(Model.Type)?"SELECT":Model.Type), new {@class="form-control",@style="height: 35px"})
+                                                        @Html.DropDownListFor(m => m.Type,new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value",selectedValue:string.IsNullOrEmpty(Model.Type)?"SELECT":Model.Type), new {@class="form-control",@style="height: 35px"})
      @*                         <select name="categoryList" id="categoryList" class="form-control" style="height: 35px">
               @foreach (var dow in Session["CategoryList"] as List<Marbale.BusinessObject.IdValue>)
               {
@@ -91,6 +91,7 @@
                 <div class="col-md-2">
         <label for="ex3">Final Price:</label>
     @Html.TextBoxFor(m => m.FinalPrice, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FinalPrice,"", new {@class = "text-danger" })
       </div>
                         <div class="col-md-2">
         <label for="ex4">Effective Price:</label>
@@ -107,15 +108,18 @@
                     <div class="form-group row">
       <div class="col-md-2">
         <label for="ex3"> <b >Credits:</b></label> @Html.TextBoxFor(m => m.Credits, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Credits,"", new {@class = "text-danger" })
        
       </div>
       <div class="col-md-2">
         <label for="ex1">Courtesy:</label>
     @Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control" })
+              @Html.ValidationMessageFor(model => model.Courtesy,"", new {@class = "text-danger" })
       </div>
                 <div class="col-md-2">
         <label for="ex3">Bonus:</label>
     @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Bonus,"", new {@class = "text-danger" })
       </div>
                         <div class="col-md-2">
         <label for="ex4">CardValidFor:</label>
@@ -159,6 +163,7 @@
 	
 		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 		<script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
+@*@Scripts.Render("~/bundles/jqueryval")*@
 @*<script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
 @*<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">

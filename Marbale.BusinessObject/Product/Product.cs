@@ -22,18 +22,27 @@ namespace Marbale.BusinessObject
         public bool OnlyVIP { get; set; }
                [Required(ErrorMessage = "Enter Price.")]
         public int Price { get; set; }
-        public int FaceValue { get; set; }
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Face value must be numeric")]
+        public int? FaceValue { get; set; }
+          [DataType(DataType.Currency)]
         public bool TaxInclusive { get; set; }
+          [DataType(DataType.Currency)]
         public int TaxPercentage { get; set; }
-        public int FinalPrice { get; set; }
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Final Price must be numeric")]
+        public int? FinalPrice { get; set; }
+          [DataType(DataType.Currency)]
         public int EffectivePrice { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDate { get; set; }
-        public int Credits { get; set; }
-        public int Courtesy { get; set; }
-        public int Bonus { get; set; }
+        [DataType(DataType.Currency)]
+        public int? Credits { get; set; }
+          [DataType(DataType.Currency)]
+        public int ?Courtesy { get; set; }
+          [DataType(DataType.Currency)]
+        public int? Bonus { get; set; }
         public int Games { get; set; }
-        public int CreditsPlus { get; set; }
+          [DataType(DataType.Currency)]
+        public int ?CreditsPlus { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpiryDate { get; set; }
         public string TaxName { get; set; }

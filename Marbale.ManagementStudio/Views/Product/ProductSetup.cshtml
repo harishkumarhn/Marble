@@ -61,7 +61,7 @@
                     </td>
                     <td>
                         <select name="TypeList" id="TypeList" class="gridText">
-                            @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
+                            @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
                             {
                                 if (@item.Type == (@dow.Id).ToString())
                                 {
@@ -141,6 +141,7 @@
     </button>
     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
       <button class="btn btn-primary btn-md" role="button" onclick="DeleteProducts()"  id="deleteproduct">Delete</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
 </div>
 <style>
     .highlight { background-color: darkmagenta; }

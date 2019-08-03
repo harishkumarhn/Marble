@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace MarbaleManagementStudio.Controllers
 {
   
-    [LogCustomExceptionFilter]
+   // [LogCustomExceptionFilter]
     public class ProductController : Controller
     {
         public ProductBL productBussiness;
@@ -31,6 +31,7 @@ namespace MarbaleManagementStudio.Controllers
             var products = productBussiness.GetProducts();
             Session["ProductList"] = products;
             Session["CategoryList"] = products[0].CategoryList;
+            Session["TypeList"] = products[0].TypeList;
             ViewBag.productDetails = products;
             return View();
         }
