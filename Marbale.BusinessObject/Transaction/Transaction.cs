@@ -130,5 +130,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public List<Discounts.DiscountLine> discountLines = new List<Discounts.DiscountLine>();
 
         public int LineId;
+
+        public bool toBeSaved = false;
     }
 }

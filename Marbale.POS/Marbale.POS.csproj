@@ -60,6 +60,7 @@
     <Compile Include="CardTasks.cs" />
     <Compile Include="Common\Device.cs" />
     <Compile Include="Common\StaticData.cs" />
+    <Compile Include="Common\USBDevice.cs" />
     <Compile Include="DataConnectionExcess.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

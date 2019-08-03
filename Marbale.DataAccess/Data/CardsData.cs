@@ -12,7 +12,7 @@ namespace Marbale.DataAccess.Data
     {
          private DBConnection conn;
 
-         public CardsData()
+        public CardsData()
         {
             conn = new DBConnection();
         }

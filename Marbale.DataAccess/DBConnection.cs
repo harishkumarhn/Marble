@@ -130,5 +130,30 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+
+        public DataSet executeSelectdatasetQuery(String sp, SqlParameter[] sqlParameter)
+        {
+            SqlCommand myCommand = new SqlCommand();
+            DataTable dataTable = new DataTable();
+            dataTable = null;
+            DataSet ds = new DataSet();
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(sp, conn))
+                {
+                    cmd.Connection = openConnection();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddRange(sqlParameter);
+                    cmd.ExecuteNonQuery();
+                    myAdapter.SelectCommand = cmd;
+                    myAdapter.Fill(ds);
+                }
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            return ds;
+        }
     }
 }

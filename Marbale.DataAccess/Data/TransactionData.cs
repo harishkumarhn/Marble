@@ -134,8 +134,17 @@ namespace Marbale.DataAccess.Data
 
                 int trxId = Convert.ToInt32(sqlParameters[26].Value);
 
-                List<TransactionLine> activetrxLines = trx.TransactionLines.FindAll(x => x.LineValid = true && x.CancelledLine == false);
+                //List<TransactionLine> activetrxLines = trx.TransactionLines.FindAll(x => x.LineValid = true && x.CancelledLine == false);
+                List<TransactionLine> activetrxLines = new List<TransactionLine>();
 
+                //Get All Active Transaction lines
+                foreach (TransactionLine tln in trx.TransactionLines)
+                {
+                    if (tln.LineValid)
+                        activetrxLines.Add(tln);
+                }
+
+                //Save only active Trax
                 foreach (TransactionLine trxLn in activetrxLines)
                 {
                     SaveTransactionLines(trxLn, trxId);
@@ -236,7 +245,7 @@ namespace Marbale.DataAccess.Data
             int custId = 0;
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[11];
+                SqlParameter[] sqlParameters = new SqlParameter[12];
 
                 sqlParameters[0] = new SqlParameter("@CustomerId", SqlDbType.Int);
                 sqlParameters[0].Value = Customer.customer_id;
@@ -317,19 +326,19 @@ namespace Marbale.DataAccess.Data
 
                 if (!string.IsNullOrEmpty(Customer.email))
                 {
-                    sqlParameters[9] = new SqlParameter("@Email", Customer.email);
+                    sqlParameters[10] = new SqlParameter("@Email", Customer.email);
                 }
                 else
                 {
-                    sqlParameters[9] = new SqlParameter("@Email", DBNull.Value);
+                    sqlParameters[10] = new SqlParameter("@Email", DBNull.Value);
                 }
 
-                sqlParameters[10] = new SqlParameter("@custId", SqlDbType.Int);
-                sqlParameters[10].Direction = ParameterDirection.Output;
+                sqlParameters[11] = new SqlParameter("@custId", SqlDbType.Int);
+                sqlParameters[11].Direction = ParameterDirection.Output;
 
                 conn.executeUpdateQuery("sp_InsertOrUpdateCustomer", sqlParameters);
 
-                custId = Convert.ToInt32(sqlParameters[10].Value);
+                custId = Convert.ToInt32(sqlParameters[11].Value);
             }
             catch(Exception ex)
             {
@@ -417,7 +426,17 @@ namespace Marbale.DataAccess.Data
                 sqlParameters[10] = new SqlParameter("@Credits", card.credits);
                 sqlParameters[11] = new SqlParameter("@Courtesy", card.courtesy);
                 sqlParameters[12] = new SqlParameter("@Bonus", card.bonus);
-                sqlParameters[13] = new SqlParameter("@CustomerId", card.customer_id);
+
+                if (card.customer_id != 0)
+                {
+                    sqlParameters[13] = new SqlParameter("@CustomerId", card.customer_id);
+                }
+                else
+                {
+                    sqlParameters[13] = new SqlParameter("@CustomerId", DBNull.Value);
+                }
+
+
                 sqlParameters[14] = new SqlParameter("@CreditsPlayed", card.credits_played);
                 sqlParameters[15] = new SqlParameter("@TicketAllowed", card.ticket_allowed);
                 sqlParameters[16] = new SqlParameter("@RealTicketMode", card.real_ticket_mode);
@@ -523,6 +542,33 @@ namespace Marbale.DataAccess.Data
             {
                 throw e;
             }
+        }
+
+
+        public DataSet GetTransactionList(int userId)
+        {
+
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+
+                if (userId != 0)
+                {
+                    sqlParameters[0] = new SqlParameter("@userId", userId);
+                }
+                else
+                {
+                    sqlParameters[0] = new SqlParameter("@userId", DBNull.Value);
+                }
+
+                return conn.executeSelectdatasetQuery("sp_GetTrxHeaderLines", sqlParameters);
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
         }
     }
 }

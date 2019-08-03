@@ -3,6 +3,7 @@ using Marbale.BusinessObject;
 using Marbale.BusinessObject.Cards;
 using Marbale.BusinessObject.Discount;
 using Marbale.BusinessObject.POSTransaction;
+using Marbale.BusinessObject.SiteSetup;
 using Marbale.POS.CardDevice;
 using Marbale.POS.Common;
 using Marble.Business;
@@ -23,7 +24,8 @@ namespace Marbale.POS
         Transaction Transaction;
         Card CurrentCard;
         BusinessObject.Customer.Customers Customer;
-        
+        public static User CurrentUser;
+        public List<Transaction> ListTransaction;
 
         Color skinColor;
 
@@ -39,6 +41,10 @@ namespace Marbale.POS
             frmLogin.ShowDialog();
             if (!frmLogin.isLoginSuccess)
                 Environment.Exit(0);
+            else
+            {
+                CurrentUser = frmLogin.loggedInUser;
+            }
         }
 
         private void POSHome_Load(object sender, EventArgs e)
@@ -81,7 +87,34 @@ namespace Marbale.POS
             }
 
             EventHandler currEventHandler = new EventHandler(CardScanCompleteEventHandle);
-            
+            foreach (Device device in deviceList)
+            {
+                if (device.DeviceSubType == "KeyboardWedge")
+                {
+                    USBDevice listener;
+                    if (IntPtr.Size == 4) //32 bit
+                        listener = new KeyboardWedge32();
+                    else
+                        listener = new KeyboardWedge64();
+
+
+                    foreach (string optString in device.OptString.Split('|'))
+                    {
+                        if (string.IsNullOrEmpty(optString.Trim()))
+                            continue;
+                        bool flag = listener.InitializeUSBReader(this, device.VID, device.PID, optString.Trim());
+                        if (listener.isOpen)
+                        {
+                            listener.Register(currEventHandler);
+                            Devices.AddCardReader(listener);
+                            if (Devices.PrimaryCardReader == null)
+                            {
+                                Devices.PrimaryCardReader = listener;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void CardScanCompleteEventHandle(object sender, EventArgs e)
@@ -193,7 +226,15 @@ namespace Marbale.POS
         public void CreateTransactionLine(Product product)
         {
             if (Transaction == null)
+            {
                 Transaction = new Transaction();
+                if (CurrentUser != null)
+                {
+                    Transaction.Username = CurrentUser.LoginId;
+                    Transaction.LoginID = CurrentUser.LoginId;
+                    Transaction.UserId = CurrentUser.Id;
+                }
+            }
 
             if (Transaction.TransactionLines == null)
                 Transaction.TransactionLines = new List<TransactionLine>();
@@ -255,12 +296,14 @@ namespace Marbale.POS
 
         public void UpdateTrxLine(TransactionLine newTrxline, TransactionLine validTrxLine)
         {
-            List<TransactionLine> TrxLines = Transaction.TransactionLines;
+            //List<TransactionLine> TrxLines = Transaction.TransactionLines;
             validTrxLine.quantity += newTrxline.quantity;
             validTrxLine.Price += newTrxline.Price;
             validTrxLine.tax_amount += newTrxline.tax_amount;
             validTrxLine.amount += newTrxline.amount;
             validTrxLine.LineAmount += newTrxline.LineAmount;
+
+            
         }
 
         public void RefreshTransactionGrid()
@@ -729,10 +772,50 @@ namespace Marbale.POS
             {
                 lblCardNotext.Text = CurrentCard.CardNumber;
                 lblCardStatustext.Text = CurrentCard.CardStatus;
+                
+                //Issue date population
+                if (CurrentCard.issue_date == DateTime.MinValue)
+                {
+                    dgvCardDetails.Rows[0].Cells[1].Value = DateTime.Now;
+                    CurrentCard.issue_date = DateTime.Now;
+                }
+                else
+                {
+                    dgvCardDetails.Rows[0].Cells[1].Value = CurrentCard.issue_date;
+                }
+
+                //Card Deposit
+                dgvCardDetails.Rows[1].Cells[1].Value = 0;
+
+                //Credits
+                dgvCardDetails.Rows[2].Cells[1].Value = CurrentCard.credits;
+
+                //Courtesy
+                dgvCardDetails.Rows[3].Cells[1].Value = CurrentCard.courtesy;
+
+                //Bonus
+                dgvCardDetails.Rows[4].Cells[1].Value = CurrentCard.bonus;
+
+                //Time
+                dgvCardDetails.Rows[5].Cells[1].Value = CurrentCard.time;
+
+                //Games
+                dgvCardDetails.Rows[6].Cells[1].Value = CurrentCard.CardGames;
+
+                //Credit Plus
+                dgvCard.Rows[0].Cells[1].Value = CurrentCard.CreditPlusCredits;
+
+                //Loyalty Points
+                dgvCard.Rows[1].Cells[1].Value = CurrentCard.loyalty_points;
+
+                //Recharged / Spent
+                dgvCard.Rows[2].Cells[1].Value = CurrentCard.TotalRechargeAmount;
+
                 if (CurrentCard.customer != null)
                 {
                     Customer = CurrentCard.customer;
                 }
+
                 PopulateCustomer();
             }
         }
@@ -813,6 +896,22 @@ namespace Marbale.POS
                 if (cmbGender.Text == string.Empty)
                     cmbGender.SelectedIndex = 0;
             }
+            else if (tabControlCardAction.SelectedTab.Name == "tabPageMyTrx")
+            {
+                UpdateTransactionTab(0);
+            }
+        }
+
+        private void UpdateTransactionTab(int userId)
+        {
+            TransactionBL trxBL = new TransactionBL();
+            ListTransaction = trxBL.GetTransactionList(userId);
+
+            dgvTrxHeader.DataSource = new List<Transaction>();
+            if (ListTransaction != null)
+            {
+                dgvTrxHeader.DataSource = ListTransaction; 
+            }
         }
 
         private void txtPhoneno_Leave(object sender, EventArgs e)
@@ -855,6 +954,36 @@ namespace Marbale.POS
         {
             lblCardNotext.Text = string.Empty;
             lblCardStatustext.Text = string.Empty;
+
+            //Issue date population
+            dgvCardDetails.Rows[0].Cells[1].Value = string.Empty;
+            
+            //Card Deposit
+            dgvCardDetails.Rows[1].Cells[1].Value = string.Empty;
+
+            //Credits
+            dgvCardDetails.Rows[2].Cells[1].Value = string.Empty;
+
+            //Courtesy
+            dgvCardDetails.Rows[3].Cells[1].Value = string.Empty;
+
+            //Bonus
+            dgvCardDetails.Rows[4].Cells[1].Value = string.Empty;
+
+            //Time
+            dgvCardDetails.Rows[5].Cells[1].Value = string.Empty;
+
+            //Games
+            dgvCardDetails.Rows[6].Cells[1].Value = string.Empty;
+
+            //Credit Plus
+            dgvCard.Rows[0].Cells[1].Value = string.Empty;
+
+            //Loyalty Points
+            dgvCard.Rows[1].Cells[1].Value = string.Empty;
+
+            //Recharged / Spent
+            dgvCard.Rows[2].Cells[1].Value = string.Empty;
         }
 
         private void lblCardNumber_Click(object sender, EventArgs e)
@@ -866,6 +995,23 @@ namespace Marbale.POS
             {
                 HandleCardRead(frm.cardNumber, null);
             }
+        }
+
+        private void dgvTrxHeader_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            dgvTrxLines.DataSource = new List<TransactionLine>();
+            if (dgvTrxHeader["Trx_id", e.RowIndex].Value != null)
+            {
+                int TrxId = Convert.ToInt32(dgvTrxHeader["Trx_id", e.RowIndex].Value);
+                Transaction trx = ListTransaction.Find(x => x.Trx_id == TrxId);
+                if(trx != null)
+                dgvTrxLines.DataSource = trx.TransactionLines;
+            }
+        }
+
+        private void btnReConnectCardReader_Click(object sender, EventArgs e)
+        {
+            registerAdditionalCardReaders();
         }
     }
 }

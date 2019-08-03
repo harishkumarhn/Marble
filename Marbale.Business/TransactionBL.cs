@@ -44,6 +44,7 @@ namespace Marble.Business
                 customer.city = dt.Rows[0]["City"] == DBNull.Value ? string.Empty : dt.Rows[0]["City"].ToString();
                 customer.state = dt.Rows[0]["State"] == DBNull.Value ? string.Empty : dt.Rows[0]["State"].ToString();
                 customer.country = dt.Rows[0]["Country"] == DBNull.Value ? string.Empty : dt.Rows[0]["Country"].ToString();
+                customer.email = dt.Rows[0]["Email"] == DBNull.Value ? string.Empty : dt.Rows[0]["Email"].ToString();
 
                 customer.gender = dt.Rows[0]["Gender"] == DBNull.Value ? 'N' : Convert.ToChar(dt.Rows[0]["Gender"]);
 
@@ -106,6 +107,79 @@ namespace Marble.Business
             }
 
             return card;
+        }
+
+
+        public List<Transaction> GetTransactionList(int userId)
+        {
+            List<Transaction> lstTransaction = new List<Transaction>();
+            Transaction trx;
+            DataSet ds = trxData.GetTransactionList(userId);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                foreach (DataRow rw in ds.Tables[0].Rows)
+                {
+                    trx = new Transaction();
+                    trx.Trx_id = rw["TrxId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["TrxId"]);
+
+                    trx.TransactionLines = GetTraxLines(trx.Trx_id, ds.Tables[1]);
+                    lstTransaction.Add(trx);
+                }
+            }
+
+            return lstTransaction;
+        }
+
+
+        //public List<Transaction> FillTransactionList(DataTable dtTrx, DataTable dtTrxLines)
+        //{
+        //    List<Transaction> lstTransaction = new List<Transaction>();
+        //    Transaction trx;
+        //    if (dtTrx != null && dtTrx.Rows.Count > 0)
+        //    {
+        //        foreach(DataRow rw in dtTrx.Rows)
+        //        {
+        //            trx = new Transaction();
+        //            trx.Trx_id = rw["TrxId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["TrxId"]);
+
+        //            trx.TransactionLines = GetTraxLines(trx.Trx_id, dtTrxLines);
+        //            lstTransaction.Add(trx);
+        //        }
+        //    }
+        //    return lstTransaction;
+        //}
+
+        public List<TransactionLine> GetTraxLines(int trxId, DataTable dtTrxLines)
+        {
+            List<TransactionLine> trxLines = new List<TransactionLine>();
+            TransactionLine trxLn;
+
+            try
+            {
+                if (dtTrxLines != null && dtTrxLines.Rows.Count > 0)
+                {
+                    var result = dtTrxLines.AsEnumerable().Where(myRow => myRow.Field<int>("TrxId") == trxId);
+
+                    if (result != null)
+                    {
+                        DataTable dt = result.CopyToDataTable<DataRow>();
+
+                        foreach (DataRow rw in dt.Rows)
+                        {
+                            trxLn = new TransactionLine();
+                            trxLn.trxId = trxId;
+                            trxLn.ProductName = rw["name"] != DBNull.Value ? rw["name"].ToString() : string.Empty;
+                            trxLn.ProductID = rw["ProductId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["ProductId"]);
+                            trxLn.Price = rw["Price"] == DBNull.Value ? 0 : Convert.ToDouble(rw["Price"]);
+                            trxLines.Add(trxLn);
+                        }
+                    }
+                }
+            }
+            catch { }
+
+            return trxLines;
         }
     }
 }
