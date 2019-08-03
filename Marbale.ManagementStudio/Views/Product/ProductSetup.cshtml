@@ -13,14 +13,14 @@
     <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width: 900px; height: 610px;" id="newproductmodel">
+            <div class="modal-content" style="width: 900px; height: 887px;" id="newproductmodel">
                 <div class="modal-header" style="background-color: crimson">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="modelbody">
+                <div class="modal-body" id="modelbody" style="position: absolute;left: 20px;top: 50px;">
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
             </thead>
             @foreach (var item in ViewBag.productDetails)
             {  
-                <tr onchange="UpdatedList(this)">
+                <tr onchange="UpdatedList(this)" onclick="getIdOfProduct(@item.Id)">
                     <td class="headerCol">@item.Id  </td>
                     <td class="headerCol" style="left:55px">
                         <button onClick="EditProduct(@item.Id)">-</button>
@@ -61,30 +61,30 @@
                     </td>
                     <td>
                         <select name="TypeList" id="TypeList" class="gridText">
-                            @foreach (var dow in item.TypeList)
+                            @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
                             {
-                                if (@item.Type == @dow.Value)
+                                if (@item.Type == (@dow.Id).ToString())
                                 {
-                                <option value="@dow.Value" selected>@dow.Value</option>
+                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
                                 }
                                 else
                                 {
-                                <option value="@dow.Value">@dow.Value</option>
+                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
                                 }
                             }
                         </select>
                     </td>
                     <td>
                         <select name="categoryList" id="categoryList" class="gridText">
-                            @foreach (var dow in item.CategoryList)
+                 @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
                             {
-                                if (@item.Category == @dow.Value)
+                                if (@item.Category == (@dow.Id).ToString())
                                 {
-                                <option value="@dow.Value" selected>@dow.Value</option>
+                                <option value="@dow.Value" id="@dow.Id"  selected>@dow.Value</option>
                                 }
                                 else
                                 {
-                                <option value="@dow.Value">@dow.Value</option>
+                                <option value="@dow.Value" id="@dow.Id" >@dow.Value</option>
                                 }
                             }
                         </select>
@@ -134,41 +134,92 @@
     </div>
 </div>
 <div class="action">
-    <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()">Save</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
     <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Product</a>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+      <button class="btn btn-primary btn-md" role="button" onclick="DeleteProducts()"  id="deleteproduct">Delete</button>
 </div>
+<style>
+    .highlight { background-color: darkmagenta; }
+</style>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
+    var newRow = 0;
+    var IdforDelete = 0;
     $(document).ready(function () {
+       
         $('.dropdown-toggle').collapse({
             toggle: false
         });
-    })
+    });
+    $('.close').click(function () {
+        location.reload();
+
+    });
+    //$("#marbleTable tr .headerCol").click(function () {
+    //    debugger
+    //    var selected = $(this).hasClass("highlight");
+    //    $("#marbleTable tr").removeClass("highlight");
+    //    if (!selected)
+    //        $("#marbleTable tr .headerCol").addClass("highlight");
+    //});
+    function DeleteProducts() {
+      debugger
+      var  Id = IdforDelete;
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("DeleteProducts", "Product")',
+            data: { Id: Id },
+            dataType: "json",
+            success: function (data) {
+               
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+    function getIdOfProduct(Id) {
+        IdforDelete = Id;
+     
+    }
+    $(':input').on('change', function () {
+        debugger
+        $("#saveproduct").attr("disabled", false);
+    });
+
     $("#newproductmodel").draggable({
         handle: ".modal-header"
     });
     function targetmodel() {
         $('#modelbody').load('/Product/Edit');
+        $('.modal-title').text('New Product');
     }
     function AddProduct() {
+        $("#saveproduct").attr("disabled", false);
+      
+        if (newRow.length >= 1) {
+            return false;
+        }
         var typeListOptions = '';
-              @foreach (var dow in ViewBag.productDetails[0].TypeList)
+              @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
               {
-                 @: typeListOptions = typeListOptions + '<option value="">@dow.Value</option>';
+                 @: typeListOptions = typeListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
               }
         typeListOptions = typeListOptions + '</select></td>';
         var categoryListOptions = '';
-              @foreach (var dow in ViewBag.productDetails[0].CategoryList)
+              @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
               {
-                   @: categoryListOptions = categoryListOptions + '<option value="" >@dow.Value</option>';
+                   @: categoryListOptions = categoryListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
               }
         categoryListOptions = categoryListOptions + ' </select> </td>';
 
-        var newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>  <td class="headerCol" style="left:55px">  </td>' +
+         newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>  <td class="headerCol" style="left:55px">  </td>' +
         '<td class="headerCol" style="left:100px"> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <select name="TypeList" id="TypeList">' + typeListOptions +
         '<td> <select name="categoryList" id="categoryList">' + categoryListOptions +
@@ -188,15 +239,21 @@
         $('#marbleTable tr:last').after(newRow);
     }
     function SaveProducts() {
+
+        debugger
         var products = [];
         var table = document.getElementById('marbleTable');
+          
         for (var r = 1, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
                 products.push({
                     Id: table.rows[r].cells[0].innerHTML,
                     Name: table.rows[r].cells[2].children[0].value,
-                    Type: table.rows[r].cells[3].children[0].value,
-                    Category: table.rows[r].cells[4].children[0].value,
+                    //selectedType: table.rows[r].cells[3].children[0].options["selectedIndex"],
+                    Type: table.rows[r].cells[3].children[0].options[table.rows[r].cells[3].children[0].options["selectedIndex"]].id,
+                 //   selectedType: table.rows[r].cells[4].children[0].options["selectedIndex"],
+                    Category: table.rows[r].cells[4].children[0].options[table.rows[r].cells[4].children[0].options["selectedIndex"]].id,
+                    //Category: table.rows[r].cells[4].children[0].id,
                     POSCounter: table.rows[r].cells[5].children[0].value,
                     Active: table.rows[r].cells[6].children[0].checked,
                     DisplayInPOS: table.rows[r].cells[7].children[0].checked,
@@ -208,9 +265,23 @@
                     FaceValue: table.rows[r].cells[13].children[0].value,
                     FinalPrice: table.rows[r].cells[14].children[0].value,
                     EffectivePrice: table.rows[r].cells[15].children[0].value,
+                    ExpiryDate: '10/10/2020',
+                    StartDate: '10/10/2020',
+                    LastUpdatedDate: '10/10/2019',
                 });
             }
         }
+
+        var ProductName = products[0].Name;
+        var PriceName = products[0].Price;
+        if (ProductName.trim() == '') {
+            alert('Please Enter Product Name');
+            return false;
+        }
+        if (PriceName == '') {
+            alert('Please Enter Price');
+        }
+
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
@@ -228,11 +299,13 @@
     }
     var updatedArray = [];
     function UpdatedList(x) {
+        debugger;
         if (!updatedArray.includes(x.rowIndex)) {
             updatedArray.push(x.rowIndex);
         }
     }
     function EditProduct(id) {
+        $('.modal-title').text('Edit Product');
         $('#basicExampleModal').modal('show');
         $('#modelbody').load('/Product/Edit', { "id": id });
         //window.open("/product/Edit/"+id, "Marbale", "width=700,height=700");

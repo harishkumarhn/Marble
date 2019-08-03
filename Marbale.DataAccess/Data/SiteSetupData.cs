@@ -301,5 +301,32 @@ namespace Marbale.DataAccess
                 throw;
             }
         }
+        public DataTable GetProductKey()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_getProducyKey");
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public int UpdateProductKey(ProductKey pk)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[3];
+                sqlParameters[0] = new SqlParameter("@SiteId", pk.SiteId);
+                sqlParameters[1] = new SqlParameter("@SiteKey", pk.SiteKey);
+                sqlParameters[2] = new SqlParameter("@LicenseKey", pk.LicenseKey);
+                return conn.executeUpdateQuery("sp_UpdateProductKey", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
     }
 }

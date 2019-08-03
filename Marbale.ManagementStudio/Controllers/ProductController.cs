@@ -1,5 +1,6 @@
 ﻿using Marbale.Business;
 using Marbale.BusinessObject;
+using MarbaleManagementStudio.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,8 @@ using System.Web.Mvc;
 
 namespace MarbaleManagementStudio.Controllers
 {
+  
+    [LogCustomExceptionFilter]
     public class ProductController : Controller
     {
         public ProductBL productBussiness;
@@ -21,11 +24,12 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
-
         public ActionResult ProductSetup()
         {
-           
+          
+          
             var products = productBussiness.GetProducts();
+            Session["ProductList"] = products;
             Session["CategoryList"] = products[0].CategoryList;
             ViewBag.productDetails = products;
             return View();
@@ -34,11 +38,14 @@ namespace MarbaleManagementStudio.Controllers
         [HttpGet]
         public ActionResult Edit()
         {
-            return View();
+            Product a = new Product();
+            return View(a);
         }
 
         public ActionResult Edit(int id)
         {
+        //    List<Product> ProductList = Session["ProductList"] as List<Product>;
+           // var p = ProductList.Where(s => s.Id == id).FirstOrDefault();
             var product = productBussiness.GetProductById(id);
 
             return View(product);
@@ -47,19 +54,40 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
-
-        public ActionResult InsertOrUpdate(Product pObject)
+        public JsonResult DeleteProducts(int Id)
         {
-            var result = productBussiness.InsertOrUpdateProduct(pObject);
+            int result = productBussiness.DeleteProductbyId(Id);
+            return Json(1, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult InsertOrUpdate(Product pObject,string submit)
+        {
+            if (ModelState.IsValid)
+            {
+                switch (submit)
+                {
+                    case "Save":
+                        var result = productBussiness.InsertOrUpdateProduct(pObject);
+                        break;
+                    case "Duplicate":
+                        pObject.Id = 0;
+                        var result1 = productBussiness.InsertOrUpdateProduct(pObject);
+                        break;
+                }
+            }
+       
             return RedirectToAction("ProductSetup", "Product");
         }
         public int UpdateProducts(List<Product> products)
         {
             var result = 0;
-            foreach (var product in products)
-            {
-                result = productBussiness.InsertOrUpdateProduct(product);
-            }
+          
+               
+                foreach (var product in products)
+                {
+                    result = productBussiness.InsertOrUpdateProduct(product);
+                }
+
             return result;
         }
         public ActionResult Types()

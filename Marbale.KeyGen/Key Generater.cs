@@ -14,6 +14,7 @@ namespace Marbale.KeyGen
 {
     public partial class KeyGenerater : Form
     {
+        
         public KeyGenerater()
         {
             InitializeComponent();
@@ -21,68 +22,104 @@ namespace Marbale.KeyGen
 
         private void btn_generate_Click(object sender, EventArgs e)
         {
-            if (chk_never.Checked)
+            try
             {
-                txt_license.Text = this.Encrypt(txt_site.Text + "|never");
+                if (chk_never.Checked)
+                {
+                    txt_license.Text = this.Encrypt(txt_site.Text + "|never");
+                }
+                else
+                {
+                    txt_license.Text = this.Encrypt(txt_site.Text + "|" + dateTimePicker1.Text);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                txt_license.Text = this.Encrypt(txt_site.Text + "|" + dateTimePicker1.Text);
+                this.lab_validation.Visible = true;
             }
         }
         private string Encrypt(string clearText)
         {
-            string EncryptionKey = "MAKV2SPBNI99212";
-            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
-            using (Aes encryptor = Aes.Create())
+            try
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
+                string EncryptionKey = "MAKV2SPBNI99212";
+                byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+                using (Aes encryptor = Aes.Create())
                 {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                    encryptor.Key = pdb.GetBytes(32);
+                    encryptor.IV = pdb.GetBytes(16);
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        cs.Write(clearBytes, 0, clearBytes.Length);
-                        cs.Close();
+                        using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                        {
+                            cs.Write(clearBytes, 0, clearBytes.Length);
+                            cs.Close();
+                        }
+                        clearText = Convert.ToBase64String(ms.ToArray());
                     }
-                    clearText = Convert.ToBase64String(ms.ToArray());
                 }
             }
+            catch (Exception ex)
+            {
+                this.lab_validation.Visible = true;
+                throw;
+            }
+
             return clearText;
         }
         private string Decrypt(string cipherText)
         {
-            string EncryptionKey = "MAKV2SPBNI99212";
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            using (Aes encryptor = Aes.Create())
+            try
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
+                string EncryptionKey = "MAKV2SPBNI99212";
+                byte[] cipherBytes = Convert.FromBase64String(cipherText);
+                using (Aes encryptor = Aes.Create())
                 {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                    encryptor.Key = pdb.GetBytes(32);
+                    encryptor.IV = pdb.GetBytes(16);
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        cs.Write(cipherBytes, 0, cipherBytes.Length);
-                        cs.Close();
+                        using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                        {
+                            cs.Write(cipherBytes, 0, cipherBytes.Length);
+                            cs.Close();
+                        }
+                        cipherText = Encoding.Unicode.GetString(ms.ToArray());
                     }
-                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
                 }
+            }
+            catch (Exception ex)
+            {
+                this.lab_validation.Visible = true;
+                throw;
             }
             return cipherText;
         }
 
         private void btn_decode_Click(object sender, EventArgs e)
         {
-            string value = this.Decrypt(txt_lk_decode.Text);
-            if (!string.IsNullOrWhiteSpace(value))
+            try
             {
-                string[] keys = value.Split('|');
-                txt_sk_decode.Text = keys[0];
-                txt_ed_deode.Text = keys[1];
-                chk_never_decode.Checked = keys[1] == "never";
+                string value = this.Decrypt(txt_lk_decode.Text);
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    string[] keys = value.Split('|');
+                    txt_sk_decode.Text = keys[0];
+                    txt_ed_deode.Text = keys[1];
+                    chk_never_decode.Checked = keys[1] == "never";
+                }
             }
+            catch (Exception ex)
+            {
+                this.lab_validation.Visible = true;
+            }
+        }
+
+        private void KeyGenerater_Load(object sender, EventArgs e)
+        {
+            this.lab_validation.Visible = false;
         }
 
     }

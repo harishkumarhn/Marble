@@ -50,6 +50,7 @@ namespace MarbaleManagementStudio.Controllers
              ViewBag.cardsDetails = data;
              return View();
          }
+
     public ActionResult Cards(int CardId)
     {
         var data = cardBussiness.gettechcardtype();
