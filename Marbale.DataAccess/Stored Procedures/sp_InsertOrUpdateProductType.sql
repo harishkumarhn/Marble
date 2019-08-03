@@ -13,7 +13,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[sp_InsertOrUpdateProductType] 
+alter PROCEDURE [dbo].[sp_InsertOrUpdateProductType] 
     @id int,
 	@type varchar(50),
 	@description varchar(500),
@@ -45,8 +45,9 @@ begin
            ,[ReportGroup]
            ,[CardSale]
            ,[Active]
-           ,[LastUpdatedDate]
-           ,[LastUpdatedBy])
+          
+           ,[LastUpdatedBy]
+		    ,[LastUpdatedDate])
      VALUES
            (@type
            ,@description
