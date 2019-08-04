@@ -1,5 +1,6 @@
 ﻿using Marbale.Business;
 using Marbale.BusinessObject;
+using Marbale.BusinessObject.Tax;
 using MarbaleManagementStudio.Models;
 using System;
 using System.Collections.Generic;
@@ -26,20 +27,31 @@ namespace MarbaleManagementStudio.Controllers
         }
         public ActionResult ProductSetup()
         {
-          
-          
-            var products = productBussiness.GetProducts();
-            Session["ProductList"] = products;
-            Session["CategoryList"] = products[0].CategoryList;
-            Session["TypeList"] = products[0].TypeList;
-            ViewBag.productDetails = products;
-            return View();
+
+            try
+            {
+                var products = productBussiness.GetProducts();
+                Session["ProductList"] = products;
+                Session["CategoryList"] = products[0].CategoryList;
+                Session["TypeList"] = products[0].TypeList;
+                Session["TaxList"] = products[0].TaxList;
+                ViewBag.productDetails = products;
+                return View();
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("ProductSetup", e);
+                throw;
+            }
+         
         }
 
         [HttpGet]
         public ActionResult Edit()
         {
+            
             Product a = new Product();
+            a.TaxList = Session["TaxList"] as List<TaxSet>;
             return View(a);
         }
 
@@ -47,9 +59,19 @@ namespace MarbaleManagementStudio.Controllers
         {
         //    List<Product> ProductList = Session["ProductList"] as List<Product>;
            // var p = ProductList.Where(s => s.Id == id).FirstOrDefault();
-            var product = productBussiness.GetProductById(id);
+            try
+            {
+                var product = productBussiness.GetProductById(id);
+                return View(product);
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("Edit", e);
+                throw;
+            }
+       
 
-            return View(product);
+          
         }
         public ActionResult ClosePopUp()
         {
@@ -57,50 +79,96 @@ namespace MarbaleManagementStudio.Controllers
         }
         public JsonResult DeleteProducts(int Id)
         {
-            int result = productBussiness.DeleteProductbyId(Id);
-            return Json(1, JsonRequestBehavior.AllowGet);
+            try
+            {
+                int result = productBussiness.DeleteProductbyId(Id);
+                return Json(1, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("DeleteProducts", e);
+                throw;
+            }
+    
         }
 
         public ActionResult InsertOrUpdate(Product pObject,string submit)
         {
-            if (ModelState.IsValid)
+            try
             {
-                switch (submit)
+                if (ModelState.IsValid)
                 {
-                    case "Save":
-                        var result = productBussiness.InsertOrUpdateProduct(pObject);
-                        break;
-                    case "Duplicate":
-                        pObject.Id = 0;
-                        var result1 = productBussiness.InsertOrUpdateProduct(pObject);
-                        break;
+                    switch (submit)
+                    {
+                        case "Save":
+                            var result = productBussiness.InsertOrUpdateProduct(pObject);
+                            break;
+                        case "Duplicate":
+                            pObject.Id = 0;
+                            var result1 = productBussiness.InsertOrUpdateProduct(pObject);
+                            break;
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("InsertOrUpdateProduct", e);
+                throw;
+            }
+        
        
             return RedirectToAction("ProductSetup", "Product");
         }
         public int UpdateProducts(List<Product> products)
         {
-            var result = 0;
-          
-               
+            try
+            {
+                var result = 0;
+
+
                 foreach (var product in products)
                 {
                     result = productBussiness.InsertOrUpdateProduct(product);
                 }
-
-            return result;
+                return result;
+              
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("UpdateProducts", e);
+                throw;
+            }
+          
+         
         }
         public ActionResult Types()
         {
-            var productTypes = productBussiness.GetProductTypes();
-            ViewBag.productTypes = productTypes;
-            return View(productTypes);
+            try
+            {
+                var productTypes = productBussiness.GetProductTypes();
+                ViewBag.productTypes = productTypes;
+                return View(productTypes);
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("UpdateProductType", e);
+                throw;
+            }
+           
         }
 
         public int UpdateProductType(List<ProductType> productTypes)
         {
-            return productBussiness.UpdateProductTypes(productTypes);
+            try
+            {
+                return productBussiness.UpdateProductTypes(productTypes);
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("UpdateProductType", e);
+                throw;
+            }
+
         }
         public ActionResult Category()
         {
@@ -110,7 +178,41 @@ namespace MarbaleManagementStudio.Controllers
         }
         public int UpdateProductCategories(List<ProductCategory> categories)
         {
-            return productBussiness.UpdateProductCategory(categories);
+            try
+            {
+                return productBussiness.UpdateProductCategory(categories);
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("UpdateProductCategories", e);
+                throw;
+            }
+         
+        }
+        public JsonResult TaxDetails(int TaxId, decimal Price, bool TaxInclusive)
+        {
+            Product p = new Product();
+            if (Session["TaxList"] != null)
+            {
+                p.TaxList = Session["TaxList"] as List<TaxSet>;
+                List<TaxSet> TaxDetails = p.TaxList.Where(a => a.TaxId == TaxId).ToList();
+                if (TaxInclusive == true)
+                {
+
+                    p.EffectivePrice = Price * (TaxDetails[0].TaxPercent / 100);
+                    p.EffectivePrice = Price - p.EffectivePrice;
+                    p.FinalPrice = Price;
+                    p.Taxpercent = TaxDetails[0].TaxPercent;
+                }
+                else
+                {
+                    p.EffectivePrice = Price * (TaxDetails[0].TaxPercent / 100);
+                    p.FinalPrice = Price + p.EffectivePrice;
+                    p.EffectivePrice = Price;
+                    p.Taxpercent = TaxDetails[0].TaxPercent;
+                }
+            }
+            return Json(p, JsonRequestBehavior.AllowGet);
         }
 
     }

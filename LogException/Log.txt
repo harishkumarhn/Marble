@@ -1,0 +1,36 @@
+=============Error Logging ===========
+===========Start============= 8/3/2019 11:52:54 AM
+Error Message: Input string was not in a correct format.
+Stack Trace:    at Marbale.Business.ProductBL.GetProductById(Int32 id) in f:\MarbleProject\Marble - Copy\Marbale.Business\ProductBL.cs:line 67
+   at MarbaleManagementStudio.Controllers.ProductController.Edit(Int32 id) in f:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\Controllers\ProductController.cs:line 60
+===========End============= 8/3/2019 11:52:54 AM
+=============Error Logging ===========
+===========Start============= 8/4/2019 4:05:02 AM
+Error Message: Column 'TaxPercent' does not belong to table Table.
+Stack Trace:    at Marbale.Business.ProductBL.GetProducts() in f:\MarbleProject\Marble - Copy\Marbale.Business\ProductBL.cs:line 147
+   at MarbaleManagementStudio.Controllers.ProductController.ProductSetup() in f:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\Controllers\ProductController.cs:line 33
+===========End============= 8/4/2019 4:05:02 AM
+=============Error Logging ===========
+===========Start============= 8/4/2019 4:06:45 AM
+Error Message: Column 'TaxPercent' does not belong to table Table.
+Stack Trace:    at Marbale.Business.ProductBL.GetProducts() in f:\MarbleProject\Marble - Copy\Marbale.Business\ProductBL.cs:line 147
+   at MarbaleManagementStudio.Controllers.ProductController.ProductSetup() in f:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\Controllers\ProductController.cs:line 33
+===========End============= 8/4/2019 4:06:48 AM
+=============Error Logging ===========
+===========Start============= 8/4/2019 4:07:58 AM
+Error Message: Column 'TaxPercent' does not belong to table Table.
+Stack Trace:    at Marbale.Business.ProductBL.GetProducts() in f:\MarbleProject\Marble - Copy\Marbale.Business\ProductBL.cs:line 147
+   at MarbaleManagementStudio.Controllers.ProductController.ProductSetup() in f:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\Controllers\ProductController.cs:line 33
+===========End============= 8/4/2019 4:07:58 AM
+=============Error Logging ===========
+===========Start============= 8/4/2019 4:08:15 AM
+Error Message: Column 'TaxPercent' does not belong to table Table.
+Stack Trace:    at Marbale.Business.ProductBL.GetProducts() in f:\MarbleProject\Marble - Copy\Marbale.Business\ProductBL.cs:line 147
+   at MarbaleManagementStudio.Controllers.ProductController.ProductSetup() in f:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\Controllers\ProductController.cs:line 33
+===========End============= 8/4/2019 4:08:15 AM
+=============Error Logging ===========
+===========Start============= 8/4/2019 4:09:22 AM
+Error Message: Column 'TaxPercent' does not belong to table Table.
+Stack Trace:    at Marbale.Business.ProductBL.GetProducts() in f:\MarbleProject\Marble - Copy\Marbale.Business\ProductBL.cs:line 147
+   at MarbaleManagementStudio.Controllers.ProductController.ProductSetup() in f:\MarbleProject\Marble - Copy\Marbale.ManagementStudio\Controllers\ProductController.cs:line 33
+===========End============= 8/4/2019 4:09:22 AM

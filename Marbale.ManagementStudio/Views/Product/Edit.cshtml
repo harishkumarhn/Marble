@@ -86,21 +86,29 @@
       </div>
          <div class="col-md-2">
         <label for="ex2">TaxInclusive:</label>
-    @Html.CheckBoxFor(m => m.TaxInclusive, new { @class = "form-control", @style = "position:absolute;width:20px;" })
+    @Html.CheckBoxFor(m => m.TaxInclusive, new { @class = "form-control",@onchange="TaxDetails('', this.value)", @style = "position:absolute;width:20px;" })
       </div>
-                <div class="col-md-2">
-        <label for="ex3">Final Price:</label>
-    @Html.TextBoxFor(m => m.FinalPrice, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.FinalPrice,"", new {@class = "text-danger" })
+                        <div class="col-md-3">
+        <label for="ex3">Tax:</label>
+                 @Html.DropDownListFor(m => m.TaxName,new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value",selectedValue:string.IsNullOrEmpty(Model.TaxName)?"SELECT":Model.TaxName), new {@class="form-control",@style="height: 35px",@onchange="TaxDetails(this.value)"})
+
+@Html.ValidationMessageFor(model => model.Category,"", new {@class = "text-danger" })
       </div>
+                                     <div class="col-md-2">
+        <label for="ex4">Tax %:</label>
+  @Html.TextBoxFor(m => m.Taxpercent, new { @class = "form-control" })
+      </div>
+        
                         <div class="col-md-2">
         <label for="ex4">Effective Price:</label>
   @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "form-control" })
       </div>
-                                 <div class="col-md-2">
-        <label for="ex4">Tax %:</label>
-  @Html.TextBoxFor(m => m.Taxpercent, new { @class = "form-control" })
+                   <div class="col-md-2">
+        <label for="ex3">Final Price:</label>
+    @Html.TextBoxFor(m => m.FinalPrice, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FinalPrice,"", new {@class = "text-danger" })
       </div>
+       
     </div>
                       </div>
 <b style="color:cadetblue">Entitlement</b>
@@ -119,7 +127,7 @@
                 <div class="col-md-2">
         <label for="ex3">Bonus:</label>
     @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Bonus,"", new {@class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Bonus,"", new {@class = "text-danger",@style="color:red" })
       </div>
                         <div class="col-md-2">
         <label for="ex4">CardValidFor:</label>
@@ -163,17 +171,45 @@
 	
 		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 		<script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
-@*@Scripts.Render("~/bundles/jqueryval")*@
-@*<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
-@*<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+@*@Scripts.Render("~/bundles/jquery")
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>*@
+@Scripts.Render("~/bundles/jqueryval")*@
+
 <script type="text/javascript">
     $('.close1').click(function () {
         location.reload();
 
     });
+    function TaxDetails(TaxId1, taxinclusive) {
+        debugger
+        var TaxId = $('#TaxName option:selected').val();
+        var Price = $('#Price').val();
+        taxinclusive = $('#TaxInclusive').is(":checked");
+     
+        if (TaxId == "") {
+            $('#EffectivePrice').val(Price);
+            $('#FinalPrice').val(Price);
+        }
+        else {
+          
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("TaxDetails", "Product")',
+                data: JSON.stringify({ TaxId: TaxId, Price: Price, TaxInclusive: taxinclusive }),
+                dataType: "json",
+                success: function (data) {
+                    $('#EffectivePrice').val(data.EffectivePrice);
+                    $('#Taxpercent').val(data.Taxpercent);
+                    $('#FinalPrice').val(data.FinalPrice);
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
+    }
+    
 
 </script>
 <style>
@@ -181,4 +217,30 @@
         position: absolute;
         width: 20px;
     }
+      .field-validation-error
+        {
+            color: #ff0000;
+        }
+        
+        .field-validation-valid
+        {
+            display: none;
+        }
+        
+        .input-validation-error
+        {
+            border: 1px solid #ff0000 !important;
+            /*background-color: #ffeeee !important;*/
+        }
+        
+        .validation-summary-errors
+        {
+            font-weight: bold !important;
+            color: #ff0000 !important;
+        }
+        
+        .validation-summary-valid
+        {
+            display: none;
+        }
 </style>

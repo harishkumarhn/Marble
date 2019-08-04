@@ -37,7 +37,7 @@ namespace MarbaleManagementStudio
             SiteSetupController s = new SiteSetupController();
             HttpPostedFileBase fileUploader=null;
             HttpPostedFileBase fileUploader1=null;
-            s.email_send( fileUploader,fileUploader1);
+          //  s.email_send( fileUploader,fileUploader1);
         }
     }
 }
