@@ -6,7 +6,11 @@
 <h2>Tax</h2>
 <div>
 <div class="taxsetmodel">
+    <div  id="taxvalidation" style="text-align: center ;  display:none">
+        <p style="font-weight:400; color:red" >No numbers above 100</p>
+    </div>
 <div id="taxtable">
+
  <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Tax</a>
     <table id="marbleTable" class="table marbleTable" style="background-color:indianred;">  
         <thead>  
@@ -24,7 +28,7 @@
         <tr onchange= "UpdatedList(this)"> 
         <td onclick="Getvalues(@item1.TaxId)"> <input type="text" id="TaxId@(count)" value="@item1.TaxId" disabled >   </td>
         <td onclick="Getvalues(@item1.TaxId)"> <input type="text" value="@item1.TaxName" class="gridText"  id="TaxName@(count)"/>  </td>
-        <td onclick="Getvalues(@item1.TaxId)"> <input type="number" value="@item1.TaxPercent" class="gridText" id="TaxPercent@(count)" />  </td>
+        <td onclick="Getvalues(@item1.TaxId)"> <input type="number" value="@item1.TaxPercent" class="gridText numberbox" id="TaxPercent@(count)" />  </td>
         <td onclick="Getvalues(@item1.TaxId)"> <input type="checkbox"  @(item1.ActiveFlag ? "checked='checked'" : "") value="@item1.ActiveFlag"  id="ActiveFlag@(count)"/>  </td>
     </tr> 
             count++;
@@ -41,6 +45,16 @@
         </div>
     </div>
 <script>
+
+    $('.numberbox').keyup(function () {
+        if ($(this).val() > 100) {
+            $('#taxvalidation').show();
+            $(this).val('0');
+        }
+        else {
+            $('#taxvalidation').hide();
+        }
+    });
     $("#marbleTable tr").click(function () {
         var selected = $(this).hasClass("highlight");
         $("#marbleTable tr").removeClass("highlight");
