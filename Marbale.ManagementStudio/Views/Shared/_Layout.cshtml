@@ -4,16 +4,18 @@
     <title>Marbale Dashboard</title>
 
     <meta charset="utf-8" />
-    <meta name="viewport" Content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" Content="IE=edge">
-     <!-- Bootstrap CSS CDN -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="~/Content/CSS/bootstrap.css">
 
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="~/Content/CSS/style.css">
     <link rel="stylesheet" href="~/Content/CSS/layout.css">
-      
+
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
     <script src="~/Content/JS/bootstrap.min.js"></script>
 
     <script src="~/Content/JS/popper.min.js"></script>
@@ -24,7 +26,7 @@
 </head>
 <body>
 
-       <div class="wrapper">
+    <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div id="dismiss">
@@ -52,7 +54,7 @@
                 <li class="active">
                     <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Communication</a>
                     <ul class="collapse list-unstyled" id="gameSubmenu">
-                <li>
+                        <li>
                             <a href="/game/hubs">Hubs</a>
                         </li>
                         <li>
@@ -61,7 +63,7 @@
                         <li>
                             <a href="/game/games">Games</a>
                         </li>
-                         <li>
+                        <li>
                             <a href="/game/machines">Machines</a>
                         </li>
                         <li>
@@ -81,31 +83,31 @@
                         <li>
                             <a href="/SiteSetup/userRoles" id="userRole">User Roles</a>
                         </li>
-						<li>
+                        <li>
                             <a href="/SiteSetup/Messages">Messages</a>
                         </li>
                         <li>
                             <a href="/TaskType/TaskType/TaskType">Task-Type</a>
                         </li>
                         <li>
-                            <a id="productKey">Product Key</a>
+                            <a id="productKey" data-target="#myModal">Product Key</a>
                         </li>
 
                     </ul>
                 </li>
-                     <li>
+                <li>
                     <a href="#pageSubmenucards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cards</a>
                     <ul class="collapse list-unstyled" id="pageSubmenucards">
                         <li>
                             <a href="/Cards/ViewCards" id="viewcard">View Card</a>
                         </li>
-                        <li>                        
+                        <li>
                             <a id="newcards">New Cards</a>
                         </li>
                         <li>
-                            <a  id="inventery">Inventory</a>
+                            <a id="inventery">Inventory</a>
                         </li>
-						
+
                     </ul>
                 </li>
             </ul>
@@ -131,35 +133,40 @@
                 </div>
             </nav>
 
-           <div id="pageContent">
+            <div id="pageContent">
                 <div id="container">
-               @RenderBody()
-           </div>
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="modal fade" id="newcardmodel">
+                <div class="modal-dialog">
+                    <div id="newproductmodel" class="modal-Content" style="width: 900px; height: 810px;">
+                        <div class="modal-header" style="background-color: blueviolet">
+                            <h5 class="modal-title" id="newupdatecardmodal" style="text-align: center">Add Card</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="modelbody"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-centre">
+            <div id="modelBody" class="modal-content" style="width: 600px;">
+             </div>
         </div>
     </div>
 
-    <div>
-        <div class="modal fade" id="newcardmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-    <div class="modal-Content" style="width: 900px;height: 810px;" id="newproductmodel">
-                <div class="modal-header" style="background-color: blueviolet">
-                    <h5 class="modal-title" id="newupdatecardmodal" style="text-align:center">Add Card</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modelbody"></div></div></div></div>
-    </div>
-
-    </div>
- 
-    <div class="overlay"></div>
-
-
     <script type="text/javascript">
         $(document).ready(function () {
-           
+
             $('#dismiss, .overlay').on('click', function () {
                 $('#sidebar').removeClass('active');
                 $('.overlay').removeClass('active');
@@ -198,12 +205,11 @@
             $('#modelbody').load('game/configuration');
         });
         $('#productKey').click(function () {
-            $(".modal-body").html("");
-            $('#newcardmodel .modal-Content').css('height', 730);
-            $('#newcardmodel .modal-Content').css('width', 900);
-            $('#newupdatecardmodal').text("productKey").addClass('modal-centre');
-            $('#newcardmodel').modal('show');
-            $('#modelbody').load('siteSetup/ProductKey');
+            $('#myModal').modal('show');
+            $('#modelBody').load('siteSetup/ProductKey');
+        });
+        $("#myModal").draggable({
+            handle: ".modal-header"
         });
     </script>
 

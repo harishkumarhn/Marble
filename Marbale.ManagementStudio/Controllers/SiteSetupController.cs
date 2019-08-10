@@ -336,17 +336,29 @@ namespace MarbaleManagementStudio.Controllers
         }
         #endregion
 
-        #region Product Key
+        #region Site
         public ActionResult ProductKey()
         {
-            var pk = siteSetup.GetProductKey();
-            return View(pk);
+            string SiteId = System.Web.Configuration.WebConfigurationManager.AppSettings["SiteId"];
+            ViewBag.ProductKey = siteSetup.GetProductKey(SiteId);
+            return View();
         }
 
-        public int UpdateProductKey(ProductKey pk)
+        public int UpdateProductKey(ProductKey siteData)
         {
-            return siteSetup.UpdateProductKey(pk);
+            return siteSetup.UpdateProductKey(siteData);
         }
+
+        public ActionResult Sites()
+        {
+            ViewBag.Sites = siteSetup.GetSites();
+            return View();
+        }
+        public int UpdateSites(List<Site> sites)
+        {
+           return siteSetup.InsertOrUpdateSites(sites);
+        }
+
         #endregion
 
     }

@@ -2,5 +2,62 @@
     ViewBag.Title = "ProductKey";
     Layout = null;
 }
-
-<h2>ProductKey</h2>
+<div class="modal-header">
+    <h4 class="modal-title">Product key</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+</div>
+<div class="modal-body">
+    <div class="col-xs-4">
+        <label>Site Key :</label>
+        <input id="siteId" type="text" hidden value="@ViewBag.ProductKey.SiteId" readonly></input>
+        <input id="siteKey" type="text" class="form-control input-sm pull-right" value="@ViewBag.ProductKey.SiteKey" readonly></input>
+    </div>
+    <div class="col-xs-4">
+        <label>License Key :</label>
+        <input id="licenseKey" type="text" class="form-control input-sm pull-right" value="@ViewBag.ProductKey.LicenseKey"></input>
+    </div>
+    @if (ViewBag.ProductKey.IsLifeTimeLicense)
+    {
+        <label>
+            Expire On
+        </label>      
+    }
+    <div id="cardsCount" style="display: none">
+        cards count
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="update" type="button" class="btn btn-primary" onclick="UpdateSiteData()">Update</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+<script>
+    var map = {}; // You could also use an array
+    onkeydown = onkeyup = function (e) {
+        e = e || event; // to deal with IE
+        map[e.keyCode] = e.type == 'keydown';
+        if (map[17] && map[16] && map[65]) { // CTRL+SHIFT+A
+            $("#cardsCount").toggle();
+        }
+    }
+    function UpdateSiteData() {
+        var siteData = {
+            SiteId: $("#siteId").val(),
+            SiteKey: $("#siteKey").val(),
+            LicenseKey: $("#licenseKey").val(),
+        };
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateProductKey", "SiteSetup")',
+                data: JSON.stringify({ siteData: siteData }),
+                dataType: "json",
+                beforeSend: function () { },
+                success: function (data) {
+                    alert('Updated successfully');
+                },
+                error: function () {
+                    alert("Update Operation failed");
+                }
+            });
+        }
+</script>

@@ -6,6 +6,7 @@ namespace Marbale.BusinessObject.SiteSetup
         public string SiteKey { get; set; }
         public string LicenseKey { get; set; }
         public int SiteId { get; set; }
+        public string ExpireOn { get; set; }
         public bool IsLifeTimeLicense { get; set; }
     }
 }
