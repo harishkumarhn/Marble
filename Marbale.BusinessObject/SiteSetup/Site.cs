@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 namespace Marbale.BusinessObject.SiteSetup
 {
     public class Site
@@ -13,6 +12,7 @@ namespace Marbale.BusinessObject.SiteSetup
         public byte[] Logo { get; set; }
         public string CustomerKey { get; set; }
         public string SiteCode { get; set; }
+        public string Version { get; set; }
         public int CompanyId { get; set; }
     }
 }

@@ -543,7 +543,17 @@ namespace Marble.Business
                     site.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
                     site.Guid = (Guid)dr["Guid"];
                     site.SiteGUID = (Guid)dr["SiteGUID"];
-                    site.Logo = (byte[])dr["Logo"];
+                    Byte[] array = new Byte[64];
+
+                    if (dr.IsNull("Logo"))
+                    {
+                        Array.Clear(array, 0, array.Length);
+                    }
+                    else
+                    {
+                        array = (byte[])dr["Logo"];
+                    }
+                    site.Logo = array;
                     site.CustomerKey = dr.IsNull("CustomerKey") ? "" : dr["CustomerKey"].ToString();
                     site.SiteCode = dr.IsNull("SiteCode") ? "" : dr["SiteCode"].ToString();
                     sites.Add(site);

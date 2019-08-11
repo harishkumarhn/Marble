@@ -72,7 +72,7 @@
     <Compile Include="Setting\Settings.cs" />
     <Compile Include="Discount\TransactionDiscount.cs" />
     <Compile Include="SiteSetup\AppModuleAction.cs" />
-    <Compile Include="SiteSetup\Copy of ProductKey.cs" />
+    <Compile Include="SiteSetup\Site.cs" />
     <Compile Include="SiteSetup\ProductKey.cs" />
     <Compile Include="SiteSetup\User.cs" />
     <Compile Include="SiteSetup\UserRole.cs" />

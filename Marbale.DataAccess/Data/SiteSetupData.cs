@@ -338,12 +338,13 @@ namespace Marbale.DataAccess
                     sqlParameters[2] = new SqlParameter("@siteAddress", string.IsNullOrWhiteSpace(site.SiteAddress) ? "" : site.SiteAddress);
                     sqlParameters[3] = new SqlParameter("@notes", string.IsNullOrWhiteSpace(site.Notes) ? "" : site.Notes);
                     sqlParameters[4] = new SqlParameter("@siteGUID", site.SiteGUID);
-                    sqlParameters[5] = new SqlParameter("@logo", site.Logo);
+                    sqlParameters[5] = new SqlParameter("@logo", SqlDbType.Image);
+                    if(site.Logo == null)
+                    sqlParameters[5].Value = DBNull.Value;
                     sqlParameters[6] = new SqlParameter("@guid", site.Guid);
-                    sqlParameters[7] = new SqlParameter("@CompanyId", site.CompanyId);
-                    sqlParameters[8] = new SqlParameter("@customerKey", site.CustomerKey);
+                    sqlParameters[7] = new SqlParameter("@companyId", site.CompanyId);
+                    sqlParameters[8] = new SqlParameter("@customerKey", string.IsNullOrWhiteSpace(site.CustomerKey) ? "" : site.CustomerKey);
                     sqlParameters[9] = new SqlParameter("@siteCode", string.IsNullOrWhiteSpace(site.SiteCode) ? "" : site.SiteCode);
-
                     conn.executeUpdateQuery("sp_InsertOrUpdateSite", sqlParameters);
                 }
             }
