@@ -75,9 +75,9 @@ namespace MarbaleManagementStudio.Controllers
            
 
 
-        //}
+        }
 
-        //#endregion
+        #endregion
         #region Appsettings
         public ActionResult UpdateAppSettings(List<AppSetting> appSettings)
         {
