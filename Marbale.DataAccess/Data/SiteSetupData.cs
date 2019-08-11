@@ -344,7 +344,7 @@ namespace Marbale.DataAccess
                     sqlParameters[6] = new SqlParameter("@guid", site.Guid);
                     sqlParameters[7] = new SqlParameter("@companyId", site.CompanyId);
                     sqlParameters[8] = new SqlParameter("@customerKey", string.IsNullOrWhiteSpace(site.CustomerKey) ? "" : site.CustomerKey);
-                    sqlParameters[9] = new SqlParameter("@siteCode", string.IsNullOrWhiteSpace(site.SiteCode) ? "" : site.SiteCode);
+                    sqlParameters[9] = new SqlParameter("@siteCode", site.SiteCode);
                     conn.executeUpdateQuery("sp_InsertOrUpdateSite", sqlParameters);
                 }
             }
