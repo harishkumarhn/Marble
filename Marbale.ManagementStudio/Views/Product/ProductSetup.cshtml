@@ -13,7 +13,7 @@
     <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width: 900px; height: 887px;" id="newproductmodel">
+            <div class="modal-content" style="width: 900px; height: 612px;" id="newproductmodel">
                 <div class="modal-header" style="background-color: crimson">
                     <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
@@ -26,7 +26,7 @@
         </div>
     </div>
 </div>
-<div class="first">
+<div class="first" style="overflow-y:scroll;height:420px;width:1300px">
     <div class="second" style="margin-left:20.2em; ">
         <table id="marbleTable" class="table">
             <thead>
@@ -61,7 +61,7 @@
                     </td>
                     <td>
                         <select name="TypeList" id="TypeList" class="gridText">
-                            @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
+                            @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
                             {
                                 if (@item.Type == (@dow.Id).ToString())
                                 {
@@ -141,6 +141,7 @@
     </button>
     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
       <button class="btn btn-primary btn-md" role="button" onclick="DeleteProducts()"  id="deleteproduct">Delete</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
 </div>
 <style>
     .highlight { background-color: darkmagenta; }
@@ -159,13 +160,16 @@
         location.reload();
 
     });
-    //$("#marbleTable tr .headerCol").click(function () {
-    //    debugger
-    //    var selected = $(this).hasClass("highlight");
-    //    $("#marbleTable tr").removeClass("highlight");
-    //    if (!selected)
-    //        $("#marbleTable tr .headerCol").addClass("highlight");
-    //});
+    $("#marbleTable tr").click(function () {
+        debugger
+        var selected = $($(this)[0].children).hasClass("highlight");
+        $(this).removeClass("highlight");
+        $($(this)[0].children).removeClass("highlight");
+        if (!selected) {
+            //$(this).addClass("highlight");
+            $($(this)[0].children).addClass("highlight");
+        }
+    });
     function DeleteProducts() {
       debugger
       var  Id = IdforDelete;

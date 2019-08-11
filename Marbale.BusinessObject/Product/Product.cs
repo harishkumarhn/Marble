@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Marbale.BusinessObject.Tax;
 namespace Marbale.BusinessObject
 {
     public class Product
@@ -21,29 +22,37 @@ namespace Marbale.BusinessObject
         public bool AutoGenerateCardNumber { get; set; }
         public bool OnlyVIP { get; set; }
                [Required(ErrorMessage = "Enter Price.")]
-        public int Price { get; set; }
-        public int FaceValue { get; set; }
+        public decimal?Price { get; set; }
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Face value must be numeric")]
+        public decimal? FaceValue { get; set; }
+          [DataType(DataType.Currency)]
         public bool TaxInclusive { get; set; }
-        public int TaxPercentage { get; set; }
-        public int FinalPrice { get; set; }
-        public int EffectivePrice { get; set; }
+          [DataType(DataType.Currency)]
+        public decimal TaxPercentage { get; set; }
+        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Final Price must be numeric")]
+        public decimal? FinalPrice { get; set; }
+          [DataType(DataType.Currency)]
+        public decimal? EffectivePrice { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDate { get; set; }
-        public int Credits { get; set; }
-        public int Courtesy { get; set; }
-        public int Bonus { get; set; }
-        public int Games { get; set; }
-        public int CreditsPlus { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal? Credits { get; set; }
+          [DataType(DataType.Currency)]
+        public int ?Courtesy { get; set; }
+          [DataType(DataType.Currency)]
+        public decimal? Bonus { get; set; }
+        public decimal Games { get; set; }
+          [DataType(DataType.Currency)]
+        public int ?CreditsPlus { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpiryDate { get; set; }
         public string TaxName { get; set; }
+
         public decimal Taxpercent { get; set; }
         public string LastUpdatedUser { get; set; }
         public int CardValidFor { get; set; }
         public List<IdValue> TypeList { get; set; }
         public List<IdValue> CategoryList { get; set; }
-
-
-        
+        public List<TaxSet> TaxList { get; set; }
     }
 }

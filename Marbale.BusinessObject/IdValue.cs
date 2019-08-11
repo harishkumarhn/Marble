@@ -17,4 +17,5 @@ namespace Marbale.BusinessObject
         public string Text { get; set; }
 
     }
+   
 }

@@ -18,7 +18,7 @@ namespace Marbale.DataAccess
         public DBConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn = new SqlConnection(@"Data Source=ADMIN\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
+            conn = new SqlConnection(@"Data Source=Gargi-PC\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
         }
 
         /// <method>

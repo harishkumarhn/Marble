@@ -3,13 +3,13 @@
 }
 
 <div class="first">
-    <div class="second">
+    <div class="second" style="margin-left:20.2em;">
 
-        <table id="marbleTable" class="table">
+        <table id="productsTable" class="table">
             <thead>
-                <th>ID</th>
-                <th>Edit</th>
-                <th>Type</th>
+                <th class="headerCol">ID</th>
+              @*  <th class="headerCol">Edit</th>*@
+                <th class="headerCol" style="left:100px">Type</th>
                 <th>Description</th>
                 <th>ReportGroup</th>
                 <th>CardSale</th>
@@ -20,11 +20,12 @@
             @foreach (var item in ViewBag.productTypes)
             {  
                 <tr onchange="UpdatedList(this)">
-                    <td>@item.Id  </td>
-                    <td>
+                    <td class="headerCol" >@item.Id  </td>
+
+                 @*   <td class="headerCol" style="left:55px">
                         <button onClick="EditProductType(@item.Id)">-</button>
-                    </td>
-                    <td>
+                    </td>*@
+                    <td class="headerCol" style="left:50px">
                         <input type="text" value="@item.Type" class="gridText" />
                     </td>
                     <td>
@@ -53,12 +54,14 @@
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProductTypes()">Save</button>
     <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductType()">Add Product Type</a>
+        <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
 </div>
 <script>
     function AddProductType() {
-
-        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>  <td>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        debugger;
+        var newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>' +
+        '<td class="headerCol" style="left:50px"> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <input type="text" value="" class="gridText" />  </td>' +
         '<td> <input type="text" value="" class="gridText" />  </td>' +
         '<td> <input type="checkbox" />  </td>' +

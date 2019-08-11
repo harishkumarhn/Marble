@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Marbale.BusinessObject.Tax
 {
-   public class TaxSet
+   public class TaxSet:IdValue
     {
        public int TaxId { get; set; }
        public string TaxName { get; set; }

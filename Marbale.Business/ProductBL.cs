@@ -7,10 +7,10 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MarbaleManagementStudio.Models;
 namespace Marbale.Business
 {
-    public class ProductBL:SiteSetupData
+    public class ProductBL
     {
         private ProductData productData;
       //  SiteSetupData ab = new ProductBL();
@@ -62,6 +62,8 @@ namespace Marbale.Business
             }
             catch (Exception e)
             {
+            
+              //  LogError
                 throw e;
             }
 
@@ -91,6 +93,18 @@ namespace Marbale.Business
                     idValues.Value = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     categoryList.Add(idValues);
                 }
+                var TaxListDataTable = productData.GetProductTaxLookUp();
+                var TaxList = new List<TaxSet>();
+                TaxList.Add(new TaxSet() { Id = null, Value = "Select" });
+                foreach (DataRow dr in TaxListDataTable.Rows)
+                {
+                    TaxSet idValues = new TaxSet();
+                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    idValues.TaxId = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    idValues.Value = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                    idValues.TaxPercent = dr.IsNull("TaxPercent") ? 0 : decimal.Parse(dr["TaxPercent"].ToString());
+                    TaxList.Add(idValues);
+                }
 
                 var productDataTable = productData.GetProducts();
                 List<Product> products = new List<Product>();
@@ -118,7 +132,7 @@ namespace Marbale.Business
 
                     product.TypeList = typeList;
                     product.CategoryList = categoryList;
-
+                    product.TaxList = TaxList;
                     products.Add(product);
                 }
                 if (products.Count == 0)
@@ -396,7 +410,8 @@ namespace Marbale.Business
             }
             catch (Exception e)
             {
-                throw e;
+             //   LogError.Instance.LogException("DeleteProductbyId", e);
+               throw e;
             }
         }
     }

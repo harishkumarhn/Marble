@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Marble.Business</RootNamespace>
     <AssemblyName>Marble.Business</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MarbaleManagementStudio">
+      <HintPath>..\Marbale.ManagementStudio\bin\MarbaleManagementStudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -69,6 +72,10 @@
     <ProjectReference Include="..\Marbale.DataAccess\Marbale.DataAccess.csproj">
       <Project>{6a6d1608-f1ec-435a-a3ec-10237ab280af}</Project>
       <Name>Marbale.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Marbale.Reports\Marbale.Reports.csproj">
+      <Project>{a05f1be2-c3f5-4502-8a28-f10b46f2b296}</Project>
+      <Name>Marbale.Reports</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

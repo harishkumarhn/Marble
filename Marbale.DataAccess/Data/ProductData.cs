@@ -328,5 +328,18 @@ namespace Marbale.DataAccess
             sqlParameters[0] = new SqlParameter("@Id",Id);
             return conn.executeUpdateQuery("DeleteProductById", sqlParameters);
         }
+
+        public DataTable GetProductTaxLookUp()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetProductTaxLookUp");
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
