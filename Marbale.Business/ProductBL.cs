@@ -7,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MarbaleManagementStudio.Models;
+
 namespace Marbale.Business
 {
     public class ProductBL
