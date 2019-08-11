@@ -26,7 +26,7 @@
         </div>
     </div>
 </div>
-<div class="first" style="overflow-y:scroll;height:420px;width:1300px">
+<div class="first" style="overflow-y:scroll;height:420px;width:1300px;background-color: burlywood;">
     <div class="second" style="margin-left:20.2em; ">
         <table id="marbleTable" class="table">
             <thead>
@@ -139,12 +139,12 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
-    <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+    <a href="/Marble/" class="btn btn-primary">Close</a>
       <button class="btn btn-primary btn-md" role="button" onclick="DeleteProducts()"  id="deleteproduct">Delete</button>
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
 </div>
 <style>
-    .highlight { background-color: darkmagenta; }
+    .highlight { background-color: #d2a973; }
 </style>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
@@ -163,7 +163,7 @@
     $("#marbleTable tr").click(function () {
         debugger
         var selected = $($(this)[0].children).hasClass("highlight");
-        $(this).removeClass("highlight");
+        $("#marbleTable tr").removeClass("highlight");
         $($(this)[0].children).removeClass("highlight");
         if (!selected) {
             //$(this).addClass("highlight");
