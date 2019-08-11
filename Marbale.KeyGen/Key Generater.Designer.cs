@@ -30,6 +30,7 @@
         {
             this.tabs_KeyGen = new System.Windows.Forms.TabControl();
             this.GenerateKey = new System.Windows.Forms.TabPage();
+            this.lab_validation = new System.Windows.Forms.Label();
             this.chk_never = new System.Windows.Forms.CheckBox();
             this.btn_generate = new System.Windows.Forms.Button();
             this.btn_close = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@
             this.lab_sk_decode = new System.Windows.Forms.Label();
             this.txt_lk_decode = new System.Windows.Forms.TextBox();
             this.lab_lk_decode = new System.Windows.Forms.Label();
-            this.lab_validation = new System.Windows.Forms.Label();
             this.tabs_KeyGen.SuspendLayout();
             this.GenerateKey.SuspendLayout();
             this.Decode.SuspendLayout();
@@ -86,6 +86,16 @@
             this.GenerateKey.TabIndex = 0;
             this.GenerateKey.Text = "Generate Key";
             // 
+            // lab_validation
+            // 
+            this.lab_validation.AutoSize = true;
+            this.lab_validation.ForeColor = System.Drawing.Color.Red;
+            this.lab_validation.Location = new System.Drawing.Point(12, 7);
+            this.lab_validation.Name = "lab_validation";
+            this.lab_validation.Size = new System.Drawing.Size(79, 13);
+            this.lab_validation.TabIndex = 9;
+            this.lab_validation.Text = "Invalid Licence";
+            // 
             // chk_never
             // 
             this.chk_never.AutoSize = true;
@@ -121,6 +131,7 @@
             this.btn_close.TabIndex = 6;
             this.btn_close.Text = "Close";
             this.btn_close.UseVisualStyleBackColor = false;
+            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
             // txt_license
             // 
@@ -205,6 +216,7 @@
             this.btn_decode_close.TabIndex = 14;
             this.btn_decode_close.Text = "Close";
             this.btn_decode_close.UseVisualStyleBackColor = false;
+            this.btn_decode_close.Click += new System.EventHandler(this.btn_decode_close_Click);
             // 
             // btn_decode
             // 
@@ -282,16 +294,6 @@
             this.lab_lk_decode.Size = new System.Drawing.Size(73, 15);
             this.lab_lk_decode.TabIndex = 5;
             this.lab_lk_decode.Text = "License Key";
-            // 
-            // lab_validation
-            // 
-            this.lab_validation.AutoSize = true;
-            this.lab_validation.ForeColor = System.Drawing.Color.Red;
-            this.lab_validation.Location = new System.Drawing.Point(12, 7);
-            this.lab_validation.Name = "lab_validation";
-            this.lab_validation.Size = new System.Drawing.Size(79, 13);
-            this.lab_validation.TabIndex = 9;
-            this.lab_validation.Text = "Invalid Licence";
             // 
             // KeyGenerater
             // 

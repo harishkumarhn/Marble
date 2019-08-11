@@ -301,16 +301,59 @@ namespace Marbale.DataAccess
                 throw;
             }
         }
-        public DataTable GetProductKey()
+        public DataTable GetProductKey(string siteId)
         {
             try
             {
-                return conn.executeSelectQuery("sp_getProducyKey");
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@SiteKey", Convert.ToInt32(siteId));
+
+                return conn.executeSelectQuery("sp_getProducyKey", sqlParameters);
             }
             catch (Exception ex)
             {
                 throw;
             }
+        }
+        public DataTable GetSites()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetSites");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public int InsertOrUpdateSites(List<Site> sites)
+        {
+            try
+            {
+                foreach (var site in sites)
+                {
+                    SqlParameter[] sqlParameters = new SqlParameter[10];
+                    sqlParameters[0] = new SqlParameter("@siteId", site.SiteId);
+                    sqlParameters[1] = new SqlParameter("@siteName", string.IsNullOrWhiteSpace(site.SiteName) ? "" : site.SiteName);
+                    sqlParameters[2] = new SqlParameter("@siteAddress", string.IsNullOrWhiteSpace(site.SiteAddress) ? "" : site.SiteAddress);
+                    sqlParameters[3] = new SqlParameter("@notes", string.IsNullOrWhiteSpace(site.Notes) ? "" : site.Notes);
+                    sqlParameters[4] = new SqlParameter("@siteGUID", site.SiteGUID);
+                    sqlParameters[5] = new SqlParameter("@logo", SqlDbType.Image);
+                    if(site.Logo == null)
+                    sqlParameters[5].Value = DBNull.Value;
+                    sqlParameters[6] = new SqlParameter("@guid", site.Guid);
+                    sqlParameters[7] = new SqlParameter("@companyId", site.CompanyId);
+                    sqlParameters[8] = new SqlParameter("@customerKey", string.IsNullOrWhiteSpace(site.CustomerKey) ? "" : site.CustomerKey);
+                    sqlParameters[9] = new SqlParameter("@siteCode", string.IsNullOrWhiteSpace(site.SiteCode) ? "" : site.SiteCode);
+                    conn.executeUpdateQuery("sp_InsertOrUpdateSite", sqlParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return 0;
         }
         public int UpdateProductKey(ProductKey pk)
         {
@@ -318,8 +361,8 @@ namespace Marbale.DataAccess
             {
                 SqlParameter[] sqlParameters = new SqlParameter[3];
                 sqlParameters[0] = new SqlParameter("@SiteId", pk.SiteId);
-                sqlParameters[1] = new SqlParameter("@SiteKey", pk.SiteKey);
-                sqlParameters[2] = new SqlParameter("@LicenseKey", pk.LicenseKey);
+                sqlParameters[1] = new SqlParameter("@SiteKey", Encoding.ASCII.GetBytes(pk.SiteKey));
+                sqlParameters[2] = new SqlParameter("@LicenseKey", Encoding.ASCII.GetBytes(pk.LicenseKey));
                 return conn.executeUpdateQuery("sp_UpdateProductKey", sqlParameters);
             }
             catch (Exception e)

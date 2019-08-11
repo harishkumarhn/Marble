@@ -72,3 +72,49 @@ div.second {
             border-top-width:3px; /*only relevant for first row*/
             /*margin-top:-3px;*/ /*compensate for top border*/
  }
+
+/*Model PopUp CSS*/
+
+button.btn-settings {
+  margin: 25px;
+  padding: 20px 30px;
+  font-size: 1.2em;
+  background-color: #337ab7;
+  color: white;
+}
+button.btn-settings:active {
+  color: white;
+}
+.modal {
+    overflow: hidden;
+}
+.modal-dialog {
+    margin-right: 0;
+    margin-left: 0;
+}
+.modal-header {
+  height:30px;
+  padding: 20px;
+  background-color:#18456b;
+  color:white;
+}
+.modal-title {
+  margin-top:-10px;
+  font-size:16px;
+}
+.modal-header .close {
+  margin-top:-25px;
+  color:#fff;
+}
+.modal-body {
+  color:#888;
+  padding: 5px 35px 20px;
+}
+.modal-body h3 {
+  text-align: center;
+}
+.modal-body p {
+  padding-top:10px;
+  font-size: 1.1em;
+}
+/*end*/

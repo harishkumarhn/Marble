@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Sites";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/product.css" rel="stylesheet" />
+
+<div class="first"  style="position: inherit;">
+    <div class="second" style="margin-left:6.5em; width: 100%;">
+        <table id="marbleTable" class="table">
+            <thead>
+                <th class="headerCol">SiteID</th>
+                <th>Site Name</th>
+                <th>Site Code</th>
+                <th>Site Address</th>
+                <th>Notes</th>
+                <th>Site GUID</th>
+                <th>Logo</th>
+                <th>Version</th>
+                <th>CustomeKey</th>
+            </thead>
+            @foreach (var item in ViewBag.Sites)
+            {  
+                <tr onchange="UpdatedList(this)">
+                    <td class="headerCol">@item.SiteId  </td>
+                    <td>
+                        <input type="text" value="@item.SiteName" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.SiteCode" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.SiteAddress" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Notes" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.SiteGUID" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Logo" class="gridText" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Version" class="gridText" />
+                    </td>
+                     <td>
+                        <input type="text" value="@item.CustomerKey" class="gridText" />
+                    </td>
+                </tr>  
+            }
+        </table>
+    </div>
+</div>
+<div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveSites()">Save</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="AddSite()">Add</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="UploadLogo()">Upload Logo</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="ClearLogo()">Clear Logo</button>
+
+</div>
+<script>
+    function AddSite() {
+
+        var newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText"/>  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <input type="text" value="" class="gridText" />  </td>' + '</tr>';
+        $('#marbleTable tr:last').after(newRow);
+    }
+     function SaveSites() {
+        var sites = [];
+        var table = document.getElementById('marbleTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                sites.push({
+                    SiteId: table.rows[r].cells[0].innerHTML,
+                    SiteName: table.rows[r].cells[1].children[0].value,
+                    SiteCode: table.rows[r].cells[2].children[0].value,
+                    SiteAddress: table.rows[r].cells[3].children[0].value,
+                    Notes: table.rows[r].cells[4].children[0].value,
+                    SiteGUID: table.rows[r].cells[5].children[0].value,
+                    Logo: table.rows[r].cells[6].children[0].value,
+                    Version: table.rows[r].cells[7].children[0].value,
+                    CustomeKey: table.rows[r].cells[8].children[0].value
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateSites", "SiteSetup")',
+            data: JSON.stringify({ sites: sites }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+    var updatedArray = [];
+    function UpdatedList(x) {
+        if (!updatedArray.includes(x.rowIndex)) {
+            updatedArray.push(x.rowIndex);
+        }
+    }
+</script>
+
+
+
+
+
+
