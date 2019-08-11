@@ -189,30 +189,33 @@ namespace MarbaleManagementStudio.Controllers
             }
          
         }
-        public JsonResult TaxDetails(int TaxId, decimal Price, bool TaxInclusive)
+        public JsonResult TaxDetails(Product model)
         {
-            Product p = new Product();
-            if (Session["TaxList"] != null)
-            {
-                p.TaxList = Session["TaxList"] as List<TaxSet>;
-                List<TaxSet> TaxDetails = p.TaxList.Where(a => a.TaxId == TaxId).ToList();
-                if (TaxInclusive == true)
+            
+                //  Product p = new Product();
+                if (Session["TaxList"] != null)
                 {
-
-                    p.EffectivePrice = (Price * TaxDetails[0].TaxPercent) / (100+(TaxDetails[0].TaxPercent));
-                    p.EffectivePrice = Price - p.EffectivePrice;
-                    p.FinalPrice = Price;
-                    p.Taxpercent = TaxDetails[0].TaxPercent;
+                    model.TaxList = Session["TaxList"] as List<TaxSet>;
+                    List<TaxSet> TaxDetails = model.TaxList.Where(a => a.TaxId == model.Id).ToList();
+                    if (model.TaxInclusive == true)
+                    {
+                        model.Price = model.Price - model.FaceValue;
+                        model.EffectivePrice = (model.Price * TaxDetails[0].TaxPercent) / (100 + (TaxDetails[0].TaxPercent));
+                        model.EffectivePrice = model.Price - model.EffectivePrice;
+                        model.FinalPrice = model.Price;
+                        model.Taxpercent = TaxDetails[0].TaxPercent;
+                    }
+                    else
+                    {
+                        model.Price = model.Price - model.FaceValue;
+                        model.EffectivePrice = model.Price * (TaxDetails[0].TaxPercent / 100);
+                        model.FinalPrice = model.Price + model.EffectivePrice;
+                        model.EffectivePrice = model.Price;
+                        model.Taxpercent = TaxDetails[0].TaxPercent;
+                    }
                 }
-                else
-                {
-                    p.EffectivePrice = Price * (TaxDetails[0].TaxPercent / 100);
-                    p.FinalPrice = Price + p.EffectivePrice;
-                    p.EffectivePrice = Price;
-                    p.Taxpercent = TaxDetails[0].TaxPercent;
-                }
-            }
-            return Json(p, JsonRequestBehavior.AllowGet);
+            
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
     }

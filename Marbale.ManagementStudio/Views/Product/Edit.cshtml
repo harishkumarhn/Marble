@@ -10,7 +10,7 @@
 
     @using (Html.BeginForm("InsertOrUpdate", "Product", FormMethod.Post))
     {
-        <div id="editpopup">
+        <div>      <div id="editpopup" style="overflow-y:scroll;height:500px">
               <form>
                   <div id="productclass" style="border:2px solid black;border-color:cornsilk">
     <div class="form-group row" >
@@ -44,14 +44,11 @@
         <label for="ex3"> <b >DisplayGroup:</b></label>  @Html.TextBoxFor(m => m.DisplayGroup, new { @class = "form-control" })
        
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <label for="ex4">Auto Generate CardNumber:</label>
      @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
-         <div class="col-md-1">
-        <label for="ex3">OnlyVIP:</label>
-     @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "form-control", @style = "position:absolute;width:20px;" })
-      </div>
+     
                           <div class="col-md-3">
         <label for="ex3">Category:</label>
                  @Html.DropDownListFor(m => m.Category,new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value",selectedValue:string.IsNullOrEmpty(Model.Category)?"SELECT":Model.Category), new {@class="form-control",@style="height: 35px"})
@@ -61,22 +58,19 @@
                                              <div class="col-md-3">
         <label for="ex3">Product Type:</label>
                                                         @Html.DropDownListFor(m => m.Type,new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value",selectedValue:string.IsNullOrEmpty(Model.Type)?"SELECT":Model.Type), new {@class="form-control",@style="height: 35px"})
-     @*                         <select name="categoryList" id="categoryList" class="form-control" style="height: 35px">
-              @foreach (var dow in Session["CategoryList"] as List<Marbale.BusinessObject.IdValue>)
-              {
-                
-                    <option value="@dow.Value">@dow.Value</option>
-                  
-              }
-            </select> *@
-   @* @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })*@
+     
+          
+      </div>
+                            <div class="col-md-1">
+        <label for="ex3">OnlyVIP:</label>
+     @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "form-control", @style = "position:absolute;width:20px;" })
       </div>
     </div>
    </div>
                <b style="color:green">Price:</b>
                   <div class="pricediv" style="border:2px solid black;border-color:cornsilk">
        <div class="form-group row">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <label for="ex3"> <b >Card Face Value:</b></label>  @Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control" })
       </div>
       <div class="col-md-2">
@@ -99,7 +93,7 @@
   @Html.TextBoxFor(m => m.Taxpercent, new { @class = "form-control" })
       </div>
         
-                        <div class="col-md-2">
+                        <div class="col-md-3">
         <label for="ex4">Effective Price:</label>
   @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "form-control" })
       </div>
@@ -131,7 +125,7 @@
       </div>
                         <div class="col-md-2">
         <label for="ex4">CardValidFor:</label>
-  @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control",@readonly="readonly" })
+  @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control"})
       </div>
     </div></div>
                   <b style="color:indianred">Miscellaneous:</b>
@@ -160,11 +154,14 @@
                      
   </form>
 
-         <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
+      
+            </div>
+               <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
              <input type="submit" name="submit" value="Duplicate" class="btn btn-primary btn-md" />
 @*               <button type="button" class="btn btn-primary" onclick="SaveDuplicate();">Duplicate</button>*@
              <button type="button" class="btn btn-secondary close1" data-dismiss="modal">Close</button>
             </div>
+  
     }
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -184,19 +181,29 @@
         debugger
         var TaxId = $('#TaxName option:selected').val();
         var Price = $('#Price').val();
+        if (Price == "") {
+            Price = null;
+        }
+        var  FaceValue= Number($('#FaceValue').val());
         taxinclusive = $('#TaxInclusive').is(":checked");
-     
+        var model = {
+            Id: TaxId,
+            Price: Price,
+            FaceValue: FaceValue,
+            TaxInclusive: taxinclusive
+        };
         if (TaxId == "") {
             $('#EffectivePrice').val(Price);
             $('#FinalPrice').val(Price);
         }
+        //JSON.stringify({ TaxId: TaxId, Price: Price, TaxInclusive: taxinclusive, FaceValue: FaceValue }),
         else {
           
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 url: '@Url.Action("TaxDetails", "Product")',
-                data: JSON.stringify({ TaxId: TaxId, Price: Price, TaxInclusive: taxinclusive }),
+                data: JSON.stringify({ model: model }),
                 dataType: "json",
                 success: function (data) {
                     $('#EffectivePrice').val(data.EffectivePrice);
