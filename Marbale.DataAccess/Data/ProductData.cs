@@ -122,7 +122,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[16];
+                SqlParameter[] sqlParameters = new SqlParameter[25];
                 sqlParameters[0] = new SqlParameter("@name", string.IsNullOrEmpty(product.Name) ? "" : product.Name);
                 sqlParameters[1] = new SqlParameter("@type", string.IsNullOrEmpty(product.Type) ? "" : product.Type);
                 sqlParameters[2] = new SqlParameter("@active", product.Active);
@@ -139,6 +139,18 @@ namespace Marbale.DataAccess
                 sqlParameters[13] = new SqlParameter("@taxInclusive", product.TaxInclusive);
                 sqlParameters[14] = new SqlParameter("@taxPercentage", product.TaxPercentage);
                 sqlParameters[15] = new SqlParameter("@id", product.Id);
+                //
+                sqlParameters[16] = new SqlParameter("@Bonus", product.Bonus);
+                sqlParameters[17] = new SqlParameter("@LastUpdatedUser", string.IsNullOrEmpty(product.LastUpdatedUser) ? "" : product.LastUpdatedUser);
+                sqlParameters[18] = new SqlParameter("@TaxName", product.TaxName);
+              //  sqlParameters[19] = new SqlParameter("@StartDate", product.StartDate);
+                sqlParameters[19] = new SqlParameter("@LastUpdatedDate", DateTime.Now);
+                sqlParameters[20] = new SqlParameter("@Games", product.Games);
+                sqlParameters[21] = new SqlParameter("@CreditsPlus", product.CreditsPlus);
+                sqlParameters[22] = new SqlParameter("@Credits", product.Credits);
+
+                sqlParameters[23] = new SqlParameter("@CardValidFor", product.CardValidFor);
+                sqlParameters[24] = new SqlParameter("@Courtesy", product.Courtesy);
 
                 return conn.executeUpdateQuery("sp_InsertOrUpdateProduct", sqlParameters);
             }
@@ -306,6 +318,15 @@ namespace Marbale.DataAccess
             sqlParameters[2] = new SqlParameter("@TaxStructurePercentage", taxstructure.TaxStructurePercentage);
             sqlParameters[3] = new SqlParameter("@TaxStructureName", taxstructure.TaxStructureName);
             return conn.executeUpdateQuery("sp_InsertOrUpdateTaxStructure", sqlParameters);
+        }
+
+        public int DeleteProductbyId(int Id)
+        {
+
+
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@Id",Id);
+            return conn.executeUpdateQuery("DeleteProductById", sqlParameters);
         }
     }
 }
