@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Marble.Business;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,75 +15,109 @@ namespace Marbale.KeyGen
 {
     public partial class KeyGenerater : Form
     {
+        string key = "sblw-3hn8-sqoy19";
+        private SiteSetupBL siteSetupBL;
         public KeyGenerater()
         {
+            siteSetupBL = new SiteSetupBL();
             InitializeComponent();
         }
 
         private void btn_generate_Click(object sender, EventArgs e)
         {
-            if (chk_never.Checked)
+            try
             {
-                txt_license.Text = this.Encrypt(txt_site.Text + "|never");
-            }
-            else
-            {
-                txt_license.Text = this.Encrypt(txt_site.Text + "|" + dateTimePicker1.Text);
-            }
-        }
-        private string Encrypt(string clearText)
-        {
-            string EncryptionKey = "MAKV2SPBNI99212";
-            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
-            using (Aes encryptor = Aes.Create())
-            {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
+                if (chk_never.Checked)
                 {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(clearBytes, 0, clearBytes.Length);
-                        cs.Close();
-                    }
-                    clearText = Convert.ToBase64String(ms.ToArray());
+                    txt_license.Text = this.Encrypt(txt_site.Text + "|never", key);
+                }
+                else
+                {
+                    txt_license.Text = this.Encrypt(txt_site.Text + "|" + dateTimePicker1.Text, key);
                 }
             }
-            return clearText;
-        }
-        private string Decrypt(string cipherText)
-        {
-            string EncryptionKey = "MAKV2SPBNI99212";
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            using (Aes encryptor = Aes.Create())
+            catch (Exception ex)
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(cipherBytes, 0, cipherBytes.Length);
-                        cs.Close();
-                    }
-                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
-                }
+                this.lab_validation.Visible = true;
             }
-            return cipherText;
+        }
+
+
+        public string Encrypt(string input, string key)
+        {
+            byte[] resultArray;
+            try
+            {
+                byte[] inputArray = UTF8Encoding.UTF8.GetBytes(input);
+                TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
+                tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
+                tripleDES.Mode = CipherMode.ECB;
+                tripleDES.Padding = PaddingMode.PKCS7;
+                ICryptoTransform cTransform = tripleDES.CreateEncryptor();
+                resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
+                tripleDES.Clear();
+            }
+            catch (Exception ex)
+            {
+                this.lab_validation.Visible = true;
+                throw;
+            }
+            return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+        }
+        public string Decrypt(string input, string key)
+        {
+            byte[] resultArray;
+            try
+            {
+                byte[] inputArray = Convert.FromBase64String(input);
+                TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
+                tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
+                tripleDES.Mode = CipherMode.ECB;
+                tripleDES.Padding = PaddingMode.PKCS7;
+                ICryptoTransform cTransform = tripleDES.CreateDecryptor();
+                resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
+                tripleDES.Clear();
+            }
+            catch (Exception ex)
+            {
+                this.lab_validation.Visible = true;
+                throw;
+            }
+            return UTF8Encoding.UTF8.GetString(resultArray);
         }
 
         private void btn_decode_Click(object sender, EventArgs e)
         {
-            string value = this.Decrypt(txt_lk_decode.Text);
-            if (!string.IsNullOrWhiteSpace(value))
+            try
             {
-                string[] keys = value.Split('|');
-                txt_sk_decode.Text = keys[0];
-                txt_ed_deode.Text = keys[1];
-                chk_never_decode.Checked = keys[1] == "never";
+                string value = this.Decrypt(txt_lk_decode.Text, key);
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    string[] keys = value.Split('|');
+                    txt_sk_decode.Text = keys[0];
+                    txt_ed_deode.Text = keys[1];
+                    chk_never_decode.Checked = keys[1] == "never";
+                }
             }
+            catch (Exception ex)
+            {
+                this.lab_validation.Visible = true;
+            }
+        }
+
+        private void KeyGenerater_Load(object sender, EventArgs e)
+        {
+            this.lab_validation.Visible = false;
+        }
+
+        private void btn_close_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void btn_decode_close_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
 
     }

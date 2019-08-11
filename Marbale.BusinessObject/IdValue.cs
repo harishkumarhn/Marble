@@ -8,12 +8,12 @@ namespace Marbale.BusinessObject
 {
     public class IdValue
     {
-        public int Id { get; set; }
+        public Nullable<int> Id { get; set; }
         public string Value { get; set; }
     }
     public class customIDVa
     {
-        public int Value { get; set; }
+        public Nullable<int> Value { get; set; }
         public string Text { get; set; }
 
     }

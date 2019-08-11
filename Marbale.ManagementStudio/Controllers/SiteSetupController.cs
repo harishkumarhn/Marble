@@ -74,13 +74,14 @@ namespace MarbaleManagementStudio.Controllers
             //}
            
 
-        }
 
-        #endregion
+        //}
+
+        //#endregion
         #region Appsettings
         public ActionResult UpdateAppSettings(List<AppSetting> appSettings)
         {
-           
+
 
             bool status = siteSetup.SavePOSConfiguration(appSettings);
             return Json(status, JsonRequestBehavior.AllowGet);
@@ -141,7 +142,7 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.LimitForm = datatable;
             return View();
         }
-         #endregion
+        #endregion
         #region Transaction
         public ActionResult Transaction()
         {
@@ -204,7 +205,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Payment");
             ViewBag.Payment = datatable;
-           // await ViewBag.Payment;
+            // await ViewBag.Payment;
             return View();
         }
         #endregion
@@ -215,7 +216,7 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.SignageForm = datatable;
             return View();
 
-           
+
         }
 
 
@@ -331,11 +332,36 @@ namespace MarbaleManagementStudio.Controllers
             types.Add(new customIDVa() { Value = 0, Text = "NotUsed" });
             types.Add(new customIDVa() { Value = 1, Text = "Option" });
             types.Add(new customIDVa() { Value = 2, Text = "Mendatory" });
-        //    ViewBag.PartialTypes = types;
-         //   List<CustomDropdown> myLevels = Enum.GetValues(typeof(CustomDropdown)).Cast<CustomDropdown>().ToList();
+            //    ViewBag.PartialTypes = types;
+            //   List<CustomDropdown> myLevels = Enum.GetValues(typeof(CustomDropdown)).Cast<CustomDropdown>().ToList();
             ViewBag.RequiredLevel = new SelectList(types);
             return View(data);
         }
+        #endregion
+
+        #region Site
+        public ActionResult ProductKey()
+        {
+            string SiteId = System.Web.Configuration.WebConfigurationManager.AppSettings["SiteId"];
+            ViewBag.ProductKey = siteSetup.GetProductKey(SiteId);
+            return View();
+        }
+
+        public int UpdateProductKey(ProductKey siteData)
+        {
+            return siteSetup.UpdateProductKey(siteData);
+        }
+
+        public ActionResult Sites()
+        {
+            ViewBag.Sites = siteSetup.GetSites();
+            return View();
+        }
+        public int UpdateSites(List<Site> sites)
+        {
+           return siteSetup.InsertOrUpdateSites(sites);
+        }
+
         #endregion
 
     }

@@ -8,14 +8,18 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Marbale.BusinessObject.SiteSetup;
+using System.Security.Cryptography;
+using System.IO;
+
 namespace Marble.Business
 {
     public class SiteSetupBL
     {
         private SiteSetupData siteSetupData;
+        string key = "sblw-3hn8-sqoy19";
 
-         public SiteSetupBL()
+
+        public SiteSetupBL()
         {
             siteSetupData = new SiteSetupData();
         }
@@ -162,16 +166,16 @@ namespace Marble.Business
         public List<MessagesModel> GetAllMessages()
         {
             var dataTable = siteSetupData.GetAllMessages();
-          List<MessagesModel> message = new List<MessagesModel>();
-          foreach (DataRow dr in dataTable.Rows)
-          {
-              MessagesModel m = new MessagesModel();
-              m.MessageNo = dr.IsNull("MessageNo") ? 0 : int.Parse(dr["MessageNo"].ToString());
-              m.MessageName = dr.IsNull("MessageName") ? "" : (dr["MessageName"].ToString());
-              m.MessageDescription = dr.IsNull("MessageDescription") ? "" : (dr["MessageDescription"].ToString());
-              message.Add(m);
-          }
-          return message;
+            List<MessagesModel> message = new List<MessagesModel>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                MessagesModel m = new MessagesModel();
+                m.MessageNo = dr.IsNull("MessageNo") ? 0 : int.Parse(dr["MessageNo"].ToString());
+                m.MessageName = dr.IsNull("MessageName") ? "" : (dr["MessageName"].ToString());
+                m.MessageDescription = dr.IsNull("MessageDescription") ? "" : (dr["MessageDescription"].ToString());
+                message.Add(m);
+            }
+            return message;
         }
         public int UpdateMessages(List<MessagesModel> messageObject)
         {
@@ -188,7 +192,7 @@ namespace Marble.Business
 
                 throw;
             }
-             
+
         }
 
 
@@ -197,11 +201,11 @@ namespace Marble.Business
             int s = 0;
             foreach (var item in tasktype)
             {
-                 s= siteSetupData.UpdateTaskType(item);
+                s = siteSetupData.UpdateTaskType(item);
             }
             return s;
-           
-            
+
+
         }
 
         public List<TaskTypeModel> GetTaskType()
@@ -238,6 +242,17 @@ namespace Marble.Business
             try
             {
                 return siteSetupData.InsertOrUpdateUsers(users);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public int InsertOrUpdateSites(List<Site> sites)
+        {
+            try
+            {
+                return siteSetupData.InsertOrUpdateSites(sites);
             }
             catch (Exception e)
             {
@@ -400,9 +415,6 @@ namespace Marble.Business
             statusList.Add(new IdValue() { Id = 0, Value = "Inactive" });
         }
 
-
-
-
         public List<Buttons> GetAllValuesButtons()
         {
             List<Buttons> bList = new List<Buttons>();
@@ -417,7 +429,7 @@ namespace Marble.Business
                 b.Tittle = dr.IsNull("Tittle") ? "" : dr["Tittle"].ToString();
                 b.BRTag = dr.IsNull("BRTag") ? "" : dr["BRTag"].ToString();
                 bList.Add(b);
-             //   b.Department = dr.IsNull("Department") ? "" : dr["Department"].ToString();
+                //   b.Department = dr.IsNull("Department") ? "" : dr["Department"].ToString();
             }
             return bList;
         }
@@ -455,6 +467,102 @@ namespace Marble.Business
             }
             return user;
         }
+        public ProductKey GetProductKey(string siteId)
+        {
+            DataTable dt = siteSetupData.GetProductKey(siteId);
+            ProductKey pk = new ProductKey();
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    pk.SiteId = dr.IsNull("site_id") ? 0 : int.Parse(dr["site_id"].ToString());
+
+                    if (!dr.IsNull("SiteKey"))
+                    {
+                        var bytes_s = (byte[])dr["SiteKey"];
+                        pk.SiteKey = Encoding.ASCII.GetString(bytes_s, 0, bytes_s.Length);
+                    }
+                    if (!dr.IsNull("LicenseKey"))
+                    {
+                        var bytes_l = (byte[])dr["LicenseKey"];
+                        pk.LicenseKey = Encoding.ASCII.GetString(bytes_l, 0, bytes_l.Length);
+                    }
+                    break;
+                }
+            }
+            return pk;
+        }
+        public int UpdateProductKey(ProductKey pk)
+        {
+            int result = -1;
+            if (!string.IsNullOrWhiteSpace(pk.SiteKey) && !string.IsNullOrWhiteSpace(pk.LicenseKey))
+            {
+                var license = Decrypt(pk.LicenseKey,key);
+                var array = license.Split('|');
+                DateTime date;
+                if (DateTime.TryParse(array[1], out date))
+                {
+                    result = siteSetupData.UpdateProductKey(pk);
+                }
+            }
+            return result;
+        }
+        public string Decrypt(string input, string key)
+        {
+            byte[] resultArray;
+            try
+            {
+                byte[] inputArray = Convert.FromBase64String(input);
+                TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
+                tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
+                tripleDES.Mode = CipherMode.ECB;
+                tripleDES.Padding = PaddingMode.PKCS7;
+                ICryptoTransform cTransform = tripleDES.CreateDecryptor();
+                resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
+                tripleDES.Clear();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return UTF8Encoding.UTF8.GetString(resultArray);
+        }
+        public List<Site> GetSites()
+        {
+            DataTable dt = siteSetupData.GetSites();
+            List<Site> sites = new List<Site>();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Site site = new Site();
+                    site.SiteId = dr.IsNull("SiteId") ? 0 : int.Parse(dr["SiteId"].ToString());
+                    site.SiteName = dr.IsNull("SiteId") ? "" : dr["SiteId"].ToString();
+                    site.SiteAddress = dr.IsNull("SiteAddress") ? "" : dr["SiteAddress"].ToString();
+                    site.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
+                    site.Guid = (Guid)dr["Guid"];
+                    site.SiteGUID = (Guid)dr["SiteGUID"];
+                    Byte[] array = new Byte[64];
+
+                    if (dr.IsNull("Logo"))
+                    {
+                        Array.Clear(array, 0, array.Length);
+                    }
+                    else
+                    {
+                        array = (byte[])dr["Logo"];
+                    }
+                    site.Logo = array;
+                    site.CustomerKey = dr.IsNull("CustomerKey") ? "" : dr["CustomerKey"].ToString();
+                    site.SiteCode = dr.IsNull("SiteCode") ? "" : dr["SiteCode"].ToString();
+                    sites.Add(site);
+                }
+
+            }
+            return sites;
+        }
+
 
     }
 }

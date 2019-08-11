@@ -1,69 +1,90 @@
 USE [Marbale]
 GO
-
-/****** Object:  StoredProcedure [dbo].[sp_InsertOrUpdateProduct]    Script Date: 1/19/2019 5:10:19 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_InsertOrUpdateProduct]    Script Date: 7/28/2019 11:12:14 AM ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
-
--- =============================================
--- Author:		Harish
--- =============================================
-
-CREATE PROCEDURE [dbo].[sp_InsertOrUpdateProduct]
-@name varchar(150),
-@type varchar(50) = null,
-@active bit,
-@price int,
-@effectivePrice int,
-@faceValue int,
-@displayGroup varchar(50),
-@displayInPOS bit,
-@autoGenerateCardNumber bit,
-@category varchar(50),
-@onlyVIP bit,
-@posCounter varchar(50),
-@taxInclusive bit,
-@taxPercentage int,
-@id int
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-if not exists (select id from Product with (updlock,serializable) where Id = @id)
-begin
-insert into Product(
-[Name],
-[Type],
-Active,
-Price,
-EffectivePrice,
-FaceValue,
-DisplayGroup,
-DisplayInPOS,
-AutoGenerateCardNumber,
-Category,
-OnlyVIP,
-POSCounter,
-TaxInclusive,
-TaxPercentage) 
-Values(@name,@type,@active,@price,@effectivePrice,@faceValue,@displayGroup,@displayInPOS,
-@autoGenerateCardNumber,@category,@onlyVIP,@posCounter,@taxInclusive,@taxPercentage)
-end
-else
-begin
- update Product set [Name]= @name,[Type]=@type,[Active]=@active,Price=@price,FinalPrice=@faceValue,
-					EffectivePrice=@effectivePrice,FaceValue=@faceValue,DisplayGroup=@displayGroup,
-					DisplayInPOS=@displayInPOS,AutoGenerateCardNumber=@autoGenerateCardNumber,Category=@category,
-					OnlyVIP=@onlyVIP,POSCounter=@posCounter,TaxInclusive=@taxInclusive,TaxPercentage=@taxPercentage
-					where Id=@id
-end
-
-END
-GO
-
-
+    
+-- =============================================    
+-- Author:  Harish    
+-- =============================================    
+    
+CREATE PROCEDURE [dbo].[sp_InsertOrUpdateProduct]    
+@name varchar(150),    
+@type varchar(50) = null,    
+@active bit=null,    
+@price int=null,    
+@effectivePrice int=null,    
+@finalPrice int=null,  
+@faceValue int=null,    
+@displayGroup varchar(50)=null,    
+@displayInPOS bit=null,    
+@autoGenerateCardNumber bit=null,    
+@category varchar(50)=null,    
+@onlyVIP bit=null,    
+@posCounter varchar(50)=null,    
+@taxInclusive bit=null,    
+@taxPercentage int=null,    
+@id int=null  ,  
+@Bonus int =null,  
+@LastUpdatedUser varchar(max)=null,  
+@TaxName varchar(max)=null,  
+--@StartDate datetime=null,  
+@LastUpdatedDate datetime=null,  
+@Games int=null,  
+@CreditsPlus int=null,  
+@Credits int=null,  
+@CardValidFor int=null  ,
+@Courtesy bigint=null  
+AS    
+BEGIN    
+ -- SET NOCOUNT ON added to prevent extra result sets from    
+ -- interfering with SELECT statements.    
+ SET NOCOUNT ON;    
+ declare @TotalDays int declare @expire datetime  
+  select @TotalDays= Defaultvalue from Settings where name ='CARD_VALIDITY'  
+  select @expire=   DATEADD(day, @TotalDays, getdate())   
+  
+if not exists (select id from Product with (updlock,serializable) where Id = @id)    
+begin    
+insert into Product(    
+[Name],    
+[Type],    
+Active,    
+Price,    
+EffectivePrice,    
+FaceValue,    
+DisplayGroup,    
+DisplayInPOS,    
+AutoGenerateCardNumber,    
+Category,    
+OnlyVIP,    
+POSCounter,    
+TaxInclusive,    
+TaxPercentage,  
+Bonus,  
+LastUpdatedUser,TaxName,LastUpdatedDate,Games,CreditsPlus,Credits,CardValidFor,Courtesy 
+  
+  
+)     
+Values(@name,@type,@active,@price,@effectivePrice,@faceValue,@displayGroup,@displayInPOS,    
+@autoGenerateCardNumber,@category,@onlyVIP,@posCounter,@taxInclusive,@taxPercentage,@Bonus,@LastUpdatedUser,@TaxName,  
+@LastUpdatedDate,@Games,@CreditsPlus,@Credits,@CardValidFor,@Courtesy)    
+end    
+else    
+begin    
+ update Product set [Name]= @name,[Type]=@type,[Active]=@active,Price=@price,FinalPrice=@faceValue,    
+     EffectivePrice=@effectivePrice,FaceValue=@faceValue,DisplayGroup=@displayGroup,    
+     DisplayInPOS=@displayInPOS,AutoGenerateCardNumber=@autoGenerateCardNumber,Category=@category,    
+     OnlyVIP=@onlyVIP,POSCounter=@posCounter,TaxInclusive=@taxInclusive,TaxPercentage=@taxPercentage  ,  
+  Bonus=@Bonus,LastUpdatedUser=@LastUpdatedUser,TaxName=@TaxName,Games=@Games,CreditsPlus=@CreditsPlus,  
+  Credits=@Credits,CardValidFor=@CardValidFor , Courtesy=@Courtesy 
+  
+  
+  
+     where Id=@id    
+end    
+    
+END    
+  

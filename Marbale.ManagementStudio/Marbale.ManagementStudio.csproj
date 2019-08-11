@@ -41,12 +41,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ConfigurationAdapter">
+      <HintPath>..\packages\ConfigurationAdapter.1.0.1\lib\ConfigurationAdapter.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -305,6 +309,8 @@
     <Content Include="Views\SiteSetup\Redemption.cshtml" />
     <Content Include="Views\SiteSetup\Payment.cshtml" />
     <Content Include="Views\SiteSetup\Customer.cshtml" />
+    <Content Include="Views\SiteSetup\ProductKey.cshtml" />
+    <Content Include="Views\SiteSetup\Sites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -315,6 +321,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Marbale.BusinessObject\Marbale.BusinessObject.csproj">
       <Project>{b49b19b5-a1c7-4372-8b3b-d4fa9a0981d0}</Project>
       <Name>Marbale.BusinessObject</Name>
@@ -323,9 +332,10 @@
       <Project>{d3791924-6c85-4aad-8bab-3e3cd23c22e6}</Project>
       <Name>Marbale.Business</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <ProjectReference Include="..\Marbale.DataAccess\Marbale.DataAccess.csproj">
+      <Project>{6a6d1608-f1ec-435a-a3ec-10237ab280af}</Project>
+      <Name>Marbale.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
