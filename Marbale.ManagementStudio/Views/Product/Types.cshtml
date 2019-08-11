@@ -3,13 +3,13 @@
 }
 
 <div class="first">
-    <div class="second" style="margin-left:20.2em;">
+    <div class="second">
 
         <table id="productsTable" class="table">
             <thead>
-                <th class="headerCol">ID</th>
+                <th>ID</th>
               @*  <th class="headerCol">Edit</th>*@
-                <th class="headerCol" style="left:100px">Type</th>
+                <th>Type</th>
                 <th>Description</th>
                 <th>ReportGroup</th>
                 <th>CardSale</th>
@@ -20,12 +20,12 @@
             @foreach (var item in ViewBag.productTypes)
             {  
                 <tr onchange="UpdatedList(this)">
-                    <td class="headerCol" >@item.Id  </td>
+                    <td>@item.Id  </td>
 
                  @*   <td class="headerCol" style="left:55px">
                         <button onClick="EditProductType(@item.Id)">-</button>
                     </td>*@
-                    <td class="headerCol" style="left:50px">
+                    <td >
                         <input type="text" value="@item.Type" class="gridText" />
                     </td>
                     <td>
@@ -71,17 +71,18 @@
         $('#productsTable tr:last').after(newRow);
     }
     function SaveProductTypes() {
+        debugger
         var productTypes = [];
         var table = document.getElementById('productsTable');
         for (var r = 1, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
                 productTypes.push({
                     Id: table.rows[r].cells[0].innerHTML,
-                    Type: table.rows[r].cells[2].children[0].value,
-                    Description: table.rows[r].cells[3].children[0].value,
-                    ReportGroup: table.rows[r].cells[4].children[0].value,
-                    Active: table.rows[r].cells[5].children[0].checked,
-                    CardSale: table.rows[r].cells[6].children[0].checked
+                    Type: table.rows[r].cells[1].children[0].value,
+                    Description: table.rows[r].cells[2].children[0].value,
+                    ReportGroup: table.rows[r].cells[3].children[0].value,
+                    Active: table.rows[r].cells[4].children[0].checked,
+                    CardSale: table.rows[r].cells[5].children[0].checked
                 });
             }
         }
