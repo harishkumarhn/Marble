@@ -137,7 +137,7 @@ namespace Marbale.DataAccess
                 sqlParameters[11] = new SqlParameter("@onlyVIP", product.OnlyVIP);
                 sqlParameters[12] = new SqlParameter("@posCounter", string.IsNullOrEmpty(product.POSCounter) ? "" : product.POSCounter);
                 sqlParameters[13] = new SqlParameter("@taxInclusive", product.TaxInclusive);
-                sqlParameters[14] = new SqlParameter("@taxPercentage", product.TaxPercentage);
+                sqlParameters[14] = new SqlParameter("@taxPercentage", product.Taxpercent);
                 sqlParameters[15] = new SqlParameter("@id", product.Id);
                 //
                 sqlParameters[16] = new SqlParameter("@Bonus", product.Bonus);
@@ -165,7 +165,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[16];
+                SqlParameter[] sqlParameters = new SqlParameter[17];
                 sqlParameters[0] = new SqlParameter("@ActiveFlag", ActiveFlag);
                 sqlParameters[1] = new SqlParameter("@AutomaticApply", AutomaticApply);
                 sqlParameters[2] = new SqlParameter("@CouponMendatory", CouponMendatory);
@@ -183,7 +183,7 @@ namespace Marbale.DataAccess
 
                 sqlParameters[14] = new SqlParameter("@MinimumUsedCredits", MinimumUsedCredits);
                 sqlParameters[15] = new SqlParameter("@RemarkMendatory", RemarkMendatory);
-                sqlParameters[15] = new SqlParameter("@Type", Type);
+                sqlParameters[16] = new SqlParameter("@Type", Type);
 
 
                 return conn.executeInsertQuery("sp_Insert_Discount", sqlParameters);
