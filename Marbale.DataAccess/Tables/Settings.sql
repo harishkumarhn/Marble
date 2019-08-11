@@ -26,3 +26,4 @@ CREATE TABLE [dbo].[Settings](
 GO
 
 
+select * from Settings

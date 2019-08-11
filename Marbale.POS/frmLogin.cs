@@ -21,6 +21,13 @@ namespace Marbale.POS
         public frmLogin()
         {
             InitializeComponent();
+
+            txtPassword.KeyPress += TxtPassword_KeyPress;
+        }
+
+        private void TxtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -58,5 +65,8 @@ namespace Marbale.POS
                 MessageBox.Show("Username or Password is invalid");
             }
         }
+
+       
+
     }
 }

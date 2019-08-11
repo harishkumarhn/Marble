@@ -37,14 +37,14 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-            frmLogin frmLogin = new frmLogin();
-            frmLogin.ShowDialog();
-            if (!frmLogin.isLoginSuccess)
-                Environment.Exit(0);
-            else
-            {
-                CurrentUser = frmLogin.loggedInUser;
-            }
+            //frmLogin frmLogin = new frmLogin();
+            //frmLogin.ShowDialog();
+            //if (!frmLogin.isLoginSuccess)
+            //    Environment.Exit(0);
+            //else
+            //{
+            //    CurrentUser = frmLogin.loggedInUser;
+            //}
         }
 
         private void POSHome_Load(object sender, EventArgs e)
@@ -64,14 +64,32 @@ namespace Marbale.POS
 
         void registerAdditionalCardReaders()
         {
-            List<Device> deviceList = new List<Device>();
+            string USBReaderVID = "VID_FFFF";
+            string USBReaderPID = "PID_0035";
+            string USBReaderOptionalString = "0000";
 
+            SiteSetupBL siteSetupBussiness = new SiteSetupBL();
+            List <AppSetting> ListAppSettings = siteSetupBussiness.GetAppSettings("SiteSetup");
+
+            if (ListAppSettings != null && ListAppSettings.Count > 0)
+            {
+                AppSetting ReaderVID = ListAppSettings.Find(x => x.Name == "USB_READER_VID");
+                if (ReaderVID != null)
+                    USBReaderVID = ReaderVID.Value;
+
+                AppSetting ReaderPID = ListAppSettings.Find(x => x.Name == "USB_READER_PID");
+                if (ReaderPID != null)
+                    USBReaderPID = ReaderPID.Value;
+
+                AppSetting UsbReaderString = ListAppSettings.Find(x => x.Name == "USB_READER_OPT_STRING");
+                if (UsbReaderString != null)
+                    USBReaderOptionalString = UsbReaderString.Value;
+            }
+
+            List<Device> deviceList = new List<Device>();
+  
             if (Devices.PrimaryCardReader == null)
             {
-                string USBReaderVID = "VID_FFFF";  //USB_READER_VID
-                string USBReaderPID = "PID_0035"; //USB_READER_PID
-                string USBReaderOptionalString = "0000"; //USB_READER_OPT_STRING
-
                 if (USBReaderVID.Trim() != string.Empty)
                 {
                     Device device = new Device();
@@ -196,6 +214,7 @@ namespace Marbale.POS
                     btnProduct.MouseUp += ProductButton_MouseUp;
                     btnProduct.Name = lstProducts[i].Name + '_' + lstProducts[i].Id;
                     btnProduct.Text = lstProducts[i].Name;
+                    
                     btnProduct.Tag = lstProducts[i].Id;
                     btnProduct.Font = btnSampleProduct.Font;
                     btnProduct.ForeColor = btnSampleProduct.ForeColor;
@@ -241,18 +260,63 @@ namespace Marbale.POS
 
             Transaction.TransactionDate = DateTime.Now;
 
+
+            if (product.Type == "NEW")
+            {
+                if (CurrentCard == null)
+                {
+                    MessageBox.Show("Please tap the card");
+                    return;
+                }
+
+                if (CurrentCard.card_id > 0)
+                {
+                    MessageBox.Show("Cannot have New Card products for existing card");
+                    return;
+                }
+
+                bool newProductExists = false;
+                for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+                {
+                    if (Transaction.TransactionLines[i].ProductType == "NEW" && Transaction.TransactionLines[i].CancelledLine == false)
+                    {
+                        newProductExists = true;
+                        break;
+                    }
+                }
+                if (newProductExists)
+                {
+                    MessageBox.Show("Cannot have multiple New Card products on same card");
+                    return;
+                }
+
+                if (product.FaceValue > 0)
+                    CreateDepositLine(product);
+            }
+            else if (product.Type == "RECHARGE")
+            {
+                if (CurrentCard == null)
+                {
+                    MessageBox.Show("Please tap the card");
+                    return;
+                }
+            }
+
             TransactionLine trxLine = new TransactionLine();
             trxLine.ProductID = product.Id;
             trxLine.ProductName = product.Name;
-            trxLine.Price = product.Price;
+            trxLine.Price = product.Price - product.FaceValue;
             trxLine.quantity = 1;
             trxLine.tax_percentage = product.TaxPercentage;
-            trxLine.tax_amount = (double)(product.Price * product.TaxPercentage) / 100;
+            trxLine.tax_amount = (double)((product.Price - product.FaceValue) * product.TaxPercentage) / 100;
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
-            trxLine.amount = product.Price;
-            trxLine.ProductTypeCode = "MANUAL";
-            trxLine.LineAmount = product.Price + trxLine.tax_amount;
+            trxLine.amount = product.Price - product.FaceValue;
+            trxLine.ProductTypeCode = product.Type;
+            trxLine.LineAmount = (product.Price - product.FaceValue) + trxLine.tax_amount;
+            trxLine.Credits = product.Credits;
+            trxLine.Bonus = product.Bonus;
+            trxLine.Courtesy = product.Courtesy;
 
             //Transaction.Tax_Amount = 0;
             bool found = false;
@@ -279,6 +343,35 @@ namespace Marbale.POS
             RefreshTransactionGrid();
         }
 
+
+        void CreateDepositLine(Product product)
+        {
+            TransactionLine trxLine = new TransactionLine();
+            trxLine.ProductID = 0;
+            trxLine.ProductName = "Card Deposit";
+            trxLine.Price = product.FaceValue;
+            trxLine.quantity = 1;
+            trxLine.tax_percentage = 0;
+            trxLine.tax_amount = 0;
+            trxLine.LineValid = true;
+            trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
+            trxLine.amount = product.FaceValue;
+            trxLine.ProductTypeCode = product.Type;
+            trxLine.LineAmount = product.FaceValue;
+            trxLine.ProductType = product.Type;
+
+            if (CurrentCard != null)
+            {
+                CurrentCard.credits = product.Credits;
+                CurrentCard.bonus = product.Bonus;
+                CurrentCard.courtesy = product.Courtesy;
+                CurrentCard.face_value = product.FaceValue;
+            }
+                    
+
+            Transaction.TransactionLines.Add(trxLine);
+
+        }
 
         void UpdateTransactionAmount()
         {
@@ -772,7 +865,8 @@ namespace Marbale.POS
             {
                 lblCardNotext.Text = CurrentCard.CardNumber;
                 lblCardStatustext.Text = CurrentCard.CardStatus;
-                
+                txtCardStatus.Text = CurrentCard.CardStatus;
+
                 //Issue date population
                 if (CurrentCard.issue_date == DateTime.MinValue)
                 {
@@ -785,7 +879,7 @@ namespace Marbale.POS
                 }
 
                 //Card Deposit
-                dgvCardDetails.Rows[1].Cells[1].Value = 0;
+                dgvCardDetails.Rows[1].Cells[1].Value = CurrentCard.face_value;
 
                 //Credits
                 dgvCardDetails.Rows[2].Cells[1].Value = CurrentCard.credits;
@@ -824,6 +918,7 @@ namespace Marbale.POS
         {
             dgvTransaction.Rows.Clear();
             Transaction = null;
+            CurrentCard = null;
             ClearCustomer();
             ClearCard();
         }
@@ -841,7 +936,10 @@ namespace Marbale.POS
 
             TransactionBL trxBL = new TransactionBL();
             int trxId = trxBL.SaveTransaction(Transaction);
-            
+
+            if (trxId > 0)
+                MessageBox.Show("Transaction Saved Successfully");
+
             ClearTransaction();
         }
 
@@ -928,7 +1026,7 @@ namespace Marbale.POS
 
         void PopulateCustomer()
         {
-            if (Customer != null)
+            if (Customer != null)  
             {
                 txtFirstname.Text = Customer.first_name;
                 txtLastname.Text = Customer.last_name;
@@ -954,6 +1052,7 @@ namespace Marbale.POS
         {
             lblCardNotext.Text = string.Empty;
             lblCardStatustext.Text = string.Empty;
+            txtCardStatus.Text = string.Empty;
 
             //Issue date population
             dgvCardDetails.Rows[0].Cells[1].Value = string.Empty;
@@ -991,7 +1090,7 @@ namespace Marbale.POS
             frmGenericDataEntry frm = new frmGenericDataEntry();
             frm.ShowDialog();
 
-            if (!string.IsNullOrEmpty(frm.cardNumber))
+            if (!string.IsNullOrEmpty(frm.cardNumber) && frm.cardNumber.Length ==10)
             {
                 HandleCardRead(frm.cardNumber, null);
             }

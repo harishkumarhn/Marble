@@ -87,12 +87,12 @@ namespace Marble.Business
                 //card.TimerResetCard = dr.IsNull("TimerResetCard") ? false : bool.Parse(dr["TimerResetCard"].ToString());
                 //card.vip_customer = dr.IsNull("VIPCustomer") ? false : bool.Parse(dr["VIPCustomer"].ToString());
 
-                //card.credits = dr.IsNull("Credits") ? 0 : float.Parse(dr["Credits"].ToString());
+                card.credits = dt.Rows[0]["Credits"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Credits"]);                
                 //card.credits_played = dr.IsNull("CreditsPlayed") ? 0 : float.Parse(dr["CreditsPlayed"].ToString());
 
 
-                //card.courtesy = dr.IsNull("Courtesy") ? 0 : float.Parse(dr["Courtesy"].ToString());
-                //card.bonus = dr.IsNull("Bonus") ? 0 : float.Parse(dr["Bonus"].ToString());
+                card.courtesy = dt.Rows[0]["Courtesy"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Courtesy"]);
+                card.bonus = dt.Rows[0]["Bonus"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Bonus"]);
                 //card.real_ticket_mode = dr.IsNull("RealTicketMode") ? false : bool.Parse(dr["RealTicketMode"].ToString());
                 //card.ticket_count = dr.IsNull("TicketCount") ? 0 : int.Parse(dr["TicketCount"].ToString());
 
@@ -122,6 +122,22 @@ namespace Marble.Business
                 {
                     trx = new Transaction();
                     trx.Trx_id = rw["TrxId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["TrxId"]);
+                    trx.TransactionDate = rw["TrxDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(rw["TrxDate"]);
+                    trx.Transaction_Amount = rw["TrxAmount"] == DBNull.Value ? 0 : Convert.ToDouble(rw["TrxAmount"]);
+                    trx.Tax_Amount = rw["TaxAmount"] == DBNull.Value ? 0 : Convert.ToDouble(rw["TaxAmount"]);
+                    trx.Net_Transaction_Amount = rw["TrxNetAmount"] == DBNull.Value ? 0 : Convert.ToDouble(rw["TrxNetAmount"]);
+                    trx.POSMachine = rw["POSMachine"] == DBNull.Value ? string.Empty : rw["POSMachine"].ToString();
+                    trx.UserId = rw["UserId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["UserId"]);
+                    trx.PaymentMode = rw["PaymentMode"] == DBNull.Value ? 0 : Convert.ToInt32(rw["PaymentMode"]);
+                    trx.CashAmount = rw["CashAmount"] == DBNull.Value ? 0 : Convert.ToDouble(rw["CashAmount"]);
+                    trx.CreditCardAmount = rw["CreditCardAmount"] == DBNull.Value ? 0 : Convert.ToDouble(rw["CreditCardAmount"]);
+                    trx.GameCardAmount = rw["GameCardAmount"] == DBNull.Value ? 0 : Convert.ToDouble(rw["GameCardAmount"]);
+                    trx.PaymentReference = rw["PaymentReference"] == DBNull.Value ? string.Empty : rw["PaymentReference"].ToString();
+                    trx.PrimaryCardId = rw["PrimaryCardId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["PrimaryCardId"]);
+                    trx.OrderId = rw["OrderId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["OrderId"]);
+                    trx.POSTypeId = rw["POSTypeId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["POSTypeId"]);
+                    trx.OtherModeAmount = rw["OtherPaymentModeAmount"] == DBNull.Value ? 0 : Convert.ToDouble(rw["OtherPaymentModeAmount"]);
+                    trx.CustomerId = rw["CustomerId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["CustomerId"]);
 
                     trx.TransactionLines = GetTraxLines(trx.Trx_id, ds.Tables[1]);
                     lstTransaction.Add(trx);
@@ -172,6 +188,20 @@ namespace Marble.Business
                             trxLn.ProductName = rw["name"] != DBNull.Value ? rw["name"].ToString() : string.Empty;
                             trxLn.ProductID = rw["ProductId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["ProductId"]);
                             trxLn.Price = rw["Price"] == DBNull.Value ? 0 : Convert.ToDouble(rw["Price"]);
+                            trxLn.trxId = rw["TrxId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["TrxId"]);
+                            trxLn.LineId = rw["LineId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["LineId"]);
+                            trxLn.quantity = rw["Quantity"] == DBNull.Value ? 0 : Convert.ToInt32(rw["Quantity"]);
+                            trxLn.amount = rw["Amount"] == DBNull.Value ? 0 : Convert.ToDouble(rw["Amount"]);
+                            trxLn.cardId = rw["CardId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["CardId"]);
+                            trxLn.CardNumber = rw["CardNumber"] != DBNull.Value ? rw["CardNumber"].ToString() : string.Empty;
+                            trxLn.Credits = rw["Credits"] == DBNull.Value ? 0 : Convert.ToDouble(rw["Credits"]);
+                            trxLn.Courtesy = rw["Courtesy"] == DBNull.Value ? 0 : Convert.ToDouble(rw["Courtesy"]);
+                            trxLn.tax_percentage = rw["TaxPercentage"] == DBNull.Value ? 0 : Convert.ToDouble(rw["TaxPercentage"]);
+                            trxLn.time = rw["Time"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["Time"]);
+                            trxLn.Bonus = rw["Bonus"] == DBNull.Value ? 0 : Convert.ToDouble(rw["Bonus"]);
+                            trxLn.tickets = rw["Tickets"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["Tickets"]);
+                            trxLn.Remarks = rw["Remarks"] != DBNull.Value ? rw["Remarks"].ToString() : string.Empty;
+
                             trxLines.Add(trxLn);
                         }
                     }

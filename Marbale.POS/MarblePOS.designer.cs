@@ -1809,12 +1809,13 @@
             // 
             // btnReConnectCardReader
             // 
-            this.btnReConnectCardReader.BackColor = System.Drawing.Color.Transparent;
+            this.btnReConnectCardReader.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnReConnectCardReader.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnReConnectCardReader.FlatAppearance.BorderSize = 0;
             this.btnReConnectCardReader.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnReConnectCardReader.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnReConnectCardReader.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReConnectCardReader.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnReConnectCardReader.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnReConnectCardReader.Location = new System.Drawing.Point(158, 8);
             this.btnReConnectCardReader.Name = "btnReConnectCardReader";

@@ -70,6 +70,7 @@
             this.pnlLogin.Name = "pnlLogin";
             this.pnlLogin.Size = new System.Drawing.Size(364, 251);
             this.pnlLogin.TabIndex = 6;
+          
             // 
             // pictureBox1
             // 
@@ -133,6 +134,7 @@
             this.txtPassword.Size = new System.Drawing.Size(266, 36);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.TextValue = "";
+
             // 
             // btnCancel
             // 

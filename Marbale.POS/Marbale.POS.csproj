@@ -194,6 +194,10 @@
       <Project>{d3791924-6c85-4aad-8bab-3e3cd23c22e6}</Project>
       <Name>Marbale.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Marbale.DataAccess\Marbale.DataAccess.csproj">
+      <Project>{6a6d1608-f1ec-435a-a3ec-10237ab280af}</Project>
+      <Name>Marbale.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\left.png" />
