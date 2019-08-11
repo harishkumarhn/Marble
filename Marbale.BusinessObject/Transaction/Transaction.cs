@@ -12,7 +12,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public double CashAmount { get; set; }
         public double Discount_Amount { get; set; }
         public string LoginID { get; set; }
-        public double Net_Transaction_Amount { get; set; }
+        public decimal Net_Transaction_Amount { get; set; }
         public string originalSystemReference { get; set; }
         public int OriginalTrxId { get; set; }
         public double OtherModeAmount { get; set; }
@@ -28,7 +28,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public int TokenNumber { get; set; }
         public double TotalPaidAmount { get; set; }
         public DateTime TransactionDate { get; set; }
-        public double Transaction_Amount { get; set; }
+        public decimal Transaction_Amount { get; set; }
         public DateTime TrxDate { get; set; }
         public List<TransactionLine> TrxLines { get; set; }
         public int TrxProfileId { get; set; }
@@ -70,17 +70,17 @@ namespace Marbale.BusinessObject.POSTransaction
         public bool AllowEdit { get; set; }
         public bool AllowPriceOverride { get; set; }
         public string AttractionDetails { get; set; }
-        public double Bonus { get; set; }
+        public decimal Bonus { get; set; }
         public bool CancelledLine { get; set; }
         //public Card card { get; set; }
         public string CardNumber { get; set; }
         public int CardTypeId { get; set; }
         public int CategoryId { get; set; }
         public bool ComboChildLine { get; set; }
-        public double Courtesy { get; set; }
+        public decimal Courtesy { get; set; }
         public bool CreditPlusConsumptionApplied { get; set; }
         public int CreditPlusConsumptionId { get; set; }
-        public double Credits { get; set; }
+        public decimal Credits { get; set; }
         public int DBLineId { get; set; }
         public bool LineProcessed { get; set; }
         public bool LineValid { get; set; }
@@ -94,7 +94,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public int OrigRentalTrxId { get; set; }
         public TransactionLine ParentLine { get; set; }
 
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public bool PrintKOT { get; set; }
         public int ProductID { get; set; }
         public string ProductName { get; set; }
@@ -110,11 +110,11 @@ namespace Marbale.BusinessObject.POSTransaction
         public string taxName { get; set; }
         public double tax_amount { get; set; }
         public int tax_id { get; set; }
-        public double tax_percentage { get; set; }
+        public decimal tax_percentage { get; set; }
         public int trxId { get; set; }
 
-        public double LineAmount { get; set; }
-        public double amount { get; set; }
+        public decimal LineAmount { get; set; }
+        public decimal amount { get; set; }
 
         public int cardId { get; set; }
 

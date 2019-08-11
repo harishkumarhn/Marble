@@ -13,7 +13,7 @@ namespace Marbale.BusinessObject.Cards
         public int card_id = -1;
         public DateTime issue_date;
         public DateTime ExpiryDate;
-        public float face_value;
+        public decimal face_value;
         public bool refund_flag = true;
         public float refund_amount;
         public DateTime refund_date;
@@ -22,9 +22,9 @@ namespace Marbale.BusinessObject.Cards
         public int addTicketCount;
         public string notes = "";
         public DateTime last_update_time;
-        public double credits;
-        public double courtesy;
-        public double bonus;
+        public decimal credits;
+        public decimal courtesy;
+        public decimal bonus;
         public double time;
         public double addCredits;
         public double addCourtesy;

@@ -305,18 +305,20 @@ namespace Marbale.POS
             TransactionLine trxLine = new TransactionLine();
             trxLine.ProductID = product.Id;
             trxLine.ProductName = product.Name;
-            trxLine.Price = product.Price - product.FaceValue;
+            trxLine.Price =  Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
             trxLine.quantity = 1;
+
             trxLine.tax_percentage = product.TaxPercentage;
+
             trxLine.tax_amount = (double)((product.Price - product.FaceValue) * product.TaxPercentage) / 100;
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
-            trxLine.amount = product.Price - product.FaceValue;
+            trxLine.amount = Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
             trxLine.ProductTypeCode = product.Type;
-            trxLine.LineAmount = (product.Price - product.FaceValue) + trxLine.tax_amount;
-            trxLine.Credits = product.Credits;
-            trxLine.Bonus = product.Bonus;
-            trxLine.Courtesy = product.Courtesy;
+            trxLine.LineAmount = (Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue)) + Convert.ToDecimal(trxLine.tax_amount);
+            trxLine.Credits = Convert.ToDecimal(product.Credits);
+            trxLine.Bonus = Convert.ToDecimal(product.Bonus);
+            trxLine.Courtesy = Convert.ToDecimal(product.Courtesy);
 
             //Transaction.Tax_Amount = 0;
             bool found = false;
@@ -349,23 +351,23 @@ namespace Marbale.POS
             TransactionLine trxLine = new TransactionLine();
             trxLine.ProductID = 0;
             trxLine.ProductName = "Card Deposit";
-            trxLine.Price = product.FaceValue;
+            trxLine.Price = Convert.ToDecimal(product.FaceValue);
             trxLine.quantity = 1;
             trxLine.tax_percentage = 0;
             trxLine.tax_amount = 0;
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
-            trxLine.amount = product.FaceValue;
+            trxLine.amount = Convert.ToDecimal(product.FaceValue);
             trxLine.ProductTypeCode = product.Type;
-            trxLine.LineAmount = product.FaceValue;
+            trxLine.LineAmount = Convert.ToDecimal(product.FaceValue);
             trxLine.ProductType = product.Type;
 
             if (CurrentCard != null)
             {
-                CurrentCard.credits = product.Credits;
-                CurrentCard.bonus = product.Bonus;
-                CurrentCard.courtesy = product.Courtesy;
-                CurrentCard.face_value = product.FaceValue;
+                CurrentCard.credits = Convert.ToDecimal(product.Credits);
+                CurrentCard.bonus = Convert.ToDecimal(product.Bonus);
+                CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
+                CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
             }
                     
 
@@ -382,6 +384,7 @@ namespace Marbale.POS
                 if (Transaction.TransactionLines[i].LineValid && Transaction.TransactionLines[i].CancelledLine == false)
                 {
                     Transaction.Tax_Amount += Transaction.TransactionLines[i].tax_amount;
+
                     Transaction.Transaction_Amount += Transaction.TransactionLines[i].LineAmount;
                 }
             }
