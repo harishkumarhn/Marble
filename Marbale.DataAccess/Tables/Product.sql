@@ -22,7 +22,7 @@ CREATE TABLE [dbo].[Product](
 	[Price] [decimal](18,3) NULL,
 	[FaceValue] [decimal](18,3) NULL,
 	[TaxInclusive] [bit] NULL,
-	[TaxPercentage] [int] NULL,
+	[TaxPercentage] [decimal] NULL,
 	[FinalPrice] [decimal](18,3) NULL,
 	[EffectivePrice] [decimal](18,3) NULL,
 	[LastUpdatedBy] [varchar](50) NULL,
