@@ -27,20 +27,20 @@ namespace MarbaleManagementStudio.Models
 
         public void LogException(string MethodName, Exception ex)
         {
-            string strPath = @"F:\MarbleProject\Marble - Copy\LogException\Log.txt";
-            if (!File.Exists(strPath))
-            {
-                File.Create(strPath).Dispose();
-            }
-            using (StreamWriter sw = File.AppendText(strPath))
-            {
-                sw.WriteLine("=============Error Logging ===========");
-                sw.WriteLine("===========Start============= " + DateTime.Now);
-                sw.WriteLine("Error Message: " + ex.Message);
-                sw.WriteLine("Stack Trace: " + ex.StackTrace);
-                sw.WriteLine("===========End============= " + DateTime.Now);
+            //string strPath = @"F:\MarbleProject\Marble - Copy\LogException\Log.txt";
+            //if (!File.Exists(strPath))
+            //{
+            //    File.Create(strPath).Dispose();
+            //}
+            //using (StreamWriter sw = File.AppendText(strPath))
+            //{
+            //    sw.WriteLine("=============Error Logging ===========");
+            //    sw.WriteLine("===========Start============= " + DateTime.Now);
+            //    sw.WriteLine("Error Message: " + ex.Message);
+            //    sw.WriteLine("Stack Trace: " + ex.StackTrace);
+            //    sw.WriteLine("===========End============= " + DateTime.Now);
 
-            }
+            //}
         }
     }
 }

@@ -16,12 +16,10 @@
         <label>License Key :</label>
         <input id="licenseKey" type="text" class="form-control input-sm pull-right" value="@ViewBag.ProductKey.LicenseKey"></input>
     </div>
-    @if (ViewBag.ProductKey.IsLifeTimeLicense)
-    {
-        <label>
-            Expire On
-        </label>      
-    }
+   
+     <div class="col-xs-4">
+        <label>Expire on: @ViewBag.ProductKey.ExpireOn </label>
+    </div>
     <div id="cardsCount" style="display: none">
         cards count
     </div>

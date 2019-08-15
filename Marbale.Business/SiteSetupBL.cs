@@ -487,6 +487,7 @@ namespace Marble.Business
                     {
                         var bytes_l = (byte[])dr["LicenseKey"];
                         pk.LicenseKey = Encoding.ASCII.GetString(bytes_l, 0, bytes_l.Length);
+                        pk.ExpireOn = this.Decrypt(pk.LicenseKey,key).Split('|')[1];
                     }
                     break;
                 }
