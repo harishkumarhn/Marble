@@ -19,12 +19,12 @@ CREATE TABLE [dbo].[Product](
 	[Category] [varchar](50) NULL,
 	[AutoGenerateCardNumber] [bit] NULL,
 	[OnlyVIP] [bit] NULL,
-	[Price] [int] NULL,
-	[FaceValue] [int] NULL,
+	[Price] [decimal](18,3) NULL,
+	[FaceValue] [decimal](18,3) NULL,
 	[TaxInclusive] [bit] NULL,
-	[TaxPercentage] [int] NULL,
-	[FinalPrice] [int] NULL,
-	[EffectivePrice] [int] NULL,
+	[TaxPercentage] [decimal] NULL,
+	[FinalPrice] [decimal](18,3) NULL,
+	[EffectivePrice] [decimal](18,3) NULL,
 	[LastUpdatedBy] [varchar](50) NULL,
 	[LastUpdatedDate] [datetime] NULL
 ) ON [PRIMARY]

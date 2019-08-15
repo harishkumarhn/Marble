@@ -30,7 +30,7 @@ namespace Marbale.Business
                 {
                     product = new Product();
                     product.DisplayInPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
-                    product.Bonus = dr.IsNull("Bonus") ? 0 : int.Parse(dr["Bonus"].ToString());
+                    product.Bonus = dr.IsNull("Bonus") ? 0 : decimal.Parse(dr["Bonus"].ToString());
                     product.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                     product.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
@@ -43,15 +43,15 @@ namespace Marbale.Business
                     product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     product.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
                     product.EffectivePrice = dr.IsNull("EffectivePrice") ? 0 : Convert.ToInt32(dr["EffectivePrice"]);
-                    product.Price = dr.IsNull("Price") ? 0 : Convert.ToInt32(dr["Price"]);
-                    product.FaceValue = dr.IsNull("FaceValue") ? 0 : Convert.ToInt32(dr["FaceValue"]);
-                    product.FinalPrice = dr.IsNull("FinalPrice") ? 0 : Convert.ToInt32(dr["FinalPrice"]);
-                    product.TaxPercentage = dr.IsNull("TaxPercentage") ? 0 : Convert.ToInt32(dr["TaxPercentage"]);
+                    product.Price = dr.IsNull("Price") ? 0 : Convert.ToDecimal(dr["Price"]);
+                    product.FaceValue = dr.IsNull("FaceValue") ? 0 : Convert.ToDecimal(dr["FaceValue"]);
+                    product.FinalPrice = dr.IsNull("FinalPrice") ? 0 : Convert.ToDecimal(dr["FinalPrice"]);
+                    product.Taxpercent = dr.IsNull("TaxPercentage") ? 0 : Convert.ToDecimal(dr["TaxPercentage"]);
                     product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
                     product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
                     product.StartDate = dr.IsNull("StartDate") ? new DateTime() : Convert.ToDateTime(dr["StartDate"]);
-                    product.Games = dr.IsNull("Games") ? 0 : Convert.ToInt32(dr["Games"]);
-                    product.Credits = dr.IsNull("Credits") ? 0 : Convert.ToInt32(dr["Credits"]);
+                    product.Games = dr.IsNull("Games") ? 0 : Convert.ToDecimal(dr["Games"]);
+                    product.Credits = dr.IsNull("Credits") ? 0 : Convert.ToDecimal(dr["Credits"]);
                     product.CardValidFor = dr.IsNull("CardValidFor") ? 0 : Convert.ToInt32(dr["CardValidFor"]);
                     product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
                     product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToInt32(dr["Courtesy"]);
@@ -136,7 +136,7 @@ namespace Marbale.Business
                 }
                 if (products.Count == 0)
                 {
-                    var p = new Product() { TypeList = typeList, CategoryList = categoryList };
+                    var p = new Product() { TypeList = typeList, CategoryList = categoryList,TaxList=TaxList };
                     products.Add(p);
                 }
                 return products;
@@ -285,7 +285,7 @@ namespace Marbale.Business
                 discount.DiscountName = dr.IsNull("discount_name") ? "" : (dr["discount_name"].ToString());
                 discount.DiscountPercentage = dr.IsNull("discount_percentage") ? 0 : int.Parse(dr["discount_percentage"].ToString());
                 discount.DiscountType = dr.IsNull("discount_type") ? "" : (dr["discount_type"].ToString());
-                discount.RemarksMandatory = dr.IsNull("RemarksMandatory") ? false : bool.Parse(dr["RemarksMandatory"].ToString());
+                discount.RemarkMendatory = dr.IsNull("RemarksMandatory") ? false : bool.Parse(dr["RemarksMandatory"].ToString());
                 discount.ActiveFlag = dr.IsNull("active_flag") ? false : bool.Parse(dr["active_flag"].ToString());
                 discount.AutomaticApply = dr.IsNull("automatic_apply") ? false : bool.Parse(dr["automatic_apply"].ToString());
                 discount.CouponMendatory = dr.IsNull("CouponMandatory") ? false : bool.Parse(dr["CouponMandatory"].ToString());

@@ -2,7 +2,7 @@
     ViewBag.Title = "Product Category";
 }
 
-<div class="first">
+<div class="first"  style="background-color: burlywood">
     <div class="second">
 
         <table id="marbleTable" class="table">
@@ -45,11 +45,12 @@
 
 </div>
 <div class="action">
-    <button class="btn btn-primary btn-md" role="button" onclick="SaveProductCategory()">Save</button>
+    <button class="btn btn-primary btn-md" role="button"  id="saveproductcat" onclick="SaveProductCategory()"  disabled>Save</button>
     <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductCategory()">Add Product Category</a>
 </div>
 <script>
     function AddProductCategory() {
+        $('#saveproductcat').removeAttr('disabled');
         var categoryListOptions = '';
               @foreach (var dow in ViewBag.categories[0].Categories)
               {

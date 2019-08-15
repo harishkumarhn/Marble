@@ -1,8 +1,8 @@
 ﻿@{
     ViewBag.Title = "Product Types";
 }
-
-<div class="first">
+<link href="~/Content/css/product.css" rel="stylesheet" />
+<div class="first" style="background-color: burlywood">
     <div class="second" style="margin-left:20.2em;">
 
         <table id="productsTable" class="table">
@@ -52,14 +52,14 @@
     </div>
 </div>
 <div class="action">
-    <button class="btn btn-primary btn-md" role="button" onclick="SaveProductTypes()">Save</button>
+    <button class="btn btn-primary btn-md" role="button" id="saveproducttypes" onclick="SaveProductTypes()" disabled>Save</button>
     <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductType()">Add Product Type</a>
         <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
 </div>
 <script>
     function AddProductType() {
-        debugger;
+        $('#saveproducttypes').removeAttr('disabled');
         var newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>' +
         '<td class="headerCol" style="left:50px"> <input type="text" value="" class="gridText"/>  </td>' +
         '<td> <input type="text" value="" class="gridText" />  </td>' +
@@ -77,11 +77,11 @@
             if (updatedArray.includes(r)) {
                 productTypes.push({
                     Id: table.rows[r].cells[0].innerHTML,
-                    Type: table.rows[r].cells[2].children[0].value,
-                    Description: table.rows[r].cells[3].children[0].value,
-                    ReportGroup: table.rows[r].cells[4].children[0].value,
-                    Active: table.rows[r].cells[5].children[0].checked,
-                    CardSale: table.rows[r].cells[6].children[0].checked
+                    Type: table.rows[r].cells[1].children[0].value,
+                    Description: table.rows[r].cells[2].children[0].value,
+                    ReportGroup: table.rows[r].cells[3].children[0].value,
+                    Active: table.rows[r].cells[4].children[0].checked,
+                    CardSale: table.rows[r].cells[5].children[0].checked
                 });
             }
         }
@@ -115,3 +115,25 @@
 
 
 
+<style>
+    div.second1 { 
+            width: 963px; 
+            overflow-x:scroll;  
+            margin-left:5em; 
+            overflow-y:visible;
+            padding-bottom:1px;
+            height: 490px;
+        }
+        div.first1 {
+            width: auto;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            height: 491px;           
+            padding-bottom: 1px;
+            position: absolute;
+            left:0;
+            top:auto;
+          
+        }
+
+</style>

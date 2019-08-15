@@ -14,7 +14,7 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 900px; height: 612px;" id="newproductmodel">
-                <div class="modal-header" style="background-color: crimson">
+                <div class="modal-header" style="background-color: crimson; height: 9%;" >
                     <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                         <span aria-hidden="true">&times;</span>
@@ -26,7 +26,7 @@
         </div>
     </div>
 </div>
-<div class="first" style="overflow-y:scroll;height:420px;width:1300px">
+<div class="first" style="overflow-y:scroll;height:420px;width:1300px;background-color: burlywood;">
     <div class="second" style="margin-left:20.2em; ">
         <table id="marbleTable" class="table">
             <thead>
@@ -134,17 +134,18 @@
     </div>
 </div>
 <div class="action">
+        <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
     <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Product</a>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
-    <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+    <a href="/Marble/" class="btn btn-primary">Close</a>
       <button class="btn btn-primary btn-md" role="button" onclick="DeleteProducts()"  id="deleteproduct">Delete</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
+
 </div>
 <style>
-    .highlight { background-color: darkmagenta; }
+    .highlight { background-color: #d2a973; }
 </style>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
@@ -163,7 +164,7 @@
     $("#marbleTable tr").click(function () {
         debugger
         var selected = $($(this)[0].children).hasClass("highlight");
-        $(this).removeClass("highlight");
+        $("#marbleTable tr").removeClass("highlight");
         $($(this)[0].children).removeClass("highlight");
         if (!selected) {
             //$(this).addClass("highlight");
@@ -264,9 +265,10 @@
                     DisplayGroup: table.rows[r].cells[8].children[0].value,
                     AutoGenerateCardNumber: table.rows[r].cells[9].children[0].checked,
                     OnlyVIP: table.rows[r].cells[10].children[0].checked,
-                    TaxInclusive: table.rows[r].cells[11].children[0].checked,
-                    Price: table.rows[r].cells[12].children[0].value,
-                    FaceValue: table.rows[r].cells[13].children[0].value,
+                    Price: table.rows[r].cells[11].children[0].value,
+                   
+                    FaceValue: table.rows[r].cells[12].children[0].value,
+                    TaxInclusive: table.rows[r].cells[13].children[0].checked,
                     FinalPrice: table.rows[r].cells[14].children[0].value,
                     EffectivePrice: table.rows[r].cells[15].children[0].value,
                     ExpiryDate: '10/10/2020',
@@ -284,6 +286,7 @@
         }
         if (PriceName == '') {
             alert('Please Enter Price');
+            return false;
         }
 
         $.ajax({
