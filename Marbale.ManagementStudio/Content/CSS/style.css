@@ -1,5 +1,5 @@
 ﻿#container {
-    border-style:outset;
+    
 }
 
 #pageSubmenu li {
@@ -43,8 +43,6 @@
     width: 250px;
     float: right;
 }
-
-
 div.second { 
             width: 1060px; 
             overflow-x:scroll;  

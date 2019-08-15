@@ -54,6 +54,40 @@ namespace MarbaleManagementStudio.Controllers
             a.TaxList = Session["TaxList"] as List<TaxSet>;
             return View(a);
         }
+        [HttpPost]
+        public JsonResult IsAlreadySigned(string Name,int Id)
+        {
+
+            return Json(IsUserAvailable(Name,Id));
+
+        }
+
+        private bool IsUserAvailable(string ProductName,int Id)
+      
+          
+            {
+                bool status = true;
+                if (Id == 0)
+                {
+                  
+                    List<Product> ProList = (List<Product>)Session["ProductList"];
+
+                    var result = ProList.Where(x => x.Name.ToLower() ==  ProductName.ToLower() ? true : false).ToList();
+
+                    if (result.Count() >= 1)
+                    {
+                        status = false;
+                    }
+                    else
+                    {
+                        status = true;
+                    }
+                }
+
+
+           return status;
+            }  
+         
 
         public ActionResult Edit(int id)
         {
@@ -119,6 +153,7 @@ namespace MarbaleManagementStudio.Controllers
        
             return RedirectToAction("ProductSetup", "Product");
         }
+       
         public int UpdateProducts(List<Product> products)
         {
             try

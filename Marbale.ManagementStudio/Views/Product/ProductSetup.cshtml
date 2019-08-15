@@ -14,7 +14,7 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 900px; height: 612px;" id="newproductmodel">
-                <div class="modal-header" style="background-color: crimson">
+                <div class="modal-header" style="background-color: crimson; height: 9%;" >
                     <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                         <span aria-hidden="true">&times;</span>
@@ -134,6 +134,7 @@
     </div>
 </div>
 <div class="action">
+        <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
     <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Product</a>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
@@ -141,7 +142,7 @@
     </button>
     <a href="/Marble/" class="btn btn-primary">Close</a>
       <button class="btn btn-primary btn-md" role="button" onclick="DeleteProducts()"  id="deleteproduct">Delete</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
+
 </div>
 <style>
     .highlight { background-color: #d2a973; }
