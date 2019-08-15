@@ -29,6 +29,8 @@ namespace MarbaleManagementStudio.Models
         public void LogException(string MethodName, Exception ex)
         {
             string strPath = ConfigurationManager.AppSettings["LogFilePath"].ToString();
+            System.IO.Directory.CreateDirectory(strPath);
+            strPath = strPath + "Log.txt";
             //string strPath = @"F:\MarbleProject\Marble - Copy\LogException\Log.txt";
             if (!File.Exists(strPath))
             {
@@ -42,7 +44,7 @@ namespace MarbaleManagementStudio.Models
                 sw.WriteLine("Stack Trace: " + ex.StackTrace);
                 sw.WriteLine("===========End============= " + DateTime.Now);
 
-            //}
+            }
         }
     }
 }
