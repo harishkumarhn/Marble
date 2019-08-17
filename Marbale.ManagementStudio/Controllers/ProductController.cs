@@ -172,8 +172,7 @@ namespace MarbaleManagementStudio.Controllers
             {
                 LogError.Instance.LogException("UpdateProducts", e);
                 throw;
-            }
-          
+            }          
          
         }
         public ActionResult Types()

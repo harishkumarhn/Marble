@@ -539,7 +539,7 @@ namespace Marble.Business
                 {
                     Site site = new Site();
                     site.SiteId = dr.IsNull("SiteId") ? 0 : int.Parse(dr["SiteId"].ToString());
-                    site.SiteName = dr.IsNull("SiteId") ? "" : dr["SiteId"].ToString();
+                    site.SiteName = dr.IsNull("SiteName") ? "" : dr["SiteName"].ToString();
                     site.SiteAddress = dr.IsNull("SiteAddress") ? "" : dr["SiteAddress"].ToString();
                     site.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
                     site.Guid = (Guid)dr["Guid"];
@@ -560,6 +560,10 @@ namespace Marble.Business
                     sites.Add(site);
                 }
 
+            }
+            if (sites.Count == 0)
+            {
+                sites.Add(new Site());
             }
             return sites;
         }
