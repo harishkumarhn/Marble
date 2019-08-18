@@ -296,6 +296,7 @@ namespace Marbale.Business
                 discount.ManagerApproval = dr.IsNull("manager_approval_required") ? false : bool.Parse(dr["manager_approval_required"].ToString());
                 discount.LastUpdatedDate = Convert.ToDateTime(dr.IsNull("last_updated_date") ? "01/01/2019" : (dr["last_updated_date"].ToString()));
                 discount.LastUpdatedUser = dr.IsNull("last_updated_user") ? "" : (dr["last_updated_user"].ToString());
+                discount.DisplayOrder = dr.IsNull("sort_order") ? 0 : int.Parse(dr["sort_order"].ToString());
                 masterdiscount.transactiondiscount.Add(discount);
             }
             foreach (DataRow dr in gamedisc.Rows)
@@ -309,6 +310,7 @@ namespace Marbale.Business
                 discount.MinimumUsedCredits = dr.IsNull("minimum_credits") ? 0 : int.Parse(dr["minimum_credits"].ToString());
                 discount.LastUpdatedDate = Convert.ToDateTime(dr.IsNull("last_updated_date") ? "01/01/2019" : (dr["last_updated_date"].ToString()));
                 discount.LastUpdatedUser = dr.IsNull("last_updated_user") ? "" : (dr["last_updated_user"].ToString());
+            //    discount.DisplayOrder = dr.IsNull("sort_order") ? 0 : int.Parse(dr["sort_order"].ToString());
                 masterdiscount.gaamediscount.Add(discount);
             }
 

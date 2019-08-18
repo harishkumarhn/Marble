@@ -55,7 +55,7 @@
                 var DisplayOrder = "DisplayOrder" + index;
                 var LastUpdatedDate = "LastUpdatedDate" + index;
                 var LastUpdatedUser = "LastUpdatedUser" + index;
-                var ManagerApprovalRequered = "ManagerApprovalRequered" + index;
+                var ManagerApproval= "ManagerApproval" + index;
                 var MinimumSaleAmount = "MinimumSaleAmount" + index;
                 var MinimumUsedCredits = "MinimumUsedCredits" + index;
                 var RemarkMendatory = "RemarkMendatory" + index;
@@ -71,9 +71,9 @@
                       '<td><span> <input id="' + AutomaticApply + '" type="checkbox" /></span></td>' +
                           '<td><span> <input id="' + ActiveFlag + '" type="checkbox" /></span></td>' +
                      '<td><span> <input id="' + DisplayOrder + '" type="text" /></span></td>' +
-                           '<td><span> <input id="' + LastUpdatedDate + '" type="text" /></span></td>' +
-                                '<td><span> <input id="' + LastUpdatedUser + '" type="text" /></span></td>' +
-                     '<td><span> <input id="' + ManagerApprovalRequered + '" type="checkbox" /></span></td>' +
+                              '<td><span> <input id="' + LastUpdatedDate + '" type="text" class="disable" readonly/></span></td>' +
+                                '<td><span> <input id="' + LastUpdatedUser + '" type="text" class="disable" readonly /></span></td>' +
+                     '<td><span> <input id="' + ManagerApproval + '" type="checkbox" /></span></td>' +
                            '<td><span> <input id="' + MinimumSaleAmount + '" type="text" /></span></td>' +
                            '<td><span> <input id="' + MinimumUsedCredits + '" type="text" /></span></td>' +
                      '<td><span> <input id="' + RemarkMendatory + '" type="checkbox" /></span></td>' +
@@ -85,6 +85,7 @@
             });
             
             $('#ui-id-1').click(function () {
+                $('#closepopup').hide();
                 $('#backdiscount').hide();
                 $('#savediscount').hide();
                 $('#ui-id-2').removeClass('buttoncolor-change');
@@ -93,6 +94,7 @@
                 $('#tabs-1').show();
             })
             $('#ui-id-2').click(function () {
+                $('#closepopup').show();
                 $('#backdiscount').show();
                 $('#ui-id-1').removeClass('buttoncolor-change');
                 $('#ui-id-2').addClass('buttoncolor-change');
@@ -167,6 +169,7 @@
 
             });
             $("#save").click(function () {
+                debugger
                // id = $("#grid tbody tr").length;
                 var id = modifiedListIndex[modifiedListIndex.length - 1];
             
@@ -182,7 +185,7 @@
                     DisplayOrder: $("#DisplayOrder" + id).val(),
                     LastUpdatedDate: $("#LastUpdatedDate" + id).val(),
                     LastUpdatedUser: $("#LastUpdatedUser" + id).val(),
-                    ManagerApproval: $("#ManagerApprovalRequered" + id).is(':checked'),
+                    ManagerApproval: $("#ManagerApproval" + id).is(':checked'),
                     DisplayInPOS: $("#DisplayInPOS" + id).is(':checked'),
                     MinimumSaleAmount: $("#MinimumSaleAmount" + id).val(),
                     MinimumUsedCredits: $("#MinimumUsedCredits" + id).val(),
@@ -193,7 +196,7 @@
 
                 };
 
-                if (id != "") {
+                if ( typeof (id) != 'undefined') {
 
                     $.ajax({
 
@@ -380,7 +383,7 @@
                  grid.Column("AutomaticApply", format: @<text><input name="chkbox" type="checkbox"@(item.AutomaticApply ? "checked='checked'" : "") id="AutomaticApply@(item.DiscountID)" value="AutomaticApply" /></text>, style: "grid-row"),
                  grid.Column("ActiveFlag", format: @<text><input name="chkbox" type="checkbox"@(item.ActiveFlag ? "checked='checked'" : "") id="ActiveFlag@(item.DiscountID)" value="ActiveFlag" /></text>, style: "grid-row"),
                  grid.Column("DisplayOrder", format: @<text><input name="textbox" type="text" class="grid-row" id="DisplayOrder@(item.DiscountID)" value="@(item.DisplayOrder)"  /></text>),
-                 grid.Column("LastUpdatedDate", format: @<text><input name="textbox" type="text" class="grid-row" id="LastUpdatedDate@(item.DiscountID)" value="@(item.LastUpdatedDate)"  /></text>),
+                 grid.Column("LastUpdatedDate", format: @<text><input name="textbox" type="text" class="grid-row" id="LastUpdatedDate@(item.DiscountID)" value="@(item.LastUpdatedDate)" readonly /></text>),
                  grid.Column("LastUpdatedUser", format: @<text><input name="textbox" type="text" class="grid-row" id="LastUpdatedUser@(item.DiscountID)" value="@(item.LastUpdatedUser)"  /></text>),
                  grid.Column("ManagerApprovalRequered", format: @<text><input name="chkbox" type="checkbox"@(item.ManagerApproval ? "checked='checked'" : "") id="ManagerApproval@(item.DiscountID)" value="ManagerApprovalRequered" /></text>, style: "grid-row"),
                  grid.Column("MinimumSaleAmount", format: @<text><input name="textbox" type="text" class="grid-row"id="MinimumSaleAmount@(item.DiscountID)" value="@(item.MinimumSaleAmount)"  /></text>),
@@ -391,12 +394,12 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-4 col-md-8">
-                <input type="submit" value="SAVE" class="btn btn-success position-btn" id="save" />
+                  <button type="button" class="btn btn-primary placebutton" onclick="history.back();">Back</button>
+                <input type="submit" value="SAVE" class="btn btn-primary" id="save" />
+         <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
             </div>
         </div>
 
-       <button type="button" class="btn btn-primary placebutton" onclick="history.back();">Back</button>
-         <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
     </div>
 
     @{
@@ -430,10 +433,13 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-4 col-md-8">
-            <input type="submit" value="SAVE" class="btn btn-success position-btn" id="savediscount" style="display: none" />
+    <button type="button" class="btn btn-primary placebutton" id="backdiscount" style="display:none" onclick="history.back();">Back</button>
+            <input type="submit" value="SAVE" class="btn btn-primary" id="savediscount" style="display: none" />
+                  <a href="/Product/ClosePopUp" class="btn btn-primary" id="closepopup" style="display:none">Close</a>
+   
         </div>
     </div>
-     <button type="button" class="btn btn-primary placebutton" id="backdiscount" style="display:none" onclick="history.back();">Back</button>
+ 
 </body>
 
 </html>
