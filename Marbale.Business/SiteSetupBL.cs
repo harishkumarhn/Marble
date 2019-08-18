@@ -557,6 +557,7 @@ namespace Marble.Business
                     site.Logo = array;
                     site.CustomerKey = dr.IsNull("CustomerKey") ? "" : dr["CustomerKey"].ToString();
                     site.SiteCode = dr.IsNull("SiteCode") ? 0 : int.Parse(dr["SiteCode"].ToString());
+                    site.Version = dr.IsNull("Version") ? "" : dr["Version"].ToString();
                     sites.Add(site);
                 }
 

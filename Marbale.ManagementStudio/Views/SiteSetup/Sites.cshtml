@@ -12,7 +12,7 @@
             <th>Site Address</th>
             <th>Notes</th>
             <th>Site GUID</th>
-            <th>Logo</th>
+            @*<th>Logo</th>*@
             <th>Version</th>
             <th>CustomeKey</th>
         </tr>
@@ -26,7 +26,7 @@
                         <input type="text" value="@item.SiteName"  />
                     </td>
                     <td>
-                        <input type="text" value="@(item.SiteCode == 0 ? "" : item.SiteCode)"  />
+                        <input type="number" value="@(item.SiteCode == 0 ? "" : item.SiteCode)"  />
                     </td>
                     <td>
                         <input type="text" value="@item.SiteAddress" />
@@ -35,12 +35,12 @@
                         <input type="text" value="@item.Notes" />
                     </td>
                     <td>
-                        <input type="text" value="@item.SiteGUID" />
+                        <input type="text" value="@item.SiteGUID" disabled="disabled"/>
                     </td>
-                    <td>
+                    @*<td>
                         <img alt="" src="@item.Logo" style="height:60px;width:60px;"/>
                         <button>Upload</button>
-                    </td>
+                    </td>*@
                     <td>
                         <input type="text" value="@item.Version" />
                     </td>
@@ -54,11 +54,6 @@
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveSites()">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button" >Add</button>
-
-    @*<button class="btn btn-primary btn-md" role="button" onclick="AddSite()">Add</button>*@
-    <button class="btn btn-primary btn-md" role="button" onclick="UploadLogo()">Upload Logo</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="ClearLogo()">Clear Logo</button>
-
 </div>
 <script>
     function SaveSites() {
@@ -76,9 +71,9 @@
                     SiteAddress: table.rows[rowIndex].cells[3].children[0].value,
                     Notes: table.rows[rowIndex].cells[4].children[0].value,
                     SiteGUID: table.rows[rowIndex].cells[5].children[0].value,
-                    Logo: table.rows[rowIndex].cells[6].children[0].value,
-                    Version: table.rows[rowIndex].cells[7].children[0].value,
-                    CustomeKey: table.rows[rowIndex].cells[8].children[0].value
+                    //Logo: table.rows[rowIndex].cells[6].children[0].value,
+                    Version: table.rows[rowIndex].cells[6].children[0].value,
+                    CustomerKey: table.rows[rowIndex].cells[7].children[0].value
                 });
             }
         }
@@ -109,6 +104,7 @@
             scrollX: true,
             scrollCollapse: true,
             editable: true,
+            stateSave: true,
             // paging: true,
             bPaginate: false,
             bInfo : false,
@@ -131,6 +127,8 @@
         var counter = 1;
 
         $('#addRow').on('click', function () {
+            var fixedcolumn1values = $('.DTFC_Cloned lable, select');
+            var fixedcolumn2values = $('.DTFC_Cloned input, select');
             table.row.add([
                 '<lable></lable>',
                 '<input type="text" value="" />',
@@ -138,27 +136,21 @@
                 '<input type="text" value="" />',
                 '<input type="text" value="" />',
                 '<input type="text" value="" />',
-                '<img alt="" src="" style="height:60px;width:60px;"/> <button>Upload</button>',
+                //'<img alt="" src="" style="height:60px;width:60px;"/> <button>Upload</button>',
                 '<input type="text" value="" />',
                 '<input type="text" value="" />'
 
             ]).draw(false);
+            for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
+                $('.DTFC_Cloned lable, select')[i].innerHTML = fixedcolumn1values[i].innerHTML;
+                $('.DTFC_Cloned input, select')[i].value = fixedcolumn2values[i].value;
+            }
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
     });
 
 </script>
 
-<style>
-    th, td {
-        white-space: nowrap;
-    }
-
-    div.dataTables_wrapper {
-        width: 1365px;
-        margin: 0 auto;
-    }
-</style>
 
 
 
