@@ -37,7 +37,7 @@ namespace MarbaleManagementStudio.Controllers
          {
              var data1 = cardBussiness.gettechcardtype();
              Session["TechCardType"] = data1;
-             if (c.IssueDate.ToShortDateString() == "1/1/0001" && c.ToDate.ToShortDateString() == "1/1/0001" && c.VIPCustomer == false && c.TechnicianCard == false)
+             if ( c.VIPCustomer == false && c.TechnicianCard == false)
              {
                  c.VIPCustomer = false;
                  c.TechnicianCard = false;

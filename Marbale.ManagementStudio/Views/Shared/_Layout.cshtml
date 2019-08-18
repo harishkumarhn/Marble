@@ -149,19 +149,32 @@
         </div>
 
         <div>
-            <div class="modal fade" id="newcardmodel">
+         @*   <div class="modal fade" id="newcardmodel" data-backdrop=""role="dialog">
                 <div class="modal-dialog">
-                    <div id="newproductmodel" class="modal-Content" style="width: 900px; height: 810px;">
+                    <div id="newproductmodel" class="modal-Content" style="width: 900px; height: 810px; background-color:white" >
                         <div class="modal-header" style="background-color: blueviolet">
                             <h5 class="modal-title" id="newupdatecardmodal" style="text-align: center">Add Card</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body" id="modelbody"></div>
+                       
                     </div>
                 </div>
-            </div>
+            </div>*@
+               <div id="newcardmodel" class="modal fade">
+        <div class="modal-dialog modal-centre">
+            <div id="newproductmodel" class="modal-content" style="width: 900px; height: 810px; background-color:white">
+                  <div class="modal-header" style="background-color: blueviolet">
+                            <h5 class="modal-title" id="newupdatecardmodal" style="text-align: center">Add Card</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                 <div class="modal-body" id="modelbody"></div>
+             </div>
+        </div>
+    </div>
         </div>
 
     </div>
@@ -193,7 +206,7 @@
             $('#newcardmodel .modal-Content').CSS('width', 719);
             $('#newupdatecardmodal').text("Inventory").addClass('modal-centre');
             $('#newcardmodel').modal('show');
-
+          
             $('#modelbody').load('/Cards/Inventory');
         });
         $('#newcards').click(function () {
@@ -201,7 +214,9 @@
             $('#newcardmodel .modal-Content').CSS('height', 810);
             $('#newcardmodel .modal-Content').CSS('width', 900);
             $('#newupdatecardmodal').text("Add Card").addClass('modal-centre');
+            //$(document).off('focusin.modal');
             $('#newcardmodel').modal('show');
+      
             $('#modelbody').load('Cards/Cards');
         });
         $('#configuration').click(function () {
