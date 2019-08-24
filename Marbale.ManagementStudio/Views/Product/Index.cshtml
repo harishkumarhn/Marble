@@ -5,8 +5,11 @@
 <link href="~/Content/css/product.css" rel="stylesheet" />
 
 <div class="container">
-    <fieldset class="productFieldset">
-        <legend>Choose by product type</legend>
+       <p style="color: blueviolet;font-weight: 500;">Choose by product type</p>
+    <div id="profiled" class="productfields">
+       
+    <div class="productFieldset">
+      
         <div class="panel panel-primary pbody">
             <div class="panel-body body">
                 <a href="/product/productsetup" class="btn btn-primary btn-lg round" role="button">Cards</a>
@@ -15,9 +18,9 @@
                 <a href="http://google.co.in" class="btn btn-primary btn-lg round" role="button" style="display:none">Bookings</a>
             </div>
         </div>
-    </fieldset>
-
-    <fieldset class="productFieldset">
+    </div>
+</div>
+    <fieldset class="productFieldset1">
         <legend>Set up</legend>
             <div class="productSetup">
                 <a href="/product/Types">Product Type</a>
@@ -34,5 +37,20 @@
     height: 97px;
     padding: 31px;
     }
+    .productFieldset {
+    position: absolute;
+    right: 38%;
+    top: 47%;
+    }
+       .productFieldset1 {
+    position: absolute;
+    right: 38%;
+    top: 87%;
+    }
+    .productfields {
+        width:97%;
+            border: 203px solid currentColor;
+    }
+   
    
 </style>

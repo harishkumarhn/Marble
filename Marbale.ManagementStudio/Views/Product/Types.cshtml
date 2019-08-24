@@ -58,6 +58,10 @@
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
 </div>
 <script>
+    $(':input').on('change', function () {
+        debugger
+        $("#saveproducttypes").attr("disabled", false);
+    });
     function AddProductType() {
         $('#saveproducttypes').removeAttr('disabled');
         var newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>' +

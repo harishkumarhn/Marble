@@ -59,7 +59,7 @@ namespace Marble.Business
                pType.TechGames = dr.IsNull("TechGames") ? "" : dr["TechGames"].ToString();
                pType.TimerResetCard = dr.IsNull("TimerResetCard") ? false : bool.Parse(dr["TimerResetCard"].ToString());
                pType.VIPCustomer = dr.IsNull("VIPCustomer") ? false : bool.Parse(dr["VIPCustomer"].ToString());
-               pType.TechCardType = dr.IsNull("TechCardType") ? "" : dr["TechCardType"].ToString();
+               pType.TechCardType = dr.IsNull("TechCardType") ? 0 : int.Parse(dr["TechCardType"].ToString());
 
                pType.Credits = dr.IsNull("Credits") ? 0 : float.Parse(dr["Credits"].ToString());
                pType.CreditPlus = dr.IsNull("CreditPlus") ? 0 : float.Parse(dr["CreditPlus"].ToString());

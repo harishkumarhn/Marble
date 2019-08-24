@@ -94,7 +94,7 @@
                         @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TechCardType"])
                         {
 
-                            if (Convert.ToInt32((@item.TechCardType)) == @dow.Id)
+                            if ((@item.TechCardType) ==  @dow.Id)
                             {
                             <option value="@dow.Value" selected>@dow.Value</option>
                             }
