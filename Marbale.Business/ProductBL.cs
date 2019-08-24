@@ -42,7 +42,7 @@ namespace Marbale.Business
                     product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
                     product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     product.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
-                    product.EffectivePrice = dr.IsNull("EffectivePrice") ? 0 : Convert.ToInt32(dr["EffectivePrice"]);
+                    product.EffectivePrice = dr.IsNull("EffectivePrice") ? 0 : Convert.ToDecimal(dr["EffectivePrice"]);
                     product.Price = dr.IsNull("Price") ? 0 : Convert.ToDecimal(dr["Price"]);
                     product.FaceValue = dr.IsNull("FaceValue") ? 0 : Convert.ToDecimal(dr["FaceValue"]);
                     product.FinalPrice = dr.IsNull("FinalPrice") ? 0 : Convert.ToDecimal(dr["FinalPrice"]);
@@ -54,7 +54,7 @@ namespace Marbale.Business
                     product.Credits = dr.IsNull("Credits") ? 0 : Convert.ToDecimal(dr["Credits"]);
                     product.CardValidFor = dr.IsNull("CardValidFor") ? 0 : Convert.ToInt32(dr["CardValidFor"]);
                     product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
-                    product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToInt32(dr["Courtesy"]);
+                    product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToDecimal(dr["Courtesy"]);
 
                 }
                 return product;

@@ -43,7 +43,7 @@ namespace Marbale.BusinessObject
         [DataType(DataType.Currency)]
         public decimal? Credits { get; set; }
           [DataType(DataType.Currency)]
-        public int ?Courtesy { get; set; }
+        public decimal ?Courtesy { get; set; }
           [DataType(DataType.Currency)]
         public decimal? Bonus { get; set; }
         public decimal Games { get; set; }
