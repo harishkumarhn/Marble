@@ -232,12 +232,12 @@
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
         $(".tblRow").on("click", function (e) {
             IdforDelete = $(this).parent().index();
-            if ($(this).hasClass('focusedRow')) {
-                $(this).removeClass('focusedRow');
+            if ($(this).parent().hasClass('focusedRow')) {
+                $(this).parent().removeClass('focusedRow');
             }
             else {
-                table.$('tr.selected').removeClass('focusedRow');
-                $(this).addClass('focusedRow');
+                table.$('tr.focusedRow').removeClass('focusedRow');
+                $(this).parent().addClass('focusedRow');
             }
             //var selected = $($(this)[0].children).hasClass("highlight");
             //$("#marbleTable tr").removeClass("highlight");
