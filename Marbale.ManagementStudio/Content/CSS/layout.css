@@ -2,7 +2,7 @@
     DEMO STYLE
 */
 
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import "/Content/CSS/fonts/font.css";
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
@@ -188,4 +188,14 @@ a.article:hover {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.dataTables_scrollBody {
+    max-height: 400px !important;
+}
+.focusedRow
+{
+    font-weight: bold;
+    text-shadow: 1px 1px 0px #EEE;
+    color: #111;   
 }

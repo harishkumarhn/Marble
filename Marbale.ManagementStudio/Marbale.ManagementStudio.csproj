@@ -134,6 +134,7 @@
     <Content Include="Content\CSS\fixedColumns.dataTables.min.css" />
     <Content Include="Content\JS\jquery.dataTables.min.js" />
     <Content Include="Content\JS\dataTables.fixedColumns.min.js" />
+    <Content Include="Content\CSS\fonts\font.css" />
     <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\GameController.cs" />
@@ -319,7 +320,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\CSS\fonts\" />
     <Folder Include="Content\CSS\Material\" />
   </ItemGroup>
   <ItemGroup>
