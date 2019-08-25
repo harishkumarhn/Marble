@@ -4,11 +4,14 @@
     Layout = null;
 }
 
-<div style="background-color:lightblue;height: 500px;">
+<div >
+ </br>
  
- 
-<div id="valuesContainer" style="background-color:orangered">
-   
+<div id="valuesContainer" style="height: 117%;
+    position: absolute;
+    width: 100%;
+    background-color: orangered;">
+   <br />
       @foreach (var item in ViewBag.Inventory)
       {
           int a = 1;
@@ -69,9 +72,9 @@
       </div>
  @*          <input type="submit"  class="button-email btn btn-primary"/>*@
 
-      
-  <button class="btn btn-primary btn-md button-pos" role="button" style="position:absolute;bottom:-44px" onclick="SaveEmail();">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary button-closes" >Close</a>
+       <div id="closesavediv">   <text> &nbsp; &nbsp; &nbsp;</text> 
+  <button class="btn btn-primary btn-md button-pos" role="button"  onclick="SaveEmail();">Save</button>   
+     <a href="/Product/ClosePopUp" class="btn btn-primary button-closes" >Close</a></div>
 </div>
       
   
@@ -170,13 +173,17 @@
     left: 319px;
     bottom: 132px;
     }
-    .button-closes {
-  position: absolute;
-    top: 1101px;
-    left:327px;
-    }
 
 input,button, label,.ar {
     float:left;
 }
+
+      div#closesavediv{
+        position: absolute;
+         left: 27%;
+    right: 0;
+    margin-left: auto;
+             bottom: -73%;
+    margin-right: auto;
+    }
 </style>
