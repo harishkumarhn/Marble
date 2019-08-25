@@ -29,7 +29,7 @@
 <table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
     <thead>
         <th>ID</th>
-        <th>Edit</th>
+        <th></th>
         <th>Name</th>
         <th>Type</th>
         <th>Category</th>
@@ -53,7 +53,12 @@
             <tr>
                 <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
                 <td>
-                    <button class="fixedCol2" onclick="EditProduct(@item.Id)">-</button>
+                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
+                         <i class="material-icons">&#xE254;</i>
+                     </a>
+                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
+                         <i class="material-icons">&#xE872;</i>
+                     </a>
                 </td>
                 <td>
                     <input type="text" class="fixedCol3" value="@item.Name"/>
@@ -139,17 +144,8 @@
         New
     </button>
     <a href="/" class="btn btn-primary">Close</a>
-    <button class="btn btn-primary btn-md" role="button" onclick="DeleteProducts()" id="deleteproduct">Delete</button>
-
 </div>
-<style>
-    .highlight {
-        background-color: #d2a973;
-    }
-</style>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
-   
     var updatedArray = [];
     function UpdatedList(index) {
         if (!updatedArray.includes(index)) {
@@ -230,23 +226,6 @@
             }
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
-        $(".tblRow").on("click", function (e) {
-            IdforDelete = $(this).parent().index();
-            if ($(this).parent().hasClass('focusedRow')) {
-                $(this).parent().removeClass('focusedRow');
-            }
-            else {
-                table.$('tr.focusedRow').removeClass('focusedRow');
-                $(this).parent().addClass('focusedRow');
-            }
-            //var selected = $($(this)[0].children).hasClass("highlight");
-            //$("#marbleTable tr").removeClass("highlight");
-            //$($(this)[0].children).removeClass("highlight");
-            //if (!selected) {
-            //    //$(this).addClass("highlight");
-            //    $($(this)[0].children).addClass("highlight");
-            //}
-        });
     });
     function SaveProducts() {
         var items = [];
@@ -306,7 +285,6 @@
             }
         });
     }
-    var IdforDelete = 0;
     $(document).ready(function () {
         $('.dropdown-toggle').collapse({
             toggle: false
@@ -315,22 +293,7 @@
     $('.close').click(function () {
         location.reload();
     });
-    function DeleteProducts() {
-        var Id = $('.DTFC_Cloned lable.fixedCol1')[IdforDelete].innerHTML;
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("DeleteProducts", "Product")',
-            data: { Id: Id },
-            dataType: "json",
-            success: function (data) {
-                location.reload();
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
-    }
+   
     $(':input').on('change', function () {
         $("#saveproduct").attr("disabled", false);
     });
@@ -347,5 +310,23 @@
         $('.modal-title').text('Edit Product');
         $('#basicExampleModal').modal('show');
         $('#modelbody').load('/Product/Edit', { "id": id });
+    }
+    function DeleteProduct(id) {
+        if (confirm('Are you sure you want to delete this from database?')) {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("DeleteProduct", "Product")',
+            data: { Id: id },
+            dataType: "json",
+            success: function (data) {
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+              });
+        }
+      
     }
 </script>
