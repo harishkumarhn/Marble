@@ -212,3 +212,7 @@ td a.edit {
 td a {
     cursor: pointer;
 }
+input[type=checkbox] {
+    width: 17px;
+    height: 17px;
+}
