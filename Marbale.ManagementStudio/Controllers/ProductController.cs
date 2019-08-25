@@ -111,7 +111,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
-        public JsonResult DeleteProducts(int Id)
+        public JsonResult DeleteProduct(int Id)
         {
             try
             {
@@ -120,7 +120,7 @@ namespace MarbaleManagementStudio.Controllers
             }
             catch (Exception e)
             {
-                LogError.Instance.LogException("DeleteProducts", e);
+                LogError.Instance.LogException("DeleteProduct", e);
                 throw;
             }
     
@@ -172,8 +172,7 @@ namespace MarbaleManagementStudio.Controllers
             {
                 LogError.Instance.LogException("UpdateProducts", e);
                 throw;
-            }
-          
+            }          
          
         }
         public ActionResult Types()

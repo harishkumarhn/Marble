@@ -21,7 +21,7 @@ namespace Marbale.DataAccess
         {
             myAdapter = new SqlDataAdapter();
             string connString = (string)objRegistryKey.GetValue("ConnectionString");
-            conn = new SqlConnection(connString);
+            conn = new SqlConnection(@"Data Source=Harish-PC\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
         }
 
         /// <method>

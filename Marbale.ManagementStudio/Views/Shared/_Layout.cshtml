@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/Content/CSS/bootstrap.css">
     <link href="~/Content/CSS/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/CSS/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Material/meterialIcon.css" rel="stylesheet" />
 
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="~/Content/CSS/style.css">
@@ -229,7 +230,7 @@
         });
         $('#productKey').click(function () {
             $('#myModal').modal('show');
-            $('#modelBody').load('siteSetup/ProductKey');
+            $('#modelBody').load('/siteSetup/ProductKey');
         });
         $("#myModal").draggable({
             handle: ".modal-header"

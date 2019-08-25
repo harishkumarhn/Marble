@@ -332,19 +332,20 @@ namespace Marbale.DataAccess
             {
                 foreach (var site in sites)
                 {
-                    SqlParameter[] sqlParameters = new SqlParameter[10];
+                    SqlParameter[] sqlParameters = new SqlParameter[11];
                     sqlParameters[0] = new SqlParameter("@siteId", site.SiteId);
                     sqlParameters[1] = new SqlParameter("@siteName", string.IsNullOrWhiteSpace(site.SiteName) ? "" : site.SiteName);
                     sqlParameters[2] = new SqlParameter("@siteAddress", string.IsNullOrWhiteSpace(site.SiteAddress) ? "" : site.SiteAddress);
                     sqlParameters[3] = new SqlParameter("@notes", string.IsNullOrWhiteSpace(site.Notes) ? "" : site.Notes);
-                    sqlParameters[4] = new SqlParameter("@siteGUID", site.SiteGUID);
+                    sqlParameters[4] = new SqlParameter("@siteGUID", site.SiteGUID == null ? Guid.NewGuid() : site.SiteGUID);
                     sqlParameters[5] = new SqlParameter("@logo", SqlDbType.Image);
                     if(site.Logo == null)
                     sqlParameters[5].Value = DBNull.Value;
-                    sqlParameters[6] = new SqlParameter("@guid", site.Guid);
+                    sqlParameters[6] = new SqlParameter("@guid", site.Guid == null ? Guid.NewGuid() : site.Guid);
                     sqlParameters[7] = new SqlParameter("@companyId", site.CompanyId);
                     sqlParameters[8] = new SqlParameter("@customerKey", string.IsNullOrWhiteSpace(site.CustomerKey) ? "" : site.CustomerKey);
                     sqlParameters[9] = new SqlParameter("@siteCode", site.SiteCode);
+                    sqlParameters[10] = new SqlParameter("@version", string.IsNullOrWhiteSpace(site.Version) ? "" : site.Version);
                     conn.executeUpdateQuery("sp_InsertOrUpdateSite", sqlParameters);
                 }
             }

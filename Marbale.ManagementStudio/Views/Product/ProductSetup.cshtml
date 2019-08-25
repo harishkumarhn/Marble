@@ -14,286 +14,267 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 900px; height: 612px;" id="newproductmodel">
-                <div class="modal-header" style="background-color: blueviolet; height: 9%;" >
+                <div class="modal-header" style="background-color: crimson; height: 9%;">
                     <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="modelbody" style="position: absolute;left: 20px;top: 50px;">
+                <div class="modal-body" id="modelbody" style="position: absolute; left: 20px; top: 50px;">
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="first" style="overflow-y:scroll;height:420px;width:1300px;background-color: burlywood;">
-    <div class="second" style="margin-left:20.2em; ">
-        <table id="marbleTable" class="table">
-            <thead>
-                <th class="headerCol">ID</th>
-                <th class="headerCol" style="left:55px">Edit</th>
-                <th class="headerCol" style="left:100px">Name</th>
-                <th>Type</th>
-                <th>Category</th>
-                <th>POSCounter</th>
-                <th>Active</th>
-                <th>DisplayInPOS</th>
-                <th>DisplayGroup</th>
-                <th>AutoGenerateCardNumber</th>
-                <th>OnlyVIP</th>
-                <th>Price</th>
-                <th>FaceValue</th>
-                <th>TaxInclusive</th>
-                <th>FinalPrice</th>
-                <th>EffectivePrice</th>
-                <th>LastUpdatedBy</th>
-                <th>LastUpdatedDate</th>
-            </thead>
-            @foreach (var item in ViewBag.productDetails)
-            {  
-                <tr onchange="UpdatedList(this)" onclick="getIdOfProduct(@item.Id)">
-                    <td class="headerCol">@item.Id  </td>
-                    <td class="headerCol" style="left:55px">
-                        <button onClick="EditProduct(@item.Id)">-</button>
-                    </td>
-                    <td class="headerCol" style="left:100px">
-                        <input type="text" value="@item.Name" class="gridText" />
-                    </td>
-                    <td>
-                        <select name="TypeList" id="TypeList" class="gridText">
-                            @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+    <thead>
+        <th>ID</th>
+        <th></th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Category</th>
+        <th>POSCounter</th>
+        <th>Active</th>
+        <th>DisplayInPOS</th>
+        <th>DisplayGroup</th>
+        <th>AutoGenerateCardNumber</th>
+        <th>OnlyVIP</th>
+        <th>Price</th>
+        <th>FaceValue</th>
+        <th>TaxInclusive</th>
+        <th>FinalPrice</th>
+        <th>EffectivePrice</th>
+        <th>LastUpdatedBy</th>
+        <th>LastUpdatedDate</th>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.productDetails)
+        {  
+            <tr>
+                <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
+                <td>
+                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
+                         <i class="material-icons">&#xE254;</i>
+                     </a>
+                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
+                         <i class="material-icons">&#xE872;</i>
+                     </a>
+                </td>
+                <td>
+                    <input type="text" class="fixedCol3" value="@item.Name"/>
+                </td>
+                <td>
+                    <select name="TypeList" id="TypeList">
+                        @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
+                        {
+                            if (@item.Type == (@dow.Id).ToString())
                             {
-                                if (@item.Type == (@dow.Id).ToString())
-                                {
-                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                                }
+                            <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
                             }
-                        </select>
-                    </td>
-                    <td>
-                        <select name="categoryList" id="categoryList" class="gridText">
-                 @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
+                            else
                             {
-                                if (@item.Category == (@dow.Id).ToString())
-                                {
-                                <option value="@dow.Value" id="@dow.Id"  selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                <option value="@dow.Value" id="@dow.Id" >@dow.Value</option>
-                                }
+                            <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
                             }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.POSCounter" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
-                    </td>
-                    <td>
-                        <input type="checkbox"  @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.DisplayGroup" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="checkbox"  @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber"/>
-                    </td>
-                    <td>
-                        <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Price" class="gridText"/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.FaceValue" class="gridText"/>
-                    </td>
-                    <td>
-                        <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.FinalPrice" class="gridText"/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.EffectivePrice" class="gridText"/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
-                    </td>
-                </tr>  
-            }
-        </table>
-    </div>
-</div>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select name="categoryList" id="categoryList">
+                        @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
+                        {
+                            if (@item.Category == (@dow.Id).ToString())
+                            {
+                            <option value="@dow.Value" id="@dow.Id"  selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                            <option value="@dow.Value" id="@dow.Id" >@dow.Value</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="text" value="@item.POSCounter" />
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />
+                </td>
+                <td>
+                    <input type="text" value="@item.DisplayGroup" />
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber"/>
+                </td>
+                <td>
+                    <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
+                </td>
+                <td>
+                    <input type="text" value="@item.Price" />
+                </td>
+                <td>
+                    <input type="text" value="@item.FaceValue" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" />
+                </td>
+                <td>
+                    <input type="text" value="@item.FinalPrice" />
+                </td>
+                <td>
+                    <input type="text" value="@item.EffectivePrice" />
+                </td>
+                <td>
+                    <input type="text" value="@item.LastUpdatedBy"  disabled/>
+                </td>
+                <td>
+                    <input type="text" value="@item.LastUpdatedDate" disabled/>
+                </td>
+            </tr> 
+        }
+    </tbody>
+</table>
 <div class="action">
-        <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
-    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add Product</a>
+    <button id="addRow" class="btn btn-primary btn-md" role="button" >Add</button>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
-    <a href="/Marble/" class="btn btn-primary">Close</a>
-      <button class="btn btn-primary btn-md" role="button" onclick="DeleteProducts()"  id="deleteproduct">Delete</button>
-
+    <a href="/" class="btn btn-primary">Close</a>
 </div>
-<style>
-    .highlight { background-color: #d2a973; }
-</style>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
-    var newRow = 0;
-    var IdforDelete = 0;
-    $(document).ready(function () {
-       
-        $('.dropdown-toggle').collapse({
-            toggle: false
-        });
-    });
-    $('.close').click(function () {
-        location.reload();
-
-    });
-    $("#marbleTable tr").click(function () {
-        debugger
-        var selected = $($(this)[0].children).hasClass("highlight");
-        $("#marbleTable tr").removeClass("highlight");
-        $($(this)[0].children).removeClass("highlight");
-        if (!selected) {
-            //$(this).addClass("highlight");
-            $($(this)[0].children).addClass("highlight");
+    var updatedArray = [];
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
         }
-    });
-    function DeleteProducts() {
-      debugger
-      var  Id = IdforDelete;
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("DeleteProducts", "Product")',
-            data: { Id: Id },
-            dataType: "json",
-            success: function (data) {
-               
-                location.reload();
+    }
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            // paging: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
             },
-            error: function (e) {
-                alert(e);
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            },
+            //order: [[ 0, "desc" ]],
+            fixedColumns: {
+                leftColumns: 3
             }
         });
-    }
-    function getIdOfProduct(Id) {
-        IdforDelete = Id;
-     
-    }
-    $(':input').on('change', function () {
-        debugger
-        $("#saveproduct").attr("disabled", false);
-    });
+        var counter = 1;
 
-    $("#newproductmodel").draggable({
-        handle: ".modal-header"
-    });
-    function targetmodel() {
-        $('#modelbody').load('/Product/Edit');
-        $('.modal-title').text('New Product');
-    }
-    function AddProduct() {
-        $("#saveproduct").attr("disabled", false);
-      
-        if (newRow.length >= 1) {
-            return false;
-        }
-        var typeListOptions = '';
-              @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
+        $('#addRow').on('click', function () {
+            $("#saveproduct").attr("disabled", false);
+            var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
+            var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol3');
+
+            var typeListOptions = '';
+              @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
               {
                  @: typeListOptions = typeListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
               }
-        typeListOptions = typeListOptions + '</select></td>';
-        var categoryListOptions = '';
+            typeListOptions = typeListOptions + '</select>';
+            var categoryListOptions = '';
               @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
               {
                    @: categoryListOptions = categoryListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
               }
-        categoryListOptions = categoryListOptions + ' </select> </td>';
-
-         newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>  <td class="headerCol" style="left:55px">  </td>' +
-        '<td class="headerCol" style="left:100px"> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <select name="TypeList" id="TypeList">' + typeListOptions +
-        '<td> <select name="categoryList" id="categoryList">' + categoryListOptions +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' +
-        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' + '</tr>';
-        $('#marbleTable tr:last').after(newRow);
-    }
+            categoryListOptions = categoryListOptions + ' </select>';
+            table.row.add([
+                '<lable class="fixedCol1"></lable>',
+                '',
+                '<input class="fixedCol3" type="text" value="" />',
+                '<select name="TypeList" id="TypeList">' + typeListOptions,
+                '<select name="categoryList" id="categoryList">' + categoryListOptions,
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" disabled/>',
+                '<input type="text" value="" disabled/>',
+            ]).draw(false);
+            
+            for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
+                $('.DTFC_Cloned lable.fixedCol1')[i].innerHTML = fixedcolumn1values[i].innerHTML;
+            }
+            for (var i = 0, j = fixedcolumn3values.length; i < j; i++) {
+                $('.DTFC_Cloned input.fixedCol3')[i].value = fixedcolumn3values[i].value;
+            }
+        });
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+    });
     function SaveProducts() {
-
-        debugger
-        var products = [];
+        var items = [];
         var table = document.getElementById('marbleTable');
-          
-        for (var r = 1, n = table.rows.length; r < n; r++) {
+        var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
+        var fixedcolumn3 = $('.DTFC_Cloned input.fixedCol3');
+
+        for (var r = 0, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
-                products.push({
-                    Id: table.rows[r].cells[0].innerHTML,
-                    Name: table.rows[r].cells[2].children[0].value,
-                    //selectedType: table.rows[r].cells[3].children[0].options["selectedIndex"],
-                    Type: table.rows[r].cells[3].children[0].options[table.rows[r].cells[3].children[0].options["selectedIndex"]].id,
-                 //   selectedType: table.rows[r].cells[4].children[0].options["selectedIndex"],
-                    Category: table.rows[r].cells[4].children[0].options[table.rows[r].cells[4].children[0].options["selectedIndex"]].id,
-                    //Category: table.rows[r].cells[4].children[0].id,
-                    POSCounter: table.rows[r].cells[5].children[0].value,
-                    Active: table.rows[r].cells[6].children[0].checked,
-                    DisplayInPOS: table.rows[r].cells[7].children[0].checked,
-                    DisplayGroup: table.rows[r].cells[8].children[0].value,
-                    AutoGenerateCardNumber: table.rows[r].cells[9].children[0].checked,
-                    OnlyVIP: table.rows[r].cells[10].children[0].checked,
-                    Price: table.rows[r].cells[11].children[0].value,
-                   
-                    FaceValue: table.rows[r].cells[12].children[0].value,
-                    TaxInclusive: table.rows[r].cells[13].children[0].checked,
-                    FinalPrice: table.rows[r].cells[14].children[0].value,
-                    EffectivePrice: table.rows[r].cells[15].children[0].value,
+                var rowIndex = r + 1;
+                if (fixedcolumn3[r].value.trim() == '') {
+                    alert('Please Enter Product Name');
+                    return false;
+                }
+                if (table.rows[rowIndex].cells[11].children[0].value == '') {
+                    alert('Please Enter Price');
+                    return false;
+                }
+                var selectedTypeIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
+                var selectedCategoryIndex = table.rows[rowIndex].cells[4].children[0].options["selectedIndex"];
+
+                items.push({
+                    Id: fixedcolumn1[r].innerHTML,
+                    Name: fixedcolumn3[r].value,
+                    Type: table.rows[rowIndex].cells[3].children[0].options[selectedTypeIndex].id,
+                    Category: table.rows[rowIndex].cells[4].children[0].options[selectedCategoryIndex].id,
+                    POSCounter: table.rows[rowIndex].cells[5].children[0].value,
+                    Active: table.rows[rowIndex].cells[6].children[0].checked,
+                    DisplayInPOS: table.rows[rowIndex].cells[7].children[0].checked,
+                    DisplayGroup: table.rows[rowIndex].cells[8].children[0].value,
+                    AutoGenerateCardNumber: table.rows[rowIndex].cells[9].children[0].checked,
+                    OnlyVIP: table.rows[rowIndex].cells[10].children[0].checked,
+                    Price: table.rows[rowIndex].cells[11].children[0].value,
+
+                    FaceValue: table.rows[rowIndex].cells[12].children[0].value,
+                    TaxInclusive: table.rows[rowIndex].cells[13].children[0].checked,
+                    FinalPrice: table.rows[rowIndex].cells[14].children[0].value,
+                    EffectivePrice: table.rows[rowIndex].cells[15].children[0].value,
                     ExpiryDate: '10/10/2020',
-                    StartDate: '10/10/2020',
-                    LastUpdatedDate: '10/10/2019',
+                    StartDate: '10/10/2020'
                 });
             }
-        }
-
-        var ProductName = products[0].Name;
-        var PriceName = products[0].Price;
-        if (ProductName.trim() == '') {
-            alert('Please Enter Product Name');
-            return false;
-        }
-        if (PriceName == '') {
-            alert('Please Enter Price');
-            return false;
         }
 
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdateProducts", "Product")',
-            data: JSON.stringify({ products: products }),
+            url: '@Url.Action("UpdateProducts", "product")',
+            data: JSON.stringify({ products: items }),
             dataType: "json",
             success: function (data) {
                 alert('Data Saved');
@@ -304,17 +285,48 @@
             }
         });
     }
-    var updatedArray = [];
-    function UpdatedList(x) {
-        debugger;
-        if (!updatedArray.includes(x.rowIndex)) {
-            updatedArray.push(x.rowIndex);
-        }
+    $(document).ready(function () {
+        $('.dropdown-toggle').collapse({
+            toggle: false
+        });
+    });
+    $('.close').click(function () {
+        location.reload();
+    });
+   
+    $(':input').on('change', function () {
+        $("#saveproduct").attr("disabled", false);
+    });
+
+    $("#newproductmodel").draggable({
+        handle: ".modal-header"
+    });
+    function targetmodel() {
+        $('#modelbody').load('/Product/Edit');
+        $('.modal-title').text('New Product');
     }
+   
     function EditProduct(id) {
         $('.modal-title').text('Edit Product');
         $('#basicExampleModal').modal('show');
         $('#modelbody').load('/Product/Edit', { "id": id });
-        //window.open("/product/Edit/"+id, "Marbale", "width=700,height=700");
+    }
+    function DeleteProduct(id) {
+        if (confirm('Are you sure you want to delete this from database?')) {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("DeleteProduct", "Product")',
+            data: { Id: id },
+            dataType: "json",
+            success: function (data) {
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+              });
+        }
+      
     }
 </script>
