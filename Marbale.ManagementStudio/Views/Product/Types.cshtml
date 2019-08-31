@@ -2,14 +2,10 @@
     ViewBag.Title = "Product Types";
 }
 <link href="~/Content/css/product.css" rel="stylesheet" />
-<div class="first" style="background-color: burlywood">
-    <div class="second" style="margin-left:20.2em;">
-
-        <table id="productsTable" class="table">
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
             <thead>
-                <th class="headerCol">ID</th>
-              @*  <th class="headerCol">Edit</th>*@
-                <th class="headerCol" style="left:100px">Type</th>
+                <th>ID</th>
+                <th>Type</th>
                 <th>Description</th>
                 <th>ReportGroup</th>
                 <th>CardSale</th>
@@ -20,19 +16,15 @@
             @foreach (var item in ViewBag.productTypes)
             {  
                 <tr onchange="UpdatedList(this)">
-                    <td class="headerCol" >@item.Id  </td>
-
-                 @*   <td class="headerCol" style="left:55px">
-                        <button onClick="EditProductType(@item.Id)">-</button>
-                    </td>*@
-                    <td class="headerCol" style="left:50px">
-                        <input type="text" value="@item.Type" class="gridText" />
+                    <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
+                    <td>
+                        <input class="fixedCol2" type="text" value="@item.Type"  />
                     </td>
                     <td>
-                        <input type="text" value="@item.Description" class="gridText" />
+                        <input type="text" value="@item.Description"  />
                     </td>
                     <td>
-                        <input type="text" value="@item.ReportGroup" class="gridText" />
+                        <input type="text" value="@item.ReportGroup"  />
                     </td>
                     <td>
                         <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
@@ -41,59 +33,102 @@
                         <input type="checkbox"  @(item.CardSale ? "checked='checked'" : "") value="@item.CardSale" />
                     </td>
                     <td>
-                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
+                        <input type="text" value="@item.LastUpdatedBy"  disabled/>
                     </td>
                     <td>
-                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
+                        <input type="text" value="@item.LastUpdatedDate"  disabled/>
                     </td>
                 </tr>  
             }
         </table>
-    </div>
-</div>
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" id="saveproducttypes" onclick="SaveProductTypes()" disabled>Save</button>
-    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductType()">Add Product Type</a>
-        <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+    <a href="#" class="btn btn-primary btn-md" role="button" id="addRow">Add Product Type</a>
+    <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
 </div>
 <script>
     $(':input').on('change', function () {
-        debugger
         $("#saveproducttypes").attr("disabled", false);
     });
-    function AddProductType() {
-        $('#saveproducttypes').removeAttr('disabled');
-        var newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>' +
-        '<td class="headerCol" style="left:50px"> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' +
-        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' + '</tr>';
-        $('#productsTable tr:last').after(newRow);
-    }
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            // paging: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            },
+            //order: [[ 0, "desc" ]],
+            fixedColumns: {
+                leftColumns: 2
+            }
+        });
+        var counter = 1;
+
+        $('#addRow').on('click', function () {
+            $("#saveproducttypes").attr("disabled", false);
+            var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
+            var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol3');
+            table.row.add([
+                '<lable class="fixedCol1"></lable>',
+                '<input class="fixedCol2" type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" disabled/>',
+                '<input type="text" value="" disabled/>',
+            ]).draw(false);
+
+            for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
+                $('.DTFC_Cloned lable.fixedCol1')[i].innerHTML = fixedcolumn1values[i].innerHTML;
+            }
+            for (var i = 0, j = fixedcolumn3values.length; i < j; i++) {
+                $('.DTFC_Cloned input.fixedCol3')[i].value = fixedcolumn3values[i].value;
+            }
+        });
+         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+    });
+
     function SaveProductTypes() {
-        var productTypes = [];
-        var table = document.getElementById('productsTable');
-        for (var r = 1, n = table.rows.length; r < n; r++) {
+        var items = [];
+        var table = document.getElementById('marbleTable');
+        var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
+        var fixedcolumn2 = $('.DTFC_Cloned input.fixedCol2');
+
+        for (var r = 0, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
-                productTypes.push({
-                    Id: table.rows[r].cells[0].innerHTML,
-                    Type: table.rows[r].cells[1].children[0].value,
-                    Description: table.rows[r].cells[2].children[0].value,
-                    ReportGroup: table.rows[r].cells[3].children[0].value,
-                    Active: table.rows[r].cells[4].children[0].checked,
-                    CardSale: table.rows[r].cells[5].children[0].checked
+                var rowIndex = r - 1;
+                items.push({
+                    Id: fixedcolumn1[rowIndex].innerHTML,
+                    Type: fixedcolumn2[rowIndex].value,
+                    Description: table.rows[rowIndex].cells[2].children[0].value,
+                    ReportGroup: table.rows[rowIndex].cells[3].children[0].value,
+                    Active: table.rows[rowIndex].cells[4].children[0].checked,
+                    CardSale: table.rows[rowIndex].cells[5].children[0].checked
                 });
             }
         }
+
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: '@Url.Action("UpdateProductType", "Product")',
-            data: JSON.stringify({ productTypes: productTypes }),
+            data: JSON.stringify({ productTypes: items }),
             dataType: "json",
             success: function (data) {
                 alert('Data Saved');
@@ -104,40 +139,11 @@
             }
         });
     }
+   
     var updatedArray = [];
     function UpdatedList(x) {
         if (!updatedArray.includes(x.rowIndex)) {
             updatedArray.push(x.rowIndex);
         }
     }
-    function EditProductType(id) {
-        window.open("/product/GetProduct/" + id, "Marbale", "width=700,height=700");
-    }
 </script>
-
-
-
-
-
-<style>
-    div.second1 { 
-            width: 963px; 
-            overflow-x:scroll;  
-            margin-left:5em; 
-            overflow-y:visible;
-            padding-bottom:1px;
-            height: 490px;
-        }
-        div.first1 {
-            width: auto;
-            overflow-y: scroll;
-            overflow-x: hidden;
-            height: 491px;           
-            padding-bottom: 1px;
-            position: absolute;
-            left:0;
-            top:auto;
-          
-        }
-
-</style>
