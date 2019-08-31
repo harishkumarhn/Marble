@@ -5,7 +5,7 @@
 }
 
 <div style="background-color:orangered;height: 500px;">
- 
+ <br />
  
 <div id="valuesContainer">
    
@@ -69,9 +69,10 @@
       </div>
  @*          <input type="submit"  class="button-email btn btn-primary"/>*@
 
-      
+   
+       <div id="closesavediv">   <text> &nbsp; &nbsp; &nbsp;</text>    
   <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a>
+     <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a></div>
 </div>
       
   
@@ -169,14 +170,17 @@
     left: 319px;
     bottom: 132px;
     }
-    .button-close {
-           position: absolute;
-    left: 646px;
-  
-    top: 576px;
-    }
+ 
 
 input,button, label,.ar {
     float:left;
 }
+ div#closesavediv{
+        position: absolute;
+         left: 27%;
+    right: 0;
+    margin-left: auto;
+               bottom: -11%;
+    margin-right: auto;
+    }
 </style>

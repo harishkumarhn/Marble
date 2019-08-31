@@ -8,12 +8,12 @@
         <div id="Tabs" role="tabpanel">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <button onclick="getValues()" aria-controls="personal" role="tab" data-toggle="tab" class="tablinks">Values</button>
-                <button aria-controls="employment" onclick="getSettings()" role="tab" data-toggle="tab" class="tablinks">Settings</button>
+           <button onclick="getValues()" aria-controls="personal" role="tab" data-toggle="tab"  class="tblev" style=" width:50%;">Values</button>
+               <button aria-controls="employment" onclick="getSettings()" role="tab" data-toggle="tab" class="tblev" style=" width:50%;">Settings</button>
             </ul>
             <!-- Tab panes -->
 
-        </div>
+                </div></br>
     </div>
 </div>
 <div id="container1">
@@ -38,8 +38,15 @@
     $('.tablinks').click(function () {
         $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
     });
+    $('.tblev').click(function () {
+        $(this).addClass('tble').siblings().removeClass('tble');
+    });
 </script>
 <style>
+    .tble {
+       
+         background-color: goldenrod;
+    }
     .tablinks {
         float: left;
         border: none;
@@ -49,7 +56,18 @@
         transition: 0.3s;
         font-size: 17px;
     }
+    .tblev {
+           float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+    }
 
+    .tble {
+    }
     .buttoncolor-change {
         background-color: cornflowerblue;
     }

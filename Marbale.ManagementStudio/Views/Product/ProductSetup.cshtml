@@ -51,10 +51,10 @@
                 <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
                 <td>
                      <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
-                         <i class="material-icons">&#xE254;</i>
+                         <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
                      </a>
                      <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
-                         <i class="material-icons">&#xE872;</i>
+                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
                      </a>
                 </td>
                 <td>
@@ -149,6 +149,7 @@
             updatedArray.push(index);
         }
     }
+ 
     $(document).ready(function () {
         var table = $('#marbleTable').DataTable({
             scrollY: "400px",
@@ -165,6 +166,7 @@
                 $('td', row).addClass('tblRow');
             },
             rowCallback: function (row, data) {
+                debugger;
                 var element = $('td', row);
                 element.on("change", function (e) {
                     UpdatedList($(this).parent().index());
@@ -173,6 +175,16 @@
             //order: [[ 0, "desc" ]],
             fixedColumns: {
                 leftColumns: 3
+            }
+        });
+        $('#marbleTable tbody').on('click', 'tr', function () {
+            debugger;
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
             }
         });
         var counter = 1;
@@ -290,7 +302,11 @@
     $('.close').click(function () {
         location.reload();
     });
-   
+    //$("#marbleTable tbody tr").on('click', function (event) {
+    //    debugger;
+    //    $("#marbleTable tbody tr").removeClass('row_selected');
+    //    $(this).css('background-color','red');
+    //});
     $(':input').on('change', function () {
         $("#saveproduct").attr("disabled", false);
     });
