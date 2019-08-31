@@ -121,10 +121,6 @@ button.btn-settings:active {
         white-space: nowrap;
     }
 
-    div.dataTables_wrapper {
-        width: 1365px;
-        margin: 0 auto;
-    }
     table.DTFC_Cloned thead, table.DTFC_Cloned tfoot {
        background-color:#0fd2f1;
     }
