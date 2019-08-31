@@ -15,7 +15,7 @@
             </thead>
             @foreach (var item in ViewBag.productTypes)
             {  
-                <tr onchange="UpdatedList(this)">
+                <tr>
                     <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
                     <td>
                         <input class="fixedCol2" type="text" value="@item.Type"  />
@@ -112,10 +112,10 @@
 
         for (var r = 0, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
-                var rowIndex = r - 1;
+                var rowIndex = r + 1;
                 items.push({
-                    Id: fixedcolumn1[rowIndex].innerHTML,
-                    Type: fixedcolumn2[rowIndex].value,
+                    Id: fixedcolumn1[r].innerHTML,
+                    Type: fixedcolumn2[r].value,
                     Description: table.rows[rowIndex].cells[2].children[0].value,
                     ReportGroup: table.rows[rowIndex].cells[3].children[0].value,
                     Active: table.rows[rowIndex].cells[4].children[0].checked,
@@ -141,9 +141,9 @@
     }
    
     var updatedArray = [];
-    function UpdatedList(x) {
-        if (!updatedArray.includes(x.rowIndex)) {
-            updatedArray.push(x.rowIndex);
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
         }
     }
 </script>
