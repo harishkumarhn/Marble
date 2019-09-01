@@ -240,6 +240,7 @@
     <Content Include="Content\CSS\fonts\pxiEyp8kv8JHgFVrJJfecg.woff2" />
     <Content Include="Content\CSS\fonts\pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2" />
     <Content Include="Content\CSS\fonts\pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2" />
+    <Content Include="Content\CSS\fonts\flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
     <None Include="Properties\PublishProfiles\Harish.pubxml" />
     <None Include="Properties\PublishProfiles\MarbleHost.pubxml" />
     <None Include="Properties\PublishProfiles\MarbleSite.pubxml" />
