@@ -139,5 +139,10 @@ namespace Marble.Business
            }
            return inventorylist;
        }
+
+       public int DeleteCardById(int Id)
+       {
+           return cardData.DeleteCardById(Id);
+       }
     }
 }

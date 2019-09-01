@@ -48,6 +48,7 @@
     <table id="cardtable" class="table marbleTable">
         <thead class="thead-dark">
             <th>CardId</th>
+            <th></th>
             <th>CardNumber</th>
             <th>TechCardType</th>
             <th>IssueDate</th>
@@ -85,7 +86,14 @@
             {  
             <tr onclick="UpdatedList(@item.CardId)">
                 <td>@item.CardId  </td>
-
+                  <td>
+                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditCard('@item.CardId')">
+                         <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
+                     </a>
+                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteCard('@item.CardId')">
+                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
+                     </a>
+                </td>
                 <td>
                     <input type="text" value="@item.CardNumber" class="gridText" />
                 </td>
@@ -189,7 +197,7 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" id="newcard">
         New Card
     </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" id="updatecard" onclick="EditCard();">
+    <button type="button" class="btn btn-primary" data-toggle="modal" id="updatecard" style="display:none" onclick="EditCard();">
         Update Card
     </button>
 </div>
@@ -205,10 +213,100 @@
 
 <link href="~/Content/DatetimePicker/jquery.datepicker2.css" rel="stylesheet" />
 <script src="~/Content/DatetimePicker/jquery.datepicker2.js"></script>
-
 <script>
+    $(function () {
+        $("#ExpiryDate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            "setDate": new Date()
+        });
+    });
+    var table;
     $(document).ready(function () {
+         table = $('#cardtable').DataTable({
+            scrollY: "400px",
+            scrollX: "400px",
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            // paging: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                debugger;
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            },
+            //order: [[ 0, "desc" ]],
+            fixedColumns: {
+                leftColumns: 3
+            }
+        });
+        $('#marbleTable tbody').on('click', 'tr', function () {
+            debugger;
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+        var counter = 1;
 
+        $('#addRow').on('click', function () {
+            $("#saveproduct").attr("disabled", false);
+            var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
+            var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol3');
+
+   @*         var typeListOptions = '';
+              @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
+              {
+                 @: typeListOptions = typeListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
+              }
+            typeListOptions = typeListOptions + '</select>';
+            var categoryListOptions = '';
+              @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
+              {
+                   @: categoryListOptions = categoryListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
+              }
+            categoryListOptions = categoryListOptions + ' </select>';*@
+            table.row.add([
+                '<lable class="fixedCol1"></lable>',
+                '',
+                '<input class="fixedCol3" type="text" value="" />',
+                '<select name="TypeList" id="TypeList">' + typeListOptions,
+                '<select name="categoryList" id="categoryList">' + categoryListOptions,
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" disabled/>',
+                '<input type="text" value="" disabled/>',
+            ]).draw(false);
+
+            for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
+                $('.DTFC_Cloned lable.fixedCol1')[i].innerHTML = fixedcolumn1values[i].innerHTML;
+            }
+            for (var i = 0, j = fixedcolumn3values.length; i < j; i++) {
+                $('.DTFC_Cloned input.fixedCol3')[i].value = fixedcolumn3values[i].value;
+            }
+        });
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
     });
 
     $('#newcard').click(function () {
@@ -228,15 +326,38 @@
         if (!selected)
             $(this).addClass("highlight");
     });
-    $("#cardtable tr").on('dblclick', function (e) {
-        debugger;
-        EditCard();
-    });
-    function EditCard() {
+    function DeleteCard(id) {
+        debugger
+        if (confirm('Are you sure you want to delete this from database?')) {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("DeleteCard", "Cards")',
+                data: { Id: id },
+                dataType: "json",
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
+
+    }
+    function EditCard(CardId) {
+        debugger
         $('#newupdatecardmodal').text("Update Card").addClass('modal-centre');
         $('#newcardmodel').modal('show');
-        $('#modelbody').load('/Cards/Cards', { "CardId": updatedArray[0] });
+        $('#modelbody').load('/Cards/Cards', { "CardId": CardId });
         //window.open("/product/Edit/"+id, "Marbale", "width=700,height=700");
     }
 
 </script>
+<style>
+    div.dataTables_wrapper {
+    width: 1184px;
+    margin: 0 auto;
+        overflow-y: scroll;
+}
+</style>
