@@ -20,15 +20,17 @@
                     <div class="col-md-2">
                         <label for="ex2"><b>CardNumber:</b></label>
                         @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CardNumber) })
+                                 @Html.ValidationMessageFor(model => model.CardNumber,"", new {@class = "text-danger" })
                     </div>
 
                     <div class="col-md-2">
                         <label for="ex3"><b>IssueDate:</b></label>
-                        @Html.TextBoxFor(m => m.IssueDate, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.IssueDate, new { @class = "form-control datepickers" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex3"><b>FaceValue:</b></label>
                         @Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control" })
+                          @Html.ValidationMessageFor(model => model.FaceValue,"", new {@class = "text-danger" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex4"><b>Custemer:</b></label>
@@ -49,20 +51,24 @@
                     <div class="col-md-2">
                         <label for="ex1"><b>Credits:</b></label>
                         @Html.TextBoxFor(m => m.Credits, new { @class = "form-control" })
+                          @Html.ValidationMessageFor(model => model.Credits,"", new {@class = "text-danger" })
 
                     </div>
                     <div class="col-md-2">
                         <label for="ex2"><b>Credit Plus:</b></label>
                         @Html.TextBoxFor(m => m.CreditPlus, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CreditPlus) })
+                          @Html.ValidationMessageFor(model => model.CreditPlus,"", new {@class = "text-danger" })
                     </div>
 
                     <div class="col-md-2">
                         <label for="ex3"><b>Courtesy:</b></label>
                         @Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control" })
+                          @Html.ValidationMessageFor(model => model.Courtesy,"", new {@class = "text-danger" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex3"><b>Bonus:</b></label>
                         @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
+                          @Html.ValidationMessageFor(model => model.Bonus,"", new {@class = "text-danger" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex4"><b>CreditsPlayed:</b></label>
@@ -78,26 +84,27 @@
                 <div class="form-group row">
                     <div class="col-md-2">
                         <label for="ex1"><b>StartTime:</b></label>
-                        @Html.TextBoxFor(m => m.StartTime, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.StartTime, new { @class = "form-control datepickers" })
 
                     </div>
                     <div class="col-md-2">
                         <label for="ex2"><b>Last Play time:</b></label>
-                        @Html.TextBoxFor(m => m.LastPlayTime, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.LastPlayTime) })
+                        @Html.TextBoxFor(m => m.LastPlayTime, new { @class = "form-control datepickers", placeholder = @Html.DisplayNameFor(n => n.LastPlayTime) })
                     </div>
                     
                     <div class="col-md-2">
                         <label for="ex1"><b>Expiry Date:</b></label>
-                        @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control datepickers" })
 
                     </div>
                     <div class="col-md-3">
                         <label for="ex3"><b>Refund Amount:</b></label>
                         @Html.TextBoxFor(m => m.RefundAmount, new { @class = "form-control" })
+                          @Html.ValidationMessageFor(model => model.RefundAmount,"", new {@class = "text-danger" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex2"><b>Refund Date:</b></label>
-                        @Html.TextBoxFor(m => m.RefundDate, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.RefundDate, new { @class = "form-control datepickers" })
                     </div>
                 </div>
             </div>
@@ -108,6 +115,7 @@
                     <div class="col-md-3">
                         <label for="ex1"><b>Ticket Count:</b></label>
                         @Html.TextBoxFor(m => m.TicketCount, new { @class = "form-control" })
+                          @Html.ValidationMessageFor(model => model.TicketCount,"", new {@class = "text-danger" })
 
                     </div>
                     <div class="col-md-3">
@@ -127,7 +135,7 @@
                 <div class="form-group row">
                     <div class="col-md-3">
                         <label for="ex1"><b>Last Updated Time:</b></label>
-                        @Html.TextBoxFor(m => m.LastUpdatedTime, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.LastUpdatedTime, new { @class = "form-control datepickers" })
 
                     </div>
                     <div class="col-md-3">
@@ -164,14 +172,28 @@
     }
 </div>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+		<script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(document).off('focusin.modal');
         //$('#newcardmodel').modal('show');
     })
     //var $j = jQuery.noConflict();
-
+    $(function () {
+        $(".datepickers").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            "setDate": new Date()
+        });
+    });
     //$j('#ExpiryDate').datepicker();
     $('.check-boxs').change(function () {
         if ($('#TimerResetCard').is(':checked')) {
