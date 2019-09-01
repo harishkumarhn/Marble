@@ -320,11 +320,9 @@ namespace Marbale.DataAccess
 
         public int DeleteProductbyId(int Id)
         {
-
-
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@Id",Id);
-            return conn.executeUpdateQuery("DeleteProductById", sqlParameters);
+            return conn.executeUpdateQuery("sp_DeleteProductById", sqlParameters);
         }
 
         public DataTable GetProductTaxLookUp()
