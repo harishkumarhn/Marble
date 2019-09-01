@@ -260,7 +260,7 @@ namespace Marbale.DataAccess
                     sqlParameters[1] = new SqlParameter("@Name", cat.Name);
                     sqlParameters[2] = new SqlParameter("@Active", cat.Active);
                     sqlParameters[3] = new SqlParameter("@ParentCategory", cat.ParentCategory);
-                    return conn.executeUpdateQuery("sp_InsertUpdateOrProductCategory", sqlParameters);
+                    conn.executeUpdateQuery("sp_InsertUpdateOrProductCategory", sqlParameters);
                 }
             }
             catch (Exception e)
