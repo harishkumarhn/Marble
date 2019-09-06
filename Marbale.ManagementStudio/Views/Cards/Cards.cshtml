@@ -25,7 +25,7 @@
 
                     <div class="col-md-2">
                         <label for="ex3"><b>IssueDate:</b></label>
-                        @Html.TextBoxFor(m => m.IssueDate, new { @class = "form-control datepickers" })
+                        @Html.TextBoxFor(m => m.IssueDateP, new { @class = "form-control datepickers" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex3"><b>FaceValue:</b></label>
@@ -193,6 +193,10 @@
             changeYear: true,
             "setDate": new Date()
         });
+    });
+    $('.close').click(function () {
+        location.reload();
+
     });
     //$j('#ExpiryDate').datepicker();
     $('.check-boxs').change(function () {

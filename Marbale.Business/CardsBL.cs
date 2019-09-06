@@ -50,7 +50,7 @@ namespace Marble.Business
                pType.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                pType.LastUpdatedTime = dr.IsNull("LastUpdatedTime") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedTime"]);
                pType.FaceValue = dr.IsNull("FaceValue") ? 0 : float.Parse(dr["FaceValue"].ToString());
-               pType.IssueDate = dr.IsNull("IssueDate") ? new DateTime() : Convert.ToDateTime(dr["IssueDate"].ToString());
+               pType.IssueDateP = dr.IsNull("IssueDate") ? new DateTime() : Convert.ToDateTime(dr["IssueDate"].ToString());
                pType.LastPlayTime = dr.IsNull("LastPlayTime") ? new DateTime() : Convert.ToDateTime(dr["LastPlayTime"].ToString());
                pType.Note = dr.IsNull("Note") ? "" : dr["Note"].ToString();
                pType.RefundAmount = dr.IsNull("RefundAmount") ? 0 : float.Parse(dr["RefundAmount"].ToString());
