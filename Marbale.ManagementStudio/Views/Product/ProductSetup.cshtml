@@ -23,7 +23,7 @@
         </div>
     </div>
 </div>
-<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+<table id="marbleTable" class="stripe row-border order-column">
     <thead>
         <th>ID</th>
         <th></th>
@@ -178,7 +178,6 @@
             }
         });
         $('#marbleTable tbody').on('click', 'tr', function () {
-            debugger;
             if ($(this).hasClass('selected')) {
                 $(this).removeClass('selected');
             }
