@@ -3,210 +3,181 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <label>Hub: </label>
-<select name="AvalibleHubs" id="Hubs" class="gridText">
-        @foreach (var dow in ViewBag.machines[0].AvalibleHubs)
-        {
-            <option value="@dow.Name">@dow.Name</option>                                
-        }
+<select name="AvalibleHubs" id="Hubs" onchange="Filter()">
+    @foreach (var dow in ViewBag.machines[0].AvalibleHubs)
+    {
+        <option value="@dow.Name">@dow.Name</option>                                
+    }
 </select>
 &nbsp&nbsp&nbsp&nbsp
-<input type="checkbox" />
+<input type="checkbox" id="activeBox" onchange="Filter()" />
 <label>Active Machines Only</label>
-<div class="first">
-    <div class="second" style="margin-left:17.0em; ">
-        <table id="marbleTable" class="table">
-            <thead>
-                <th class="headerCol" style="top:24px">ID</th>
-                <th class="headerCol" style="left:55px;top:24px">Name</th>
-                <th>Game Name</th>
-                <th>Hub Name</th>
-                <th>Hub Address</th>
-                <th>Machine Address</th>
-                <th>Effective Machine Address</th>
-                <th>Active</th>
-                <th>Reader Type</th>
-                <th>Software Version</th>
-                <th>Ticket Mode</th>
-                <th>VIP Price</th>
-                <th>TicketAllowed</th>
-                <th>PurchasePrice</th>
-                <th>Note</th>
-                <th>Theme</th>
-                <th>LastUpdatedBy</th>
-                <th>LastUpdatedDate</th>
-                <th>Configure</th>
-            </thead>
-            @foreach (var item in ViewBag.machines)
-            {  
-                <tr onchange="UpdatedList(this)">
-                    <td class="headerCol">@item.Id  </td>
-                    <td class="headerCol" style="left:55px">
-                        <input type="text" value="@item.Name" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.GameName" class="gridText" />
-                    </td>
-                    <td>
-                        <select name="AvalibleHubs" id="AvalibleHubs" class="gridText">
-                            @foreach (var dow in item.AvalibleHubs)
-                            {
-                                if (@item.HubName == @dow.Name)
-                                {
-                                <option value="@dow.Name" selected>@dow.Name</option>
-                                }
-                                else
-                                {
-                                <option value="@dow.Name">@dow.Name</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.HubAddress" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.MachineAddress" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.EffectiveMachineAddress" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
-                    </td>
-                    <td>
-                        <select name="AvalibleReaders" id="AvalibleReaders" class="gridText">
-                            @foreach (var dow in item.AvalibleReaders)
-                            {
-                                if (@item.ReaderType == @dow.Value)
-                                {
-                                    <option value="@dow.Value" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                    <option value="@dow.Value">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.SoftwareVersion" class="gridText"/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.TicketMode" class="gridText"/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.VIPPrice" class="gridText"/>
-                    </td>
-                      <td>
-                        <input type="checkbox"  @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.PurchasePrice" class="gridText"/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Notes" class="gridText"/>
-                    </td>
-                    <td>
-                        <select name="AvalibleThemes" id="AvalibleThemes" class="gridText">
-                            @foreach (var dow in item.AvalibleThemes)
-                            {
-                                if (@item.Theme == @dow.Value)
-                                {
-                                    <option value="@dow.Value" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                    <option value="@dow.Value">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled/>
-                    </td>
-                    <td>
-                        <button onClick="ConfigureMachine(@item.Id)">-</button>
-                    </td>
-                </tr>  
-            }
-        </table>
-    </div>
-</div>
+<table id="marbleTable" class="stripe row-border order-column">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Game Name</th>
+        <th>Hub Name</th>
+        <th>Hub Address</th>
+        <th>Machine Address</th>
+        <th>Effective Machine Address</th>
+        <th>Active</th>
+        <th>Reader Type</th>
+        <th>Software Version</th>
+        <th>Ticket Mode</th>
+        <th>VIP Price</th>
+        <th>TicketAllowed</th>
+        <th>PurchasePrice</th>
+        <th>Note</th>
+        <th>Theme</th>
+        <th>LastUpdatedBy</th>
+        <th>LastUpdatedDate</th>
+        <th>Configure</th>
+    </thead>
+    @foreach (var item in ViewBag.machines)
+    {  
+        <tr>
+            <td>
+                <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
+            </td>
+            <td>
+                <input type="text" class="fixedCol2" value="@item.Name" />
+            </td>
+            <td>
+                <input type="text" value="@item.GameName" />
+            </td>
+            <td>
+                <select name="AvalibleHubs" id="AvalibleHubs">
+                    @foreach (var dow in item.AvalibleHubs)
+                    {
+                        if (@item.HubName == @dow.Name)
+                        {
+                        <option value="@dow.Name" id="@dow.Id" selected>@dow.Name</option>
+                        }
+                        else
+                        {
+                        <option value="@dow.Name" id="@dow.Id">@dow.Name</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <input type="text" value="@item.HubAddress" />
+            </td>
+            <td>
+                <input type="text" value="@item.MachineAddress" />
+            </td>
+            <td>
+                <input type="text" value="@item.EffectiveMachineAddress" />
+            </td>
+            <td>
+                <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
+            </td>
+            <td>
+                <select name="AvalibleReaders" id="AvalibleReaders">
+                    @foreach (var dow in item.AvalibleReaders)
+                    {
+                        if (@item.ReaderType == @dow.Value)
+                        {
+                        <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                        }
+                        else
+                        {
+                        <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <input type="text" value="@item.SoftwareVersion" />
+            </td>
+            <td>
+                <input type="text" value="@item.TicketMode" />
+            </td>
+            <td>
+                <input type="text" value="@item.VIPPrice" />
+            </td>
+            <td>
+                <input type="checkbox"  @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
+            </td>
+            <td>
+                <input type="text" value="@item.PurchasePrice" />
+            </td>
+            <td>
+                <input type="text" value="@item.Notes" />
+            </td>
+            <td>
+                <select name="AvalibleThemes" id="AvalibleThemes">
+                    @foreach (var dow in item.AvalibleThemes)
+                    {
+                        if (@item.Theme == @dow.Value)
+                        {
+                        <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                        }
+                        else
+                        {
+                        <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <input type="text" value="@item.LastUpdatedBy" disabled/>
+            </td>
+            <td>
+                <input type="text" value="@item.LastUpdatedDate" disabled/>
+            </td>
+            <td>
+                <button onClick="ConfigureMachine(@item.Id)">-</button>
+            </td>
+        </tr>  
+    }
+</table>
 <div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveMachines()">Save</button>
-    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddMachine()">Add</a>
+    <a href="#" class="btn btn-primary btn-md" role="button" id="addRow">Add</a>
+    <a href="/" class="btn btn-primary">Close</a>
+
 </div>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
     $(document).ready(function () {
         $('.dropdown-toggle').collapse({
             toggle: false
         });
     })
-    function AddMachine() {
-        var hubNames = '';
-              @foreach (var dow in ViewBag.machines[0].AvalibleHubs)
-              {
-                 @: hubNames = hubNames + '<option value="@dow.Name">@dow.Name</option>';
-              }
-        hubNames = hubNames + '</select></td>';
-        var readerTypes = '';
-              @foreach (var dow in ViewBag.machines[0].AvalibleReaders)
-              {
-                 @: readerTypes = readerTypes + '<option value="@dow.Value">@dow.Value</option>';
-              }
-        readerTypes = readerTypes + '</select></td>';
-        var themes = '';
-              @foreach (var dow in ViewBag.machines[0].AvalibleThemes)
-              {
-                 @: themes = themes + '<option value="@dow.Value">@dow.Value</option>';
-              }
-        themes = themes + '</select></td>';
 
-        var newRow = '<tr onchange=UpdatedList(this)> ' +
-        '<td class="headerCol"> <a href="#"></a> </td> ' +
-        ' <td class="headerCol" style="left:55px"> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <select name="AvalibleHubs" id="AvalibleHubs">' + hubNames +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <select name="AvalibleReaders" id="AvalibleReaders">' + readerTypes +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <select name="AvalibleThemes" id="AvalibleThemes">' + themes;
-        $('#marbleTable tr:last').after(newRow);
-    }
     function SaveMachines() {
-        var machines = [];
+        var items = [];
         var table = document.getElementById('marbleTable');
-        for (var r = 1, n = table.rows.length; r < n; r++) {
+        var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
+        var fixedcolumn2 = $('.DTFC_Cloned input.fixedCol2');
+
+        for (var r = 0, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
-                machines.push({
-                    Id: table.rows[r].cells[0].innerHTML,
-                    Name: table.rows[r].cells[1].children[0].value,
-                    GameName: table.rows[r].cells[2].children[0].value,
-                    HubName: table.rows[r].cells[3].children[0].value,
-                    HubAddress: table.rows[r].cells[4].children[0].value,
-                    MachineAddress: table.rows[r].cells[5].children[0].value,
-                    EffectiveMachineAddress: table.rows[r].cells[6].children[0].value,
-                    Active: table.rows[r].cells[7].children[0].checked,
-                    ReaderType: table.rows[r].cells[8].children[0].value,
-                    SoftwareVersion: table.rows[r].cells[9].children[0].value,
-                    TicketMode: table.rows[r].cells[10].children[0].value,
-                    VIPPrice: table.rows[r].cells[11].children[0].value,
-                    TicketAllowed: table.rows[r].cells[12].children[0].checked,
-                    PurchasePrice: table.rows[r].cells[13].children[0].value,
-                    Notes: table.rows[r].cells[14].children[0].value,
-                    Theme: table.rows[r].cells[15].children[0].value,
+                var rowIndex = r + 1;
+
+                var selectedHubIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
+                var selectedReaderIndex = table.rows[rowIndex].cells[8].children[0].options["selectedIndex"];
+                var selectedTheamIndex = table.rows[rowIndex].cells[15].children[0].options["selectedIndex"];
+
+                items.push({
+                    Id: fixedcolumn1[r].innerHTML,
+                    Name: fixedcolumn2[r].value,
+                    GameName: table.rows[rowIndex].cells[2].children[0].value,
+                    HubName: table.rows[rowIndex].cells[3].children[0].options[selectedHubIndex].innerHTML,
+                    HubAddress: table.rows[rowIndex].cells[4].children[0].value,
+                    MachineAddress: table.rows[rowIndex].cells[5].children[0].value,
+                    EffectiveMachineAddress: table.rows[rowIndex].cells[6].children[0].value,
+                    Active: table.rows[rowIndex].cells[7].children[0].checked,
+                    ReaderType: table.rows[rowIndex].cells[8].children[0].options[selectedReaderIndex].innerHTML,
+                    SoftwareVersion: table.rows[rowIndex].cells[9].children[0].value,
+                    TicketMode: table.rows[rowIndex].cells[10].children[0].value,
+                    VIPPrice: table.rows[rowIndex].cells[11].children[0].value,
+                    TicketAllowed: table.rows[rowIndex].cells[12].children[0].checked,
+                    PurchasePrice: table.rows[rowIndex].cells[13].children[0].value,
+                    Notes: table.rows[rowIndex].cells[14].children[0].value,
+                    Theme: table.rows[rowIndex].cells[15].children[0].options[selectedTheamIndex].innerHTML,
                 });
             }
         }
@@ -214,7 +185,7 @@
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: '@Url.Action("UpdateMachines", "Game")',
-            data: JSON.stringify({ machines: machines }),
+            data: JSON.stringify({ machines: items }),
             dataType: "json",
             success: function (data) {
                 alert('Data Saved');
@@ -225,10 +196,123 @@
             }
         });
     }
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            // paging: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            },
+            //order: [[ 0, "desc" ]],
+            fixedColumns: {
+                leftColumns: 2
+            }
+        });
+        var counter = 1;
+
+        $('#addRow').on('click', function () {
+            $("#saveproducttypes").attr("disabled", false);
+            var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
+            var fixedcolumn2values = $('.DTFC_Cloned input.fixedCol2');
+            var hubNames = '';
+              @foreach (var dow in ViewBag.machines[0].AvalibleHubs)
+              {
+                 @: hubNames = hubNames + '<option id="@dow.Id" value="" >@dow.Name</option>';
+              }
+            hubNames = hubNames + '</select>';
+            var readerTypes = '';
+              @foreach (var dow in ViewBag.machines[0].AvalibleReaders)
+              {
+                 @: readerTypes = readerTypes + '<option id="@dow.Id" value="" >@dow.Value</option>';
+              }
+            readerTypes = readerTypes + '</select>';
+            var themes = '';
+              @foreach (var dow in ViewBag.machines[0].AvalibleThemes)
+              {
+                 @: themes = themes + '<option id="@dow.Id" value="" >@dow.Value</option>';
+              }
+            themes = themes + '</select>';
+
+            table.row.add([
+                '<lable class="fixedCol1"></lable>',
+                '<input class="fixedCol2" type="text" value="" />',
+                '<input type="text" value="" />',
+                '<select name="AvalibleHubs" id="AvalibleHubs">' + hubNames,
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<select name="AvalibleReaders" id="AvalibleReaders">' + readerTypes,
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<select name="AvalibleThemes" id="AvalibleThemes">' + themes,
+                '<input type="text" value="" disabled/>',
+                '<input type="text" value="" disabled/>',
+                '<button onClick="ConfigureMachine(0)" disabled>-</button>'
+
+            ]).draw(false);
+
+            for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
+                $('.DTFC_Cloned lable.fixedCol1')[i].innerHTML = fixedcolumn1values[i].innerHTML;
+            }
+            for (var i = 0, j = fixedcolumn2values.length; i < j; i++) {
+                $('.DTFC_Cloned input.fixedCol2')[i].value = fixedcolumn2values[i].value;
+            }
+        });
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+    });
+
+
     var updatedArray = [];
-    function UpdatedList(x) {
-        if (!updatedArray.includes(x.rowIndex)) {
-            updatedArray.push(x.rowIndex);
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
+        }
+    }
+    
+    function Filter() {
+        var table = document.getElementById('marbleTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            var rowIndex = r;
+            var selectedHubIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
+            var isSet = false;
+            // filter by active state
+            if ($('#activeBox')[0].checked && isSet == false) {
+                if (table.rows[rowIndex].cells[7].children[0].checked != true) {
+                    table.rows[rowIndex].hidden = true;
+                    $('.DTFC_Cloned tbody tr')[r - 1].hidden = true;
+                    isSet = true;
+                }
+            }
+            if ($('#Hubs')[0].selectedIndex > 0 && isSet == false) {
+                if (table.rows[rowIndex].cells[3].children[0].options[selectedHubIndex].innerHTML != $('#Hubs')[0].value) {
+                    table.rows[rowIndex].hidden = true;
+                    $('.DTFC_Cloned tbody tr')[r - 1].hidden = true;
+                    isSet = true;
+                }
+            }
+            if(isSet == false) {
+                table.rows[rowIndex].hidden = false;
+                $('.DTFC_Cloned tbody tr')[r - 1].hidden = false;
+            }
         }
     }
     function ConfigureMachine() {
