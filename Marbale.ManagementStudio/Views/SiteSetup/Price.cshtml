@@ -4,14 +4,11 @@
     Layout = null;
 }
 
-<div style="background-color:orangered;height: 500px;">
- 
- 
-<div id="valuesContainer"style="    position: absolute;
-    background-color: orangered;
-    width: 100%;
-    height: 100%;">
-    </br>
+<div style="background-color: orangered; height: 500px;">
+
+
+    <div id="valuesContainer" style="position: absolute; background-color: orangered; width: 100%; height: 100%;">
+        </br>
    
       @foreach (var item in ViewBag.Price)
       {
@@ -20,65 +17,66 @@
           switch (type)
           {
               case "string":
-               <div>                        
-                            <div class="inputwrap demo">
-                             <text> &nbsp; &nbsp; &nbsp;</text>   <label> <b>@item.Caption </b>:</label>
-                              
-                     <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+          <div>
+              <div class="inputwrap demo">
+                  <text> &nbsp; &nbsp; &nbsp;</text>
+                  <label><b>@item.Caption </b>:</label>
 
-                            </div>
-                    </div>
+                  <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+
+              </div>
+          </div>
 
                   break;
-                  case "bool":
+              case "bool":
                  
-                     <div>
-                          <div class="inputwrap demo">
-                             <text> &nbsp; &nbsp; &nbsp;</text>  <label> <b>@item.Caption </b>:</label>
-                       <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br /> </div>
+          <div>
+              <div class="inputwrap demo">
+                  <text> &nbsp; &nbsp; &nbsp;</text>
+                  <label><b>@item.Caption </b>:</label>
+                  <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+              </div>
 
-                
-     </div>
+
+          </div>
                   break;
-                            case "file":
-                
- 
-    
-         <div>
-                          <div class="inputwrap demo">
-                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
-                     <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br /> </div>
-           
-                        </div>
+              case "file":
+          <div>
+              <div class="inputwrap demo">
+                  <text> &nbsp; &nbsp; &nbsp;</text>
+                  <label><b>@item.Caption </b>:</label>
+                  <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br />
+              </div>
 
+          </div>
 
-      
-
-                
-    
-              break;
-                            case "int":
-                    <div>
-                          <div class="inputwrap demo">
-                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
-                     <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br /> </div>
-                        </div>
+                  break;
+              case "int":
+          <div>
+              <div class="inputwrap demo">
+                  <text> &nbsp; &nbsp; &nbsp;</text>
+                  <label><b>@item.Caption </b>:</label>
+                  <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
+              </div>
+          </div>
                     
-              break;
+                  break;
 
           }
 
       }
-    
-      </div>
- @*          <input type="submit"  class="button-email btn btn-primary"/>*@
 
-         <div id="closesavediv">   <text> &nbsp; &nbsp; &nbsp;</text> 
-  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a></div>
+    </div>
+    @*          <input type="submit"  class="button-email btn btn-primary"/>*@
+
+    <div id="closesavediv">
+        <text> &nbsp; &nbsp; &nbsp;</text>
+        <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>
+        <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+    </div>
 </div>
-      
-  
+
+
 <script>
     var appSettings = [];
     var appSettings1 = [];
@@ -89,7 +87,7 @@
             Value: this.value,
             ScreenGroup: 'Price'
         };
-      
+
         appSettings.push(d);
     });
     $('input[name=fileUploader]').change(function (e) {
@@ -101,7 +99,7 @@
         };
 
         appSettings.push(d1);
-       // console.log(this.files[0].mozFullPath);
+        // console.log(this.files[0].mozFullPath);
     })
     $('input[name=fileUploader1]').change(function (e) {
         debugger
@@ -114,7 +112,7 @@
         appSettings.push(d1);
         // console.log(this.files[0].mozFullPath);
     })
-   
+
     $('input[name=allcheck]').change(function () {
         debugger
         var d = {
@@ -125,7 +123,7 @@
         appSettings.push(d);
     });
 
-   // formData.append('file', $('#PDF_WRITER_PRINTER')[0].files[0]);
+    // formData.append('file', $('#PDF_WRITER_PRINTER')[0].files[0]);
     function SaveEmail() {
         debugger
         $.ajax({
@@ -135,17 +133,17 @@
 
             data: JSON.stringify({ appSettings: appSettings }),
 
-                        dataType: "json",
+            dataType: "json",
 
-                        beforeSend: function () { },
+            beforeSend: function () { },
 
-                        success: function (data) {
-                            appSettings = [];
-                          //  location.reload();
-                            $('#displayMessage').text('data added succesfully').addClass('success');
-                        }
-                            });
-   
+            success: function (data) {
+                appSettings = [];
+                //  location.reload();
+                $('#displayMessage').text('data added succesfully').addClass('success');
+            }
+        });
+
     }
     $(document).ready(function () {
         $('input[name="allcheck"]').each(function (index) {
@@ -161,35 +159,38 @@
 <style>
     .defalut-width {
         width: 280px;
-            height: 46px;
-    }
-    label {
-    width:480px;
-    clear:left;
-    text-align:right;
-    padding-right:10px;
-}
-      .button-email {
-     position: absolute;
-    left: 319px;
-    bottom: 132px;
-    }
-    .button-close {
-           position: absolute;
-    left: 646px;
-  
-    top: 730px;
+        height: 46px;
     }
 
-input,button, label,.ar {
-    float:left;
-}
- div#closesavediv{
+    label {
+        width: 480px;
+        clear: left;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .button-email {
         position: absolute;
-         left: 37%;
-    right: 0;
-    margin-left: auto;
-               bottom: -16%;
-    margin-right: auto;
+        left: 319px;
+        bottom: 132px;
+    }
+
+    .button-close {
+        position: absolute;
+        left: 646px;
+        top: 730px;
+    }
+
+    input, button, label, .ar {
+        float: left;
+    }
+
+    div#closesavediv {
+        position: absolute;
+        left: 37%;
+        right: 0;
+        margin-left: auto;
+        bottom: -16%;
+        margin-right: auto;
     }
 </style>
