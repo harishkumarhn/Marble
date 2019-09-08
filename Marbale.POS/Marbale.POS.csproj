@@ -60,6 +60,8 @@
     </Compile>
     <Compile Include="CardTasks.cs" />
     <Compile Include="Common\Device.cs" />
+    <Compile Include="Common\NumberPad.cs" />
+    <Compile Include="Common\NumberPadForm.cs" />
     <Compile Include="Common\StaticData.cs" />
     <Compile Include="Common\USBDevice.cs" />
     <Compile Include="DataConnectionExcess.cs" />
@@ -80,6 +82,17 @@
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTender.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTender.Designer.cs">
+      <DependentUpon>frmTender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Keypad\KeyPadResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KeyPadResources.resx</DependentUpon>
     </Compile>
     <Compile Include="MarblePOS.cs">
       <SubType>Form</SubType>
@@ -125,6 +138,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTender.resx">
+      <DependentUpon>frmTender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Keypad\KeyPadResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>KeyPadResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="MarblePOS.resx">
       <DependentUpon>MarblePOS.cs</DependentUpon>
@@ -213,6 +233,29 @@
     <None Include="Resources\right1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\0.png" />
+    <None Include="Resources\0_pressed.png" />
+    <None Include="Resources\1.png" />
+    <None Include="Resources\1_pressed.png" />
+    <None Include="Resources\2.png" />
+    <None Include="Resources\2_pressed.png" />
+    <None Include="Resources\3_pressed.png" />
+    <None Include="Resources\4.png" />
+    <None Include="Resources\4_pressed.png" />
+    <None Include="Resources\5.png" />
+    <None Include="Resources\5_pressed.png" />
+    <None Include="Resources\6.png" />
+    <None Include="Resources\7.png" />
+    <None Include="Resources\7_pressed.png" />
+    <None Include="Resources\8.png" />
+    <None Include="Resources\8_pressed.png" />
+    <None Include="Resources\9.png" />
+    <None Include="Resources\9_pressed.png" />
+    <None Include="Resources\back_pressed.png" />
+    <None Include="Resources\bg_keypad.png" />
+    <None Include="Resources\3.png" />
+    <None Include="Resources\back.png" />
+    <None Include="Resources\6_pressed.png" />
     <Content Include="Resources\Button.png" />
     <None Include="Resources\Transfer_Card.png" />
     <None Include="Resources\Clear_Transaction.png" />
@@ -221,14 +264,22 @@
     <None Include="Resources\Load_Bonus.png" />
     <None Include="Resources\Load_Multiple.png" />
     <None Include="Resources\Consolidate_Cards.png" />
+    <None Include="Resources\clear.png" />
+    <None Include="Resources\clear_pressed.png" />
+    <None Include="Resources\dot.png" />
+    <None Include="Resources\dot_pressed.png" />
+    <None Include="Resources\entry-box.png" />
     <Content Include="Resources\Manual.png" />
     <Content Include="Resources\New_Product.png" />
     <None Include="Resources\Save_Transaction1.png" />
     <None Include="Resources\Save_Transaction.png" />
     <None Include="Resources\Payment.png" />
     <None Include="Resources\Print.png" />
+    <None Include="Resources\ok.png" />
+    <None Include="Resources\ok_pressed.png" />
     <Content Include="Resources\RefundCard.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

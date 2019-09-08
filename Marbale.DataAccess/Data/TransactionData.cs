@@ -148,6 +148,7 @@ namespace Marbale.DataAccess.Data
                 foreach (TransactionLine trxLn in activetrxLines)
                 {
                     SaveTransactionLines(trxLn, trxId);
+                    SaveTransactionTaxLines(trxLn, trxId);
                 }
 
                 return trxId;
@@ -233,6 +234,39 @@ namespace Marbale.DataAccess.Data
 
                 conn.executeUpdateQuery("sp_InsertOrUpdateTrxLines", sqlParameters);
 
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public void SaveTransactionTaxLines(TransactionLine trxLine, int trxId)
+        {
+            try
+            {
+
+                if (trxLine.tax_amount > 0)
+                {
+                    SqlParameter[] sqlParameters = new SqlParameter[7];
+
+                    sqlParameters[0] = new SqlParameter("@trxId", SqlDbType.Int);
+                    sqlParameters[0].Value = trxId;
+
+                    sqlParameters[1] = new SqlParameter("@LineId", trxLine.LineId);
+
+                    sqlParameters[2] = new SqlParameter("@TaxId", trxLine.tax_id);
+
+                    sqlParameters[3] = new SqlParameter("@TaxStructureId", trxLine.tax_structer_id);
+
+                    sqlParameters[4] = new SqlParameter("@Percentage", trxLine.tax_percentage);
+
+                    sqlParameters[5] = new SqlParameter("@Amount", trxLine.tax_amount);
+
+                    sqlParameters[6] = new SqlParameter("@ProductSplitAmount", 0);
+
+                    conn.executeUpdateQuery("sp_InsertTransactionTaxLines", sqlParameters);
+                }
             }
             catch (Exception e)
             {

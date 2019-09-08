@@ -3,7 +3,7 @@
 -- Author:  Harish   Modified:Shridhar     
 -- =============================================        
         
-CREATE PROCEDURE [dbo].[sp_InsertOrUpdateProduct]        
+Alter PROCEDURE [dbo].[sp_InsertOrUpdateProduct]        
 @name varchar(150),        
 @type varchar(50) = null,        
 @active bit=null,        
@@ -30,7 +30,8 @@ CREATE PROCEDURE [dbo].[sp_InsertOrUpdateProduct]
 @Credits int=null,      
 @CardValidFor int=null  ,    
 @Courtesy bigint=null   ,
-@ExpiryDate datetime =null   
+@ExpiryDate datetime =null,
+@taxId int = 0
 AS        
 BEGIN        
  -- SET NOCOUNT ON added to prevent extra result sets from        
@@ -60,13 +61,13 @@ TaxPercentage,
 Bonus,      
 LastUpdatedUser,TaxName,LastUpdatedDate,Games,CreditsPlus,Credits,CardValidFor,Courtesy,  
 finalprice    ,
-ExpiryDate ,StartDate
+ExpiryDate ,StartDate,TaxId
       
       
 )         
 Values(@name,@type,@active,@price,@effectivePrice,@faceValue,@displayGroup,@displayInPOS,        
 @autoGenerateCardNumber,@category,@onlyVIP,@posCounter,@taxInclusive,@taxPercentage,@Bonus,@LastUpdatedUser,@TaxName,      
-@LastUpdatedDate,@Games,@CreditsPlus,@Credits,@CardValidFor,@Courtesy,@finalPrice,@ExpiryDate,@StartDate)        
+@LastUpdatedDate,@Games,@CreditsPlus,@Credits,@CardValidFor,@Courtesy,@finalPrice,@ExpiryDate,@StartDate,@taxId)        
 end        
 else        
 begin        
@@ -75,7 +76,8 @@ begin
      DisplayInPOS=@displayInPOS,AutoGenerateCardNumber=@autoGenerateCardNumber,Category=@category,        
      OnlyVIP=@onlyVIP,POSCounter=@posCounter,TaxInclusive=@taxInclusive,TaxPercentage=@taxPercentage  ,      
   Bonus=@Bonus,LastUpdatedUser=@LastUpdatedUser,TaxName=@TaxName,Games=@Games,CreditsPlus=@CreditsPlus,      
-  Credits=@Credits,CardValidFor=@CardValidFor , Courtesy=@Courtesy    ,ExpiryDate=@ExpiryDate
+  Credits=@Credits,CardValidFor=@CardValidFor , Courtesy=@Courtesy    ,ExpiryDate=@ExpiryDate,
+  TaxId = @taxId
       
       
       

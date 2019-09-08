@@ -110,6 +110,9 @@ namespace Marbale.BusinessObject.POSTransaction
         public string taxName { get; set; }
         public double tax_amount { get; set; }
         public int tax_id { get; set; }
+
+        public int tax_structer_id { get; set; }
+
         public decimal tax_percentage { get; set; }
         public int trxId { get; set; }
 

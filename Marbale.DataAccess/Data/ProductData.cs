@@ -122,7 +122,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[27];
+                SqlParameter[] sqlParameters = new SqlParameter[28];
                 sqlParameters[0] = new SqlParameter("@name", string.IsNullOrEmpty(product.Name) ? "" : product.Name);
                 sqlParameters[1] = new SqlParameter("@type", string.IsNullOrEmpty(product.Type) ? "" : product.Type);
                 sqlParameters[2] = new SqlParameter("@active", product.Active);
@@ -150,6 +150,7 @@ namespace Marbale.DataAccess
                 sqlParameters[24] = new SqlParameter("@CardValidFor", product.CardValidFor);
                 sqlParameters[25] = new SqlParameter("@Courtesy", product.Courtesy);
                 sqlParameters[26] = new SqlParameter("@ExpiryDate", product.ExpiryDate);
+                sqlParameters[27] = new SqlParameter("@taxId", product.TaxId);
                 return conn.executeUpdateQuery("sp_InsertOrUpdateProduct", sqlParameters);
             }
             catch (Exception e)
