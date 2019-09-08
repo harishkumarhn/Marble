@@ -7,18 +7,7 @@
     {
         <div>
             <div class="form-group row">
-                <div class="col-md-1">
-                    <label for="ex4"><b>VIP Customer:</b></label>
-                    @Html.CheckBoxFor(m => m.VIPCustomer, new { @class = "form-control", @style = "position:absolute;width:20px;" })
-                </div>
-                <div class="col-md-1">
-                    <label for="ex3"><b>Technician Card:</b></label>
-                    @Html.CheckBoxFor(m => m.TechnicianCard, new { @class = "form-control", @style = "position:absolute;width:20px;" })
-                </div>
-                <div class="col-md-1">
-                    <label for="ex3"><b>Valid Card:</b></label>
-                    @Html.CheckBoxFor(m => m.TechnicianCard, new { @class = "form-control", @style = "position:absolute;width:20px;" })
-                </div>
+               
                 <div class="col-md-2">
                     <label for="ex2"><b>CardNumber:</b></label>
                     @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CardNumber) })
@@ -36,17 +25,27 @@
                     <label for="ex4"><b>Custemer Name:</b></label>
                     @Html.TextBoxFor(m => m.Custemer, new { @class = "form-control" })
                 </div>
+                 <div class="col-md-1">
+                    <label for="ex4"><b>VIP Customer:</b></label>
+                    @Html.CheckBoxFor(m => m.VIPCustomer, new { @class = "form-control", @style = "position:absolute;width:20px;" })
+                </div>
+                <div class="col-md-1">
+                    <label for="ex3"><b>Technician Card:</b></label>
+                    @Html.CheckBoxFor(m => m.TechnicianCard, new { @class = "form-control", @style = "position:absolute;width:20px;" })
+                </div>
+                <div class="col-md-1">
+                    <label for="ex3"><b>Valid Card:</b></label>
+                    @Html.CheckBoxFor(m => m.TechnicianCard, new { @class = "form-control", @style = "position:absolute;width:20px;" })
+                </div>
 
             </div>
-            <input type="submit" name="submit" value="Search" class="btn btn-primary btn-md" />
+            <input type="submit" name="submit" value="Search" class="btn btn-primary btn-md"/>
         </div>
     }
 </div>
-<h2>ViewCards</h2>
-<div>
-
+<div style="margin-top: 7px;">
     <table id="cardtable" class="table marbleTable">
-        <thead class="thead-dark">
+        <thead>
             <th>CardId</th>
             <th></th>
             <th>CardNumber</th>
@@ -95,10 +94,10 @@
                      </a>
                 </td>
                 <td>
-                    <input type="text" value="@item.CardNumber" class="gridText" />
+                    <input type="text" value="@item.CardNumber" />
                 </td>
                 <td>
-                    <select name="TypeList" id="TypeList" class="gridText">
+                    <select name="TypeList" id="TypeList">
                         @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TechCardType"])
                         {
 
@@ -115,7 +114,7 @@
                 </td>
 
                 <td>
-                    <input type="text" value="@item.IssueDate" class="gridText" />
+                    <input type="text" value="@item.IssueDateP" />
                 </td>
                 <td>
                     <input type="checkbox"  @(item.VIPCustomer ? "checked='checked'" : "") value="@item.VIPCustomer" />
@@ -124,40 +123,40 @@
                     <input type="checkbox"  @(item.TimerResetCard ? "checked='checked'" : "") value="@item.TimerResetCard" />
                 </td>
                 <td>
-                    <input type="text" value="@item.FaceValue" class="gridText" />
+                    <input type="text" value="@item.FaceValue" />
                 </td>
                 <td>
-                    <input type="text" value="@item.Custemer" class="gridText"/>
+                    <input type="text" value="@item.Custemer"/>
                 </td>
                 @*    <td>
-                    <input type="text" value="@item.FaceValue" class="gridText"/>
+                    <input type="text" value="@item.FaceValue"/>
                 </td>*@
 
                 <td>
-                    <input type="text" value="@item.RefundDate" class="gridText"/>
+                    <input type="text" value="@item.RefundDate"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.LastUpdatedTime" class="gridText"/>
+                    <input type="text" value="@item.LastUpdatedTime"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.LastUpdatedBy" class="gridText"/>
+                    <input type="text" value="@item.LastUpdatedBy"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.RefundAmount" class="gridText"/>
-                </td>
-
-                <td>
-                    <input type="text" value="@item.Note" class="gridText"/>
-                </td>
-                <td>
-                    <input type="text" value="@item.StartTime" class="gridText"/>
+                    <input type="text" value="@item.RefundAmount"/>
                 </td>
 
                 <td>
-                    <input type="text" value="@item.LastPlayTime" class="gridText"/>
+                    <input type="text" value="@item.Note"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.TechGames" class="gridText"/>
+                    <input type="text" value="@item.StartTime"/>
+                </td>
+
+                <td>
+                    <input type="text" value="@item.LastPlayTime"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.TechGames"/>
                 </td>
                 <td>
                     <input type="checkbox"  @(item.TechnicianCard ? "checked='checked'" : "") value="@item.TechnicianCard" />
@@ -165,23 +164,23 @@
 
 
                 <td>
-                    <input type="text" value="@item.Credits" class="gridText"/>
+                    <input type="text" value="@item.Credits"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.CreditPlus" class="gridText"/>
+                    <input type="text" value="@item.CreditPlus"/>
                 </td>
 
                 <td>
-                    <input type="text" value="@item.Courtesy" class="gridText"/>
+                    <input type="text" value="@item.Courtesy"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.Bonus" class="gridText"/>
+                    <input type="text" value="@item.Bonus"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.CreditsPlayed" class="gridText"/>
+                    <input type="text" value="@item.CreditsPlayed"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.TicketCount" class="gridText"/>
+                    <input type="text" value="@item.TicketCount"/>
                 </td>
                 <td>
                     <input type="checkbox"  @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
@@ -194,25 +193,16 @@
             }
         }
     </table>
-    <button type="button" class="btn btn-primary" data-toggle="modal" id="newcard">
+    <button type="button" class="btn btn-primary" data-toggle="modal" id="newcard" style="position: absolute;
+    right: 86%;
+    bottom: 22%;">
         New Card
     </button>
     <button type="button" class="btn btn-primary" data-toggle="modal" id="updatecard" style="display:none" onclick="EditCard();">
         Update Card
     </button>
 </div>
-<style>
-    .highlight {
-        background-color: cadetblue;
-    }
 
-    input {
-        border: none;
-    }
-</style>
-
-<link href="~/Content/DatetimePicker/jquery.datepicker2.css" rel="stylesheet" />
-<script src="~/Content/DatetimePicker/jquery.datepicker2.js"></script>
 <script>
     $(function () {
         $("#ExpiryDate").datepicker({
@@ -264,24 +254,11 @@
         $('#addRow').on('click', function () {
             $("#saveproduct").attr("disabled", false);
             var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
-            var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol3');
-
-   @*         var typeListOptions = '';
-              @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
-              {
-                 @: typeListOptions = typeListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
-              }
-            typeListOptions = typeListOptions + '</select>';
-            var categoryListOptions = '';
-              @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
-              {
-                   @: categoryListOptions = categoryListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
-              }
-            categoryListOptions = categoryListOptions + ' </select>';*@
+            var fixedcolumn2values = $('.DTFC_Cloned input.fixedCol2');
             table.row.add([
                 '<lable class="fixedCol1"></lable>',
                 '',
-                '<input class="fixedCol3" type="text" value="" />',
+                '<input class="fixedCol2" type="text" value="" />',
                 '<select name="TypeList" id="TypeList">' + typeListOptions,
                 '<select name="categoryList" id="categoryList">' + categoryListOptions,
                 '<input type="text" value="" />',
@@ -302,8 +279,8 @@
             for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
                 $('.DTFC_Cloned lable.fixedCol1')[i].innerHTML = fixedcolumn1values[i].innerHTML;
             }
-            for (var i = 0, j = fixedcolumn3values.length; i < j; i++) {
-                $('.DTFC_Cloned input.fixedCol3')[i].value = fixedcolumn3values[i].value;
+            for (var i = 0, j = fixedcolumn2values.length; i < j; i++) {
+                $('.DTFC_Cloned input.fixedCol2')[i].value = fixedcolumn2values[i].value;
             }
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
@@ -354,10 +331,3 @@
     }
 
 </script>
-<style>
-    div.dataTables_wrapper {
-    width: 1184px;
-    margin: 0 auto;
-        overflow-y: scroll;
-}
-</style>
