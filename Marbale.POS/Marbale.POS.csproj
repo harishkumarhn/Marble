@@ -60,6 +60,12 @@
     </Compile>
     <Compile Include="CardTasks.cs" />
     <Compile Include="Common\Device.cs" />
+    <Compile Include="Common\frmTender.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\frmTender.Designer.cs">
+      <DependentUpon>frmTender.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\NumberPad.cs" />
     <Compile Include="Common\NumberPadForm.cs" />
     <Compile Include="Common\StaticData.cs" />
@@ -82,12 +88,6 @@
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmTender.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmTender.Designer.cs">
-      <DependentUpon>frmTender.cs</DependentUpon>
     </Compile>
     <Compile Include="Keypad\KeyPadResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -130,6 +130,9 @@
     <EmbeddedResource Include="CardTask.resx">
       <DependentUpon>CardTask.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Common\frmTender.resx">
+      <DependentUpon>frmTender.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,9 +141,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmTender.resx">
-      <DependentUpon>frmTender.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Keypad\KeyPadResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -269,6 +269,8 @@
     <None Include="Resources\dot.png" />
     <None Include="Resources\dot_pressed.png" />
     <None Include="Resources\entry-box.png" />
+    <None Include="Resources\DiplayGroupButton.png" />
+    <None Include="Resources\customer_button_normal.png" />
     <Content Include="Resources\Manual.png" />
     <Content Include="Resources\New_Product.png" />
     <None Include="Resources\Save_Transaction1.png" />

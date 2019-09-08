@@ -7,6 +7,7 @@ using Marbale.BusinessObject.SiteSetup;
 using Marbale.POS.CardDevice;
 using Marbale.POS.Common;
 using Marble.Business;
+using Parafait_POS;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -75,7 +76,7 @@ namespace Marbale.POS
             string USBReaderOptionalString = "0000";
 
             SiteSetupBL siteSetupBussiness = new SiteSetupBL();
-            List <AppSetting> ListAppSettings = siteSetupBussiness.GetAppSettings("SiteSetup");
+            List<AppSetting> ListAppSettings = siteSetupBussiness.GetAppSettings("SiteSetup");
 
             if (ListAppSettings != null && ListAppSettings.Count > 0)
             {
@@ -93,7 +94,7 @@ namespace Marbale.POS
             }
 
             List<Device> deviceList = new List<Device>();
-  
+
             if (Devices.PrimaryCardReader == null)
             {
                 if (USBReaderVID.Trim() != string.Empty)
@@ -166,7 +167,7 @@ namespace Marbale.POS
             TransactionBL trxBL = new TransactionBL();
             CurrentCard = trxBL.GetCard(0, CardNumber);
 
-            if(CurrentCard == null || CurrentCard.card_id == 0)
+            if (CurrentCard == null || CurrentCard.card_id == 0)
                 CurrentCard = new Card();
 
             DisplayCardDetails();
@@ -220,7 +221,7 @@ namespace Marbale.POS
                     btnProduct.MouseUp += ProductButton_MouseUp;
                     btnProduct.Name = lstProducts[i].Name + '_' + lstProducts[i].Id;
                     btnProduct.Text = lstProducts[i].Name;
-                    
+
                     btnProduct.Tag = lstProducts[i].Id;
                     btnProduct.Font = btnSampleProduct.Font;
                     btnProduct.ForeColor = btnSampleProduct.ForeColor;
@@ -321,7 +322,7 @@ namespace Marbale.POS
             TransactionLine trxLine = new TransactionLine();
             trxLine.ProductID = product.Id;
             trxLine.ProductName = product.Name;
-            trxLine.Price =  Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
+            trxLine.Price = Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
             trxLine.quantity = 1;
 
             trxLine.tax_percentage = product.TaxPercentage;
@@ -340,7 +341,7 @@ namespace Marbale.POS
             bool found = false;
             for (int i = 0; i < Transaction.TransactionLines.Count; i++)
             {
-                if(Transaction.TransactionLines[i].ProductID == product.Id && Transaction.TransactionLines[i].CancelledLine == false)
+                if (Transaction.TransactionLines[i].ProductID == product.Id && Transaction.TransactionLines[i].CancelledLine == false)
                 {
                     trxLine.LineValid = false;
                     Transaction.TransactionLines.Add(trxLine);
@@ -386,7 +387,7 @@ namespace Marbale.POS
                 CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
                 CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
             }
-                    
+
 
             Transaction.TransactionLines.Add(trxLine);
 
@@ -416,7 +417,7 @@ namespace Marbale.POS
             validTrxLine.amount += newTrxline.amount;
             validTrxLine.LineAmount += newTrxline.LineAmount;
 
-            
+
         }
 
         public void RefreshTransactionGrid()
@@ -494,7 +495,7 @@ namespace Marbale.POS
                     && Transaction.TransactionLines[i].CardNumber == null && !Transaction.TransactionLines[i].CancelledLine)
                 {
                     dgvTransaction.Rows.Add();
-                    dgvTransaction.Rows[rowcount].Cells["Product_Type"].Value = "Item Sale";  
+                    dgvTransaction.Rows[rowcount].Cells["Product_Type"].Value = "Item Sale";
                     dgvTransaction.Rows[rowcount].Cells["LineId"].Value = Transaction.TransactionLines[i].LineId = i;
                     dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = Transaction.TransactionLines[i].ProductTypeCode;
                     dgvTransaction.Rows[rowcount].Cells["ProductId"].Value = Transaction.TransactionLines[i].ProductID;
@@ -507,7 +508,7 @@ namespace Marbale.POS
 
                     for (int j = i; j < Transaction.TransactionLines.Count; j++)
                     {
-                        if (Transaction.TransactionLines[j].CardNumber == null && Transaction.TransactionLines[j].LineValid 
+                        if (Transaction.TransactionLines[j].CardNumber == null && Transaction.TransactionLines[j].LineValid
                             && !Transaction.TransactionLines[j].LineProcessed && !Transaction.TransactionLines[j].CancelledLine)
                         {
                             displayNonCardLine(dgvTransaction, Transaction, j, ref rowcount);
@@ -539,7 +540,7 @@ namespace Marbale.POS
             rowcount++;
 
             bool discFound = false;
-            if (Transaction.discounts != null && Transaction.discounts.DiscountLines !=null)
+            if (Transaction.discounts != null && Transaction.discounts.DiscountLines != null)
             {
                 foreach (Discounts.DiscountLine dl in Transaction.discounts.DiscountLines)
                 {
@@ -645,7 +646,7 @@ namespace Marbale.POS
 
             dgvTransaction.Rows[rowcount].Cells["Remarks"].Value = Trx.TransactionLines[j].Remarks;
             //dgvTransaction.Rows[rowcount].Cells["AttractionDetails"].Value = Trx.TransactionLines[j].AttractionDetails;
-           
+
 
             dgvTransaction.Rows[rowcount].Cells["Tax"].Value = Trx.TransactionLines[j].tax_amount;
             dgvTransaction.Rows[rowcount].Cells["TaxName"].Value = Trx.TransactionLines[j].taxName;
@@ -736,13 +737,13 @@ namespace Marbale.POS
             dgvCardDetails.Rows[0].Cells[1].Style.Font = new Font("arial", 11, FontStyle.Bold);
 
             dgvCardDetails.Rows.Add();
-            dgvCardDetails.Rows[1].Cells[0].Value = "Card Deposit"; 
+            dgvCardDetails.Rows[1].Cells[0].Value = "Card Deposit";
 
             dgvCardDetails.Rows.Add();
             dgvCardDetails.Rows[2].Cells[0].Value = "Credits";
 
             dgvCardDetails.Rows.Add();
-            dgvCardDetails.Rows[3].Cells[0].Value = "Courtesy";  
+            dgvCardDetails.Rows[3].Cells[0].Value = "Courtesy";
 
             dgvCardDetails.Rows.Add();
             dgvCardDetails.Rows[4].Cells[0].Value = "Bonus";
@@ -830,13 +831,13 @@ namespace Marbale.POS
                 MarbleSplitContainer.Panel2.Controls.Add(pnlCardDetails);
                 MarbleSplitContainer.Panel1.Controls.Remove(pnlCardDetails);
 
-                pnlCardDetails.Size = MarbleSplitContainer.Panel2.ClientSize; 
+                pnlCardDetails.Size = MarbleSplitContainer.Panel2.ClientSize;
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btnTask_Click(object sender, EventArgs e)
@@ -943,6 +944,7 @@ namespace Marbale.POS
             CurrentCard = null;
             ClearCustomer();
             ClearCard();
+            updateScreenAmounts();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -950,11 +952,36 @@ namespace Marbale.POS
             if (Transaction == null)
                 return;
 
-            if(Customer != null)
+            if (Customer != null)
                 Transaction.customer = Customer;
 
             if (CurrentCard != null)
                 Transaction.Card = CurrentCard;
+
+            while (true)
+            {
+                frmTender ft = new frmTender((double)Transaction.Net_Transaction_Amount);
+                ft.ShowDialog();
+                double varAmount = ft.TenderedAmount;
+
+                if (varAmount >= 0)
+                {
+                    if (varAmount >= (double)Transaction.Net_Transaction_Amount)
+                    {
+                        tendered_amount = varAmount;
+                        updateScreenAmounts();
+                        break;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter equal or greter than total transaction amount");
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
 
             TransactionBL trxBL = new TransactionBL();
             int trxId = trxBL.SaveTransaction(Transaction);
@@ -1007,7 +1034,7 @@ namespace Marbale.POS
                 Customer.gender = 'N';
 
             Customer.birth_date = dtpDOB.Value;
-       }
+        }
 
         private void tabControlCardAction_Selected(object sender, TabControlEventArgs e)
         {
@@ -1030,7 +1057,7 @@ namespace Marbale.POS
             dgvTrxHeader.DataSource = new List<Transaction>();
             if (ListTransaction != null)
             {
-                dgvTrxHeader.DataSource = ListTransaction; 
+                dgvTrxHeader.DataSource = ListTransaction;
             }
         }
 
@@ -1041,14 +1068,14 @@ namespace Marbale.POS
                 TransactionBL trxBL = new TransactionBL();
                 Customer = trxBL.GetCustomer(0, txtPhoneno.Text.Trim());
 
-                if(Customer != null && Customer.customer_id > 0)
-                PopulateCustomer();
+                if (Customer != null && Customer.customer_id > 0)
+                    PopulateCustomer();
             }
         }
 
         void PopulateCustomer()
         {
-            if (Customer != null)  
+            if (Customer != null)
             {
                 txtFirstname.Text = Customer.first_name;
                 txtLastname.Text = Customer.last_name;
@@ -1078,7 +1105,7 @@ namespace Marbale.POS
 
             //Issue date population
             dgvCardDetails.Rows[0].Cells[1].Value = string.Empty;
-            
+
             //Card Deposit
             dgvCardDetails.Rows[1].Cells[1].Value = string.Empty;
 
@@ -1112,7 +1139,7 @@ namespace Marbale.POS
             frmGenericDataEntry frm = new frmGenericDataEntry();
             frm.ShowDialog();
 
-            if (!string.IsNullOrEmpty(frm.cardNumber) && frm.cardNumber.Length ==10)
+            if (!string.IsNullOrEmpty(frm.cardNumber) && frm.cardNumber.Length == 10)
             {
                 HandleCardRead(frm.cardNumber, null);
             }
@@ -1125,8 +1152,8 @@ namespace Marbale.POS
             {
                 int TrxId = Convert.ToInt32(dgvTrxHeader["Trx_id", e.RowIndex].Value);
                 Transaction trx = ListTransaction.Find(x => x.Trx_id == TrxId);
-                if(trx != null)
-                dgvTrxLines.DataSource = trx.TransactionLines;
+                if (trx != null)
+                    dgvTrxLines.DataSource = trx.TransactionLines;
             }
         }
 
@@ -1177,7 +1204,7 @@ namespace Marbale.POS
             }
 
             textBoxTransactionTotal.Text = "Rs " + total_amount.ToString(); //.ToString("$"); //AMOUNT_WITH_CURRENCY_SYMBOL
-            textBoxBalance.Text = "Rs " + balance_amount.ToString(); //.ToString("Rs");
+            textBoxBalance.Text = "Rs " + balanceAmount.ToString(); //.ToString("Rs");
             textBoxTendered.Text = "Rs " + tendered_amount.ToString(); //.ToString("$"); //AMOUNT_WITH_CURRENCY_SYMBOL
 
             txtChangeAmount.Text = "Rs " + changeAmount.ToString(); //.ToString(ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);

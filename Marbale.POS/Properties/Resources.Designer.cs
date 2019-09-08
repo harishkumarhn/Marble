@@ -123,6 +123,26 @@ namespace Marbale.POS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap customer_button_normal {
+            get {
+                object obj = ResourceManager.GetObject("customer_button_normal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DiplayGroupButton {
+            get {
+                object obj = ResourceManager.GetObject("DiplayGroupButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap forwards__1_ {
             get {
                 object obj = ResourceManager.GetObject("forwards (1)", resourceCulture);
