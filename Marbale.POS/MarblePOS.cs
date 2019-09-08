@@ -972,7 +972,7 @@ namespace Marbale.POS
                     }
                     else
                     {
-                        MessageBox.Show("Please enter equal or greter than total transaction amount");
+                        MessageBox.Show("Please enter amount equal or greater than total transaction amount", "Message");
                     }
                 }
                 else
