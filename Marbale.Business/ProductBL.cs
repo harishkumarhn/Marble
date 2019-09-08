@@ -46,7 +46,7 @@ namespace Marbale.Business
                     product.Price = dr.IsNull("Price") ? 0 : Convert.ToDecimal(dr["Price"]);
                     product.FaceValue = dr.IsNull("FaceValue") ? 0 : Convert.ToDecimal(dr["FaceValue"]);
                     product.FinalPrice = dr.IsNull("FinalPrice") ? 0 : Convert.ToDecimal(dr["FinalPrice"]);
-                    product.Taxpercent = dr.IsNull("TaxPercentage") ? 0 : Convert.ToDecimal(dr["TaxPercentage"]);
+                    product.TaxPercentage = product.Taxpercent = dr.IsNull("TaxPercentage") ? 0 : Convert.ToDecimal(dr["TaxPercentage"]);
                     product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
                     product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
                     product.StartDate = dr.IsNull("StartDate") ? new DateTime() : Convert.ToDateTime(dr["StartDate"]);
@@ -55,6 +55,7 @@ namespace Marbale.Business
                     product.CardValidFor = dr.IsNull("CardValidFor") ? 0 : Convert.ToInt32(dr["CardValidFor"]);
                     product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
                     product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToDecimal(dr["Courtesy"]);
+                    product.TaxId = dr.IsNull("Taxid") ? 0 : Convert.ToInt32(dr["Taxid"]);
 
                 }
                 return product;
@@ -123,7 +124,7 @@ namespace Marbale.Business
                     product.Price = dr.IsNull("Price") ? 0 : Convert.ToInt32(dr["Price"]);
                     product.FaceValue = dr.IsNull("FaceValue") ? 0 : Convert.ToInt32(dr["FaceValue"]);
                     product.FinalPrice = dr.IsNull("FinalPrice") ? 0 : Convert.ToInt32(dr["FinalPrice"]);
-                    product.TaxPercentage = dr.IsNull("TaxPercentage") ? 0 : Convert.ToInt32(dr["TaxPercentage"]);
+                    product.TaxPercentage = product.Taxpercent = dr.IsNull("TaxPercentage") ? 0 : Convert.ToInt32(dr["TaxPercentage"]);
                     product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
                     product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
                     product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
