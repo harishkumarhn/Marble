@@ -66,7 +66,7 @@ namespace Marbale.DataAccess.Data
                 
                 SqlParameter[] sqlParameters = new SqlParameter[6];
                 sqlParameters[0] = new SqlParameter("@TechnicianCard", cardmodel.TechnicianCard);
-                sqlParameters[1] = new SqlParameter("@CardNumber", string.IsNullOrEmpty(cardmodel.CardNumber) ? "" : cardmodel.CardNumber);
+                sqlParameters[1] = new SqlParameter("@CardNumber", cardmodel.CardNumber);
                 sqlParameters[2] = new SqlParameter("@Custemer", string.IsNullOrEmpty(cardmodel.Custemer) ? "" : cardmodel.Custemer);
                 sqlParameters[3] = new SqlParameter("@VIPCustomer", cardmodel.VIPCustomer);
                 sqlParameters[4] = new SqlParameter("@IssueDate", cardmodel.IssueDate);

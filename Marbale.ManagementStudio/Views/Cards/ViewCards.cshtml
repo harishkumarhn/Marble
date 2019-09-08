@@ -115,7 +115,7 @@
                 </td>
 
                 <td>
-                    <input type="text" value="@item.IssueDate" class="gridText" />
+                    <input type="text" value="@item.IssueDateP" class="gridText" />
                 </td>
                 <td>
                     <input type="checkbox"  @(item.VIPCustomer ? "checked='checked'" : "") value="@item.VIPCustomer" />
@@ -194,7 +194,9 @@
             }
         }
     </table>
-    <button type="button" class="btn btn-primary" data-toggle="modal" id="newcard">
+    <button type="button" class="btn btn-primary" data-toggle="modal" id="newcard" style="position: absolute;
+    right: 86%;
+    bottom: 22%;">
         New Card
     </button>
     <button type="button" class="btn btn-primary" data-toggle="modal" id="updatecard" style="display:none" onclick="EditCard();">
