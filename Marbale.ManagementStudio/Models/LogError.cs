@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -27,7 +28,10 @@ namespace MarbaleManagementStudio.Models
 
         public void LogException(string MethodName, Exception ex)
         {
-            string strPath = @"F:\MarbleProject\Marble - Copy\LogException\Log.txt";
+            string strPath = ConfigurationManager.AppSettings["LogFilePath"].ToString();
+            System.IO.Directory.CreateDirectory(strPath);
+            strPath = strPath + "Log.txt";
+            //string strPath = @"F:\MarbleProject\Marble - Copy\LogException\Log.txt";
             if (!File.Exists(strPath))
             {
                 File.Create(strPath).Dispose();

@@ -7,11 +7,11 @@ namespace Marbale.BusinessObject.SiteSetup
         public int SiteId { get; set; }
         public string SiteAddress { get; set; }
         public string Notes { get; set; }
-        public Guid SiteGUID { get; set; }
-        public Guid Guid { get; set; }
+        public Guid? SiteGUID { get; set; }
+        public Guid? Guid { get; set; }
         public byte[] Logo { get; set; }
         public string CustomerKey { get; set; }
-        public string SiteCode { get; set; }
+        public int SiteCode { get; set; }
         public string Version { get; set; }
         public int CompanyId { get; set; }
     }

@@ -4,6 +4,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using Microsoft.Win32;
 
 namespace Marbale.DataAccess
 {
@@ -11,6 +12,7 @@ namespace Marbale.DataAccess
     {
         private SqlDataAdapter myAdapter;
         private SqlConnection conn;
+        RegistryKey objRegistryKey = Registry.LocalMachine;
 
         /// <constructor>
         /// Initialise Connection
@@ -18,7 +20,8 @@ namespace Marbale.DataAccess
         public DBConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn = new SqlConnection(@"Data Source=ADMIN\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
+            string connString = (string)objRegistryKey.GetValue("ConnectionString");
+            conn = new SqlConnection(@"Data Source=Harish-PC\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
         }
 
         /// <method>

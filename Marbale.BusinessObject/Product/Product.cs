@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using Marbale.BusinessObject.Tax;
+
 namespace Marbale.BusinessObject
 {
     public class Product
     {
         public int Id { get; set; }
+
          [Required(ErrorMessage = "Enter Product name.")]
+         [Remote("IsAlreadySigned", "Product",AdditionalFields = "Id", HttpMethod = "POST", ErrorMessage = "Product Exsist Already")]
         public string Name { get; set; }
         public string Type { get; set; }
         public string POSCounter { get; set; }
@@ -44,8 +49,8 @@ namespace Marbale.BusinessObject
         public decimal Games { get; set; }
           [DataType(DataType.Currency)]
         public int ?CreditsPlus { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime ExpiryDate { get; set; }
+        public DateTime ?StartDate { get; set; }
+        public DateTime ?ExpiryDate { get; set; }
         public string TaxName { get; set; }
 
         public decimal Taxpercent { get; set; }

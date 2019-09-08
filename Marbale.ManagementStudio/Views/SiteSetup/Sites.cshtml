@@ -3,90 +3,77 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/css/product.css" rel="stylesheet" />
-
-<div class="first"  style="position: inherit;">
-    <div class="second" style="margin-left:6.5em; width: 100%;">
-        <table id="marbleTable" class="table">
-            <thead>
-                <th class="headerCol">SiteID</th>
-                <th>Site Name</th>
-                <th>Site Code</th>
-                <th>Site Address</th>
-                <th>Notes</th>
-                <th>Site GUID</th>
-                <th>Logo</th>
-                <th>Version</th>
-                <th>CustomeKey</th>
-            </thead>
-            @foreach (var item in ViewBag.Sites)
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+    <thead>
+        <tr>
+            <th>SiteID</th>
+            <th>Site Name</th>
+            <th>Site Code</th>
+            <th>Site Address</th>
+            <th>Notes</th>
+            <th>Site GUID</th>
+            @*<th>Logo</th>*@
+            <th>Version</th>
+            <th>CustomeKey</th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var item in ViewBag.Sites)
             {  
-                <tr onchange="UpdatedList(this)">
-                    <td class="headerCol">@item.SiteId  </td>
+                <tr>
+                    <td> <lable>@(item.SiteId == 0 ? "" : item.SiteId) </lable> </td>
                     <td>
-                        <input type="text" value="@item.SiteName" class="gridText" />
+                        <input type="text" value="@item.SiteName"  />
                     </td>
                     <td>
-                        <input type="text" value="@item.SiteCode" class="gridText" />
+                        <input type="number" value="@(item.SiteCode == 0 ? "" : item.SiteCode)"  />
                     </td>
                     <td>
-                        <input type="text" value="@item.SiteAddress" class="gridText" />
+                        <input type="text" value="@item.SiteAddress" />
                     </td>
                     <td>
-                        <input type="text" value="@item.Notes" class="gridText" />
+                        <input type="text" value="@item.Notes" />
                     </td>
                     <td>
-                        <input type="text" value="@item.SiteGUID" class="gridText" />
+                        <input type="text" value="@item.SiteGUID" disabled="disabled"/>
+                    </td>
+                    @*<td>
+                        <img alt="" src="@item.Logo" style="height:60px;width:60px;"/>
+                        <button>Upload</button>
+                    </td>*@
+                    <td>
+                        <input type="text" value="@item.Version" />
                     </td>
                     <td>
-                        <input type="text" value="@item.Logo" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Version" class="gridText" />
-                    </td>
-                     <td>
-                        <input type="text" value="@item.CustomerKey" class="gridText" />
+                        <input type="text" value="@item.CustomerKey" />
                     </td>
                 </tr>  
             }
-        </table>
-    </div>
-</div>
+    </tbody>
+</table>
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveSites()">Save</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="AddSite()">Add</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="UploadLogo()">Upload Logo</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="ClearLogo()">Clear Logo</button>
-
+    <button id="addRow" class="btn btn-primary btn-md" role="button" >Add</button>
 </div>
 <script>
-    function AddSite() {
-
-        var newRow = '<tr onchange=UpdatedList(this)> <td class="headerCol"> <a href="#"></a> </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' + '</tr>';
-        $('#marbleTable tr:last').after(newRow);
-    }
-     function SaveSites() {
+    function SaveSites() {
         var sites = [];
         var table = document.getElementById('marbleTable');
-        for (var r = 1, n = table.rows.length; r < n; r++) {
+        var fixedcolumn1 = $('.DTFC_Cloned lable, select');
+        var fixedcolumn2 = $('.DTFC_Cloned input, select');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
+                var rowIndex = r + 1;
                 sites.push({
-                    SiteId: table.rows[r].cells[0].innerHTML,
-                    SiteName: table.rows[r].cells[1].children[0].value,
-                    SiteCode: table.rows[r].cells[2].children[0].value,
-                    SiteAddress: table.rows[r].cells[3].children[0].value,
-                    Notes: table.rows[r].cells[4].children[0].value,
-                    SiteGUID: table.rows[r].cells[5].children[0].value,
-                    Logo: table.rows[r].cells[6].children[0].value,
-                    Version: table.rows[r].cells[7].children[0].value,
-                    CustomeKey: table.rows[r].cells[8].children[0].value
+                    SiteId: fixedcolumn1[r].innerHTML,
+                    SiteName: fixedcolumn2[r].value,
+                    SiteCode: table.rows[rowIndex].cells[2].children[0].value,
+                    SiteAddress: table.rows[rowIndex].cells[3].children[0].value,
+                    Notes: table.rows[rowIndex].cells[4].children[0].value,
+                    SiteGUID: table.rows[rowIndex].cells[5].children[0].value,
+                    //Logo: table.rows[rowIndex].cells[6].children[0].value,
+                    Version: table.rows[rowIndex].cells[6].children[0].value,
+                    CustomerKey: table.rows[rowIndex].cells[7].children[0].value
                 });
             }
         }
@@ -106,12 +93,64 @@
         });
     }
     var updatedArray = [];
-    function UpdatedList(x) {
-        if (!updatedArray.includes(x.rowIndex)) {
-            updatedArray.push(x.rowIndex);
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
         }
     }
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "300px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            // paging: true,
+            bPaginate: false,
+            bInfo : false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function ( row, data, index ) {
+                    $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            },
+            //order: [[ 0, "desc" ]],
+            fixedColumns: {
+                leftColumns: 2
+            }
+        });
+        var counter = 1;
+
+        $('#addRow').on('click', function () {
+            var fixedcolumn1values = $('.DTFC_Cloned lable, select');
+            var fixedcolumn2values = $('.DTFC_Cloned input, select');
+            table.row.add([
+                '<lable></lable>',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                //'<img alt="" src="" style="height:60px;width:60px;"/> <button>Upload</button>',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />'
+
+            ]).draw(false);
+            for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
+                $('.DTFC_Cloned lable, select')[i].innerHTML = fixedcolumn1values[i].innerHTML;
+                $('.DTFC_Cloned input, select')[i].value = fixedcolumn2values[i].value;
+            }
+        });
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+    });
+
 </script>
+
 
 
 

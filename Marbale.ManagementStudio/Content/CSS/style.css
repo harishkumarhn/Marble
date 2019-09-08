@@ -1,5 +1,5 @@
 ﻿#container {
-    border-style:outset;
+    
 }
 
 #pageSubmenu li {
@@ -43,8 +43,6 @@
     width: 250px;
     float: right;
 }
-
-
 div.second { 
             width: 1060px; 
             overflow-x:scroll;  
@@ -62,6 +60,7 @@ div.second {
             position: absolute;
             left:0;
             top:auto;
+          
         }
 .headerCol {
    position: absolute; 
@@ -118,3 +117,17 @@ button.btn-settings:active {
   font-size: 1.1em;
 }
 /*end*/
+ th, td {
+        white-space: nowrap;
+    }
+
+    div.dataTables_wrapper {
+        width: 1365px;
+        margin: 0 auto;
+    }
+    table.DTFC_Cloned thead, table.DTFC_Cloned tfoot {
+       background-color:#0fd2f1;
+    }
+    thead {
+       background-color: #0fd2f1;
+    }
