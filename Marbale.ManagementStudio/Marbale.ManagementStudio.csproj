@@ -132,8 +132,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\CSS\jquery.dataTables.min.css" />
     <Content Include="Content\CSS\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\CSS\Material\meterialIcon.css" />
     <Content Include="Content\JS\jquery.dataTables.min.js" />
     <Content Include="Content\JS\dataTables.fixedColumns.min.js" />
+    <Content Include="Content\CSS\fonts\font.css" />
     <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\GameController.cs" />
@@ -235,6 +237,10 @@
     <Content Include="Content\DatetimePicker\LICENSE" />
     <Content Include="Content\DatetimePicker\README.md" />
     <Content Include="Content\Fabrastics\.DS_Store" />
+    <Content Include="Content\CSS\fonts\pxiEyp8kv8JHgFVrJJfecg.woff2" />
+    <Content Include="Content\CSS\fonts\pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2" />
+    <Content Include="Content\CSS\fonts\pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2" />
+    <Content Include="Content\CSS\fonts\flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
     <None Include="Properties\PublishProfiles\Harish.pubxml" />
     <None Include="Properties\PublishProfiles\MarbleHost.pubxml" />
     <None Include="Properties\PublishProfiles\MarbleSite.pubxml" />
@@ -319,8 +325,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\CSS\fonts\" />
-    <Folder Include="Content\CSS\Material\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

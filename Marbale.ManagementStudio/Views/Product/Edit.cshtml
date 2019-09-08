@@ -127,7 +127,7 @@
   @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control"})
       </div>
     </div></div>
-                  <b style="color:indianred">Miscellaneous:</b>
+                  <b style="color:darkblue">Miscellaneous:</b>
                   <div class="Miscellaneousclass" style="border:2px solid black;border-color:cornsilk">
       <div class="form-group row">
       <div class="col-md-3">
@@ -162,6 +162,11 @@
             </div>
   
     }
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+		<script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
 @* for datepicker*@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
@@ -169,11 +174,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 @*validations*@
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-		<script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
 @*@Scripts.Render("~/bundles/jquery")
 
 @Scripts.Render("~/bundles/jqueryval")*@

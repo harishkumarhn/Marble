@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/css/product.css" rel="stylesheet" />
+<div class="contentBody">
+    
 <table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
     <thead>
         <tr>
@@ -51,11 +53,69 @@
             }
     </tbody>
 </table>
+</div>
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveSites()">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button" >Add</button>
 </div>
 <script>
+
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            // paging: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            },
+            //order: [[ 0, "desc" ]],
+            fixedColumns: {
+                leftColumns: 2
+            }
+        });
+        var counter = 1;
+
+        $('#addRow').on('click', function () {
+            var fixedcolumn1values = $('.DTFC_Cloned lable, select');
+            var fixedcolumn2values = $('.DTFC_Cloned input, select');
+            table.row.add([
+                '<lable></lable>',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" disabled="disabled"/>',
+                //'<img alt="" src="" style="height:60px;width:60px;"/> <button>Upload</button>',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />'
+
+            ]).draw(false);
+            for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
+                $('.DTFC_Cloned lable, select')[i].innerHTML = fixedcolumn1values[i].innerHTML;
+                $('.DTFC_Cloned input, select')[i].value = fixedcolumn2values[i].value;
+            }
+        });
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+    });
+    var updatedArray = [];
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
+        }
+    }
     function SaveSites() {
         var sites = [];
         var table = document.getElementById('marbleTable');
@@ -92,62 +152,7 @@
             }
         });
     }
-    var updatedArray = [];
-    function UpdatedList(index) {
-        if (!updatedArray.includes(index)) {
-            updatedArray.push(index);
-        }
-    }
-    $(document).ready(function () {
-        var table = $('#marbleTable').DataTable({
-            scrollY: "300px",
-            scrollX: true,
-            scrollCollapse: true,
-            editable: true,
-            stateSave: true,
-            // paging: true,
-            bPaginate: false,
-            bInfo : false,
-            bFilter: false,
-            bSort: false,
-            "createdRow": function ( row, data, index ) {
-                    $('td', row).addClass('tblRow');
-            },
-            rowCallback: function (row, data) {
-                var element = $('td', row);
-                element.on("change", function (e) {
-                    UpdatedList($(this).parent().index());
-                });
-            },
-            //order: [[ 0, "desc" ]],
-            fixedColumns: {
-                leftColumns: 2
-            }
-        });
-        var counter = 1;
-
-        $('#addRow').on('click', function () {
-            var fixedcolumn1values = $('.DTFC_Cloned lable, select');
-            var fixedcolumn2values = $('.DTFC_Cloned input, select');
-            table.row.add([
-                '<lable></lable>',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                //'<img alt="" src="" style="height:60px;width:60px;"/> <button>Upload</button>',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />'
-
-            ]).draw(false);
-            for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
-                $('.DTFC_Cloned lable, select')[i].innerHTML = fixedcolumn1values[i].innerHTML;
-                $('.DTFC_Cloned input, select')[i].value = fixedcolumn2values[i].value;
-            }
-        });
-        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
-    });
+   
 
 </script>
 

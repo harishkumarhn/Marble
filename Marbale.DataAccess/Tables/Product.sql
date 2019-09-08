@@ -1,12 +1,4 @@
-USE [Marbale]
-GO
 
-/****** Object:  Table [dbo].[Product]    Script Date: 1/19/2019 7:20:14 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
 
 CREATE TABLE [dbo].[Product](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -19,15 +11,29 @@ CREATE TABLE [dbo].[Product](
 	[Category] [varchar](50) NULL,
 	[AutoGenerateCardNumber] [bit] NULL,
 	[OnlyVIP] [bit] NULL,
-	[Price] [decimal](18,3) NULL,
-	[FaceValue] [decimal](18,3) NULL,
+	[Price] [decimal](18, 3) NULL,
+	[FaceValue] [decimal](18, 3) NULL,
 	[TaxInclusive] [bit] NULL,
-	[TaxPercentage] [decimal] NULL,
-	[FinalPrice] [decimal](18,3) NULL,
-	[EffectivePrice] [decimal](18,3) NULL,
+	[TaxPercentage] [decimal](18, 3) NULL,
+	[FinalPrice] [decimal](18, 3) NULL,
+	[EffectivePrice] [decimal](18, 3) NULL,
 	[LastUpdatedBy] [varchar](50) NULL,
-	[LastUpdatedDate] [datetime] NULL
-) ON [PRIMARY]
+	[LastUpdatedDate] [datetime] NULL,
+	[Bonus] [decimal](18, 3) NULL,
+	[LastUpdatedUser] [varchar](max) NULL,
+	[TaxName] [varchar](max) NULL,
+	[StartDate] [datetime] NULL,
+	[Games] [decimal](18, 3) NULL,
+	[CreditsPlus] [decimal](18, 3) NULL,
+	[Credits] [decimal](18, 3) NULL,
+	[CardValidFor] [int] NULL,
+	[ExpiryDate] [datetime] NULL,
+	[Courtesy] [bigint] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
 GO
 
 

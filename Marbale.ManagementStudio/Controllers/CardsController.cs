@@ -37,7 +37,7 @@ namespace MarbaleManagementStudio.Controllers
          {
              var data1 = cardBussiness.gettechcardtype();
              Session["TechCardType"] = data1;
-             if (c.IssueDate.ToShortDateString() == "1/1/0001" && c.ToDate.ToShortDateString() == "1/1/0001" && c.VIPCustomer == false && c.TechnicianCard == false)
+             if ( c.VIPCustomer == false && c.TechnicianCard == false)
              {
                  c.VIPCustomer = false;
                  c.TechnicianCard = false;
@@ -58,22 +58,30 @@ namespace MarbaleManagementStudio.Controllers
         CardsModel card = cardBussiness.getCardById(CardId);
         return View(card);
     }
-         public int InsertOrUpdateCards(CardsModel product)
+    public ActionResult InsertOrUpdateCards(CardsModel product)
          {
              try
              {
-                 return cardBussiness.InsertOrUpdateCards(product);
+                 int result= cardBussiness.InsertOrUpdateCards(product);
              }
              catch (Exception e)
              {
                  throw e;
              }
+             return RedirectToAction("ViewCards", "Cards");
          }
         #endregion
-    
-        #region Inventory
-      
-         public ActionResult Inventory()
+    #region DeleteCard
+    public JsonResult DeleteCard(int Id)
+    {
+        int i = cardBussiness.DeleteCardById(Id);
+        return Json(i,JsonRequestBehavior.AllowGet);
+    }
+
+#endregion
+    #region Inventory
+
+    public ActionResult Inventory()
          {
            Inventory m = new Marbale.BusinessObject.Cards.Inventory();
               List<Inventory>data = cardBussiness.GetInventory(m);

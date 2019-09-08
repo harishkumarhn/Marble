@@ -42,7 +42,7 @@ namespace Marbale.Business
                     product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
                     product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     product.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
-                    product.EffectivePrice = dr.IsNull("EffectivePrice") ? 0 : Convert.ToInt32(dr["EffectivePrice"]);
+                    product.EffectivePrice = dr.IsNull("EffectivePrice") ? 0 : Convert.ToDecimal(dr["EffectivePrice"]);
                     product.Price = dr.IsNull("Price") ? 0 : Convert.ToDecimal(dr["Price"]);
                     product.FaceValue = dr.IsNull("FaceValue") ? 0 : Convert.ToDecimal(dr["FaceValue"]);
                     product.FinalPrice = dr.IsNull("FinalPrice") ? 0 : Convert.ToDecimal(dr["FinalPrice"]);
@@ -54,7 +54,7 @@ namespace Marbale.Business
                     product.Credits = dr.IsNull("Credits") ? 0 : Convert.ToDecimal(dr["Credits"]);
                     product.CardValidFor = dr.IsNull("CardValidFor") ? 0 : Convert.ToInt32(dr["CardValidFor"]);
                     product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
-                    product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToInt32(dr["Courtesy"]);
+                    product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToDecimal(dr["Courtesy"]);
                     product.TaxId = dr.IsNull("Taxid") ? 0 : Convert.ToInt32(dr["Taxid"]);
 
                 }
@@ -297,6 +297,7 @@ namespace Marbale.Business
                 discount.ManagerApproval = dr.IsNull("manager_approval_required") ? false : bool.Parse(dr["manager_approval_required"].ToString());
                 discount.LastUpdatedDate = Convert.ToDateTime(dr.IsNull("last_updated_date") ? "01/01/2019" : (dr["last_updated_date"].ToString()));
                 discount.LastUpdatedUser = dr.IsNull("last_updated_user") ? "" : (dr["last_updated_user"].ToString());
+                discount.DisplayOrder = dr.IsNull("sort_order") ? 0 : int.Parse(dr["sort_order"].ToString());
                 masterdiscount.transactiondiscount.Add(discount);
             }
             foreach (DataRow dr in gamedisc.Rows)
@@ -310,6 +311,7 @@ namespace Marbale.Business
                 discount.MinimumUsedCredits = dr.IsNull("minimum_credits") ? 0 : int.Parse(dr["minimum_credits"].ToString());
                 discount.LastUpdatedDate = Convert.ToDateTime(dr.IsNull("last_updated_date") ? "01/01/2019" : (dr["last_updated_date"].ToString()));
                 discount.LastUpdatedUser = dr.IsNull("last_updated_user") ? "" : (dr["last_updated_user"].ToString());
+            //    discount.DisplayOrder = dr.IsNull("sort_order") ? 0 : int.Parse(dr["sort_order"].ToString());
                 masterdiscount.gaamediscount.Add(discount);
             }
 

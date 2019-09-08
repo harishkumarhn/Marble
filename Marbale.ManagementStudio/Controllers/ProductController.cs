@@ -111,7 +111,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
-        public JsonResult DeleteProducts(int Id)
+        public JsonResult DeleteProduct(int Id)
         {
             try
             {
@@ -120,7 +120,7 @@ namespace MarbaleManagementStudio.Controllers
             }
             catch (Exception e)
             {
-                LogError.Instance.LogException("DeleteProducts", e);
+                LogError.Instance.LogException("DeleteProduct", e);
                 throw;
             }
     
@@ -236,7 +236,7 @@ namespace MarbaleManagementStudio.Controllers
                         model.Price = model.Price - model.FaceValue;
                         model.EffectivePrice = (model.Price * TaxDetails[0].TaxPercent) / (100 + (TaxDetails[0].TaxPercent));
                         model.EffectivePrice = model.Price - model.EffectivePrice;
-                        model.FinalPrice = model.Price;
+                        model.FinalPrice = model.Price + model.FaceValue;
                         model.Taxpercent = TaxDetails[0].TaxPercent;
                     }
                     else

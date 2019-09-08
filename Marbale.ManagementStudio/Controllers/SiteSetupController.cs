@@ -112,10 +112,9 @@ namespace MarbaleManagementStudio.Controllers
             return View();
         }
 
-        public string UpdateSettings(List<Settings> settings)
+        public int UpdateSettings(List<Settings> settings)
         {
-            bool status = siteSetup.SaveSettings(settings);
-            return "Updated";
+           return siteSetup.SaveSettings(settings);
         }
         public ActionResult Messages()
         {

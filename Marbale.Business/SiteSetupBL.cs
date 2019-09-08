@@ -91,22 +91,23 @@ namespace Marble.Business
                 throw e;
             }
         }
-        public bool SaveSettings(List<Settings> settings)
+        public int SaveSettings(List<Settings> settings)
         {
+            int result = 0;
             try
             {
                 foreach (var setting in settings)
                 {
-                    siteSetupData.UpdateSettings(setting.Id, setting.Name, setting.Caption, setting.Description, setting.DefaultValue, setting.Type,
+                    result = siteSetupData.UpdateSettings(setting.Id, setting.Name, setting.Caption, setting.Description, setting.DefaultValue, setting.Type,
                         setting.ScreenGroup, setting.LastUpdatedBy, setting.Active, setting.UserLevel, setting.PosLevel);
                 }
-                return true;
 
             }
             catch (Exception e)
             {
                 throw e;
             }
+            return result;
         }
         public bool SavePOSConfiguration(List<AppSetting> appSetting)
         {
