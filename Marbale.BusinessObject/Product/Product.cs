@@ -54,5 +54,7 @@ namespace Marbale.BusinessObject
         public List<IdValue> TypeList { get; set; }
         public List<IdValue> CategoryList { get; set; }
         public List<TaxSet> TaxList { get; set; }
+
+        public int TaxId { get; set; }
     }
 }

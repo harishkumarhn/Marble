@@ -55,6 +55,7 @@ namespace Marbale.Business
                     product.CardValidFor = dr.IsNull("CardValidFor") ? 0 : Convert.ToInt32(dr["CardValidFor"]);
                     product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
                     product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToInt32(dr["Courtesy"]);
+                    product.TaxId = dr.IsNull("Taxid") ? 0 : Convert.ToInt32(dr["Taxid"]);
 
                 }
                 return product;
