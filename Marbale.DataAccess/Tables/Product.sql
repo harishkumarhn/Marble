@@ -28,7 +28,8 @@ CREATE TABLE [dbo].[Product](
 	[Credits] [decimal](18, 3) NULL,
 	[CardValidFor] [int] NULL,
 	[ExpiryDate] [datetime] NULL,
-	[Courtesy] [bigint] NULL
+	[Courtesy] [bigint] NULL,
+	[TaxId] [int] NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO

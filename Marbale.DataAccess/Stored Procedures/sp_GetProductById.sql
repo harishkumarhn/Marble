@@ -5,6 +5,9 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
+-- DROP PROC sp_GetProductById
+
 CREATE PROCEDURE [dbo].[sp_GetProductById]     
  @id int    
 AS    
@@ -20,13 +23,22 @@ BEGIN
    select @expiredate = ExpiryDate from Product where id=@id
    select @startDate = startDate from Product where id=@id
   select @withoutExpireDate =DATEADD(DAY,@cardvalidFor,@startDate)  
+ 
  SELECT     
  Courtesy,  
- Id ,Name ,Type ,POSCounter, Active, DisplayInPOS ,DisplayGroup ,Category ,
+ p.Id ,Name ,PT.Type ,POSCounter, P.Active, DisplayInPOS ,DisplayGroup ,Category ,
  AutoGenerateCardNumber ,OnlyVIP, Price, FaceValue, TaxInclusive, TaxPercentage, FinalPrice, EffectivePrice,    
-  LastUpdatedBy, LastUpdatedDate, Bonus, LastUpdatedUser ,TaxName, StartDate as 'StartDate', Games ,    
-  CreditsPlus, Credits ,CardValidFor,case when isnull(@expiredate,'') ='' then @withoutExpireDate else ExpiryDate end as 'ExpiryDate'
+  P.LastUpdatedBy, P.LastUpdatedDate, Bonus, LastUpdatedUser ,TaxName, StartDate as 'StartDate', Games ,    
+  CreditsPlus, Credits ,CardValidFor,case when isnull(@expiredate,'') ='' then @withoutExpireDate else ExpiryDate end as 'ExpiryDate',
   --ExpiryDate 'ExpiryDate'    
-    
-  from Product where Id = @id    
+    TaxId
+  from Product P
+  LEFT JOIN ProductType PT on P.Type = PT.Id
+   
+
+  where P.Id = @id    
 END 
+
+
+
+
