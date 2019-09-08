@@ -203,17 +203,18 @@
         });
         $('#inventery').click(function () {
             $(".modal-body").html("");
-            $('#newcardmodel .modal-Content').CSS('height', 590);
-            $('#newcardmodel .modal-Content').CSS('width', 719);
+            $('#newcardmodel .modal-Content').css('height', 590);
+            $('#newcardmodel .modal-Content').css('width', 719);
             $('#newupdatecardmodal').text("Inventory").addClass('modal-centre');
             $('#newcardmodel').modal('show');
           
             $('#modelbody').load('/Cards/Inventory');
         });
         $('#newcards').click(function () {
+            debugger;
             $(".modal-body").html("");
-            $('#newcardmodel .modal-Content').CSS('height', 810);
-            $('#newcardmodel .modal-Content').CSS('width', 900);
+            $('#newcardmodel .modal-Content').css('height', 810);
+            $('#newcardmodel .modal-Content').css('width', 900);
             $('#newupdatecardmodal').text("Add Card").addClass('modal-centre');
             //$(document).off('focusin.modal');
             $('#newcardmodel').modal('show');
