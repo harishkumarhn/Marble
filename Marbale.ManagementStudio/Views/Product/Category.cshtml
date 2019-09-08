@@ -1,79 +1,122 @@
 ﻿@{
     ViewBag.Title = "Product Category";
 }
+<table id="marbleTable" class="stripe row-border order-column">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>ParentCategory</th>
+        <th>Active</th>
+    </thead>
+    @foreach (var item in ViewBag.categories)
+    {  
+        <tr>
+            <td>@item.Id  </td>
+            <td>
+                <input type="text" value="@item.Name"/>
+            </td>
+            <td>
+                <select name="categoryList" id="categoryList">
+                    @foreach (var dow in item.Categories)
+                    {
+                        if (@item.ParentCategory == @dow.Value)
+                        {
+                        <option value="@dow.Value" selected>@dow.Value</option>
+                        }
+                        else
+                        {
+                        <option value="@dow.Value">@dow.Value</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
+            </td>
+        </tr>  
+    }
+</table>
 
-<div class="first"  style="background-color: burlywood">
-    <div class="second">
 
-        <table id="marbleTable" class="table">
-            <thead>
-                <th class="headerCol">ID</th>
-                <th>Name</th>
-                <th>ParentCategory</th>
-                <th>Active</th>
-            </thead>
-            @foreach (var item in ViewBag.categories)
-            {  
-                <tr onchange="UpdatedList(this)">
-                    <td class="headerCol">@item.Id  </td>
-                    <td>
-                        <input type="text" value="@item.Name" class="gridText" />
-                    </td>
-                    <td>
-                        <select name="categoryList" id="categoryList" class="gridText">
-                            @foreach (var dow in item.Categories)
-                            {
-                                if (@item.ParentCategory == @dow.Value)
-                                {
-                                <option value="@dow.Value" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                <option value="@dow.Value">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
-                    </td>
-                </tr>  
-            }
-        </table>
-
-    </div>
-
-</div>
 <div class="action">
-    <button class="btn btn-primary btn-md" role="button"  id="saveproductcat" onclick="SaveProductCategory()"  disabled>Save</button>
-    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddProductCategory()">Add Product Category</a>
+    <button class="btn btn-primary btn-md" role="button" id="saveproductcat" onclick="SaveProductCategory()" disabled>Save</button>
+    <a href="#" id="addRow" class="btn btn-primary btn-md" role="button">Add Product Category</a>
 </div>
 <script>
-    function AddProductCategory() {
-        $('#saveproductcat').removeAttr('disabled');
-        var categoryListOptions = '';
+
+    var updatedArray = [];
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
+        }
+    }
+
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            // paging: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            }
+        });
+        $('#marbleTable tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+        $('#addRow').on('click', function () {
+            $('#saveproductcat').removeAttr('disabled');
+            var categoryListOptions = '';
               @foreach (var dow in ViewBag.categories[0].Categories)
               {
-                 @: categoryListOptions = categoryListOptions + '<option value="">@dow.Value</option>';
+                   @: categoryListOptions = categoryListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
               }
-        categoryListOptions = categoryListOptions + '</select></td>';
+            categoryListOptions = categoryListOptions + ' </select>';
+            table.row.add([
+                '<a href="#"></a>',
+                '<input type="text" value="" />',
+                '<select name="categoryList" id="categoryList">' + categoryListOptions,
+                '<input type="checkbox" />',
+            ]).draw(false);
 
-        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-         '<td> <select name="categoryList" id="categoryList">' + categoryListOptions +
-        '<td> <input type="checkbox" />  </td>' + '</tr>';
-        $('#marbleTable tr:last').after(newRow);
-    }
+        });
+        $(".tblRow").on("change", function (e) {
+            $('#saveproductcat').removeAttr('disabled');
+            UpdatedList($(this).parent().index());
+        });
+    });
+
     function SaveProductCategory() {
         var productCategories = [];
         var table = document.getElementById('marbleTable');
-        for (var r = 1, n = table.rows.length; r < n; r++) {
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+            var rowIndex = r+1;
+
             if (updatedArray.includes(r)) {
+                var selectedIndex = table.rows[rowIndex].cells[2].children[0].options["selectedIndex"];
                 productCategories.push({
-                    Id: table.rows[r].cells[0].innerHTML,
-                    Name: table.rows[r].cells[1].children[0].value,
-                    Category: table.rows[r].cells[2].children[0].value,
-                    Active: table.rows[r].cells[3].children[0].checked,
+                    Id: table.rows[rowIndex].cells[0].innerHTML,
+                    Name: table.rows[rowIndex].cells[1].children[0].value,
+                    ParentCategory: table.rows[rowIndex].cells[2].children[0].options[selectedIndex].innerHTML,
+                    Active: table.rows[rowIndex].cells[3].children[0].checked,
                 });
             }
         }
@@ -91,11 +134,5 @@
                 alert(e);
             }
         });
-    }
-    var updatedArray = [];
-    function UpdatedList(x) {
-        if (!updatedArray.includes(x.rowIndex)) {
-            updatedArray.push(x.rowIndex);
-        }
     }
 </script>

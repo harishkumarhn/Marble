@@ -135,6 +135,8 @@ namespace Marble.Business
                      game.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                      game.Description = dr.IsNull("Description") ? "" : dr["Description"].ToString();
                      game.GameProfile = dr.IsNull("GameProfile") ? 0 : int.Parse(dr["GameProfile"].ToString());
+                     game.GPNormalPrice = game.GameProfile > 0 ? profiles.Find(x => x.Id == game.GameProfile).NormalPrice.ToString() : "";
+                     game.GPVipPrice = game.GameProfile > 0 ? profiles.Find(x => x.Id == game.GameProfile).VIPPrice.ToString() : "";
                      game.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
                      game.GameCompanyName = dr.IsNull("GameCompanyName") ? "" : dr["GameCompanyName"].ToString();
                      game.VIPPrice = dr.IsNull("VIPPrice") ? 0 : int.Parse(dr["VIPPrice"].ToString());

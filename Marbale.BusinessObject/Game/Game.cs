@@ -12,6 +12,8 @@ namespace Marbale.BusinessObject.Game
         public string Name { get; set; }
         public string Description { get; set; }
         public int GameProfile { get; set; }
+        public string GPNormalPrice { get; set; }
+        public string GPVipPrice { get; set; }
         public List<GameProfile> GameProfiles { get; set; }
         public int NormalPrice { get; set; }
         public int VIPPrice { get; set; }

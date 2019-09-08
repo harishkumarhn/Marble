@@ -21,6 +21,11 @@ namespace Marbale.POS
         string cardNumber = "";
         string tempCardNumber = "";
 
+        double tendered_amount = 0;
+        double total_amount = 0;
+        double TipAmount = 0;
+        double balance_amount = 0;
+
         Transaction Transaction;
         Card CurrentCard;
         BusinessObject.Customer.Customers Customer;
@@ -37,14 +42,14 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-            frmLogin frmLogin = new frmLogin();
-            frmLogin.ShowDialog();
-            if (!frmLogin.isLoginSuccess)
-                Environment.Exit(0);
-            else
-            {
-                CurrentUser = frmLogin.loggedInUser;
-            }
+            //frmLogin frmLogin = new frmLogin();
+            //frmLogin.ShowDialog();
+            //if (!frmLogin.isLoginSuccess)
+            //    Environment.Exit(0);
+            //else
+            //{
+            //    CurrentUser = frmLogin.loggedInUser;
+            //}
         }
 
         private void POSHome_Load(object sender, EventArgs e)
@@ -52,6 +57,7 @@ namespace Marbale.POS
             UpdateProductsTab();
             updateCardDetailsGrid();
             registerAdditionalCardReaders();
+            updateScreenAmounts();
         }
 
         class Device
@@ -301,6 +307,16 @@ namespace Marbale.POS
                     return;
                 }
             }
+            else if (product.Type == "RECHARGE")
+            {
+                if (CurrentCard == null)
+                {
+                    MessageBox.Show("Please tap the card");
+                    return;
+                }
+            }
+
+
 
             TransactionLine trxLine = new TransactionLine();
             trxLine.ProductID = product.Id;
@@ -309,7 +325,7 @@ namespace Marbale.POS
             trxLine.quantity = 1;
 
             trxLine.tax_percentage = product.TaxPercentage;
-
+            trxLine.tax_id = product.TaxId;
             trxLine.tax_amount = (double)((product.Price - product.FaceValue) * product.TaxPercentage) / 100;
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
@@ -343,6 +359,7 @@ namespace Marbale.POS
 
 
             RefreshTransactionGrid();
+            updateScreenAmounts();
         }
 
 
@@ -852,12 +869,14 @@ namespace Marbale.POS
                 }
 
                 RefreshTransactionGrid();
+                updateScreenAmounts();
             }
         }
 
         private void btnClearTrxn_Click(object sender, EventArgs e)
         {
             ClearTransaction();
+            updateScreenAmounts();
         }
 
         private void DisplayCardDetails()
@@ -1114,6 +1133,55 @@ namespace Marbale.POS
         private void btnReConnectCardReader_Click(object sender, EventArgs e)
         {
             registerAdditionalCardReaders();
+        }
+
+        private void btnKeypad_Click(object sender, EventArgs e)
+        {
+            (sender as Button).FlatAppearance.BorderSize = 0;
+            showNumberPadForm('-');
+        }
+
+        void showNumberPadForm(char firstKey)
+        {
+            double varAmount = NumberPadForm.ShowNumberPadForm("Enter Amount", firstKey);
+            if (varAmount >= 0)
+            {
+                tendered_amount = varAmount;
+                updateScreenAmounts();
+            }
+        }
+
+
+        private void updateScreenAmounts()
+        {
+            double balanceAmount = 0;
+            double changeAmount = 0;
+            if (Transaction == null)
+            {
+                total_amount = 0;
+                tendered_amount = 0;
+                TipAmount = 0;//Modification on 09-Nov-2015:Tip Amount Feature
+            }
+            else
+            {
+                //Begin Modification on 09-Nov-2015:Tip Amount Feature
+                total_amount = (double)Transaction.Net_Transaction_Amount + TipAmount;
+
+                if (Transaction.TotalPaidAmount == 0)
+                    balanceAmount = total_amount - Transaction.TotalPaidAmount;
+                else
+                    balanceAmount = total_amount - (Transaction.TotalPaidAmount + Transaction.Tip_Amount);
+                changeAmount = Math.Max(tendered_amount - balanceAmount, 0);
+
+                TipAmount = Transaction.Tip_Amount;
+            }
+
+            textBoxTransactionTotal.Text = "Rs " + total_amount.ToString(); //.ToString("$"); //AMOUNT_WITH_CURRENCY_SYMBOL
+            textBoxBalance.Text = "Rs " + balance_amount.ToString(); //.ToString("Rs");
+            textBoxTendered.Text = "Rs " + tendered_amount.ToString(); //.ToString("$"); //AMOUNT_WITH_CURRENCY_SYMBOL
+
+            txtChangeAmount.Text = "Rs " + changeAmount.ToString(); //.ToString(ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);
+            txtTipAmount.Text = "Rs " + TipAmount.ToString(); //(ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);
         }
     }
 }

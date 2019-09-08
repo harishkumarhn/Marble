@@ -6,8 +6,43 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+-- DROP PROC sp_GetProducts
 Create proc [dbo].[sp_GetProducts]
 as 
 begin 
-select * from Product
+
+select 
+		p.Id,
+		Name,
+		PT.Type,
+		POSCounter,
+		P.Active,
+		DisplayInPOS,
+		DisplayGroup,
+		Category,
+		AutoGenerateCardNumber,
+		OnlyVIP,
+		Price,
+		FaceValue,
+		TaxInclusive,
+		TaxPercentage,
+		FinalPrice,
+		EffectivePrice,
+		p.LastUpdatedBy,
+		p.LastUpdatedDate,
+		Bonus,
+		LastUpdatedUser,
+		TaxName,
+		StartDate,
+		Games,
+		CreditsPlus,
+		Credits,
+		CardValidFor,
+		ExpiryDate,
+		Courtesy,
+		TaxId 
+				FROM Product P
+		LEFT JOIN ProductType PT ON P.Type = PT.Id
 end
+
+
