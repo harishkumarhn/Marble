@@ -317,8 +317,6 @@ namespace Marbale.POS
                 }
             }
 
-
-
             TransactionLine trxLine = new TransactionLine();
             trxLine.ProductID = product.Id;
             trxLine.ProductName = product.Name;
@@ -1209,6 +1207,47 @@ namespace Marbale.POS
 
             txtChangeAmount.Text = "Rs " + changeAmount.ToString(); //.ToString(ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);
             txtTipAmount.Text = "Rs " + TipAmount.ToString(); //(ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            if (Transaction == null)
+            {
+                RefreshTabs();
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Do you want to cancel unsaved Transaction and continue ?", "Confirmation Messages", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    RefreshTabs();
+                }
+            }
+        }
+
+        public void RefreshTabs()
+        {
+            ClearTransaction();
+            updateScreenAmounts();
+
+            UpdateProductsTab();
+            updateCardDetailsGrid();
+            registerAdditionalCardReaders();
+            updateScreenAmounts();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to logout ?", "Confirmation Messages", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Close();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
         }
     }
 }
