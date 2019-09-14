@@ -3,64 +3,71 @@
     Layout = null;
 }
 
-<div >
+<div>
     </br>
-<div id="valuesContainer" style="background-color:orangered">
-   
-      @foreach (var item in ViewBag.SignageForm)
-      {
-          String type = item.Type.ToString();
-          switch (type)
-          {
-              case "string":
-               <div>                        
-                            <div class="inputwrap demo">
-                             <text> &nbsp; &nbsp; &nbsp;</text>   <label> <b>@item.Caption </b>:</label>
-                     <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+    <div id="valuesContainer" style="background-color: orangered">
 
-                            </div>
-                    </div>
+        @foreach (var item in ViewBag.SignageForm)
+        {
+            String type = item.Type.ToString();
+            switch (type)
+            {
+                case "string":
+            <div>
+                <div class="inputwrap demo">
+                    <text> &nbsp; &nbsp; &nbsp;</text>
+                    <label><b>@item.Caption </b>:</label>
+                    <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
 
-                  break;
-                  case "bool":
+                </div>
+            </div>
+
+                    break;
+                case "bool":
                  
-                     <div>
-                          <div class="inputwrap demo">
-                             <text> &nbsp; &nbsp; &nbsp;</text>  <label> <b>@item.Caption </b>:</label>
-                       <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br /> </div>
+            <div>
+                <div class="inputwrap demo">
+                    <text> &nbsp; &nbsp; &nbsp;</text>
+                    <label><b>@item.Caption </b>:</label>
+                    <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+                </div>
 
-                
-     </div>
-                  break;
-                  case"int":
-                    <div>
-                          <div class="inputwrap demo">
-                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
-                     <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br /> </div>
-                        </div>
+
+            </div>
+                    break;
+                case "int":
+            <div>
+                <div class="inputwrap demo">
+                    <text> &nbsp; &nbsp; &nbsp;</text>
+                    <label><b>@item.Caption </b>:</label>
+                    <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
+                </div>
+            </div>
                     
-                  break;
-                     case"color":
-                    <div>
-                          <div class="inputwrap demo" id="colorpickerdemo">
-                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
-                     <input type="text" value="@item.Value" class="colorwell" name="myInput" id="@item.Name"/><br /> </div>
-                        </div>
+                    break;
+                case "color":
+            <div>
+                <div class="inputwrap demo" id="colorpickerdemo">
+                    <text> &nbsp; &nbsp; &nbsp;</text>
+                    <label><b>@item.Caption </b>:</label>
+                    <input type="text" value="@item.Value" class="colorwell" name="myInput" id="@item.Name"/><br />
+                </div>
+            </div>
                     
-                  break;
-                  
-          }
-                  
-      }
+                    break;
+
+            }
+
+        }
 
 
-<div id="colorpicker"></div>
-       <div id="picker"></div>
-  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveLimits()">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a>
-</div>
-      
+        <div id="colorpicker"></div>
+        <div id="picker"></div>
+        <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveLimits()">Save</button>
+        <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a>
     </div>
+
+</div>
 <script src="~/Content/Fabrastics/farbtastic.js"></script>
 <link href="~/Content/Fabrastics/farbtastic.css" rel="stylesheet" />
 <script>
@@ -77,7 +84,7 @@
     });
     var appSettings = [];
     $('input[name=myInput]').blur(function () {
-        debugger
+
         var d = {
             Name: this.id,
             Value: this.value,
@@ -94,44 +101,47 @@
 
             data: JSON.stringify({ appSettings: appSettings }),
 
-                        dataType: "json",
+            dataType: "json",
 
-                        beforeSend: function () { },
+            beforeSend: function () { },
 
-                        success: function (data) {
-                            appSettings = [];
-                          //  location.reload();
-                            $('#displayMessage').text('data added succesfully').addClass('success');
-                        }
-                            });
-   
+            success: function (data) {
+                appSettings = [];
+                //  location.reload();
+                $('#displayMessage').text('data added succesfully').addClass('success');
+            }
+        });
+
     }
- 
+
 </script>
 
 <style>
     .defalut-width {
         width: 280px;
-            height: 46px;
-    }
-    label {
-    width:480px;
-    clear:left;
-    text-align:right;
-    padding-right:10px;
-}
-      .button-pos {
-        position: absolute;
-    left: 290px;
-    top: 533px;
-    }
-    .button-close {
-        position: absolute;
-    left: 795px;
-    top: 533px;
+        height: 46px;
     }
 
-input,button, label,.ar {
-    float:left;
-}
+    label {
+        width: 480px;
+        clear: left;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .button-pos {
+        position: absolute;
+        left: 290px;
+        top: 533px;
+    }
+
+    .button-close {
+        position: absolute;
+        left: 795px;
+        top: 533px;
+    }
+
+    input, button, label, .ar {
+        float: left;
+    }
 </style>

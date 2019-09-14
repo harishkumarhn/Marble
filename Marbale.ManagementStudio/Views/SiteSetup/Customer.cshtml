@@ -6,35 +6,38 @@
 
 <h2>Customer</h2>
 
-<div id="valuesContainer" style="position:absolute;top:432px;overflow-x:scroll;overflow-y:scroll;background-color:orangered">
+<div id="valuesContainer" style="position: absolute; top: 432px; overflow-x: scroll; overflow-y: scroll; background-color: orangered">
     @foreach (var item in Model)
     {
         switch (item.Type.ToLower())
         {
             case "dropdown":
-                @Html.LabelFor(model => @item.Caption,@item.Caption)
-                 @Html.DropDownListFor(m => item.Value, new SelectList(((System.Web.Mvc.MultiSelectList)(ViewBag.RequiredLevel)).Items, "Value", "Text",selectedValue:item.Value), new {@class="form-control",@style="width:160px", id = @item.Name,Name="myInput",@onchange = "javascript:DoSomething(this.value,this.id);"})
+        @Html.LabelFor(model => @item.Caption, @item.Caption)
+        @Html.DropDownListFor(m => item.Value, new SelectList(((System.Web.Mvc.MultiSelectList)(ViewBag.RequiredLevel)).Items, "Value", "Text", selectedValue: item.Value), new { @class = "form-control", @style = "width:160px", id = @item.Name, Name = "myInput", @onchange = "javascript:DoSomething(this.value,this.id);" })
         <br />
                 break;
-                case "bool":
+            case "bool":
        
-          <div class="inputwrap demo">
-                             <text> </text>  <label> <b>@item.Caption </b>:</label>
-                       <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br /> </div>
+        <div class="inputwrap demo">
+            <text> </text>
+            <label><b>@item.Caption </b>:</label>
+            <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+        </div>
                 break;
         }
-    }<br /><br />
-       <div style="position:absolute;right:0px">   
-  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>   <text> &nbsp; &nbsp; &nbsp;</text> 
-     <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a>
-</div>
+    }<br />
+    <br />
+    <div style="position: absolute; right: 0px">
+        <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>
+        <text> &nbsp; &nbsp; &nbsp;</text>
+        <a href="/Product/ClosePopUp" class="btn btn-primary button-close">Close</a>
     </div>
+</div>
 
 <script>
     var appSettings = [];
     var appSettings1 = [];
     $('input[Name=myInput]').change(function () {
-        debugger
         var d = {
             Name: this.id,
             Value: this.value,
@@ -44,7 +47,6 @@
         appSettings.push(d);
     });
     function DoSomething(value, id) {
-        debugger
         var d = {
             Name: id,
             Value: value,
@@ -54,7 +56,6 @@
         appSettings.push(d);
     }
     function SaveEmail() {
-        debugger
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
@@ -75,9 +76,7 @@
 
     }
     $(document).ready(function () {
-        debugger;
         $('input[name="allcheck"]').each(function (index) {
-            debugger;
             if ($(this).val().toLowerCase() == "true")
 
                 ($(this).prop('checked', true));
@@ -88,22 +87,24 @@
 <style>
     .defalut-width {
         width: 280px;
-            height: 46px;
+        height: 46px;
     }
-    label {
-    width:480px;
-    clear:left;
-    text-align:right;
-    padding-right:10px;
-}
-      .button-email {
-     position: absolute;
-    left: 319px;
-    bottom: 132px;
-    }
-  
 
-input,button, label,.ar {
-    float:left;
-}
+    label {
+        width: 480px;
+        clear: left;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .button-email {
+        position: absolute;
+        left: 319px;
+        bottom: 132px;
+    }
+
+
+    input, button, label, .ar {
+        float: left;
+    }
 </style>

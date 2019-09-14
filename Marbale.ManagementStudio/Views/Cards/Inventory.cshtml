@@ -158,7 +158,6 @@
         }, 10);
     });
     $('#submitinventory').click(function () {
-        debugger
         var myObject = {
             From: $('#From').val(),
             To:$('#To').val()
@@ -166,7 +165,6 @@
         var url = '@Url.Content("~/Cards/GetInventory")';
         $.getJSON(url,myObject, function (data) {
             $("#cardtableinventory tbody").html('');
-            debugger
             var html;
             $.each(data, function (i, item) {
                 html += "<tr><td>" + item.NumberOfCards + "</td>";

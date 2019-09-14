@@ -7,13 +7,13 @@
 
 <legend>Configuration</legend>
 
-@using (Html.BeginForm("UpdateConfiguration","Game",FormMethod.Post))
+@using (Html.BeginForm("UpdateConfiguration", "Game", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <div style="width:900px;">
-            <div style="width:450px;float:left">
+        <div style="width: 900px;">
+            <div style="width: 450px; float: left">
                 <div class="editor-label">
                     @Html.LabelFor(model => model.StartInPhysicalTicketMode)
                 </div>
@@ -70,7 +70,7 @@
                     @Html.EditorFor(model => model.MinSecondsBetweenRepeatPlay)
                     @Html.ValidationMessageFor(model => model.MinSecondsBetweenRepeatPlay)
                 </div>
-                 <div class="editor-label">
+                <div class="editor-label">
                     @Html.LabelFor(model => model.OutOfServiceTheme)
                 </div>
                 <div class="editor-field">
@@ -86,7 +86,7 @@
                     @Html.ValidationMessageFor(model => model.CoinPulseWidth)
                 </div>
             </div>
-            <div style="width:450px;float:left">
+            <div style="width: 450px; float: left">
 
                 <div class="editor-label">
                     @Html.LabelFor(model => model.CoinPulseGap)
@@ -153,15 +153,17 @@
                 </div>
             </div>
         </div>
-        <p style="bottom: 11px;position: fixed;">
+        <p style="bottom: 11px; position: fixed;">
             <input type="button" class="btn btn-primary btn-md" value="Save" onclick="SaveConfiguration(this)" />
+            <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+
         </p>
     </fieldset>
 }
 
 <script>
     $(document).ready(function () {
-       
+
     })
     function SaveConfiguration(btnClicked) {
         var $form = $(btnClicked).parents('form');
@@ -188,5 +190,5 @@
             updatedArray.push(x.rowIndex);
         }
     }
-    
- </script>
+
+</script>

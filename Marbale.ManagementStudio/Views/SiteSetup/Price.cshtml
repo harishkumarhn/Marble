@@ -81,7 +81,7 @@
     var appSettings = [];
     var appSettings1 = [];
     $('input[name=myInput]').change(function () {
-        debugger
+        
         var d = {
             Name: this.id,
             Value: this.value,
@@ -91,7 +91,7 @@
         appSettings.push(d);
     });
     $('input[name=fileUploader]').change(function (e) {
-        debugger
+        
         var d1 = {
             Name: this.id,
             Value: this.value,
@@ -102,7 +102,7 @@
         // console.log(this.files[0].mozFullPath);
     })
     $('input[name=fileUploader1]').change(function (e) {
-        debugger
+        
         var d1 = {
             Name: this.id,
             Value: this.value,
@@ -114,7 +114,7 @@
     })
 
     $('input[name=allcheck]').change(function () {
-        debugger
+        
         var d = {
             Name: this.id,
             Value: $(this).is(":checked"),
@@ -125,7 +125,7 @@
 
     // formData.append('file', $('#PDF_WRITER_PRINTER')[0].files[0]);
     function SaveEmail() {
-        debugger
+        
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
@@ -147,7 +147,7 @@
     }
     $(document).ready(function () {
         $('input[name="allcheck"]').each(function (index) {
-            debugger
+            
             if ($(this).val().toLowerCase() == "true")
 
                 ($(this).prop('checked', true));

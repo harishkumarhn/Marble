@@ -23,8 +23,10 @@
     @foreach (var item in ViewBag.games)
     {  
         <tr>
-            <td ><lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>  </td>
-            <td >
+            <td>
+                <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
+            </td>
+            <td>
                 <input type="text" class="fixedCol2" value="@item.Name"/>
             </td>
             <td>
@@ -47,7 +49,7 @@
             </td>
 
             <td hidden>
-                <input type="text" value=""/>
+                <input type="text" value="" />
             </td>
             <td>
                 <input type="text" value="@item.GPNormalPrice" disabled />
@@ -81,10 +83,11 @@
     }
 </table>
 <div class="action">
-     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveGames()" id="saveGame">Save</button>
-    <a href="#" class="btn btn-primary btn-md" role="button" id="addRow">Add</a>
-    <a href="/" class="btn btn-primary">Close</a>
+    <button class="btn btn-primary btn-md" role="button" id="addRow">Add</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+
 </div>
 <script>
     $(document).ready(function () {
