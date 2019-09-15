@@ -56,6 +56,7 @@ namespace Marbale.POS
         private void POSHome_Load(object sender, EventArgs e)
         {
             UpdateProductsTab();
+            UpdateDiscountsTab();
             updateCardDetailsGrid();
             registerAdditionalCardReaders();
             updateScreenAmounts();
@@ -236,6 +237,51 @@ namespace Marbale.POS
                     flowLayoutPanelProducts.Controls.Add(btnProduct);
                 }
             }
+        }
+
+        private void UpdateDiscountsTab()
+        {
+            ProductBL productBL = new ProductBL();
+            MasterDiscounts masterDiscounts = productBL.GetAllDiscounts();
+
+            List<TransactionDiscount> lstDiscounts = masterDiscounts.transactiondiscount;
+
+            if (lstDiscounts.Count > 0)
+            {
+                flowLayoutPanelDiscounts.Controls.Clear();
+                for (int i = 0; i < lstDiscounts.Count; i++)
+                {
+                    Button btnDiscount = new Button();
+                    btnDiscount.Click += new EventHandler(DiscountButton_Click);
+                    btnDiscount.MouseDown += DiscountButton_MouseDown;
+                    btnDiscount.MouseUp += DiscountButton_MouseUp;
+                    btnDiscount.Name = lstDiscounts[i].DiscountName + '_' + lstDiscounts[i].DiscountID;
+                    btnDiscount.Text = lstDiscounts[i].DiscountName;
+                    btnDiscount.Tag = lstDiscounts[i].DiscountID;
+                    btnDiscount.Font = btnSampleProduct.Font;
+                    btnDiscount.ForeColor = btnSampleProduct.ForeColor;
+                    btnDiscount.Size = btnSampleProduct.Size;
+                    btnDiscount.BackgroundImage = btnSampleProduct.BackgroundImage;
+                    btnDiscount.FlatStyle = btnSampleProduct.FlatStyle;
+                    btnDiscount.FlatAppearance.BorderColor = btnSampleProduct.FlatAppearance.BorderColor;
+                    btnDiscount.FlatAppearance.BorderSize = btnSampleProduct.FlatAppearance.BorderSize;
+                    btnDiscount.FlatAppearance.MouseDownBackColor = btnSampleProduct.FlatAppearance.MouseOverBackColor = Color.Transparent;
+                    btnDiscount.BackgroundImageLayout = ImageLayout.Zoom;
+                    btnDiscount.BackColor = Color.Transparent;
+                    flowLayoutPanelDiscounts.Controls.Add(btnDiscount);
+                }
+            }
+        }
+
+        private void DiscountButton_Click(object sender, EventArgs e)
+        {
+            //Button b = (Button)sender;
+            //int product_id = Convert.ToInt32(b.Tag);
+
+            //ProductBL productBL = new ProductBL();
+            //Product product = productBL.GetProductById(product_id);
+
+            //CreateTransactionLine(product);
         }
 
         private void ProductButton_Click(object sender, EventArgs e)
@@ -692,6 +738,16 @@ namespace Marbale.POS
             return dgv;
         }
 
+
+        private void DiscountButton_MouseDown(object sender, EventArgs e)
+        {
+
+        }
+        private void DiscountButton_MouseUp(object sender, EventArgs e)
+        {
+
+        }
+
         private void ProductButton_MouseDown(object sender, EventArgs e)
         {
 
@@ -840,7 +896,8 @@ namespace Marbale.POS
 
         private void btnTask_Click(object sender, EventArgs e)
         {
-            ChangeLayout();
+            posContextMenu.Show(btnTask, new Point(0, 0), ToolStripDropDownDirection.AboveLeft);
+            //ChangeLayout();
         }
 
         private void btnCancelTrxnLine_Click(object sender, EventArgs e)
@@ -1232,6 +1289,7 @@ namespace Marbale.POS
             updateScreenAmounts();
 
             UpdateProductsTab();
+            UpdateDiscountsTab();
             updateCardDetailsGrid();
             registerAdditionalCardReaders();
             updateScreenAmounts();
@@ -1248,6 +1306,14 @@ namespace Marbale.POS
             {
                 //do something else
             }
+        }
+
+        private void posContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+             if (e.ClickedItem.Equals(changeLayoutToolStripMenuItem))
+             {
+                ChangeLayout();
+             }
         }
     }
 }

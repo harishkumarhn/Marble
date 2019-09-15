@@ -160,7 +160,7 @@ namespace Marbale.DataAccess
 
         }
         
-        public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, int DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory, bool Type)
+        public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, double DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory, bool Type)
         {
             try
             {

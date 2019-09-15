@@ -276,7 +276,9 @@ namespace Marbale.Business
                                .Where(r => r.Field<string>("discount_type") != "T")
                                .CopyToDataTable();
             }
-            catch { }
+            catch(Exception e1)
+            {
+            }
             MasterDiscounts masterdiscount = new MasterDiscounts();
             foreach (DataRow dr in transactiondiscount.Rows)
             {
@@ -284,7 +286,7 @@ namespace Marbale.Business
                 TransactionDiscount discount = new TransactionDiscount();
                 discount.DiscountID = dr.IsNull("discount_id") ? 0 : int.Parse(dr["discount_id"].ToString());
                 discount.DiscountName = dr.IsNull("discount_name") ? "" : (dr["discount_name"].ToString());
-                discount.DiscountPercentage = dr.IsNull("discount_percentage") ? 0 : int.Parse(dr["discount_percentage"].ToString());
+                discount.DiscountPercentage = dr.IsNull("discount_percentage") ? 0 : double.Parse(dr["discount_percentage"].ToString());
                 discount.DiscountType = dr.IsNull("discount_type") ? "" : (dr["discount_type"].ToString());
                 discount.RemarkMendatory = dr.IsNull("RemarksMandatory") ? false : bool.Parse(dr["RemarksMandatory"].ToString());
                 discount.ActiveFlag = dr.IsNull("active_flag") ? false : bool.Parse(dr["active_flag"].ToString());
@@ -300,9 +302,9 @@ namespace Marbale.Business
                 discount.DisplayOrder = dr.IsNull("sort_order") ? 0 : int.Parse(dr["sort_order"].ToString());
                 masterdiscount.transactiondiscount.Add(discount);
             }
+
             foreach (DataRow dr in gamedisc.Rows)
             {
-
                 GameDiscount discount = new GameDiscount();
                 discount.DiscountID = dr.IsNull("discount_id") ? 0 : int.Parse(dr["discount_id"].ToString());
                 discount.DiscountName = dr.IsNull("discount_name") ? "" : (dr["discount_name"].ToString());
@@ -311,15 +313,13 @@ namespace Marbale.Business
                 discount.MinimumUsedCredits = dr.IsNull("minimum_credits") ? 0 : int.Parse(dr["minimum_credits"].ToString());
                 discount.LastUpdatedDate = Convert.ToDateTime(dr.IsNull("last_updated_date") ? "01/01/2019" : (dr["last_updated_date"].ToString()));
                 discount.LastUpdatedUser = dr.IsNull("last_updated_user") ? "" : (dr["last_updated_user"].ToString());
-            //    discount.DisplayOrder = dr.IsNull("sort_order") ? 0 : int.Parse(dr["sort_order"].ToString());
+               //discount.DisplayOrder = dr.IsNull("sort_order") ? 0 : int.Parse(dr["sort_order"].ToString());
                 masterdiscount.gaamediscount.Add(discount);
             }
 
             return masterdiscount;
-
-
-
         }
+
         public int SaveDiscount(TransactionDiscount discount)
         {
             int status = productData.SaveDiscount(discount.ActiveFlag, discount.AutomaticApply, discount.CouponMendatory, discount.DiscountAmount, discount.DiscountID, discount.DiscountName, discount.DiscountPercentage, discount.DiscountType, discount.DisplayInPOS, discount.DisplayOrder, discount.LastUpdatedDate, discount.LastUpdatedUser, discount.ManagerApproval, discount.MinimumSaleAmount, discount.MinimumUsedCredits, discount.RemarkMendatory, discount.Type);
