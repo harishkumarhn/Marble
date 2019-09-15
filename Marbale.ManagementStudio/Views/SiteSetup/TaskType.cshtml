@@ -8,80 +8,78 @@
     <label id="successMessages" class="pos-text"></label>
 </div>
 <div>
-<table id="TasktypeTable" class="table messagesTable table-bordered" style="display: block; height: 500px; overflow-x: auto">  
-        <thead class="back-color">  
-            <th >Task Type Id</th>  
-            <th>Task Type</th>  
-              <th >Task Type Name</th>  
-            <th>Requires Manager Approval</th>  
-                 <th>Dispaly in POS</th>   
-        </thead>  
-    @{
-        int count = 1;
+    <table id="TasktypeTable" class="table messagesTable table-bordered" style="display: block; height: 500px; overflow-x: auto">
+        <thead>
+            <th>Task Type Id</th>
+            <th>Task Type</th>
+            <th>Task Type Name</th>
+            <th>Requires Manager Approval</th>
+            <th>Dispaly in POS</th>
+        </thead>
+        @{
+            int count = 1;
         }
-        @foreach (var item in ViewBag.TaskType)  
+        @foreach (var item in ViewBag.TaskType)
         {  
-            <tr onchange="UpdatedList(this)"> 
-        <td > @item.TaskTypeId  </td>
-    
-        <td> <input type="text" value="@item.TaskType" class="gridText" style="width: 958px;">  </td>
-        <td> <input type="text" value="@item.TaskTypeName">  </td>
-                  <td> <input type="checkbox"  @(item.RequiresManagerApproval ? "checked='checked'" : "") value="@item.RequiresManagerApproval"  id="ActiveFlag@(count)"/>  </td>
-                  <td> <input type="checkbox"  @(item.DispalyinPOS ? "checked='checked'" : "") value="@item.DispalyinPOS"  id="DispalyinPOS@(count)"/>  </td>
-    </tr>  
+            <tr onchange="UpdatedList(this)">
+                <td>@item.TaskTypeId  </td>
+
+                <td>
+                    <input type="text" value="@item.TaskType" class="gridText" style="width: 958px;">
+                </td>
+                <td>
+                    <input type="text" value="@item.TaskTypeName">
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.RequiresManagerApproval ? "checked='checked'" : "") value="@item.RequiresManagerApproval"  id="ActiveFlag@(count)"/>
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.DispalyinPOS ? "checked='checked'" : "") value="@item.DispalyinPOS"  id="DispalyinPOS@(count)"/>
+                </td>
+            </tr>  
             count++;
-        }  
+        }
     </table>
-    
-    <button class="btn btn-primary btn-md" role="button" onclick="SaveTaskType()">Save</button> 
-     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>   
+
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveTaskType()">Save</button>
+    <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
 </div>
-<style>
-    .back-color {
-        background-color:blueviolet;
-    }
-    .pos-text {
-           left: 650px;
-    position: absolute;
-    top: 135px;
-        color: blue;
-    }
-</style>
-     <script>
-         function SaveTaskType() {
-             var TaskTypeObject = [];
-             var table = document.getElementById('TasktypeTable');
-             for (var r = 1, n = table.rows.length; r < n; r++) {
-                 if (updatedArray.includes(r)) {
-                     messageObject.push({
-                         TaskTypeId: table.rows[r].cells[0].innerHTML,
-                         TaskType: table.rows[r].cells[1].children[0].value,
-                         TaskTypeName: table.rows[r].cells[2].children[0].value,
-                         RequiresManagerApproval: table.rows[r].cells[3].children[0].value,
-                         DispalyinPOS: table.rows[r].cells[4].children[0].value
-                    
-                     });
-                 }
-             }
-             $.ajax({
-                 type: "POST",
-                 contentType: "application/json; charset=utf-8",
-                 url: '@Url.Action("UpdateTaskType", "SiteSetup1")',
-                 data: JSON.stringify({ messageObject: messageObject }),
-            dataType: "json",
-            success: function (data) {
-                $('#successMessages').text('Data Saved Successfully');
-            },
-            error: function (e) {
-              
-                alert(e);
+
+<script>
+    function SaveTaskType() {
+        var TaskTypeObject = [];
+        var table = document.getElementById('TasktypeTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                messageObject.push({
+                    TaskTypeId: table.rows[r].cells[0].innerHTML,
+                    TaskType: table.rows[r].cells[1].children[0].value,
+                    TaskTypeName: table.rows[r].cells[2].children[0].value,
+                    RequiresManagerApproval: table.rows[r].cells[3].children[0].value,
+                    DispalyinPOS: table.rows[r].cells[4].children[0].value
+
+                });
             }
-        });
-    }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateTaskType", "SiteSetup1")',
+                 data: JSON.stringify({ messageObject: messageObject }),
+                 dataType: "json",
+                 success: function (data) {
+                     $('#successMessages').text('Data Saved Successfully');
+                 },
+                 error: function (e) {
+
+                     alert(e);
+                 }
+             });
+         }
          var updatedArray = [];
          function UpdatedList(x) {
              if (!updatedArray.includes(x.rowIndex)) {
                  updatedArray.push(x.rowIndex);
              }
          }
-     </script>   
+</script>

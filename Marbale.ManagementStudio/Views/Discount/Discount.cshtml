@@ -17,7 +17,6 @@
                 $('#gridContent').show();
             })
             $('#grid').on('change', 'input, select, textarea', function () {
-                debugger
                 var row_id = $(this)[0].id.match(/\d+/)[0];
                 modifiedListIndex.push(row_id);
             });
@@ -43,7 +42,6 @@
 
 
             $(".add").click(function () {
-                debugger
                 var index = $("#grid tbody tr").length + 1;
                 var DiscountId = "DiscountId" + index;
                 var DiscountName = "DiscountName" + index;
@@ -104,7 +102,6 @@
             })
 
             $('.addgamediscount').click(function () {
-                debugger;
                 var index = $("#grid2 tbody tr").length + 1;
                 var DiscountId = "DiscountId" + index;
                 var DiscountName = "DiscountName" + index;
@@ -127,7 +124,6 @@
             })
 
             $('#savediscount').click(function () {
-                debugger;
                 id = $("#grid2 tbody tr").length;
                 var discountObject = {
                     DiscountId: $("#DiscountId" + id).val(),
@@ -159,8 +155,6 @@
                         beforeSend: function () { },
 
                         success: function (data) {
-                            debugger
-
                             location.reload();
                             $('#displayMessage').text('data added succesfully').addClass('success');
                         }
@@ -169,7 +163,6 @@
 
             });
             $("#save").click(function () {
-                debugger
                // id = $("#grid tbody tr").length;
                 var id = modifiedListIndex[modifiedListIndex.length - 1];
             

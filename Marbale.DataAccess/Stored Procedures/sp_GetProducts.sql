@@ -14,7 +14,7 @@ begin
 select 
 		p.Id,
 		Name,
-		PT.Type,
+		PT.Id as Type,
 		POSCounter,
 		P.Active,
 		DisplayInPOS,

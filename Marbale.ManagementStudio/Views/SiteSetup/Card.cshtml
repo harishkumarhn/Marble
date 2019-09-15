@@ -67,7 +67,6 @@ input,button, label,.ar {
 <script>
     var appSettings = [];
     $('input[name=myInput]').change(function () {
-        debugger
         var d = {
             Name: this.id,
             Value: this.value,
@@ -76,7 +75,6 @@ input,button, label,.ar {
         appSettings.push(d);
     });
     $('input[name=allcheck]').change(function () {
-        debugger
         var d = {
             Name: this.id,
             Value: $(this).is(":checked"),
@@ -106,7 +104,6 @@ input,button, label,.ar {
     }
     $(document).ready(function () {
         $('input[name="allcheck"]').each(function (index) {
-            debugger
             if ($(this).val().toLowerCase() == "true")
 
                 ($(this).prop('checked', true));

@@ -212,7 +212,26 @@ td a.edit {
 td a {
     cursor: pointer;
 }
+
 input[type=checkbox] {
     width: 17px;
     height: 17px;
+}
+input[type=text] {
+   max-height: 30px !important;
+}
+.pageContent {
+    padding-left:5px;
+    padding-right:5px;
+}
+.action {
+  position: fixed;
+  left: 10px;
+  bottom: 0;
+  height:10%;
+  width: 100%;
+  text-align: left;
+}
+button {
+    min-width:100px;
 }

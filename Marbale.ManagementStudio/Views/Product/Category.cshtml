@@ -40,7 +40,8 @@
 
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" id="saveproductcat" onclick="SaveProductCategory()" disabled>Save</button>
-    <a href="#" id="addRow" class="btn btn-primary btn-md" role="button">Add Product Category</a>
+    <button id="addRow" class="btn btn-primary btn-md" role="button">Add Product Category</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
 </div>
 <script>
 
@@ -108,7 +109,7 @@
         var productCategories = [];
         var table = document.getElementById('marbleTable');
         for (var r = 0, n = table.rows.length; r < n; r++) {
-            var rowIndex = r+1;
+            var rowIndex = r + 1;
 
             if (updatedArray.includes(r)) {
                 var selectedIndex = table.rows[rowIndex].cells[2].children[0].options["selectedIndex"];
