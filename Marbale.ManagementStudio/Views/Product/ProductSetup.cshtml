@@ -39,15 +39,21 @@
         <th>Price</th>
         <th>FaceValue</th>
         <th>TaxInclusive</th>
+        <th>TaxPercent</th>
+        <th>Tax</th>
         <th>FinalPrice</th>
         <th>EffectivePrice</th>
         <th>LastUpdatedBy</th>
         <th>LastUpdatedDate</th>
     </thead>
     <tbody>
+        @{
+            var count = 0;
+        }
         @foreach (var item in ViewBag.productDetails)
-        {  
-            <tr>
+        {
+            count++;
+            <tr id="@count">
                 <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
                 <td>
                      <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
@@ -109,19 +115,37 @@
                     <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
                 </td>
                 <td>
-                    <input type="text" value="@item.Price" />
+                    <input type="text" value="@item.Price" id="Price@(count)" />
                 </td>
                 <td>
-                    <input type="text" value="@item.FaceValue" />
+                    <input type="text" value="@item.FaceValue" id="FaceValue@(count)" />
                 </td>
                 <td>
-                    <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" />
+                    <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)"  />
+                </td>
+                   <td>
+                    <input type="text" value="@item.TaxPercentage" id="TaxPercentage@(count)"/>
+                </td>
+                  <td>
+                    <select name="taxlist" id="taxlist">
+                        @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
+                        {
+                            if (@item.TaxName == (@dow.Id).ToString())
+                            {
+                            <option value="@dow.Value" id="@dow.Id"  selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                            <option value="@dow.Value" id="@dow.Id" >@dow.Value</option>
+                            }
+                        }
+                    </select>
                 </td>
                 <td>
-                    <input type="text" value="@item.FinalPrice" />
+                    <input type="text" id="FinalPrice@(count)"  value="@item.FinalPrice" />
                 </td>
                 <td>
-                    <input type="text" value="@item.EffectivePrice" />
+                    <input type="text" value="@item.EffectivePrice" id="EffectivePrice@(count)" />
                 </td>
                 <td>
                     <input type="text" value="@item.LastUpdatedBy"  disabled/>
@@ -150,6 +174,48 @@
         }
     }
  
+    $(document).on('change', '#taxlist', function () {
+        debugger;
+        var rowid=   $(this).closest('tr').attr('id');
+        var TaxId = $(this).find('option:selected').attr('id');
+        //TaxId = $('#taxlist' + rowid + ' option:selected').val();
+   
+     var Price = $('#Price' + rowid).val();
+        if (Price == "") {
+            Price = null;
+        }
+        var FaceValue = Number($('#FaceValue'+rowid).val());
+        taxinclusive = $('#TaxInclusive'+rowid).is(":checked");
+        var model = {
+            Id: TaxId,
+            Price: Price,
+            FaceValue: FaceValue,
+            TaxInclusive: taxinclusive
+        };
+        if (TaxId == "") {
+            $('#EffectivePrice' + rowid).val(Price);
+            $('#FinalPrice' + rowid).val(Price);
+        }
+            //JSON.stringify({ TaxId: TaxId, Price: Price, TaxInclusive: taxinclusive, FaceValue: FaceValue }),
+        else {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("TaxDetails", "Product")',
+                data: JSON.stringify({ model: model }),
+                dataType: "json",
+                success: function (data) {
+                    $('#EffectivePrice' + rowid).val(data.EffectivePrice);
+                    $('#TaxPercentage' + rowid).val(data.Taxpercent);
+                    $('#FinalPrice' + rowid).val(data.FinalPrice);
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
+    });
     $(document).ready(function () {
         var table = $('#marbleTable').DataTable({
             scrollY: "400px",
@@ -175,15 +241,6 @@
             //order: [[ 0, "desc" ]],
             fixedColumns: {
                 leftColumns: 3
-            }
-        });
-        $('#marbleTable tbody').on('click', 'tr', function () {
-            if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected');
-            }
-            else {
-                table.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
             }
         });
         var counter = 1;
@@ -254,6 +311,7 @@
                 }
                 var selectedTypeIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
                 var selectedCategoryIndex = table.rows[rowIndex].cells[4].children[0].options["selectedIndex"];
+                var selectedTaxIndex = table.rows[rowIndex].cells[15].children[0].options["selectedIndex"];
 
                 items.push({
                     Id: fixedcolumn1[r].innerHTML,
@@ -267,11 +325,12 @@
                     AutoGenerateCardNumber: table.rows[rowIndex].cells[9].children[0].checked,
                     OnlyVIP: table.rows[rowIndex].cells[10].children[0].checked,
                     Price: table.rows[rowIndex].cells[11].children[0].value,
-
                     FaceValue: table.rows[rowIndex].cells[12].children[0].value,
                     TaxInclusive: table.rows[rowIndex].cells[13].children[0].checked,
-                    FinalPrice: table.rows[rowIndex].cells[14].children[0].value,
-                    EffectivePrice: table.rows[rowIndex].cells[15].children[0].value,
+                    Taxpercent: table.rows[rowIndex].cells[14].children[0].value,
+                    TaxName: table.rows[rowIndex].cells[15].children[0].options[selectedTaxIndex].id,
+                    FinalPrice: table.rows[rowIndex].cells[16].children[0].value,
+                    EffectivePrice: table.rows[rowIndex].cells[17].children[0].value,
                     ExpiryDate: '10/10/2020',
                     StartDate: '10/10/2020'
                 });
@@ -341,4 +400,5 @@
         }
       
     }
+
 </script>

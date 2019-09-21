@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace MarbaleManagementStudio.Controllers
 {
@@ -25,21 +26,59 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
+
+
         public ActionResult ProductSetup()
         {
             try
             {
+               
                 var products = productBussiness.GetProducts();
                 Session["ProductList"] = products;
                 Session["CategoryList"] = products[0].CategoryList;
                 Session["TypeList"] = products[0].TypeList;
                 Session["TaxList"] = products[0].TaxList;
-                ViewBag.productDetails = products;
+                ViewBag.productDetails = products.Where(a => a.Type != "100");
                 return View();
             }
             catch (Exception e)
             {
                 LogError.Instance.LogException("ProductSetup", e);
+                throw;
+            }
+
+        }
+        public ActionResult NonCardProductSetup()
+        {
+            try
+            {
+                Product p = new Product();
+                List<Product> pList = new List<Product>();
+                var products = productBussiness.GetProducts();
+                Session["NonCardProductList"] = products;
+                Session["CategoryList"] = products[0].CategoryList;
+                IdValue i = new IdValue() { Id=100,Value="MANUAL"};
+                p.TypeList.Add(i);
+                Session["TypeList"] = p.TypeList;
+                Session["TaxList"] = products[0].TaxList;
+                var productList = products.Where(a => a.Type == "100");
+                if (productList.Count() == 0)
+                {
+
+                    var p1 = new Product() { TypeList = p.TypeList, CategoryList = products[0].CategoryList, TaxList = products[0].TaxList };
+                    pList.Add(p1);
+                    ViewBag.productDetails = pList;
+                }
+                else
+                {
+                    ViewBag.productDetails = productList;
+                }
+           
+                return View();
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("NonCardProductSetup", e);
                 throw;
             }
 
