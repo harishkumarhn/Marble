@@ -132,6 +132,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\CSS\jquery.dataTables.min.css" />
     <Content Include="Content\CSS\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\CSS\layout.css" />
     <Content Include="Content\CSS\Material\meterialIcon.css" />
     <Content Include="Content\JS\jquery.dataTables.min.js" />
     <Content Include="Content\JS\dataTables.fixedColumns.min.js" />
@@ -158,8 +159,6 @@
     <Content Include="Content\CSS\kendo.default.css" />
     <Content Include="Content\CSS\kendo.common-material.min.css" />
     <Content Include="Content\CSS\kendo.material.min.css" />
-    <Content Include="Content\CSS\layout.css" />
-    <Content Include="Content\CSS\product.css" />
     <Content Include="Content\CSS\style.css" />
     <Content Include="Content\DatetimePicker\index.html" />
     <Content Include="Content\DatetimePicker\jquery.datepicker2.css" />
