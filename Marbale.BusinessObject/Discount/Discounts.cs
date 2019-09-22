@@ -16,12 +16,12 @@ namespace Marbale.BusinessObject.Discount
         public class DiscountLine
         {
             public int DiscountId;
-            public double DiscountPercentage;
+            public decimal DiscountPercentage;
             public string DiscountName = "";
             public bool LineValid = true;
             public string DiscountCouponNumber = "";
             public int DiscountCouponSetId = -1;
-            public double DiscountAmount;
+            public decimal DiscountAmount;
             public string DisplayChar = "*";
         }
         public List<DiscountLine> DiscountLines = new List<DiscountLine>();

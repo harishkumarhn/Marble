@@ -286,7 +286,7 @@ namespace Marbale.Business
                 TransactionDiscount discount = new TransactionDiscount();
                 discount.DiscountID = dr.IsNull("discount_id") ? 0 : int.Parse(dr["discount_id"].ToString());
                 discount.DiscountName = dr.IsNull("discount_name") ? "" : (dr["discount_name"].ToString());
-                discount.DiscountPercentage = dr.IsNull("discount_percentage") ? 0 : double.Parse(dr["discount_percentage"].ToString());
+                discount.DiscountPercentage = dr.IsNull("discount_percentage") ? 0 : decimal.Parse(dr["discount_percentage"].ToString());
                 discount.DiscountType = dr.IsNull("discount_type") ? "" : (dr["discount_type"].ToString());
                 discount.RemarkMendatory = dr.IsNull("RemarksMandatory") ? false : bool.Parse(dr["RemarksMandatory"].ToString());
                 discount.ActiveFlag = dr.IsNull("active_flag") ? false : bool.Parse(dr["active_flag"].ToString());
@@ -318,6 +318,53 @@ namespace Marbale.Business
             }
 
             return masterdiscount;
+        }
+
+        public TransactionDiscount GetDiscountById(int id)
+        {
+            try
+            {
+                var dataTable = productData.GetDiscountById(id);
+                TransactionDiscount discount = null;
+
+                //To Do : get only top 1 discount
+                //dataTable.Rows[0][0]
+                if (dataTable != null && dataTable.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dataTable.Rows)
+                    {
+                        discount = new TransactionDiscount();
+                        discount.DiscountID = dr.IsNull("discount_id") ? 0 : int.Parse(dr["discount_id"].ToString());
+                        discount.DiscountName = dr.IsNull("discount_name") ? "" : (dr["discount_name"].ToString());
+                        discount.DiscountPercentage = dr.IsNull("discount_percentage") ? 0 : decimal.Parse(dr["discount_percentage"].ToString());
+                        discount.DiscountType = dr.IsNull("discount_type") ? "" : (dr["discount_type"].ToString());
+                        discount.RemarkMendatory = dr.IsNull("RemarksMandatory") ? false : bool.Parse(dr["RemarksMandatory"].ToString());
+                        discount.ActiveFlag = dr.IsNull("active_flag") ? false : bool.Parse(dr["active_flag"].ToString());
+                        discount.AutomaticApply = dr.IsNull("automatic_apply") ? false : bool.Parse(dr["automatic_apply"].ToString());
+                        discount.CouponMendatory = dr.IsNull("CouponMandatory") ? false : bool.Parse(dr["CouponMandatory"].ToString());
+                        discount.DiscountAmount = dr.IsNull("DiscountAmount") ? 0 : float.Parse(dr["DiscountAmount"].ToString());
+                        discount.MinimumSaleAmount = dr.IsNull("minimum_sale_amount") ? 0 : int.Parse(dr["minimum_sale_amount"].ToString());
+                        discount.MinimumUsedCredits = dr.IsNull("minimum_credits") ? 0 : int.Parse(dr["minimum_credits"].ToString());
+                        discount.DisplayInPOS = dr.IsNull("display_in_POS") ? false : bool.Parse(dr["display_in_POS"].ToString());
+                        discount.ManagerApproval = dr.IsNull("manager_approval_required") ? false : bool.Parse(dr["manager_approval_required"].ToString());
+                        discount.LastUpdatedDate = Convert.ToDateTime(dr.IsNull("last_updated_date") ? "01/01/2019" : (dr["last_updated_date"].ToString()));
+                        discount.LastUpdatedUser = dr.IsNull("last_updated_user") ? "" : (dr["last_updated_user"].ToString());
+                        discount.DisplayOrder = dr.IsNull("sort_order") ? 0 : int.Parse(dr["sort_order"].ToString());
+                        break;
+                    }
+                }
+
+                if (discount == null)
+                    discount = new TransactionDiscount();
+                return discount;
+            }
+            catch (Exception e)
+            {
+
+                //  LogError
+                throw e;
+            }
+
         }
 
         public int SaveDiscount(TransactionDiscount discount)

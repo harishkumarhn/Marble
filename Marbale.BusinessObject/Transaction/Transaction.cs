@@ -23,7 +23,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public int POSTypeId { get; set; }
         public double Pre_TaxAmount { get; set; }
         public string Status { get; set; }
-        public double Tax_Amount { get; set; }
+        public decimal Tax_Amount { get; set; }
         public double Tip_Amount { get; set; }
         public int TokenNumber { get; set; }
         public double TotalPaidAmount { get; set; }
@@ -108,7 +108,7 @@ namespace Marbale.BusinessObject.POSTransaction
 
         public string TaxInclusivePrice { get; set; }
         public string taxName { get; set; }
-        public double tax_amount { get; set; }
+        public decimal tax_amount { get; set; }
         public int tax_id { get; set; }
 
         public int tax_structer_id { get; set; }
@@ -119,6 +119,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public decimal LineAmount { get; set; }
         public decimal amount { get; set; }
 
+        public decimal Discount_Percentage { get; set; }
         public int cardId { get; set; }
 
         public decimal time { get; set; }

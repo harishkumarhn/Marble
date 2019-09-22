@@ -43,14 +43,14 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-            frmLogin frmLogin = new frmLogin();
-            frmLogin.ShowDialog();
-            if (!frmLogin.isLoginSuccess)
-                Environment.Exit(0);
-            else
-            {
-                CurrentUser = frmLogin.loggedInUser;
-            }
+            //frmLogin frmLogin = new frmLogin();
+            //frmLogin.ShowDialog();
+            //if (!frmLogin.isLoginSuccess)
+            //    Environment.Exit(0);
+            //else
+            //{
+            //    CurrentUser = frmLogin.loggedInUser;
+            //}
         }
 
         private void POSHome_Load(object sender, EventArgs e)
@@ -275,13 +275,134 @@ namespace Marbale.POS
 
         private void DiscountButton_Click(object sender, EventArgs e)
         {
-            //Button b = (Button)sender;
-            //int product_id = Convert.ToInt32(b.Tag);
+            Button b = (Button)sender;
+            int discountId = Convert.ToInt32(b.Tag);
 
-            //ProductBL productBL = new ProductBL();
-            //Product product = productBL.GetProductById(product_id);
+            ProductBL productBL = new ProductBL();
+            TransactionDiscount discount = productBL.GetDiscountById(discountId);
 
-            //CreateTransactionLine(product);
+            createDiscountLine(discount);
+            ApplyDiscountToLines();
+            RefreshTransactionGrid();
+        }
+
+        bool createDiscountLine(TransactionDiscount discount)
+        {
+            if (Transaction == null)
+                return false;
+
+            string couponNumber = string.Empty;
+            Discounts.DiscountLine dl = new Discounts.DiscountLine();
+
+            if (Transaction.discounts == null)
+                Transaction.discounts = new Discounts();
+            if (Transaction.discounts.DiscountLines == null)
+                Transaction.discounts.DiscountLines = new List<Discounts.DiscountLine>();
+
+            bool found = false;
+            foreach (Discounts.DiscountLine d in Transaction.discounts.DiscountLines)
+            {
+                if (d.DiscountId == discount.DiscountID)
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                Transaction.discounts.DiscountLines.Add(dl);
+                dl.DiscountId = discount.DiscountID;
+
+                dl.DiscountName = discount.DiscountName;
+                dl.DiscountPercentage = discount.DiscountPercentage;
+
+                dl.DiscountCouponNumber = string.Empty;
+                dl.DiscountCouponSetId = 0;
+
+                if (!couponNumber.Equals(string.Empty))
+                {
+                    dl.DiscountName += " (Coupon:" + couponNumber + ")";
+                }
+
+                switch (Transaction.discounts.DiscountLines.Count % 5)
+                {
+                    case 1: dl.DisplayChar = "*"; break;
+                    case 2: dl.DisplayChar = "^"; break;
+                    case 3: dl.DisplayChar = "#"; break;
+                    case 4: dl.DisplayChar = "@"; break;
+                    case 0: dl.DisplayChar = "$"; break;
+                }
+            }
+            return true;
+        }
+
+        public void ApplyDiscountToLines()
+        {
+            if (Transaction == null)
+                return;
+
+            for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+            {
+                if (Transaction.TransactionLines[i].DBLineId <= 0)
+                    Transaction.TransactionLines[i].discountLines.Clear();
+            }
+
+            foreach (Discounts.DiscountLine dl in Transaction.discounts.DiscountLines)
+            {
+                if (dl.LineValid)
+                {
+                    for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+                    {
+                        if (Transaction.TransactionLines[i].LineValid)
+                        {
+                            if (!Transaction.TransactionLines[i].discountLines.Contains(dl)) //Add discounts to line if not added already
+                                Transaction.TransactionLines[i].discountLines.Add(dl);
+                        }
+                    }
+                }
+            }
+            updateAmounts();
+        }
+
+        public void updateAmounts()
+        {
+            decimal Transaction_Amount = 0;
+            decimal Pre_TaxAmount = 0;
+            decimal Tax_Amount = 0;
+            decimal Discount_Amount = 0;
+
+            foreach (Discounts.DiscountLine dl in Transaction.discounts.DiscountLines)
+            {
+                dl.DiscountAmount = 0;
+            }
+
+            for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+            {
+                if (Transaction.TransactionLines[i].LineValid)
+                {
+                    decimal preTaxLineAmount = Transaction.TransactionLines[i].LineAmount = Transaction.TransactionLines[i].Price * Transaction.TransactionLines[i].quantity;
+
+                    Pre_TaxAmount += preTaxLineAmount;
+                    Transaction.TransactionLines[i].tax_amount =  preTaxLineAmount * Transaction.TransactionLines[i].tax_percentage / 100;
+
+                    Tax_Amount += Transaction.TransactionLines[i].tax_amount;
+                    Transaction.TransactionLines[i].LineAmount += Transaction.TransactionLines[i].tax_amount;
+                    Transaction.TransactionLines[i].Discount_Percentage = 0;
+
+                    foreach (Discounts.DiscountLine dl in Transaction.TransactionLines[i].discountLines)
+                    {
+                        if (dl.LineValid)
+                        {
+                            Transaction.TransactionLines[i].Discount_Percentage += dl.DiscountPercentage;
+                            dl.DiscountAmount += (preTaxLineAmount + Transaction.TransactionLines[i].tax_amount) * dl.DiscountPercentage / 100;
+                        }
+                    }
+                    Discount_Amount += (preTaxLineAmount + Transaction.TransactionLines[i].tax_amount) * Transaction.TransactionLines[i].Discount_Percentage / 100;
+                }
+            }
+            Transaction_Amount = Pre_TaxAmount + Tax_Amount;
+            Transaction.Net_Transaction_Amount =  Math.Round(Transaction_Amount - Discount_Amount, 2, MidpointRounding.AwayFromZero);
         }
 
         private void ProductButton_Click(object sender, EventArgs e)
@@ -371,7 +492,7 @@ namespace Marbale.POS
 
             trxLine.tax_percentage = product.TaxPercentage;
             trxLine.tax_id = product.TaxId;
-            trxLine.tax_amount = (double)((product.Price - product.FaceValue) * product.TaxPercentage) / 100;
+            trxLine.tax_amount = (decimal) ((product.Price - product.FaceValue) * product.TaxPercentage) / 100;
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
             trxLine.amount = Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
@@ -402,6 +523,10 @@ namespace Marbale.POS
                 trxLine.LineValid = true;
             }
 
+            if (Transaction.discounts != null && Transaction.discounts.DiscountLines != null)
+            {
+                ApplyDiscountToLines();
+            }
 
             RefreshTransactionGrid();
             updateScreenAmounts();
@@ -434,7 +559,6 @@ namespace Marbale.POS
 
 
             Transaction.TransactionLines.Add(trxLine);
-
         }
 
         void UpdateTransactionAmount()
