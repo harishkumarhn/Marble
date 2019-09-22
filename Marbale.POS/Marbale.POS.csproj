@@ -233,6 +233,8 @@
     <None Include="Resources\right1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Transfer_Card_Pressed.png" />
+    <None Include="Resources\Save_Transaction_Pressed.png" />
     <None Include="Resources\0.png" />
     <None Include="Resources\0_pressed.png" />
     <None Include="Resources\1.png" />
@@ -271,6 +273,16 @@
     <None Include="Resources\entry-box.png" />
     <None Include="Resources\DiplayGroupButton.png" />
     <None Include="Resources\customer_button_normal.png" />
+    <None Include="Resources\Clear_Transaction_Pressed.png" />
+    <None Include="Resources\Cancel_Trx_Line_Pressed.png" />
+    <None Include="Resources\Keypad_Pressed.png" />
+    <None Include="Resources\Keypad_Icon_32.png" />
+    <None Include="Resources\Logout.png" />
+    <None Include="Resources\Logout_Pressed.png" />
+    <None Include="Resources\Load_Tickets_Pressed.png" />
+    <None Include="Resources\Load_Bonus_Pressed.png" />
+    <None Include="Resources\Load_Multiple_Pressed.png" />
+    <None Include="Resources\Consolidate_Cards_Pressed.png" />
     <Content Include="Resources\Manual.png" />
     <Content Include="Resources\New_Product.png" />
     <None Include="Resources\Save_Transaction1.png" />
@@ -279,6 +291,8 @@
     <None Include="Resources\Print.png" />
     <None Include="Resources\ok.png" />
     <None Include="Resources\ok_pressed.png" />
+    <None Include="Resources\Payment_Pressed.png" />
+    <None Include="Resources\Print_Pressed.png" />
     <Content Include="Resources\RefundCard.png" />
   </ItemGroup>
   <ItemGroup />

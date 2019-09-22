@@ -43,14 +43,14 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-            frmLogin frmLogin = new frmLogin();
-            frmLogin.ShowDialog();
-            if (!frmLogin.isLoginSuccess)
-                Environment.Exit(0);
-            else
-            {
-                CurrentUser = frmLogin.loggedInUser;
-            }
+            //frmLogin frmLogin = new frmLogin();
+            //frmLogin.ShowDialog();
+            //if (!frmLogin.isLoginSuccess)
+            //    Environment.Exit(0);
+            //else
+            //{
+            //    CurrentUser = frmLogin.loggedInUser;
+            //}
         }
 
         private void POSHome_Load(object sender, EventArgs e)
@@ -1314,6 +1314,104 @@ namespace Marbale.POS
              {
                 ChangeLayout();
              }
+        }
+
+        void trxButtonMouseUp(object sender, MouseEventArgs e)
+        {
+            Button b = sender as Button;
+            if (b.Equals(btnSave))
+            {
+                b.BackgroundImage = Properties.Resources.Save_Transaction;
+            }
+            else if (b.Equals(btnPayment))
+            {
+                b.BackgroundImage = Properties.Resources.Payment;
+            }
+            else if (b.Equals(btnClearTrxn))
+            {
+                b.BackgroundImage = Properties.Resources.Clear_Transaction;
+            }
+            else if (b.Equals(btnCancelTrxnLine))
+            {
+                b.BackgroundImage = Properties.Resources.Cancel_Transaction;
+            }
+            else if (b.Equals(btnSuspendOrder))
+            {
+                b.BackgroundImage = Properties.Resources.Payment;
+            }
+            else if (b.Equals(btnPrint))
+            {
+                b.BackgroundImage = Properties.Resources.Print;
+            }
+            else if (b.Equals(btnLoadTickets))
+            {
+                b.BackgroundImage = Properties.Resources.Load_Tickets;
+            }
+            else if (b.Equals(btnLoadBonus))
+            {
+                b.BackgroundImage = Properties.Resources.Load_Bonus;
+            }
+            else if (b.Equals(btnLoadMultiple))
+            {
+                b.BackgroundImage = Properties.Resources.Load_Multiple;
+            }
+            else if (b.Equals(btnTransferCard))
+            {
+                b.BackgroundImage = Properties.Resources.Transfer_Card;
+            }
+            else if (b.Equals(btnCansolidateCard))
+            {
+                b.BackgroundImage = Properties.Resources.Consolidate_Cards;
+            }
+        }
+
+        private void trxButtonMouseDown(object sender, MouseEventArgs e)
+        {
+            Button b = sender as Button;
+            if (b.Equals(btnSave))
+            {
+                b.BackgroundImage = Properties.Resources.Save_Transaction_Pressed;
+            }
+            else if (b.Equals(btnPayment))
+            {
+                b.BackgroundImage = Properties.Resources.Payment_Pressed;
+            }
+            else if (b.Equals(btnClearTrxn))
+            {
+                b.BackgroundImage = Properties.Resources.Clear_Transaction_Pressed;
+            }
+            else if (b.Equals(btnCancelTrxnLine))
+            {
+                b.BackgroundImage = Properties.Resources.Cancel_Trx_Line_Pressed;
+            }
+            else if (b.Equals(btnSuspendOrder))
+            {
+                b.BackgroundImage = Properties.Resources.Payment_Pressed;
+            }
+            else if (b.Equals(btnPrint))
+            {
+                b.BackgroundImage = Properties.Resources.Print_Pressed;
+            }
+            else if (b.Equals(btnLoadTickets))
+            {
+                b.BackgroundImage = Properties.Resources.Load_Tickets_Pressed;
+            }
+            else if (b.Equals(btnLoadBonus))
+            {
+                b.BackgroundImage = Properties.Resources.Load_Bonus_Pressed;
+            }
+            else if (b.Equals(btnLoadMultiple))
+            {
+                b.BackgroundImage = Properties.Resources.Load_Multiple_Pressed;
+            }
+            else if (b.Equals(btnTransferCard))
+            {
+                b.BackgroundImage = Properties.Resources.Transfer_Card_Pressed;
+            }
+            else if (b.Equals(btnCansolidateCard))
+            {
+                b.BackgroundImage = Properties.Resources.Consolidate_Cards_Pressed;
+            }
         }
     }
 }
