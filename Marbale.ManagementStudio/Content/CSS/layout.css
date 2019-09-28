@@ -190,28 +190,6 @@ a.article:hover {
     right: 0;
 }
 
-.dataTables_scrollBody {
-    max-height: 400px !important;
-}
-.focusedRow
-{
-    font-weight: bold;
-    text-shadow: 1px 1px 0px #EEE;
-    color: #111;
-}
-table.table td i {
-    font-size: 18px;
-}
-td a.delete {
-    color: #E34724 !important;
-}
-
-td a.edit {
-   color: #FFC107 !important;
-}
-td a {
-    cursor: pointer;
-}
 
 input[type=checkbox] {
     width: 17px;

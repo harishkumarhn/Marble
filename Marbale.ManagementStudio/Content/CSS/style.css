@@ -117,13 +117,39 @@ button.btn-settings:active {
   font-size: 1.1em;
 }
 /*end*/
+
+.dataTables_scrollBody {
+    max-height: 400px !important;
+}
+.focusedRow
+{
+    font-weight: bold;
+    text-shadow: 1px 1px 0px #EEE;
+    color: #111;
+}
+table.table td i {
+    font-size: 18px;
+}
+td a.delete {
+    color: #E34724 !important;
+}
+
+td a.edit {
+   color: #7cab81 !important;
+}
+td a {
+    cursor: pointer;
+}
+th {
+    border: 1px solid #29d2da;
+}
  th, td {
         white-space: nowrap;
     }
 
     table.DTFC_Cloned thead, table.DTFC_Cloned tfoot {
-       background-color:#0fd2f1;
+       background-color:#0ab1cc;
     }
     thead {
-       background-color: #0fd2f1;
+       background-color: #0ab1cc;
     }
