@@ -1,5 +1,6 @@
 ﻿using Marbale.BusinessObject.Cards;
 using Marbale.BusinessObject.Customer;
+using Marbale.BusinessObject.Discount;
 using Marbale.BusinessObject.Messages;
 using Marbale.BusinessObject.POSTransaction;
 using Marbale.BusinessObject.SiteSetup;
@@ -44,7 +45,7 @@ namespace Marbale.DataAccess.Data
                 sqlParameters[2] = new SqlParameter("@TrxAmount", trx.Transaction_Amount);
 
                 sqlParameters[3] = new SqlParameter("@TrxDiscountPercentage", SqlDbType.Decimal);
-                sqlParameters[3].Value = 0;
+                sqlParameters[3].Value = trx.Discount_Percentage;
 
                 sqlParameters[4] = new SqlParameter("@TaxAmount", trx.Tax_Amount);
                 sqlParameters[5] = new SqlParameter("@TrxNetAmount", trx.Net_Transaction_Amount);
@@ -149,6 +150,7 @@ namespace Marbale.DataAccess.Data
                 {
                     SaveTransactionLines(trxLn, trxId);
                     SaveTransactionTaxLines(trxLn, trxId);
+                    SaveTransactionDiscountLines(trxLn, trxId);
                 }
 
                 return trxId;
@@ -266,6 +268,46 @@ namespace Marbale.DataAccess.Data
                     sqlParameters[6] = new SqlParameter("@ProductSplitAmount", 0);
 
                     conn.executeUpdateQuery("sp_InsertTransactionTaxLines", sqlParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public void SaveTransactionDiscountLines(TransactionLine trxLine, int trxId)
+        {
+            try
+            {
+
+                List<Discounts.DiscountLine> activeDiscountLines = trxLine.discountLines.FindAll(x => x.LineValid == true);
+
+                if (trxLine.tax_amount > 0 && activeDiscountLines != null && activeDiscountLines.Count > 0)
+                {
+                    foreach (Discounts.DiscountLine dsLn in activeDiscountLines)
+                    {
+                        SqlParameter[] sqlParameters = new SqlParameter[7];
+
+                        sqlParameters[0] = new SqlParameter("@trxId", SqlDbType.Int);
+                        sqlParameters[0].Value = trxId;
+
+                        sqlParameters[1] = new SqlParameter("@LineId", trxLine.LineId);
+
+                        sqlParameters[2] = new SqlParameter("@DiscountId", dsLn.DiscountId);
+
+                        decimal trxLineDiscountAmnt = (trxLine.LineAmount * dsLn.DiscountPercentage) / 100;
+
+                        sqlParameters[3] = new SqlParameter("@DiscountAmount", trxLineDiscountAmnt);
+
+                        sqlParameters[4] = new SqlParameter("@DiscountPercentage", dsLn.DiscountPercentage);
+
+                        sqlParameters[5] = new SqlParameter("@Remarks", string.Empty);
+
+                        sqlParameters[6] = new SqlParameter("@ApprovedBy", 0);
+
+                        conn.executeUpdateQuery("sp_InsertTransactionDiscountLines", sqlParameters);
+                    }                    
                 }
             }
             catch (Exception e)

@@ -11,6 +11,9 @@ namespace Marbale.BusinessObject.POSTransaction
     {
         public double CashAmount { get; set; }
         public double Discount_Amount { get; set; }
+
+        public decimal Discount_Percentage { get; set; }
+
         public string LoginID { get; set; }
         public decimal Net_Transaction_Amount { get; set; }
         public string originalSystemReference { get; set; }
@@ -61,6 +64,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public Cards.Card Card;
 
         public Discounts discounts;
+
     }
 
 

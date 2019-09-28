@@ -11,6 +11,7 @@ using Parafait_POS;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Security.Permissions;
 using System.Windows.Forms;
 
@@ -371,6 +372,15 @@ namespace Marbale.POS
             decimal Pre_TaxAmount = 0;
             decimal Tax_Amount = 0;
             decimal Discount_Amount = 0;
+            if (Transaction == null)
+            {
+                ClearTransaction();
+                return;
+            }
+            if (Transaction.discounts == null)
+            {
+                Transaction.discounts = new Discounts();
+            }
 
             foreach (Discounts.DiscountLine dl in Transaction.discounts.DiscountLines)
             {
@@ -379,12 +389,23 @@ namespace Marbale.POS
 
             for (int i = 0; i < Transaction.TransactionLines.Count; i++)
             {
-                if (Transaction.TransactionLines[i].LineValid)
+                if (Transaction.TransactionLines[i].LineValid && Transaction.TransactionLines[i].CancelledLine == false)
                 {
-                    decimal preTaxLineAmount = Transaction.TransactionLines[i].LineAmount = Transaction.TransactionLines[i].Price * Transaction.TransactionLines[i].quantity;
+                    decimal preTaxLineAmount = 0;
+                    if (Transaction.TransactionLines[i].quantity > 1)
+                    {
+                        preTaxLineAmount = Transaction.TransactionLines[i].LineAmount = Transaction.TransactionLines[i].Price;
+                    }
+                    else
+                    {
+                        preTaxLineAmount = Transaction.TransactionLines[i].LineAmount = Transaction.TransactionLines[i].Price * Transaction.TransactionLines[i].quantity;
+                    }
 
                     Pre_TaxAmount += preTaxLineAmount;
-                    Transaction.TransactionLines[i].tax_amount =  preTaxLineAmount * Transaction.TransactionLines[i].tax_percentage / 100;
+                    if (Transaction.TransactionLines[i].quantity == 1)
+                        Transaction.TransactionLines[i].tax_amount = preTaxLineAmount * Transaction.TransactionLines[i].tax_percentage / 100;
+                    
+                   
 
                     Tax_Amount += Transaction.TransactionLines[i].tax_amount;
                     Transaction.TransactionLines[i].LineAmount += Transaction.TransactionLines[i].tax_amount;
@@ -402,8 +423,26 @@ namespace Marbale.POS
                 }
             }
             Transaction_Amount = Pre_TaxAmount + Tax_Amount;
+            Transaction.Discount_Percentage = GetTransactionDiscountPercentage();
             Transaction.Net_Transaction_Amount =  Math.Round(Transaction_Amount - Discount_Amount, 2, MidpointRounding.AwayFromZero);
         }
+
+        private decimal GetTransactionDiscountPercentage()
+        {
+            List<Discounts.DiscountLine> distinctDiscountLines = new List<Discounts.DiscountLine>();
+
+            if (Transaction != null && Transaction.discounts != null)
+            {
+                foreach(Discounts.DiscountLine d in Transaction.discounts.DiscountLines)
+                {
+                    if (d.LineValid && !distinctDiscountLines.Any(x => x.DiscountId == d.DiscountId && x.LineValid))
+                        distinctDiscountLines.Add(d);
+                }
+            }
+
+           return distinctDiscountLines.Sum(x => x.DiscountPercentage);
+        }
+
 
         private void ProductButton_Click(object sender, EventArgs e)
         {
@@ -528,6 +567,7 @@ namespace Marbale.POS
                 ApplyDiscountToLines();
             }
 
+            updateAmounts();
             RefreshTransactionGrid();
             updateScreenAmounts();
         }
@@ -756,7 +796,7 @@ namespace Marbale.POS
             // display grand total
             dgvTransaction.Rows.Add();
             dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = "Grand Total";
-            dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = Transaction.Net_Transaction_Amount = Transaction.Transaction_Amount;
+            dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = Transaction.Net_Transaction_Amount;// = Transaction.Transaction_Amount;
 
             DataGridViewCellStyle dgvgrandtot = getSpecialGridRowFormat(dgvTransaction.DefaultCellStyle, 2);// new DataGridViewCellStyle();
             dgvgrandtot.BackColor =
@@ -1044,10 +1084,29 @@ namespace Marbale.POS
 
                         if (trxLine != null)
                             trxLine.CancelledLine = true;
+                    }
 
+                    if (dgvTransaction.SelectedRows[i].Cells["Line_Type"].Value != null && 
+                        dgvTransaction.SelectedRows[i].Cells["Line_Type"].Value.ToString() == "Discount")
+                    {
+                        int discountId = Convert.ToInt32(dgvTransaction.SelectedRows[i].Cells["LineId"].Value);
+                        List<Discounts.DiscountLine> dscLines = Transaction.discounts.DiscountLines.FindAll(x => x.DiscountId == discountId);
+                        if (dscLines != null)
+                        {
+                            foreach (Discounts.DiscountLine ln in dscLines)
+                            {
+                                ln.LineValid = false;
+                            }
+                        }
                     }
                 }
 
+                List<TransactionLine> activeTrxLns = Transaction.TransactionLines.FindAll(x => x.LineValid == true && x.CancelledLine == false);
+
+                if (activeTrxLns != null && activeTrxLns.Count == 0)
+                    ClearTransaction();
+
+                updateAmounts();
                 RefreshTransactionGrid();
                 updateScreenAmounts();
             }
