@@ -3,8 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/Content/css/product.css" rel="stylesheet" />
-
 <div>
     <!-- Modal -->
     <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
@@ -140,7 +138,7 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'"" >Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
 </div>
 <script>
     var updatedArray = [];
@@ -166,7 +164,6 @@
                 $('td', row).addClass('tblRow');
             },
             rowCallback: function (row, data) {
-                debugger;
                 var element = $('td', row);
                 element.on("change", function (e) {
                     UpdatedList($(this).parent().index());
@@ -302,7 +299,6 @@
         location.reload();
     });
     //$("#marbleTable tbody tr").on('click', function (event) {
-    //    debugger;
     //    $("#marbleTable tbody tr").removeClass('row_selected');
     //    $(this).css('background-color','red');
     //});

@@ -2,63 +2,61 @@
     ViewBag.Title = "User Role";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@*width: 1019px;*@
 <div class="userRoleContainer">
-    <div class="first">
-        <div class="second" style="width: 1019px;">
-            <table id="marbleTable" class="table marbleTable userRoleTbl">
-                <thead class="thead-dark">
-                    <th hidden>ID</th>
-                    <th>Role</th>
-                    <th>Description</th>
-                    <th>Manager Flag</th>
-                    <th>AllowPOSAccess</th>
-                    <th>POS ClockInOut</th>
-                    <th>AllowShift OpenClose</th>
-                    <th>Last Updated By</th>
-                    <th>Last Updated Date</th>
-                </thead>
-                @foreach (var item in ViewBag.userRoles)
-                {
-                    <tr onchange="UpdatedList(this)" tabindex ="@item.Id">
-                        <td onclick="UpdateTree(this)" hidden>
-                            @item.Id
-                        </td>
-                        <td onclick="UpdateTree(this)">
-                            <input type="text" value="@item.Role" class="gridText"/>
-                        </td>
-                        <td onclick="UpdateTree(this)">
-                            <input type="text" value="@item.Description" class="gridText" />
-                        </td>
-                        <td onclick="UpdateTree(this)">
-                            <input type="checkbox"  @(item.ManagerFlag ? "checked='checked'" : "") value="@item.ManagerFlag" />
-                        </td>
-                        <td onclick="UpdateTree(this)">
-                            <input type="checkbox" @(item.AllowPOSAccess ? "checked='checked'" : "") value="@item.AllowPOSAccess" />
-                        </td>
-                        <td onclick="UpdateTree(this)">
-                            <input type="checkbox" @(item.POSClockInOut ? "checked='checked'" : "") value="@item.POSClockInOut" />
-                        </td>
-                        <td onclick="UpdateTree(this)">
-                            <input type="checkbox" @(item.AllowShiftOpenClose ? "checked='checked'" : "") value="@item.AllowShiftOpenClose" />
-                        </td>
-                        <td onclick="UpdateTree(this)">
-                            <input type="text" value="@item.LastUpdatedBy" class="gridText" disabled />
-                        </td>
-                        <td onclick="UpdateTree(this)">
-                            <input type="text" value="@item.LastUpdatedDate" class="gridText" disabled />
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
+    <div style="width: 81%; float: left;">
+        <table id="marbleTable" class="stripe row-border order-column">
+            <thead>
+                <th>ID</th>
+                <th>Role</th>
+                <th>Description</th>
+                <th>Manager Flag</th>
+                <th>AllowPOSAccess</th>
+                <th>POS ClockInOut</th>
+                <th>AllowShift OpenClose</th>
+                <th>Last Updated By</th>
+                <th>Last Updated Date</th>
+            </thead>
+            @foreach (var item in ViewBag.userRoles)
+            {
+                <tr onchange="UpdatedList(this)" tabindex ="@item.Id">
+                    <td>
+                        <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
+                    </td>
+                    <td>
+                        <input class="fixedCol2" type="text" value="@item.Role" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.Description" />
+                    </td>
+                    <td>
+                        <input type="checkbox"  @(item.ManagerFlag ? "checked='checked'" : "") value="@item.ManagerFlag" />
+                    </td>
+                    <td>
+                        <input type="checkbox" @(item.AllowPOSAccess ? "checked='checked'" : "") value="@item.AllowPOSAccess" />
+                    </td>
+                    <td>
+                        <input type="checkbox" @(item.POSClockInOut ? "checked='checked'" : "") value="@item.POSClockInOut" />
+                    </td>
+                    <td>
+                        <input type="checkbox" @(item.AllowShiftOpenClose ? "checked='checked'" : "") value="@item.AllowShiftOpenClose" />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedBy" disabled />
+                    </td>
+                    <td>
+                        <input type="text" value="@item.LastUpdatedDate" disabled />
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
     <div class="userModuleAccess">
         <link href="~/Content/css/kendo.common.min.css" rel="stylesheet" />
         <link href="~/Content/css/kendo.default.css" rel="stylesheet" />
         <script src="~/Content/JS/kendo.all.min.js"></script>
         <div class="demo-section k-content">
-            <div>
+            <div style="height: 46px;">
                 <span class="actionTreeHeader">Module Action Tree</span>
             </div>
             <div id="parent">
@@ -67,54 +65,108 @@
             <div id="result"></div>
         </div>
     </div>
-    <div class="action">
-        <button class="btn btn-primary btn-md" role="button" onclick="SaveUserRoles()">Save</button>
-        <button class="btn btn-primary btn-md" role="button" onclick="AddUserRole()">Add UserRole</button>
-        <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
-    </div>
-
 </div>
+<div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveUserRoles()">Save</button>
+    <button class="btn btn-primary btn-md" role="button" id="addRow">Add UserRole</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+</div>
+
 <script>
     var selectedTreeItems = '';
     var selectedRow = 0;
-    function AddUserRole() {
-        var newRow = '<tr onchange = UpdatedList(this)>' +
-        '<td> <a href="#"></a> </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' +
-        '<td> <input type="text" value="" class="gridText" disabled/>  </td>' + '</tr>';
-        $('#marbleTable tr:last').after(newRow);
-    }
 
     var updatedArray = [];
-    function UpdatedList(row) {
-        if (!updatedArray.includes(row.rowIndex)) {
-            updatedArray.push(row.rowIndex);
+    function UpdatedList(rowIndex) {
+        if (!updatedArray.includes(rowIndex)) {
+            updatedArray.push(rowIndex);
         }
     }
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            // paging: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            },
+            //order: [[ 0, "desc" ]],
+            fixedColumns: {
+                leftColumns: 2
+            }
+        });
+        $('#marbleTable tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+        $('.dataTable').on('click', 'tbody td', function () {
+            var tbl = document.getElementById('marbleTable');
+            if (tbl.rows[this.parentNode.rowIndex].cells[0].children[0].innerHTML.trim().length > 0) {
+                UpdateModuleActionTree(tbl.rows[this.parentNode.rowIndex].cells[0].children[0].innerHTML.trim());
+            }
+        });
+        $('#addRow').on('click', function () {
+            var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
+            var fixedcolumn2values = $('.DTFC_Cloned input.fixedCol2');
+            table.row.add([
+                '<lable class="fixedCol1"></lable>',
+                '<input class="fixedCol2" type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" disabled/>',
+                '<input type="text" value="" disabled/>',
+            ]).draw(false);
+
+            for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
+                $('.DTFC_Cloned lable.fixedCol1')[i].innerHTML = fixedcolumn1values[i].innerHTML;
+            }
+            for (var i = 0, j = fixedcolumn2values.length; i < j; i++) {
+                $('.DTFC_Cloned input.fixedCol2')[i].value = fixedcolumn2values[i].value;
+            }
+        });
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+    });
+
 
     function SaveUserRoles() {
-        var userRoles = [];
+        var items = [];
         var table = document.getElementById('marbleTable');
-        for (var r = 1, n = table.rows.length; r < n; r++) {
-            var moduleActions = '';
-            if (r == selectedRow) {
-                moduleActions = selectedTreeItems;
-            }
+        var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
+        var fixedcolumn2 = $('.DTFC_Cloned input.fixedCol2');
+
+        for (var r = 0, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
-                userRoles.push({
-                    Id: table.rows[r].cells[0].innerHTML,
-                    Role: table.rows[r].cells[1].children[0].value,
-                    Description: table.rows[r].cells[2].children[0].value,
-                    ManagerFlag: table.rows[r].cells[3].children[0].checked,
-                    AllowPOSAccess: table.rows[r].cells[4].children[0].checked,
-                    POSClockInOut: table.rows[r].cells[5].children[0].checked,
-                    AllowShiftOpenClose: table.rows[r].cells[6].children[0].checked,
+                var rowIndex = r + 1;
+
+                items.push({
+                    Id: fixedcolumn1[r].innerHTML,
+                    Role: fixedcolumn2[r].value,
+                    Description: table.rows[rowIndex].cells[2].children[0].value,
+                    ManagerFlag: table.rows[rowIndex].cells[3].children[0].checked,
+                    AllowPOSAccess: table.rows[rowIndex].cells[4].children[0].checked,
+                    POSClockInOut: table.rows[rowIndex].cells[5].children[0].checked,
+                    AllowShiftOpenClose: table.rows[rowIndex].cells[6].children[0].checked,
                     AavalibleModuleActions: selectedTreeItems
                 });
             }
@@ -123,7 +175,7 @@
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: '@Url.Action("UpdateUserRoles", "SiteSetup")',
-            data: JSON.stringify({ userRoles: userRoles }),
+            data: JSON.stringify({ userRoles: items }),
             dataType: "json",
             success: function (data) {
                 alert('Data Saved');
@@ -134,13 +186,6 @@
             }
         });
     }
-
-    function UpdateTree(x) {
-        var tbl = document.getElementById('marbleTable');
-        selectedRow = tbl.rows[x.parentNode.rowIndex].cells[0].innerHTML;
-        UpdateModuleActionTree(selectedRow.trim());
-    }
-
     function UpdateModuleActionTree(roleId) {
         $("#treeview").remove();
         moduleActions = new kendo.data.HierarchicalDataSource({

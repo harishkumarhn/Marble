@@ -183,7 +183,6 @@
     <Content Include="Content\CSS\kendo.default.css" />
     <Content Include="Content\CSS\kendo.material.min.css" />
     <Content Include="Content\CSS\layout.css" />
-    <Content Include="Content\CSS\product.css" />
     <Content Include="Content\CSS\style.css" />
     <Content Include="Content\JS\bootstrap.min.js" />
     <Content Include="Content\JS\fontawesome.js" />

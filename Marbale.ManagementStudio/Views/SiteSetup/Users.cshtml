@@ -248,31 +248,7 @@
     function targetmodel() {
         $('#modelbody').load('/SiteSetup/EditUser');
     }
-    function AddUser() {
-
-        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>  <td>  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <select name="Roles" id="Roles">' + rolesOptions +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <select name="Statuses" id="Statuses">' + statusListOptions +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  disabled/>  </td>' +
-        '<td> <input type="text" value=""  disabled/>  </td>' +
-        '<td> <input type="text" value=""  disabled/>  </td>' +
-        '<td> <input type="text" value=""  disabled/>  </td>' + '</tr>';
-        $('#marbleTable tr:last').after(newRow);
-    }
+   
     function SaveUsers() {
         var items = [];
         var table = document.getElementById('marbleTable');
