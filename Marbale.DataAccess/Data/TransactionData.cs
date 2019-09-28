@@ -281,9 +281,9 @@ namespace Marbale.DataAccess.Data
             try
             {
 
-                List<Discounts.DiscountLine> activeDiscountLines = trxLine.discountLines.FindAll(x => x.LineValid == true);
+                List<Discounts.DiscountLine> activeDiscountLines = trxLine.discountLines.FindAll(x => x.LineValid);
 
-                if (trxLine.tax_amount > 0 && activeDiscountLines != null && activeDiscountLines.Count > 0)
+                if (activeDiscountLines != null && activeDiscountLines.Count > 0)
                 {
                     foreach (Discounts.DiscountLine dsLn in activeDiscountLines)
                     {
