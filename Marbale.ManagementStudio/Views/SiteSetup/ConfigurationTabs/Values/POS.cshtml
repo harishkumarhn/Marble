@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "POS";
+    Layout = null;
+}
+    <div class="tabContent">
+        <table>
+            @foreach (var item in ViewBag.POSForm)
+            {
+                String type = item.Type.ToString();
+                <tr>
+                    <th>
+                        @item.Caption :
+                    </th>
+                    <td>
+
+                        @switch (type)
+                        {
+                            case "string":
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                                break;
+                            case "bool":
+                            <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+                                break;
+                            case "file":
+                            <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br />
+                                break;
+                            case "int":
+                            <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
+                                break;
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/>
+                        }
+                    </td>
+                </tr>  
+            }
+        </table>
+
+        @{
+            List<SelectListItem> listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem
+              {
+                  Text = "Cash",
+                  Value = "1",
+                  Selected = true
+              });
+            listItems.Add(new SelectListItem
+             {
+                 Text = "Credit Card",
+                 Value = "2"
+             });
+            listItems.Add(new SelectListItem
+             {
+                 Text = "Game Card",
+                 Value = "3"
+             });
+        }
+        <div class="inputwrap demo">
+            <label>Default Cash Mode</label>
+            @Html.DropDownList("Default Cash Mode", listItems, new { @class = "defalut-width ar", @name = "myInput" })
+        </div>
+    </div>
+
+    <div class="actionItems">
+        <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()">Save</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+    </div>
+
+<script>
+    var appSettings = [];
+    $('input[name=myInput]').change(function () {
+        var d = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'POS'
+        };
+        appSettings.push(d);
+    });
+    $('input[name=allcheck]').change(function () {
+        var d = {
+            Name: this.id,
+            Value: $(this).is(":checked"),
+            ScreenGroup: 'POS'
+        };
+        appSettings.push(d);
+    });
+    $("#Default_Cash_Mode").change(function () {
+
+
+        var dropdn = {
+            Name: this.id,
+            Value: $('#Default_Cash_Mode').find(":selected").text()
+        }
+        appSettings.push(dropdn);
+    });
+    function SaveProducts() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateAppSettings", "SiteSetup")',
+
+            data: JSON.stringify({ appSettings: appSettings }),
+
+            dataType: "json",
+
+            beforeSend: function () { },
+
+            success: function (data) {
+                appSettings = [];
+                location.reload();
+                $('#displayMessage').text('data added succesfully').addClass('success');
+            }
+        });
+
+    }
+    $(document).ready(function () {
+        $('input[name="allcheck"]').each(function (index) {
+            if ($(this).val().toLowerCase() == "true")
+                ($(this).prop('checked', true));
+        });
+
+    });
+</script>
+

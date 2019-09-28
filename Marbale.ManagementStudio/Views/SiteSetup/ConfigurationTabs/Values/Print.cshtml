@@ -1,83 +1,50 @@
 ﻿@model Marbale.BusinessObject.AppSetting
 @{
-    ViewBag.Title = "Redemptions";
+    ViewBag.Title = "Print";
     Layout = null;
 }
 
-<div>
- 
- 
-<div id="valuesContainer" style="    position: absolute;
-    background-color: orangered;
-    width: 100%;
-    height: 100%;">
-   <br />
-      @foreach (var item in ViewBag.Redemption)
+
+<div id="valuesContainer">
+    <div class="tabContent">
+        <table>
+      @foreach (var item in ViewBag.Print)
       {
-          int a = 1;
-          String type = item.Type.ToString();
-          switch (type)
-          {
-              case "string":
-               <div>                        
-                            <div class="inputwrap demo">
-                             <text> &nbsp; &nbsp; &nbsp;</text>   <label> <b>@item.Caption </b>:</label>
-                              
-                     <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                String type = item.Type.ToString();
+                <tr>
+                    <th>
+                        @item.Caption :
+                    </th>
+                    <td>
 
-                            </div>
-                    </div>
-
-                  break;
-                  case "bool":
-                 
-                     <div>
-                          <div class="inputwrap demo">
-                             <text> &nbsp; &nbsp; &nbsp;</text>  <label> <b>@item.Caption </b>:</label>
-                       <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br /> </div>
-
-                
-     </div>
-                  break;
+                        @switch (type)
+                        {
+                            case "string":
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                                break;
+                            case "bool":
+                            <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+                                break;
                             case "file":
-                
- 
-    
-         <div>
-                          <div class="inputwrap demo">
-                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
-                     <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br /> </div>
-           
-                        </div>
-
-
-      
-
-                
-    
-              break;
+                            <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br />
+                                break;
                             case "int":
-                    <div>
-                          <div class="inputwrap demo">
-                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
-                     <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br /> </div>
-                        </div>
-                    
-              break;
+                            <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
+                                break;
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/>
+                        }
+                    </td>
+                </tr>  
+            }
+        </table>
 
-          }
+        <div class="actionItems">
+            <button class="btn btn-primary btn-md" role="button" onclick="SaveEmail()">Save</button>
+            <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+        </div>
+    </div>
 
-      }
-    
-      </div>
- @*          <input type="submit"  class="button-email btn btn-primary"/>*@
-
-             <div id="closesavediv">   <text> &nbsp; &nbsp; &nbsp;</text> 
-  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary button-close" style="top:909px;left:327px">Close</a></div>
 </div>
-      
-  
 <script>
     var appSettings = [];
     var appSettings1 = [];
@@ -86,7 +53,7 @@
         var d = {
             Name: this.id,
             Value: this.value,
-            ScreenGroup: 'Formats'
+            ScreenGroup: 'Price'
         };
       
         appSettings.push(d);
@@ -119,7 +86,7 @@
         var d = {
             Name: this.id,
             Value: $(this).is(":checked"),
-            ScreenGroup: 'Formats'
+            ScreenGroup: 'Price'
         };
         appSettings.push(d);
     });
@@ -173,17 +140,22 @@
     left: 319px;
     bottom: 132px;
     }
-
+    .button-close {
+           position: absolute;
+    left: 646px;
+  
+    top: 576px;
+    }
 
 input,button, label,.ar {
     float:left;
 }
-   div#closesavediv{
+ div#closesavediv{
         position: absolute;
          left: 27%;
     right: 0;
     margin-left: auto;
-             bottom: -48%;
+               bottom: -30%;
     margin-right: auto;
     }
 </style>

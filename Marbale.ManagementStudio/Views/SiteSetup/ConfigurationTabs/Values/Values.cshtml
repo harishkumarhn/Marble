@@ -2,21 +2,13 @@
 @{
     Layout = null;
 }
-@foreach (var item in Model)
-{
-    <button class="@item.Class" id="@item.Id" onclick="@item.MethodName"title="@item.Tittle">@item.Text</button>
-}
-@*<button class="tablinks" id="postab" onclick="getposdetails()"title="get pos info">POS</button>
-<button class="tablinks" id="cardtab" onclick="getCardDetails()">Card</button>
-<button class="tablinks" id="limittab" onclick="getLimitDetails()">Limits</button>
-<button class="tablinks" id="Transactiontab" onclick="getTransactionDetails()">Transaction</button>
-<button class="tablinks" id="Emailtab" onclick="getEmailDetails()">Email</button>
-<button class="tablinks" id="Signagetab" onclick="getSignageDetails()">Signage</button>
-<button class="tablinks" id="Servertab" onclick="getServerDetails()">Server</button>*@
-
-</br><br /><br /><br /></br></br>
+<div class="tabButtons">
+    @foreach (var item in Model)
+    {
+        <button class="@item.Class" id="@item.Id" onclick="@item.MethodName"title="@item.Tittle">@item.Text</button>
+    }
+</div>
 <div id="valuesContainer">
-    
 </div>
 <script>
     $(document).ready(function () {
@@ -40,10 +32,9 @@
     function getSignageDetails() {
         $('#valuesContainer').load('/SiteSetup/Signage', { ValType: 'Signage' });
     }
-    function getEmailDetails()
-    {
+    function getEmailDetails() {
         $('#valuesContainer').load('/SiteSetup/Email', { ValType: 'Transaction' });
-        }
+    }
     function getLimitDetails() {
         $('#valuesContainer').load('/SiteSetup/Limit', { ValType: 'Limit' });
     }
@@ -72,29 +63,49 @@
         $('#valuesContainer').load('/SiteSetup/Customer');
     }
     $('.tablinks').click(function () {
-            $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
-        });
+        $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+    });
 </script>
 <style>
+    .buttoncolor-change {
+        background-color: cornflowerblue;
+    }
 
-      .tablinks {
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-            font-size: 17px;
-        }
-      .buttoncolor-change {
-            background-color: cornflowerblue;
-        }
     .valuesContainer {
         position: absolute;
-   
-    left: 350px;
-    width: 655px;
-  
+        left: 350px;
+        width: 655px;
     }
- 
+
+    .tabButtons {
+        width: 100%;
+        background-color: #d8d7d6;
+        height: 109px;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 80%;
+    }
+
+    th {
+       font-weight: 600;
+        border: none;
+        text-align: left;
+        max-width: 30%;
+        min-width: 15%;
+        word-wrap: break-word;
+    }
+
+    .tabContent {
+        margin-left: 15%;
+        height: 400px;
+        overflow-y: auto;
+    }
+
+    .actionItems {
+        margin-left: 15%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
 </style>

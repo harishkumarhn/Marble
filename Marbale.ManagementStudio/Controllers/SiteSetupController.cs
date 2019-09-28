@@ -29,10 +29,10 @@ namespace MarbaleManagementStudio.Controllers
         {
             var settings = siteSetup.GetSettings();
             ViewBag.GetSetting = settings;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Settings/Settings.cshtml");
         }
         #region EmailSedning
-        public  void email_send(HttpPostedFileBase fileUploader, HttpPostedFileBase fileUploader1)
+        public void email_send(HttpPostedFileBase fileUploader, HttpPostedFileBase fileUploader1)
         {
             //var datatable = siteSetup.GetAppSettings("Email");
             //List<AppSetting> app = new List<AppSetting>();
@@ -59,7 +59,7 @@ namespace MarbaleManagementStudio.Controllers
             //    var filename = app[1].Value;
             //    mail.Attachments.Add(new Attachment(filename));
             //}
-        
+
             //SmtpServer.Port = 587;
             //SmtpServer.Credentials = new System.Net.NetworkCredential(SMTP_Login_Username, SMTP_Login_Password);
             //SmtpServer.EnableSsl = true;
@@ -69,10 +69,10 @@ namespace MarbaleManagementStudio.Controllers
             //}
             //catch (Exception ex)
             //{
-               
+
             //    throw;
             //}
-           
+
 
 
         }
@@ -89,7 +89,7 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult Values()
         {
             List<Buttons> buttons = siteSetup.GetAllValuesButtons();
-            return View(buttons);
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Values.cshtml", buttons);
         }
         public ActionResult POS(string ValType)
         {
@@ -97,30 +97,30 @@ namespace MarbaleManagementStudio.Controllers
 
             ViewBag.POSForm = datatable;
 
-            return PartialView();
+            return PartialView("~/Views/SiteSetup/ConfigurationTabs/Values/POS.cshtml");
         }
         public ActionResult Card()
         {
             var datatable = siteSetup.GetAppSettings("Card");
             ViewBag.CardForm = datatable;
-            return PartialView();
+            return PartialView("~/Views/SiteSetup/ConfigurationTabs/Values/Card.cshtml");
         }
         public ActionResult BackUp(string ValType)
         {
             var datatable = siteSetup.GetAppSettings("BackUp");
             ViewBag.BackupRestore = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/BackUp.cshtml");
         }
 
         public int UpdateSettings(List<Settings> settings)
         {
-           return siteSetup.SaveSettings(settings);
+            return siteSetup.SaveSettings(settings);
         }
         public ActionResult Messages()
         {
             var datatable = siteSetup.GetAllMessages();
             ViewBag.Messages = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Messages.cshtml");
         }
         public int UpdateMessages(List<MessagesModel> messageObject)
         {
@@ -139,7 +139,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Limit");
             ViewBag.LimitForm = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Limit.cshtml");
         }
         #endregion
         #region Transaction
@@ -147,7 +147,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Transaction");
             ViewBag.Transaction = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Transaction.cshtml");
         }
         #endregion
 
@@ -156,7 +156,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Price");
             ViewBag.Price = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Price.cshtml");
         }
         #endregion
         #region Email
@@ -164,7 +164,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Email");
             ViewBag.Email = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Email.cshtml");
         }
         #endregion
         #region Print
@@ -172,7 +172,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Print");
             ViewBag.Print = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Print.cshtml");
         }
         #endregion
         #region Formats
@@ -180,7 +180,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Formats");
             ViewBag.Formats = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Formats.cshtml");
         }
         #endregion
         #region Inventory
@@ -188,7 +188,8 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Inventory");
             ViewBag.Inventory = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Inventory.cshtml");
+
         }
         #endregion
         #region Redemption
@@ -196,7 +197,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Redemption");
             ViewBag.Redemption = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Redemption.cshtml");
         }
         #endregion
         #region Payment
@@ -204,8 +205,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Payment");
             ViewBag.Payment = datatable;
-            // await ViewBag.Payment;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Payment.cshtml");
         }
         #endregion
         #region Signage
@@ -213,9 +213,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Signage");
             ViewBag.SignageForm = datatable;
-            return View();
-
-
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Signage.cshtml");
         }
 
 
@@ -225,7 +223,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAppSettings("Server");
             ViewBag.Server = datatable;
-            return View();
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Server.cshtml");
         }
         #endregion
 
@@ -334,7 +332,7 @@ namespace MarbaleManagementStudio.Controllers
             //    ViewBag.PartialTypes = types;
             //   List<CustomDropdown> myLevels = Enum.GetValues(typeof(CustomDropdown)).Cast<CustomDropdown>().ToList();
             ViewBag.RequiredLevel = new SelectList(types);
-            return View(data);
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Customer.cshtml",data);
         }
         #endregion
 
@@ -358,7 +356,7 @@ namespace MarbaleManagementStudio.Controllers
         }
         public int UpdateSites(List<Site> sites)
         {
-           return siteSetup.InsertOrUpdateSites(sites);
+            return siteSetup.InsertOrUpdateSites(sites);
         }
 
         #endregion

@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Signage";
+    Layout = null;
+}
+<div id="valuesContainer">
+    <div class="tabContent">
+        <table>
+        @foreach (var item in ViewBag.SignageForm)
+        {
+                String type = item.Type.ToString();
+                <tr>
+                    <th>
+                        @item.Caption :
+                    </th>
+                    <td>
+
+                        @switch (type)
+                        {
+                            case "string":
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                                break;
+                            case "bool":
+                            <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+                                break;
+                            case "file":
+                            <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br />
+                                break;
+                            case "int":
+                            <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
+                                break;
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/>
+                        }
+                    </td>
+                </tr>  
+            }
+        </table>
+
+        <div class="actionItems">
+            <button class="btn btn-primary btn-md" role="button" onclick="SaveLimits()">Save</button>
+            <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+        </div>
+    </div>
+
+</div>
+<script src="~/Content/Fabrastics/farbtastic.js"></script>
+<link href="~/Content/Fabrastics/farbtastic.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        var f = $.farbtastic('#colorpicker');
+        $('.colorwell')
+            .each(function () {
+                f.linkTo(this);
+            })
+            .focus(function () {
+                f.linkTo(this);
+            });
+
+    });
+    var appSettings = [];
+    $('input[name=myInput]').blur(function () {
+
+        var d = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Signage'
+        };
+        appSettings.push(d);
+    });
+
+    function SaveLimits() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateAppSettings", "SiteSetup")',
+
+            data: JSON.stringify({ appSettings: appSettings }),
+
+            dataType: "json",
+
+            beforeSend: function () { },
+
+            success: function (data) {
+                appSettings = [];
+                //  location.reload();
+                $('#displayMessage').text('data added succesfully').addClass('success');
+            }
+        });
+
+    }
+
+</script>
+
+<style>
+    .defalut-width {
+        width: 280px;
+        height: 46px;
+    }
+
+    label {
+        width: 480px;
+        clear: left;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .button-pos {
+        position: absolute;
+        left: 290px;
+        top: 533px;
+    }
+
+    .button-close {
+        position: absolute;
+        left: 795px;
+        top: 533px;
+    }
+
+    input, button, label, .ar {
+        float: left;
+    }
+</style>
