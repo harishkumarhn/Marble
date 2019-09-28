@@ -4,189 +4,121 @@
     Layout = null;
 }
 
-<div>
- 
- 
-<div id="valuesContainer" style="    position: absolute;
-    background-color: orangered;
-    width: 100%;
-    height: 170%;">
-   </br>
-      @foreach (var item in ViewBag.Server)
-      {
-          int a = 1;
-          String type = item.Type.ToString();
-          switch (type)
-          {
-              case "string":
-               <div>                        
-                            <div class="inputwrap demo">
-                             <text> &nbsp; &nbsp; &nbsp;</text>   <label> <b>@item.Caption </b>:</label>
-                              
-                     <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+<div id="valuesContainer">
 
-                            </div>
-                    </div>
+    <div class="tabContent">
+        <table>
+            @foreach (var item in ViewBag.Server)
+            {
+                String type = item.Type.ToString();
+                <tr>
+                    <th>
+                        @item.Caption :
+                    </th>
+                    <td>
 
-                  break;
-                  case "bool":
-                 
-                     <div>
-                          <div class="inputwrap demo">
-                             <text> &nbsp; &nbsp; &nbsp;</text>  <label> <b>@item.Caption </b>:</label>
-                       <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br /> </div>
-
-                
-     </div>
-                  break;
+                        @switch (type)
+                        {
+                            case "string":
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                                break;
+                            case "bool":
+                            <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+                                break;
                             case "file":
-                
- 
-    
-         <div>
-                          <div class="inputwrap demo">
-                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
-                     <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br /> </div>
-           
-                        </div>
-
-
-      
-
-                
-    
-              break;
+                            <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br />
+                                break;
                             case "int":
-                    <div>
-                          <div class="inputwrap demo">
-                         <text> &nbsp; &nbsp; &nbsp;</text>     <label> <b>@item.Caption </b>:</label>
-                     <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br /> </div>
-                        </div>
-                    
-              break;
-
-          }
-
-      }
-    
-      </div>
- @*          <input type="submit"  class="button-email btn btn-primary"/>*@
-
-         <div id="closesavediv">   <text> &nbsp; &nbsp; &nbsp;</text> 
-  <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>   
-     <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a></div>
-</div>
-      
-  
-<script>
-    var appSettings = [];
-    var appSettings1 = [];
-    $('input[name=myInput]').change(function () {
-        
-        var d = {
-            Name: this.id,
-            Value: this.value,
-            ScreenGroup: 'Server'
-        };
-      
-        appSettings.push(d);
-    });
-    $('input[name=fileUploader]').change(function (e) {
-        
-        var d1 = {
-            Name: this.id,
-            Value: this.value,
-            ScreenGroup: 'Server'
-        };
-
-        appSettings.push(d1);
-       // console.log(this.files[0].mozFullPath);
-    })
-    $('input[name=fileUploader1]').change(function (e) {
-        
-        var d1 = {
-            Name: this.id,
-            Value: this.value,
-            ScreenGroup: 'Email'
-        };
-
-        appSettings.push(d1);
-        // console.log(this.files[0].mozFullPath);
-    })
-   
-    $('input[name=allcheck]').change(function () {
-        
-        var d = {
-            Name: this.id,
-            Value: $(this).is(":checked"),
-            ScreenGroup: 'Email'
-        };
-        appSettings.push(d);
-    });
-
-   // formData.append('file', $('#PDF_WRITER_PRINTER')[0].files[0]);
-    function SaveEmail() {
-        
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdateAppSettings", "SiteSetup")',
-
-            data: JSON.stringify({ appSettings: appSettings }),
-
-                        dataType: "json",
-
-                        beforeSend: function () { },
-
-                        success: function (data) {
-                            appSettings = [];
-                          //  location.reload();
-                            $('#displayMessage').text('data added succesfully').addClass('success');
+                            <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
+                                break;
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/>
                         }
-                            });
-   
-    }
-    $(document).ready(function () {
-        $('input[name="allcheck"]').each(function (index) {
-            
-            if ($(this).val().toLowerCase() == "true")
+                    </td>
+                </tr>  
+            }
+        </table>
 
-                ($(this).prop('checked', true));
+
+        <div class="actionItems">
+            <button class="btn btn-primary btn-md" role="button" onclick="SaveServer()">Save</button>
+            <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+        </div>
+    </div>
+
+
+    <script>
+        var appSettings = [];
+        $('input[name=myInput]').change(function () {
+
+            var d = {
+                Name: this.id,
+                Value: this.value,
+                ScreenGroup: 'Server'
+            };
+
+            appSettings.push(d);
         });
-    });
-</script>
+        $('input[name=fileUploader]').change(function (e) {
 
-<style>
-    .defalut-width {
-        width: 280px;
-            height: 46px;
-    }
-    label {
-    width:480px;
-    clear:left;
-    text-align:right;
-    padding-right:10px;
-}
-      .button-email {
-     position: absolute;
-    left: 319px;
-    bottom: 132px;
-    }
-    .button-close {
-        top: 1412px;
-    position: absolute;
-    }
+            var d1 = {
+                Name: this.id,
+                Value: this.value,
+                ScreenGroup: 'Server'
+            };
 
-input,button, label,.ar {
-    float:left;
-}
- div#closesavediv{
-        position: absolute;
-         left: 37%;
-    right: 0;
-    margin-left: auto;
-             
-    bottom: -121%;
-    margin-right: auto;
-    }
-</style>
+            appSettings.push(d1);
+            // console.log(this.files[0].mozFullPath);
+        })
+        $('input[name=fileUploader1]').change(function (e) {
+
+            var d1 = {
+                Name: this.id,
+                Value: this.value,
+                ScreenGroup: 'Email'
+            };
+
+            appSettings.push(d1);
+            // console.log(this.files[0].mozFullPath);
+        })
+
+        $('input[name=allcheck]').change(function () {
+
+            var d = {
+                Name: this.id,
+                Value: $(this).is(":checked"),
+                ScreenGroup: 'Email'
+            };
+            appSettings.push(d);
+        });
+
+        // formData.append('file', $('#PDF_WRITER_PRINTER')[0].files[0]);
+        function SaveServer() {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("UpdateAppSettings", "SiteSetup")',
+
+                data: JSON.stringify({ appSettings: appSettings }),
+
+                dataType: "json",
+
+                beforeSend: function () { },
+
+                success: function (data) {
+                    appSettings = [];
+                    //  location.reload();
+                    $('#displayMessage').text('data added succesfully').addClass('success');
+                }
+            });
+
+        }
+        $(document).ready(function () {
+            $('input[name="allcheck"]').each(function (index) {
+
+                if ($(this).val().toLowerCase() == "true")
+
+                    ($(this).prop('checked', true));
+            });
+        });
+    </script>

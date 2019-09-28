@@ -332,7 +332,7 @@ namespace MarbaleManagementStudio.Controllers
             //    ViewBag.PartialTypes = types;
             //   List<CustomDropdown> myLevels = Enum.GetValues(typeof(CustomDropdown)).Cast<CustomDropdown>().ToList();
             ViewBag.RequiredLevel = new SelectList(types);
-            return View(data);
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Customer.cshtml",data);
         }
         #endregion
 

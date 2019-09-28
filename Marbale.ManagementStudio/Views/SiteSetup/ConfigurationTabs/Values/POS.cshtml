@@ -2,48 +2,37 @@
     ViewBag.Title = "POS";
     Layout = null;
 }
-
-<div id="valuesContainer">
     <div class="tabContent">
-        @foreach (var item in ViewBag.POSForm)
-        {
-            String type = item.Type.ToString();
-            switch (type)
+        <table>
+            @foreach (var item in ViewBag.POSForm)
             {
-                case "string":
-            <div>
-                <div class="inputwrap demo">
-                    <label>@item.Caption :</label>
-                    <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                String type = item.Type.ToString();
+                <tr>
+                    <th>
+                        @item.Caption :
+                    </th>
+                    <td>
 
-                </div>
-            </div>
-
-                    break;
-                case "bool":
-                 
-            <div>
-                <div class="inputwrap demo">
-                    <label>@item.Caption :</label>
-                    <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
-                </div>
-
-
-            </div>
-                    break;
-                case "int":
-            <div>
-                <div class="inputwrap demo">
-                    <label>@item.Caption :</label>
-                    <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
-                </div>
-            </div>
-                    
-                    break;
-
+                        @switch (type)
+                        {
+                            case "string":
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                                break;
+                            case "bool":
+                            <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+                                break;
+                            case "file":
+                            <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br />
+                                break;
+                            case "int":
+                            <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
+                                break;
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/>
+                        }
+                    </td>
+                </tr>  
             }
-
-        }
+        </table>
 
         @{
             List<SelectListItem> listItems = new List<SelectListItem>();
@@ -69,12 +58,11 @@
             @Html.DropDownList("Default Cash Mode", listItems, new { @class = "defalut-width ar", @name = "myInput" })
         </div>
     </div>
-    
+
     <div class="actionItems">
         <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()">Save</button>
         <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
     </div>
-</div>
 
 <script>
     var appSettings = [];

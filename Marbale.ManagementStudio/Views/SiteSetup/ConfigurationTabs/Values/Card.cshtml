@@ -2,68 +2,47 @@
     ViewBag.Title = "Card";
 }
 
-<h2>Card</h2>
-<div style="background-color:orangered;height: 500px;"></br>
-<div id="valuesContainer" >
-    
-      @foreach (var item in ViewBag.CardForm)
-      {
-          String type = item.Type.ToString();
-          switch (type)
-          {
-              case "string":
-             
-                            <div class="inputwrap">
-                                <label> <b>@item.Caption </b>:</label>
-                       <input type="text" value="@item.Value" id="@item.Name" name="myInput"/><br /></div>
-                 
-                  break;
-                  case "bool":
-               
-                          <div class="inputwrap">
-                               <label> <b>@item.Caption </b>:</label>
-                        <input type="checkbox" value="@item.Value" id="@item.Name" class="checktrue" name="allcheck"/> </div>
+<div id="valuesContainer">
+    <div class="tabContent">
+        <table>
+        @foreach (var item in ViewBag.CardForm)
+        {
+            String type = item.Type.ToString();
+                <tr>
+                    <th>
+                        @item.Caption :
+                    </th>
+                    <td>
 
-                   
-                  break;
-                  case"int":
-                     
-                          <div class="inputwrap">
-                               <label> <b>@item.Caption </b>:</label>
-                       <input type="number" value="@item.Value" id="@item.Name" class="gridText" name="myInput"/> </div>
+                        @switch (type)
+                        {
+                            case "string":
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                                break;
+                            case "bool":
+                            <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+                                break;
+                            case "file":
+                            <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br />
+                                break;
+                            case "int":
+                            <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
+                                break;
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/>
+                        }
+                    </td>
+                </tr>  
+            }
+        </table>
 
-                     
-                  break;
-                  
-          }
-                  
-      }
-        <div id="closesavediv">   <text> &nbsp; &nbsp; &nbsp;</text>  
-    <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveAppSettings()">Save</button> 
-         <a href="/Product/ClosePopUp" class="btn btn-primary btn-md ">Close</a>
-            </div>
-</div></div>
-<style>
-        label {
-    width:480px;
-    clear:left;
-    text-align:right;
-    padding-right:10px;
-}
- 
+    </div>
 
-input,button, label,.ar {
-    float:left;
-}
-    div#closesavediv{
-        position: absolute;
-     left: 26%;
-    right: 0;
-    margin-left: auto;
-         bottom: -18%;
-    margin-right: auto;
-    }
-</style>
+    <div class="actionItems">
+        <button class="btn btn-primary btn-md" role="button" onclick="SaveAppSettings()">Save</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+    </div>
+</div>
+
 <script>
     var appSettings = [];
     $('input[name=myInput]').change(function () {
@@ -97,10 +76,10 @@ input,button, label,.ar {
 
             success: function (data) {
                 appSettings = [];
-                
-              
+
+
             }
-          });
+        });
     }
     $(document).ready(function () {
         $('input[name="allcheck"]').each(function (index) {

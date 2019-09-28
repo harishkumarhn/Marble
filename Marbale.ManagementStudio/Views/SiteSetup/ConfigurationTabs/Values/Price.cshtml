@@ -3,80 +3,46 @@
     ViewBag.Title = "Price";
     Layout = null;
 }
-
-<div style="background-color: orangered; height: 500px;">
-
-
-    <div id="valuesContainer" style="position: absolute; background-color: orangered; width: 100%; height: 100%;">
-        </br>
-   
+<div id="valuesContainer">
+    <div class="tabContent">
+        <table>
       @foreach (var item in ViewBag.Price)
-      {
-          int a = 1;
-          String type = item.Type.ToString();
-          switch (type)
-          {
-              case "string":
-          <div>
-              <div class="inputwrap demo">
-                  <text> &nbsp; &nbsp; &nbsp;</text>
-                  <label><b>@item.Caption </b>:</label>
+       {
+                String type = item.Type.ToString();
+                <tr>
+                    <th>
+                        @item.Caption :
+                    </th>
+                    <td>
 
-                  <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                        @switch (type)
+                        {
+                            case "string":
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                                break;
+                            case "bool":
+                            <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+                                break;
+                            case "file":
+                            <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br />
+                                break;
+                            case "int":
+                            <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
+                                break;
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/>
+                        }
+                    </td>
+                </tr>  
+            }
+        </table>
 
-              </div>
-          </div>
-
-                  break;
-              case "bool":
-                 
-          <div>
-              <div class="inputwrap demo">
-                  <text> &nbsp; &nbsp; &nbsp;</text>
-                  <label><b>@item.Caption </b>:</label>
-                  <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
-              </div>
-
-
-          </div>
-                  break;
-              case "file":
-          <div>
-              <div class="inputwrap demo">
-                  <text> &nbsp; &nbsp; &nbsp;</text>
-                  <label><b>@item.Caption </b>:</label>
-                  <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br />
-              </div>
-
-          </div>
-
-                  break;
-              case "int":
-          <div>
-              <div class="inputwrap demo">
-                  <text> &nbsp; &nbsp; &nbsp;</text>
-                  <label><b>@item.Caption </b>:</label>
-                  <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
-              </div>
-          </div>
-                    
-                  break;
-
-          }
-
-      }
-
+        <div class="actionItems">
+            <button class="btn btn-primary btn-md" role="button" onclick="SaveEmail()">Save</button>
+            <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+        </div>
     </div>
-    @*          <input type="submit"  class="button-email btn btn-primary"/>*@
 
-    <div id="closesavediv">
-        <text> &nbsp; &nbsp; &nbsp;</text>
-        <button class="btn btn-primary btn-md button-pos" role="button" onclick="SaveEmail();">Save</button>
-        <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
-    </div>
 </div>
-
-
 <script>
     var appSettings = [];
     var appSettings1 = [];
