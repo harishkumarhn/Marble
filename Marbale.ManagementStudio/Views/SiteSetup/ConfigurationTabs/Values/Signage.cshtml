@@ -19,6 +19,9 @@
                             case "string":
                             <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
                                 break;
+                             case "color":
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                                break;
                             case "bool":
                             <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
                                 break;
@@ -72,50 +75,15 @@
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: '@Url.Action("UpdateAppSettings", "SiteSetup")',
-
             data: JSON.stringify({ appSettings: appSettings }),
-
             dataType: "json",
-
             beforeSend: function () { },
-
             success: function (data) {
                 appSettings = [];
                 //  location.reload();
                 $('#displayMessage').text('data added succesfully').addClass('success');
             }
         });
-
     }
 
 </script>
-
-<style>
-    .defalut-width {
-        width: 280px;
-        height: 46px;
-    }
-
-    label {
-        width: 480px;
-        clear: left;
-        text-align: right;
-        padding-right: 10px;
-    }
-
-    .button-pos {
-        position: absolute;
-        left: 290px;
-        top: 533px;
-    }
-
-    .button-close {
-        position: absolute;
-        left: 795px;
-        top: 533px;
-    }
-
-    input, button, label, .ar {
-        float: left;
-    }
-</style>

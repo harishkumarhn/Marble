@@ -4,8 +4,6 @@
     Layout = null;
 }
 
-
-<div id="valuesContainer">
     <div class="tabContent">
         <table>
       @foreach (var item in ViewBag.Print)
@@ -44,7 +42,6 @@
         </div>
     </div>
 
-</div>
 <script>
     var appSettings = [];
     var appSettings1 = [];
@@ -123,39 +120,3 @@
     });
 
 </script>
-
-<style>
-    .defalut-width {
-        width: 280px;
-            height: 46px;
-    }
-    label {
-    width:480px;
-    clear:left;
-    text-align:right;
-    padding-right:10px;
-}
-      .button-email {
-     position: absolute;
-    left: 319px;
-    bottom: 132px;
-    }
-    .button-close {
-           position: absolute;
-    left: 646px;
-  
-    top: 576px;
-    }
-
-input,button, label,.ar {
-    float:left;
-}
- div#closesavediv{
-        position: absolute;
-         left: 27%;
-    right: 0;
-    margin-left: auto;
-               bottom: -30%;
-    margin-right: auto;
-    }
-</style>
