@@ -1,6 +1,7 @@
 ﻿using Marbale.BusinessObject;
 using Marbale.BusinessObject.Tax;
 using Marbale.DataAccess;
+using Marble.Business.Enum;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,11 +13,13 @@ namespace Marbale.Business
     public class ProductBL
     {
         private ProductData productData;
-      //  SiteSetupData ab = new ProductBL();
+        private CommonData commonData;
+
        
         public ProductBL()
         {
             productData = new ProductData();
+            commonData = new CommonData();
         }
        
         #region products
@@ -105,6 +108,16 @@ namespace Marbale.Business
                     idValues.TaxPercent = dr.IsNull("TaxPercent") ? 0 : decimal.Parse(dr["TaxPercent"].ToString());
                     TaxList.Add(idValues);
                 }
+                var DisplatInDataTable = commonData.GetListItems((int)ListItemGroup.DisplayGroup);
+                var DisplatInList = new List<IdValue>();
+                DisplatInList.Add(new IdValue() { Id = null, Value = "Select" });
+                foreach (DataRow dr in DisplatInDataTable.Rows)
+                {
+                    IdValue idValues = new IdValue();
+                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    idValues.Value = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                    DisplatInList.Add(idValues);
+                }
 
                 var productDataTable = productData.GetProducts();
                 List<Product> products = new List<Product>();
@@ -133,11 +146,18 @@ namespace Marbale.Business
                     product.TypeList = typeList;
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;
+                    product.DisplayGroupList = DisplatInList;
                     products.Add(product);
                 }
                 if (products.Count == 0)
                 {
-                    var p = new Product() { TypeList = typeList, CategoryList = categoryList,TaxList=TaxList };
+                    var p = new Product() 
+                    { 
+                        TypeList = typeList, 
+                        CategoryList = categoryList,
+                        TaxList=TaxList,
+                        DisplayGroupList = DisplatInList
+                    };
                     products.Add(p);
                 }
                 return products;
@@ -234,7 +254,6 @@ namespace Marbale.Business
 
             catch (Exception)
             {
-
                 throw;
             }
 

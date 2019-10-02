@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Product Category";
 }
-<table id="marbleTable" class="stripe row-border order-column">
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
     <thead>
         <th>ID</th>
         <th>Name</th>
@@ -74,18 +74,10 @@
                 });
             }
         });
-        $('#marbleTable tbody').on('click', 'tr', function () {
-            if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected');
-            }
-            else {
-                table.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
-        });
         $('#addRow').on('click', function () {
             $('#saveproductcat').removeAttr('disabled');
             var categoryListOptions = '';
+
               @foreach (var dow in ViewBag.categories[0].Categories)
               {
                    @: categoryListOptions = categoryListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';

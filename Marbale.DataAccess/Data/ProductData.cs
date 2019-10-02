@@ -94,6 +94,17 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetListItemsByGroupId()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetProductTypeLookUp");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public DataTable GetProductCategoryLookUp()
         {
             try
