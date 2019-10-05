@@ -76,7 +76,7 @@
                             <a href="/game/machines">Machines</a>
                         </li>
                         <li>
-                            <a id="configuration">Configuration</a>
+                            <a href="#" id="configuration">Configuration</a>
                         </li>
                     </ul>
                 </li>
@@ -152,39 +152,10 @@
             </div>
         </div>
 
-        <div>
-            @*   <div class="modal fade" id="newcardmodel" data-backdrop=""role="dialog">
-                <div class="modal-dialog">
-                    <div id="newproductmodel" class="modal-Content" style="width: 900px; height: 810px; background-color:white" >
-                        <div class="modal-header" style="background-color: blueviolet">
-                            <h5 class="modal-title" id="newupdatecardmodal" style="text-align: center">Add Card</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>*@
-            <div id="newcardmodel" class="modal fade">
-                <div class="modal-dialog modal-centre">
-                    <div id="newproductmodel" class="modal-content" style="width: 900px; height: 810px; background-color: white">
-                        <div class="modal-header" style="background-color: blueviolet">
-                            <h5 class="modal-title" id="newupdatecardmodal" style="text-align: center">Add Card</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="modelbody"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
     <div id="myModal" class="modal fade">
         <div class="modal-dialog modal-centre">
-            <div id="modelBody" class="modal-content" style="width: 600px;">
+            <div id="modelBody" class="modal-content">
             </div>
         </div>
     </div>
@@ -214,22 +185,20 @@
             $('#modelbody').load('/Cards/Inventory');
         });
         $('#newcards').click(function () {
-            $(".modal-body").html("");
-            $('#newcardmodel .modal-Content').css('height', 810);
-            $('#newcardmodel .modal-Content').css('width', 900);
-            $('#newupdatecardmodal').text("Add Card").addClass('modal-centre');
-            //$(document).off('focusin.modal');
-            $('#newcardmodel').modal('show');
-
-            $('#modelbody').load('Cards/Cards');
+            $('#myModal').modal('show');
+            $('#modelBody').css({
+                'left': '-25%',
+                'width': 900
+            });
+            $('#modelBody').load('/Cards/Cards');
         });
         $('#configuration').click(function () {
-            $(".modal-body").html("");
-            $('#newcardmodel .modal-Content').css('height', 730);
-            $('#newcardmodel .modal-Content').css('width', 900);
-            $('#newupdatecardmodal').text("Configuration").addClass('modal-centre');
-            $('#newcardmodel').modal('show');
-            $('#modelbody').load('/game/configuration');
+            $('#myModal').modal('show');
+            $('#modelBody').css({
+                'left': '-25%',
+                'width': 800
+            });
+            $('#modelBody').load('/game/configuration');
         });
         $('#productKey').click(function () {
             $('#myModal').modal('show');
@@ -242,9 +211,3 @@
 
 </body>
 </html>
-<style>
-    .modal-centre {
-        position: absolute;
-        right: 430px;
-    }
-</style>

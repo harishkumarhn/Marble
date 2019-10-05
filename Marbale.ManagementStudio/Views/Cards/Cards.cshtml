@@ -4,8 +4,12 @@
     Layout = null;
 }
 
-<div>
-    @using (Html.BeginForm("InsertOrUpdateCards", "Cards", FormMethod.Post))
+<div class="modal-header">
+    <h4 class="modal-title">New Card</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="min-width: 10px !important;">&times;</button>
+</div>
+<div class="modal-body" style="width:900px">
+    @using (Html.BeginForm("InsertOrUpdateCards", "Cards", new { id = "InsertOrUpdateCards" }, FormMethod.Post))
     {
         <div>
             <b style="color: cadetblue">Main</b>
@@ -166,11 +170,14 @@
                     </div>
                 </div>
             </div>
-            <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
     }
 </div>
+<div class="modal-footer">
+    <button id="update" type="submit" class="btn btn-primary" onclick="Save(this)">Save</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -208,5 +215,22 @@
         }
 
     });
+    function Save(btnClicked) {
+        debugger;
+        var $form = $('#InsertOrUpdateCards');
+        $.ajax({
+            type: "POST",
+            url: $form.attr('action'),
+            data: $form.serialize(),
+            error: function (xhr, status, error) {
+                //do something about the error
+            },
+            success: function (response) {
+                //do something with response
+                alert('Data saved');
 
+            }
+        });
+        return false;// if it's a link to prevent post
+    }
 </script>

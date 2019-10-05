@@ -120,8 +120,12 @@ button.btn-settings {
     color: #fff;
 }
 
+.modal-centre {
+    position: absolute;
+    right: 430px;
+}
+
 .modal-body {
-    color: #888;
     padding: 5px 35px 20px;
 }
 

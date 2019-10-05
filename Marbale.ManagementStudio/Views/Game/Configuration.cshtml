@@ -5,8 +5,12 @@
     Layout = null;
 }
 
-<legend>Configuration</legend>
-
+<div class="modal-header">
+    <h4 class="modal-title">Configuration</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="min-width: 10px !important;">&times;</button>
+</div>
+<div class="modal-body" style="width:900px">
+   
 @using (Html.BeginForm("UpdateConfiguration", "Game", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
@@ -153,18 +157,16 @@
                 </div>
             </div>
         </div>
-        <p style="bottom: 11px; position: fixed;">
-            <input type="button" class="btn btn-primary btn-md" value="Save" onclick="SaveConfiguration(this)" />
-            <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
-
-        </p>
     </fieldset>
 }
+</div>
+<div class="modal-footer">
+    <button id="update" type="button" class="btn btn-primary" onclick="SaveConfiguration(this)">Save</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+
 
 <script>
-    $(document).ready(function () {
-
-    })
     function SaveConfiguration(btnClicked) {
         var $form = $(btnClicked).parents('form');
         $.ajax({
@@ -180,9 +182,7 @@
 
             }
         });
-
         return false;// if it's a link to prevent post
-
     }
     var updatedArray = [];
     function UpdatedList(x) {
@@ -190,5 +190,4 @@
             updatedArray.push(x.rowIndex);
         }
     }
-
 </script>

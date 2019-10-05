@@ -120,7 +120,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             var datatable = siteSetup.GetAllMessages();
             ViewBag.Messages = datatable;
-            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Messages.cshtml");
+            return View();
         }
         public int UpdateMessages(List<MessagesModel> messageObject)
         {
