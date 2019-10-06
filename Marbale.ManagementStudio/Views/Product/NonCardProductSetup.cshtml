@@ -128,15 +128,15 @@
                 </td>
                   <td>
                     <select name="taxlist" id="taxlist">
-                        @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
+                        @foreach (var dow in @item.TaxList)
                         {
-                            if (@item.TaxName == (@dow.Id).ToString())
+                            if ((@dow.Id) != null && @item.TaxName == (@dow.Id).ToString())
                             {
-                            <option value="@dow.Value" id="@dow.Id"  selected>@dow.Value</option>
+                            <option value="@dow.TaxName" id="@dow.Id" selected>@dow.TaxName</option>
                             }
                             else
                             {
-                            <option value="@dow.Value" id="@dow.Id" >@dow.Value</option>
+                            <option value="@dow.TaxName" id="@dow.Id">@dow.TaxName</option>
                             }
                         }
                     </select>
