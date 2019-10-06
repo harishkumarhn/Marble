@@ -33,7 +33,9 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                ViewBag.productDetails = productBussiness.GetProducts((int)ProductTypeEnum.Card);
+                var products = productBussiness.GetProducts((int)ProductTypeEnum.Card);
+                Session["TaxList"] = products[0].TaxList;
+                ViewBag.productDetails = products;
                 return View();
             }
             catch (Exception e)
