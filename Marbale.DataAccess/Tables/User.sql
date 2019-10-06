@@ -29,7 +29,7 @@ CREATE TABLE [dbo].[User](
 	[EmpEndDate] [datetime] NULL,
 	[EmpEndReason] [varchar](200) NULL,
 	[LastLogInTime] [datetime] NULL,
-	[LastLogOutTimee] [datetime] NULL,
+	[LastLogOutTime] [datetime] NULL,
 	[CreatationDate] [datetime] NULL,
 	[CreatedBy] [varchar](500) NULL,
 	[LastUpdatedBy] [varchar](500) NULL,

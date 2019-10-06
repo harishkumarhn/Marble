@@ -8,23 +8,26 @@
         <div id="Tabs" role="tabpanel">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-           <button onclick="getValues()" aria-controls="personal" role="tab" data-toggle="tab"  class="tblev" style=" width:50%;">Values</button>
-               <button aria-controls="employment" onclick="getSettings()" role="tab" data-toggle="tab" class="tblev" style=" width:50%;">Settings</button>
+                <button onclick="getValues()" aria-controls="personal" role="tab" data-toggle="tab" class="tblev" style="width: 50%;">Values</button>
+                <button aria-controls="employment" onclick="getSettings()" role="tab" data-toggle="tab" class="tblev" style="width: 50%;">Settings</button>
             </ul>
             <!-- Tab panes -->
 
-                </div></br>
+        </div>
     </div>
 </div>
 <div id="container1">
 </div>
 
-
-
 <script>
     $(document).ready(function () {
-        //getValues();
-    })
+        if (isEmpty($('#container1'))) {
+            getValues();
+        }
+    });
+    function isEmpty(el) {
+        return !$.trim(el.html())
+    }
     function getValues() {
         $('#loading').show();
         $('#container1').load('/SiteSetup/Values');
@@ -44,9 +47,9 @@
 </script>
 <style>
     .tble {
-       
-         background-color: goldenrod;
+        background-color: goldenrod;
     }
+
     .tablinks {
         float: left;
         border: none;
@@ -55,19 +58,27 @@
         padding: 14px 16px;
         transition: 0.3s;
         font-size: 17px;
+        border-style: inset;
+        border-width: 1px;
+        border-color: white;
     }
+
     .tblev {
-           float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-            font-size: 17px;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        background-color: #7f7eb1;
+        border-style: ridge;
+        border-color: #e8e8f3;
     }
 
     .tble {
     }
+
     .buttoncolor-change {
         background-color: cornflowerblue;
     }

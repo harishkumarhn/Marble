@@ -20,139 +20,142 @@
         </div>
     </div>
 </div>
-    <table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
-        <thead>
-                <th>Id</th>
-                <th>Edit</th>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Email</th>
-                <th>LoginId</th>
-                <th>Status</th>
-                <th>POSCounter</th>
-                <th>Department</th>
-                <th>Manager</th>
-                <th>CompanyAdmin</th>
-                <th>EmpStartDate</th>
-                <th>EmpEndDate</th>
-                <th>EmpEndResone</th>
-                <th>PasswordChangeDate</th>
-                <th>Invalid Attempts</th>
-                <th>LastLoginTime</th>
-                <th>LastLogoutTime</th>
-                <th>CreationDate</th>
-                <th>CreatedBy</th>
-                <th>LastUpdatedBy</th>
-                <th>LastUpdatedDate</th>
-            </thead>
-            @foreach (var item in ViewBag.users)
-            {  
-                <tr>
-                    <td>   <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>  </td>
-                    <td>
-                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditUser('@item.Id')">
-                         <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
-                     </a>
-                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteUser('@item.Id')">
-                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
-                     </a>
-                </td>
-                    <td>
-                        <input class="fixedCol3" type="text" value="@item.Name" />
-                    </td>
-                    <td>
-                        <select name="Roles" id="Roles" >
-                            @foreach (var dow in item.Roles)
-                            {
-                                if (@item.Role == @dow.Value)
-                                {
-                                <option value="@dow.Value" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                <option value="@dow.Value">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Email"  />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.LoginId"  />
-                    </td>
-                    <td>
-                        <select name="Statuses" id="Statuses" >
-                            @foreach (var dow in item.Statuses)
-                            {
-                                if (@item.Status == @dow.Value)
-                                {
-                                <option value="@dow.Value" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                <option value="@dow.Value">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.POSCounter"  />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Department" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Manager" />
-                    </td>
-                    <td>
-                        <input type="checkbox"  @(item.CompanyAdmin ? "checked='checked'" : "") value="@item.CompanyAdmin" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.EmpStartDate"  />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.EmpEndDate" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.EmpEndReason"  />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.PaswardChangeDate"  disabled/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.InvalidAttempts"  disabled/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.LastLoginTime"  disabled/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.LastLogoutTime"  disabled/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.CreationDate"  disabled/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.CreatedBy"  disabled/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.LastUpdatedBy"  disabled/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.LastUpdatedDate"  disabled/>
-                    </td>
-                </tr>  
-            }
-        </table>
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+    <thead>
+        <th>Id</th>
+        <th>Edit</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Email</th>
+        <th>LoginId</th>
+        <th>Status</th>
+        <th>POSCounter</th>
+        <th>Department</th>
+        <th>Manager</th>
+        <th>CompanyAdmin</th>
+        <th>EmpStartDate</th>
+        <th>EmpEndDate</th>
+        <th>EmpEndResone</th>
+        <th>PasswordChangeDate</th>
+        <th>Invalid Attempts</th>
+        <th>LastLoginTime</th>
+        <th>LastLogoutTime</th>
+        <th>CreationDate</th>
+        <th>CreatedBy</th>
+        <th>LastUpdatedBy</th>
+        <th>LastUpdatedDate</th>
+    </thead>
+    @foreach (var item in ViewBag.users)
+    {  
+        <tr>
+            <td>
+                <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
+            </td>
+            <td>
+                <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditUser('@item.Id')">
+                    <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
+                </a>
+                <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteUser('@item.Id')">
+                    <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
+                </a>
+            </td>
+            <td>
+                <input class="fixedCol3" type="text" value="@item.Name" />
+            </td>
+            <td>
+                <select name="Roles" id="Roles">
+                    @foreach (var dow in item.Roles)
+                    {
+                        if (@item.Role == @dow.Value)
+                        {
+                        <option value="@dow.Value" selected>@dow.Value</option>
+                        }
+                        else
+                        {
+                        <option value="@dow.Value">@dow.Value</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <input type="text" value="@item.Email"  />
+            </td>
+            <td>
+                <input type="text" value="@item.LoginId"  />
+            </td>
+            <td>
+                <select name="Statuses" id="Statuses">
+                    @foreach (var dow in item.Statuses)
+                    {
+                        if (@item.Status == @dow.Value)
+                        {
+                        <option value="@dow.Value" selected>@dow.Value</option>
+                        }
+                        else
+                        {
+                        <option value="@dow.Value">@dow.Value</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <input type="text" value="@item.POSCounter"  />
+            </td>
+            <td>
+                <input type="text" value="@item.Department" />
+            </td>
+            <td>
+                <input type="text" value="@item.Manager" />
+            </td>
+            <td>
+                <input type="checkbox"  @(item.CompanyAdmin ? "checked='checked'" : "") value="@item.CompanyAdmin" />
+            </td>
+            <td>
+                <input type="text" value="@item.EmpStartDate"  />
+            </td>
+            <td>
+                <input type="text" value="@item.EmpEndDate" />
+            </td>
+            <td>
+                <input type="text" value="@item.EmpEndReason"  />
+            </td>
+            <td>
+                <input type="text" value="@item.PaswardChangeDate"  disabled/>
+            </td>
+            <td>
+                <input type="text" value="@item.InvalidAttempts"  disabled/>
+            </td>
+            <td>
+                <input type="text" value="@item.LastLoginTime"  disabled/>
+            </td>
+            <td>
+                <input type="text" value="@item.LastLogoutTime"  disabled/>
+            </td>
+            <td>
+                <input type="text" value="@item.CreationDate"  disabled/>
+            </td>
+            <td>
+                <input type="text" value="@item.CreatedBy"  disabled/>
+            </td>
+            <td>
+                <input type="text" value="@item.LastUpdatedBy"  disabled/>
+            </td>
+            <td>
+                <input type="text" value="@item.LastUpdatedDate"  disabled/>
+            </td>
+        </tr>  
+    }
+</table>
 
 <div class="action">
 
     <button class="btn btn-primary btn-md" role="button" onclick="SaveUsers()">Save</button>
-    <a href="#" class="btn btn-primary btn-md" role="button" id="addRow">Add User</a>
-
+    <button class="btn btn-primary btn-md" role="button" id="addRow">Add User</button>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+
 
 </div>
 <script>
@@ -239,37 +242,13 @@
                 $('.DTFC_Cloned input.fixedCol3')[i].value = fixedcolumn3values[i].value;
             }
         });
-         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
     });
 
     function targetmodel() {
         $('#modelbody').load('/SiteSetup/EditUser');
     }
-    function AddUser() {
-       
-        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>  <td>  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <select name="Roles" id="Roles">' + rolesOptions +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <select name="Statuses" id="Statuses">' + statusListOptions +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  />  </td>' +
-        '<td> <input type="text" value=""  disabled/>  </td>' +
-        '<td> <input type="text" value=""  disabled/>  </td>' +
-        '<td> <input type="text" value=""  disabled/>  </td>' +
-        '<td> <input type="text" value=""  disabled/>  </td>' + '</tr>';
-        $('#marbleTable tr:last').after(newRow);
-    }
+   
     function SaveUsers() {
         var items = [];
         var table = document.getElementById('marbleTable');

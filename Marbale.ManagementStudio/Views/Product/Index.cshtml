@@ -1,57 +1,20 @@
 ﻿@{
-    ViewBag.Title = "ProductsMenu";
+    ViewBag.Title = "PRODUCTS MENU";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Content/css/product.css" rel="stylesheet" />
-
+@*<link href="~/Content/css/product.css" rel="stylesheet" />*@
+<link href="~/Content/CSS/StyleSheet1.css" rel="stylesheet" />
 <div class="container">
-    <p style="color: blueviolet; font-weight: 500;">Choose by product type</p>
-    <div id="profiled" class="productfields">
-
-        <div class="productFieldset">
-
-            <div class="panel panel-primary pbody">
-                <div class="panel-body body">
-                    <a href="/product/productsetup" class="btn btn-primary btn-lg round" role="button">Cards</a>
-                    <a href="/product/NonCardProductSetup" class="btn btn-primary btn-lg round" role="button">Non Card Sales</a>
-                    <a href="http://google.co.in" class="btn btn-primary btn-lg round" role="button" style="display: none">Combo</a>
-                    <a href="http://google.co.in" class="btn btn-primary btn-lg round" role="button" style="display: none">Bookings</a>
-                </div>
-            </div>
-        </div>
+    <div class="holder">
+        <h1><b>Choose by product type</b></h1>
+        <button class="button large" onclick="location.href='/product/productsetup'">Cards</button>
+        <button class="button large">Non Card Product</button>
     </div>
-    <fieldset class="productFieldset1">
-        <legend>Set up</legend>
-        <div class="productSetup">
-            <a href="/product/Types">Product Type</a>
-            <a href="/product/Category">Product Category</a>
-            <a href="#">Product Modifiers</a>
-        </div>
-    </fieldset>
-
+     <div class="holder sub">
+         <h1 style="margin-top: 18px;">Set up</h1>
+        <button class="button medium" onclick="location.href='/product/Types'">Product Type</button>
+        <button class="button medium" onclick="location.href='/product/Category'">Product Category</button>
+        <button class="button medium">Product Modifiers</button>
+    </div>
 </div>
-<style>
-    .round {
-        border-radius: 72px;
-        width: 200px;
-        height: 97px;
-        padding: 31px;
-    }
 
-    .productFieldset {
-        position: absolute;
-        right: 38%;
-        top: 47%;
-    }
-
-    .productFieldset1 {
-        position: absolute;
-        right: 38%;
-        top: 87%;
-    }
-
-    .productfields {
-        width: 97%;
-        border: 203px solid currentColor;
-    }
-</style>

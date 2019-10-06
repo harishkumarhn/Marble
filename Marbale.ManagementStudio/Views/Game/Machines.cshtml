@@ -136,9 +136,8 @@
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveMachines()">Save</button>
-    <a href="#" class="btn btn-primary btn-md" role="button" id="addRow">Add</a>
-    <a href="/" class="btn btn-primary">Close</a>
-
+    <button class="btn btn-primary btn-md" role="button" id="addRow">Add</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
 </div>
 <script>
     $(document).ready(function () {
@@ -287,7 +286,7 @@
             updatedArray.push(index);
         }
     }
-    
+
     function Filter() {
         var table = document.getElementById('marbleTable');
         for (var r = 1, n = table.rows.length; r < n; r++) {
@@ -309,7 +308,7 @@
                     isSet = true;
                 }
             }
-            if(isSet == false) {
+            if (isSet == false) {
                 table.rows[rowIndex].hidden = false;
                 $('.DTFC_Cloned tbody tr')[r - 1].hidden = false;
             }

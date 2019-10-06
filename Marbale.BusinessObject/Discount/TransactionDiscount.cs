@@ -10,7 +10,7 @@ namespace Marbale.BusinessObject
     {
         public int DiscountID { get; set; }
         public string DiscountName { get; set; }
-        public int DiscountPercentage { get; set; }
+        public decimal DiscountPercentage { get; set; }
         public bool AutomaticApply { get; set; }
         public float MinimumSaleAmount { get; set; }
         public float MinimumUsedCredits { get; set; }
