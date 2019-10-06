@@ -1,3 +1,5 @@
+
+
 CREATE proc [dbo].[sp_Insert_Discount]      
       
        
@@ -7,7 +9,7 @@ CREATE proc [dbo].[sp_Insert_Discount]
    @DiscountID int=null,      
     @DiscountName varchar(100)=null,       
   @ActiveFlag bit=null,       
-    @DiscountPercentage float=null,      
+    @DiscountPercentage numeric(18,3)= 0,      
      @DiscountType varchar(100)=null,      
    @DisplayInPOS bit=null,      
     @DisplayOrder int=null,       

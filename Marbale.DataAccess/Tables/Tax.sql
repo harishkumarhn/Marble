@@ -11,7 +11,7 @@ GO
 CREATE TABLE [dbo].[Tax](
 	[TaxId] [int] IDENTITY(1,1) NOT NULL,
 	[TaxName] [varchar](100) NULL,
-	[TaxPercent] [decimal](18, 0) NULL,
+	[TaxPercent] [decimal](18, 3) NULL,
 	[ActiveFlag] [bit] NULL
 ) ON [PRIMARY]
 GO

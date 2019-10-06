@@ -124,7 +124,7 @@ namespace Marble.Business
                     trx.Trx_id = rw["TrxId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["TrxId"]);
                     trx.TransactionDate = rw["TrxDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(rw["TrxDate"]);
                     trx.Transaction_Amount = rw["TrxAmount"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["TrxAmount"]);
-                    trx.Tax_Amount = rw["TaxAmount"] == DBNull.Value ? 0 : Convert.ToDouble(rw["TaxAmount"]);
+                    trx.Tax_Amount = rw["TaxAmount"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["TaxAmount"]);
                     trx.Net_Transaction_Amount = rw["TrxNetAmount"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["TrxNetAmount"]);
                     trx.POSMachine = rw["POSMachine"] == DBNull.Value ? string.Empty : rw["POSMachine"].ToString();
                     trx.UserId = rw["UserId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["UserId"]);

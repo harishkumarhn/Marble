@@ -348,7 +348,10 @@ namespace Marble.Business
                 user.Statuses = statusList;
                 users.Add(user);
             }
-
+            if (users.Count == 0)
+            {
+                users.Add(new User() { Roles = rolesList, Statuses = statusList });
+            }
             return users;
 
         }

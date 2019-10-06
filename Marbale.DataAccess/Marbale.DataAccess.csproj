@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Data\AdminData.cs" />
     <Compile Include="Data\CategoryData.cs" />
+    <Compile Include="Data\CommonData.cs" />
     <Compile Include="Data\GameData.cs" />
     <Compile Include="Data\CardsData.cs" />
     <Compile Include="Data\LocationData.cs" />

@@ -1,7 +1,7 @@
 USE [Marbale]
 GO
 
-/****** Object:  Table [dbo].[ProductType]    Script Date: 1/16/2019 12:28:46 AM ******/
+/****** Object:  Table [dbo].[ProductType]    Script Date: 10/2/2019 4:46:24 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,7 +16,11 @@ CREATE TABLE [dbo].[ProductType](
 	[CardSale] [bit] NULL,
 	[Active] [bit] NULL,
 	[LastUpdatedDate] [datetime] NULL,
-	[LastUpdatedBy] [varchar](50) NULL
+	[LastUpdatedBy] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 

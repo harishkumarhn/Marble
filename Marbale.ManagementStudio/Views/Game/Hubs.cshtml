@@ -4,11 +4,11 @@
 }
 
 <div class="first">
-    <div class="second" style="margin-left:17.0em; ">
+    <div class="second" style="margin-left: 17.0em;">
         <table id="marbleTable" class="table">
             <thead>
                 <th class="headerCol">ID</th>
-                <th class="headerCol" style="left:55px">Name</th>
+                <th class="headerCol" style="left: 55px">Name</th>
                 <th>Address</th>
                 <th>Frequency</th>
                 <th>Note</th>
@@ -22,7 +22,7 @@
             {  
                 <tr onchange="UpdatedList(this)">
                     <td class="headerCol">@item.Id  </td>
-                    <td class="headerCol" style="left:55px">
+                    <td class="headerCol" style="left: 55px">
                         <input type="text" value="@item.Name" class="gridText" />
                     </td>
                     <td>
@@ -56,7 +56,9 @@
 </div>
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveHubs()">Save</button>
-    <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddHub()">Add</a>
+    <button class="btn btn-primary btn-md" role="button" onclick="AddHub()">Add</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+
 </div>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
@@ -66,7 +68,7 @@
         });
     })
     function AddHub() {
-        var newRow = '<tr onchange=UpdatedList(this)> '+
+        var newRow = '<tr onchange=UpdatedList(this)> ' +
         '<td class="headerCol"> <a href="#"></a> </td> ' +
         ' <td class="headerCol" style="left:55px"> <input type="text" value="" class="gridText" />  </td>' +
         '<td> <input type="text" value="" class="gridText" />  </td>' +
