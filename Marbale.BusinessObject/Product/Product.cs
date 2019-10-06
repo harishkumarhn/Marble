@@ -12,6 +12,10 @@ namespace Marbale.BusinessObject
 {
     public class Product
     {
+        public Product()
+        {
+            TypeList = new List<IdValue>();
+        }
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Enter Product name.")]
@@ -61,9 +65,6 @@ namespace Marbale.BusinessObject
         public List<IdValue> CategoryList { get; set; }
         public List<TaxSet> TaxList { get; set; }
         public List<IdValue> DisplayGroupList { get; set; }
-
-
-
         public int TaxId { get; set; }
     }
 }

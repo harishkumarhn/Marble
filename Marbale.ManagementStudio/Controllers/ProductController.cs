@@ -1,4 +1,5 @@
 ﻿using Marbale.Business;
+using Marbale.Business.Enum;
 using Marbale.BusinessObject;
 using Marbale.BusinessObject.Tax;
 using MarbaleManagementStudio.Models;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace MarbaleManagementStudio.Controllers
 {
@@ -25,12 +27,13 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
+
+
         public ActionResult ProductSetup()
         {
             try
             {
-                var products = productBussiness.GetProducts();
-                ViewBag.productDetails = products;
+                ViewBag.productDetails = productBussiness.GetProducts((int)ProductTypeEnum.Card);
                 return View();
             }
             catch (Exception e)
@@ -39,6 +42,29 @@ namespace MarbaleManagementStudio.Controllers
                 throw;
             }
 
+        }
+        public ActionResult NonCardProductSetup()
+        {
+            try
+            {
+                var products = productBussiness.GetProducts((int)ProductTypeEnum.Manual);
+                Session["TaxList"] = products[0].TaxList;
+                ViewBag.productDetails = products;
+                return View();
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("NonCardProductSetup", e);
+                throw;
+            }
+
+        }
+        [HttpGet]
+        public ActionResult NonCardEdit()
+        {
+            Product a = new Product();
+            a.TaxList = Session["TaxList"] as List<TaxSet>;
+            return View(a);
         }
 
         [HttpGet]
@@ -72,12 +98,22 @@ namespace MarbaleManagementStudio.Controllers
             }
             return status;
         }
-
+        public ActionResult NonCardEdit(int id)
+        {
+            try
+            {
+                var product = productBussiness.GetProductById(id);
+                return View(product);
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("Edit", e);
+                throw;
+            }
+        }
 
         public ActionResult Edit(int id)
         {
-            //    List<Product> ProductList = Session["ProductList"] as List<Product>;
-            // var p = ProductList.Where(s => s.Id == id).FirstOrDefault();
             try
             {
                 var product = productBussiness.GetProductById(id);
@@ -207,7 +243,6 @@ namespace MarbaleManagementStudio.Controllers
         }
         public JsonResult TaxDetails(Product model)
         {
-
             //  Product p = new Product();
             if (Session["TaxList"] != null)
             {
