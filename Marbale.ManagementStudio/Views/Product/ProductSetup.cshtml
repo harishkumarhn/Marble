@@ -254,8 +254,13 @@
               @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
               {
                  @: typeListOptions = typeListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
+                          }
+            var taxListOptions = '';
+              @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
+              {
+                 @: taxListOptions = taxListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
               }
-            typeListOptions = typeListOptions + '</select>';
+            taxListOptions = taxListOptions + '</select>';
             var categoryListOptions = '';
               @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
               {
@@ -278,7 +283,9 @@
                 '<input type="text" value="" />',
                 '<input type="checkbox" />',
                 '<input type="text" value="" />',
+                '<select name="taxlist" id="taxlist">' + taxListOptions,
                 '<input type="text" value="" />',
+                    '<input type="text" value="" />',
                 '<input type="text" value="" disabled/>',
                 '<input type="text" value="" disabled/>',
             ]).draw(false);

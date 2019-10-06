@@ -256,6 +256,12 @@
                  @: typeListOptions = typeListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
               }
             typeListOptions = typeListOptions + '</select>';
+            var taxListOptions = '';
+              @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
+              {
+                 @: taxListOptions = taxListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
+              }
+            taxListOptions = taxListOptions + '</select>';
             var categoryListOptions = '';
               @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["CategoryList"])
               {
@@ -278,7 +284,9 @@
                 '<input type="text" value="" />',
                 '<input type="checkbox" />',
                 '<input type="text" value="" />',
+                '<select name="taxlist" id="taxlist">' + taxListOptions,
                 '<input type="text" value="" />',
+                    '<input type="text" value="" />',
                 '<input type="text" value="" disabled/>',
                 '<input type="text" value="" disabled/>',
             ]).draw(false);
@@ -380,7 +388,7 @@
     function EditProduct(id) {
         $('.modal-title').text('Edit Product');
         $('#basicExampleModal').modal('show');
-        $('#modelbody').load('/Product/Edit', { "id": id });
+        $('#modelbody').load('/Product/NonCardEdit', { "id": id });
     }
     function DeleteProduct(id) {
         if (confirm('Are you sure you want to delete this from database?')) {
