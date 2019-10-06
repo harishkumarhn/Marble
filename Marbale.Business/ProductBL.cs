@@ -152,24 +152,35 @@ namespace Marbale.Business
                     product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                     product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                     product.TaxName = dr.IsNull("TaxName") ? "" : dr["TaxName"].ToString();
-                    product.TypeList = typeList;
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;
                     product.DisplayGroupList = DisplatInList;
                     if (productType == (int)ProductTypeEnum.Card && product.Type != manualTypeId)
                     {
+                        product.TypeList = typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList();
                         products.Add(product);
                     }
                     else if ((int)ProductTypeEnum.Manual == productType && product.Type == manualTypeId)
                     {
+                        product.TypeList = typeList.Where(x => x.Value == ProductTypeEnum.Manual.ToString()).ToList();
                         products.Add(product);
                     }
                 }
                 if (products.Count == 0)
                 {
+                    var defaultTypeList = new List<IdValue>();
+                    defaultTypeList.Add(new IdValue() { Id = null, Value = "Select" });
+                    if (productType == (int)ProductTypeEnum.Card)
+                    {
+                        defaultTypeList.AddRange(typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList());
+                    }
+                    else if ((int)ProductTypeEnum.Manual == productType)
+                    {
+                        defaultTypeList.AddRange(typeList.Where(x => x.Value == ProductTypeEnum.Manual.ToString()).ToList());
+                    }
                     var p = new Product() 
-                    { 
-                        TypeList = typeList, 
+                    {
+                        TypeList = defaultTypeList, 
                         CategoryList = categoryList,
                         TaxList=TaxList,
                         DisplayGroupList = DisplatInList
