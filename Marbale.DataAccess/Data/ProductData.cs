@@ -94,6 +94,17 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetListItemsByGroupId()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetProductTypeLookUp");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public DataTable GetProductCategoryLookUp()
         {
             try
@@ -118,6 +129,21 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+
+        public DataTable GetDiscountById(int id)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@id", id);
+                return conn.executeSelectQuery("sp_GetDiscountById", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public int InsertOrUpdateProduct(Product product)
         {
             try
@@ -160,7 +186,7 @@ namespace Marbale.DataAccess
 
         }
         
-        public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, int DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory, bool Type)
+        public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, decimal DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory, bool Type)
         {
             try
             {

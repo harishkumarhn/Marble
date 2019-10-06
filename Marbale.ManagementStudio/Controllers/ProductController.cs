@@ -34,10 +34,6 @@ namespace MarbaleManagementStudio.Controllers
             {
                
                 var products = productBussiness.GetProducts();
-                Session["ProductList"] = products;
-                Session["CategoryList"] = products[0].CategoryList;
-                Session["TypeList"] = products[0].TypeList;
-                Session["TaxList"] = products[0].TaxList;
                 ViewBag.productDetails = products.Where(a => a.Type != "100");
                 return View();
             }

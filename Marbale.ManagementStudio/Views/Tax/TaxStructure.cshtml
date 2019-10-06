@@ -3,35 +3,41 @@
     
     ViewBag.Title = "Tax Structure";
     Layout = null;
-    }
+}
 
 <div class="taxsetmodel">
-<div id="taxtable">
- <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddTax()">Add Tax Structure</a>
-    <table id="TaxStructure" class="table TaxStructure" style="background-color:indianred">  
-        <thead>  
-            <th>Tax StructureId</th>  
-            <th>Tax structure Name</th>  
-            <th>Tax structure Percentage</th> 
-        </thead>  
-        @if(Model!=null)
-     {
-            int count=1;
-        foreach (var item1 in Model)  
-        {  
-        <tr onchange= "UpdatedList(this)"> 
-             <td> <input type="text" id="TaxStructureId@(count)" value="@item1.TaxStructureId" disabled >   </td>
-       
-        <td > <input type="text" value="@item1.TaxStructureName" class="gridText"  id="TaxStructureName@(count)"/>  </td>
-        <td> <input type="number" value="@item1.TaxStructurePercentage" class="gridText" id="TaxStructurePercentage@(count)" />  </td>
-    </tr> 
-            count++;
-        }   
-     }
-    </table>
+    <div id="taxtable">
+        <a href="#" class="btn btn-primary btn-md" role="button" onclick="AddTax()">Add Tax Structure</a>
+        <table id="TaxStructure" class="table TaxStructure">
+            <thead>
+                <th>Tax StructureId</th>
+                <th>Tax structure Name</th>
+                <th>Tax structure Percentage</th>
+            </thead>
+            @if (Model != null)
+            {
+                int count = 1;
+                foreach (var item1 in Model)
+                {  
+                <tr onchange="UpdatedList(this)" style="background-color:white">
+                    <td>
+                        <input type="text" id="TaxStructureId@(count)" value="@item1.TaxStructureId" disabled >
+                    </td>
+
+                    <td>
+                        <input type="text" value="@item1.TaxStructureName"  id="TaxStructureName@(count)"/>
+                    </td>
+                    <td>
+                        <input type="number" value="@item1.TaxStructurePercentage" id="TaxStructurePercentage@(count)" />
+                    </td>
+                </tr> 
+                    count++;
+                }
+            }
+        </table>
     </div>
- <button class="btn btn-primary btn-md" role="button" onclick="SaveTaxSet()">Save</button> 
-    </div> 
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveTaxSet()">Save</button>
+</div>
 <style>
 
 </style>
@@ -41,24 +47,24 @@
         var TaxStructureId = "TaxStructureId" + index;
         var TaxStructureName = "TaxStructureName" + index;
         var TaxStructurePercentage = "TaxStructurePercentage" + index;
-        var newRow = '<tr onchange=UpdatedList(this)> <td> <a href="#"></a> </td>' +
-     '<td> <input type="text" class="gridText" id="' + TaxStructureName + '" />  </td>' +
-     '<td> <input type="number" class="gridText"  id="' + TaxStructurePercentage + '" />  </td>' +
+        var newRow = '<tr onchange=UpdatedList(this) style="background-color:white"> <td> <a href="#"></a> </td>' +
+     '<td> <input type="text" id="' + TaxStructureName + '" />  </td>' +
+     '<td> <input type="number"  id="' + TaxStructurePercentage + '" />  </td>' +
       '</tr>';
         $('#TaxStructure tr:last').after(newRow);
     }
     function UpdatedList(x) {
-        debugger;
+
         updatedArray = [];
         updatedArray.push(x.rowIndex);
     }
     function SaveTaxSet() {
-        debugger
+
         var table = document.getElementById('TaxStructure');
         var id = updatedArray[0];
 
         var taxstructure = {
-            TaxId:localStorage['TaxId'],
+            TaxId: localStorage['TaxId'],
             TaxStructureId: $('#TaxStructureId' + id).val(),
             TaxStructureName: $('#TaxStructureName' + id).val(),
             TaxStructurePercentage: $("#TaxStructurePercentage" + id).val()

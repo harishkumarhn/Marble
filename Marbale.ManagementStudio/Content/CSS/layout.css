@@ -190,32 +190,32 @@ a.article:hover {
     right: 0;
 }
 
-.dataTables_scrollBody {
-    max-height: 400px !important;
-}
-.focusedRow
-{
-    font-weight: bold;
-    text-shadow: 1px 1px 0px #EEE;
-    color: #111;
-}
-table.table td i {
-    font-size: 18px;
-}
-td a.delete {
-    color: #E34724 !important;
-}
 
-td a.edit {
-   color: #FFC107 !important;
-}
-td a {
-    cursor: pointer;
-}
 input[type=checkbox] {
     width: 17px;
     height: 17px;
 }
 input[type=text] {
    max-height: 30px !important;
+}
+.pageContent {
+    padding-left:5px;
+    padding-right:5px;
+}
+.action {
+  position: fixed;
+  left: 10px;
+  bottom: 0;
+  height:10%;
+  width: 100%;
+  text-align: left;
+}
+button {
+    min-width:100px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }

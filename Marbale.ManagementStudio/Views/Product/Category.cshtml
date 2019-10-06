@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Product Category";
 }
-<table id="marbleTable" class="stripe row-border order-column">
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
     <thead>
         <th>ID</th>
         <th>Name</th>
@@ -40,7 +40,8 @@
 
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" id="saveproductcat" onclick="SaveProductCategory()" disabled>Save</button>
-    <a href="#" id="addRow" class="btn btn-primary btn-md" role="button">Add Product Category</a>
+    <button id="addRow" class="btn btn-primary btn-md" role="button">Add Product Category</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
 </div>
 <script>
 
@@ -73,18 +74,10 @@
                 });
             }
         });
-        $('#marbleTable tbody').on('click', 'tr', function () {
-            if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected');
-            }
-            else {
-                table.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
-        });
         $('#addRow').on('click', function () {
             $('#saveproductcat').removeAttr('disabled');
             var categoryListOptions = '';
+
               @foreach (var dow in ViewBag.categories[0].Categories)
               {
                    @: categoryListOptions = categoryListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
@@ -108,7 +101,7 @@
         var productCategories = [];
         var table = document.getElementById('marbleTable');
         for (var r = 0, n = table.rows.length; r < n; r++) {
-            var rowIndex = r+1;
+            var rowIndex = r + 1;
 
             if (updatedArray.includes(r)) {
                 var selectedIndex = table.rows[rowIndex].cells[2].children[0].options["selectedIndex"];

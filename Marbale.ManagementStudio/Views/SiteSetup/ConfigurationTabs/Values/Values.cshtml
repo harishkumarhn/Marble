@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Marbale.BusinessObject.Buttons>
+@{
+    Layout = null;
+}
+<div class="tabButtons">
+    @foreach (var item in Model)
+    {
+        <button class="@item.Class" id="@item.Id" onclick="@item.MethodName"title="@item.Tittle">@item.Text</button>
+    }
+</div>
+<div id="valuesContainer">
+</div>
+<script>
+    $(document).ready(function () {
+        $('#loading').show();
+        getposdetails();
+        $("#postab").addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+        $('#loading').hide();
+    })
+    function getTransactionDetails() {
+        $('#valuesContainer').load('/SiteSetup/Transaction', { ValType: 'Transaction' });
+    }
+    function getFormatsInfo() {
+        $('#valuesContainer').load('/SiteSetup/Formats', { ValType: 'Formats' });
+    }
+    function getPrintDetails() {
+        $('#valuesContainer').load('/SiteSetup/Print', { ValType: 'Print' });
+    }
+    function getServerDetails() {
+        $('#valuesContainer').load('/SiteSetup/Server', { ValType: 'Transaction' });
+    }
+    function getSignageDetails() {
+        $('#valuesContainer').load('/SiteSetup/Signage', { ValType: 'Signage' });
+    }
+    function getEmailDetails() {
+        $('#valuesContainer').load('/SiteSetup/Email', { ValType: 'Transaction' });
+    }
+    function getLimitDetails() {
+        $('#valuesContainer').load('/SiteSetup/Limit', { ValType: 'Limit' });
+    }
+    function getposdetails() {
+        $('#valuesContainer').load('/SiteSetup/POS', { ValType: 'pos' });
+    }
+    function getBackupDetails() {
+        $('#valuesContainer').load('/SiteSetup/BackUp', { ValType: 'pos' });
+    }
+    function getPriceDetails() {
+        $('#valuesContainer').load('/SiteSetup/Price', { ValType: 'price' });
+    }
+    function getCardDetails() {
+        $('#valuesContainer').load('/SiteSetup/Card');
+    }
+    function getInventoryInfo() {
+        $('#valuesContainer').load('/SiteSetup/Inventory');
+    }
+    function getRedInfo() {
+        $('#valuesContainer').load('/SiteSetup/Redemption');
+    }
+    function getPaymentInfo() {
+        $('#valuesContainer').load('/SiteSetup/Payment');
+    }
+    function getCustomerDetails() {
+        $('#valuesContainer').load('/SiteSetup/Customer');
+    }
+    $('.tablinks').click(function () {
+        $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+    });
+</script>
+<style>
+    .buttoncolor-change {
+        background-color: cornflowerblue;
+    }
+
+    .valuesContainer {
+        position: absolute;
+        left: 350px;
+        width: 655px;
+    }
+
+    .tabButtons {
+        width: 100%;
+        background-color: #d8d7d6;
+        height: 109px;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 80%;
+    }
+
+    th {
+       font-weight: 600;
+        border: none;
+        text-align: left;
+        max-width: 30%;
+        min-width: 15%;
+        word-wrap: break-word;
+    }
+
+    .tabContent {
+        margin-left: 15%;
+        height: 400px;
+        overflow-y: auto;
+    }
+
+    .actionItems {
+        margin-left: 15%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .actionItems button {
+        margin-right:15px;
+    }
+</style>

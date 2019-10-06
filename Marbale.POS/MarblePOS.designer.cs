@@ -28,13 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarblePOS));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -43,22 +40,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarblePOS));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControlCardAction = new System.Windows.Forms.TabControl();
             this.tabPageTrx = new System.Windows.Forms.TabPage();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnSuspendOrder = new System.Windows.Forms.Button();
+            this.btnCancelTrxnLine = new System.Windows.Forms.Button();
+            this.btnClearTrxn = new System.Windows.Forms.Button();
+            this.btnPayment = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.dgvTransaction = new System.Windows.Forms.DataGridView();
-            this.Product_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Product_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Line_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Line_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TaxName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Card_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageMyTrx = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -127,15 +122,28 @@
             this.btnRefundCard = new System.Windows.Forms.Button();
             this.MarbleSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panelButtons = new System.Windows.Forms.Panel();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.btnKeypad = new System.Windows.Forms.Button();
+            this.btnTask = new System.Windows.Forms.Button();
+            this.btnLaunch = new System.Windows.Forms.Button();
+            this.btnRefund = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.tbHomeControls = new System.Windows.Forms.TabControl();
             this.tbPageProducts = new System.Windows.Forms.TabPage();
             this.flowLayoutPanelProducts = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSampleProduct = new System.Windows.Forms.Button();
             this.tbPageDiscounts = new System.Windows.Forms.TabPage();
             this.flowLayoutPanelDiscounts = new System.Windows.Forms.FlowLayoutPanel();
             this.SampleButtonDiscount = new System.Windows.Forms.Button();
             this.tbPageFunctions = new System.Windows.Forms.TabPage();
             this.flowLayoutPanelFunctions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLoadTickets = new System.Windows.Forms.Button();
+            this.btnLoadBonus = new System.Windows.Forms.Button();
+            this.btnLoadMultiple = new System.Windows.Forms.Button();
+            this.btnTransferCard = new System.Windows.Forms.Button();
+            this.btnCansolidateCard = new System.Windows.Forms.Button();
             this.tbPageRedeem = new System.Windows.Forms.TabPage();
+            this.pbRedeem = new System.Windows.Forms.PictureBox();
             this.tbPageSystem = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnReConnectCardReader = new System.Windows.Forms.Button();
@@ -156,25 +164,21 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.cmbPaymentMode = new System.Windows.Forms.ComboBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.btnKeypad = new System.Windows.Forms.Button();
-            this.btnTask = new System.Windows.Forms.Button();
-            this.btnLaunch = new System.Windows.Forms.Button();
-            this.btnRefund = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnSampleProduct = new System.Windows.Forms.Button();
-            this.btnLoadTickets = new System.Windows.Forms.Button();
-            this.btnLoadBonus = new System.Windows.Forms.Button();
-            this.btnRedeemLoyalty = new System.Windows.Forms.Button();
-            this.btnRedeemTicketsForBonus = new System.Windows.Forms.Button();
-            this.btnSalesReturnExchange = new System.Windows.Forms.Button();
-            this.pbRedeem = new System.Windows.Forms.PictureBox();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnSuspendOrder = new System.Windows.Forms.Button();
-            this.btnCancelTrxnLine = new System.Windows.Forms.Button();
-            this.btnClearTrxn = new System.Windows.Forms.Button();
-            this.btnPayment = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.posContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.changeLayoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enterMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Product_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Product_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Line_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Line_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TaxName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Card_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControlCardAction.SuspendLayout();
             this.tabPageTrx.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransaction)).BeginInit();
@@ -204,12 +208,13 @@
             this.tbPageFunctions.SuspendLayout();
             this.flowLayoutPanelFunctions.SuspendLayout();
             this.tbPageRedeem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRedeem)).BeginInit();
             this.tbPageSystem.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelSkinColor.SuspendLayout();
             this.panelPassword.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRedeem)).BeginInit();
+            this.posContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlCardAction
@@ -250,6 +255,159 @@
             this.tabPageTrx.TabIndex = 0;
             this.tabPageTrx.Text = "Transaction";
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPrint.AutoEllipsis = true;
+            this.btnPrint.BackgroundImage = global::Marbale.POS.Properties.Resources.Print;
+            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnPrint.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnPrint.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.ForeColor = System.Drawing.Color.White;
+            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnPrint.Location = new System.Drawing.Point(532, 406);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(101, 57);
+            this.btnPrint.TabIndex = 10;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnPrint.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
+            // 
+            // btnSuspendOrder
+            // 
+            this.btnSuspendOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSuspendOrder.AutoEllipsis = true;
+            this.btnSuspendOrder.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSuspendOrder.BackgroundImage")));
+            this.btnSuspendOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSuspendOrder.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
+            this.btnSuspendOrder.FlatAppearance.BorderSize = 0;
+            this.btnSuspendOrder.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnSuspendOrder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSuspendOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSuspendOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSuspendOrder.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuspendOrder.ForeColor = System.Drawing.Color.White;
+            this.btnSuspendOrder.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSuspendOrder.Location = new System.Drawing.Point(427, 406);
+            this.btnSuspendOrder.Name = "btnSuspendOrder";
+            this.btnSuspendOrder.Size = new System.Drawing.Size(101, 57);
+            this.btnSuspendOrder.TabIndex = 9;
+            this.btnSuspendOrder.Text = "Suspend Order";
+            this.btnSuspendOrder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSuspendOrder.UseVisualStyleBackColor = false;
+            this.btnSuspendOrder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnSuspendOrder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
+            // 
+            // btnCancelTrxnLine
+            // 
+            this.btnCancelTrxnLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancelTrxnLine.AutoEllipsis = true;
+            this.btnCancelTrxnLine.BackgroundImage = global::Marbale.POS.Properties.Resources.Cancel_Transaction;
+            this.btnCancelTrxnLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCancelTrxnLine.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
+            this.btnCancelTrxnLine.FlatAppearance.BorderSize = 0;
+            this.btnCancelTrxnLine.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnCancelTrxnLine.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnCancelTrxnLine.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnCancelTrxnLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelTrxnLine.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelTrxnLine.ForeColor = System.Drawing.Color.White;
+            this.btnCancelTrxnLine.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnCancelTrxnLine.Location = new System.Drawing.Point(321, 406);
+            this.btnCancelTrxnLine.Name = "btnCancelTrxnLine";
+            this.btnCancelTrxnLine.Size = new System.Drawing.Size(101, 57);
+            this.btnCancelTrxnLine.TabIndex = 8;
+            this.btnCancelTrxnLine.Text = "Cancel Trx Line";
+            this.btnCancelTrxnLine.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCancelTrxnLine.UseVisualStyleBackColor = false;
+            this.btnCancelTrxnLine.Click += new System.EventHandler(this.btnCancelTrxnLine_Click);
+            this.btnCancelTrxnLine.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnCancelTrxnLine.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
+            // 
+            // btnClearTrxn
+            // 
+            this.btnClearTrxn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClearTrxn.AutoEllipsis = true;
+            this.btnClearTrxn.BackgroundImage = global::Marbale.POS.Properties.Resources.Clear_Transaction;
+            this.btnClearTrxn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClearTrxn.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
+            this.btnClearTrxn.FlatAppearance.BorderSize = 0;
+            this.btnClearTrxn.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnClearTrxn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnClearTrxn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnClearTrxn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearTrxn.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearTrxn.ForeColor = System.Drawing.Color.White;
+            this.btnClearTrxn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnClearTrxn.Location = new System.Drawing.Point(216, 406);
+            this.btnClearTrxn.Name = "btnClearTrxn";
+            this.btnClearTrxn.Size = new System.Drawing.Size(101, 57);
+            this.btnClearTrxn.TabIndex = 7;
+            this.btnClearTrxn.Text = "Clear Trxn";
+            this.btnClearTrxn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnClearTrxn.UseVisualStyleBackColor = false;
+            this.btnClearTrxn.Click += new System.EventHandler(this.btnClearTrxn_Click);
+            this.btnClearTrxn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnClearTrxn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
+            // 
+            // btnPayment
+            // 
+            this.btnPayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPayment.AutoEllipsis = true;
+            this.btnPayment.BackgroundImage = global::Marbale.POS.Properties.Resources.Payment;
+            this.btnPayment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
+            this.btnPayment.FlatAppearance.BorderSize = 0;
+            this.btnPayment.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnPayment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnPayment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayment.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPayment.ForeColor = System.Drawing.Color.White;
+            this.btnPayment.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnPayment.Location = new System.Drawing.Point(110, 406);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(101, 57);
+            this.btnPayment.TabIndex = 6;
+            this.btnPayment.Text = "Payment";
+            this.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPayment.UseVisualStyleBackColor = false;
+            this.btnPayment.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnPayment.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSave.AutoEllipsis = true;
+            this.btnSave.BackgroundImage = global::Marbale.POS.Properties.Resources.Save_Transaction;
+            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSave.Location = new System.Drawing.Point(3, 406);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(101, 57);
+            this.btnSave.TabIndex = 5;
+            this.btnSave.Text = "Save Trxn";
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnSave.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
+            // 
             // dgvTransaction
             // 
             this.dgvTransaction.AllowUserToAddRows = false;
@@ -271,8 +429,8 @@
             this.dgvTransaction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Product_Name,
             this.Product_Type,
+            this.Product_Name,
             this.Quantity,
             this.Price,
             this.Tax,
@@ -305,108 +463,6 @@
             this.dgvTransaction.Size = new System.Drawing.Size(712, 395);
             this.dgvTransaction.TabIndex = 4;
             this.dgvTransaction.TabStop = false;
-            // 
-            // Product_Name
-            // 
-            this.Product_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Product_Name.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Product_Name.HeaderText = "Product";
-            this.Product_Name.MinimumWidth = 100;
-            this.Product_Name.Name = "Product_Name";
-            this.Product_Name.ReadOnly = true;
-            this.Product_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Product_Type
-            // 
-            this.Product_Type.HeaderText = "Product Type";
-            this.Product_Type.Name = "Product_Type";
-            this.Product_Type.Visible = false;
-            // 
-            // Quantity
-            // 
-            this.Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Quantity.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Quantity.HeaderText = "Quantity";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.ReadOnly = true;
-            this.Quantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Quantity.Width = 68;
-            // 
-            // Price
-            // 
-            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.Price.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Price.Width = 47;
-            // 
-            // Tax
-            // 
-            this.Tax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.Tax.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Tax.HeaderText = "Tax";
-            this.Tax.Name = "Tax";
-            this.Tax.ReadOnly = true;
-            this.Tax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Tax.Width = 33;
-            // 
-            // Line_Amount
-            // 
-            this.Line_Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.Line_Amount.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Line_Amount.HeaderText = "Amount";
-            this.Line_Amount.MinimumWidth = 100;
-            this.Line_Amount.Name = "Line_Amount";
-            this.Line_Amount.ReadOnly = true;
-            this.Line_Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Remarks
-            // 
-            this.Remarks.HeaderText = "Remarks";
-            this.Remarks.Name = "Remarks";
-            this.Remarks.Visible = false;
-            // 
-            // Line_Type
-            // 
-            this.Line_Type.HeaderText = "Line_Type";
-            this.Line_Type.Name = "Line_Type";
-            this.Line_Type.Visible = false;
-            // 
-            // TaxName
-            // 
-            this.TaxName.HeaderText = "Tax Name";
-            this.TaxName.Name = "TaxName";
-            this.TaxName.Visible = false;
-            // 
-            // Card_Number
-            // 
-            this.Card_Number.HeaderText = "Card Number";
-            this.Card_Number.Name = "Card_Number";
-            this.Card_Number.Visible = false;
-            // 
-            // LineId
-            // 
-            this.LineId.HeaderText = "LineId";
-            this.LineId.Name = "LineId";
-            this.LineId.Visible = false;
-            // 
-            // ProductId
-            // 
-            this.ProductId.HeaderText = "ProductId";
-            this.ProductId.Name = "ProductId";
-            this.ProductId.Visible = false;
             // 
             // tabPageMyTrx
             // 
@@ -1239,6 +1295,137 @@
             this.panelButtons.Size = new System.Drawing.Size(468, 72);
             this.panelButtons.TabIndex = 24;
             // 
+            // btnLogout
+            // 
+            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnLogout.ForeColor = System.Drawing.Color.White;
+            this.btnLogout.Image = global::Marbale.POS.Properties.Resources.Logout;
+            this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnLogout.Location = new System.Drawing.Point(338, 9);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(60, 60);
+            this.btnLogout.TabIndex = 18;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnKeypad
+            // 
+            this.btnKeypad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnKeypad.BackColor = System.Drawing.Color.Transparent;
+            this.btnKeypad.FlatAppearance.BorderSize = 0;
+            this.btnKeypad.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnKeypad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnKeypad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnKeypad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnKeypad.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnKeypad.ForeColor = System.Drawing.Color.White;
+            this.btnKeypad.Image = global::Marbale.POS.Properties.Resources.Keypad_Icon_32;
+            this.btnKeypad.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnKeypad.Location = new System.Drawing.Point(272, 9);
+            this.btnKeypad.Name = "btnKeypad";
+            this.btnKeypad.Size = new System.Drawing.Size(60, 60);
+            this.btnKeypad.TabIndex = 23;
+            this.btnKeypad.Text = "Keypad";
+            this.btnKeypad.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnKeypad.UseVisualStyleBackColor = true;
+            this.btnKeypad.Click += new System.EventHandler(this.btnKeypad_Click);
+            // 
+            // btnTask
+            // 
+            this.btnTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnTask.BackColor = System.Drawing.Color.Transparent;
+            this.btnTask.FlatAppearance.BorderSize = 0;
+            this.btnTask.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnTask.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnTask.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTask.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnTask.ForeColor = System.Drawing.Color.White;
+            this.btnTask.Image = ((System.Drawing.Image)(resources.GetObject("btnTask.Image")));
+            this.btnTask.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnTask.Location = new System.Drawing.Point(4, 9);
+            this.btnTask.Name = "btnTask";
+            this.btnTask.Size = new System.Drawing.Size(60, 60);
+            this.btnTask.TabIndex = 21;
+            this.btnTask.Text = "Task";
+            this.btnTask.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnTask.UseVisualStyleBackColor = true;
+            this.btnTask.Click += new System.EventHandler(this.btnTask_Click);
+            // 
+            // btnLaunch
+            // 
+            this.btnLaunch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLaunch.BackColor = System.Drawing.Color.Transparent;
+            this.btnLaunch.FlatAppearance.BorderSize = 0;
+            this.btnLaunch.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnLaunch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnLaunch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnLaunch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLaunch.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnLaunch.ForeColor = System.Drawing.Color.White;
+            this.btnLaunch.Image = ((System.Drawing.Image)(resources.GetObject("btnLaunch.Image")));
+            this.btnLaunch.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnLaunch.Location = new System.Drawing.Point(205, 9);
+            this.btnLaunch.Name = "btnLaunch";
+            this.btnLaunch.Size = new System.Drawing.Size(60, 60);
+            this.btnLaunch.TabIndex = 21;
+            this.btnLaunch.Text = "Launch";
+            this.btnLaunch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnLaunch.UseVisualStyleBackColor = true;
+            // 
+            // btnRefund
+            // 
+            this.btnRefund.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefund.BackColor = System.Drawing.Color.Transparent;
+            this.btnRefund.FlatAppearance.BorderSize = 0;
+            this.btnRefund.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnRefund.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnRefund.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnRefund.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefund.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnRefund.ForeColor = System.Drawing.Color.White;
+            this.btnRefund.Image = ((System.Drawing.Image)(resources.GetObject("btnRefund.Image")));
+            this.btnRefund.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnRefund.Location = new System.Drawing.Point(138, 9);
+            this.btnRefund.Name = "btnRefund";
+            this.btnRefund.Size = new System.Drawing.Size(60, 60);
+            this.btnRefund.TabIndex = 22;
+            this.btnRefund.Text = "Refund";
+            this.btnRefund.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRefund.UseVisualStyleBackColor = true;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnRefresh.Location = new System.Drawing.Point(71, 9);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(60, 60);
+            this.btnRefresh.TabIndex = 20;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // tbHomeControls
             // 
             this.tbHomeControls.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1285,6 +1472,27 @@
             this.flowLayoutPanelProducts.Name = "flowLayoutPanelProducts";
             this.flowLayoutPanelProducts.Size = new System.Drawing.Size(461, 569);
             this.flowLayoutPanelProducts.TabIndex = 0;
+            // 
+            // btnSampleProduct
+            // 
+            this.btnSampleProduct.BackColor = System.Drawing.Color.Transparent;
+            this.btnSampleProduct.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSampleProduct.BackgroundImage")));
+            this.btnSampleProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSampleProduct.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnSampleProduct.FlatAppearance.BorderSize = 0;
+            this.btnSampleProduct.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnSampleProduct.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSampleProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSampleProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSampleProduct.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.btnSampleProduct.ForeColor = System.Drawing.Color.Black;
+            this.btnSampleProduct.Location = new System.Drawing.Point(3, 3);
+            this.btnSampleProduct.Name = "btnSampleProduct";
+            this.btnSampleProduct.Size = new System.Drawing.Size(120, 96);
+            this.btnSampleProduct.TabIndex = 0;
+            this.btnSampleProduct.Text = "New Card";
+            this.btnSampleProduct.UseVisualStyleBackColor = false;
+            this.btnSampleProduct.Visible = false;
             // 
             // tbPageDiscounts
             // 
@@ -1348,14 +1556,134 @@
             this.flowLayoutPanelFunctions.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanelFunctions.Controls.Add(this.btnLoadTickets);
             this.flowLayoutPanelFunctions.Controls.Add(this.btnLoadBonus);
-            this.flowLayoutPanelFunctions.Controls.Add(this.btnRedeemLoyalty);
-            this.flowLayoutPanelFunctions.Controls.Add(this.btnRedeemTicketsForBonus);
-            this.flowLayoutPanelFunctions.Controls.Add(this.btnSalesReturnExchange);
+            this.flowLayoutPanelFunctions.Controls.Add(this.btnLoadMultiple);
+            this.flowLayoutPanelFunctions.Controls.Add(this.btnTransferCard);
+            this.flowLayoutPanelFunctions.Controls.Add(this.btnCansolidateCard);
             this.flowLayoutPanelFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelFunctions.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanelFunctions.Name = "flowLayoutPanelFunctions";
             this.flowLayoutPanelFunctions.Size = new System.Drawing.Size(461, 569);
             this.flowLayoutPanelFunctions.TabIndex = 0;
+            // 
+            // btnLoadTickets
+            // 
+            this.btnLoadTickets.BackColor = System.Drawing.Color.Transparent;
+            this.btnLoadTickets.BackgroundImage = global::Marbale.POS.Properties.Resources.Load_Tickets;
+            this.btnLoadTickets.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLoadTickets.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnLoadTickets.FlatAppearance.BorderSize = 0;
+            this.btnLoadTickets.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnLoadTickets.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnLoadTickets.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnLoadTickets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoadTickets.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.btnLoadTickets.ForeColor = System.Drawing.Color.Snow;
+            this.btnLoadTickets.Location = new System.Drawing.Point(3, 3);
+            this.btnLoadTickets.Name = "btnLoadTickets";
+            this.btnLoadTickets.Size = new System.Drawing.Size(125, 80);
+            this.btnLoadTickets.TabIndex = 3;
+            this.btnLoadTickets.Tag = "LOADTICKETS";
+            this.btnLoadTickets.Text = "Load Tickets";
+            this.btnLoadTickets.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnLoadTickets.UseVisualStyleBackColor = false;
+            this.btnLoadTickets.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnLoadTickets.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
+            // 
+            // btnLoadBonus
+            // 
+            this.btnLoadBonus.BackColor = System.Drawing.Color.Transparent;
+            this.btnLoadBonus.BackgroundImage = global::Marbale.POS.Properties.Resources.Load_Bonus;
+            this.btnLoadBonus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLoadBonus.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnLoadBonus.FlatAppearance.BorderSize = 0;
+            this.btnLoadBonus.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnLoadBonus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnLoadBonus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnLoadBonus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoadBonus.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.btnLoadBonus.ForeColor = System.Drawing.Color.Snow;
+            this.btnLoadBonus.Location = new System.Drawing.Point(134, 3);
+            this.btnLoadBonus.Name = "btnLoadBonus";
+            this.btnLoadBonus.Size = new System.Drawing.Size(125, 80);
+            this.btnLoadBonus.TabIndex = 8;
+            this.btnLoadBonus.Tag = "LOADBONUS";
+            this.btnLoadBonus.Text = "Load Bonus";
+            this.btnLoadBonus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnLoadBonus.UseVisualStyleBackColor = false;
+            this.btnLoadBonus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnLoadBonus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
+            // 
+            // btnLoadMultiple
+            // 
+            this.btnLoadMultiple.BackColor = System.Drawing.Color.Transparent;
+            this.btnLoadMultiple.BackgroundImage = global::Marbale.POS.Properties.Resources.Load_Multiple;
+            this.btnLoadMultiple.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLoadMultiple.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnLoadMultiple.FlatAppearance.BorderSize = 0;
+            this.btnLoadMultiple.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnLoadMultiple.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnLoadMultiple.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnLoadMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoadMultiple.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.btnLoadMultiple.ForeColor = System.Drawing.Color.Snow;
+            this.btnLoadMultiple.Location = new System.Drawing.Point(265, 3);
+            this.btnLoadMultiple.Name = "btnLoadMultiple";
+            this.btnLoadMultiple.Size = new System.Drawing.Size(125, 80);
+            this.btnLoadMultiple.TabIndex = 10;
+            this.btnLoadMultiple.Tag = "REDEEMLOYALTY";
+            this.btnLoadMultiple.Text = "Load Multiple";
+            this.btnLoadMultiple.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnLoadMultiple.UseVisualStyleBackColor = false;
+            this.btnLoadMultiple.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnLoadMultiple.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
+            // 
+            // btnTransferCard
+            // 
+            this.btnTransferCard.BackColor = System.Drawing.Color.Transparent;
+            this.btnTransferCard.BackgroundImage = global::Marbale.POS.Properties.Resources.Transfer_Card;
+            this.btnTransferCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnTransferCard.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnTransferCard.FlatAppearance.BorderSize = 0;
+            this.btnTransferCard.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnTransferCard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnTransferCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnTransferCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTransferCard.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.btnTransferCard.ForeColor = System.Drawing.Color.Snow;
+            this.btnTransferCard.Location = new System.Drawing.Point(3, 89);
+            this.btnTransferCard.Name = "btnTransferCard";
+            this.btnTransferCard.Size = new System.Drawing.Size(125, 80);
+            this.btnTransferCard.TabIndex = 12;
+            this.btnTransferCard.Tag = "REDEEMTICKETSFORBONUS";
+            this.btnTransferCard.Text = "Transfer card";
+            this.btnTransferCard.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnTransferCard.UseVisualStyleBackColor = false;
+            this.btnTransferCard.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnTransferCard.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
+            // 
+            // btnCansolidateCard
+            // 
+            this.btnCansolidateCard.BackColor = System.Drawing.Color.Transparent;
+            this.btnCansolidateCard.BackgroundImage = global::Marbale.POS.Properties.Resources.Consolidate_Cards;
+            this.btnCansolidateCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCansolidateCard.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCansolidateCard.FlatAppearance.BorderSize = 0;
+            this.btnCansolidateCard.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnCansolidateCard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnCansolidateCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnCansolidateCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCansolidateCard.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.btnCansolidateCard.ForeColor = System.Drawing.Color.Snow;
+            this.btnCansolidateCard.Location = new System.Drawing.Point(134, 89);
+            this.btnCansolidateCard.Name = "btnCansolidateCard";
+            this.btnCansolidateCard.Size = new System.Drawing.Size(125, 80);
+            this.btnCansolidateCard.TabIndex = 17;
+            this.btnCansolidateCard.Tag = "SALESRETURNEXCHANGE";
+            this.btnCansolidateCard.Text = "Cansolidate Cards";
+            this.btnCansolidateCard.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCansolidateCard.UseVisualStyleBackColor = false;
+            this.btnCansolidateCard.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
+            this.btnCansolidateCard.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
             // 
             // tbPageRedeem
             // 
@@ -1369,6 +1697,15 @@
             this.tbPageRedeem.TabIndex = 4;
             this.tbPageRedeem.Text = "Redeem";
             this.tbPageRedeem.ToolTipText = "Redeem Tickets for Gifts";
+            // 
+            // pbRedeem
+            // 
+            this.pbRedeem.Location = new System.Drawing.Point(110, 28);
+            this.pbRedeem.Name = "pbRedeem";
+            this.pbRedeem.Size = new System.Drawing.Size(130, 130);
+            this.pbRedeem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbRedeem.TabIndex = 0;
+            this.pbRedeem.TabStop = false;
             // 
             // tbPageSystem
             // 
@@ -1615,415 +1952,127 @@
             this.label23.Text = "Default Pay Mode";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnLogout
+            // posContextMenu
             // 
-            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
-            this.btnLogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnLogout.FlatAppearance.BorderSize = 0;
-            this.btnLogout.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnLogout.ForeColor = System.Drawing.Color.White;
-            this.btnLogout.Image = ((System.Drawing.Image)(resources.GetObject("btnLogout.Image")));
-            this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnLogout.Location = new System.Drawing.Point(338, 9);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(60, 60);
-            this.btnLogout.TabIndex = 18;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnLogout.UseVisualStyleBackColor = false;
+            this.posContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeLayoutToolStripMenuItem,
+            this.enterMessageToolStripMenuItem});
+            this.posContextMenu.Name = "posContextMenu";
+            this.posContextMenu.Size = new System.Drawing.Size(155, 48);
+            this.posContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.posContextMenu_ItemClicked);
             // 
-            // btnKeypad
+            // changeLayoutToolStripMenuItem
             // 
-            this.btnKeypad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnKeypad.BackColor = System.Drawing.Color.Transparent;
-            this.btnKeypad.FlatAppearance.BorderSize = 0;
-            this.btnKeypad.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnKeypad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnKeypad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnKeypad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnKeypad.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnKeypad.ForeColor = System.Drawing.Color.White;
-            this.btnKeypad.Image = ((System.Drawing.Image)(resources.GetObject("btnKeypad.Image")));
-            this.btnKeypad.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnKeypad.Location = new System.Drawing.Point(272, 9);
-            this.btnKeypad.Name = "btnKeypad";
-            this.btnKeypad.Size = new System.Drawing.Size(60, 60);
-            this.btnKeypad.TabIndex = 23;
-            this.btnKeypad.Text = "Keypad";
-            this.btnKeypad.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnKeypad.UseVisualStyleBackColor = true;
-            this.btnKeypad.Click += new System.EventHandler(this.btnKeypad_Click);
+            this.changeLayoutToolStripMenuItem.Name = "changeLayoutToolStripMenuItem";
+            this.changeLayoutToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.changeLayoutToolStripMenuItem.Text = "Change Layout";
             // 
-            // btnTask
+            // enterMessageToolStripMenuItem
             // 
-            this.btnTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnTask.BackColor = System.Drawing.Color.Transparent;
-            this.btnTask.FlatAppearance.BorderSize = 0;
-            this.btnTask.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnTask.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnTask.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTask.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnTask.ForeColor = System.Drawing.Color.White;
-            this.btnTask.Image = ((System.Drawing.Image)(resources.GetObject("btnTask.Image")));
-            this.btnTask.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnTask.Location = new System.Drawing.Point(4, 9);
-            this.btnTask.Name = "btnTask";
-            this.btnTask.Size = new System.Drawing.Size(60, 60);
-            this.btnTask.TabIndex = 21;
-            this.btnTask.Text = "Task";
-            this.btnTask.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTask.UseVisualStyleBackColor = true;
-            this.btnTask.Click += new System.EventHandler(this.btnTask_Click);
+            this.enterMessageToolStripMenuItem.Name = "enterMessageToolStripMenuItem";
+            this.enterMessageToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.enterMessageToolStripMenuItem.Text = "Enter Message";
             // 
-            // btnLaunch
+            // Product_Type
             // 
-            this.btnLaunch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLaunch.BackColor = System.Drawing.Color.Transparent;
-            this.btnLaunch.FlatAppearance.BorderSize = 0;
-            this.btnLaunch.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnLaunch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnLaunch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnLaunch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLaunch.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnLaunch.ForeColor = System.Drawing.Color.White;
-            this.btnLaunch.Image = ((System.Drawing.Image)(resources.GetObject("btnLaunch.Image")));
-            this.btnLaunch.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnLaunch.Location = new System.Drawing.Point(205, 9);
-            this.btnLaunch.Name = "btnLaunch";
-            this.btnLaunch.Size = new System.Drawing.Size(60, 60);
-            this.btnLaunch.TabIndex = 21;
-            this.btnLaunch.Text = "Launch";
-            this.btnLaunch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.Product_Type.HeaderText = "Type";
+            this.Product_Type.Name = "Product_Type";
             // 
-            // btnRefund
+            // Product_Name
             // 
-            this.btnRefund.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefund.BackColor = System.Drawing.Color.Transparent;
-            this.btnRefund.FlatAppearance.BorderSize = 0;
-            this.btnRefund.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnRefund.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnRefund.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnRefund.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefund.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnRefund.ForeColor = System.Drawing.Color.White;
-            this.btnRefund.Image = ((System.Drawing.Image)(resources.GetObject("btnRefund.Image")));
-            this.btnRefund.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRefund.Location = new System.Drawing.Point(138, 9);
-            this.btnRefund.Name = "btnRefund";
-            this.btnRefund.Size = new System.Drawing.Size(60, 60);
-            this.btnRefund.TabIndex = 22;
-            this.btnRefund.Text = "Refund";
-            this.btnRefund.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRefund.UseVisualStyleBackColor = true;
+            this.Product_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Product_Name.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Product_Name.HeaderText = "Product";
+            this.Product_Name.MinimumWidth = 100;
+            this.Product_Name.Name = "Product_Name";
+            this.Product_Name.ReadOnly = true;
+            this.Product_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // btnRefresh
+            // Quantity
             // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
-            this.btnRefresh.FlatAppearance.BorderSize = 0;
-            this.btnRefresh.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRefresh.Location = new System.Drawing.Point(71, 9);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(60, 60);
-            this.btnRefresh.TabIndex = 20;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Quantity.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            this.Quantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Quantity.Width = 68;
             // 
-            // btnSampleProduct
+            // Price
             // 
-            this.btnSampleProduct.BackColor = System.Drawing.Color.Transparent;
-            this.btnSampleProduct.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSampleProduct.BackgroundImage")));
-            this.btnSampleProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSampleProduct.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnSampleProduct.FlatAppearance.BorderSize = 0;
-            this.btnSampleProduct.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnSampleProduct.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSampleProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSampleProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSampleProduct.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.btnSampleProduct.ForeColor = System.Drawing.Color.Black;
-            this.btnSampleProduct.Location = new System.Drawing.Point(3, 3);
-            this.btnSampleProduct.Name = "btnSampleProduct";
-            this.btnSampleProduct.Size = new System.Drawing.Size(120, 96);
-            this.btnSampleProduct.TabIndex = 0;
-            this.btnSampleProduct.Text = "New Card";
-            this.btnSampleProduct.UseVisualStyleBackColor = false;
-            this.btnSampleProduct.Visible = false;
+            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.Price.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Price.Width = 47;
             // 
-            // btnLoadTickets
+            // Tax
             // 
-            this.btnLoadTickets.BackColor = System.Drawing.Color.Transparent;
-            this.btnLoadTickets.BackgroundImage = global::Marbale.POS.Properties.Resources.Load_Tickets;
-            this.btnLoadTickets.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnLoadTickets.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnLoadTickets.FlatAppearance.BorderSize = 0;
-            this.btnLoadTickets.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnLoadTickets.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnLoadTickets.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnLoadTickets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoadTickets.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.btnLoadTickets.ForeColor = System.Drawing.Color.Snow;
-            this.btnLoadTickets.Location = new System.Drawing.Point(3, 3);
-            this.btnLoadTickets.Name = "btnLoadTickets";
-            this.btnLoadTickets.Size = new System.Drawing.Size(125, 80);
-            this.btnLoadTickets.TabIndex = 3;
-            this.btnLoadTickets.Tag = "LOADTICKETS";
-            this.btnLoadTickets.Text = "Load Tickets";
-            this.btnLoadTickets.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnLoadTickets.UseVisualStyleBackColor = false;
+            this.Tax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.Tax.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Tax.HeaderText = "Tax";
+            this.Tax.Name = "Tax";
+            this.Tax.ReadOnly = true;
+            this.Tax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Tax.Width = 33;
             // 
-            // btnLoadBonus
+            // Line_Amount
             // 
-            this.btnLoadBonus.BackColor = System.Drawing.Color.Transparent;
-            this.btnLoadBonus.BackgroundImage = global::Marbale.POS.Properties.Resources.Load_Bonus;
-            this.btnLoadBonus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnLoadBonus.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnLoadBonus.FlatAppearance.BorderSize = 0;
-            this.btnLoadBonus.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnLoadBonus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnLoadBonus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnLoadBonus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoadBonus.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.btnLoadBonus.ForeColor = System.Drawing.Color.Snow;
-            this.btnLoadBonus.Location = new System.Drawing.Point(134, 3);
-            this.btnLoadBonus.Name = "btnLoadBonus";
-            this.btnLoadBonus.Size = new System.Drawing.Size(125, 80);
-            this.btnLoadBonus.TabIndex = 8;
-            this.btnLoadBonus.Tag = "LOADBONUS";
-            this.btnLoadBonus.Text = "Load Bonus";
-            this.btnLoadBonus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnLoadBonus.UseVisualStyleBackColor = false;
+            this.Line_Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.Line_Amount.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Line_Amount.HeaderText = "Amount";
+            this.Line_Amount.MinimumWidth = 100;
+            this.Line_Amount.Name = "Line_Amount";
+            this.Line_Amount.ReadOnly = true;
+            this.Line_Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // btnRedeemLoyalty
+            // Remarks
             // 
-            this.btnRedeemLoyalty.BackColor = System.Drawing.Color.Transparent;
-            this.btnRedeemLoyalty.BackgroundImage = global::Marbale.POS.Properties.Resources.Load_Multiple;
-            this.btnRedeemLoyalty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRedeemLoyalty.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnRedeemLoyalty.FlatAppearance.BorderSize = 0;
-            this.btnRedeemLoyalty.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnRedeemLoyalty.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnRedeemLoyalty.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnRedeemLoyalty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRedeemLoyalty.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.btnRedeemLoyalty.ForeColor = System.Drawing.Color.Snow;
-            this.btnRedeemLoyalty.Location = new System.Drawing.Point(265, 3);
-            this.btnRedeemLoyalty.Name = "btnRedeemLoyalty";
-            this.btnRedeemLoyalty.Size = new System.Drawing.Size(125, 80);
-            this.btnRedeemLoyalty.TabIndex = 10;
-            this.btnRedeemLoyalty.Tag = "REDEEMLOYALTY";
-            this.btnRedeemLoyalty.Text = "Load Multiple";
-            this.btnRedeemLoyalty.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRedeemLoyalty.UseVisualStyleBackColor = false;
+            this.Remarks.HeaderText = "Remarks";
+            this.Remarks.Name = "Remarks";
+            this.Remarks.Visible = false;
             // 
-            // btnRedeemTicketsForBonus
+            // Line_Type
             // 
-            this.btnRedeemTicketsForBonus.BackColor = System.Drawing.Color.Transparent;
-            this.btnRedeemTicketsForBonus.BackgroundImage = global::Marbale.POS.Properties.Resources.Transfer_Card;
-            this.btnRedeemTicketsForBonus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRedeemTicketsForBonus.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnRedeemTicketsForBonus.FlatAppearance.BorderSize = 0;
-            this.btnRedeemTicketsForBonus.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnRedeemTicketsForBonus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnRedeemTicketsForBonus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnRedeemTicketsForBonus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRedeemTicketsForBonus.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.btnRedeemTicketsForBonus.ForeColor = System.Drawing.Color.Snow;
-            this.btnRedeemTicketsForBonus.Location = new System.Drawing.Point(3, 89);
-            this.btnRedeemTicketsForBonus.Name = "btnRedeemTicketsForBonus";
-            this.btnRedeemTicketsForBonus.Size = new System.Drawing.Size(125, 80);
-            this.btnRedeemTicketsForBonus.TabIndex = 12;
-            this.btnRedeemTicketsForBonus.Tag = "REDEEMTICKETSFORBONUS";
-            this.btnRedeemTicketsForBonus.Text = "Transfer card";
-            this.btnRedeemTicketsForBonus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRedeemTicketsForBonus.UseVisualStyleBackColor = false;
+            this.Line_Type.HeaderText = "Line_Type";
+            this.Line_Type.Name = "Line_Type";
+            this.Line_Type.Visible = false;
             // 
-            // btnSalesReturnExchange
+            // TaxName
             // 
-            this.btnSalesReturnExchange.BackColor = System.Drawing.Color.Transparent;
-            this.btnSalesReturnExchange.BackgroundImage = global::Marbale.POS.Properties.Resources.Consolidate_Cards;
-            this.btnSalesReturnExchange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSalesReturnExchange.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnSalesReturnExchange.FlatAppearance.BorderSize = 0;
-            this.btnSalesReturnExchange.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnSalesReturnExchange.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSalesReturnExchange.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSalesReturnExchange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalesReturnExchange.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.btnSalesReturnExchange.ForeColor = System.Drawing.Color.Snow;
-            this.btnSalesReturnExchange.Location = new System.Drawing.Point(134, 89);
-            this.btnSalesReturnExchange.Name = "btnSalesReturnExchange";
-            this.btnSalesReturnExchange.Size = new System.Drawing.Size(125, 80);
-            this.btnSalesReturnExchange.TabIndex = 17;
-            this.btnSalesReturnExchange.Tag = "SALESRETURNEXCHANGE";
-            this.btnSalesReturnExchange.Text = "Cansolidate Cards";
-            this.btnSalesReturnExchange.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSalesReturnExchange.UseVisualStyleBackColor = false;
+            this.TaxName.HeaderText = "Tax Name";
+            this.TaxName.Name = "TaxName";
+            this.TaxName.Visible = false;
             // 
-            // pbRedeem
+            // Card_Number
             // 
-            this.pbRedeem.Location = new System.Drawing.Point(110, 28);
-            this.pbRedeem.Name = "pbRedeem";
-            this.pbRedeem.Size = new System.Drawing.Size(130, 130);
-            this.pbRedeem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbRedeem.TabIndex = 0;
-            this.pbRedeem.TabStop = false;
+            this.Card_Number.HeaderText = "Card Number";
+            this.Card_Number.Name = "Card_Number";
+            this.Card_Number.Visible = false;
             // 
-            // btnPrint
+            // LineId
             // 
-            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPrint.AutoEllipsis = true;
-            this.btnPrint.BackgroundImage = global::Marbale.POS.Properties.Resources.Print;
-            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
-            this.btnPrint.FlatAppearance.BorderSize = 0;
-            this.btnPrint.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnPrint.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnPrint.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnPrint.Location = new System.Drawing.Point(532, 406);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(101, 57);
-            this.btnPrint.TabIndex = 10;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPrint.UseVisualStyleBackColor = false;
+            this.LineId.HeaderText = "LineId";
+            this.LineId.Name = "LineId";
+            this.LineId.Visible = false;
             // 
-            // btnSuspendOrder
+            // ProductId
             // 
-            this.btnSuspendOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSuspendOrder.AutoEllipsis = true;
-            this.btnSuspendOrder.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSuspendOrder.BackgroundImage")));
-            this.btnSuspendOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSuspendOrder.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
-            this.btnSuspendOrder.FlatAppearance.BorderSize = 0;
-            this.btnSuspendOrder.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnSuspendOrder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSuspendOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSuspendOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSuspendOrder.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSuspendOrder.ForeColor = System.Drawing.Color.White;
-            this.btnSuspendOrder.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSuspendOrder.Location = new System.Drawing.Point(427, 406);
-            this.btnSuspendOrder.Name = "btnSuspendOrder";
-            this.btnSuspendOrder.Size = new System.Drawing.Size(101, 57);
-            this.btnSuspendOrder.TabIndex = 9;
-            this.btnSuspendOrder.Text = "Suspend Order";
-            this.btnSuspendOrder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSuspendOrder.UseVisualStyleBackColor = false;
-            // 
-            // btnCancelTrxnLine
-            // 
-            this.btnCancelTrxnLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancelTrxnLine.AutoEllipsis = true;
-            this.btnCancelTrxnLine.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancelTrxnLine.BackgroundImage")));
-            this.btnCancelTrxnLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCancelTrxnLine.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
-            this.btnCancelTrxnLine.FlatAppearance.BorderSize = 0;
-            this.btnCancelTrxnLine.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnCancelTrxnLine.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnCancelTrxnLine.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnCancelTrxnLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelTrxnLine.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelTrxnLine.ForeColor = System.Drawing.Color.White;
-            this.btnCancelTrxnLine.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnCancelTrxnLine.Location = new System.Drawing.Point(321, 406);
-            this.btnCancelTrxnLine.Name = "btnCancelTrxnLine";
-            this.btnCancelTrxnLine.Size = new System.Drawing.Size(101, 57);
-            this.btnCancelTrxnLine.TabIndex = 8;
-            this.btnCancelTrxnLine.Text = "Cancel Trx Line";
-            this.btnCancelTrxnLine.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCancelTrxnLine.UseVisualStyleBackColor = false;
-            this.btnCancelTrxnLine.Click += new System.EventHandler(this.btnCancelTrxnLine_Click);
-            // 
-            // btnClearTrxn
-            // 
-            this.btnClearTrxn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClearTrxn.AutoEllipsis = true;
-            this.btnClearTrxn.BackgroundImage = global::Marbale.POS.Properties.Resources.Clear_Transaction;
-            this.btnClearTrxn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClearTrxn.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
-            this.btnClearTrxn.FlatAppearance.BorderSize = 0;
-            this.btnClearTrxn.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnClearTrxn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnClearTrxn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnClearTrxn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearTrxn.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearTrxn.ForeColor = System.Drawing.Color.White;
-            this.btnClearTrxn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnClearTrxn.Location = new System.Drawing.Point(216, 406);
-            this.btnClearTrxn.Name = "btnClearTrxn";
-            this.btnClearTrxn.Size = new System.Drawing.Size(101, 57);
-            this.btnClearTrxn.TabIndex = 7;
-            this.btnClearTrxn.Text = "Clear Trxn";
-            this.btnClearTrxn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnClearTrxn.UseVisualStyleBackColor = false;
-            this.btnClearTrxn.Click += new System.EventHandler(this.btnClearTrxn_Click);
-            // 
-            // btnPayment
-            // 
-            this.btnPayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPayment.AutoEllipsis = true;
-            this.btnPayment.BackgroundImage = global::Marbale.POS.Properties.Resources.Payment;
-            this.btnPayment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
-            this.btnPayment.FlatAppearance.BorderSize = 0;
-            this.btnPayment.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnPayment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnPayment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayment.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPayment.ForeColor = System.Drawing.Color.White;
-            this.btnPayment.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnPayment.Location = new System.Drawing.Point(110, 406);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(101, 57);
-            this.btnPayment.TabIndex = 6;
-            this.btnPayment.Text = "Payment";
-            this.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPayment.UseVisualStyleBackColor = false;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSave.AutoEllipsis = true;
-            this.btnSave.BackgroundImage = global::Marbale.POS.Properties.Resources.Save_Transaction;
-            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSave.Location = new System.Drawing.Point(3, 406);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(101, 57);
-            this.btnSave.TabIndex = 5;
-            this.btnSave.Text = "Save Trxn";
-            this.btnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.ProductId.HeaderText = "ProductId";
+            this.ProductId.Name = "ProductId";
+            this.ProductId.Visible = false;
             // 
             // MarblePOS
             // 
@@ -2082,6 +2131,7 @@
             this.tbPageFunctions.ResumeLayout(false);
             this.flowLayoutPanelFunctions.ResumeLayout(false);
             this.tbPageRedeem.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbRedeem)).EndInit();
             this.tbPageSystem.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -2090,7 +2140,7 @@
             this.panelPassword.ResumeLayout(false);
             this.panelPassword.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbRedeem)).EndInit();
+            this.posContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2150,9 +2200,9 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunctions;
         private System.Windows.Forms.Button btnLoadTickets;
         private System.Windows.Forms.Button btnLoadBonus;
-        private System.Windows.Forms.Button btnRedeemLoyalty;
-        private System.Windows.Forms.Button btnRedeemTicketsForBonus;
-        private System.Windows.Forms.Button btnSalesReturnExchange;
+        private System.Windows.Forms.Button btnLoadMultiple;
+        private System.Windows.Forms.Button btnTransferCard;
+        private System.Windows.Forms.Button btnCansolidateCard;
         private System.Windows.Forms.TabPage tbPageRedeem;
         private System.Windows.Forms.PictureBox pbRedeem;
         private System.Windows.Forms.TabPage tbPageSystem;
@@ -2189,18 +2239,6 @@
         private System.Windows.Forms.Button btnCancelTrxnLine;
         private System.Windows.Forms.Button btnClearTrxn;
         private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Product_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Product_Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Line_Amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Line_Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TaxName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Card_Number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LineId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtFirstname;
         private System.Windows.Forms.Label label6;
@@ -2228,5 +2266,20 @@
         private System.Windows.Forms.DataGridView dgvTrxHeader;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ContextMenuStrip posContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem changeLayoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enterMessageToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Product_Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Product_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Line_Amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Line_Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TaxName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Card_Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LineId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
     }
 }

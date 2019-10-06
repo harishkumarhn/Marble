@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminBL.cs" />
+    <Compile Include="Enum\ListItemGroup.cs" />
     <Compile Include="InventoryBL\CategoryBL.cs" />
     <Compile Include="Enum\ThemeEnum.cs" />
     <Compile Include="Enum\ReaderEnum.cs" />

@@ -1,0 +1,124 @@
+﻿@model Marbale.BusinessObject.AppSetting
+@{
+    ViewBag.Title = "Inventory";
+    Layout = null;
+}
+
+<div id="valuesContainer">
+    <div class="tabContent">
+        <table>
+      @foreach (var item in ViewBag.Inventory)
+     {
+                String type = item.Type.ToString();
+                <tr>
+                    <th>
+                        @item.Caption :
+                    </th>
+                    <td>
+
+                        @switch (type)
+                        {
+                            case "string":
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/><br />
+                                break;
+                            case "bool":
+                            <input type="checkbox" value="@item.Value" class="checktrue strings" name="allcheck" id="@item.Name"/><br />
+                                break;
+                            case "file":
+                            <input type="file" value="@item.Value" class="strings" name="fileUploader" id="@item.Name"/><br />
+                                break;
+                            case "int":
+                            <input type="number" value="@item.Value" class="strings" name="myInput" id="@item.Name"/><br />
+                                break;
+                            <input type="text" value="@item.Value" id="@item.Name" class="strings" name="myInput"/>
+                        }
+                    </td>
+                </tr>  
+            }
+        </table>
+
+        <div class="actionItems">
+            <button class="btn btn-primary btn-md" role="button" onclick="SaveEmail()">Save</button>
+            <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+        </div>
+    </div>
+
+</div>
+<script>
+    var appSettings = [];
+    var appSettings1 = [];
+    $('input[name=myInput]').change(function () {
+        
+        var d = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Formats'
+        };
+      
+        appSettings.push(d);
+    });
+    $('input[name=fileUploader]').change(function (e) {
+        
+        var d1 = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Price'
+        };
+
+        appSettings.push(d1);
+       // console.log(this.files[0].mozFullPath);
+    })
+    $('input[name=fileUploader1]').change(function (e) {
+        
+        var d1 = {
+            Name: this.id,
+            Value: this.value,
+            ScreenGroup: 'Email'
+        };
+
+        appSettings.push(d1);
+        // console.log(this.files[0].mozFullPath);
+    })
+   
+    $('input[name=allcheck]').change(function () {
+        
+        var d = {
+            Name: this.id,
+            Value: $(this).is(":checked"),
+            ScreenGroup: 'Formats'
+        };
+        appSettings.push(d);
+    });
+
+   // formData.append('file', $('#PDF_WRITER_PRINTER')[0].files[0]);
+    function SaveEmail() {
+        
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateAppSettings", "SiteSetup")',
+
+            data: JSON.stringify({ appSettings: appSettings }),
+
+                        dataType: "json",
+
+                        beforeSend: function () { },
+
+                        success: function (data) {
+                            appSettings = [];
+                          //  location.reload();
+                            $('#displayMessage').text('data added succesfully').addClass('success');
+                        }
+                            });
+   
+    }
+    $(document).ready(function () {
+        $('input[name="allcheck"]').each(function (index) {
+            
+            if ($(this).val().toLowerCase() == "true")
+
+                ($(this).prop('checked', true));
+        });
+    });
+
+</script>
