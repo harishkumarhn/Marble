@@ -83,6 +83,13 @@ namespace MarbaleManagementStudio.Controllers
             }
 
         }
+        [HttpGet]
+        public ActionResult NonCardEdit()
+        {
+            Product a = new Product();
+            a.TaxList = Session["TaxList"] as List<TaxSet>;
+            return View(a);
+        }
 
         [HttpGet]
         public ActionResult Edit()
@@ -115,12 +122,22 @@ namespace MarbaleManagementStudio.Controllers
             }
             return status;
         }
-
+        public ActionResult NonCardEdit(int id)
+        {
+            try
+            {
+                var product = productBussiness.GetProductById(id);
+                return View(product);
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("Edit", e);
+                throw;
+            }
+        }
 
         public ActionResult Edit(int id)
         {
-            //    List<Product> ProductList = Session["ProductList"] as List<Product>;
-            // var p = ProductList.Where(s => s.Id == id).FirstOrDefault();
             try
             {
                 var product = productBussiness.GetProductById(id);
