@@ -1,4 +1,5 @@
 ﻿using Marbale.Business;
+using Marbale.Business.Enum;
 using Marbale.BusinessObject;
 using Marbale.BusinessObject.Tax;
 using MarbaleManagementStudio.Models;
@@ -32,9 +33,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-               
-                var products = productBussiness.GetProducts();
-                ViewBag.productDetails = products.Where(a => a.Type != "100");
+                ViewBag.productDetails = productBussiness.GetProducts((int)ProductTypeEnum.Card);
                 return View();
             }
             catch (Exception e)
@@ -48,28 +47,9 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                Product p = new Product();
-                List<Product> pList = new List<Product>();
-                var products = productBussiness.GetProducts();
-                Session["NonCardProductList"] = products;
-                Session["CategoryList"] = products[0].CategoryList;
-                IdValue i = new IdValue() { Id=100,Value="MANUAL"};
-                p.TypeList.Add(i);
-                Session["TypeList"] = p.TypeList;
+                var products = productBussiness.GetProducts((int)ProductTypeEnum.Manual);
                 Session["TaxList"] = products[0].TaxList;
-                var productList = products.Where(a => a.Type == "100");
-                if (productList.Count() == 0)
-                {
-
-                    var p1 = new Product() { TypeList = p.TypeList, CategoryList = products[0].CategoryList, TaxList = products[0].TaxList };
-                    pList.Add(p1);
-                    ViewBag.productDetails = pList;
-                }
-                else
-                {
-                    ViewBag.productDetails = productList;
-                }
-           
+                ViewBag.productDetails = products;
                 return View();
             }
             catch (Exception e)
@@ -263,7 +243,6 @@ namespace MarbaleManagementStudio.Controllers
         }
         public JsonResult TaxDetails(Product model)
         {
-
             //  Product p = new Product();
             if (Session["TaxList"] != null)
             {

@@ -1,4 +1,5 @@
-﻿using Marbale.BusinessObject;
+﻿using Marbale.Business.Enum;
+using Marbale.BusinessObject;
 using Marbale.BusinessObject.Tax;
 using Marbale.DataAccess;
 using Marble.Business.Enum;
@@ -71,10 +72,12 @@ namespace Marbale.Business
             }
 
         }
-        public List<Product> GetProducts()
+        public List<Product> GetProducts(int productType = (int)ProductTypeEnum.CardAndManual)
         {
             try
             {
+                var manualTypeId = "";
+
                 var typeListDataTable = productData.GetProductTypeLookUp();
                 var typeList = new List<IdValue>();
                 typeList.Add(new IdValue() { Id = null, Value = "Select" });
@@ -83,6 +86,10 @@ namespace Marbale.Business
                     IdValue idValues = new IdValue();
                     idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                     idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                    if(idValues.Value == ProductTypeEnum.Manual.ToString())
+                    {
+                        manualTypeId = idValues.Value;
+                    }
                     typeList.Add(idValues);
                 }
 
@@ -108,6 +115,7 @@ namespace Marbale.Business
                     idValues.TaxPercent = dr.IsNull("TaxPercent") ? 0 : decimal.Parse(dr["TaxPercent"].ToString());
                     TaxList.Add(idValues);
                 }
+
                 var DisplatInDataTable = commonData.GetListItems((int)ListItemGroup.DisplayGroup);
                 var DisplatInList = new List<IdValue>();
                 DisplatInList.Add(new IdValue() { Id = null, Value = "Select" });
@@ -121,6 +129,7 @@ namespace Marbale.Business
 
                 var productDataTable = productData.GetProducts();
                 List<Product> products = new List<Product>();
+               
                 foreach (DataRow dr in productDataTable.Rows)
                 {
                     Product product = new Product();
@@ -147,7 +156,14 @@ namespace Marbale.Business
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;
                     product.DisplayGroupList = DisplatInList;
-                    products.Add(product);
+                    if (productType == (int)ProductTypeEnum.Card && product.Type != manualTypeId)
+                    {
+                        products.Add(product);
+                    }
+                    else if ((int)ProductTypeEnum.Manual == productType && product.Type == manualTypeId)
+                    {
+                        products.Add(product);
+                    }
                 }
                 if (products.Count == 0)
                 {

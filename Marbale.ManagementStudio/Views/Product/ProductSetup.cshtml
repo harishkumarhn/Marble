@@ -52,14 +52,16 @@
         {
             count++;
             <tr id="@count">
-                <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
                 <td>
-                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
-                         <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
-                     </a>
-                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
-                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
-                     </a>
+                    <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
+                </td>
+                <td>
+                    <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
+                        <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
+                    </a>
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
+                        <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
+                    </a>
                 </td>
                 <td>
                     <input type="text" class="fixedCol3" value="@item.Name"/>
@@ -104,7 +106,7 @@
                     <input type="checkbox"  @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />
                 </td>
                 <td>
-                      <select name="TypeList" id="DisplayGroupList">
+                    <select name="TypeList" id="DisplayGroupList">
                         @foreach (var dow in @item.DisplayGroupList)
                         {
                             if ((@dow.Id) != null && @item.DisplayGroup == (@dow.Id).ToString())
@@ -125,7 +127,7 @@
                     <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
                 </td>
                 <td>
-                    <input type="text" value="@item.Price" id="Price@(count)" />
+                    <input type="number" value="@item.Price" id="Price@(count)" />
                 </td>
                 <td>
                     <input type="text" value="@item.FaceValue" id="FaceValue@(count)" />
@@ -133,29 +135,29 @@
                 <td>
                     <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)"  />
                 </td>
-                   <td>
-                    <input type="text" value="@item.TaxPercentage" id="TaxPercentage@(count)"/>
+                <td>
+                    <input type="number" value="@item.TaxPercentage" id="TaxPercentage@(count)"/>
                 </td>
-                  <td>
+                <td>
                     <select name="taxlist" id="taxlist">
-                        @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
+                        @foreach (var dow in @item.TaxList)
                         {
-                            if (@item.TaxName == (@dow.Id).ToString())
+                            if ((@dow.Id) != null && @item.TaxName == (@dow.Id).ToString())
                             {
-                            <option value="@dow.Value" id="@dow.Id"  selected>@dow.Value</option>
+                            <option value="@dow.TaxName" id="@dow.Id" selected>@dow.TaxName</option>
                             }
                             else
                             {
-                            <option value="@dow.Value" id="@dow.Id" >@dow.Value</option>
+                            <option value="@dow.TaxName" id="@dow.Id">@dow.TaxName</option>
                             }
                         }
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="FinalPrice@(count)"  value="@item.FinalPrice" />
+                    <input type="number" id="FinalPrice@(count)"  value="@item.FinalPrice" />
                 </td>
                 <td>
-                    <input type="text" value="@item.EffectivePrice" id="EffectivePrice@(count)" />
+                    <input type="number" value="@item.EffectivePrice" id="EffectivePrice@(count)" />
                 </td>
                 <td>
                     <input type="text" value="@item.LastUpdatedBy"  disabled/>
@@ -170,7 +172,7 @@
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
-    <button id="addRow" class="btn btn-primary btn-md" role="button" >Add</button>
+    <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
@@ -183,19 +185,18 @@
             updatedArray.push(index);
         }
     }
- 
+
     $(document).on('change', '#taxlist', function () {
-        debugger;
-        var rowid=   $(this).closest('tr').attr('id');
+        var rowid = $(this).closest('tr').attr('id');
         var TaxId = $(this).find('option:selected').attr('id');
         //TaxId = $('#taxlist' + rowid + ' option:selected').val();
-   
-     var Price = $('#Price' + rowid).val();
+
+        var Price = $('#Price' + rowid).val();
         if (Price == "") {
             Price = null;
         }
-        var FaceValue = Number($('#FaceValue'+rowid).val());
-        taxinclusive = $('#TaxInclusive'+rowid).is(":checked");
+        var FaceValue = Number($('#FaceValue' + rowid).val());
+        taxinclusive = $('#TaxInclusive' + rowid).is(":checked");
         var model = {
             Id: TaxId,
             Price: Price,
@@ -297,7 +298,7 @@
                 '<input type="text" value="" disabled/>',
                 '<input type="text" value="" disabled/>',
             ]).draw(false);
-            
+
             for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
                 $('.DTFC_Cloned lable.fixedCol1')[i].innerHTML = fixedcolumn1values[i].innerHTML;
             }
@@ -391,7 +392,7 @@
         $('#modelbody').load('/Product/Edit');
         $('.modal-title').text('New Product');
     }
-   
+
     function EditProduct(id) {
         $('.modal-title').text('Edit Product');
         $('#basicExampleModal').modal('show');
@@ -403,17 +404,17 @@
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 url: '@Url.Action("DeleteProduct", "Product")',
-            data: { Id: id },
-            dataType: "json",
-            success: function (data) {
-                location.reload();
-            },
-            error: function (e) {
-                alert(e);
-            }
-              });
+                data: { Id: id },
+                dataType: "json",
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
         }
-      
+
     }
 
 </script>
