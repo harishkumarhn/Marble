@@ -35,6 +35,8 @@ namespace MarbaleManagementStudio.Controllers
             {
                 var products = productBussiness.GetProducts((int)ProductTypeEnum.Card);
                 Session["TaxList"] = products[0].TaxList;
+                Session["TypeList"] = products[0].TypeList;
+                Session["CategoryList"] = products[0].CategoryList;
                 ViewBag.productDetails = products;
                 return View();
             }
@@ -51,6 +53,8 @@ namespace MarbaleManagementStudio.Controllers
             {
                 var products = productBussiness.GetProducts((int)ProductTypeEnum.Manual);
                 Session["TaxList"] = products[0].TaxList;
+                Session["TypeList"] = products[0].TypeList;
+                Session["CategoryList"] = products[0].CategoryList;
                 ViewBag.productDetails = products;
                 return View();
             }

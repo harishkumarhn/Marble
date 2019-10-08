@@ -152,15 +152,16 @@ namespace Marbale.Business
                     product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                     product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                     product.TaxName = dr.IsNull("TaxName") ? "" : dr["TaxName"].ToString();
+                    product.TypeName = dr.IsNull("TypeName") ? "" : dr["TypeName"].ToString();
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;
                     product.DisplayGroupList = DisplatInList;
-                    if (productType == (int)ProductTypeEnum.Card && product.Type != manualTypeId)
+                    if (productType == (int)ProductTypeEnum.Card && product.TypeName != manualTypeId)
                     {
                         product.TypeList = typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList();
                         products.Add(product);
                     }
-                    else if ((int)ProductTypeEnum.Manual == productType && product.Type == manualTypeId)
+                    else if ((int)ProductTypeEnum.Manual == productType && product.TypeName.ToLower() == manualTypeId.ToLower())
                     {
                         product.TypeList = typeList.Where(x => x.Value == ProductTypeEnum.Manual.ToString()).ToList();
                         products.Add(product);

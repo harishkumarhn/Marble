@@ -137,18 +137,17 @@
                 </td>
                 <td>
                     <input type="number" value="@item.TaxPercentage" id="TaxPercentage@(count)"/>
-                </td>
-                <td>
-                    <select name="taxlist" id="taxlist">
-                        @foreach (var dow in @item.TaxList)
+                </td><td>
+                   <select name="taxlist" id="taxlist">
+                        @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
                         {
-                            if ((@dow.Id) != null && @item.TaxName == (@dow.Id).ToString())
+                            if (@item.TaxName == (@dow.Id).ToString())
                             {
-                            <option value="@dow.TaxName" id="@dow.Id" selected>@dow.TaxName</option>
+                            <option value="@dow.Value" id="@dow.Id"  selected>@dow.Value</option>
                             }
                             else
                             {
-                            <option value="@dow.TaxName" id="@dow.Id">@dow.TaxName</option>
+                            <option value="@dow.Value" id="@dow.Id" >@dow.Value</option>
                             }
                         }
                     </select>
@@ -187,6 +186,7 @@
     }
 
     $(document).on('change', '#taxlist', function () {
+
         var rowid = $(this).closest('tr').attr('id');
         var TaxId = $(this).find('option:selected').attr('id');
         //TaxId = $('#taxlist' + rowid + ' option:selected').val();
