@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[Product](
 	[POSCounter] [varchar](50) NULL,
 	[Active] [bit] NULL,
 	[DisplayInPOS] [bit] NULL,
-	[DisplayGroup] [varchar](50) NULL,
+	[DisplayGroupId] int NULL,
 	[Category] [int] NULL,
 	[AutoGenerateCardNumber] [bit] NULL,
 	[OnlyVIP] [bit] NULL,

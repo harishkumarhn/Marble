@@ -20,7 +20,7 @@ go
 CREATE PROCEDURE dbo.sp_InsertOrUpdateTrxHeader @trxId  INT, 
                                                 @TrxDate DATE,
 												@TrxAmount NUMERIC(10,4), 
-												@TrxDiscountPercentage NUMERIC(4,4),
+												@TrxDiscountPercentage NUMERIC(10,4),
 												@TaxAmount  NUMERIC(10,4),  
 												@TrxNetAmount  NUMERIC(10,4), 
 												@POSMachine NVARCHAR(50) = NULL,

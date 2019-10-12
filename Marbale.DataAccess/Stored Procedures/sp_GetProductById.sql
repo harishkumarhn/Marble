@@ -26,7 +26,7 @@ BEGIN
  
  SELECT     
  Courtesy,  
- p.Id ,Name ,PT.Type ,POSCounter, P.Active, DisplayInPOS ,DisplayGroup ,Category ,
+ p.Id ,Name ,PT.Type ,POSCounter, P.Active, DisplayInPOS ,DG.DisplayGroup ,Category ,
  AutoGenerateCardNumber ,OnlyVIP, Price, FaceValue, TaxInclusive, TaxPercentage, FinalPrice, EffectivePrice,    
   P.LastUpdatedBy, P.LastUpdatedDate, Bonus, LastUpdatedUser ,TaxName, StartDate as 'StartDate', Games ,    
   CreditsPlus, Credits ,CardValidFor,case when isnull(@expiredate,'') ='' then @withoutExpireDate else ExpiryDate end as 'ExpiryDate',
@@ -34,7 +34,7 @@ BEGIN
     TaxId
   from Product P
   LEFT JOIN ProductType PT on P.Type = PT.Id
-   
+  LEFT JOIN DisplayGroup DG on P.DisplayGroupId = DG.DisplayGroupId 
 
   where P.Id = @id    
 END 

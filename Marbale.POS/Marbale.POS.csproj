@@ -233,6 +233,14 @@
     <None Include="Resources\right1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\RightArrow1.png" />
+    <None Include="Resources\LeftArrow1.png" />
+    <None Include="Resources\Dropdown1.png" />
+    <None Include="Resources\Reconnect.jpg" />
+    <None Include="Resources\Reset.jpg" />
+    <None Include="Resources\changeColor.jpg" />
+    <None Include="Resources\Password change.jpg" />
+    <Content Include="Resources\RightArrow.png" />
     <None Include="Resources\Transfer_Card_Pressed.png" />
     <None Include="Resources\Save_Transaction_Pressed.png" />
     <None Include="Resources\0.png" />
@@ -283,6 +291,8 @@
     <None Include="Resources\Load_Bonus_Pressed.png" />
     <None Include="Resources\Load_Multiple_Pressed.png" />
     <None Include="Resources\Consolidate_Cards_Pressed.png" />
+    <Content Include="Resources\Dropdown.png" />
+    <Content Include="Resources\LeftArrow.png" />
     <Content Include="Resources\Manual.png" />
     <Content Include="Resources\New_Product.png" />
     <None Include="Resources\Save_Transaction1.png" />

@@ -48,6 +48,7 @@
     <Compile Include="Cards\Card.cs" />
     <Compile Include="Customers\Customers.cs" />
     <Compile Include="Discount\Discounts.cs" />
+    <Compile Include="DisplayGroup\DisplayGroup.cs" />
     <Compile Include="Game\Machine.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameProfile.cs" />

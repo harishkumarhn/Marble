@@ -63,6 +63,7 @@ namespace Marbale.BusinessObject
         public List<IdValue> DisplayGroupList { get; set; }
 
 
+        public int DisplayGroupId { get; set; }
 
         public int TaxId { get; set; }
     }

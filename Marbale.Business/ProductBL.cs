@@ -71,6 +71,7 @@ namespace Marbale.Business
             }
 
         }
+
         public List<Product> GetProducts()
         {
             try
@@ -168,6 +169,7 @@ namespace Marbale.Business
                 throw e;
             }
         }
+
         public int InsertOrUpdateProduct(Product product)
         {
             try
