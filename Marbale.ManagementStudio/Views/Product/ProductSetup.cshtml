@@ -37,23 +37,31 @@
         <th>Price</th>
         <th>FaceValue</th>
         <th>TaxInclusive</th>
+        <th>TaxPercent</th>
+        <th>Tax</th>
         <th>FinalPrice</th>
         <th>EffectivePrice</th>
         <th>LastUpdatedBy</th>
         <th>LastUpdatedDate</th>
     </thead>
     <tbody>
+        @{
+            var count = 0;
+        }
         @foreach (var item in ViewBag.productDetails)
-        {  
-            <tr>
-                <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
+        {
+            count++;
+            <tr id="@count">
                 <td>
-                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
-                         <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
-                     </a>
-                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
-                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
-                     </a>
+                    <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
+                </td>
+                <td>
+                    <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
+                        <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
+                    </a>
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
+                        <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
+                    </a>
                 </td>
                 <td>
                     <input type="text" class="fixedCol3" value="@item.Name"/>
@@ -98,7 +106,7 @@
                     <input type="checkbox"  @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />
                 </td>
                 <td>
-                      <select name="TypeList" id="DisplayGroupList">
+                    <select name="TypeList" id="DisplayGroupList">
                         @foreach (var dow in @item.DisplayGroupList)
                         {
                             if ((@dow.Id) != null && @item.DisplayGroup == (@dow.Id).ToString())
@@ -119,19 +127,37 @@
                     <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
                 </td>
                 <td>
-                    <input type="text" value="@item.Price" />
+                    <input type="number" value="@item.Price" id="Price@(count)" />
                 </td>
                 <td>
-                    <input type="text" value="@item.FaceValue" />
+                    <input type="text" value="@item.FaceValue" id="FaceValue@(count)" />
                 </td>
                 <td>
-                    <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" />
+                    <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)"  />
                 </td>
                 <td>
-                    <input type="text" value="@item.FinalPrice" />
+                    <input type="number" value="@item.TaxPercentage" id="TaxPercentage@(count)"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.EffectivePrice" />
+                    <select name="taxlist" id="taxlist">
+                        @foreach (var dow in @item.TaxList)
+                        {
+                            if ((@dow.Id) != null && @item.TaxName == (@dow.Id).ToString())
+                            {
+                            <option value="@dow.TaxName" id="@dow.Id" selected>@dow.TaxName</option>
+                            }
+                            else
+                            {
+                            <option value="@dow.TaxName" id="@dow.Id">@dow.TaxName</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="number" id="FinalPrice@(count)"  value="@item.FinalPrice" />
+                </td>
+                <td>
+                    <input type="number" value="@item.EffectivePrice" id="EffectivePrice@(count)" />
                 </td>
                 <td>
                     <input type="text" value="@item.LastUpdatedBy"  disabled/>
@@ -146,7 +172,7 @@
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
-    <button id="addRow" class="btn btn-primary btn-md" role="button" >Add</button>
+    <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
@@ -159,7 +185,48 @@
             updatedArray.push(index);
         }
     }
- 
+
+    $(document).on('change', '#taxlist', function () {
+        var rowid = $(this).closest('tr').attr('id');
+        var TaxId = $(this).find('option:selected').attr('id');
+        //TaxId = $('#taxlist' + rowid + ' option:selected').val();
+
+        var Price = $('#Price' + rowid).val();
+        if (Price == "") {
+            Price = null;
+        }
+        var FaceValue = Number($('#FaceValue' + rowid).val());
+        taxinclusive = $('#TaxInclusive' + rowid).is(":checked");
+        var model = {
+            Id: TaxId,
+            Price: Price,
+            FaceValue: FaceValue,
+            TaxInclusive: taxinclusive
+        };
+        if (TaxId == "") {
+            $('#EffectivePrice' + rowid).val(Price);
+            $('#FinalPrice' + rowid).val(Price);
+        }
+            //JSON.stringify({ TaxId: TaxId, Price: Price, TaxInclusive: taxinclusive, FaceValue: FaceValue }),
+        else {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("TaxDetails", "Product")',
+                data: JSON.stringify({ model: model }),
+                dataType: "json",
+                success: function (data) {
+                    $('#EffectivePrice' + rowid).val(data.EffectivePrice);
+                    $('#TaxPercentage' + rowid).val(data.Taxpercent);
+                    $('#FinalPrice' + rowid).val(data.FinalPrice);
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
+    });
     $(document).ready(function () {
         var table = $('#marbleTable').DataTable({
             scrollY: "400px",
@@ -186,7 +253,7 @@
                 leftColumns: 3
             }
         });
-       
+
         $('#addRow').on('click', function () {
             $("#saveproduct").attr("disabled", false);
             var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
@@ -231,7 +298,7 @@
                 '<input type="text" value="" disabled/>',
                 '<input type="text" value="" disabled/>',
             ]).draw(false);
-            
+
             for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
                 $('.DTFC_Cloned lable.fixedCol1')[i].innerHTML = fixedcolumn1values[i].innerHTML;
             }
@@ -260,6 +327,7 @@
                 }
                 var selectedTypeIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
                 var selectedCategoryIndex = table.rows[rowIndex].cells[4].children[0].options["selectedIndex"];
+                var selectedTaxIndex = table.rows[rowIndex].cells[15].children[0].options["selectedIndex"];
                 var selectedDisplayGroupIndex = table.rows[rowIndex].cells[8].children[0].options["selectedIndex"];
 
                 items.push({
@@ -274,11 +342,12 @@
                     AutoGenerateCardNumber: table.rows[rowIndex].cells[9].children[0].checked,
                     OnlyVIP: table.rows[rowIndex].cells[10].children[0].checked,
                     Price: table.rows[rowIndex].cells[11].children[0].value,
-
                     FaceValue: table.rows[rowIndex].cells[12].children[0].value,
                     TaxInclusive: table.rows[rowIndex].cells[13].children[0].checked,
-                    FinalPrice: table.rows[rowIndex].cells[14].children[0].value,
-                    EffectivePrice: table.rows[rowIndex].cells[15].children[0].value,
+                    Taxpercent: table.rows[rowIndex].cells[14].children[0].value,
+                    TaxName: table.rows[rowIndex].cells[15].children[0].options[selectedTaxIndex].id,
+                    FinalPrice: table.rows[rowIndex].cells[16].children[0].value,
+                    EffectivePrice: table.rows[rowIndex].cells[17].children[0].value,
                     ExpiryDate: '10/10/2020',
                     StartDate: '10/10/2020'
                 });
@@ -323,7 +392,7 @@
         $('#modelbody').load('/Product/Edit');
         $('.modal-title').text('New Product');
     }
-   
+
     function EditProduct(id) {
         $('.modal-title').text('Edit Product');
         $('#basicExampleModal').modal('show');
@@ -335,16 +404,17 @@
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 url: '@Url.Action("DeleteProduct", "Product")',
-            data: { Id: id },
-            dataType: "json",
-            success: function (data) {
-                location.reload();
-            },
-            error: function (e) {
-                alert(e);
-            }
-              });
+                data: { Id: id },
+                dataType: "json",
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
         }
-      
+
     }
+
 </script>

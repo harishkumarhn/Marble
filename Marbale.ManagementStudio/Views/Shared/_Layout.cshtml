@@ -20,7 +20,8 @@
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
-
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/Content/JS/jquery.dataTables.min.js"></script>
     <script src="~/Content/JS/dataTables.fixedColumns.min.js"></script>
     <script src="~/Content/DatetimePicker/jquery.datepicker2.js"></script>
@@ -187,7 +188,7 @@
         $('#newcards').click(function () {
             $('#myModal').modal('show');
             $('#modelBody').css({
-                'left': '-25%',
+                'left': '-30%',
                 'width': 900
             });
             $('#modelBody').load('/Cards/Cards');
@@ -195,10 +196,11 @@
         $('#configuration').click(function () {
             $('#myModal').modal('show');
             $('#modelBody').css({
-                'left': '-25%',
-                'width': 800
+                'left': '-30%',
+                'width': 800,
             });
             $('#modelBody').load('/game/configuration');
+           
         });
         $('#productKey').click(function () {
             $('#myModal').modal('show');

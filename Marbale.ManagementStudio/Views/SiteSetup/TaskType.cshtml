@@ -42,7 +42,8 @@
     </table>
 
     <button class="btn btn-primary btn-md" role="button" onclick="SaveTaskType()">Save</button>
-    <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'"" >Close</button>
 </div>
 
 <script>
@@ -64,7 +65,7 @@
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdateTaskType", "SiteSetup1")',
+            url: '@Url.Action("UpdateTaskType", "SiteSetup")',
                  data: JSON.stringify({ messageObject: messageObject }),
                  dataType: "json",
                  success: function (data) {
