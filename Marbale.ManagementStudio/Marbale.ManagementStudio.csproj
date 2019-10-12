@@ -323,6 +323,8 @@
     <Content Include="Views\SiteSetup\ConfigurationTabs\Values\Customer.cshtml" />
     <Content Include="Views\SiteSetup\ProductKey.cshtml" />
     <Content Include="Views\SiteSetup\Sites.cshtml" />
+    <Content Include="Views\Product\NonCardProductSetup.cshtml" />
+    <Content Include="Views\Product\NonCardEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

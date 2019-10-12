@@ -122,7 +122,8 @@ button.btn-settings {
 
 .modal-centre {
     position: absolute;
-    right: 430px;
+    right: 440px;
+    top: -20px;
 }
 
 .modal-body {

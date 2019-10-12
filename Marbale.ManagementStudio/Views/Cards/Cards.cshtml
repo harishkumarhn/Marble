@@ -1,6 +1,5 @@
 ﻿@model Marbale.BusinessObject.Cards.CardsModel
 @{
-   
     Layout = null;
 }
 
@@ -8,8 +7,8 @@
     <h4 class="modal-title">New Card</h4>
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="min-width: 10px !important;">&times;</button>
 </div>
-<div class="modal-body" style="width:900px">
-    @using (Html.BeginForm("InsertOrUpdateCards", "Cards", new { id = "InsertOrUpdateCards" }, FormMethod.Post))
+<div class="modal-body">
+    @using (Html.BeginForm("InsertOrUpdateCards", "Cards", FormMethod.Post, new { id = "cardForm" }))
     {
         <div>
             <b style="color: cadetblue">Main</b>
@@ -24,7 +23,7 @@
                     <div class="col-md-2">
                         <label for="ex2"><b>CardNumber:</b></label>
                         @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CardNumber) })
-                                 @Html.ValidationMessageFor(model => model.CardNumber,"", new {@class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-md-2">
@@ -34,7 +33,7 @@
                     <div class="col-md-2">
                         <label for="ex3"><b>FaceValue:</b></label>
                         @Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control" })
-                          @Html.ValidationMessageFor(model => model.FaceValue,"", new {@class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.FaceValue, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex4"><b>Custemer:</b></label>
@@ -47,7 +46,7 @@
 
                 </div>
             </div>
-            
+
             <b style="color: cadetblue">Value</b>
             <div id="valueclass" style="border: 2px solid black; border-color: cornsilk">
                 <div class="form-group row">
@@ -55,24 +54,24 @@
                     <div class="col-md-2">
                         <label for="ex1"><b>Credits:</b></label>
                         @Html.TextBoxFor(m => m.Credits, new { @class = "form-control" })
-                          @Html.ValidationMessageFor(model => model.Credits,"", new {@class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Credits, "", new { @class = "text-danger" })
 
                     </div>
                     <div class="col-md-2">
                         <label for="ex2"><b>Credit Plus:</b></label>
                         @Html.TextBoxFor(m => m.CreditPlus, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CreditPlus) })
-                          @Html.ValidationMessageFor(model => model.CreditPlus,"", new {@class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.CreditPlus, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-md-2">
                         <label for="ex3"><b>Courtesy:</b></label>
                         @Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control" })
-                          @Html.ValidationMessageFor(model => model.Courtesy,"", new {@class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Courtesy, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex3"><b>Bonus:</b></label>
                         @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
-                          @Html.ValidationMessageFor(model => model.Bonus,"", new {@class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Bonus, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex4"><b>CreditsPlayed:</b></label>
@@ -95,7 +94,7 @@
                         <label for="ex2"><b>Last Play time:</b></label>
                         @Html.TextBoxFor(m => m.LastPlayTime, new { @class = "form-control datepickers", placeholder = @Html.DisplayNameFor(n => n.LastPlayTime) })
                     </div>
-                    
+
                     <div class="col-md-2">
                         <label for="ex1"><b>Expiry Date:</b></label>
                         @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control datepickers" })
@@ -104,7 +103,7 @@
                     <div class="col-md-3">
                         <label for="ex3"><b>Refund Amount:</b></label>
                         @Html.TextBoxFor(m => m.RefundAmount, new { @class = "form-control" })
-                          @Html.ValidationMessageFor(model => model.RefundAmount,"", new {@class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.RefundAmount, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex2"><b>Refund Date:</b></label>
@@ -119,7 +118,7 @@
                     <div class="col-md-3">
                         <label for="ex1"><b>Ticket Count:</b></label>
                         @Html.TextBoxFor(m => m.TicketCount, new { @class = "form-control" })
-                          @Html.ValidationMessageFor(model => model.TicketCount,"", new {@class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.TicketCount, "", new { @class = "text-danger" })
 
                     </div>
                     <div class="col-md-3">
@@ -177,19 +176,13 @@
     <button id="update" type="submit" class="btn btn-primary" onclick="Save(this)">Save</button>
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-		<script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
-
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        $('.modal-body').css({
+            'width': '900px;',
+            'height': '500px',
+            'overflow-y': 'scroll'
+        });
         $(document).off('focusin.modal');
         //$('#newcardmodel').modal('show');
     })
@@ -216,8 +209,7 @@
 
     });
     function Save(btnClicked) {
-        debugger;
-        var $form = $('#InsertOrUpdateCards');
+        var $form = $('#cardForm');
         $.ajax({
             type: "POST",
             url: $form.attr('action'),
