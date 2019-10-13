@@ -36,6 +36,7 @@ namespace Marbale.POS
         public List<Transaction> ListTransaction;
 
         Color skinColor;
+        public Color POSBackColor;
 
         ListBox cmbDisplayGroups;
 
@@ -47,14 +48,14 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-            frmLogin frmLogin = new frmLogin();
-            frmLogin.ShowDialog();
-            if (!frmLogin.isLoginSuccess)
-                Environment.Exit(0);
-            else
-            {
-                CurrentUser = frmLogin.loggedInUser;
-            }
+            //frmLogin frmLogin = new frmLogin();
+            //frmLogin.ShowDialog();
+            //if (!frmLogin.isLoginSuccess)
+            //    Environment.Exit(0);
+            //else
+            //{
+            //    CurrentUser = frmLogin.loggedInUser;
+            //}
         }
 
         private void POSHome_Load(object sender, EventArgs e)
@@ -1775,6 +1776,45 @@ namespace Marbale.POS
             txtCurrentPassword.Text = "";
             txtNewPassword.Text = "";
             txtReEnterNewPassword.Text = "";
+        }
+
+        private void btnChangeSkinColor_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ColorDialog colorDialogBox = new ColorDialog();
+            colorDialogBox.FullOpen = true;
+
+            DialogResult CDR = colorDialogBox.ShowDialog();
+
+            if (CDR == DialogResult.OK)
+            {
+                btnChangeSkinColor.ForeColor = colorDialogBox.Color;
+                POSBackColor = colorDialogBox.Color;
+                SetPOSBackgroundColor();
+            }
+        }
+
+        private void SetPOSBackgroundColor()
+        {
+            this.BackColor = POSBackColor;
+
+            foreach (TabPage tp in tabControlProducts.TabPages)
+                tp.BackColor = POSBackColor;
+            flowLayoutPanelDiscounts.BackColor = POSBackColor;
+            flowLayoutPanelFunctions.BackColor = POSBackColor;
+
+            panelButtons.BackColor = POSBackColor;
+
+            foreach (TabPage tp in tbHomeControls.TabPages)
+                tp.BackColor = POSBackColor;
+
+            dgvTransaction.BackgroundColor = POSBackColor;
+        }
+
+        private void buttonSkinColorReset_Click(object sender, EventArgs e)
+        {
+            POSBackColor = Color.Gray;
+            SetPOSBackgroundColor();
+            dgvTransaction.BackgroundColor = Color.LightBlue;
         }
     }
 }
