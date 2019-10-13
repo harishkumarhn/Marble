@@ -253,6 +253,18 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetProductDisplayGroup()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetDisplayGroup");
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
         public int UpdateProductTypes(List<ProductType> types)
         {
             try
@@ -268,6 +280,36 @@ namespace Marbale.DataAccess
                     sqlParameters[5] = new SqlParameter("@active", type.Active);
                     sqlParameters[6] = new SqlParameter("@lastupdatedby", type.LastUpdatedBy == null ? "Harish" : type.LastUpdatedBy);
                     conn.executeUpdateQuery("sp_InsertOrUpdateProductType", sqlParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return 0;
+        }
+        public int DeleteDisplayGroup(int Id)
+        {
+
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+
+            sqlParameters[0] = new SqlParameter("@Id", Id);
+
+
+            return conn.executeInsertQuery("sp_DeleteDisplayGroup", sqlParameters);
+        }
+        public int UpdateProductDispalyGroup(List<DisplayGroupModel> model)
+        {
+            try
+            {
+                foreach (var dispaly in model)
+                {
+                    SqlParameter[] sqlParameters = new SqlParameter[4];
+                    sqlParameters[0] = new SqlParameter("@Id", dispaly.Id);
+                    sqlParameters[1] = new SqlParameter("@DisplayGroup", dispaly.DisplayGroup);
+                    sqlParameters[2] = new SqlParameter("@Description", dispaly.Description);
+                    sqlParameters[3] = new SqlParameter("@SortOrder", dispaly.SortOrder);
+                    conn.executeUpdateQuery("sp_InsertOrUpdateDisplayGroup", sqlParameters);
                 }
             }
             catch (Exception e)

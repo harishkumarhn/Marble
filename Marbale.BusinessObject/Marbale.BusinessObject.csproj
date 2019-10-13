@@ -62,6 +62,7 @@
     <Compile Include="Inventory\Vendor.cs" />
     <Compile Include="Messages\MessagesModel.cs" />
     <Compile Include="NameValue.cs" />
+    <Compile Include="Product\DisplayGroupModel.cs" />
     <Compile Include="Setting\AppSetting.cs" />
     <Compile Include="Card\CardDetail.cs" />
     <Compile Include="Product\ProductCategory.cs" />

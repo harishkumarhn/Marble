@@ -1,5 +1,6 @@
 ﻿using Marbale.Business.Enum;
 using Marbale.BusinessObject;
+
 using Marbale.BusinessObject.Tax;
 using Marbale.DataAccess;
 using Marble.Business.Enum;
@@ -243,6 +244,58 @@ namespace Marbale.Business
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+        public List<DisplayGroupModel> GetProductDisplayGroup()
+        {
+            try
+            {
+                
+                var dataTable = productData.GetProductDisplayGroup();
+                List<DisplayGroupModel> listProductGroups = new List<DisplayGroupModel>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    DisplayGroupModel display = new DisplayGroupModel();
+                    display.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    display.DisplayGroup = dr.IsNull("DisplayGroup") ? "" : (dr["DisplayGroup"].ToString());
+                    display.Description = dr.IsNull("Description") ? "" : dr["Description"].ToString();
+                    display.SortOrder = dr.IsNull("SortOrder") ? 0 : int.Parse(dr["SortOrder"].ToString());
+                    display.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
+                    display.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? "": (dr["LastUpdatedDate"]).ToString();
+         
+
+                    listProductGroups.Add(display);
+                }
+                return listProductGroups;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+        public int DeleteDisplayGroup(int Id)
+        {
+            try
+            {
+                return productData.DeleteDisplayGroup(Id);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+        public int UpdateProductDispalyGroup(List<DisplayGroupModel> model)
+        {
+            try
+            {
+                return productData.UpdateProductDispalyGroup(model);
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
         public List<ProductCategory> GetProductCategory()

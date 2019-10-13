@@ -1,6 +1,7 @@
 ﻿using Marbale.Business;
 using Marbale.Business.Enum;
 using Marbale.BusinessObject;
+
 using Marbale.BusinessObject.Tax;
 using MarbaleManagementStudio.Models;
 using System;
@@ -227,6 +228,22 @@ namespace MarbaleManagementStudio.Controllers
                 throw;
             }
 
+        }
+        public ActionResult DeleteDisplayGroup(int Id)
+        {
+            int a = productBussiness.DeleteDisplayGroup(Id);
+            return Json(1, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DisplayGroup()
+        {
+            List<DisplayGroupModel> DispalyGroups = productBussiness.GetProductDisplayGroup();
+           // ViewBag.categories = categories;
+            return View(DispalyGroups);
+        }
+        public int UpdateProductDispalyGroup(List<DisplayGroupModel> model)
+        {
+          return productBussiness.UpdateProductDispalyGroup(model);
+           
         }
         public ActionResult Category()
         {
