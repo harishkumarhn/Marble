@@ -70,6 +70,11 @@ namespace Marbale.Business
             }
         }
 
+        public void ChangeUserPassword(int userId, string currentPassword, string newPassword)
+        {
+            marbaleData.ChangePassword(userId, currentPassword, newPassword);
+        }
+
 
         public List<DisplayGroup> GetDisplayGroup(int displayGroupId)
         {

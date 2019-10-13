@@ -33,6 +33,7 @@ namespace Marbale.BusinessObject.SiteSetup
         public List<IdValue> Roles { get; set; }
         public List<IdValue> Statuses { get; set; }
 
+        public string password { get; set; }
 
     }
 }

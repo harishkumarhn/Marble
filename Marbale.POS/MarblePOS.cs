@@ -47,14 +47,14 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-            //frmLogin frmLogin = new frmLogin();
-            //frmLogin.ShowDialog();
-            //if (!frmLogin.isLoginSuccess)
-            //    Environment.Exit(0);
-            //else
-            //{
-            //    CurrentUser = frmLogin.loggedInUser;
-            //}
+            frmLogin frmLogin = new frmLogin();
+            frmLogin.ShowDialog();
+            if (!frmLogin.isLoginSuccess)
+                Environment.Exit(0);
+            else
+            {
+                CurrentUser = frmLogin.loggedInUser;
+            }
         }
 
         private void POSHome_Load(object sender, EventArgs e)
@@ -1731,7 +1731,50 @@ namespace Marbale.POS
             {
 
             }
+        }
 
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            string currentPassword = txtCurrentPassword.Text;
+            string newPassword = txtNewPassword.Text;
+            string ReEnteredPassword = txtReEnterNewPassword.Text;
+
+
+            if (string.IsNullOrEmpty(currentPassword))
+            {
+                MessageBox.Show("Please Enter Current Password");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                MessageBox.Show("Please Enter New Password");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(ReEnteredPassword))
+            {
+                MessageBox.Show("Please Re Enter Password");
+                return;
+            }
+
+            if (newPassword != ReEnteredPassword)
+            {
+                MessageBox.Show("New Password and Re Entered Password not Matching");
+                return;
+            }
+
+            if(CurrentUser != null && CurrentUser.password != currentPassword)
+            {
+                MessageBox.Show("Current Password is Incorrect");
+                return;
+            }
+
+            posBussiness.ChangeUserPassword(CurrentUser.Id, currentPassword, newPassword);
+            MessageBox.Show("Password is Changed Successfully");
+            txtCurrentPassword.Text = "";
+            txtNewPassword.Text = "";
+            txtReEnterNewPassword.Text = "";
         }
     }
 }
