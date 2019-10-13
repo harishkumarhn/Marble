@@ -47,6 +47,24 @@ namespace Marbale.DataAccess
             }
         }
 
+
+        public void ChangePassword(int UserId, string currentPassword, string NewPassword)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[3];
+                sqlParameters[0] = new SqlParameter("@userId", UserId);
+                sqlParameters[1] = new SqlParameter("@currentPassword", currentPassword);
+                sqlParameters[2] = new SqlParameter("@password", NewPassword);
+                conn.executeUpdateQuery("sp_ChangeUserPassword", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
         public DataTable GetAllDiscounts()
         {
             try
@@ -58,7 +76,21 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-       
+
+        public DataTable GetDisplayGroup(int dispalyGroupId)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@displayGroupId", dispalyGroupId);
+                return conn.executeSelectQuery("sp_GetDisplayGroup", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public DataTable GetProducts()
         {
             try
@@ -70,12 +102,13 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-        public DataTable GetProductsByScreenGroup(string screenGroup)
+
+        public DataTable GetProductsByScreenGroup(int screenGroupId)
         {
             try
             {
                 SqlParameter[] sqlParameters = new SqlParameter[1];
-                sqlParameters[0] = new SqlParameter("@screen", screenGroup);
+                sqlParameters[0] = new SqlParameter("@displayGroupId", screenGroupId);
                 return conn.executeSelectQuery("sp_GetProductsByScreenGroup", sqlParameters);
             }
             catch (Exception e)

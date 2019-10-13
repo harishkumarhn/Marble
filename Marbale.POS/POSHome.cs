@@ -87,7 +87,7 @@ namespace Marbale.POS
 
         private void UpdateProductsTab()
         {
-            var products = posBussiness.GetProductsByScreenGroup("POS");
+            var products = posBussiness.GetProductsByScreenGroup(0);
 
             if (products.Count > 0)
             {

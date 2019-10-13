@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject;
+using Marbale.BusinessObject.DisplayGroup;
 using Marbale.BusinessObject.SiteSetup;
 using Marbale.DataAccess;
 using System;
@@ -32,11 +33,11 @@ namespace Marbale.Business
             int updatestatus = marbaleData.UpdatePOSUserCredential(Password);
             return updatestatus;
         }
-        public List<Product> GetProductsByScreenGroup(string screenGroup)
+        public List<Product> GetProductsByScreenGroup(int screenGroupId)
         {
             try
             {
-                DataTable dataTable = marbaleData.GetProductsByScreenGroup(screenGroup);
+                DataTable dataTable = marbaleData.GetProductsByScreenGroup(screenGroupId);
                 List<Product> products = new List<Product>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -69,7 +70,39 @@ namespace Marbale.Business
             }
         }
 
+        public void ChangeUserPassword(int userId, string currentPassword, string newPassword)
+        {
+            marbaleData.ChangePassword(userId, currentPassword, newPassword);
+        }
 
-        
+
+        public List<DisplayGroup> GetDisplayGroup(int displayGroupId)
+        {
+            List<DisplayGroup> displayGroupList = new List<DisplayGroup>();
+
+            try
+            {
+                DataTable dataTable = marbaleData.GetDisplayGroup(displayGroupId);
+                DisplayGroup displayGrp;
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    displayGrp = new DisplayGroup();
+                    displayGrp.displayGroupId = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
+                    displayGrp.displayGroupname = dr.IsNull("DisplayGroup") ? string.Empty : dr["DisplayGroup"].ToString();
+                    displayGrp.sortOrder = dr.IsNull("SortOrder") ? 0 : int.Parse(dr["SortOrder"].ToString());
+                    displayGrp.createdBy = dr.IsNull("CreatedBy") ? string.Empty : dr["CreatedBy"].ToString();
+                    displayGrp.lastUpdatedBy = dr.IsNull("LastUpdatedBy") ? string.Empty : dr["LastUpdatedBy"].ToString();
+                    displayGrp.createdDate = dr.IsNull("CreatedDate") ? new DateTime() : Convert.ToDateTime(dr["CreatedDate"]);
+                    displayGrp.lastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    displayGroupList.Add(displayGrp);
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
+
+            return displayGroupList;
+        }
     }
 }

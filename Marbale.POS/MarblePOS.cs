@@ -2,6 +2,7 @@
 using Marbale.BusinessObject;
 using Marbale.BusinessObject.Cards;
 using Marbale.BusinessObject.Discount;
+using Marbale.BusinessObject.DisplayGroup;
 using Marbale.BusinessObject.POSTransaction;
 using Marbale.BusinessObject.SiteSetup;
 using Marbale.POS.CardDevice;
@@ -35,6 +36,9 @@ namespace Marbale.POS
         public List<Transaction> ListTransaction;
 
         Color skinColor;
+        public Color POSBackColor;
+
+        ListBox cmbDisplayGroups;
 
         public object TranscationBL { get; private set; }
 
@@ -56,6 +60,7 @@ namespace Marbale.POS
 
         private void POSHome_Load(object sender, EventArgs e)
         {
+            InitializeProductDisplayGroupDropDown();
             UpdateProductsTab();
             UpdateDiscountsTab();
             updateCardDetailsGrid();
@@ -210,10 +215,14 @@ namespace Marbale.POS
 
         private void UpdateProductsTab()
         {
-            List<Product> lstProducts = posBussiness.GetProductsByScreenGroup("POS");
-
+            cmbDisplayGroups.Items.Clear();
+            List<Product> lstProducts = posBussiness.GetProductsByScreenGroup(0);
+            TabPage ProductTab = null;
+            tabControlProducts.TabPages.Clear();
+            FlowLayoutPanel flpProducts = new FlowLayoutPanel();
             if (lstProducts.Count > 0)
             {
+                string prev_display_group = "@!@##$#";
                 flowLayoutPanelProducts.Controls.Clear();
                 for (int i = 0; i < lstProducts.Count; i++)
                 {
@@ -235,8 +244,34 @@ namespace Marbale.POS
                     btnProduct.FlatAppearance.MouseDownBackColor = btnSampleProduct.FlatAppearance.MouseOverBackColor = Color.Transparent;
                     btnProduct.BackgroundImageLayout = ImageLayout.Zoom;
                     btnProduct.BackColor = Color.Transparent;
-                    flowLayoutPanelProducts.Controls.Add(btnProduct);
+
+                    string dispGroup = lstProducts[i].DisplayGroup;
+                    if (dispGroup != prev_display_group)
+                    {
+                        prev_display_group = dispGroup;
+                        ProductTab = new TabPage(prev_display_group);
+                        ProductTab.Name = prev_display_group;
+                        ProductTab.Text = prev_display_group;
+                        ProductTab.BackColor = Color.Gray;
+                        ProductTab.Text = prev_display_group.Replace("&", "&&");
+                        tabControlProducts.TabPages.Add(ProductTab);
+                        flpProducts = new FlowLayoutPanel();
+                        flpProducts.Dock = DockStyle.Fill;
+                        flpProducts.AutoScroll = true;
+                        flpProducts.BackColor = Color.Transparent;
+                        ProductTab.Controls.Add(flpProducts);
+
+                        cmbDisplayGroups.Items.Add(prev_display_group);
+                        int width = (int)(cmbDisplayGroups.CreateGraphics().MeasureString(prev_display_group, cmbDisplayGroups.Font).Width) + 20;
+                        if (width > cmbDisplayGroups.Width)
+                            cmbDisplayGroups.Width = width;
+                    }
+
+                    flpProducts.Controls.Add(btnProduct);
+                    //flowLayoutPanelProducts.Controls.Add(btnProduct);
                 }
+
+                lblTabText.Text = tabControlProducts.SelectedTab.Text;
             }
         }
 
@@ -1470,7 +1505,6 @@ namespace Marbale.POS
         {
             ClearTransaction();
             updateScreenAmounts();
-
             UpdateProductsTab();
             UpdateDiscountsTab();
             updateCardDetailsGrid();
@@ -1595,6 +1629,192 @@ namespace Marbale.POS
             {
                 b.BackgroundImage = Properties.Resources.Consolidate_Cards_Pressed;
             }
+        }
+
+        private void btnDisplayGroupDropDown_Click(object sender, EventArgs e)
+        {
+            if (cmbDisplayGroups.Visible)
+            {
+                cmbDisplayGroups.Visible = false;
+            }
+            else
+            {
+                //int items = 0;
+                //if(cmbDisplayGroups.DataSource != null)
+                //{
+                //    items = ((List<DisplayGroup>)cmbDisplayGroups.DataSource).Count;
+                //}
+
+                cmbDisplayGroups.Location = new Point(btnDisplayGroupDropDown.Location.X + btnDisplayGroupDropDown.Width - cmbDisplayGroups.Width - 2, btnDisplayGroupDropDown.Location.Y + btnDisplayGroupDropDown.Height);
+                cmbDisplayGroups.BringToFront();
+
+             
+                cmbDisplayGroups.Height = (int)(cmbDisplayGroups.Items.Count * cmbDisplayGroups.ItemHeight * 1.1);
+
+                if (cmbDisplayGroups.Height > tbPageProducts.Height - 40)
+                {
+                    cmbDisplayGroups.Height = tbPageProducts.Height - 40;
+                    cmbDisplayGroups.ScrollAlwaysVisible = true;
+                }
+                else
+                    cmbDisplayGroups.ScrollAlwaysVisible = false;
+
+                cmbDisplayGroups.Visible = true;
+                this.ActiveControl = cmbDisplayGroups;
+                cmbDisplayGroups.Focus();
+            }
+        }
+
+        void InitializeProductDisplayGroupDropDown()
+        {   
+            cmbDisplayGroups = new ListBox();
+            cmbDisplayGroups.Font = new Font("Arial", 14.0F);
+            cmbDisplayGroups.SelectionMode = SelectionMode.One;
+            cmbDisplayGroups.Visible = false;
+            cmbDisplayGroups.SelectedIndexChanged += new EventHandler(cmbDisplayGroups_SelectedIndexChanged);
+            cmbDisplayGroups.LostFocus += new EventHandler(cmbDisplayGroups_LostFocus);
+            cmbDisplayGroups.HorizontalScrollbar = false;
+            cmbDisplayGroups.ScrollAlwaysVisible = false;
+
+            //POSBL posBL = new POSBL();
+            //List<DisplayGroup> listDisplayGroup = posBL.GetDisplayGroup(0);
+
+            //cmbDisplayGroups.DataSource = listDisplayGroup;
+            //cmbDisplayGroups.ValueMember = "displayGroupId";
+            //cmbDisplayGroups.DisplayMember = "displayGroupname";
+
+            tbPageProducts.Controls.Add(cmbDisplayGroups);
+        }
+
+        void cmbDisplayGroups_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //tbPageProducts.select = cmbDisplayGroups.SelectedIndex;
+            cmbDisplayGroups.Visible = false;
+            tabControlProducts.SelectedIndex = cmbDisplayGroups.SelectedIndex;
+            lblTabText.Text = tabControlProducts.SelectedTab.Text;
+        }
+
+        void cmbDisplayGroups_LostFocus(object sender, EventArgs e)
+        {
+            if (!btnDisplayGroupDropDown.Focused)
+                cmbDisplayGroups.Visible = false;
+        }
+
+        private void btnPrevProductGroup_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int i = tabControlProducts.SelectedIndex - 1;
+                if (i < 0)
+                    i = tabControlProducts.TabPages.Count - 1;
+
+                tabControlProducts.SelectedIndex = i;
+                lblTabText.Text = tabControlProducts.SelectedTab.Text;
+            }
+            catch
+            {
+            }
+        }
+
+        private void btnNextProductGroup_Click(object sender, EventArgs e)
+        {
+          
+            try
+            {
+                int i = tabControlProducts.SelectedIndex + 1;
+                if (i >= tabControlProducts.TabPages.Count)
+                    i = 0;
+
+                tabControlProducts.SelectedIndex = i;
+                lblTabText.Text = tabControlProducts.SelectedTab.Text;
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            string currentPassword = txtCurrentPassword.Text;
+            string newPassword = txtNewPassword.Text;
+            string ReEnteredPassword = txtReEnterNewPassword.Text;
+
+
+            if (string.IsNullOrEmpty(currentPassword))
+            {
+                MessageBox.Show("Please Enter Current Password");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                MessageBox.Show("Please Enter New Password");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(ReEnteredPassword))
+            {
+                MessageBox.Show("Please Re Enter Password");
+                return;
+            }
+
+            if (newPassword != ReEnteredPassword)
+            {
+                MessageBox.Show("New Password and Re Entered Password not Matching");
+                return;
+            }
+
+            if(CurrentUser != null && CurrentUser.password != currentPassword)
+            {
+                MessageBox.Show("Current Password is Incorrect");
+                return;
+            }
+
+            posBussiness.ChangeUserPassword(CurrentUser.Id, currentPassword, newPassword);
+            MessageBox.Show("Password is Changed Successfully");
+            txtCurrentPassword.Text = "";
+            txtNewPassword.Text = "";
+            txtReEnterNewPassword.Text = "";
+        }
+
+        private void btnChangeSkinColor_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ColorDialog colorDialogBox = new ColorDialog();
+            colorDialogBox.FullOpen = true;
+
+            DialogResult CDR = colorDialogBox.ShowDialog();
+
+            if (CDR == DialogResult.OK)
+            {
+                btnChangeSkinColor.ForeColor = colorDialogBox.Color;
+                POSBackColor = colorDialogBox.Color;
+                SetPOSBackgroundColor();
+            }
+        }
+
+        private void SetPOSBackgroundColor()
+        {
+            this.BackColor = POSBackColor;
+
+            foreach (TabPage tp in tabControlProducts.TabPages)
+                tp.BackColor = POSBackColor;
+            flowLayoutPanelDiscounts.BackColor = POSBackColor;
+            flowLayoutPanelFunctions.BackColor = POSBackColor;
+
+            panelButtons.BackColor = POSBackColor;
+
+            foreach (TabPage tp in tbHomeControls.TabPages)
+                tp.BackColor = POSBackColor;
+
+            dgvTransaction.BackgroundColor = POSBackColor;
+        }
+
+        private void buttonSkinColorReset_Click(object sender, EventArgs e)
+        {
+            POSBackColor = Color.Gray;
+            SetPOSBackgroundColor();
+            dgvTransaction.BackgroundColor = Color.LightBlue;
         }
     }
 }
