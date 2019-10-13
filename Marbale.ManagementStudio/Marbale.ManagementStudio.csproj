@@ -325,6 +325,7 @@
     <Content Include="Views\SiteSetup\Sites.cshtml" />
     <Content Include="Views\Product\NonCardProductSetup.cshtml" />
     <Content Include="Views\Product\NonCardEdit.cshtml" />
+    <Content Include="Views\Product\DisplayGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -37,15 +37,6 @@ namespace MarbaleManagementStudio.Controllers
          {
              var data1 = cardBussiness.gettechcardtype();
              Session["TechCardType"] = data1;
-             //if ( c.VIPCustomer == false && c.TechnicianCard == false)
-             //{
-             //    c.VIPCustomer = false;
-             //    c.TechnicianCard = false;
-             //    c.CardNumber = "";
-             //    c.Custemer = "";
-             //    c.IssueDate = DateTime.Now;
-             //    c.ToDate = DateTime.Now;
-             //} 
              List<CardsModel> data = cardBussiness.GetAllCards(c);
              ViewBag.cardsDetails = data;
              return View();

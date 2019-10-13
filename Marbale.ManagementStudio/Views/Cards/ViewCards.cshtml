@@ -64,7 +64,7 @@
             <th>StartTime</th>
             <th>LastPlayTime</th>
             <th>TechGame</th>
-            <th>TechnicianCard</th>
+     
 
             <th>Credits</th>
             <th>Credit Plus</th>
@@ -157,9 +157,7 @@
                 <td>
                     <input type="text" value="@item.TechGames"/>
                 </td>
-                <td>
-                    <input type="checkbox"  @(item.TechnicianCard ? "checked='checked'" : "") value="@item.TechnicianCard" />
-                </td>
+             
 
 
                 <td>
@@ -193,8 +191,8 @@
         }
     </table>
     <button type="button" class="btn btn-primary" data-toggle="modal" id="newcard" style="position: absolute;
-    right: 86%;
-    bottom: 22%;">
+    right: 92%;
+    bottom: 21%;">
         New Card
     </button>
     <button type="button" class="btn btn-primary" data-toggle="modal" id="updatecard" style="display:none" onclick="EditCard();">
