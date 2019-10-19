@@ -56,7 +56,7 @@ namespace Marbale.BusinessObject
         public DateTime? StartDate { get; set; }
         public DateTime? ExpiryDate { get; set; }
         public string TaxName { get; set; }
-
+        public string TypeName { get; set; }
         public decimal Taxpercent { get; set; }
         public string LastUpdatedUser { get; set; }
         public int CardValidFor { get; set; }

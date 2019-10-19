@@ -1,6 +1,7 @@
 ﻿using Marbale.Business;
 using Marbale.Business.Enum;
 using Marbale.BusinessObject;
+
 using Marbale.BusinessObject.Tax;
 using MarbaleManagementStudio.Models;
 using System;
@@ -33,7 +34,11 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                ViewBag.productDetails = productBussiness.GetProducts((int)ProductTypeEnum.Card);
+                var products = productBussiness.GetProducts((int)ProductTypeEnum.Card);
+                Session["TaxList"] = products[0].TaxList;
+                Session["TypeList"] = products[0].TypeList;
+                Session["CategoryList"] = products[0].CategoryList;
+                ViewBag.productDetails = products;
                 return View();
             }
             catch (Exception e)
@@ -49,6 +54,8 @@ namespace MarbaleManagementStudio.Controllers
             {
                 var products = productBussiness.GetProducts((int)ProductTypeEnum.Manual);
                 Session["TaxList"] = products[0].TaxList;
+                Session["TypeList"] = products[0].TypeList;
+                Session["CategoryList"] = products[0].CategoryList;
                 ViewBag.productDetails = products;
                 return View();
             }
@@ -221,6 +228,22 @@ namespace MarbaleManagementStudio.Controllers
                 throw;
             }
 
+        }
+        public ActionResult DeleteDisplayGroup(int Id)
+        {
+            int a = productBussiness.DeleteDisplayGroup(Id);
+            return Json(1, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DisplayGroup()
+        {
+            List<DisplayGroupModel> DispalyGroups = productBussiness.GetProductDisplayGroup();
+           // ViewBag.categories = categories;
+            return View(DispalyGroups);
+        }
+        public int UpdateProductDispalyGroup(List<DisplayGroupModel> model)
+        {
+          return productBussiness.UpdateProductDispalyGroup(model);
+           
         }
         public ActionResult Category()
         {

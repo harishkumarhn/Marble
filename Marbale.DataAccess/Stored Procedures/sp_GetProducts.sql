@@ -1,13 +1,7 @@
-USE [Marbale]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_GetDiscounts]    Script Date: 1/19/2019 6:58:51 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 
 -- DROP PROC sp_GetProducts
-Create proc [dbo].[sp_GetProducts]
+alter proc [dbo].[sp_GetProducts]
 as 
 begin 
 
@@ -40,7 +34,8 @@ select
 		CardValidFor,
 		ExpiryDate,
 		Courtesy,
-		TaxId 
+		TaxId ,
+		PT.Type as TypeName
 				FROM Product P
 		LEFT JOIN ProductType PT ON P.Type = PT.Id
 end
