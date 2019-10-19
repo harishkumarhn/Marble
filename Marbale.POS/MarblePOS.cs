@@ -1199,7 +1199,7 @@ namespace Marbale.POS
                 dgvCard.Rows[1].Cells[1].Value = CurrentCard.loyalty_points;
 
                 //Recharged / Spent
-                dgvCard.Rows[2].Cells[1].Value = CurrentCard.TotalRechargeAmount;
+                dgvCard.Rows[2].Cells[1].Value = "0/0"; // CurrentCard.TotalRechargeAmount;
 
                 if (CurrentCard.customer != null)
                 {
@@ -1639,12 +1639,6 @@ namespace Marbale.POS
             }
             else
             {
-                //int items = 0;
-                //if(cmbDisplayGroups.DataSource != null)
-                //{
-                //    items = ((List<DisplayGroup>)cmbDisplayGroups.DataSource).Count;
-                //}
-
                 cmbDisplayGroups.Location = new Point(btnDisplayGroupDropDown.Location.X + btnDisplayGroupDropDown.Width - cmbDisplayGroups.Width - 2, btnDisplayGroupDropDown.Location.Y + btnDisplayGroupDropDown.Height);
                 cmbDisplayGroups.BringToFront();
 
@@ -1711,9 +1705,7 @@ namespace Marbale.POS
                 tabControlProducts.SelectedIndex = i;
                 lblTabText.Text = tabControlProducts.SelectedTab.Text;
             }
-            catch
-            {
-            }
+            catch{ }
         }
 
         private void btnNextProductGroup_Click(object sender, EventArgs e)
