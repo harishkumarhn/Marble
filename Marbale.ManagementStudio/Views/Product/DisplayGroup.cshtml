@@ -83,7 +83,7 @@
             $('#SaveDisplayGroup').removeAttr('disabled');
           
                 table.row.add([
-                    '<a href="#"></a>',
+                    '<a href="#"></a>','',
                     '<input type="text" value="" />',
                 '<input type="text" value="" />',
                  '<input type="number" value="" />',
@@ -131,9 +131,9 @@
 
                 productDispalyGroup.push({
                     Id: table.rows[rowIndex].cells[0].innerHTML,
-                    DisplayGroup: table.rows[rowIndex].cells[1].children[0].value,
-                    Description: table.rows[rowIndex].cells[2].children[0].value,
-                    SortOrder: table.rows[rowIndex].cells[3].children[0].value,
+                    DisplayGroup: table.rows[rowIndex].cells[2].children[0].value,
+                    Description: table.rows[rowIndex].cells[3].children[0].value,
+                    SortOrder: table.rows[rowIndex].cells[4].children[0].value,
                 });
             }
         }

@@ -290,7 +290,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                return conn.executeSelectQuery("sp_GetDisplayGroup");
+                return conn.executeSelectQuery("Adminsp_GetDisplayGroup");
             }
             catch (Exception)
             {

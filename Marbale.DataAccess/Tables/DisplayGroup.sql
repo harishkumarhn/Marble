@@ -1,16 +1,6 @@
-USE [Marbale]
-GO
-
-/****** Object:  Table [dbo].[DisplayGroup]    Script Date: 06/10/2019 11:46:12 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [dbo].[DisplayGroup](
 	[DisplayGroupId] [int] IDENTITY(1,1) NOT NULL,
-	[DisplayGroup] [int] NOT NULL,
+	[DisplayGroup] [nvarchar(300)] NOT NULL,
 	[SortOrder] [int] NULL,
 	[CreatedBy] [nvarchar](50) NULL,
 	[CreatedDate] [datetime] NULL,
@@ -23,5 +13,3 @@ CREATE TABLE [dbo].[DisplayGroup](
 ) ON [PRIMARY]
 
 GO
-
-
