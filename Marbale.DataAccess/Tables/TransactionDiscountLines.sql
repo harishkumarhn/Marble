@@ -2,10 +2,6 @@ USE [Marbale]
 GO
 
 /****** Object:  Table [dbo].[TransactionDiscountLines]    Script Date: 28/09/2019 12:12:33 ******/
-DROP TABLE [dbo].[TransactionDiscountLines]
-GO
-
-/****** Object:  Table [dbo].[TransactionDiscountLines]    Script Date: 28/09/2019 12:12:33 ******/
 SET ANSI_NULLS ON
 GO
 

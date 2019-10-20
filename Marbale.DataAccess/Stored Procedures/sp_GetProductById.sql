@@ -8,7 +8,7 @@ GO
 
 -- DROP PROC sp_GetProductById
 
-CREATE PROCEDURE [dbo].[sp_GetProductById]     
+Alter PROCEDURE [dbo].[sp_GetProductById]     
  @id int    
 AS    
 BEGIN    
@@ -27,15 +27,15 @@ BEGIN
  SELECT     
  Courtesy,  
  p.Id ,Name ,PT.Type ,POSCounter, P.Active, DisplayInPOS ,DG.DisplayGroup ,Category ,
- AutoGenerateCardNumber ,OnlyVIP, Price, FaceValue, TaxInclusive, TaxPercentage, FinalPrice, EffectivePrice,    
-  P.LastUpdatedBy, P.LastUpdatedDate, Bonus, LastUpdatedUser ,TaxName, StartDate as 'StartDate', Games ,    
+ AutoGenerateCardNumber ,OnlyVIP, Price, FaceValue, TaxInclusive, T.TaxPercent TaxPercentage, FinalPrice, EffectivePrice,    
+  P.LastUpdatedBy, P.LastUpdatedDate, Bonus, LastUpdatedUser ,T.TaxName, StartDate as 'StartDate', Games ,    
   CreditsPlus, Credits ,CardValidFor,case when isnull(@expiredate,'') ='' then @withoutExpireDate else ExpiryDate end as 'ExpiryDate',
   --ExpiryDate 'ExpiryDate'    
-    TaxId
+    T.TaxId
   from Product P
+  JOIN Tax T ON T.TaxId = p.TaxId
   LEFT JOIN ProductType PT on P.Type = PT.Id
-  LEFT JOIN DisplayGroup DG on P.DisplayGroupId = DG.DisplayGroupId 
-
+  LEFT JOIN DisplayGroup DG on P.DisplayGroupId = DG.DisplayGroupId
   where P.Id = @id    
 END 
 

@@ -1,14 +1,14 @@
 USE [Marbale]
 GO
 
-/****** Object:  Table [dbo].[Customers]    Script Date: 6/23/2019 12:06:30 AM ******/
+/****** Object:  Table [dbo].[Customer]    Script Date: 6/23/2019 12:06:30 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Customers](
+CREATE TABLE [dbo].[Customer](
 [CustomerId] [int] IDENTITY(1,1) NOT NULL,
 [CustomerName] [nvarchar](50) NOT NULL,
 [Address1] [nvarchar](50) NULL,
@@ -52,15 +52,15 @@ CREATE TABLE [dbo].[Customers](
 [DownloadBatchId] [int] NULL,
 [IDProofFileName] [nvarchar](100) NULL,
 [Title] [nvarchar](20) NULL,
- CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
 (
 [CustomerId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Customers] ADD  CONSTRAINT [DF_Customers_Guid]  DEFAULT (newid()) FOR [Guid]
+ALTER TABLE [dbo].[Customer] ADD  CONSTRAINT [DF_Customer_Guid]  DEFAULT (newid()) FOR [Guid]
 GO
 
-ALTER TABLE [dbo].[Customers] ADD  DEFAULT ((1)) FOR [IsValid]
+ALTER TABLE [dbo].[Customer] ADD  DEFAULT ((1)) FOR [IsValid]
 GO

@@ -1,7 +1,7 @@
 USE [Marbale]
 GO
 
-/****** Object:  Table [dbo].[Cards]    Script Date: 6/23/2019 12:07:14 AM ******/
+/****** Object:  Table [dbo].[Card]    Script Date: 6/23/2019 12:07:14 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -9,7 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE TABLE [dbo].[Cards](
+CREATE TABLE [dbo].[Card](
 [CardId] [int] IDENTITY(1,1) NOT NULL,
 [CardNumber] [varchar](50) NOT NULL,
 [IssueDate] [datetime] NOT NULL,
@@ -45,22 +45,22 @@ CREATE TABLE [dbo].[Cards](
 [ExpiryDate] [datetime] NULL,
 [DownloadBatchId] [int] NULL,
 [RefreshFromHQTime] [datetime] NULL,
- CONSTRAINT [PK_Cards] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Card] PRIMARY KEY CLUSTERED 
 (
 [CardId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Cards] ADD  CONSTRAINT [DF_Cards_Guid]  DEFAULT (newid()) FOR [Guid]
+ALTER TABLE [dbo].[Card] ADD  CONSTRAINT [DF_Card_Guid]  DEFAULT (newid()) FOR [Guid]
 GO
 
-ALTER TABLE [dbo].[Cards]  WITH CHECK ADD  CONSTRAINT [FK_Cards_Customers] FOREIGN KEY([CustomerId])
+ALTER TABLE [dbo].[Card]  WITH CHECK ADD  CONSTRAINT [FK_Card_Customers] FOREIGN KEY([CustomerId])
 REFERENCES [dbo].[Customers] ([CustomerId])
 GO
 
-ALTER TABLE [dbo].[Cards] CHECK CONSTRAINT [FK_Cards_Customers]
+ALTER TABLE [dbo].[Card] CHECK CONSTRAINT [FK_Card_Customers]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cards Master Table' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Cards'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Card Master Table' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Card'
 GO
