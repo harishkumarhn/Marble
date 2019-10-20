@@ -69,11 +69,11 @@ AS
       BEGIN TRAN 
 
       IF EXISTS (SELECT customerid 
-                 FROM   customers WITH (updlock, serializable) 
+                 FROM   customer WITH (updlock, serializable) 
                  WHERE  customerid = @CustomerId) 
         BEGIN 
             -- update statements for procedure here 
-            UPDATE dbo.customers 
+            UPDATE dbo.customer
             SET    customername = @CustomerName, 
                    address1 = @Address1, 
                    address2 = @Address2, 
@@ -120,7 +120,7 @@ AS
       ELSE 
         BEGIN 
             -- Insert statements for procedure here 
-            INSERT INTO [dbo].[customers] 
+            INSERT INTO [dbo].[customer] 
                         ([customername], 
                          [address1], 
                          [address2], 

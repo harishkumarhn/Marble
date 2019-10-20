@@ -18,7 +18,7 @@ begin
 SELECT
 	*
 		FROM 
-		Cards
+		Card
 
 	WHERE 
 		(@cardId IS NULL OR CardId = @cardId)
