@@ -3,57 +3,55 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="first">
-    <div class="second" style="margin-left: 17.0em;">
-        <table id="marbleTable" class="table">
-            <thead>
-                <th class="headerCol">ID</th>
-                <th class="headerCol" style="left: 55px">Name</th>
-                <th>Address</th>
-                <th>Frequency</th>
-                <th>Note</th>
-                <th>Active</th>
-                <th>MacAddress</th>
-                <th>IPAddress</th>
-                <th>TCP Port</th>
-                <th>Configure</th>
-            </thead>
-            @foreach (var item in ViewBag.hubDetails)
-            {  
-                <tr onchange="UpdatedList(this)">
-                    <td class="headerCol">@item.Id  </td>
-                    <td class="headerCol" style="left: 55px">
-                        <input type="text" value="@item.Name" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Address" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Frequency" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Note" class="gridText" />
-                    </td>
-                    <td>
-                        <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.MacAddress" class="gridText"/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.IPAddress" class="gridText"/>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.TCPPort" class="gridText"/>
-                    </td>
-                    <td>
-                        <button onClick="ConfigureHub(@item.Id)">-</button>
-                    </td>
-                </tr>  
-            }
-        </table>
-    </div>
-</div>
+<table id="marbleTable" class="stripe row-border order-column">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Frequency</th>
+        <th>Note</th>
+        <th>Active</th>
+        <th>MacAddress</th>
+        <th>IPAddress</th>
+        <th>TCP Port</th>
+        <th>Configure</th>
+    </thead>
+    @foreach (var item in ViewBag.hubDetails)
+    {  
+        <tr onchange="UpdatedList(this)">
+            <td>
+                <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
+            </td>
+            <td>
+                <input type="text" value="@item.Name" />
+            </td>
+            <td>
+                <input type="text" value="@item.Address" />
+            </td>
+            <td>
+                <input type="text" value="@item.Frequency" />
+            </td>
+            <td>
+                <input type="text" value="@item.Note" />
+            </td>
+            <td>
+                <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
+            </td>
+            <td>
+                <input type="text" value="@item.MacAddress"/>
+            </td>
+            <td>
+                <input type="text" value="@item.IPAddress"/>
+            </td>
+            <td>
+                <input type="text" value="@item.TCPPort"/>
+            </td>
+            <td>
+                <button onClick="ConfigureHub(@item.Id)">-</button>
+            </td>
+        </tr>  
+    }
+</table>
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveHubs()">Save</button>
     <button class="btn btn-primary btn-md" role="button" onclick="AddHub()">Add</button>
@@ -69,16 +67,16 @@
     })
     function AddHub() {
         var newRow = '<tr onchange=UpdatedList(this)> ' +
-        '<td class="headerCol"> <a href="#"></a> </td> ' +
-        ' <td class="headerCol" style="left:55px"> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
-        '<td> <input type="text" value="" class="gridText" />  </td>' +
+        '<td> <a href="#"></a> </td> ' +
+        ' <td  style="left:55px"> <input type="text" value="" />  </td>' +
+        '<td> <input type="text" value="" />  </td>' +
+        '<td> <input type="text" value="" />  </td>' +
+        '<td> <input type="text" value="" />  </td>' +
         '<td> <input type="checkbox" />  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="text" value="" class="gridText"/>  </td>' +
-        '<td> <input type="button" value="" class="gridText" onclick = ConfigureHub()/>  </td>' + '</tr>';
+        '<td> <input type="text" value=""/>  </td>' +
+        '<td> <input type="text" value=""/>  </td>' +
+        '<td> <input type="text" value=""/>  </td>' +
+        '<td> <input type="button" value="" onclick = ConfigureHub()/>  </td>' + '</tr>';
         $('#marbleTable tr:last').after(newRow);
     }
     function SaveHubs() {
