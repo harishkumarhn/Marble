@@ -60,7 +60,7 @@ SELECT
 	IDProofFileName,
 	Title
 	FROM 
-		Customers
+		Customer
 
 	WHERE 
 		(@customerId IS NULL OR CustomerId = @customerId)
