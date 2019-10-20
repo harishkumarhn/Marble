@@ -83,7 +83,7 @@ namespace Marbale.DataAccess.Data
         {
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@CardId", CardId);
-            return conn.executeSelectQuery("GetCardById", sqlParameters);
+            return conn.executeSelectQuery("sp_GetCardById", sqlParameters);
         }
 
         public DataTable GetTechCardType()
