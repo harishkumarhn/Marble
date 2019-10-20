@@ -6,7 +6,7 @@ create  proc [dbo].[sp_GetAllCards]
 @IssueDate datetime=null,      
 @ToDate datetime=null      
 as begin       
-select * from Cards   c
+select * from Card   c
  
  where  (c.CardNumber=@CardNumber or @CardNumber is null) 
  and (c.VIPCustomer =@VIPCustomer or @VIPCustomer=0 )
