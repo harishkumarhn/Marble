@@ -32,13 +32,13 @@ namespace Marbale.BusinessObject
         public bool OnlyVIP { get; set; }
         [Required(ErrorMessage = "Enter Price.")]
         public decimal? Price { get; set; }
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Face value must be numeric")]
+     [Range(0, double.MaxValue, ErrorMessage = "Please enter  Number")]
         public decimal? FaceValue { get; set; }
         [DataType(DataType.Currency)]
         public bool TaxInclusive { get; set; }
         [DataType(DataType.Currency)]
         public decimal TaxPercentage { get; set; }
-        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Final Price must be numeric")]
+      [Range(0, double.MaxValue, ErrorMessage = "Please enter  Number")]
         public decimal? FinalPrice { get; set; }
         [DataType(DataType.Currency)]
         public decimal? EffectivePrice { get; set; }
