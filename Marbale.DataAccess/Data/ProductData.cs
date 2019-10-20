@@ -189,7 +189,7 @@ namespace Marbale.DataAccess
                 sqlParameters[4] = new SqlParameter("@effectivePrice", product.EffectivePrice);
                 sqlParameters[5] = new SqlParameter("@finalPrice", product.FinalPrice);
                 sqlParameters[6] = new SqlParameter("@faceValue", product.FaceValue);
-                sqlParameters[7] = new SqlParameter("@displayGroup", string.IsNullOrEmpty(product.DisplayGroup) ? "" : product.DisplayGroup);
+                sqlParameters[7] = new SqlParameter("@displayGroupId", product.DisplayGroupId);
                 sqlParameters[8] = new SqlParameter("@displayInPOS", product.DisplayInPOS);
                 sqlParameters[9] = new SqlParameter("@autoGenerateCardNumber", product.AutoGenerateCardNumber);
                 sqlParameters[10] = new SqlParameter("@category", string.IsNullOrEmpty(product.Category) ? "" : product.Category);

@@ -25,20 +25,20 @@ namespace Marbale.BusinessObject
         public string POSCounter { get; set; }
         public bool Active { get; set; }
         public bool DisplayInPOS { get; set; }
-        public string DisplayGroup { get; set; }
+        public int DisplayGroupId { get; set; }
         [Required(ErrorMessage = "Select Category")]
         public string Category { get; set; }
         public bool AutoGenerateCardNumber { get; set; }
         public bool OnlyVIP { get; set; }
         [Required(ErrorMessage = "Enter Price.")]
         public decimal? Price { get; set; }
-     [Range(0, double.MaxValue, ErrorMessage = "Please enter  Number")]
+        [Range(0, double.MaxValue, ErrorMessage = "Please enter  Number")]
         public decimal? FaceValue { get; set; }
         [DataType(DataType.Currency)]
         public bool TaxInclusive { get; set; }
         [DataType(DataType.Currency)]
         public decimal TaxPercentage { get; set; }
-      [Range(0, double.MaxValue, ErrorMessage = "Please enter  Number")]
+        [Range(0, double.MaxValue, ErrorMessage = "Please enter  Number")]
         public decimal? FinalPrice { get; set; }
         [DataType(DataType.Currency)]
         public decimal? EffectivePrice { get; set; }

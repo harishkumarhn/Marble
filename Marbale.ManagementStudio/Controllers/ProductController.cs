@@ -38,6 +38,7 @@ namespace MarbaleManagementStudio.Controllers
                 Session["TaxList"] = products[0].TaxList;
                 Session["TypeList"] = products[0].TypeList;
                 Session["CategoryList"] = products[0].CategoryList;
+                Session["DisplayGroupList"] = products[0].DisplayGroupList;
                 ViewBag.productDetails = products;
                 return View();
             }

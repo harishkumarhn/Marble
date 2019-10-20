@@ -1,7 +1,7 @@
 USE [Marbale]
 GO
 
-/****** Object:  Table [dbo].[Product]    Script Date: 10/2/2019 4:45:46 PM ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 10/20/2019 11:23:21 PM ******/
 SET ANSI_NULLS ON
 GO
 

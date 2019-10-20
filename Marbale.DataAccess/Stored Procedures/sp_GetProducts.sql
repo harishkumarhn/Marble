@@ -12,7 +12,7 @@ select
 		POSCounter,
 		P.Active,
 		DisplayInPOS,
-		DisplayGroup,
+		P.DisplayGroupId,
 		Category,
 		AutoGenerateCardNumber,
 		OnlyVIP,

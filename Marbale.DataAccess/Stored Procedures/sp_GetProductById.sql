@@ -26,7 +26,7 @@ BEGIN
  
  SELECT     
  Courtesy,  
- p.Id ,Name ,PT.Type ,POSCounter, P.Active, DisplayInPOS ,DG.DisplayGroup ,Category ,
+ p.Id ,Name ,PT.Type ,POSCounter, P.Active, DisplayInPOS ,DG.DisplayGroupId ,Category ,
  AutoGenerateCardNumber ,OnlyVIP, Price, FaceValue, TaxInclusive, T.TaxPercent TaxPercentage, FinalPrice, EffectivePrice,    
   P.LastUpdatedBy, P.LastUpdatedDate, Bonus, LastUpdatedUser ,T.TaxName, StartDate as 'StartDate', Games ,    
   CreditsPlus, Credits ,CardValidFor,case when isnull(@expiredate,'') ='' then @withoutExpireDate else ExpiryDate end as 'ExpiryDate',

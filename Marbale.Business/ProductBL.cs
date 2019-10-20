@@ -40,7 +40,7 @@ namespace Marbale.Business
                     product.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
-                    product.DisplayGroup = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
+                    product.DisplayGroupId = dr.IsNull("DisplayGroup") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
                     product.LastUpdatedBy = dr.IsNull("LastUpdatedUser") ? "" : dr["LastUpdatedBy"].ToString();
                     product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                     product.TaxName = dr.IsNull("TaxName") ? "" : dr["TaxName"].ToString();
@@ -117,15 +117,15 @@ namespace Marbale.Business
                     TaxList.Add(idValues);
                 }
 
-                var DisplatInDataTable = commonData.GetListItems((int)ListItemGroup.DisplayGroup);
-                var DisplatInList = new List<IdValue>();
-                DisplatInList.Add(new IdValue() { Id = null, Value = "Select" });
-                foreach (DataRow dr in DisplatInDataTable.Rows)
+                var DisplayGroupDataTable = commonData.GetListItems((int)ListItemGroup.DisplayGroup);
+                var DisplayGroupList = new List<IdValue>();
+                DisplayGroupList.Add(new IdValue() { Id = null, Value = "Select" });
+                foreach (DataRow dr in DisplayGroupDataTable.Rows)
                 {
                     IdValue idValues = new IdValue();
-                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    idValues.Value = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    DisplatInList.Add(idValues);
+                    idValues.Id = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
+                    idValues.Value = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
+                    DisplayGroupList.Add(idValues);
                 }
 
                 var productDataTable = productData.GetProducts();
@@ -139,7 +139,7 @@ namespace Marbale.Business
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
                     product.DisplayInPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
-                    product.DisplayGroup = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
+                    product.DisplayGroupId = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
                     product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
                     product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     product.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
@@ -156,7 +156,7 @@ namespace Marbale.Business
                     product.TypeName = dr.IsNull("TypeName") ? "" : dr["TypeName"].ToString();
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;
-                    product.DisplayGroupList = DisplatInList;
+                    product.DisplayGroupList = DisplayGroupList;
                     if (productType == (int)ProductTypeEnum.Card && product.TypeName != manualTypeId)
                     {
                         product.TypeList = typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList();
@@ -185,7 +185,7 @@ namespace Marbale.Business
                         TypeList = defaultTypeList, 
                         CategoryList = categoryList,
                         TaxList=TaxList,
-                        DisplayGroupList = DisplatInList
+                        DisplayGroupList = DisplayGroupList
                     };
                     products.Add(p);
                 }
