@@ -55,11 +55,11 @@ GO
 ALTER TABLE [dbo].[Card] ADD  CONSTRAINT [DF_Card_Guid]  DEFAULT (newid()) FOR [Guid]
 GO
 
-ALTER TABLE [dbo].[Card]  WITH CHECK ADD  CONSTRAINT [FK_Card_Customers] FOREIGN KEY([CustomerId])
-REFERENCES [dbo].[Customers] ([CustomerId])
+ALTER TABLE [dbo].[Card]  WITH CHECK ADD  CONSTRAINT [FK_Card_Customer] FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[Customer] ([CustomerId])
 GO
 
-ALTER TABLE [dbo].[Card] CHECK CONSTRAINT [FK_Card_Customers]
+ALTER TABLE [dbo].[Card] CHECK CONSTRAINT [FK_Card_Customer]
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Card Master Table' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Card'
