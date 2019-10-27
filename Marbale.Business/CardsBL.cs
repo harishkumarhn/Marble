@@ -45,7 +45,7 @@ namespace Marble.Business
                CardsModel pType = new CardsModel();
                pType.CardId = dr.IsNull("CardId") ? 0 : int.Parse(dr["CardId"].ToString());
                pType.CardNumber = dr.IsNull("CardNumber") ? "" : (dr["CardNumber"].ToString());
-               pType.Custemer = dr.IsNull("Custemer") ? "" : dr["Custemer"].ToString();
+               pType.Customer = dr.IsNull("Customer") ? "" : dr["Customer"].ToString();
                pType.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"].ToString());
                pType.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                pType.LastUpdatedTime = dr.IsNull("LastUpdatedTime") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedTime"]);

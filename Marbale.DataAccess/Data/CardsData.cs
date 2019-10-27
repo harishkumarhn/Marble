@@ -25,7 +25,7 @@ namespace Marbale.DataAccess.Data
                 SqlParameter[] sqlParameters = new SqlParameter[25];
                 sqlParameters[0] = new SqlParameter("@CardId", cardmodel.CardId);
                 sqlParameters[1] = new SqlParameter("@CardNumber", cardmodel.CardNumber);
-                sqlParameters[2] = new SqlParameter("@Custemer", cardmodel.Custemer);
+                sqlParameters[2] = new SqlParameter("@Custemer", cardmodel.Customer);
                 sqlParameters[3] = new SqlParameter("@FaceValue", cardmodel.FaceValue);
                 sqlParameters[4] = new SqlParameter("@IssueDate", cardmodel.IssueDateP);
                 sqlParameters[5] = new SqlParameter("@LastPlayTime", cardmodel.LastPlayTime);
@@ -67,7 +67,7 @@ namespace Marbale.DataAccess.Data
                 SqlParameter[] sqlParameters = new SqlParameter[6];
                 sqlParameters[0] = new SqlParameter("@TechnicianCard", cardmodel.TechnicianCard);
                 sqlParameters[1] = new SqlParameter("@CardNumber", cardmodel.CardNumber);
-                sqlParameters[2] = new SqlParameter("@Custemer", string.IsNullOrEmpty(cardmodel.Custemer) ? "" : cardmodel.Custemer);
+                sqlParameters[2] = new SqlParameter("@Custemer", string.IsNullOrEmpty(cardmodel.Customer) ? "" : cardmodel.Customer);
                 sqlParameters[3] = new SqlParameter("@VIPCustomer", cardmodel.VIPCustomer);
                 sqlParameters[4] = new SqlParameter("@IssueDate", cardmodel.IssueDate);
                 sqlParameters[5] = new SqlParameter("@ToDate", cardmodel.ToDate);

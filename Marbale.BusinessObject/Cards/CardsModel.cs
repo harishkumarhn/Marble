@@ -15,7 +15,7 @@ namespace Marbale.BusinessObject.Cards
         public DateTime? IssueDate { get; set; }
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "{0} Must be a Number")]
         public float? FaceValue { get; set; }
-        public string Custemer { get; set; }
+        public string Customer { get; set; }
         public bool VIPCustomer { get; set; }
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "{0} Must be a Number")]
         public float? Credits { get; set; }
