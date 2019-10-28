@@ -107,7 +107,7 @@
                 </td>
                  <td>
                     <select name="displayGroupList" id="displayGroupList">
-                        @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"])
+                        @foreach (var dow in (@item.DisplayGroupList))
                         {
                             if (@item.DisplayGroupId == (@dow.Id))
                             {
@@ -402,25 +402,29 @@
     }
 
     function EditProduct(id) {
-        $('.modal-title').text('Edit Product');
-        $('#basicExampleModal').modal('show');
-        $('#modelbody').load('/Product/NonCardEdit', { "id": id });
+        if (id != 0) {
+            $('.modal-title').text('Edit Product');
+            $('#basicExampleModal').modal('show');
+            $('#modelbody').load('/Product/NonCardEdit', { "id": id });
+        }
     }
     function DeleteProduct(id) {
-        if (confirm('Are you sure you want to delete this from database?')) {
-            $.ajax({
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                url: '@Url.Action("DeleteProduct", "Product")',
-                data: { Id: id },
-                dataType: "json",
-                success: function (data) {
-                    location.reload();
-                },
-                error: function (e) {
-                    alert(e);
-                }
-            });
+        if (id != 0) {
+            if (confirm('Are you sure you want to delete this from database?')) {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    url: '@Url.Action("DeleteProduct", "Product")',
+                    data: { Id: id },
+                    dataType: "json",
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (e) {
+                        alert(e);
+                    }
+                });
+            }
         }
 
     }

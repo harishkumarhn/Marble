@@ -91,10 +91,11 @@
                 For Period  
                 @Html.RadioButtonFor(model => model.TillDate, "For Period")  
  </div>
-       <div class="col-md-3">
+
+       <div class="col-md-3 datepickers">
          @Html.TextBoxFor(m => m.From, new {@class="form-control datapicker", data_select="datepicker",placeholder ="From Date"})
            </div>
-    <div class="col-md-3">
+    <div class="col-md-3 datepickers">
    @Html.TextBoxFor(m => m.To, new {@class="form-control datapicker", data_select="datepicker",placeholder ="To Date"})
         </div>
                 
@@ -105,7 +106,7 @@
         </br>
         <div>
 
-    <table id="cardtableinventory" class="table marbleTable" style="overflow-x:auto;height:216px;width: 547px">
+    <table id="cardtableinventory" class="table marbleTable" style="overflow-y:scroll;height:216px;width: 547px">
         <thead class="thead-dark">
             <th>Number Of Cards</th>
             <th>Action</th>
@@ -126,7 +127,7 @@
           </div>
             <div class="col">
           <label for="lblName" style="position: absolute;
-        right: 260px;
+        right: 683px;
         bottom: 6px;
         color: coral;"></label> 
           </div>
@@ -150,12 +151,21 @@
 
 <script >
     $("document").ready(function () {
+        $('.datepickers').hide();
         var totalcards = $('#Totalcards').val();
 
         $("label[for='lblName']").text(totalcards);
         setTimeout(function () {
             $("#addcardtab").trigger('click');
         }, 10);
+    });
+    $('input:radio').click(function () {
+        debugger
+        if ($(this).val() === 'For Period') {
+            $('.datepickers').show();
+        } else {
+            $('.datepickers').hide();
+        }
     });
     $('#submitinventory').click(function () {
         var myObject = {
