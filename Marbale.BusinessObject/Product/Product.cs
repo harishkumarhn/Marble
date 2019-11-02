@@ -17,7 +17,7 @@ namespace Marbale.BusinessObject
             TypeList = new List<IdValue>();
         }
         public int Id { get; set; }
-
+        public string DisplayGroup { get; set; }
         [Required(ErrorMessage = "Enter Product name.")]
         [Remote("IsAlreadySigned", "Product", AdditionalFields = "Id", HttpMethod = "POST", ErrorMessage = "Product Exsist Already")]
         public string Name { get; set; }
