@@ -245,7 +245,7 @@ namespace Marbale.POS
                     btnProduct.BackgroundImageLayout = ImageLayout.Zoom;
                     btnProduct.BackColor = Color.Transparent;
 
-                    string dispGroup = lstProducts[i].DisplayGroupId;
+                    string dispGroup = lstProducts[i].DisplayGroup;
                     if (dispGroup != prev_display_group)
                     {
                         prev_display_group = dispGroup;

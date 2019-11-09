@@ -26,6 +26,7 @@ namespace Marbale.BusinessObject
         public bool Active { get; set; }
         public bool DisplayInPOS { get; set; }
         public int DisplayGroupId { get; set; }
+        public string DisplayGroup { get; set; }
         [Required(ErrorMessage = "Select Category")]
         public string Category { get; set; }
         public bool AutoGenerateCardNumber { get; set; }
