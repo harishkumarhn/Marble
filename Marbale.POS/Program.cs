@@ -14,11 +14,18 @@ namespace Marbale.POS
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MarblePOS());
-           // Application.Run(new TestForm());
-            Console.ReadLine();
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MarblePOS());
+                // Application.Run(new TestForm());
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
