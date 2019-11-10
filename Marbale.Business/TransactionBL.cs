@@ -94,7 +94,7 @@ namespace Marble.Business
                 card.courtesy = dt.Rows[0]["Courtesy"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Courtesy"]);
                 card.bonus = dt.Rows[0]["Bonus"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Bonus"]);
                 //card.real_ticket_mode = dr.IsNull("RealTicketMode") ? false : bool.Parse(dr["RealTicketMode"].ToString());
-                //card.ticket_count = dr.IsNull("TicketCount") ? 0 : int.Parse(dr["TicketCount"].ToString());
+                card.ticket_count = dt.Rows[0]["TicketCount"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["TicketCount"]);
 
                 if (card.customer_id != 0)
                 card.customer = GetCustomer(card.customer_id, string.Empty);
