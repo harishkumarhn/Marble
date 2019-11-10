@@ -13,7 +13,7 @@ ALTER  proc [dbo].[sp_GetAllCards]
 @IssueDate datetime=null,      
 @ToDate datetime=null      
 as begin       
-select *,cu.CustomerName as Customer from Card c join Customer cu on c.CustomerId = cu.CustomerId 
+select *,cu.CustomerName as Customer from Card c left join Customer cu on c.CustomerId = cu.CustomerId 
  where  (c.CardNumber=@CardNumber or @CardNumber is null) 
  and (c.VIPCustomer =@VIPCustomer or @VIPCustomer=0 )
  and (cast(c.IssueDate as date)=cast(@IssueDate as date) or @IssueDate is null)
