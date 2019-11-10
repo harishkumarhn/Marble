@@ -1785,7 +1785,6 @@ namespace Marbale.POS
             }
             catch
             {
-
             }
         }
 
@@ -1870,6 +1869,42 @@ namespace Marbale.POS
             POSBackColor = Color.Gray;
             SetPOSBackgroundColor();
             dgvTransaction.BackgroundColor = Color.LightBlue;
+        }
+
+        private void btnLoadTickets_Click(object sender, EventArgs e)
+        {
+            if (CurrentCard == null)
+            {
+                MessageBox.Show("Please tap the card");
+                return;
+            }
+
+            if(CurrentCard.card_id <= 0)
+            {
+                MessageBox.Show("Can't Load tickets to the New card");
+                return;
+            }
+
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADTICKETS, CurrentCard);
+            frm.ShowDialog();
+        }
+
+        private void btnLoadBonus_Click(object sender, EventArgs e)
+        {
+            if (CurrentCard == null)
+            {
+                MessageBox.Show("Please tap the card");
+                return;
+            }
+
+            if (CurrentCard.card_id <= 0)
+            {
+                MessageBox.Show("Can't Load Bonus to the New card");
+                return;
+            }
+
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADBONUS, CurrentCard);
+            frm.ShowDialog();
         }
     }
 }
