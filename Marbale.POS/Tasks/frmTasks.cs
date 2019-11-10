@@ -1,4 +1,5 @@
-﻿using Marbale.BusinessObject.Cards;
+﻿using Marbale.Business;
+using Marbale.BusinessObject.Cards;
 using Marbale.POS.Tasks;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,12 @@ namespace Marbale.POS
                 MessageBox.Show("Please enter the tickets to load to card");
                 return;
             }
+
+            ProductBL productBL = new ProductBL();
+            productBL.LoadTicketBonusToCards(currentcard.card_id, Convert.ToInt32(txtTickets.Text), 0, "");
+
+            MessageBox.Show("Tickets loaded to card successfully.");
+            this.Close();
         }
 
         private void txtTickets_KeyPress(object sender, KeyPressEventArgs e)
@@ -98,6 +105,17 @@ namespace Marbale.POS
                 MessageBox.Show("Please enter the Bonus to load to card");
                 return;
             }
+
+            ProductBL productBL = new ProductBL();
+            productBL.LoadTicketBonusToCards(currentcard.card_id, 0,Convert.ToInt32(txtBonus.Text), "");
+
+            MessageBox.Show("Bonus loaded to card successfully.");
+            this.Close();
+        }
+
+        private void btnBonusClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

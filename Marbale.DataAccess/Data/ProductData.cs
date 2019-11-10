@@ -439,5 +439,16 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+
+        public void LoadTicketBonusToCards(int cardId, int tickets, int bonus, string user)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[4];
+            sqlParameters[0] = new SqlParameter("@cardId", cardId);
+            sqlParameters[1] = new SqlParameter("@bonus", bonus);
+            sqlParameters[2] = new SqlParameter("@ticket", tickets);
+            sqlParameters[3] = new SqlParameter("@lastupdatedBy", user);
+
+            conn.executeUpdateQuery("sp_loadTicketBonusTocard", sqlParameters);
+        }
     }
 }

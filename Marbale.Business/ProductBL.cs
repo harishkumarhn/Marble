@@ -563,5 +563,18 @@ namespace Marbale.Business
                throw e;
             }
         }
+
+        public void LoadTicketBonusToCards(int cardId, int tickets, int bonus, string user)
+        {
+            try
+            {
+                productData.LoadTicketBonusToCards(cardId, tickets, bonus, user);
+            }
+            catch (Exception e)
+            {
+                //   LogError.Instance.LogException("DeleteProductbyId", e);
+                throw e;
+            }
+        }
     }
 }

@@ -1002,7 +1002,7 @@ namespace Marbale.POS
             dgvCardDetails.Rows[4].Cells[0].Value = "Bonus";
 
             dgvCardDetails.Rows.Add();
-            dgvCardDetails.Rows[5].Cells[0].Value = "Time";
+            dgvCardDetails.Rows[5].Cells[0].Value = "Tickets"; //Time
 
             dgvCardDetails.Rows.Add();
             dgvCardDetails.Rows[6].Cells[0].Value = "Games";
@@ -1187,7 +1187,7 @@ namespace Marbale.POS
                 dgvCardDetails.Rows[4].Cells[1].Value = CurrentCard.bonus;
 
                 //Time
-                dgvCardDetails.Rows[5].Cells[1].Value = CurrentCard.time;
+                dgvCardDetails.Rows[5].Cells[1].Value = CurrentCard.ticket_count; // CurrentCard.time;
 
                 //Games
                 dgvCardDetails.Rows[6].Cells[1].Value = CurrentCard.CardGames;
@@ -1887,6 +1887,12 @@ namespace Marbale.POS
 
             frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADTICKETS, CurrentCard);
             frm.ShowDialog();
+            HandleCardRead(CurrentCard.CardNumber, null);
+
+            //if (frm.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+            //{
+            //    HandleCardRead(CurrentCard.CardNumber, null);
+            //}
         }
 
         private void btnLoadBonus_Click(object sender, EventArgs e)
@@ -1905,6 +1911,12 @@ namespace Marbale.POS
 
             frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADBONUS, CurrentCard);
             frm.ShowDialog();
+            HandleCardRead(CurrentCard.CardNumber, null);
+
+            //if (frm.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+            //{
+            //    HandleCardRead(CurrentCard.CardNumber, null);
+            //}
         }
     }
 }
