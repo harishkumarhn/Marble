@@ -1,6 +1,7 @@
 CREATE TABLE [dbo].[DisplayGroup](
 	[DisplayGroupId] [int] IDENTITY(1,1) NOT NULL,
 	[DisplayGroup] [nvarchar(300)] NOT NULL,
+	[Description] [nvarchar(300)] NOT NULL,
 	[SortOrder] [int] NULL,
 	[CreatedBy] [nvarchar](50) NULL,
 	[CreatedDate] [datetime] NULL,

@@ -17,7 +17,7 @@ namespace Marbale.BusinessObject
             TypeList = new List<IdValue>();
         }
         public int Id { get; set; }
-
+        public string DisplayGroup { get; set; }
         [Required(ErrorMessage = "Enter Product name.")]
         [Remote("IsAlreadySigned", "Product", AdditionalFields = "Id", HttpMethod = "POST", ErrorMessage = "Product Exsist Already")]
         public string Name { get; set; }
@@ -26,7 +26,6 @@ namespace Marbale.BusinessObject
         public bool Active { get; set; }
         public bool DisplayInPOS { get; set; }
         public int DisplayGroupId { get; set; }
-        public string DisplayGroup { get; set; }
         [Required(ErrorMessage = "Select Category")]
         public string Category { get; set; }
         public bool AutoGenerateCardNumber { get; set; }
