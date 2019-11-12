@@ -48,14 +48,14 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-            frmLogin frmLogin = new frmLogin();
-            frmLogin.ShowDialog();
-            if (!frmLogin.isLoginSuccess)
-                Environment.Exit(0);
-            else
-            {
-                CurrentUser = frmLogin.loggedInUser;
-            }
+            //frmLogin frmLogin = new frmLogin();
+            //frmLogin.ShowDialog();
+            //if (!frmLogin.isLoginSuccess)
+            //    Environment.Exit(0);
+            //else
+            //{
+            //    CurrentUser = frmLogin.loggedInUser;
+            //}
         }
 
         private void POSHome_Load(object sender, EventArgs e)
@@ -245,7 +245,7 @@ namespace Marbale.POS
                     btnProduct.BackgroundImageLayout = ImageLayout.Zoom;
                     btnProduct.BackColor = Color.Transparent;
 
-                    string dispGroup = lstProducts[i].DisplayGroupId;
+                    string dispGroup = lstProducts[i].DisplayGroup;
                     if (dispGroup != prev_display_group)
                     {
                         prev_display_group = dispGroup;
@@ -1278,6 +1278,7 @@ namespace Marbale.POS
             txtCountry.Text = string.Empty;
             txtEmail.Text = string.Empty;
             cmbGender.SelectedIndex = 0;
+            lblCustomerMessage.Text = string.Empty;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -1307,12 +1308,15 @@ namespace Marbale.POS
                 Customer.gender = 'N';
 
             Customer.birth_date = dtpDOB.Value;
+
+            lblCustomerMessage.Text = "Customer will be saved after saving Transcation";
         }
 
         private void tabControlCardAction_Selected(object sender, TabControlEventArgs e)
         {
             if (tabControlCardAction.SelectedTab.Name == "tabPageCustomer")
             {
+                lblCustomerMessage.Text = "";
                 if (cmbGender.Text == string.Empty)
                     cmbGender.SelectedIndex = 0;
             }
@@ -1331,6 +1335,30 @@ namespace Marbale.POS
             if (ListTransaction != null)
             {
                 dgvTrxHeader.DataSource = ListTransaction;
+
+                dgvTrxHeader.Columns["POSMachineId"].Visible = false;
+                dgvTrxHeader.Columns["POSTypeId"].Visible = false;
+                dgvTrxHeader.Columns["Pre_TaxAmount"].Visible = false;
+                dgvTrxHeader.Columns["Status"].Visible = false;
+                dgvTrxHeader.Columns["Tax_Amount"].Visible = false;
+                dgvTrxHeader.Columns["Tip_Amount"].Visible = false;
+                dgvTrxHeader.Columns["TokenNumber"].Visible = false;
+                dgvTrxHeader.Columns["TotalPaidAmount"].Visible = false;
+                //dgvTrxHeader.Columns["DateTimeTransactionDate"].Visible = false;
+                dgvTrxHeader.Columns["Transaction_Amount"].Visible = false;
+                //dgvTrxHeader.Columns["DateTimeTrxDate"].Visible = false;
+                dgvTrxHeader.Columns["TrxProfileId"].Visible = false;
+                dgvTrxHeader.Columns["Username"].Visible = false;
+                dgvTrxHeader.Columns["UserId"].Visible = false;
+                dgvTrxHeader.Columns["CustomerId"].Visible = false;
+                dgvTrxHeader.Columns["CreditCardAmount"].Visible = false;
+                dgvTrxHeader.Columns["GameCardAmount"].Visible = false;
+                dgvTrxHeader.Columns["PrimaryCardId"].Visible = false;
+                dgvTrxHeader.Columns["OrderId"].Visible = false;
+                dgvTrxHeader.Columns["Remarks"].Visible = false;
+                dgvTrxHeader.Columns["ExternalSystemReference"].Visible = false;
+                //dgvTrxHeader.Columns["DateTimeLastUpdatedTime"].Visible = false;
+                dgvTrxHeader.Columns["Customer"].Visible = false;
             }
         }
 
@@ -1426,7 +1454,42 @@ namespace Marbale.POS
                 int TrxId = Convert.ToInt32(dgvTrxHeader["Trx_id", e.RowIndex].Value);
                 Transaction trx = ListTransaction.Find(x => x.Trx_id == TrxId);
                 if (trx != null)
+                {
                     dgvTrxLines.DataSource = trx.TransactionLines;
+
+                    dgvTrxLines.Columns["AllowCancel"].Visible = false;
+                    dgvTrxLines.Columns["AllowEdit"].Visible = false;
+                    dgvTrxLines.Columns["AllowPriceOverride"].Visible = false;
+                    dgvTrxLines.Columns["AttractionDetails"].Visible = false;
+                    dgvTrxLines.Columns["CancelledLine"].Visible = false;
+                    dgvTrxLines.Columns["CardTypeId"].Visible = false;
+                    dgvTrxLines.Columns["CategoryId"].Visible = false;
+                    dgvTrxLines.Columns["ComboChildLine"].Visible = false;
+                    dgvTrxLines.Columns["CreditPlusConsumptionApplied"].Visible = false;
+                    dgvTrxLines.Columns["CreditPlusConsumptionId"].Visible = false;
+                    dgvTrxLines.Columns["DBLineId"].Visible = false;
+                    dgvTrxLines.Columns["LineProcessed"].Visible = false;
+                    dgvTrxLines.Columns["LineValid"].Visible = false;
+                    dgvTrxLines.Columns["LockerAllocationId"].Visible = false;
+                    dgvTrxLines.Columns["LockerName"].Visible = false;
+                    dgvTrxLines.Columns["LockerNumber"].Visible = false;
+                    dgvTrxLines.Columns["ModifierLine"].Visible = false;
+                    dgvTrxLines.Columns["OriginalLineID"].Visible = false;
+                   // dgvTrxLines.Columns["doubleOriginalPrice"].Visible = false;
+                
+                  
+                    dgvTrxLines.Columns["productSplitTaxExists"].Visible = false;
+                    dgvTrxLines.Columns["TaxInclusivePrice"].Visible = false;
+                    dgvTrxLines.Columns["tax_structer_id"].Visible = false;
+                    dgvTrxLines.Columns["LineAmount"].Visible = false;
+                    dgvTrxLines.Columns["cardId"].Visible = false;
+                    dgvTrxLines.Columns["time"].Visible = false;
+                    dgvTrxLines.Columns["Customer"].Visible = false;
+                    dgvTrxLines.Columns["ModifierSetId"].Visible = false;
+                    //dgvTrxLines.Columns["TransactionLineParentLine"].Visible = false;
+                    dgvTrxLines.Columns["PrintKOT"].Visible = false;
+                    dgvTrxLines.Columns["ParentLine"].Visible = false;
+                }
             }
         }
 

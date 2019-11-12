@@ -28,7 +28,7 @@
 
                     <div class="col-md-2">
                         <label for="ex3"><b>IssueDate:</b></label>
-                        @Html.TextBoxFor(m => m.IssueDateP, new { @class = "form-control datepickers" })
+                        @Html.TextBoxFor(m => m.IssueDateP, new { @class = "form-control datepicker" })
                     </div>
                     <div class="col-md-2">
                         <label for="ex3"><b>FaceValue:</b></label>
@@ -87,17 +87,17 @@
                 <div class="form-group row">
                     <div class="col-md-2">
                         <label for="ex1"><b>StartTime:</b></label>
-                        @Html.TextBoxFor(m => m.StartTime, new { @class = "form-control datepickers" })
+                        @Html.TextBoxFor(m => m.StartTime, new { @class = "form-control datepicker" })
 
                     </div>
                     <div class="col-md-2">
                         <label for="ex2"><b>Last Play time:</b></label>
-                        @Html.TextBoxFor(m => m.LastPlayTime, new { @class = "form-control datepickers", placeholder = @Html.DisplayNameFor(n => n.LastPlayTime) })
+                        @Html.TextBoxFor(m => m.LastPlayTime, new { @class = "form-control datepicker", placeholder = @Html.DisplayNameFor(n => n.LastPlayTime) })
                     </div>
 
                     <div class="col-md-2">
                         <label for="ex1"><b>Expiry Date:</b></label>
-                        @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control datepickers" })
+                        @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control datepicker" })
 
                     </div>
                     <div class="col-md-3">
@@ -107,7 +107,7 @@
                     </div>
                     <div class="col-md-2">
                         <label for="ex2"><b>Refund Date:</b></label>
-                        @Html.TextBoxFor(m => m.RefundDate, new { @class = "form-control datepickers" })
+                        @Html.TextBoxFor(m => m.RefundDate, new { @class = "form-control datepicker" })
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                 <div class="form-group row">
                     <div class="col-md-3">
                         <label for="ex1"><b>Last Updated Time:</b></label>
-                        @Html.TextBoxFor(m => m.LastUpdatedTime, new { @class = "form-control datepickers" })
+                        @Html.TextBoxFor(m => m.LastUpdatedTime, new { @class = "form-control datepicker" })
 
                     </div>
                     <div class="col-md-3">
@@ -176,6 +176,8 @@
     <button id="update" type="submit" class="btn btn-primary" onclick="Save(this)">Save</button>
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
+@*<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
 <script type="text/javascript">
     $(document).ready(function () {
         $('.modal-body').css({
@@ -188,7 +190,7 @@
     })
     //var $j = jQuery.noConflict();
     $(function () {
-        $(".datepickers").datepicker({
+        $(".datepicker").datepicker({
             changeMonth: true,
             changeYear: true,
             "setDate": new Date()
@@ -209,6 +211,7 @@
 
     });
     function Save(btnClicked) {
+        debugger;
         var $form = $('#cardForm');
         $.ajax({
             type: "POST",

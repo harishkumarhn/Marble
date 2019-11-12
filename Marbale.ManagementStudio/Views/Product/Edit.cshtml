@@ -29,39 +29,7 @@
 
                 <div class="row">
                 <div class="form-group col-md-6">
-                    <div class="form-group col-md-12">    
-                            <label class="col-md-6">POS Counter:</label>
-                            @Html.TextBoxFor(m => m.POSCounter, new { @class = "form-control col-md-5" })
-                    </div>
-         <div class="form-group col-md-12">   
-                           
-                            <label class="col-md-6"><b>DisplayGroup:</b></label>
-                    
-                            @Html.TextBoxFor(m => m.DisplayGroup, new { @class = "form-control col-md-5" })
-                                  </div>
-                   <div class="form-group col-md-12">     
-                            <label class="col-md-6">Auto Generate CardNumber:</label>
-                     
-                             @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "form-control col-md-5", @style = "position:absolute;width:20px;" })
-                            </div>
-                    <div class="form-group col-md-12"> 
-                            <label class="col-md-6">Category:</label>
-                               @Html.DropDownListFor(m => m.Category, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Category) ? "SELECT" : Model.Category), new { @class = "form-control col-md-5" })
-
-                            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-12"> 
-                            <label class="col-md-6">Product Type:</label>
-                      
-                            @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "height: 35px" })
-                            
-
-                        </div>
-                        <div class="form-group col-md-12"> 
-                            <label class="col-md-6">OnlyVIP:</label>
-                            @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "form-control col-md-5", @style = "position:absolute;width:20px;" })
-                        </div>
-                        <div class="form-group col-md-12"> 
+                       <div class="form-group col-md-12"> 
                             <label class="col-md-6"><b>Card Face Value:</b></label>
                             @Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control col-md-5" })
                         </div>
@@ -95,10 +63,7 @@
                             @Html.TextBoxFor(m => m.FinalPrice, new { @class = "form-control col-md-5" })
                             @Html.ValidationMessageFor(model => model.FinalPrice, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-                   <div class="form-group col-md-6">
-                 
-                      <div class="form-group col-md-12">
+                     <div class="form-group col-md-12">
                               <label class="col-md-6"><b>Credits:</b></label>
                             @Html.TextBoxFor(m => m.Credits, new { @class = "form-control col-md-5" })
                             @Html.ValidationMessageFor(model => model.Credits, "", new { @class = "text-danger" })
@@ -114,6 +79,48 @@
                             @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control col-md-5" })
                             @Html.ValidationMessageFor(model => model.Bonus, "", new { @class = "text-danger", @style = "color:red" })
                         </div>
+                     <div class="form-group col-md-12"> 
+                            <label class="col-md-6">OnlyVIP:</label>
+                            @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "form-control col-md-5", @style = "position:absolute;width:20px;" })
+                        </div>
+                     
+                    <div class="form-group col-md-12"> 
+                            <label class="col-md-6">Category:</label>
+                               @Html.DropDownListFor(m => m.Category, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Category) ? "SELECT" : Model.Category), new { @class = "form-control col-md-5" })
+
+                            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-12"> 
+                            <label class="col-md-6">Product Type:</label>
+                      
+                            @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "height: 35px" })
+                            
+
+                        </div>
+                        
+
+
+               
+                
+                     
+                    </div>
+                   <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">     
+                            <label class="col-md-6">Auto Generate CardNumber:</label>
+                     
+                             @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "form-control col-md-5", @style = "position:absolute;width:20px;" })
+                            </div>
+                      <div class="form-group col-md-12">    
+                            <label class="col-md-6">POS Counter:</label>
+                            @Html.TextBoxFor(m => m.POSCounter, new { @class = "form-control col-md-5" })
+                    </div>
+         <div class="form-group col-md-12">   
+                           
+                            <label class="col-md-6"><b>DisplayGroup:</b></label>
+                    
+                            @Html.TextBoxFor(m => m.DisplayGroup, new { @class = "form-control col-md-5" })
+                                  </div>
+                     
                        <div class="form-group col-md-12">
                              <label class="col-md-6">CardValidFor:</label>
                             @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control col-md-5" })

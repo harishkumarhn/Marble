@@ -51,15 +51,15 @@ namespace Marble.Business
                pType.LastUpdatedTime = dr.IsNull("LastUpdatedTime") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedTime"]);
                pType.FaceValue = dr.IsNull("FaceValue") ? 0 : float.Parse(dr["FaceValue"].ToString());
                pType.IssueDateP = dr.IsNull("IssueDate") ? new DateTime() : Convert.ToDateTime(dr["IssueDate"].ToString());
-               pType.LastPlayTime = dr.IsNull("LastPlayTime") ? new DateTime() : Convert.ToDateTime(dr["LastPlayTime"].ToString());
+               pType.LastPlayTime = dr.IsNull("LastTimePlayed") ? new DateTime() : Convert.ToDateTime(dr["LastTimePlayed"].ToString());
                pType.Note = dr.IsNull("Note") ? "" : dr["Note"].ToString();
                pType.RefundAmount = dr.IsNull("RefundAmount") ? 0 : float.Parse(dr["RefundAmount"].ToString());
                pType.RefundDate = dr.IsNull("RefundDate") ? new DateTime() : Convert.ToDateTime(dr["RefundDate"].ToString());
-               pType.StartTime = dr.IsNull("StartTime") ? new DateTime() : Convert.ToDateTime(dr["StartTime"].ToString());
+               pType.StartTime = dr.IsNull("StartDateTtime") ? new DateTime() : Convert.ToDateTime(dr["StartDateTtime"].ToString());
                pType.TechGames = dr.IsNull("TechGames") ? "" : dr["TechGames"].ToString();
                pType.TimerResetCard = dr.IsNull("TimerResetCard") ? false : bool.Parse(dr["TimerResetCard"].ToString());
                pType.VIPCustomer = dr.IsNull("VIPCustomer") ? false : bool.Parse(dr["VIPCustomer"].ToString());
-               pType.TechCardType = dr.IsNull("TechCardType") ? 0 : int.Parse(dr["TechCardType"].ToString());
+               pType.TechCardType = dr.IsNull("TechnicianCard") ? 0 : int.Parse(dr["TechnicianCard"].ToString());
 
                pType.Credits = dr.IsNull("Credits") ? 0 : float.Parse(dr["Credits"].ToString());
                pType.CreditPlus = dr.IsNull("CreditPlus") ? 0 : float.Parse(dr["CreditPlus"].ToString());
