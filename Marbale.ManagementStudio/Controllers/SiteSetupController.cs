@@ -361,6 +361,12 @@ namespace MarbaleManagementStudio.Controllers
 
         #endregion
 
+        #region
+        public ActionResult Printer()
+        {
+            return View();
+        }
+        #endregion
     }
 
 }
