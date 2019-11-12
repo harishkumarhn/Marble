@@ -573,7 +573,42 @@ namespace Marble.Business
             }
             return sites;
         }
+        public List<Printer> GetPrinters()
+        {
+            DataTable dt = siteSetupData.GetPrinters();
+            List<Printer> printers = new List<Printer>();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Printer printer = new Printer();
+                    printer.PrinterId = dr.IsNull("PrinterId") ? 0 : int.Parse(dr["PrinterId"].ToString());
+                    printer.PrinterName = dr.IsNull("PrinterName") ? "" : dr["PrinterName"].ToString();
+                    printer.PrinterLocation = dr.IsNull("PrinterLocation") ? "" : dr["PrinterLocation"].ToString();
+                    printer.IPAddress = dr.IsNull("IPAddress") ? "" : dr["IPAddress"].ToString();
+                    printer.KDSTerminal = dr.IsNull("KDSTerminal") ? false : bool.Parse(dr["KDSTerminal"].ToString());
+                    printer.Remarks = dr.IsNull("Remarks") ? "" : dr["Remarks"].ToString();
+                    printers.Add(printer);
+                }
 
+            }
+            if (printers.Count == 0)
+            {
+                printers.Add(new Printer());
+            }
+            return printers;
+        }
 
+        public int InsertOrUpdatePrinters(List<Printer> printers)
+        {
+            try
+            {
+                return siteSetupData.InsertOrUpdatePrinters(printers);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

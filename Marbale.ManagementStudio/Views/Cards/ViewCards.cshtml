@@ -71,9 +71,9 @@
             <th>Courtesy</th>
             <th>Bonus</th>
             <th>CreditsPlayed</th>
-            <th>Ticket Count</th>
-            <th>Ticket Allowed</th>
-            <th>Real Ticket Mode</th>
+            <th>TicketCount</th>
+            <th>TicketAllowed</th>
+            <th>RealTicketMode</th>
 
 
 
@@ -190,14 +190,11 @@
             }
         }
     </table>
-    <button type="button" class="btn btn-primary" data-toggle="modal" id="newcard" style="position: absolute;
-    right: 92%;
-    bottom: 36%;">
-        New Card
-    </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" id="updatecard" style="display:none" onclick="EditCard();">
-        Update Card
-    </button>
+</div>
+<div class="action">
+    <button id="newcard" class="btn btn-primary btn-md" role="button">New Card</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
 </div>
 
 <script>

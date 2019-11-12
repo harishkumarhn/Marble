@@ -327,6 +327,7 @@
     <Content Include="Views\Product\NonCardEdit.cshtml" />
     <Content Include="Views\Product\DisplayGroup.cshtml" />
     <Content Include="Views\SiteSetup\Printer.cshtml" />
+    <Content Include="Views\SiteSetup\PrinterList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

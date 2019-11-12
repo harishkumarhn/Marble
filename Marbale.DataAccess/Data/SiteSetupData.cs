@@ -326,6 +326,17 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetPrinters()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetPrinters");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public int InsertOrUpdateSites(List<Site> sites)
         {
             try
@@ -371,6 +382,29 @@ namespace Marbale.DataAccess
                 throw e;
             }
 
+        }
+        public int InsertOrUpdatePrinters(List<Printer> printers)
+        {
+            try
+            {
+                foreach (var printer in printers)
+                {
+                    SqlParameter[] sqlParameters = new SqlParameter[6];
+                    sqlParameters[0] = new SqlParameter("@PrinterId", printer.PrinterId);
+                    sqlParameters[1] = new SqlParameter("@PrinterName", string.IsNullOrWhiteSpace(printer.PrinterName) ? "" : printer.PrinterName);
+                    sqlParameters[2] = new SqlParameter("@IPAddress", string.IsNullOrWhiteSpace(printer.IPAddress) ? "" : printer.IPAddress);
+                    sqlParameters[3] = new SqlParameter("@PrinterLocation", string.IsNullOrWhiteSpace(printer.PrinterLocation) ? "" : printer.PrinterLocation);
+                    sqlParameters[4] = new SqlParameter("@KDSTerminal", printer.KDSTerminal);
+                    sqlParameters[5] = new SqlParameter("@Remarks", string.IsNullOrWhiteSpace(printer.Remarks) ? "" : printer.Remarks);
+                    conn.executeUpdateQuery("sp_InsertOrUpdatePrinter", sqlParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return 0;
         }
     }
 }

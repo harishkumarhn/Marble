@@ -2,16 +2,11 @@
 using Marbale.BusinessObject.Messages;
 using Marbale.BusinessObject.SiteSetup;
 using Marble.Business;
-using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
 using MarbaleManagementStudio.Models;
-using System.Net;
-using System.Net.Mail;
 using System.Web;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace MarbaleManagementStudio.Controllers
 {
@@ -361,11 +356,21 @@ namespace MarbaleManagementStudio.Controllers
 
         #endregion
 
-        #region
+        #region Printer
         public ActionResult Printer()
         {
             return View();
         }
+        public ActionResult PrinterList()
+        {
+            ViewBag.Printers = siteSetup.GetPrinters();
+            return View();
+        }
+        public int UpdatePrinters(List<Printer> Printers)
+        {
+            return siteSetup.InsertOrUpdatePrinters(Printers);
+        }
+
         #endregion
     }
 
