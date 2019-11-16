@@ -2,7 +2,7 @@
     ViewBag.Title = "printTemplate";
     Layout = null;
 }
-<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+<table id="marbleTable_printTemplateHeaders" class="stripe row-border order-column" style="width: 100%">
     <thead>
         <tr>
             <th>Template ID</th>
@@ -10,6 +10,7 @@
             <th>Font Name</th>
             <th>Font Size</th>
             <th>Preview</th>
+            <th>Add</th>
         </tr>
     </thead>
     <tbody>
@@ -29,12 +30,87 @@
                     <input type="text" value="@item.FontSize" />
                 </td>
                 <td><button>--</button></td>
+                <td><button onclick="AddTemplateHeader()">Add</button></td>
             </tr>  
         }
     </tbody>
 </table>
+<script>
+    $(document).ready(function () {
+        var table = $('#marbleTable_printTemplateHeaders').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            }
+        });
+        var counter = 1;
+
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+    });
+    function AddTemplateHeader() {
+        $('#marbleTable_printTemplateHeaders').DataTable().row.add([
+                '<lable></lable>',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<button>--</button>',
+                '<button onclick="AddTemplateHeader()">Add</button>'
+        ]).draw(false);
+    }
+    var updatedArray = [];
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
+        }
+    }
+    function SavePrinters() {
+        var printers = [];
+        var table = document.getElementById('marbleTable_printTemplateHeaders');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                var rowIndex = r + 1;
+                printers.push({
+                    PrinterId: table.rows[rowIndex].cells[0].children[0].value,
+                    PrinterName: table.rows[rowIndex].cells[1].children[0].value,
+                    PrinterLocation: table.rows[rowIndex].cells[2].children[0].value,
+                    IPAddress: table.rows[rowIndex].cells[3].children[0].value,
+                    KDSTerminal: table.rows[rowIndex].cells[4].children[0].checked,
+                    Remarks: table.rows[rowIndex].cells[5].children[0].value
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdatePrinters", "SiteSetup")',
+            data: JSON.stringify({ printers: printers }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+</script>
 <div id="templateData">
-    <table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+    <table id="marbleTable_printTemplate" class="stripe row-border order-column" style="width: 100%">
     <thead>
         <tr>
             <th>TemplateId</th>
@@ -176,15 +252,13 @@
     <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
 </div>
 <script>
-
     $(document).ready(function () {
-        var table = $('#marbleTable').DataTable({
+        var table = $('#marbleTable_printTemplate').DataTable({
             scrollY: "400px",
             scrollX: true,
             scrollCollapse: true,
             editable: true,
             stateSave: true,
-            // paging: true,
             bPaginate: false,
             bInfo: false,
             bFilter: false,
@@ -198,7 +272,6 @@
                     UpdatedList($(this).parent().index());
                 });
             },
-            //order: [[ 0, "desc" ]],
             fixedColumns: {
                 leftColumns: 2
             }
@@ -206,13 +279,31 @@
         var counter = 1;
 
         $('#addRow').on('click', function () {
+            var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
+            var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol2');
+
+            var alignmentListOptions = '';
+              @foreach (var dow in ViewBag.PrintTemplates[0].AlignmentList)
+              {
+                 @: alignmentListOptions = alignmentListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
+                          
+              }
             table.row.add([
                 '<lable></lable>',
                 '<input type="text" value="" />',
                 '<input type="text" value="" />',
                 '<input type="text" value="" />',
+                '<select name="Col1Alignment" id="Col1Alignment">' + alignmentListOptions,
                 '<input type="text" value="" />',
-                '<input type="checkbox" />',
+                '<select name="Col2Alignment" id="Col2Alignment">' + alignmentListOptions,
+                '<input type="text" value="" />',
+                '<select name="Col3Alignment" id="Col3Alignment">' + alignmentListOptions,
+                '<input type="text" value="" />',
+                '<select name="Col4Alignment" id="Col4Alignment">' + alignmentListOptions,
+                '<input type="text" value="" />',
+                '<select name="Col5Alignment" id="Col5Alignment">' + alignmentListOptions,
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
                 '<input type="text" value="" />'
 
             ]).draw(false);
@@ -224,37 +315,5 @@
         if (!updatedArray.includes(index)) {
             updatedArray.push(index);
         }
-    }
-    function SavePrinters() {
-        var printers = [];
-        var table = document.getElementById('marbleTable');
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-            if (updatedArray.includes(r)) {
-                var rowIndex = r + 1;
-                debugger;
-                printers.push({
-                    PrinterId: table.rows[rowIndex].cells[0].children[0].value,
-                    PrinterName: table.rows[rowIndex].cells[1].children[0].value,
-                    PrinterLocation: table.rows[rowIndex].cells[2].children[0].value,
-                    IPAddress: table.rows[rowIndex].cells[3].children[0].value,
-                    KDSTerminal: table.rows[rowIndex].cells[4].children[0].checked,
-                    Remarks: table.rows[rowIndex].cells[5].children[0].value
-                });
-            }
-        }
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdatePrinters", "SiteSetup")',
-            data: JSON.stringify({ printers: printers }),
-            dataType: "json",
-            success: function (data) {
-                alert('Data Saved');
-                location.reload();
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
     }
 </script>

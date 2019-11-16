@@ -1,7 +1,7 @@
 USE [Marbale]
 GO
 
-/****** Object:  Table [dbo].[Printers]    Script Date: 11/12/2019 11:38:55 PM ******/
+/****** Object:  Table [dbo].[Printers]    Script Date: 11/16/2019 5:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,7 +10,7 @@ GO
 
 CREATE TABLE [dbo].[Printers](
 	[PrinterId] [int] IDENTITY(1,1) NOT NULL,
-	[PrinterName] [nvarchar](50) NULL,
+	[PrinterName] [nvarchar](500) NULL,
 	[PrinterLocation] [nvarchar](100) NULL,
 	[IPAddress] [nvarchar](50) NULL,
 	[Remarks] [nvarchar](100) NULL,
