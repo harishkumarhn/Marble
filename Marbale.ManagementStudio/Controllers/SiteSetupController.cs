@@ -370,6 +370,12 @@ namespace MarbaleManagementStudio.Controllers
         {
             return siteSetup.InsertOrUpdatePrinters(Printers);
         }
+        public ActionResult printTemplate()
+        {
+            ViewBag.PrintTemplateHeaders = siteSetup.GetPrintTemplateHeaders();
+            ViewBag.PrintTemplates = siteSetup.GetPrintTemplates();
+            return View();
+        }
 
         #endregion
     }

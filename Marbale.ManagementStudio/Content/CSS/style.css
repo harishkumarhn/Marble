@@ -5,8 +5,6 @@
     width: 100%;
     height: 100%;
 }
-
-
 .formTable td {
     border: none;
 }
@@ -166,7 +164,6 @@ td a.edit {
 td a {
     cursor: pointer;
 }
-
 #marbaleTable th {
     border: 1px solid #29d2da;
 }
@@ -181,6 +178,7 @@ table.DTFC_Cloned thead, table.DTFC_Cloned tfoot {
 
 thead {
     background-color: #0ab1cc;
+    height:20px;
 }
 /* Tab control*/
 .valuesContainer {
@@ -192,7 +190,7 @@ thead {
 .tabButtons {
     width: 100%;
     background-color: #d8d7d6;
-    height: 109px;
+    height: 84px;
     margin-bottom: 10px;
 }
 
@@ -217,7 +215,7 @@ thead {
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 7px 12px;
     transition: 0.3s;
     font-size: 17px;
     border-style: inset;
@@ -230,7 +228,7 @@ thead {
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 7px 12px;
     transition: 0.3s;
     font-size: 17px;
     background-color: #7f7eb1;
@@ -241,4 +239,5 @@ thead {
 .buttoncolor-change {
     background-color: cornflowerblue;
 }
+
 /*end*/
