@@ -190,11 +190,8 @@
             }
         }
     </table>
-    <button type="button" class="btn btn-primary" data-toggle="modal" id="newcard" style="position: absolute;
-    right: 92%;
-    bottom: 36%;">
-        New Card
-    </button>
+  @*  <button type="button" class="btn btn-primary" data-toggle="modal" id="newcard">New Cacrd
+    </button>*@
     <button type="button" class="btn btn-primary" data-toggle="modal" id="updatecard" style="display:none" onclick="EditCard();">
         Update Card
     </button>
@@ -210,7 +207,8 @@
     });
     var table;
     $(document).ready(function () {
-         table = $('#cardtable').DataTable({
+        table = $('#cardtable').DataTable({
+            "dom": 'frlt<"dt-buttons">ip',
             scrollY: "400px",
             scrollX: "400px",
             scrollCollapse: true,
@@ -279,9 +277,10 @@
             }
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
-    });
+        $("#cardtable_wrapper div.dt-buttons").html('<button type="button" class="btn btn-primary" data-toggle="modal" id="newcard">New Cacrd</button>');
 
-    $('#newcard').click(function () {
+    });
+    $(document).on('click', '#newcard', function () {
         $('#myModal').modal('show');
         $('#modelBody').css({
             'left': '-30%',

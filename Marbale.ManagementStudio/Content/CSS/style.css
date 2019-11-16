@@ -10,7 +10,9 @@
 .formTable td {
     border: none;
 }
-
+.dt-buttons {
+    line-height:55px;
+}
 .gridText {
     border-style: none;
 }
