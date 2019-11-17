@@ -573,7 +573,107 @@ namespace Marble.Business
             }
             return sites;
         }
+        public List<Printer> GetPrinters()
+        {
+            DataTable dt = siteSetupData.GetPrinters();
+            List<Printer> printers = new List<Printer>();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Printer printer = new Printer();
+                    printer.PrinterId = dr.IsNull("PrinterId") ? 0 : int.Parse(dr["PrinterId"].ToString());
+                    printer.PrinterName = dr.IsNull("PrinterName") ? "" : dr["PrinterName"].ToString();
+                    printer.PrinterLocation = dr.IsNull("PrinterLocation") ? "" : dr["PrinterLocation"].ToString();
+                    printer.IPAddress = dr.IsNull("IPAddress") ? "" : dr["IPAddress"].ToString();
+                    printer.KDSTerminal = dr.IsNull("KDSTerminal") ? false : bool.Parse(dr["KDSTerminal"].ToString());
+                    printer.Remarks = dr.IsNull("Remarks") ? "" : dr["Remarks"].ToString();
+                    printers.Add(printer);
+                }
 
+            }
+            if (printers.Count == 0)
+            {
+                printers.Add(new Printer());
+            }
+            return printers;
+        }
+        public List<ReceiptPrintTemplateHeader> GetPrintTemplateHeaders()
+        {
+            DataTable dt = siteSetupData.GetPrintTemplateHeaders();
+            List<ReceiptPrintTemplateHeader> templateHeaders = new List<ReceiptPrintTemplateHeader>();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ReceiptPrintTemplateHeader templatHeader = new ReceiptPrintTemplateHeader();
+                    templatHeader.TemplateId = dr.IsNull("TemplateId") ? 0 : int.Parse(dr["TemplateId"].ToString());
+                    templatHeader.TemplateName = dr.IsNull("TemplateName") ? "" : dr["TemplateName"].ToString();
+                    templatHeader.FontName = dr.IsNull("FontName") ? "" : dr["FontName"].ToString();
+                    templatHeader.FontSize = dr.IsNull("FontSize") ? 0 : int.Parse(dr["FontSize"].ToString());
+                    templateHeaders.Add(templatHeader);
+                }
 
+            }
+            if (templateHeaders.Count == 0)
+            {
+                templateHeaders.Add(new ReceiptPrintTemplateHeader());
+            }
+            return templateHeaders;
+        }
+        public List<ReceiptPrintTemplate> GetPrintTemplates()
+        {
+            DataTable dt = siteSetupData.GetPrintTemplates();
+            var list = new List<IdValue>();
+            list.Add(new IdValue() { Id = 1, Value = "Header" });
+            list.Add(new IdValue() { Id = 2, Value = "Left" });
+            list.Add(new IdValue() { Id = 3, Value = "Right" });
+            list.Add(new IdValue() { Id = 4, Value = "Footer" });
+
+            List<ReceiptPrintTemplate> templates = new List<ReceiptPrintTemplate>();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ReceiptPrintTemplate template = new ReceiptPrintTemplate();
+                    template.TemplateId = dr.IsNull("TemplateId") ? 0 : int.Parse(dr["TemplateId"].ToString());
+                    template.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    template.Section = dr.IsNull("Section") ? "" : dr["Section"].ToString();
+                    template.Sequence = dr.IsNull("Sequence") ? 0 : int.Parse(dr["Sequence"].ToString());
+                    template.Col1Alignment = dr.IsNull("Col1Alignment") ? "" : dr["Col1Alignment"].ToString();
+                    template.Col1Data = dr.IsNull("Col1Data") ? "" : dr["Col1Data"].ToString();
+                    template.Col2Alignment = dr.IsNull("Col2Alignment") ? "" : dr["Col2Alignment"].ToString();
+                    template.Col2Data = dr.IsNull("Col2Data") ? "" : dr["Col2Data"].ToString();
+                    template.Col3Alignment = dr.IsNull("Col3Alignment") ? "" : dr["Col3Alignment"].ToString();
+                    template.Col3Data = dr.IsNull("Col1Data") ? "" : dr["Col1Data"].ToString();
+                    template.Col4Alignment = dr.IsNull("Col4Alignment") ? "" : dr["Col4Alignment"].ToString();
+                    template.Col4Data = dr.IsNull("Col4Data") ? "" : dr["Col4Data"].ToString();
+                    template.Col5Alignment = dr.IsNull("Col5Alignment") ? "" : dr["Col5Alignment"].ToString();
+                    template.Col5Data = dr.IsNull("Col5Data") ? "" : dr["Col5Data"].ToString();
+                    template.FontName = dr.IsNull("FontName") ? "" : dr["FontName"].ToString();
+                    template.FontSize = dr.IsNull("FontSize") ? 0 : int.Parse(dr["FontSize"].ToString());
+                    template.AlignmentList = list;
+                    templates.Add(template);
+                }
+
+            }
+            if (templates.Count == 0)
+            {
+                templates.Add(new ReceiptPrintTemplate() { AlignmentList = list });
+            }
+            return templates;
+        }
+
+        public int InsertOrUpdatePrinters(List<Printer> printers)
+        {
+            try
+            {
+                return siteSetupData.InsertOrUpdatePrinters(printers);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

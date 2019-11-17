@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Printer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+   <button class="tablinks" id="printer" onclick="getPrinters()" title="Printers">Printers</button>
+   <button class="tablinks" id="template" onclick="getTemplates()" title="Templates">Templates</button>
+</div>
+<div id="tabBody">
+</div>
+<script>
+    $(document).ready(function () {
+        $("#printer").addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+        getPrinters();
+    })
+    function getPrinters() {
+        $('#tabBody').load('/SiteSetup/printerList');
+    }
+    function getTemplates() {
+        $('#tabBody').load('/SiteSetup/printTemplate');
+    }
+    $('.tablinks').click(function () {
+        $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+    });
+</script>

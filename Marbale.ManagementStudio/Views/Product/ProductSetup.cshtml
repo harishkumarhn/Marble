@@ -5,7 +5,9 @@
 
 <link href="~/Content/css/product.css" rel="stylesheet" />
 <style>
-    form label {font-weight:bold}
+    form label {
+        font-weight: bold;
+    }
 </style>
 <div>
     <!-- Modal -->
@@ -56,14 +58,16 @@
         {
             count++;
             <tr id="@count">
-                <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
                 <td>
-                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
-                         <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
-                     </a>
-                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
-                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
-                     </a>
+                    <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
+                </td>
+                <td>
+                    <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
+                        <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
+                    </a>
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
+                        <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
+                    </a>
                 </td>
                 <td>
                     <input type="text" class="fixedCol3" value="@item.Name"/>
@@ -137,10 +141,10 @@
                 <td>
                     <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)"  />
                 </td>
-                   <td>
+                <td>
                     <input type="text" value="@item.TaxPercentage" id="TaxPercentage@(count)"/>
                 </td>
-                  <td>
+                <td>
                     <select name="taxlist" id="taxlist">
                         @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
                         {
@@ -174,7 +178,7 @@
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
-    <button id="addRow" class="btn btn-primary btn-md" role="button" >Add</button>
+    <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
         New
     </button>
@@ -187,19 +191,19 @@
             updatedArray.push(index);
         }
     }
- 
+
     $(document).on('change', '#taxlist', function () {
         debugger;
-        var rowid=   $(this).closest('tr').attr('id');
+        var rowid = $(this).closest('tr').attr('id');
         var TaxId = $(this).find('option:selected').attr('id');
         //TaxId = $('#taxlist' + rowid + ' option:selected').val();
-   
-     var Price = $('#Price' + rowid).val();
+
+        var Price = $('#Price' + rowid).val();
         if (Price == "") {
             Price = null;
         }
-        var FaceValue = Number($('#FaceValue'+rowid).val());
-        taxinclusive = $('#TaxInclusive'+rowid).is(":checked");
+        var FaceValue = Number($('#FaceValue' + rowid).val());
+        taxinclusive = $('#TaxInclusive' + rowid).is(":checked");
         var model = {
             Id: TaxId,
             Price: Price,
@@ -307,11 +311,11 @@
                 '<input type="text" value="" />',
                 '<select name="taxlist" id="taxlist">' + taxListOptions,
                 '<input type="text" value="" />',
-                    '<input type="text" value="" />',
+                '<input type="text" value="" />',
                 '<input type="text" value="" disabled/>',
                 '<input type="text" value="" disabled/>',
             ]).draw(false);
-            
+
             for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
                 $('.DTFC_Cloned lable.fixedCol1')[i].innerHTML = fixedcolumn1values[i].innerHTML;
             }
@@ -406,7 +410,7 @@
         $('#modelbody').load('/Product/Edit');
         $('.modal-title').text('New Product');
     }
-   
+
     function EditProduct(id) {
         if (id != 0) {
             $('.modal-title').text('Edit Product');

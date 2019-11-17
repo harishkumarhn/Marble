@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "PrinterList";
+    Layout = null;
+}
+
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+    <thead>
+        <tr>
+            <th>Printer ID</th>
+            <th>Printer Name</th>
+            <th>Printer Location</th>
+            <th>IP Address</th>
+            <th>KDS Terminal</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Printers)
+        {  
+            <tr>
+                <td>
+                    <lable> @(item.PrinterId == 0 ? "" : item.PrinterId) </lable>
+                </td>
+                <td>
+                    <input type="text" value="@item.PrinterName" />
+                </td>
+                <td>
+                    <input type="text" value="@item.PrinterLocation" />
+                </td>
+                <td>
+                    <input type="text" value="@item.IPAddress" />
+                </td>
+                <td>
+                    <input type="checkbox"  @(item.KDSTerminal ? "checked='checked'" : "") value="@item.KDSTerminal" />
+                </td>
+                <td>
+                    <input type="text" value="@item.Remarks" />
+                </td>
+            </tr>  
+        }
+    </tbody>
+</table>
+<div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="SavePrinters()">Save</button>
+    <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+</div>
+<script>
+
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            }
+        });
+        var counter = 1;
+
+        $('#addRow').on('click', function () {
+            table.row.add([
+                '<lable></lable>',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" />'
+
+            ]).draw(false);
+        });
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+    });
+    var updatedArray = [];
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
+        }
+    }
+    function SavePrinters() {
+        var printers = [];
+        var table = document.getElementById('marbleTable');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                var rowIndex = r + 1;
+                debugger;
+                printers.push({
+                    PrinterId: table.rows[rowIndex].cells[0].children[0].value,
+                    PrinterName: table.rows[rowIndex].cells[1].children[0].value,
+                    PrinterLocation: table.rows[rowIndex].cells[2].children[0].value,
+                    IPAddress: table.rows[rowIndex].cells[3].children[0].value,
+                    KDSTerminal: table.rows[rowIndex].cells[4].children[0].checked,
+                    Remarks: table.rows[rowIndex].cells[5].children[0].value
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdatePrinters", "SiteSetup")',
+            data: JSON.stringify({ printers: printers }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+</script>
