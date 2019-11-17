@@ -40,7 +40,7 @@ namespace Marbale.Business
                     product.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
-                    product.DisplayGroup = dr.IsNull("DisplayGroup") ? "" : dr.IsNull("DisplayGroup").ToString();
+                    product.DisplayGroupId = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
                     product.LastUpdatedBy = dr.IsNull("LastUpdatedUser") ? "" : dr["LastUpdatedBy"].ToString();
                     product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                     product.TaxName = dr.IsNull("TaxName") ? "" : dr["TaxName"].ToString();
