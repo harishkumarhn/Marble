@@ -15,10 +15,10 @@
         getPrinters();
     })
     function getPrinters() {
-        $('#tabBody').load('/SiteSetup/printerList', { ValType: 'Transaction' });
+        $('#tabBody').load('/SiteSetup/printerList');
     }
     function getTemplates() {
-        $('#tabBody').load('/SiteSetup/printerTemplate', { ValType: 'Formats' });
+        $('#tabBody').load('/SiteSetup/printTemplate');
     }
     $('.tablinks').click(function () {
         $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');

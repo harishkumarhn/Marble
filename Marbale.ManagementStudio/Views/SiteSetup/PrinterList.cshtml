@@ -55,7 +55,6 @@
             scrollCollapse: true,
             editable: true,
             stateSave: true,
-            // paging: true,
             bPaginate: false,
             bInfo: false,
             bFilter: false,
@@ -68,10 +67,6 @@
                 element.on("change", function (e) {
                     UpdatedList($(this).parent().index());
                 });
-            },
-            //order: [[ 0, "desc" ]],
-            fixedColumns: {
-                leftColumns: 2
             }
         });
         var counter = 1;
@@ -79,7 +74,6 @@
         $('#addRow').on('click', function () {
             table.row.add([
                 '<lable></lable>',
-                '<input type="text" value="" />',
                 '<input type="text" value="" />',
                 '<input type="text" value="" />',
                 '<input type="text" value="" />',

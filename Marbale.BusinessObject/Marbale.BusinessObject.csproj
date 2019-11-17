@@ -79,6 +79,8 @@
     <Compile Include="Discount\TransactionDiscount.cs" />
     <Compile Include="SiteSetup\AppModuleAction.cs" />
     <Compile Include="SiteSetup\Printer.cs" />
+    <Compile Include="SiteSetup\ReceiptPrintTemplateHeader.cs" />
+    <Compile Include="SiteSetup\ReceiptPrintTemplate.cs" />
     <Compile Include="SiteSetup\Site.cs" />
     <Compile Include="SiteSetup\ProductKey.cs" />
     <Compile Include="SiteSetup\User.cs" />

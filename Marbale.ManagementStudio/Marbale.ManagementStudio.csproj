@@ -328,6 +328,7 @@
     <Content Include="Views\Product\DisplayGroup.cshtml" />
     <Content Include="Views\SiteSetup\Printer.cshtml" />
     <Content Include="Views\SiteSetup\PrinterList.cshtml" />
+    <Content Include="Views\SiteSetup\printTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

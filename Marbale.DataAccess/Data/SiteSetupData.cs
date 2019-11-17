@@ -337,6 +337,28 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetPrintTemplateHeaders()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetPrintTemplateHeaders");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public DataTable GetPrintTemplates()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetPrintTemplates");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public int InsertOrUpdateSites(List<Site> sites)
         {
             try
