@@ -93,7 +93,7 @@ namespace MarbaleManagementStudio.Controllers
             bool status = true;
             if (Id == 0)
             {
-                List<Product> ProList = (List<Product>)Session["ProductList"];
+                List<Product> ProList =productBussiness.GetProducts((int)ProductTypeEnum.Card);
                 var result = ProList.Where(x => x.Name.ToLower() == ProductName.ToLower() ? true : false).ToList();
                 if (result.Count() >= 1)
                 {
