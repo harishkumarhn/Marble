@@ -169,6 +169,7 @@ td a {
 }
 
 #marbaleTable th, td {
+    padding: 4px 8px !important;
     white-space: nowrap;
 }
 
