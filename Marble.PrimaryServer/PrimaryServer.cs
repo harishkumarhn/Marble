@@ -121,6 +121,7 @@ namespace Marble.PrimaryServer
             }
             catch (Exception ex)
             {
+               
             }
             this.WindowState = FormWindowState.Minimized;
         }
