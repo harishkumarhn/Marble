@@ -588,6 +588,31 @@ namespace Marbale.DataAccess.Data
             }
         }
 
+        public void Transfercard(int fromcardId, int toCardId, string lastUpdatedBy)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[3];
+
+                sqlParameters[0] = new SqlParameter("@fromCardId", fromcardId);
+                sqlParameters[1] = new SqlParameter("@toCardId", toCardId);
+
+                if (!string.IsNullOrEmpty(lastUpdatedBy))
+                {
+                    sqlParameters[2] = new SqlParameter("@LastUpdatedBy", lastUpdatedBy);
+                }
+                else
+                {
+                    sqlParameters[2] = new SqlParameter("@LastUpdatedBy", DBNull.Value);
+                }
+
+                conn.executeInsertQuery("sp_TransferCard", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public DataTable GetCard(int cardId, string cardNumber)
         {
             try

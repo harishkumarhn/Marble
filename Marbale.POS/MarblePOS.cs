@@ -1286,6 +1286,8 @@ namespace Marbale.POS
             ClearCustomer();
         }
 
+
+
         private void btnSaveCustomer_Click(object sender, EventArgs e)
         {
             if (Customer == null)
@@ -1917,6 +1919,24 @@ namespace Marbale.POS
             //{
             //    HandleCardRead(CurrentCard.CardNumber, null);
             //}
+        }
+
+        private void btnTransferCard_Click(object sender, EventArgs e)
+        {
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.TRANSFERCARD, CurrentCard);
+            frm.ShowDialog();
+        }
+
+        private void btnLoadMultiple_Click(object sender, EventArgs e)
+        {
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADMULTIPLE, CurrentCard);
+            frm.ShowDialog();
+        }
+
+        private void btnCansolidateCard_Click(object sender, EventArgs e)
+        {
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.CANSOLIDATECARD, CurrentCard);
+            frm.ShowDialog();
         }
     }
 }

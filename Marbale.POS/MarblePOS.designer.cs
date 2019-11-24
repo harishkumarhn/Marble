@@ -1853,6 +1853,7 @@
             this.btnLoadMultiple.Text = "Load Multiple";
             this.btnLoadMultiple.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnLoadMultiple.UseVisualStyleBackColor = false;
+            this.btnLoadMultiple.Click += new System.EventHandler(this.btnLoadMultiple_Click);
             this.btnLoadMultiple.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
             this.btnLoadMultiple.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
             // 
@@ -1877,6 +1878,7 @@
             this.btnTransferCard.Text = "Transfer card";
             this.btnTransferCard.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnTransferCard.UseVisualStyleBackColor = false;
+            this.btnTransferCard.Click += new System.EventHandler(this.btnTransferCard_Click);
             this.btnTransferCard.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
             this.btnTransferCard.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
             // 
@@ -1901,6 +1903,7 @@
             this.btnCansolidateCard.Text = "Cansolidate Cards";
             this.btnCansolidateCard.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnCansolidateCard.UseVisualStyleBackColor = false;
+            this.btnCansolidateCard.Click += new System.EventHandler(this.btnCansolidateCard_Click);
             this.btnCansolidateCard.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseDown);
             this.btnCansolidateCard.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trxButtonMouseUp);
             // 
