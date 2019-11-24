@@ -21,13 +21,9 @@ namespace Marbale.POS
     public partial class MarblePOS : Form
     {
         POSBL posBussiness;
-        string cardNumber = "";
-        string tempCardNumber = "";
-
         double tendered_amount = 0;
         double total_amount = 0;
         double TipAmount = 0;
-        double balance_amount = 0;
 
         Transaction Transaction;
         Card CurrentCard;
