@@ -96,8 +96,9 @@
         for (var r = 0, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
                 var rowIndex = r + 1;
+                debugger;
                 printers.push({
-                    PrinterId: table.rows[rowIndex].cells[0].children[0].innerHTML,
+                    PrinterId: table.rows[rowIndex].cells[0].children[0].value,
                     PrinterName: table.rows[rowIndex].cells[1].children[0].value,
                     PrinterLocation: table.rows[rowIndex].cells[2].children[0].value,
                     IPAddress: table.rows[rowIndex].cells[3].children[0].value,
