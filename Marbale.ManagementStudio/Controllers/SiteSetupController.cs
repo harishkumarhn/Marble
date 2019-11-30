@@ -359,22 +359,29 @@ namespace MarbaleManagementStudio.Controllers
         #region Printer
         public ActionResult Printer()
         {
-            return View();
+            return View("~/Views/SiteSetup/Printer/Printer.cshtml");
         }
         public ActionResult PrinterList()
         {
             ViewBag.Printers = siteSetup.GetPrinters();
-            return View();
+            return View("~/Views/SiteSetup/Printer/PrinterList.cshtml");
         }
         public int UpdatePrinters(List<Printer> Printers)
         {
             return siteSetup.InsertOrUpdatePrinters(Printers);
         }
-        public ActionResult printTemplate()
+        public ActionResult PrintTemplate()
         {
-            ViewBag.PrintTemplateHeaders = siteSetup.GetPrintTemplateHeaders();
-            ViewBag.PrintTemplates = siteSetup.GetPrintTemplates();
-            return View();
+            var printTemplateHeaders = siteSetup.GetPrintTemplateHeaders();
+            ViewBag.PrintTemplateHeaders = printTemplateHeaders;
+            ViewBag.PrintTemplate = siteSetup.GetPrintTemplates(printTemplateHeaders.Count > 0 ? printTemplateHeaders[0].TemplateId : 0);
+            ViewBag.FontNameList = new string[]{"auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset"};
+            return View("~/Views/SiteSetup/Printer/PrintTemplate.cshtml");
+        }
+        public ActionResult PrintTemplateDataItems(int headerId)
+        {
+            ViewBag.PrintTemplate = siteSetup.GetPrintTemplates(headerId);
+            return PartialView("~/Views/SiteSetup/Printer/PrintTemplateDataItems.cshtml");
         }
 
         #endregion
