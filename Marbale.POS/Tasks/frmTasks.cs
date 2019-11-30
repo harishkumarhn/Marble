@@ -1,5 +1,6 @@
 ﻿using Marbale.Business;
 using Marbale.BusinessObject.Cards;
+using Marbale.POS.CardDevice;
 using Marbale.POS.Tasks;
 using Marble.Business;
 using System;
@@ -20,12 +21,20 @@ namespace Marbale.POS
         int TaskId = 0;
         Card fromCard;
         Card toCard;
+        List<Card> lstConsolidateCard;
+        List<DataGridView> lstConsolidatedatagridView;
 
         public frmTasks(int taskId, Card card)
         {
             InitializeComponent();
             currentcard = card;
             this.TaskId = taskId;
+         
+        }
+        private void frmTasks_Load(object sender, EventArgs e)
+        {
+            CardReader.RequiredByOthers = true;
+            CardReader.setReceiveAction = TappedCard;
             PoplateForm();
         }
 
@@ -86,8 +95,12 @@ namespace Marbale.POS
                     //PopulateCardBonusGrid();
                     break;
                 case (int)CommonTask.Task.CANSOLIDATECARD:
-                    //PopulateCardBonusGrid();
+                    {
+                        lstConsolidateCard = new List<Card>();
+                        lstConsolidatedatagridView = new List<DataGridView>();
+                         //PopulateCardBonusGrid();
                     break;
+                    }
             }
         }
 
@@ -271,6 +284,134 @@ namespace Marbale.POS
 
 
             MessageBox.Show("Card transferred successfully.");
+            this.Close();
+        }
+
+        private void TappedCard()
+        {
+
+
+        }
+
+
+        private void PopulateConsoliDateCardGrid(Card card, ref DataGridView dataGridView, ref bool success)
+        {
+            bool found = false;
+            if(lstConsolidateCard != null && lstConsolidateCard.Count> 0)
+            {
+                foreach(Card swipedcard in lstConsolidateCard)
+                {
+                    if (swipedcard.CardNumber == card.CardNumber)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if(found)
+                {
+                    MessageBox.Show("Card is already Added");
+                    return;
+                }
+            }
+
+            if (card != null && card.card_id > 0)
+            {
+                string[] row1 = new string[] { card.CardNumber, card.issue_date.ToString(), card.credits.ToString(), card.bonus.ToString(), card.ticket_count.ToString() };
+                dataGridView.Rows.Add(row1);
+                lstConsolidateCard.Add(card);
+                lstConsolidatedatagridView.Add(dataGridView);
+                success = true;
+            }
+            else
+            {
+                MessageBox.Show("Please tap the valid card");
+            }
+        }
+
+        private void btnGetConsolidateCard_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Validatecard(txtConsolidateCard.Text))
+                {
+                    Card objCard = GetCard(txtConsolidateCard.Text);
+                    bool success = false;
+                    DataGridView dataGrid = GetConsolidateNewGrid();
+                    PopulateConsoliDateCardGrid(objCard, ref dataGrid, ref success);
+                    if (success)
+                    {
+                        if (lstConsolidatedatagridView != null && lstConsolidatedatagridView.Count > 1)
+                        {
+
+                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count-1].Location = new Point(dgvConsolidateCard.Location.X, lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 2].Location.Y+60);
+
+                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].BringToFront();
+                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].Refresh();
+                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].Show();
+
+                            tbConsilidated.Controls.Add(lstConsolidatedatagridView[lstConsolidatedatagridView.Count-1]);
+
+                            this.Refresh(); 
+                        }
+                        else
+                        {
+                            dataGrid.Location = dgvConsolidateCard.Location;
+
+                            dataGrid.BringToFront();
+                            dataGrid.Refresh();
+                            dataGrid.Show();
+                            dataGrid.Visible = true;
+                            tbConsilidated.Controls.Add(dataGrid);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+
+        public DataGridView GetConsolidateNewGrid()
+        {
+            DataGridView grid = new DataGridView();
+            grid.AllowUserToAddRows = dgvConsolidateCard.AllowUserToAddRows;
+            grid.AllowUserToDeleteRows = dgvConsolidateCard.AllowUserToDeleteRows;
+            grid.AllowUserToResizeColumns  = dgvConsolidateCard.AllowUserToResizeColumns;
+            grid.Size = dgvConsolidateCard.Size;
+            grid.MultiSelect = dgvConsolidateCard.MultiSelect;
+            grid.ColumnHeadersVisible = dgvConsolidateCard.ColumnHeadersVisible;
+            grid.RowHeadersVisible = dgvConsolidateCard.RowHeadersVisible;
+            grid.ReadOnly = dgvConsolidateCard.ReadOnly;
+            
+
+            grid.Columns.Add("Card_Number", "Card Number");
+            grid.Columns["Card_Number"].Width = 150;
+
+            grid.Columns.Add("Issue_Date", "Issue Date");
+            grid.Columns["Issue_Date"].Width = 150;
+
+            grid.Columns.Add("Credits", "Credits");
+            grid.Columns["Credits"].Width = 100;
+
+            grid.Columns.Add("Bonus", "Bonus");
+            grid.Columns["Bonus"].Width = 100;
+
+            grid.Columns.Add("Tickets", "Tickets");
+            grid.Columns["Tickets"].Width = 100;
+
+            grid.Enabled = true;
+
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+
+            return grid;
+        }
+
+        private void btnConsolidateClose_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

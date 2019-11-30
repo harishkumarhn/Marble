@@ -151,18 +151,25 @@ namespace Marbale.POS
             {
                 DeviceScannedEventArgs checkScannedEvent = e as DeviceScannedEventArgs;
 
-                string CardNumber = checkScannedEvent.Message; // LEFT_TRIM_CARD_NUMBER, RIGHT_TRIM_CARD_NUMBER
-
-                if (System.Text.RegularExpressions.Regex.Matches(CardNumber, "0").Count >= 8)
+                string CardNumber = string.Empty;
+                if (CardReader.CardSwiped == false)
                 {
-                    return;
+                    CardNumber = checkScannedEvent.Message; // LEFT_TRIM_CARD_NUMBER, RIGHT_TRIM_CARD_NUMBER
+                    if (System.Text.RegularExpressions.Regex.Matches(CardNumber, "0").Count >= 8)
+                    {
+                        return;
+                    }
+                    CardReader.CardSwiped = true;
+                    HandleCardRead(CardNumber, sender as DeviceClass);
                 }
-                HandleCardRead(CardNumber, sender as DeviceClass);
             }
         }
 
         private void HandleCardRead(string CardNumber, DeviceClass readerDevice)
         {
+            if(CardReader.CardSwiped)
+               CardReader.CardSwiped = false;
+
             ClearCard();
 
             CurrentCard = null;
