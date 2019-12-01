@@ -125,7 +125,7 @@ namespace Marbale.DataAccess
                     cmd.Connection = openConnection();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddRange(sqlParameter);
-                    return cmd.ExecuteNonQuery();
+                    return Convert.ToInt32(cmd.ExecuteScalar());
                }
             }
             catch (SqlException e)

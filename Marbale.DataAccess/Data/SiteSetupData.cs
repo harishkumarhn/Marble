@@ -439,7 +439,7 @@ namespace Marbale.DataAccess
                 headerPrameter[1] = new SqlParameter("@TemplateName", string.IsNullOrWhiteSpace(template.TemplateName) ? "" : template.TemplateName);
                 headerPrameter[2] = new SqlParameter("@FontName", string.IsNullOrWhiteSpace(template.FontName) ? "" : template.FontName);
                 headerPrameter[3] = new SqlParameter("@FontSize", template.FontSize);
-                var templateid = conn.executeUpdateQuery("sp_InsertOrUpdatePrintTemplateHeader", headerPrameter);
+                var id = conn.executeUpdateQuery("sp_InsertOrUpdatePrintTemplateHeader", headerPrameter);
 
                 if (template.PrintTemplateItems != null)
                 {
@@ -447,7 +447,7 @@ namespace Marbale.DataAccess
                     {
                         SqlParameter[] templateItems = new SqlParameter[16];
                         templateItems[0] = new SqlParameter("@Id", item.Id);
-                        templateItems[1] = new SqlParameter("@TemplateId", item.TemplateId == 0 ? templateid : item.TemplateId);
+                        templateItems[1] = new SqlParameter("@TemplateId", item.TemplateId == 0 ? id : item.TemplateId);
                         templateItems[2] = new SqlParameter("@Sequence", item.Sequence);
                         templateItems[3] = new SqlParameter("@Section", string.IsNullOrWhiteSpace(item.Section) ? "" : item.Section);
                         templateItems[4] = new SqlParameter("@FontName", string.IsNullOrWhiteSpace(item.FontName) ? "" : item.FontName);
