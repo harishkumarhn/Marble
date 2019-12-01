@@ -621,41 +621,45 @@ namespace Marble.Business
             }
             return templateHeaders;
         }
-        public List<ReceiptPrintTemplate> GetPrintTemplates()
+        public List<ReceiptPrintTemplate> GetPrintTemplates(int headerId)
         {
-            DataTable dt = siteSetupData.GetPrintTemplates();
-            var list = new List<IdValue>();
+            List<ReceiptPrintTemplate> templates = new List<ReceiptPrintTemplate>();
+             var list = new List<IdValue>();
             list.Add(new IdValue() { Id = 1, Value = "Header" });
             list.Add(new IdValue() { Id = 2, Value = "Left" });
             list.Add(new IdValue() { Id = 3, Value = "Right" });
             list.Add(new IdValue() { Id = 4, Value = "Footer" });
 
-            List<ReceiptPrintTemplate> templates = new List<ReceiptPrintTemplate>();
-            if (dt != null && dt.Rows.Count > 0)
+            if (headerId > 0)
             {
-                foreach (DataRow dr in dt.Rows)
-                {
-                    ReceiptPrintTemplate template = new ReceiptPrintTemplate();
-                    template.TemplateId = dr.IsNull("TemplateId") ? 0 : int.Parse(dr["TemplateId"].ToString());
-                    template.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    template.Section = dr.IsNull("Section") ? "" : dr["Section"].ToString();
-                    template.Sequence = dr.IsNull("Sequence") ? 0 : int.Parse(dr["Sequence"].ToString());
-                    template.Col1Alignment = dr.IsNull("Col1Alignment") ? "" : dr["Col1Alignment"].ToString();
-                    template.Col1Data = dr.IsNull("Col1Data") ? "" : dr["Col1Data"].ToString();
-                    template.Col2Alignment = dr.IsNull("Col2Alignment") ? "" : dr["Col2Alignment"].ToString();
-                    template.Col2Data = dr.IsNull("Col2Data") ? "" : dr["Col2Data"].ToString();
-                    template.Col3Alignment = dr.IsNull("Col3Alignment") ? "" : dr["Col3Alignment"].ToString();
-                    template.Col3Data = dr.IsNull("Col1Data") ? "" : dr["Col1Data"].ToString();
-                    template.Col4Alignment = dr.IsNull("Col4Alignment") ? "" : dr["Col4Alignment"].ToString();
-                    template.Col4Data = dr.IsNull("Col4Data") ? "" : dr["Col4Data"].ToString();
-                    template.Col5Alignment = dr.IsNull("Col5Alignment") ? "" : dr["Col5Alignment"].ToString();
-                    template.Col5Data = dr.IsNull("Col5Data") ? "" : dr["Col5Data"].ToString();
-                    template.FontName = dr.IsNull("FontName") ? "" : dr["FontName"].ToString();
-                    template.FontSize = dr.IsNull("FontSize") ? 0 : int.Parse(dr["FontSize"].ToString());
-                    template.AlignmentList = list;
-                    templates.Add(template);
-                }
+                DataTable dt = siteSetupData.GetPrintTemplates();
 
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        ReceiptPrintTemplate template = new ReceiptPrintTemplate();
+                        template.TemplateId = dr.IsNull("TemplateId") ? 0 : int.Parse(dr["TemplateId"].ToString());
+                        template.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                        template.Section = dr.IsNull("Section") ? "" : dr["Section"].ToString();
+                        template.Sequence = dr.IsNull("Sequence") ? 0 : int.Parse(dr["Sequence"].ToString());
+                        template.Col1Alignment = dr.IsNull("Col1Alignment") ? "" : dr["Col1Alignment"].ToString();
+                        template.Col1Data = dr.IsNull("Col1Data") ? "" : dr["Col1Data"].ToString();
+                        template.Col2Alignment = dr.IsNull("Col2Alignment") ? "" : dr["Col2Alignment"].ToString();
+                        template.Col2Data = dr.IsNull("Col2Data") ? "" : dr["Col2Data"].ToString();
+                        template.Col3Alignment = dr.IsNull("Col3Alignment") ? "" : dr["Col3Alignment"].ToString();
+                        template.Col3Data = dr.IsNull("Col1Data") ? "" : dr["Col1Data"].ToString();
+                        template.Col4Alignment = dr.IsNull("Col4Alignment") ? "" : dr["Col4Alignment"].ToString();
+                        template.Col4Data = dr.IsNull("Col4Data") ? "" : dr["Col4Data"].ToString();
+                        template.Col5Alignment = dr.IsNull("Col5Alignment") ? "" : dr["Col5Alignment"].ToString();
+                        template.Col5Data = dr.IsNull("Col5Data") ? "" : dr["Col5Data"].ToString();
+                        template.FontName = dr.IsNull("FontName") ? "" : dr["FontName"].ToString();
+                        template.FontSize = dr.IsNull("FontSize") ? 0 : int.Parse(dr["FontSize"].ToString());
+                        template.AlignmentList = list;
+                        templates.Add(template);
+                    }
+
+                }
             }
             if (templates.Count == 0)
             {
