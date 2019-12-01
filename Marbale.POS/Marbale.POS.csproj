@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardDevice\CardReader.cs" />
     <Compile Include="CardDevice\DeviceClass.cs" />
     <Compile Include="CardTask.cs">
       <SubType>Form</SubType>
