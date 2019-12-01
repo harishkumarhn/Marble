@@ -74,7 +74,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                
+
                 SqlParameter[] sqlParameters = new SqlParameter[3];
                 sqlParameters[0] = new SqlParameter("@name", name);
                 sqlParameters[1] = new SqlParameter("@value", value);
@@ -157,9 +157,9 @@ namespace Marbale.DataAccess
                         if (role.AavalibleModuleActions.Contains("-Module") || role.AavalibleModuleActions.Contains("-Root"))
                         {
                             string[] arr = role.AavalibleModuleActions.Split(',');
-                            arr = arr.Skip(1).ToArray(); 
+                            arr = arr.Skip(1).ToArray();
                             role.AavalibleModuleActions = "";
-                            foreach(var item in arr)
+                            foreach (var item in arr)
                             {
                                 role.AavalibleModuleActions = role.AavalibleModuleActions + item + ",";
                             }
@@ -348,11 +348,13 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-        public DataTable GetPrintTemplates()
+        public DataTable GetPrintTemplates(int templateId)
         {
             try
             {
-                return conn.executeSelectQuery("sp_GetPrintTemplates");
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@templateId", templateId);
+                return conn.executeSelectQuery("sp_GetPrintTemplatesById",sqlParameters);
             }
             catch (Exception e)
             {
@@ -372,8 +374,8 @@ namespace Marbale.DataAccess
                     sqlParameters[3] = new SqlParameter("@notes", string.IsNullOrWhiteSpace(site.Notes) ? "" : site.Notes);
                     sqlParameters[4] = new SqlParameter("@siteGUID", site.SiteGUID == null ? Guid.NewGuid() : site.SiteGUID);
                     sqlParameters[5] = new SqlParameter("@logo", SqlDbType.Image);
-                    if(site.Logo == null)
-                    sqlParameters[5].Value = DBNull.Value;
+                    if (site.Logo == null)
+                        sqlParameters[5].Value = DBNull.Value;
                     sqlParameters[6] = new SqlParameter("@guid", site.Guid == null ? Guid.NewGuid() : site.Guid);
                     sqlParameters[7] = new SqlParameter("@companyId", site.CompanyId);
                     sqlParameters[8] = new SqlParameter("@customerKey", string.IsNullOrWhiteSpace(site.CustomerKey) ? "" : site.CustomerKey);
@@ -419,6 +421,54 @@ namespace Marbale.DataAccess
                     sqlParameters[4] = new SqlParameter("@KDSTerminal", printer.KDSTerminal);
                     sqlParameters[5] = new SqlParameter("@Remarks", string.IsNullOrWhiteSpace(printer.Remarks) ? "" : printer.Remarks);
                     conn.executeUpdateQuery("sp_InsertOrUpdatePrinter", sqlParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return 0;
+        }
+        public int InsertOrUpdatePrintTemplateHeaderAndItems(ReceiptPrintTemplateHeader template)
+        {
+            try
+            {
+                SqlParameter[] headerPrameter = new SqlParameter[4];
+                headerPrameter[0] = new SqlParameter("@TemplateId", template.TemplateId);
+                headerPrameter[1] = new SqlParameter("@TemplateName", string.IsNullOrWhiteSpace(template.TemplateName) ? "" : template.TemplateName);
+                headerPrameter[2] = new SqlParameter("@FontName", string.IsNullOrWhiteSpace(template.FontName) ? "" : template.FontName);
+                headerPrameter[3] = new SqlParameter("@FontSize", template.FontSize);
+                var templateid = conn.executeUpdateQuery("sp_InsertOrUpdatePrintTemplateHeader", headerPrameter);
+
+                if (template.PrintTemplateItems != null)
+                {
+                    foreach (var item in template.PrintTemplateItems)
+                    {
+                        SqlParameter[] templateItems = new SqlParameter[16];
+                        templateItems[0] = new SqlParameter("@Id", item.Id);
+                        templateItems[1] = new SqlParameter("@TemplateId", item.TemplateId == 0 ? templateid : item.TemplateId);
+                        templateItems[2] = new SqlParameter("@Sequence", item.Sequence);
+                        templateItems[3] = new SqlParameter("@Section", string.IsNullOrWhiteSpace(item.Section) ? "" : item.Section);
+                        templateItems[4] = new SqlParameter("@FontName", string.IsNullOrWhiteSpace(item.FontName) ? "" : item.FontName);
+                        templateItems[5] = new SqlParameter("@FontSize", item.FontSize);
+                        templateItems[6] = new SqlParameter("@Col1Alignment", string.IsNullOrWhiteSpace(item.Col1Alignment) ? "" : item.Col1Alignment[0].ToString());
+                        templateItems[7] = new SqlParameter("@Col1Data", string.IsNullOrWhiteSpace(item.Col1Data) ? "" : item.Col1Data);
+
+                        templateItems[8] = new SqlParameter("@Col2Alignment", string.IsNullOrWhiteSpace(item.Col2Alignment) ? "" : item.Col2Alignment[0].ToString());
+                        templateItems[9] = new SqlParameter("@Col2Data", string.IsNullOrWhiteSpace(item.Col2Data) ? "" : item.Col2Data);
+
+                        templateItems[10] = new SqlParameter("@Col3Alignment", string.IsNullOrWhiteSpace(item.Col3Alignment) ? "" : item.Col3Alignment[0].ToString());
+                        templateItems[11] = new SqlParameter("@Col3Data", string.IsNullOrWhiteSpace(item.Col3Data) ? "" : item.Col3Data);
+
+                        templateItems[12] = new SqlParameter("@Col4Alignment", string.IsNullOrWhiteSpace(item.Col4Alignment) ? "" : item.Col4Alignment[0].ToString());
+                        templateItems[13] = new SqlParameter("@Col4Data", string.IsNullOrWhiteSpace(item.Col4Data) ? "" : item.Col4Data);
+
+                        templateItems[14] = new SqlParameter("@Col5Alignment", string.IsNullOrWhiteSpace(item.Col5Alignment) ? "" : item.Col5Alignment[0].ToString());
+                        templateItems[15] = new SqlParameter("@Col5Data", string.IsNullOrWhiteSpace(item.Col5Data) ? "" : item.Col5Data);
+
+                        conn.executeUpdateQuery("sp_InsertOrUpdatePrintTemplateItems", templateItems);
+                    }
                 }
             }
             catch (Exception e)
