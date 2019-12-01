@@ -24,5 +24,7 @@ SELECT
 		(@cardId IS NULL OR CardId = @cardId)
 	AND
 		(@cardNumber IS NULL OR CardNumber = LTRIM(RTRIM(@cardNumber)))
+	AND 
+		ValidFlag = 1
 end
 

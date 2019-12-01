@@ -211,5 +211,16 @@ namespace Marble.Business
 
             return trxLines;
         }
+
+        public int SaveCard(Card card)
+        {
+            return trxData.SaveCard(card);
+        }
+
+
+        public void TransferCard(int fromcardId, int toCardId, string lastUpdatedBy)
+        {
+            trxData.Transfercard(fromcardId, toCardId, lastUpdatedBy);
+        }
     }
 }

@@ -21,13 +21,9 @@ namespace Marbale.POS
     public partial class MarblePOS : Form
     {
         POSBL posBussiness;
-        string cardNumber = "";
-        string tempCardNumber = "";
-
         double tendered_amount = 0;
         double total_amount = 0;
         double TipAmount = 0;
-        double balance_amount = 0;
 
         Transaction Transaction;
         Card CurrentCard;
@@ -155,18 +151,25 @@ namespace Marbale.POS
             {
                 DeviceScannedEventArgs checkScannedEvent = e as DeviceScannedEventArgs;
 
-                string CardNumber = checkScannedEvent.Message; // LEFT_TRIM_CARD_NUMBER, RIGHT_TRIM_CARD_NUMBER
-
-                if (System.Text.RegularExpressions.Regex.Matches(CardNumber, "0").Count >= 8)
+                string CardNumber = string.Empty;
+                if (CardReader.CardSwiped == false)
                 {
-                    return;
+                    CardNumber = checkScannedEvent.Message; // LEFT_TRIM_CARD_NUMBER, RIGHT_TRIM_CARD_NUMBER
+                    if (System.Text.RegularExpressions.Regex.Matches(CardNumber, "0").Count >= 8)
+                    {
+                        return;
+                    }
+                    CardReader.CardSwiped = true;
+                    HandleCardRead(CardNumber, sender as DeviceClass);
                 }
-                HandleCardRead(CardNumber, sender as DeviceClass);
             }
         }
 
         private void HandleCardRead(string CardNumber, DeviceClass readerDevice)
         {
+            if(CardReader.CardSwiped)
+               CardReader.CardSwiped = false;
+
             ClearCard();
 
             CurrentCard = null;
@@ -1286,6 +1289,8 @@ namespace Marbale.POS
             ClearCustomer();
         }
 
+
+
         private void btnSaveCustomer_Click(object sender, EventArgs e)
         {
             if (Customer == null)
@@ -1917,6 +1922,24 @@ namespace Marbale.POS
             //{
             //    HandleCardRead(CurrentCard.CardNumber, null);
             //}
+        }
+
+        private void btnTransferCard_Click(object sender, EventArgs e)
+        {
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.TRANSFERCARD, CurrentCard);
+            frm.ShowDialog();
+        }
+
+        private void btnLoadMultiple_Click(object sender, EventArgs e)
+        {
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADMULTIPLE, CurrentCard);
+            frm.ShowDialog();
+        }
+
+        private void btnCansolidateCard_Click(object sender, EventArgs e)
+        {
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.CANSOLIDATECARD, CurrentCard);
+            frm.ShowDialog();
         }
     }
 }

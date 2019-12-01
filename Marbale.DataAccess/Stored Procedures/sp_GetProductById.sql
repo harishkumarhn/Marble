@@ -26,7 +26,7 @@ BEGIN
   --ExpiryDate 'ExpiryDate'      
     T.TaxId  
   from Product P  
-   JOIN Tax T ON T.TaxId = p.TaxName 
+  LEFT JOIN Tax T ON T.TaxId = p.TaxName 
   LEFT JOIN ProductType PT on P.Type = PT.Id  
   LEFT JOIN DisplayGroup DG on P.DisplayGroupId = DG.DisplayGroupId  
   where P.Id = @id      

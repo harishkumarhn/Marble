@@ -1,6 +1,8 @@
 ﻿using Marbale.Business;
 using Marbale.BusinessObject.Cards;
+using Marbale.POS.CardDevice;
 using Marbale.POS.Tasks;
+using Marble.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,11 +19,22 @@ namespace Marbale.POS
     {
         Card currentcard = new Card();
         int TaskId = 0;
+        Card fromCard;
+        Card toCard;
+        List<Card> lstConsolidateCard;
+        List<DataGridView> lstConsolidatedatagridView;
+
         public frmTasks(int taskId, Card card)
         {
             InitializeComponent();
             currentcard = card;
             this.TaskId = taskId;
+         
+        }
+        private void frmTasks_Load(object sender, EventArgs e)
+        {
+            CardReader.RequiredByOthers = true;
+            CardReader.setReceiveAction = TappedCard;
             PoplateForm();
         }
 
@@ -56,22 +69,38 @@ namespace Marbale.POS
 
         private void PoplateForm()
         {
-            for (int i = 0; i < CardTabControl.TabPages.Count; i++)
+            while (CardTabControl.TabPages.Count > 1)
             {
-                if (CardTabControl.TabPages[i].Tag != null && Convert.ToInt32(CardTabControl.TabPages[i].Tag) != TaskId)
+                for (int i = 0; i < CardTabControl.TabPages.Count; i++)
                 {
-                    CardTabControl.TabPages.RemoveAt(i);
+                    if (CardTabControl.TabPages[i].Tag != null && Convert.ToInt32(CardTabControl.TabPages[i].Tag) != TaskId)
+                    {
+                        CardTabControl.TabPages.RemoveAt(i);
+                    }
                 }
             }
 
-            switch(TaskId)
+            switch (TaskId)
             {
                 case (int)CommonTask.Task.LOADTICKETS:
-                                                       PopulateCardTicketGrid();
-                                                       break;
-                case (int)CommonTask.Task.LOADBONUS  :
-                                                       PopulateCardBonusGrid();
-                                                       break;
+                    PopulateCardTicketGrid();
+                    break;
+                case (int)CommonTask.Task.LOADBONUS:
+                    PopulateCardBonusGrid();
+                    break;
+                case (int)CommonTask.Task.LOADMULTIPLE:
+                    //PopulateCardBonusGrid();
+                    break;
+                case (int)CommonTask.Task.TRANSFERCARD:
+                    //PopulateCardBonusGrid();
+                    break;
+                case (int)CommonTask.Task.CANSOLIDATECARD:
+                    {
+                        lstConsolidateCard = new List<Card>();
+                        lstConsolidatedatagridView = new List<DataGridView>();
+                         //PopulateCardBonusGrid();
+                    break;
+                    }
             }
         }
 
@@ -93,6 +122,21 @@ namespace Marbale.POS
             }
         }
 
+        void PopulateTransferFromCard(Card card)
+        {
+            if (card != null && card.card_id > 0)
+            {
+                string[] row1 = new string[] { card.CardNumber, card.issue_date.ToString(), card.credits.ToString(), card.bonus.ToString(), card.ticket_count.ToString() };
+                dgvFromCard.Rows.Add(row1);
+            }
+            else if (card != null && card.card_id <= 0)
+            {
+                string[] row1 = new string[] { card.CardNumber, string.Empty, card.credits.ToString(), card.bonus.ToString(), card.ticket_count.ToString() };
+                dgvToCard.Rows.Add(row1);
+            }
+        }
+
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -107,13 +151,266 @@ namespace Marbale.POS
             }
 
             ProductBL productBL = new ProductBL();
-            productBL.LoadTicketBonusToCards(currentcard.card_id, 0,Convert.ToInt32(txtBonus.Text), "");
+            productBL.LoadTicketBonusToCards(currentcard.card_id, 0, Convert.ToInt32(txtBonus.Text), "");
 
             MessageBox.Show("Bonus loaded to card successfully.");
             this.Close();
         }
 
         private void btnBonusClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnGetFromcard_Click(object sender, EventArgs e)
+        {
+            fromCard = new Card();
+            if (Validatecard(txtFromCardnumber.Text))
+            {
+                fromCard = GetCard(txtFromCardnumber.Text.Trim());
+
+                if (fromCard != null && fromCard.CardStatus != "ISSUED")
+                {
+                    MessageBox.Show("Please Tap the issued card");
+                }
+                else
+                {
+                    PopulateTransferFromCard(fromCard);
+                }
+            }
+        }
+
+
+        private Card GetCard(string cardNumber)
+        {
+            TransactionBL trxBL = new TransactionBL();
+            return trxBL.GetCard(0, cardNumber);
+        }
+
+        bool Validatecard(string cardNumber)
+        {
+            if (string.IsNullOrEmpty(cardNumber))
+            {
+                MessageBox.Show("Please enter card number");
+                return false;
+            }
+            if (cardNumber.Length != 10)
+            {
+                MessageBox.Show("Card number length should be 10");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void btnGetTocard_Click(object sender, EventArgs e)
+        {
+            toCard = new Card();
+            if (Validatecard(txtTocardNumber.Text))
+            {
+                toCard = GetCard(txtTocardNumber.Text.Trim());
+
+                if (toCard == null || toCard.CardStatus != "NEW")
+                {
+                    MessageBox.Show("Please Tap the NEW card");
+                }
+                else
+                {
+                    PopulateTransferFromCard(toCard);
+                }
+            }
+        }
+
+        public void TransferCard(Card fromCard, Card toCard, string remarks)
+        {
+            try
+            {
+                toCard.card_id = 0;
+                toCard.issue_date = fromCard.issue_date;
+                toCard.face_value = fromCard.face_value;
+                toCard.refund_date = fromCard.refund_date;
+                toCard.refund_flag = fromCard.refund_flag;
+                toCard.refund_amount = fromCard.refund_amount;
+                toCard.ticket_count = fromCard.ticket_count;
+                toCard.credits = fromCard.credits;
+                toCard.bonus = fromCard.bonus;
+                toCard.courtesy = fromCard.courtesy;
+                toCard.valid_flag = fromCard.valid_flag;
+                toCard.customer_id = fromCard.customer_id;
+                toCard.credits_played = fromCard.credits_played;
+                toCard.ticket_allowed = fromCard.ticket_allowed;
+                toCard.real_ticket_mode = fromCard.real_ticket_mode;
+                toCard.vip_customer = fromCard.vip_customer;
+                toCard.notes = fromCard.notes;
+                toCard.start_time = fromCard.start_time;
+                toCard.last_played_time = fromCard.last_played_time;
+                toCard.technician_card = fromCard.technician_card;
+                toCard.TimerResetCard = fromCard.TimerResetCard;
+                toCard.loyalty_points = fromCard.loyalty_points;
+                toCard.CardTypeId = fromCard.CardTypeId;
+                toCard.ExpiryDate = fromCard.ExpiryDate;
+                toCard.notes = fromCard.notes;
+                toCard.addTime = fromCard.time;
+
+                TransactionBL trxBL = new TransactionBL();
+                int toCardId = trxBL.SaveCard(toCard);
+
+                if (toCardId > 0)
+                {
+                    trxBL.TransferCard(fromCard.card_id, toCardId, "");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnTransferCardOk_Click(object sender, EventArgs e)
+        {
+            if (fromCard == null || fromCard.card_id == 0)
+            {
+                MessageBox.Show("Please enter From card details");
+                return;
+            }
+
+            if (toCard == null || string.IsNullOrEmpty(toCard.CardNumber))
+            {
+                MessageBox.Show("Please enter To card details");
+                return;
+            }
+
+            TransferCard(fromCard, toCard, "");
+
+
+            MessageBox.Show("Card transferred successfully.");
+            this.Close();
+        }
+
+        private void TappedCard()
+        {
+
+
+        }
+
+
+        private void PopulateConsoliDateCardGrid(Card card, ref DataGridView dataGridView, ref bool success)
+        {
+            bool found = false;
+            if(lstConsolidateCard != null && lstConsolidateCard.Count> 0)
+            {
+                foreach(Card swipedcard in lstConsolidateCard)
+                {
+                    if (swipedcard.CardNumber == card.CardNumber)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if(found)
+                {
+                    MessageBox.Show("Card is already Added");
+                    return;
+                }
+            }
+
+            if (card != null && card.card_id > 0)
+            {
+                string[] row1 = new string[] { card.CardNumber, card.issue_date.ToString(), card.credits.ToString(), card.bonus.ToString(), card.ticket_count.ToString() };
+                dataGridView.Rows.Add(row1);
+                lstConsolidateCard.Add(card);
+                lstConsolidatedatagridView.Add(dataGridView);
+                success = true;
+            }
+            else
+            {
+                MessageBox.Show("Please tap the valid card");
+            }
+        }
+
+        private void btnGetConsolidateCard_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Validatecard(txtConsolidateCard.Text))
+                {
+                    Card objCard = GetCard(txtConsolidateCard.Text);
+                    bool success = false;
+                    DataGridView dataGrid = GetConsolidateNewGrid();
+                    PopulateConsoliDateCardGrid(objCard, ref dataGrid, ref success);
+                    if (success)
+                    {
+                        if (lstConsolidatedatagridView != null && lstConsolidatedatagridView.Count > 1)
+                        {
+
+                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count-1].Location = new Point(dgvConsolidateCard.Location.X, lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 2].Location.Y+60);
+
+                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].BringToFront();
+                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].Refresh();
+                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].Show();
+
+                            tbConsilidated.Controls.Add(lstConsolidatedatagridView[lstConsolidatedatagridView.Count-1]);
+
+                            this.Refresh(); 
+                        }
+                        else
+                        {
+                            dataGrid.Location = dgvConsolidateCard.Location;
+
+                            dataGrid.BringToFront();
+                            dataGrid.Refresh();
+                            dataGrid.Show();
+                            dataGrid.Visible = true;
+                            tbConsilidated.Controls.Add(dataGrid);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+
+        public DataGridView GetConsolidateNewGrid()
+        {
+            DataGridView grid = new DataGridView();
+            grid.AllowUserToAddRows = dgvConsolidateCard.AllowUserToAddRows;
+            grid.AllowUserToDeleteRows = dgvConsolidateCard.AllowUserToDeleteRows;
+            grid.AllowUserToResizeColumns  = dgvConsolidateCard.AllowUserToResizeColumns;
+            grid.Size = dgvConsolidateCard.Size;
+            grid.MultiSelect = dgvConsolidateCard.MultiSelect;
+            grid.ColumnHeadersVisible = dgvConsolidateCard.ColumnHeadersVisible;
+            grid.RowHeadersVisible = dgvConsolidateCard.RowHeadersVisible;
+            grid.ReadOnly = dgvConsolidateCard.ReadOnly;
+            
+
+            grid.Columns.Add("Card_Number", "Card Number");
+            grid.Columns["Card_Number"].Width = 150;
+
+            grid.Columns.Add("Issue_Date", "Issue Date");
+            grid.Columns["Issue_Date"].Width = 150;
+
+            grid.Columns.Add("Credits", "Credits");
+            grid.Columns["Credits"].Width = 100;
+
+            grid.Columns.Add("Bonus", "Bonus");
+            grid.Columns["Bonus"].Width = 100;
+
+            grid.Columns.Add("Tickets", "Tickets");
+            grid.Columns["Tickets"].Width = 100;
+
+            grid.Enabled = true;
+
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+
+            return grid;
+        }
+
+        private void btnConsolidateClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }

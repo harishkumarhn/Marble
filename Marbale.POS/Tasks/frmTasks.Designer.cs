@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CardTabControl = new System.Windows.Forms.TabControl();
             this.tbLoadTickets = new System.Windows.Forms.TabPage();
             this.lblCardDetails = new System.Windows.Forms.Label();
@@ -55,23 +58,69 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbLoadMultiple = new System.Windows.Forms.TabPage();
+            this.tbTransferCard = new System.Windows.Forms.TabPage();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnTransferCardOk = new System.Windows.Forms.Button();
+            this.btnGetTocard = new System.Windows.Forms.Button();
+            this.txtTocardNumber = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnGetFromcard = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dgvToCard = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dgvFromCard = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtFromCardnumber = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbConsilidated = new System.Windows.Forms.TabPage();
+            this.dgvConsolidateCard = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnGetConsolidateCard = new System.Windows.Forms.Button();
+            this.txtConsolidateCard = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnConsolidateClose = new System.Windows.Forms.Button();
+            this.btnConsolidateOk = new System.Windows.Forms.Button();
             this.CardTabControl.SuspendLayout();
             this.tbLoadTickets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardTickets)).BeginInit();
             this.tbLoadBonus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBonusCard)).BeginInit();
+            this.tbTransferCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvToCard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFromCard)).BeginInit();
+            this.tbConsilidated.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsolidateCard)).BeginInit();
             this.SuspendLayout();
             // 
             // CardTabControl
             // 
             this.CardTabControl.Controls.Add(this.tbLoadTickets);
             this.CardTabControl.Controls.Add(this.tbLoadBonus);
+            this.CardTabControl.Controls.Add(this.tbLoadMultiple);
+            this.CardTabControl.Controls.Add(this.tbTransferCard);
+            this.CardTabControl.Controls.Add(this.tbConsilidated);
             this.CardTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CardTabControl.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
             this.CardTabControl.Location = new System.Drawing.Point(0, 0);
             this.CardTabControl.Name = "CardTabControl";
             this.CardTabControl.SelectedIndex = 0;
-            this.CardTabControl.Size = new System.Drawing.Size(702, 401);
+            this.CardTabControl.Size = new System.Drawing.Size(744, 423);
             this.CardTabControl.TabIndex = 0;
             // 
             // tbLoadTickets
@@ -87,9 +136,9 @@
             this.tbLoadTickets.Location = new System.Drawing.Point(4, 24);
             this.tbLoadTickets.Name = "tbLoadTickets";
             this.tbLoadTickets.Padding = new System.Windows.Forms.Padding(3);
-            this.tbLoadTickets.Size = new System.Drawing.Size(694, 373);
+            this.tbLoadTickets.Size = new System.Drawing.Size(736, 395);
             this.tbLoadTickets.TabIndex = 0;
-            this.tbLoadTickets.Tag = "1";
+            this.tbLoadTickets.Tag = "0";
             this.tbLoadTickets.Text = "Load Tickets";
             this.tbLoadTickets.UseVisualStyleBackColor = true;
             // 
@@ -177,14 +226,14 @@
             this.dgvCardTickets.Name = "dgvCardTickets";
             this.dgvCardTickets.ReadOnly = true;
             this.dgvCardTickets.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCardTickets.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCardTickets.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvCardTickets.RowHeadersVisible = false;
             this.dgvCardTickets.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvCardTickets.Size = new System.Drawing.Size(535, 50);
@@ -224,9 +273,9 @@
             this.tbLoadBonus.Location = new System.Drawing.Point(4, 24);
             this.tbLoadBonus.Name = "tbLoadBonus";
             this.tbLoadBonus.Padding = new System.Windows.Forms.Padding(3);
-            this.tbLoadBonus.Size = new System.Drawing.Size(694, 373);
+            this.tbLoadBonus.Size = new System.Drawing.Size(736, 395);
             this.tbLoadBonus.TabIndex = 1;
-            this.tbLoadBonus.Tag = "2";
+            this.tbLoadBonus.Tag = "1";
             this.tbLoadBonus.Text = "Load Bonus";
             this.tbLoadBonus.UseVisualStyleBackColor = true;
             // 
@@ -314,14 +363,14 @@
             this.dgvBonusCard.Name = "dgvBonusCard";
             this.dgvBonusCard.ReadOnly = true;
             this.dgvBonusCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBonusCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBonusCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvBonusCard.RowHeadersVisible = false;
             this.dgvBonusCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvBonusCard.Size = new System.Drawing.Size(535, 50);
@@ -348,17 +397,422 @@
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
             this.dataGridViewTextBoxColumn3.Width = 230;
             // 
+            // tbLoadMultiple
+            // 
+            this.tbLoadMultiple.Location = new System.Drawing.Point(4, 24);
+            this.tbLoadMultiple.Name = "tbLoadMultiple";
+            this.tbLoadMultiple.Size = new System.Drawing.Size(736, 395);
+            this.tbLoadMultiple.TabIndex = 3;
+            this.tbLoadMultiple.Tag = "2";
+            this.tbLoadMultiple.Text = "Load Multiple";
+            this.tbLoadMultiple.UseVisualStyleBackColor = true;
+            // 
+            // tbTransferCard
+            // 
+            this.tbTransferCard.Controls.Add(this.textBox3);
+            this.tbTransferCard.Controls.Add(this.label6);
+            this.tbTransferCard.Controls.Add(this.button2);
+            this.tbTransferCard.Controls.Add(this.btnTransferCardOk);
+            this.tbTransferCard.Controls.Add(this.btnGetTocard);
+            this.tbTransferCard.Controls.Add(this.txtTocardNumber);
+            this.tbTransferCard.Controls.Add(this.label5);
+            this.tbTransferCard.Controls.Add(this.btnGetFromcard);
+            this.tbTransferCard.Controls.Add(this.label4);
+            this.tbTransferCard.Controls.Add(this.dgvToCard);
+            this.tbTransferCard.Controls.Add(this.label3);
+            this.tbTransferCard.Controls.Add(this.dgvFromCard);
+            this.tbTransferCard.Controls.Add(this.txtFromCardnumber);
+            this.tbTransferCard.Controls.Add(this.label2);
+            this.tbTransferCard.Location = new System.Drawing.Point(4, 24);
+            this.tbTransferCard.Name = "tbTransferCard";
+            this.tbTransferCard.Padding = new System.Windows.Forms.Padding(3);
+            this.tbTransferCard.Size = new System.Drawing.Size(736, 395);
+            this.tbTransferCard.TabIndex = 2;
+            this.tbTransferCard.Tag = "3";
+            this.tbTransferCard.Text = "Transfer card";
+            this.tbTransferCard.UseVisualStyleBackColor = true;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(252, 275);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(364, 42);
+            this.textBox3.TabIndex = 27;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label6.Location = new System.Drawing.Point(176, 278);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 15);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Remarks :";
+            // 
+            // button2
+            // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button2.Location = new System.Drawing.Point(433, 338);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(102, 39);
+            this.button2.TabIndex = 25;
+            this.button2.Text = "Close";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // btnTransferCardOk
+            // 
+            this.btnTransferCardOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnTransferCardOk.Location = new System.Drawing.Point(144, 338);
+            this.btnTransferCardOk.Name = "btnTransferCardOk";
+            this.btnTransferCardOk.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnTransferCardOk.Size = new System.Drawing.Size(102, 39);
+            this.btnTransferCardOk.TabIndex = 24;
+            this.btnTransferCardOk.Text = "OK";
+            this.btnTransferCardOk.UseVisualStyleBackColor = true;
+            this.btnTransferCardOk.Click += new System.EventHandler(this.btnTransferCardOk_Click);
+            // 
+            // btnGetTocard
+            // 
+            this.btnGetTocard.Location = new System.Drawing.Point(433, 152);
+            this.btnGetTocard.Name = "btnGetTocard";
+            this.btnGetTocard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnGetTocard.Size = new System.Drawing.Size(93, 23);
+            this.btnGetTocard.TabIndex = 23;
+            this.btnGetTocard.Text = "Get Details";
+            this.btnGetTocard.UseVisualStyleBackColor = true;
+            this.btnGetTocard.Click += new System.EventHandler(this.btnGetTocard_Click);
+            // 
+            // txtTocardNumber
+            // 
+            this.txtTocardNumber.Location = new System.Drawing.Point(252, 152);
+            this.txtTocardNumber.MaxLength = 10;
+            this.txtTocardNumber.Name = "txtTocardNumber";
+            this.txtTocardNumber.Size = new System.Drawing.Size(161, 23);
+            this.txtTocardNumber.TabIndex = 22;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label5.Location = new System.Drawing.Point(92, 156);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(154, 15);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Enter To CardNumber :";
+            // 
+            // btnGetFromcard
+            // 
+            this.btnGetFromcard.Location = new System.Drawing.Point(433, 21);
+            this.btnGetFromcard.Name = "btnGetFromcard";
+            this.btnGetFromcard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnGetFromcard.Size = new System.Drawing.Size(93, 23);
+            this.btnGetFromcard.TabIndex = 20;
+            this.btnGetFromcard.Text = "Get Details";
+            this.btnGetFromcard.UseVisualStyleBackColor = true;
+            this.btnGetFromcard.Click += new System.EventHandler(this.btnGetFromcard_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(78, 189);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 15);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "To Card Details";
+            // 
+            // dgvToCard
+            // 
+            this.dgvToCard.AllowUserToAddRows = false;
+            this.dgvToCard.AllowUserToDeleteRows = false;
+            this.dgvToCard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvToCard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.Column3,
+            this.fv});
+            this.dgvToCard.Location = new System.Drawing.Point(81, 207);
+            this.dgvToCard.MultiSelect = false;
+            this.dgvToCard.Name = "dgvToCard";
+            this.dgvToCard.ReadOnly = true;
+            this.dgvToCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvToCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            this.dgvToCard.RowHeadersVisible = false;
+            this.dgvToCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvToCard.Size = new System.Drawing.Size(605, 50);
+            this.dgvToCard.TabIndex = 18;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "CardNumber";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Issue Date";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "credit";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Bonus";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // fv
+            // 
+            this.fv.HeaderText = "Tickets";
+            this.fv.Name = "fv";
+            this.fv.ReadOnly = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(78, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(126, 15);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "From Card Details";
+            // 
+            // dgvFromCard
+            // 
+            this.dgvFromCard.AllowUserToAddRows = false;
+            this.dgvFromCard.AllowUserToDeleteRows = false;
+            this.dgvFromCard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFromCard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.Column1,
+            this.Column2});
+            this.dgvFromCard.Location = new System.Drawing.Point(81, 71);
+            this.dgvFromCard.MultiSelect = false;
+            this.dgvFromCard.Name = "dgvFromCard";
+            this.dgvFromCard.ReadOnly = true;
+            this.dgvFromCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFromCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            this.dgvFromCard.RowHeadersVisible = false;
+            this.dgvFromCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvFromCard.Size = new System.Drawing.Size(605, 50);
+            this.dgvFromCard.TabIndex = 16;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "CardNumber";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Issue Date";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Credit";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Bonus";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Tickets";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // txtFromCardnumber
+            // 
+            this.txtFromCardnumber.Location = new System.Drawing.Point(252, 21);
+            this.txtFromCardnumber.MaxLength = 10;
+            this.txtFromCardnumber.Name = "txtFromCardnumber";
+            this.txtFromCardnumber.Size = new System.Drawing.Size(161, 23);
+            this.txtFromCardnumber.TabIndex = 12;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(78, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(168, 15);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Enter From CardNumber :";
+            // 
+            // tbConsilidated
+            // 
+            this.tbConsilidated.Controls.Add(this.btnConsolidateClose);
+            this.tbConsilidated.Controls.Add(this.btnConsolidateOk);
+            this.tbConsilidated.Controls.Add(this.btnGetConsolidateCard);
+            this.tbConsilidated.Controls.Add(this.txtConsolidateCard);
+            this.tbConsilidated.Controls.Add(this.label7);
+            this.tbConsilidated.Controls.Add(this.dgvConsolidateCard);
+            this.tbConsilidated.Location = new System.Drawing.Point(4, 24);
+            this.tbConsilidated.Name = "tbConsilidated";
+            this.tbConsilidated.Size = new System.Drawing.Size(736, 395);
+            this.tbConsilidated.TabIndex = 4;
+            this.tbConsilidated.Tag = "4";
+            this.tbConsilidated.Text = "Consolidate Cards";
+            this.tbConsilidated.UseVisualStyleBackColor = true;
+            // 
+            // dgvConsolidateCard
+            // 
+            this.dgvConsolidateCard.AllowUserToAddRows = false;
+            this.dgvConsolidateCard.AllowUserToDeleteRows = false;
+            this.dgvConsolidateCard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConsolidateCard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17});
+            this.dgvConsolidateCard.Location = new System.Drawing.Point(38, 44);
+            this.dgvConsolidateCard.MultiSelect = false;
+            this.dgvConsolidateCard.Name = "dgvConsolidateCard";
+            this.dgvConsolidateCard.ReadOnly = true;
+            this.dgvConsolidateCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvConsolidateCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            this.dgvConsolidateCard.RowHeadersVisible = false;
+            this.dgvConsolidateCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvConsolidateCard.Size = new System.Drawing.Size(605, 49);
+            this.dgvConsolidateCard.TabIndex = 17;
+            this.dgvConsolidateCard.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "CardNumber";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            this.dataGridViewTextBoxColumn13.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.HeaderText = "Issue Date";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            this.dataGridViewTextBoxColumn14.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.HeaderText = "Credit";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.HeaderText = "Bonus";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.HeaderText = "Tickets";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            // 
+            // btnGetConsolidateCard
+            // 
+            this.btnGetConsolidateCard.Location = new System.Drawing.Point(392, 15);
+            this.btnGetConsolidateCard.Name = "btnGetConsolidateCard";
+            this.btnGetConsolidateCard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnGetConsolidateCard.Size = new System.Drawing.Size(93, 23);
+            this.btnGetConsolidateCard.TabIndex = 23;
+            this.btnGetConsolidateCard.Text = "Get Details";
+            this.btnGetConsolidateCard.UseVisualStyleBackColor = true;
+            this.btnGetConsolidateCard.Click += new System.EventHandler(this.btnGetConsolidateCard_Click);
+            // 
+            // txtConsolidateCard
+            // 
+            this.txtConsolidateCard.Location = new System.Drawing.Point(211, 15);
+            this.txtConsolidateCard.MaxLength = 10;
+            this.txtConsolidateCard.Name = "txtConsolidateCard";
+            this.txtConsolidateCard.Size = new System.Drawing.Size(161, 23);
+            this.txtConsolidateCard.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label7.Location = new System.Drawing.Point(37, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(133, 15);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Enter CardNumber :";
+            // 
+            // btnConsolidateClose
+            // 
+            this.btnConsolidateClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnConsolidateClose.Location = new System.Drawing.Point(414, 333);
+            this.btnConsolidateClose.Name = "btnConsolidateClose";
+            this.btnConsolidateClose.Size = new System.Drawing.Size(102, 39);
+            this.btnConsolidateClose.TabIndex = 27;
+            this.btnConsolidateClose.Text = "Close";
+            this.btnConsolidateClose.UseVisualStyleBackColor = true;
+            this.btnConsolidateClose.Click += new System.EventHandler(this.btnConsolidateClose_Click);
+            // 
+            // btnConsolidateOk
+            // 
+            this.btnConsolidateOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnConsolidateOk.Location = new System.Drawing.Point(125, 333);
+            this.btnConsolidateOk.Name = "btnConsolidateOk";
+            this.btnConsolidateOk.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnConsolidateOk.Size = new System.Drawing.Size(102, 39);
+            this.btnConsolidateOk.TabIndex = 26;
+            this.btnConsolidateOk.Text = "OK";
+            this.btnConsolidateOk.UseVisualStyleBackColor = true;
+            // 
             // frmTasks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 401);
+            this.ClientSize = new System.Drawing.Size(744, 423);
             this.Controls.Add(this.CardTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmTasks";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Card Tasks";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.frmTasks_Load);
             this.CardTabControl.ResumeLayout(false);
             this.tbLoadTickets.ResumeLayout(false);
             this.tbLoadTickets.PerformLayout();
@@ -366,6 +820,13 @@
             this.tbLoadBonus.ResumeLayout(false);
             this.tbLoadBonus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBonusCard)).EndInit();
+            this.tbTransferCard.ResumeLayout(false);
+            this.tbTransferCard.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvToCard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFromCard)).EndInit();
+            this.tbConsilidated.ResumeLayout(false);
+            this.tbConsilidated.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsolidateCard)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -397,5 +858,43 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.TabPage tbTransferCard;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dgvFromCard;
+        private System.Windows.Forms.TextBox txtFromCardnumber;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dgvToCard;
+        private System.Windows.Forms.Button btnGetFromcard;
+        private System.Windows.Forms.Button btnGetTocard;
+        private System.Windows.Forms.TextBox txtTocardNumber;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnTransferCardOk;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fv;
+        private System.Windows.Forms.TabPage tbLoadMultiple;
+        private System.Windows.Forms.TabPage tbConsilidated;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridView dgvConsolidateCard;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.Button btnGetConsolidateCard;
+        private System.Windows.Forms.TextBox txtConsolidateCard;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnConsolidateClose;
+        private System.Windows.Forms.Button btnConsolidateOk;
     }
 }

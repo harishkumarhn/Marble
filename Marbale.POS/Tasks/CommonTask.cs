@@ -10,11 +10,11 @@ namespace Marbale.POS.Tasks
     {
         public enum Task
         {
-            LOADTICKETS = 1,
-            LOADBONUS =  2,
-            LOADMULTIPLE = 3,
-            TRANSFERCARD = 4,
-            CANSOLIDATECARD = 5
+            LOADTICKETS = 0,
+            LOADBONUS =  1,
+            LOADMULTIPLE = 2,
+            TRANSFERCARD = 3,
+            CANSOLIDATECARD = 4
         }
     }
 }
