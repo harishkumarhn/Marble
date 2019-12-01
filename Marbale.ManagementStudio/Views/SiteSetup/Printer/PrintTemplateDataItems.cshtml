@@ -6,7 +6,7 @@
  <table id="marbleTable_printTemplate" class="stripe row-border order-column" style="width: 100%">
         <thead>
             <tr>
-                <th>TemplateId</th>
+                <th>Id</th>
                 <th>Section</th>
                 <th>Sequence</th>
                 <th>Col1Data</th>
@@ -28,10 +28,10 @@
             {  
                 <tr>
                     <td>
-                        <lable> @(item.TemplateId == 0 ? "" : item.TemplateId) </lable>
+                        <lable class="fixedCol1"> @(item.Id == 0 ? "" : item.Id) </lable>
                     </td>
                     <td>
-                        <input type="text" value="@item.Section" />
+                        <input type="text" class="fixedCol2" value="@item.Section" />
                     </td>
                     <td>
                         <input type="text" value="@item.Sequence" />
@@ -43,7 +43,7 @@
                         <select name="Col1Alignment" id="Col1Alignment">
                             @foreach (var dow in @item.AlignmentList)
                             {
-                                if (@item.Col1Alignment == (@dow.Id).ToString())
+                                if (@item.Col1Alignment == (@dow.Value[0]).ToString())
                                 {
                                 <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
                                 }
@@ -61,7 +61,7 @@
                         <select name="Col2Alignment" id="Col2Alignment">
                             @foreach (var dow in @item.AlignmentList)
                             {
-                                if (@item.Col2Alignment == (@dow.Id).ToString())
+                                if (@item.Col2Alignment == (@dow.Value[0]).ToString())
                                 {
                                 <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
                                 }
@@ -79,7 +79,7 @@
                         <select name="Col3Alignment" id="Col3Alignment">
                             @foreach (var dow in @item.AlignmentList)
                             {
-                                if (@item.Col3Alignment == (@dow.Id).ToString())
+                                if (@item.Col3Alignment == (@dow.Value[0]).ToString())
                                 {
                                 <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
                                 }
@@ -97,7 +97,7 @@
                         <select name="Col4Alignment" id="Col4Alignment">
                             @foreach (var dow in @item.AlignmentList)
                             {
-                                if (@item.Col4Alignment == (@dow.Id).ToString())
+                                if (@item.Col4Alignment == (@dow.Value[0]).ToString())
                                 {
                                 <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
                                 }
@@ -115,7 +115,7 @@
                         <select name="Col5Alignment" id="Col5Alignment">
                             @foreach (var dow in @item.AlignmentList)
                             {
-                                if (@item.Col5Alignment == (@dow.Id).ToString())
+                                if (@item.Col5Alignment == (@dow.Value[0]).ToString())
                                 {
                                 <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
                                 }
@@ -127,7 +127,19 @@
                         </select>
                     </td>
                     <td>
-                        <input type="text" value="@item.FontName" />
+                         <select name="fontName">
+                        @foreach (var dow in ViewBag.FontNameList)
+                        {
+                            if (@item.FontName == @dow)
+                            {
+                            <option value="@dow" selected style="font-family:@dow">@dow</option>
+                            }
+                            else
+                            {
+                            <option value="@dow" style="font-family:@dow">@dow</option>
+                            }
+                        }
+                    </select>
                     </td>
                     <td>
                         <input type="text" value="@item.FontSize" />
@@ -155,9 +167,6 @@
                     var element = $('td', row);
                     element.on("change", function (e) {
                         UpdatedList($(this).parent().index());
-                    });
-                    element.on("click", function (e) {
-                        UpdatePrinterTemplateList($(this).parent().index());
                     });
                 },
                 fixedColumns: {

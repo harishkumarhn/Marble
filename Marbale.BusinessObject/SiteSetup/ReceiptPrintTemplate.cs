@@ -11,7 +11,7 @@ namespace Marbale.BusinessObject.SiteSetup
         public int Id { get; set; }
         public int TemplateId { get; set; }
         public string FontName { get; set; }
-        public int FontSize { get; set; }
+        public decimal FontSize { get; set; }
         public string Section { get; set; }
         public int Sequence { get; set; }
         public string Col1Data { get; set; }

@@ -372,18 +372,20 @@ namespace MarbaleManagementStudio.Controllers
         }
         public ActionResult PrintTemplate()
         {
-            var printTemplateHeaders = siteSetup.GetPrintTemplateHeaders();
-            ViewBag.PrintTemplateHeaders = printTemplateHeaders;
-            ViewBag.PrintTemplate = siteSetup.GetPrintTemplates(printTemplateHeaders.Count > 0 ? printTemplateHeaders[0].TemplateId : 0);
+            ViewBag.PrintTemplateHeadersAndItems = siteSetup.GetPrintTemplateHeaderAndItems();
             ViewBag.FontNameList = new string[]{"auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset"};
             return View("~/Views/SiteSetup/Printer/PrintTemplate.cshtml");
         }
         public ActionResult PrintTemplateDataItems(int headerId)
         {
             ViewBag.PrintTemplate = siteSetup.GetPrintTemplates(headerId);
+            ViewBag.FontNameList = new string[] { "auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset" };
             return PartialView("~/Views/SiteSetup/Printer/PrintTemplateDataItems.cshtml");
         }
-
+        public int UpdatePrintTemplate(ReceiptPrintTemplateHeader template)
+        {
+            return siteSetup.InsertOrUpdatePrintTemplateHeaderAndItems(template);
+        }
         #endregion
     }
 

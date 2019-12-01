@@ -492,7 +492,7 @@ namespace Marble.Business
                     {
                         var bytes_l = (byte[])dr["LicenseKey"];
                         pk.LicenseKey = Encoding.ASCII.GetString(bytes_l, 0, bytes_l.Length);
-                        pk.ExpireOn = this.Decrypt(pk.LicenseKey,key).Split('|')[1];
+                        pk.ExpireOn = this.Decrypt(pk.LicenseKey, key).Split('|')[1];
                     }
                     break;
                 }
@@ -504,7 +504,7 @@ namespace Marble.Business
             int result = -1;
             if (!string.IsNullOrWhiteSpace(pk.SiteKey) && !string.IsNullOrWhiteSpace(pk.LicenseKey))
             {
-                var license = Decrypt(pk.LicenseKey,key);
+                var license = Decrypt(pk.LicenseKey, key);
                 var array = license.Split('|');
                 DateTime date;
                 if (DateTime.TryParse(array[1], out date))
@@ -598,7 +598,7 @@ namespace Marble.Business
             }
             return printers;
         }
-        public List<ReceiptPrintTemplateHeader> GetPrintTemplateHeaders()
+        public List<ReceiptPrintTemplateHeader> GetPrintTemplateHeaderAndItems()
         {
             DataTable dt = siteSetupData.GetPrintTemplateHeaders();
             List<ReceiptPrintTemplateHeader> templateHeaders = new List<ReceiptPrintTemplateHeader>();
@@ -610,7 +610,8 @@ namespace Marble.Business
                     templatHeader.TemplateId = dr.IsNull("TemplateId") ? 0 : int.Parse(dr["TemplateId"].ToString());
                     templatHeader.TemplateName = dr.IsNull("TemplateName") ? "" : dr["TemplateName"].ToString();
                     templatHeader.FontName = dr.IsNull("FontName") ? "" : dr["FontName"].ToString();
-                    templatHeader.FontSize = dr.IsNull("FontSize") ? 0 : int.Parse(dr["FontSize"].ToString());
+                    templatHeader.FontSize = dr.IsNull("FontSize") ? 0 : decimal.Parse(dr["FontSize"].ToString());
+                    templatHeader.PrintTemplateItems = GetPrintTemplates(templatHeader.TemplateId);
                     templateHeaders.Add(templatHeader);
                 }
 
@@ -624,7 +625,7 @@ namespace Marble.Business
         public List<ReceiptPrintTemplate> GetPrintTemplates(int headerId)
         {
             List<ReceiptPrintTemplate> templates = new List<ReceiptPrintTemplate>();
-             var list = new List<IdValue>();
+            var list = new List<IdValue>();
             list.Add(new IdValue() { Id = 1, Value = "Header" });
             list.Add(new IdValue() { Id = 2, Value = "Left" });
             list.Add(new IdValue() { Id = 3, Value = "Right" });
@@ -632,7 +633,7 @@ namespace Marble.Business
 
             if (headerId > 0)
             {
-                DataTable dt = siteSetupData.GetPrintTemplates();
+                DataTable dt = siteSetupData.GetPrintTemplates(headerId);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -654,7 +655,7 @@ namespace Marble.Business
                         template.Col5Alignment = dr.IsNull("Col5Alignment") ? "" : dr["Col5Alignment"].ToString();
                         template.Col5Data = dr.IsNull("Col5Data") ? "" : dr["Col5Data"].ToString();
                         template.FontName = dr.IsNull("FontName") ? "" : dr["FontName"].ToString();
-                        template.FontSize = dr.IsNull("FontSize") ? 0 : int.Parse(dr["FontSize"].ToString());
+                        template.FontSize = dr.IsNull("FontSize") ? 0 : decimal.Parse(dr["FontSize"].ToString());
                         template.AlignmentList = list;
                         templates.Add(template);
                     }
@@ -673,6 +674,17 @@ namespace Marble.Business
             try
             {
                 return siteSetupData.InsertOrUpdatePrinters(printers);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public int InsertOrUpdatePrintTemplateHeaderAndItems(ReceiptPrintTemplateHeader template)
+        {
+            try
+            {
+                return siteSetupData.InsertOrUpdatePrintTemplateHeaderAndItems(template);
             }
             catch (Exception e)
             {
