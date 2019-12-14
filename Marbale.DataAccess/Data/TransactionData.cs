@@ -645,7 +645,35 @@ namespace Marbale.DataAccess.Data
             }
         }
 
+        public void ConsolidateCards(Card toCard, string lastUpdatedBy)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[6];
 
+                sqlParameters[0] = new SqlParameter("@toCardId", toCard.card_id);
+                sqlParameters[1] = new SqlParameter("@credits", toCard.credits);
+                sqlParameters[2] = new SqlParameter("@courtesy", toCard.courtesy);
+                sqlParameters[3] = new SqlParameter("@bonus", toCard.bonus);
+                sqlParameters[4] = new SqlParameter("@ticket_count", toCard.ticket_count);
+             
+
+                if (!string.IsNullOrEmpty(lastUpdatedBy))
+                {
+                    sqlParameters[5] = new SqlParameter("@lastUpdatedBy", lastUpdatedBy);
+                }
+                else
+                {
+                    sqlParameters[5] = new SqlParameter("@lastUpdatedBy", DBNull.Value);
+                }
+
+                conn.executeInsertQuery("sp_ConsolidateCards", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public DataSet GetTransactionList(int userId)
         {
 
