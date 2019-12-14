@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CardTabControl = new System.Windows.Forms.TabControl();
             this.tbLoadTickets = new System.Windows.Forms.TabPage();
             this.lblCardDetails = new System.Windows.Forms.Label();
@@ -62,7 +62,7 @@
             this.tbTransferCard = new System.Windows.Forms.TabPage();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnTransferCardClose = new System.Windows.Forms.Button();
             this.btnTransferCardOk = new System.Windows.Forms.Button();
             this.btnGetTocard = new System.Windows.Forms.Button();
             this.txtTocardNumber = new System.Windows.Forms.TextBox();
@@ -85,17 +85,17 @@
             this.txtFromCardnumber = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbConsilidated = new System.Windows.Forms.TabPage();
+            this.btnConsolidateClose = new System.Windows.Forms.Button();
+            this.btnConsolidateOk = new System.Windows.Forms.Button();
+            this.btnGetConsolidateCard = new System.Windows.Forms.Button();
+            this.txtConsolidateCard = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.dgvConsolidateCard = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnGetConsolidateCard = new System.Windows.Forms.Button();
-            this.txtConsolidateCard = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnConsolidateClose = new System.Windows.Forms.Button();
-            this.btnConsolidateOk = new System.Windows.Forms.Button();
             this.CardTabControl.SuspendLayout();
             this.tbLoadTickets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardTickets)).BeginInit();
@@ -226,14 +226,14 @@
             this.dgvCardTickets.Name = "dgvCardTickets";
             this.dgvCardTickets.ReadOnly = true;
             this.dgvCardTickets.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCardTickets.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCardTickets.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCardTickets.RowHeadersVisible = false;
             this.dgvCardTickets.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvCardTickets.Size = new System.Drawing.Size(535, 50);
@@ -363,14 +363,14 @@
             this.dgvBonusCard.Name = "dgvBonusCard";
             this.dgvBonusCard.ReadOnly = true;
             this.dgvBonusCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBonusCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBonusCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvBonusCard.RowHeadersVisible = false;
             this.dgvBonusCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvBonusCard.Size = new System.Drawing.Size(535, 50);
@@ -411,7 +411,7 @@
             // 
             this.tbTransferCard.Controls.Add(this.textBox3);
             this.tbTransferCard.Controls.Add(this.label6);
-            this.tbTransferCard.Controls.Add(this.button2);
+            this.tbTransferCard.Controls.Add(this.btnTransferCardClose);
             this.tbTransferCard.Controls.Add(this.btnTransferCardOk);
             this.tbTransferCard.Controls.Add(this.btnGetTocard);
             this.tbTransferCard.Controls.Add(this.txtTocardNumber);
@@ -450,15 +450,16 @@
             this.label6.TabIndex = 26;
             this.label6.Text = "Remarks :";
             // 
-            // button2
+            // btnTransferCardClose
             // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(433, 338);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(102, 39);
-            this.button2.TabIndex = 25;
-            this.button2.Text = "Close";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnTransferCardClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnTransferCardClose.Location = new System.Drawing.Point(433, 338);
+            this.btnTransferCardClose.Name = "btnTransferCardClose";
+            this.btnTransferCardClose.Size = new System.Drawing.Size(102, 39);
+            this.btnTransferCardClose.TabIndex = 25;
+            this.btnTransferCardClose.Text = "Close";
+            this.btnTransferCardClose.UseVisualStyleBackColor = true;
+            this.btnTransferCardClose.Click += new System.EventHandler(this.btnConsolidateClose_Click);
             // 
             // btnTransferCardOk
             // 
@@ -538,14 +539,14 @@
             this.dgvToCard.Name = "dgvToCard";
             this.dgvToCard.ReadOnly = true;
             this.dgvToCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvToCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvToCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvToCard.RowHeadersVisible = false;
             this.dgvToCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvToCard.Size = new System.Drawing.Size(605, 50);
@@ -609,14 +610,14 @@
             this.dgvFromCard.Name = "dgvFromCard";
             this.dgvFromCard.ReadOnly = true;
             this.dgvFromCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFromCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFromCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvFromCard.RowHeadersVisible = false;
             this.dgvFromCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvFromCard.Size = new System.Drawing.Size(605, 50);
@@ -688,6 +689,58 @@
             this.tbConsilidated.Text = "Consolidate Cards";
             this.tbConsilidated.UseVisualStyleBackColor = true;
             // 
+            // btnConsolidateClose
+            // 
+            this.btnConsolidateClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnConsolidateClose.Location = new System.Drawing.Point(414, 342);
+            this.btnConsolidateClose.Name = "btnConsolidateClose";
+            this.btnConsolidateClose.Size = new System.Drawing.Size(102, 39);
+            this.btnConsolidateClose.TabIndex = 27;
+            this.btnConsolidateClose.Text = "Close";
+            this.btnConsolidateClose.UseVisualStyleBackColor = true;
+            this.btnConsolidateClose.Click += new System.EventHandler(this.btnConsolidateClose_Click);
+            // 
+            // btnConsolidateOk
+            // 
+            this.btnConsolidateOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnConsolidateOk.Location = new System.Drawing.Point(125, 342);
+            this.btnConsolidateOk.Name = "btnConsolidateOk";
+            this.btnConsolidateOk.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnConsolidateOk.Size = new System.Drawing.Size(102, 39);
+            this.btnConsolidateOk.TabIndex = 26;
+            this.btnConsolidateOk.Text = "OK";
+            this.btnConsolidateOk.UseVisualStyleBackColor = true;
+            this.btnConsolidateOk.Click += new System.EventHandler(this.btnConsolidateOk_Click);
+            // 
+            // btnGetConsolidateCard
+            // 
+            this.btnGetConsolidateCard.Location = new System.Drawing.Point(392, 15);
+            this.btnGetConsolidateCard.Name = "btnGetConsolidateCard";
+            this.btnGetConsolidateCard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnGetConsolidateCard.Size = new System.Drawing.Size(93, 23);
+            this.btnGetConsolidateCard.TabIndex = 23;
+            this.btnGetConsolidateCard.Text = "Get Details";
+            this.btnGetConsolidateCard.UseVisualStyleBackColor = true;
+            this.btnGetConsolidateCard.Click += new System.EventHandler(this.btnGetConsolidateCard_Click);
+            // 
+            // txtConsolidateCard
+            // 
+            this.txtConsolidateCard.Location = new System.Drawing.Point(211, 15);
+            this.txtConsolidateCard.MaxLength = 10;
+            this.txtConsolidateCard.Name = "txtConsolidateCard";
+            this.txtConsolidateCard.Size = new System.Drawing.Size(161, 23);
+            this.txtConsolidateCard.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label7.Location = new System.Drawing.Point(37, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(133, 15);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Enter CardNumber :";
+            // 
             // dgvConsolidateCard
             // 
             this.dgvConsolidateCard.AllowUserToAddRows = false;
@@ -704,14 +757,14 @@
             this.dgvConsolidateCard.Name = "dgvConsolidateCard";
             this.dgvConsolidateCard.ReadOnly = true;
             this.dgvConsolidateCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvConsolidateCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvConsolidateCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvConsolidateCard.RowHeadersVisible = false;
             this.dgvConsolidateCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvConsolidateCard.Size = new System.Drawing.Size(605, 49);
@@ -749,57 +802,6 @@
             this.dataGridViewTextBoxColumn17.HeaderText = "Tickets";
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            // 
-            // btnGetConsolidateCard
-            // 
-            this.btnGetConsolidateCard.Location = new System.Drawing.Point(392, 15);
-            this.btnGetConsolidateCard.Name = "btnGetConsolidateCard";
-            this.btnGetConsolidateCard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnGetConsolidateCard.Size = new System.Drawing.Size(93, 23);
-            this.btnGetConsolidateCard.TabIndex = 23;
-            this.btnGetConsolidateCard.Text = "Get Details";
-            this.btnGetConsolidateCard.UseVisualStyleBackColor = true;
-            this.btnGetConsolidateCard.Click += new System.EventHandler(this.btnGetConsolidateCard_Click);
-            // 
-            // txtConsolidateCard
-            // 
-            this.txtConsolidateCard.Location = new System.Drawing.Point(211, 15);
-            this.txtConsolidateCard.MaxLength = 10;
-            this.txtConsolidateCard.Name = "txtConsolidateCard";
-            this.txtConsolidateCard.Size = new System.Drawing.Size(161, 23);
-            this.txtConsolidateCard.TabIndex = 22;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(37, 18);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(133, 15);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "Enter CardNumber :";
-            // 
-            // btnConsolidateClose
-            // 
-            this.btnConsolidateClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnConsolidateClose.Location = new System.Drawing.Point(414, 333);
-            this.btnConsolidateClose.Name = "btnConsolidateClose";
-            this.btnConsolidateClose.Size = new System.Drawing.Size(102, 39);
-            this.btnConsolidateClose.TabIndex = 27;
-            this.btnConsolidateClose.Text = "Close";
-            this.btnConsolidateClose.UseVisualStyleBackColor = true;
-            this.btnConsolidateClose.Click += new System.EventHandler(this.btnConsolidateClose_Click);
-            // 
-            // btnConsolidateOk
-            // 
-            this.btnConsolidateOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnConsolidateOk.Location = new System.Drawing.Point(125, 333);
-            this.btnConsolidateOk.Name = "btnConsolidateOk";
-            this.btnConsolidateOk.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnConsolidateOk.Size = new System.Drawing.Size(102, 39);
-            this.btnConsolidateOk.TabIndex = 26;
-            this.btnConsolidateOk.Text = "OK";
-            this.btnConsolidateOk.UseVisualStyleBackColor = true;
             // 
             // frmTasks
             // 
@@ -869,7 +871,7 @@
         private System.Windows.Forms.Button btnGetTocard;
         private System.Windows.Forms.TextBox txtTocardNumber;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnTransferCardClose;
         private System.Windows.Forms.Button btnTransferCardOk;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label6;

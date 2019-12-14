@@ -414,5 +414,46 @@ namespace Marbale.POS
         {
             this.Close();
         }
+
+        private void btnConsolidateOk_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TransactionBL trxBL = new TransactionBL();
+                if (lstConsolidateCard != null && lstConsolidateCard.Count > 0)
+                {
+                    Card[] arrayCards = lstConsolidateCard.ToArray();
+                    Card updateToCard = new Card();
+                    Card tocard = new Card();
+                    for (int i = 0; i < arrayCards.Count(); i++)
+                    {
+                        updateToCard.card_id = arrayCards[i].card_id;
+                        updateToCard.credits += arrayCards[i].credits;
+                        updateToCard.bonus += arrayCards[i].bonus;
+                        updateToCard.ticket_count += arrayCards[i].ticket_count;
+                        updateToCard.courtesy += arrayCards[i].courtesy;
+                        if (i == arrayCards.Count() - 1)
+                        {
+                            trxBL.ConsolidateCards(updateToCard, "");
+                        }
+                        else
+                        {
+                            tocard.card_id = arrayCards[i].card_id;
+                            tocard.credits = 0;
+                            tocard.ticket_count = 0;
+                            tocard.bonus = 0;
+                            tocard.courtesy = 0;
+                            trxBL.ConsolidateCards(tocard, "");
+                        }
+                    }
+
+                    MessageBox.Show("Card Consolidated successfully");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

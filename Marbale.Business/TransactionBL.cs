@@ -222,5 +222,10 @@ namespace Marble.Business
         {
             trxData.Transfercard(fromcardId, toCardId, lastUpdatedBy);
         }
+
+        public void ConsolidateCards(Card toCard, string lastUpdatedBy)
+        {
+            trxData.ConsolidateCards(toCard, lastUpdatedBy);
+        }
     }
 }
