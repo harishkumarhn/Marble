@@ -20,7 +20,7 @@ namespace Marbale.DataAccess
         public DBConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn = new SqlConnection(@"Data Source=ADMIN\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
+            conn = new SqlConnection(@"Data Source=DESKTOP-76IH8U6;Initial Catalog=Marbale;Trusted_Connection=True;");
         }
 
 
@@ -125,7 +125,7 @@ namespace Marbale.DataAccess
                     cmd.Connection = openConnection();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddRange(sqlParameter);
-                    return cmd.ExecuteNonQuery();
+                    return Convert.ToInt32(cmd.ExecuteScalar());
                }
             }
             catch (SqlException e)

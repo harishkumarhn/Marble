@@ -11,6 +11,7 @@ namespace Marbale.BusinessObject.SiteSetup
         public int TemplateId { get; set; }
         public string TemplateName { get; set; }
         public string FontName { get; set; }
-        public int FontSize { get; set; }
+        public decimal FontSize { get; set; }
+        public List<ReceiptPrintTemplate> PrintTemplateItems { get; set; }
     }
 }
