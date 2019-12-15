@@ -238,5 +238,8 @@ thead {
 .buttoncolor-change {
     background-color: cornflowerblue;
 }
-
+select {
+    max-height:30px;
+    font-size:14px;
+}
 /*end*/
