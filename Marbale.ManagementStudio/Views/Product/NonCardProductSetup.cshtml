@@ -141,7 +141,7 @@
                    <select name="taxlist" id="taxlist">
                         @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
                         {
-                            if (@item.TaxName == (@dow.Id).ToString())
+                            if (@item.TaxId == (@dow.Id))
                             {
                             <option value="@dow.Value" id="@dow.Id"  selected>@dow.Value</option>
                             }
@@ -172,7 +172,7 @@
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="EditProduct(0)">
         New
     </button>
     <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
@@ -353,7 +353,7 @@
                     FaceValue: table.rows[rowIndex].cells[12].children[0].value,
                     TaxInclusive: table.rows[rowIndex].cells[13].children[0].checked,
                     Taxpercent: table.rows[rowIndex].cells[14].children[0].value,
-                    TaxName: table.rows[rowIndex].cells[15].children[0].options[selectedTaxIndex].id,
+                    TaxId: table.rows[rowIndex].cells[15].children[0].options[selectedTaxIndex].id,
                     FinalPrice: table.rows[rowIndex].cells[16].children[0].value,
                     EffectivePrice: table.rows[rowIndex].cells[17].children[0].value,
                     ExpiryDate: '10/10/2020',
@@ -385,10 +385,7 @@
     $('.close').click(function () {
         location.reload();
     });
-    //$("#marbleTable tbody tr").on('click', function (event) {
-    //    $("#marbleTable tbody tr").removeClass('row_selected');
-    //    $(this).css('background-color','red');
-    //});
+   
     $(':input').on('change', function () {
         $("#saveproduct").attr("disabled", false);
     });
@@ -396,18 +393,23 @@
     $("#newproductmodel").draggable({
         handle: ".modal-header"
     });
-    function targetmodel() {
-        $('#modelbody').load('/Product/Edit');
-        $('.modal-title').text('New Product');
-    }
+
 
     function EditProduct(id) {
+        $('#myModal').modal('show');
+        $('#modelBody').css({
+            'left': '-40%',
+            'width': 1000
+        });
         if (id != 0) {
+            $('#modelBody').load('/Product/NonCardEdit', { "id": id });
             $('.modal-title').text('Edit Product');
-            $('#basicExampleModal').modal('show');
-            $('#modelbody').load('/Product/NonCardEdit', { "id": id });
+        } else {
+            $('#modelBody').load('/Product/NonCardEdit');
+            $('.modal-title').text('New Product');
         }
     }
+
     function DeleteProduct(id) {
         if (id != 0) {
             if (confirm('Are you sure you want to delete this from database?')) {

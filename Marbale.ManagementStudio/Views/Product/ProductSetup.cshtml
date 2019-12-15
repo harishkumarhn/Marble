@@ -9,24 +9,7 @@
         font-weight: bold;
     }
 </style>
-<div>
-    <!-- Modal -->
-    @*<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width: 1019px; height: 623px;left:30%;bottom:20px" id="newproductmodel">
-                <div class="modal-header" style="height: 9%;">
-                    <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modelbody" style="position: absolute; left: 20px; top: 50px;">
-                </div>
-            </div>
-        </div>
-    </div>*@
-</div>
+
 <table id="marbleTable" class="stripe row-border order-column">
     <thead>
         <th>ID</th>
@@ -148,7 +131,7 @@
                     <select name="taxlist" id="taxlist">
                         @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
                         {
-                            if (@item.TaxName == (@dow.Id).ToString())
+                            if (@item.TaxId == (@dow.Id))
                             {
                             <option value="@dow.Value" id="@dow.Id"  selected>@dow.Value</option>
                             }

@@ -75,13 +75,6 @@ namespace MarbaleManagementStudio.Controllers
             return View(a);
         }
 
-        [HttpGet]
-        public ActionResult Edit()
-        {
-            Product a = new Product();
-            a.TaxList = Session["TaxList"] as List<TaxSet>;
-            return View(a);
-        }
         [HttpPost]
         public JsonResult IsAlreadySigned(string Name, int Id)
         {
@@ -120,7 +113,7 @@ namespace MarbaleManagementStudio.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id=0)
         {
             try
             {
@@ -179,9 +172,7 @@ namespace MarbaleManagementStudio.Controllers
                 LogError.Instance.LogException("InsertOrUpdateProduct", e);
                 throw;
             }
-
-
-            return RedirectToAction("ProductSetup", "Product");
+            return View("~/Views/Product/Edit",pObject);
         }
 
         public int UpdateProducts(List<Product> products)

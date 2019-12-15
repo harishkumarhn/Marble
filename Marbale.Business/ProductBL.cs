@@ -29,56 +29,64 @@ namespace Marbale.Business
         {   
             try
             {
-                var dataTable = productData.GetProductById(id);
                 Product product = null;
                 var typeList = new List<IdValue>();
                 var categoryList = new List<IdValue>();
                 var TaxList = new List<TaxSet>();
                 var DisplayGroupList = new List<IdValue>();
-
                 GetSessionData(typeList, categoryList, TaxList, DisplayGroupList);
-                foreach (DataRow dr in dataTable.Rows)
-                {
-                    product = new Product();
-                    product.DisplayInPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
-                    product.Bonus = dr.IsNull("Bonus") ? 0 : decimal.Parse(dr["Bonus"].ToString());
-                    product.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    product.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
-                    product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
-                    product.DisplayGroupId = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
-                    product.LastUpdatedBy = dr.IsNull("LastUpdatedUser") ? "" : dr["LastUpdatedBy"].ToString();
-                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
-                    product.TaxName = dr.IsNull("TaxName") ? "" : dr["TaxName"].ToString();
-                    product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
-                    product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
-                    product.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
-                    product.EffectivePrice = dr.IsNull("EffectivePrice") ? 0 : Convert.ToDecimal(dr["EffectivePrice"]);
-                    product.Price = dr.IsNull("Price") ? 0 : Convert.ToDecimal(dr["Price"]);
-                    product.FaceValue = dr.IsNull("FaceValue") ? 0 : Convert.ToDecimal(dr["FaceValue"]);
-                    product.FinalPrice = dr.IsNull("FinalPrice") ? 0 : Convert.ToDecimal(dr["FinalPrice"]);
-                    product.TaxPercentage = product.Taxpercent = dr.IsNull("TaxPercentage") ? 0 : Convert.ToDecimal(dr["TaxPercentage"]);
-                    product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
-                    product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
-                    product.StartDate = dr.IsNull("StartDate") ? new DateTime() : Convert.ToDateTime(dr["StartDate"]);
-                    product.Games = dr.IsNull("Games") ? 0 : Convert.ToDecimal(dr["Games"]);
-                    product.Credits = dr.IsNull("Credits") ? 0 : Convert.ToDecimal(dr["Credits"]);
-                    product.CardValidFor = dr.IsNull("CardValidFor") ? 0 : Convert.ToInt32(dr["CardValidFor"]);
-                    product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
-                    product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToDecimal(dr["Courtesy"]);
-                    product.TaxId = dr.IsNull("Taxid") ? 0 : Convert.ToInt32(dr["Taxid"]);
-                    product.CategoryList = categoryList;
-                    product.TaxList = TaxList;
-                    product.DisplayGroupList = DisplayGroupList;
-                    if (productType == (int)ProductTypeEnum.Card && product.TypeName != ProductTypeEnum.Manual.ToString())
-                    {
-                        product.TypeList = typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList();
-                    }
-                    else if ((int)ProductTypeEnum.Manual == productType && product.TypeName.ToLower() == ProductTypeEnum.Manual.ToString().ToLower())
-                    {
-                        product.TypeList = typeList.Where(x => x.Value == ProductTypeEnum.Manual.ToString()).ToList();
-                    }
 
+                if (id > 0)
+                {
+                    var dataTable = productData.GetProductById(id);
+
+                    foreach (DataRow dr in dataTable.Rows)
+                    {
+                        product = new Product();
+                        product.DisplayInPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
+                        product.Bonus = dr.IsNull("Bonus") ? 0 : decimal.Parse(dr["Bonus"].ToString());
+                        product.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                        product.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
+                        product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                        product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
+                        product.DisplayGroupId = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
+                        product.LastUpdatedBy = dr.IsNull("LastUpdatedUser") ? "" : dr["LastUpdatedBy"].ToString();
+                        product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                        product.TaxName = dr.IsNull("TaxName") ? "" : dr["TaxName"].ToString();
+                        product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
+                        product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
+                        product.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                        product.EffectivePrice = dr.IsNull("EffectivePrice") ? 0 : Convert.ToDecimal(dr["EffectivePrice"]);
+                        product.Price = dr.IsNull("Price") ? 0 : Convert.ToDecimal(dr["Price"]);
+                        product.FaceValue = dr.IsNull("FaceValue") ? 0 : Convert.ToDecimal(dr["FaceValue"]);
+                        product.FinalPrice = dr.IsNull("FinalPrice") ? 0 : Convert.ToDecimal(dr["FinalPrice"]);
+                        product.TaxPercentage = product.Taxpercent = dr.IsNull("TaxPercentage") ? 0 : Convert.ToDecimal(dr["TaxPercentage"]);
+                        product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
+                        product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
+                        product.StartDate = dr.IsNull("StartDate") ? new DateTime() : Convert.ToDateTime(dr["StartDate"]);
+                        product.Games = dr.IsNull("Games") ? 0 : Convert.ToDecimal(dr["Games"]);
+                        product.Credits = dr.IsNull("Credits") ? 0 : Convert.ToDecimal(dr["Credits"]);
+                        product.CardValidFor = dr.IsNull("CardValidFor") ? 0 : Convert.ToInt32(dr["CardValidFor"]);
+                        product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
+                        product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToDecimal(dr["Courtesy"]);
+                        product.TaxId = dr.IsNull("Taxid") ? 0 : Convert.ToInt32(dr["Taxid"]);
+                        product.CategoryList = categoryList;
+                        product.TaxList = TaxList;
+                        product.DisplayGroupList = DisplayGroupList;
+                        if (productType == (int)ProductTypeEnum.Card && product.TypeName != ProductTypeEnum.Manual.ToString())
+                        {
+                            product.TypeList = typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList();
+                        }
+                        else if ((int)ProductTypeEnum.Manual == productType && product.TypeName.ToLower() == ProductTypeEnum.Manual.ToString().ToLower())
+                        {
+                            product.TypeList = typeList.Where(x => x.Value == ProductTypeEnum.Manual.ToString()).ToList();
+                        }
+
+                    }
+                }
+                else
+                {
+                    product = new Product() { TaxList = TaxList,DisplayGroupList=DisplayGroupList,CategoryList=categoryList,TypeList=typeList};
                 }
                 return product;
             }
@@ -125,8 +133,10 @@ namespace Marbale.Business
                     product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
                     product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                     product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
-                    product.TaxName = dr.IsNull("TaxName") ? "" : dr["TaxName"].ToString();
+                    product.TaxName = dr.IsNull("TaxId") ? "" : dr["TaxId"].ToString();
                     product.TypeName = dr.IsNull("TypeName") ? "" : dr["TypeName"].ToString();
+                    product.TaxId = dr.IsNull("TaxId") ? 0 : Convert.ToInt32(dr["TaxId"].ToString());
+
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;
                     product.DisplayGroupList = DisplayGroupList;
@@ -171,7 +181,7 @@ namespace Marbale.Business
             }
         }
 
-        private void GetSessionData(List<IdValue> typeList, List<IdValue> categoryList, List<TaxSet> TaxList, List<IdValue> DisplayGroupList)
+        public void GetSessionData(List<IdValue> typeList, List<IdValue> categoryList, List<TaxSet> TaxList, List<IdValue> DisplayGroupList)
         {
             var typeListDataTable = productData.GetProductTypeLookUp();
             typeList.Add(new IdValue() { Id = null, Value = "Select" });

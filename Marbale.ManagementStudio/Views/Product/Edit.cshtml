@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label class="col-md-6">Tax:</label>
-                            @Html.DropDownListFor(m => m.TaxName, new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.TaxName) ? "SELECT" : Model.TaxName), new { @class = "form-control col-md-5", @style = "height: 35px;font-size: 14px", @onchange = "TaxDetails(this.value)" })
+                            @Html.DropDownListFor(m => m.TaxId, new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.TaxName) ? "SELECT" : Model.TaxName), new { @class = "form-control col-md-5", @style = "height: 35px;font-size: 14px", @onchange = "TaxDetails(this.value)" })
 
                             @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
                         </div>
@@ -96,9 +96,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label class="col-md-6">Product Type:</label>
-                            @Html.DropDownListFor(m => m.TypeName, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "font-size: 14px" })
-
-                            @*@Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "height: 35px;font-size: 14px" })*@
+                            @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "font-size: 14px" })
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -175,7 +173,7 @@
 
     });
     function TaxDetails(TaxId1, taxinclusive) {
-        var TaxId = $('#TaxName option:selected').val();
+        var TaxId = $('#TaxId option:selected').val();
         var Price = $('#Price').val();
         if (Price == "") {
             Price = null;
