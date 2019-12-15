@@ -359,24 +359,33 @@ namespace MarbaleManagementStudio.Controllers
         #region Printer
         public ActionResult Printer()
         {
-            return View();
+            return View("~/Views/SiteSetup/Printer/Printer.cshtml");
         }
         public ActionResult PrinterList()
         {
             ViewBag.Printers = siteSetup.GetPrinters();
-            return View();
+            return View("~/Views/SiteSetup/Printer/PrinterList.cshtml");
         }
         public int UpdatePrinters(List<Printer> Printers)
         {
             return siteSetup.InsertOrUpdatePrinters(Printers);
         }
-        public ActionResult printTemplate()
+        public ActionResult PrintTemplate()
         {
-            ViewBag.PrintTemplateHeaders = siteSetup.GetPrintTemplateHeaders();
-            ViewBag.PrintTemplates = siteSetup.GetPrintTemplates();
-            return View();
+            ViewBag.PrintTemplateHeadersAndItems = siteSetup.GetPrintTemplateHeaderAndItems();
+            ViewBag.FontNameList = new string[]{"auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset"};
+            return View("~/Views/SiteSetup/Printer/PrintTemplate.cshtml");
         }
-
+        public ActionResult PrintTemplateDataItems(int headerId)
+        {
+            ViewBag.PrintTemplate = siteSetup.GetPrintTemplates(headerId);
+            ViewBag.FontNameList = new string[] { "auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset" };
+            return PartialView("~/Views/SiteSetup/Printer/PrintTemplateDataItems.cshtml");
+        }
+        public int UpdatePrintTemplate(ReceiptPrintTemplateHeader template)
+        {
+            return siteSetup.InsertOrUpdatePrintTemplateHeaderAndItems(template);
+        }
         #endregion
     }
 

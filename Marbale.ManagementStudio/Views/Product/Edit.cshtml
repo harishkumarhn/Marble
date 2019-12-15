@@ -4,134 +4,131 @@
     ViewBag.Title = "Product";
     Layout = null;
 }
+<div class="modal-header">
+    <h4 class="modal-title">New Product</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="min-width: 10px !important;">&times;</button>
+</div>
+<div class="modal-body" style="width: 1000px">
 
 
-
-@using (Html.BeginForm("InsertOrUpdate", "Product", FormMethod.Post))
-{
-    
+    @using (Html.BeginForm("InsertOrUpdate", "Product", FormMethod.Post))
+    {
         <div id="editpopup">
             <form>
-              <div class="form-group row">
-                       
-                            <label class="col-md-2"><b>Id:</b></label>
-                            @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "form-control col-md-2" })
-                            <label class="col-md-1"><b>Name:</b></label>
-                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control col-md-3", placeholder = @Html.DisplayNameFor(n => n.Name) })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-               
-                            <label class="col-md-1">Active:</label>
-                            @Html.CheckBoxFor(m => m.Active, new { @class = "form-control col-md-1"})
+                <div style="height: 550px;overflow-y:scroll;overflow-x: hidden;">
+                <div class="form-group row">
 
-                            <label class="col-md-1">DisplayInPOS:</label>
-                            @Html.CheckBoxFor(m => m.DisplayInPOS, new { @class = "form-control col-md-1" })
-                    </div>
+                    <label class="col-md-2"><b>Id:</b></label>
+                    @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "form-control col-md-2" })
+                    <label class="col-md-1"><b>Name:</b></label>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control col-md-3", placeholder = @Html.DisplayNameFor(n => n.Name) })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                    <label class="col-md-1">Active:</label>
+                    @Html.CheckBoxFor(m => m.Active, new { @class = "form-control col-md-1" })
+
+                    <label class="col-md-1">DisplayIn POS:</label>
+                    @Html.CheckBoxFor(m => m.DisplayInPOS, new { @class = "form-control col-md-1" })
+                </div>
 
                 <div class="row">
-                <div class="form-group col-md-6">
-                       <div class="form-group col-md-12"> 
+                    <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label class="col-md-6"><b>Card Face Value:</b></label>
                             @Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control col-md-5" })
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="col-md-6">Price:</label> 
+                            <label class="col-md-6">Price:</label>
                             @Html.TextBoxFor(m => m.Price, new { @class = "form-control col-md-5" })
                             @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="col-md-6">TaxInclusive:</label> 
+                            <label class="col-md-6">TaxInclusive:</label>
                             @Html.CheckBoxFor(m => m.TaxInclusive, new { @class = "form-control col-md-5", @onchange = "TaxDetails('', this.value)", @style = "position:absolute;width:20px;" })
-                                
+
                         </div>
-                        <div class="form-group col-md-12"> 
+                        <div class="form-group col-md-12">
                             <label class="col-md-6">Tax:</label>
-                            @Html.DropDownListFor(m => m.TaxName, new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.TaxName) ? "SELECT" : Model.TaxName), new { @class = "form-control col-md-5", @style = "height: 35px", @onchange = "TaxDetails(this.value)" })
+                            @Html.DropDownListFor(m => m.TaxName, new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.TaxName) ? "SELECT" : Model.TaxName), new { @class = "form-control col-md-5", @style = "height: 35px;font-size: 14px", @onchange = "TaxDetails(this.value)" })
 
                             @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
                         </div>
-                        <div class="form-group col-md-12"> 
+                        <div class="form-group col-md-12">
                             <label class="col-md-6">Tax %:</label>
                             @Html.TextBoxFor(m => m.Taxpercent, new { @class = "form-control col-md-5" })
                         </div>
 
-                        <div class="form-group col-md-12"> 
+                        <div class="form-group col-md-12">
                             <label class="col-md-6">Effective Price:</label>
                             @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "form-control col-md-5" })
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="col-md-6">Final Price:</label> 
+                            <label class="col-md-6">Final Price:</label>
                             @Html.TextBoxFor(m => m.FinalPrice, new { @class = "form-control col-md-5" })
                             @Html.ValidationMessageFor(model => model.FinalPrice, "", new { @class = "text-danger" })
                         </div>
-                     <div class="form-group col-md-12">
-                              <label class="col-md-6"><b>Credits:</b></label>
+                        <div class="form-group col-md-12">
+                            <label class="col-md-6"><b>Credits:</b></label>
                             @Html.TextBoxFor(m => m.Credits, new { @class = "form-control col-md-5" })
                             @Html.ValidationMessageFor(model => model.Credits, "", new { @class = "text-danger" })
 
                         </div>
                         <div class="form-group col-md-12">
-                              <label class="col-md-6">Courtesy:</label>
+                            <label class="col-md-6">Courtesy:</label>
                             @Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control col-md-5" })
                             @Html.ValidationMessageFor(model => model.Courtesy, "", new { @class = "text-danger" })
                         </div>
-                       <div class="form-group col-md-12">
-                             <label class="col-md-6">Bonus:</label>
+                        <div class="form-group col-md-12">
+                            <label class="col-md-6">Bonus:</label>
                             @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control col-md-5" })
                             @Html.ValidationMessageFor(model => model.Bonus, "", new { @class = "text-danger", @style = "color:red" })
                         </div>
-                     <div class="form-group col-md-12"> 
+                        <div class="form-group col-md-12">
                             <label class="col-md-6">OnlyVIP:</label>
                             @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "form-control col-md-5", @style = "position:absolute;width:20px;" })
                         </div>
-                     
-                    <div class="form-group col-md-12"> 
+
+                        <div class="form-group col-md-12">
                             <label class="col-md-6">Category:</label>
-                               @Html.DropDownListFor(m => m.Category, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Category) ? "SELECT" : Model.Category), new { @class = "form-control col-md-5" })
+                            @Html.DropDownListFor(m => m.Category, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Category) ? "SELECT" : Model.Category), new { @class = "form-control col-md-5", @style = "font-size: 14px" })
 
                             @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
                         </div>
-                        <div class="form-group col-md-12"> 
+                        <div class="form-group col-md-12">
                             <label class="col-md-6">Product Type:</label>
-                      
-                            @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "height: 35px" })
-                            
+                            @Html.DropDownListFor(m => m.TypeName, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "font-size: 14px" })
 
+                            @*@Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "height: 35px;font-size: 14px" })*@
                         </div>
-                        
-
-
-               
-                
-                     
                     </div>
-                   <div class="form-group col-md-6">
-                        <div class="form-group col-md-12">     
+                    <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label class="col-md-6">Auto Generate CardNumber:</label>
-                     
-                             @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "form-control col-md-5", @style = "position:absolute;width:20px;" })
-                            </div>
-                      <div class="form-group col-md-12">    
+
+                            @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "form-control col-md-5", @style = "position:absolute;width:20px;" })
+                        </div>
+                        <div class="form-group col-md-12">
                             <label class="col-md-6">POS Counter:</label>
                             @Html.TextBoxFor(m => m.POSCounter, new { @class = "form-control col-md-5" })
-                    </div>
-         <div class="form-group col-md-12">   
-                           
+                        </div>
+                        <div class="form-group col-md-12">
+
                             <label class="col-md-6"><b>DisplayGroup:</b></label>
-           
-                   @Html.DropDownListFor(m => m.DisplayGroupId, new SelectList((List<Marbale.BusinessObject.IdValue>) Session["DisplayGroupList"], "Id", "Value"), new { @class = "form-control col-md-5", @style = "height: 35px" })
-                    
-                           @* @Html.TextBoxFor(m => m.DisplayGroup, new { @class = "form-control col-md-5" })*@
-                                  </div>
-                     
-                       <div class="form-group col-md-12">
-                             <label class="col-md-6">CardValidFor:</label>
+                            @Html.DropDownListFor(m => m.DisplayGroupId, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.DisplayGroup) ? "SELECT" : Model.DisplayGroup), new { @class = "form-control col-md-5", @style = "font-size: 14px" })
+
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label class="col-md-6">CardValidFor:</label>
                             @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control col-md-5" })
                         </div>
 
-                        <div class="form-group row"></div>   <div class="form-group row"></div>
-                          <div class="form-group row"></div>   <div class="form-group row"></div>
+                        <div class="form-group row"></div>
+                        <div class="form-group row"></div>
+                        <div class="form-group row"></div>
+                        <div class="form-group row"></div>
                         <div class="form-group col-md-12">
-                             <label class="col-md-6"><b>StartDate:</b></label>
+                            <label class="col-md-6"><b>StartDate:</b></label>
                             @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control col-md-5 datepicker", @id = "StartDate", @readonly = "readonly" })
                         </div>
                         <div class="form-group col-md-12">
@@ -146,47 +143,22 @@
                             @Html.TextBoxFor(m => m.LastUpdatedUser, new { @class = "form-control col-md-5", @readonly = "readonly" })
                         </div>
                         <div class="form-group col-md-12">
-                           <label class="col-md-6">LastUpdatedDate:</label>
+                            <label class="col-md-6">LastUpdatedDate:</label>
                             @Html.TextBoxFor(m => m.LastUpdatedDate, new { @class = "form-control col-md-5", @readonly = "readonly" })
-
                         </div>
-                   
                     </div>
-             
+                </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
+                <input type="submit" name="submit" value="Duplicate" class="btn btn-primary btn-md" />
+                <button type="button" class="btn btn-secondary close1" data-dismiss="modal">Close</button>
             </div>
-
-
-            </form> 
-            
-     <div class="modal-footer">
-               <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
-        <input type="submit" name="submit" value="Duplicate" class="btn btn-primary btn-md" />
-        @*               <button type="button" class="btn btn-primary" onclick="SaveDuplicate();">Duplicate</button>*@
-        <button type="button" class="btn btn-secondary close1" data-dismiss="modal">Close</button>
         </div>
-        </div>
-
-      
-
   
-  
-}
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
-<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-<script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
-@* for datepicker*@
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-@*validations*@
-
-@*@Scripts.Render("~/bundles/jquery")
-
-@Scripts.Render("~/bundles/jqueryval")*@
+    }
+</div>
 
 <script type="text/javascript">
 
@@ -244,50 +216,17 @@
 
 </script>
 <style>
-    .modal-footer {
-    padding: 0rem;
-    border-top: 0px !important;
-}
-    input.form-control{display:inline-block}
-    select.form-control{display:inline-block}
-.form-group label {
-  font-size: 12px;
-}
-    .row {
-            padding: 11px;
-    margin: 7px;
-    }
-.form-group {
-    margin-bottom: 0rem;
-}
-input[type=text] {
-   max-height: 22px !important;
-}
-
-    .checkboxs {
-        position: absolute;
-        width: 20px;
+    input.form-control {
+        display: inline-block;
     }
 
-    .field-validation-error {
-        color: #ff0000;
+    select.form-control {
+        display: inline-block;
     }
-
-    .field-validation-valid {
-        display: none;
+    .modal-body {
+        padding:5px;
     }
-
-    .input-validation-error {
-        border: 1px solid #ff0000 !important;
-        /*background-color: #ffeeee !important;*/
-    }
-
-    .validation-summary-errors {
-        font-weight: bold !important;
-        color: #ff0000 !important;
-    }
-
-    .validation-summary-valid {
-        display: none;
+    .form-group {
+        margin-bottom:0px;
     }
 </style>

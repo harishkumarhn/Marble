@@ -326,9 +326,10 @@
     <Content Include="Views\Product\NonCardProductSetup.cshtml" />
     <Content Include="Views\Product\NonCardEdit.cshtml" />
     <Content Include="Views\Product\DisplayGroup.cshtml" />
-    <Content Include="Views\SiteSetup\Printer.cshtml" />
-    <Content Include="Views\SiteSetup\PrinterList.cshtml" />
-    <Content Include="Views\SiteSetup\printTemplate.cshtml" />
+    <Content Include="Views\SiteSetup\Printer\Printer.cshtml" />
+    <Content Include="Views\SiteSetup\Printer\PrinterList.cshtml" />
+    <Content Include="Views\SiteSetup\Printer\PrintTemplate.cshtml" />
+    <Content Include="Views\SiteSetup\Printer\PrintTemplateDataItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
