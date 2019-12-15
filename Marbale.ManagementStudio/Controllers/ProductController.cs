@@ -28,8 +28,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
-
-
+        
         public ActionResult ProductSetup()
         {
             try
@@ -57,6 +56,7 @@ namespace MarbaleManagementStudio.Controllers
                 Session["TaxList"] = products[0].TaxList;
                 Session["TypeList"] = products[0].TypeList;
                 Session["CategoryList"] = products[0].CategoryList;
+                Session["DisplayGroupList"] = products[0].DisplayGroupList;
                 ViewBag.productDetails = products;
                 return View();
             }
@@ -125,6 +125,10 @@ namespace MarbaleManagementStudio.Controllers
             try
             {
                 var product = productBussiness.GetProductById(id);
+                Session["TaxList"] = product.TaxList;
+                Session["TypeList"] = product.TypeList;
+                Session["CategoryList"] = product.CategoryList;
+                Session["DisplayGroupList"] = product.DisplayGroupList;
                 return View(product);
             }
             catch (Exception e)

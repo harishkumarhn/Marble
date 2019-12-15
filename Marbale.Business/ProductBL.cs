@@ -25,12 +25,18 @@ namespace Marbale.Business
         }
        
         #region products
-        public Product GetProductById(int id)
+        public Product GetProductById(int id, int productType = (int)ProductTypeEnum.CardAndManual)
         {   
             try
             {
                 var dataTable = productData.GetProductById(id);
                 Product product = null;
+                var typeList = new List<IdValue>();
+                var categoryList = new List<IdValue>();
+                var TaxList = new List<TaxSet>();
+                var DisplayGroupList = new List<IdValue>();
+
+                GetSessionData(typeList, categoryList, TaxList, DisplayGroupList);
                 foreach (DataRow dr in dataTable.Rows)
                 {
                     product = new Product();
@@ -61,6 +67,17 @@ namespace Marbale.Business
                     product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
                     product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToDecimal(dr["Courtesy"]);
                     product.TaxId = dr.IsNull("Taxid") ? 0 : Convert.ToInt32(dr["Taxid"]);
+                    product.CategoryList = categoryList;
+                    product.TaxList = TaxList;
+                    product.DisplayGroupList = DisplayGroupList;
+                    if (productType == (int)ProductTypeEnum.Card && product.TypeName != ProductTypeEnum.Manual.ToString())
+                    {
+                        product.TypeList = typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList();
+                    }
+                    else if ((int)ProductTypeEnum.Manual == productType && product.TypeName.ToLower() == ProductTypeEnum.Manual.ToString().ToLower())
+                    {
+                        product.TypeList = typeList.Where(x => x.Value == ProductTypeEnum.Manual.ToString()).ToList();
+                    }
 
                 }
                 return product;
@@ -77,56 +94,12 @@ namespace Marbale.Business
         {
             try
             {
-                var manualTypeId = "";
-
-                var typeListDataTable = productData.GetProductTypeLookUp();
                 var typeList = new List<IdValue>();
-                typeList.Add(new IdValue() { Id = null, Value = "Select" });
-                foreach (DataRow dr in typeListDataTable.Rows)
-                {
-                    IdValue idValues = new IdValue();
-                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
-                    if(idValues.Value == ProductTypeEnum.Manual.ToString())
-                    {
-                        manualTypeId = idValues.Value;
-                    }
-                    typeList.Add(idValues);
-                }
-
-                var catrgoryListDataTable = productData.GetProductCategoryLookUp();
                 var categoryList = new List<IdValue>();
-                categoryList.Add(new IdValue() { Id = null, Value = "Select" });
-                foreach (DataRow dr in catrgoryListDataTable.Rows)
-                {
-                    IdValue idValues = new IdValue();
-                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    idValues.Value = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    categoryList.Add(idValues);
-                }
-                var TaxListDataTable = productData.GetProductTaxLookUp();
                 var TaxList = new List<TaxSet>();
-                TaxList.Add(new TaxSet() { Id = null, Value = "Select" });
-                foreach (DataRow dr in TaxListDataTable.Rows)
-                {
-                    TaxSet idValues = new TaxSet();
-                    idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    idValues.TaxId = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    idValues.Value = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    idValues.TaxPercent = dr.IsNull("TaxPercent") ? 0 : decimal.Parse(dr["TaxPercent"].ToString());
-                    TaxList.Add(idValues);
-                }
-
-                var DisplayGroupDataTable = commonData.GetListItems((int)ListItemGroup.DisplayGroup);
                 var DisplayGroupList = new List<IdValue>();
-                DisplayGroupList.Add(new IdValue() { Id = null, Value = "Select" });
-                foreach (DataRow dr in DisplayGroupDataTable.Rows)
-                {
-                    IdValue idValues = new IdValue();
-                    idValues.Id = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
-                    idValues.Value = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
-                    DisplayGroupList.Add(idValues);
-                }
+
+                GetSessionData(typeList, categoryList, TaxList, DisplayGroupList);
 
                 var productDataTable = productData.GetProducts();
                 List<Product> products = new List<Product>();
@@ -157,12 +130,12 @@ namespace Marbale.Business
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;
                     product.DisplayGroupList = DisplayGroupList;
-                    if (productType == (int)ProductTypeEnum.Card && product.TypeName != manualTypeId)
+                    if (productType == (int)ProductTypeEnum.Card && product.TypeName != ProductTypeEnum.Manual.ToString())
                     {
                         product.TypeList = typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList();
                         products.Add(product);
                     }
-                    else if ((int)ProductTypeEnum.Manual == productType && product.TypeName.ToLower() == manualTypeId.ToLower())
+                    else if ((int)ProductTypeEnum.Manual == productType && product.TypeName.ToLower() == ProductTypeEnum.Manual.ToString().ToLower())
                     {
                         product.TypeList = typeList.Where(x => x.Value == ProductTypeEnum.Manual.ToString()).ToList();
                         products.Add(product);
@@ -195,6 +168,50 @@ namespace Marbale.Business
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        private void GetSessionData(List<IdValue> typeList, List<IdValue> categoryList, List<TaxSet> TaxList, List<IdValue> DisplayGroupList)
+        {
+            var typeListDataTable = productData.GetProductTypeLookUp();
+            typeList.Add(new IdValue() { Id = null, Value = "Select" });
+            foreach (DataRow dr in typeListDataTable.Rows)
+            {
+                IdValue idValues = new IdValue();
+                idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                idValues.Value = dr.IsNull("Type") ? "" : dr["Type"].ToString();
+                typeList.Add(idValues);
+            }
+
+            var catrgoryListDataTable = productData.GetProductCategoryLookUp();
+            categoryList.Add(new IdValue() { Id = null, Value = "Select" });
+            foreach (DataRow dr in catrgoryListDataTable.Rows)
+            {
+                IdValue idValues = new IdValue();
+                idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                idValues.Value = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                categoryList.Add(idValues);
+            }
+            var TaxListDataTable = productData.GetProductTaxLookUp();
+            TaxList.Add(new TaxSet() { Id = null, Value = "Select" });
+            foreach (DataRow dr in TaxListDataTable.Rows)
+            {
+                TaxSet idValues = new TaxSet();
+                idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                idValues.TaxId = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                idValues.Value = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                idValues.TaxPercent = dr.IsNull("TaxPercent") ? 0 : decimal.Parse(dr["TaxPercent"].ToString());
+                TaxList.Add(idValues);
+            }
+
+            var DisplayGroupDataTable = commonData.GetListItems((int)ListItemGroup.DisplayGroup);
+            DisplayGroupList.Add(new IdValue() { Id = null, Value = "Select" });
+            foreach (DataRow dr in DisplayGroupDataTable.Rows)
+            {
+                IdValue idValues = new IdValue();
+                idValues.Id = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
+                idValues.Value = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
+                DisplayGroupList.Add(idValues);
             }
         }
         public int InsertOrUpdateProduct(Product product)

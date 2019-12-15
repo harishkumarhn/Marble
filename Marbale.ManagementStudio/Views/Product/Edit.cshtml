@@ -96,8 +96,9 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label class="col-md-6">Product Type:</label>
+                            @Html.DropDownListFor(m => m.TypeName, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "font-size: 14px" })
 
-                            @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "height: 35px;font-size: 14px" })
+                            @*@Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-5", @style = "height: 35px;font-size: 14px" })*@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -113,10 +114,8 @@
                         <div class="form-group col-md-12">
 
                             <label class="col-md-6"><b>DisplayGroup:</b></label>
+                            @Html.DropDownListFor(m => m.DisplayGroupId, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.DisplayGroup) ? "SELECT" : Model.DisplayGroup), new { @class = "form-control col-md-5", @style = "font-size: 14px" })
 
-                            @Html.DropDownListFor(m => m.DisplayGroupId, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"], "Id", "Value"), new { @class = "form-control col-md-5", @style = "height: 35px;font-size: 14px" })
-
-                            @* @Html.TextBoxFor(m => m.DisplayGroup, new { @class = "form-control col-md-5" })*@
                         </div>
 
                         <div class="form-group col-md-12">
