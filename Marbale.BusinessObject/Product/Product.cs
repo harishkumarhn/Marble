@@ -25,7 +25,7 @@ namespace Marbale.BusinessObject
         public string POSCounter { get; set; }
         public bool Active { get; set; }
         public bool DisplayInPOS { get; set; }
-        public int ? DisplayGroupId { get; set; }
+        public int? DisplayGroupId { get; set; }
         [Required(ErrorMessage = "Select Category")]
         public string Category { get; set; }
         public bool AutoGenerateCardNumber { get; set; }
@@ -60,6 +60,14 @@ namespace Marbale.BusinessObject
         public decimal Taxpercent { get; set; }
         public string LastUpdatedUser { get; set; }
         public int CardValidFor { get; set; }
+        public DateTime? Time { get; set; }
+        public int Tickets { get; set; }
+        public bool TicketAllowed { get; set; }
+        public bool ManagerApprovalRequired { get; set; }
+        public bool TrxHeaderRemarksMandatory { get; set; }
+        public bool TrxRemarksMandatory { get; set; }
+        public bool AllowPriceOverride { get; set; }
+        public bool QuantityPrompt { get; set; }
 
         public List<IdValue> TypeList { get; set; }
         public List<IdValue> CategoryList { get; set; }

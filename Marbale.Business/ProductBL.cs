@@ -70,6 +70,14 @@ namespace Marbale.Business
                         product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
                         product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToDecimal(dr["Courtesy"]);
                         product.TaxId = dr.IsNull("Taxid") ? 0 : Convert.ToInt32(dr["Taxid"]);
+                        product.TicketAllowed = dr.IsNull("TicketAllowed") ? false : bool.Parse(dr["TicketAllowed"].ToString());
+                        product.ManagerApprovalRequired = dr.IsNull("ManagerApprovalRequired") ? false : bool.Parse(dr["ManagerApprovalRequired"].ToString());
+                        product.Tickets = dr.IsNull("Tickets") ? 0 : Convert.ToInt32(dr["Tickets"]);
+                        product.TrxHeaderRemarksMandatory = dr.IsNull("TrxHeaderRemarksMandatory") ? false : bool.Parse(dr["TrxHeaderRemarksMandatory"].ToString());
+                        product.TrxRemarksMandatory = dr.IsNull("TrxRemarksMandatory") ? false : bool.Parse(dr["TrxRemarksMandatory"].ToString());
+                        product.QuantityPrompt = dr.IsNull("QuantityPrompt") ? false : bool.Parse(dr["QuantityPrompt"].ToString());
+                        product.AllowPriceOverride = dr.IsNull("AllowPriceOverride") ? false : bool.Parse(dr["AllowPriceOverride"].ToString());
+
                         product.CategoryList = categoryList;
                         product.TaxList = TaxList;
                         product.DisplayGroupList = DisplayGroupList;
@@ -136,6 +144,13 @@ namespace Marbale.Business
                     product.TaxName = dr.IsNull("TaxId") ? "" : dr["TaxId"].ToString();
                     product.TypeName = dr.IsNull("TypeName") ? "" : dr["TypeName"].ToString();
                     product.TaxId = dr.IsNull("TaxId") ? 0 : Convert.ToInt32(dr["TaxId"].ToString());
+                    product.TicketAllowed = dr.IsNull("TicketAllowed") ? false : bool.Parse(dr["TicketAllowed"].ToString());
+                    product.ManagerApprovalRequired = dr.IsNull("ManagerApprovalRequired") ? false : bool.Parse(dr["ManagerApprovalRequired"].ToString());
+                    product.Tickets = dr.IsNull("Tickets") ? 0 : Convert.ToInt32(dr["Tickets"]);
+                    product.TrxHeaderRemarksMandatory = dr.IsNull("TrxHeaderRemarksMandatory") ? false : bool.Parse(dr["TrxHeaderRemarksMandatory"].ToString());
+                    product.TrxRemarksMandatory = dr.IsNull("TrxRemarksMandatory") ? false : bool.Parse(dr["TrxRemarksMandatory"].ToString());
+                    product.QuantityPrompt = dr.IsNull("QuantityPrompt") ? false : bool.Parse(dr["QuantityPrompt"].ToString());
+                    product.AllowPriceOverride = dr.IsNull("AllowPriceOverride") ? false : bool.Parse(dr["AllowPriceOverride"].ToString());
 
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;

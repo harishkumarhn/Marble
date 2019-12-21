@@ -1,13 +1,13 @@
 ﻿using Marbale.Business;
 using Marbale.Business.Enum;
 using Marbale.BusinessObject;
-
 using Marbale.BusinessObject.Tax;
 using MarbaleManagementStudio.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -28,7 +28,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
-        
+
         public ActionResult ProductSetup()
         {
             try
@@ -113,7 +113,7 @@ namespace MarbaleManagementStudio.Controllers
             }
         }
 
-        public ActionResult Edit(int id=0)
+        public ActionResult Edit(int id = 0)
         {
             try
             {
@@ -149,8 +149,9 @@ namespace MarbaleManagementStudio.Controllers
 
         }
 
-        public ActionResult InsertOrUpdate(Product pObject, string submit)
+        public string InsertOrUpdate(Product pObject, string submit)
         {
+            var message = string.Empty;
             try
             {
                 if (ModelState.IsValid)
@@ -164,7 +165,14 @@ namespace MarbaleManagementStudio.Controllers
                             pObject.Id = 0;
                             var result1 = productBussiness.InsertOrUpdateProduct(pObject);
                             break;
+
                     }
+                }
+                else
+                {
+                    message = string.Join(" | ", ModelState.Values
+                                  .SelectMany(v => v.Errors)
+                                  .Select(e => e.ErrorMessage));
                 }
             }
             catch (Exception e)
@@ -172,7 +180,7 @@ namespace MarbaleManagementStudio.Controllers
                 LogError.Instance.LogException("InsertOrUpdateProduct", e);
                 throw;
             }
-            return View("~/Views/Product/Edit",pObject);
+            return message;
         }
 
         public int UpdateProducts(List<Product> products)
@@ -233,13 +241,13 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult DisplayGroup()
         {
             List<DisplayGroupModel> DispalyGroups = productBussiness.GetProductDisplayGroup();
-           // ViewBag.categories = categories;
+            // ViewBag.categories = categories;
             return View(DispalyGroups);
         }
         public int UpdateProductDispalyGroup(List<DisplayGroupModel> model)
         {
-          return productBussiness.UpdateProductDispalyGroup(model);
-           
+            return productBussiness.UpdateProductDispalyGroup(model);
+
         }
         public ActionResult Category()
         {
