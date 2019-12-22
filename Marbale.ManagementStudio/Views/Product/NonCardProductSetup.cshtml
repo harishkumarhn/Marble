@@ -56,21 +56,23 @@
                     <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
                 </td>
                 <td>
+                    @if(item.Id > 0) {
                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
                         <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
                     </a>
                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
                     </a>
+                    }
                 </td>
                 <td>
                     <input type="text" class="fixedCol3" value="@item.Name"/>
                 </td>
                 <td>
                     <select name="TypeList" id="TypeList">
-                        @foreach (var dow in @item.TypeList)
+                        @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
                         {
-                            if (@dow.Id != null && @item.Type == (@dow.Id).ToString())
+                            if (@item.Type == (@dow.Id).ToString())
                             {
                             <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
                             }
@@ -172,7 +174,7 @@
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="EditProduct(0)">
+    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="EditProduct(0)">
         New
     </button>
     <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
@@ -409,7 +411,6 @@
             $('.modal-title').text('New Product');
         }
     }
-
     function DeleteProduct(id) {
         if (id != 0) {
             if (confirm('Are you sure you want to delete this from database?')) {
