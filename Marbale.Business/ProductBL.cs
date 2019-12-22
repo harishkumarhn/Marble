@@ -48,6 +48,7 @@ namespace Marbale.Business
                         product.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                         product.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                         product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                        product.TypeName = dr.IsNull("TypeName") ? "" : dr["TypeName"].ToString();
                         product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
                         product.DisplayGroupId = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
                         product.LastUpdatedBy = dr.IsNull("LastUpdatedUser") ? "" : dr["LastUpdatedBy"].ToString();
@@ -77,11 +78,12 @@ namespace Marbale.Business
                         product.TrxRemarksMandatory = dr.IsNull("TrxRemarksMandatory") ? false : bool.Parse(dr["TrxRemarksMandatory"].ToString());
                         product.QuantityPrompt = dr.IsNull("QuantityPrompt") ? false : bool.Parse(dr["QuantityPrompt"].ToString());
                         product.AllowPriceOverride = dr.IsNull("AllowPriceOverride") ? false : bool.Parse(dr["AllowPriceOverride"].ToString());
+                        product.Time = dr.IsNull("Time") ? new DateTime() : Convert.ToDateTime(dr["Time"]);
 
                         product.CategoryList = categoryList;
                         product.TaxList = TaxList;
                         product.DisplayGroupList = DisplayGroupList;
-                        if (productType == (int)ProductTypeEnum.Card && product.TypeName != ProductTypeEnum.Manual.ToString())
+                        if (productType != (int)ProductTypeEnum.Manual && product.TypeName != ProductTypeEnum.Manual.ToString())
                         {
                             product.TypeList = typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList();
                         }
