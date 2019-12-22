@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Marbale.BusinessObject
-{
-    public class IdValue
+{     
+    public class IdValue      
     {
         public Nullable<int> Id { get; set; }
-        public string Value { get; set; }
+        public string Value { get; set; }   
     }
     public class customIDVa
     {

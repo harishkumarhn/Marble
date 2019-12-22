@@ -87,7 +87,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="ex3">Tax:</label>
-                            @Html.DropDownListFor(m => m.TaxName, new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.TaxName) ? "SELECT" : Model.TaxName), new { @class = "form-control", @style = "height: 35px", @onchange = "TaxDetails(this.value)" })
+                            @Html.DropDownListFor(m => m.TaxId, new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.TaxName) ? "SELECT" : Model.TaxName), new { @class = "form-control", @style = "height: 35px", @onchange = "TaxDetails(this.value)" })
 
                             @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
                         </div>
@@ -201,8 +201,7 @@
 
     });
     function TaxDetails(TaxId1, taxinclusive) {
-        debugger
-        var TaxId = $('#TaxName option:selected').val();
+        var TaxId = $('#TaxId option:selected').val();
         var Price = $('#Price').val();
         if (Price == "") {
             Price = null;

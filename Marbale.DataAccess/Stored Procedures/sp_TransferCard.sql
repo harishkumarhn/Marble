@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-DROP PROC sp_TransferCard
+--DROP PROC sp_TransferCard
 GO
 
 CREATE proc [dbo].[sp_TransferCard]  
