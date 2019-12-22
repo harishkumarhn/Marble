@@ -1,7 +1,7 @@
 USE [Marbale]
 GO
 
-/****** Object:  Table [dbo].[Product]    Script Date: 10/20/2019 11:23:21 PM ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 12/22/2019 11:01:13 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[Product](
 	[POSCounter] [varchar](50) NULL,
 	[Active] [bit] NULL,
 	[DisplayInPOS] [bit] NULL,
-	[DisplayGroupId] int NULL,
+	[DisplayGroupId] [int] NULL,
 	[Category] [int] NULL,
 	[AutoGenerateCardNumber] [bit] NULL,
 	[OnlyVIP] [bit] NULL,
@@ -38,6 +38,14 @@ CREATE TABLE [dbo].[Product](
 	[ExpiryDate] [datetime] NULL,
 	[Courtesy] [bigint] NULL,
 	[TaxId] [int] NULL,
+	[Time] [datetime] NULL,
+	[Tickets] [numeric](8, 0) NULL,
+	[TicketAllowed] [bit] NULL,
+	[ManagerApprovalRequired] [bit] NULL,
+	[TrxHeaderRemarksMandatory] [bit] NULL,
+	[TrxRemarksMandatory] [bit] NULL,
+	[AllowPriceOverride] [bit] NULL,
+	[QuantityPrompt] [bit] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
