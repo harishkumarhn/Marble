@@ -45,12 +45,14 @@
                     <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
                 </td>
                 <td>
+                    @if(item.Id > 0) {
                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
                         <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
                     </a>
                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
                     </a>
+                    }
                 </td>
                 <td>
                     <input type="text" class="fixedCol3" value="@item.Name"/>
@@ -162,7 +164,7 @@
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="EditProduct(0)">
+    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="EditProduct(0)">
         New
     </button>
     <a href="/" class="btn btn-primary">Close</a>
@@ -377,11 +379,6 @@
     $('.close').click(function () {
         location.reload();
     });
-    //$("#marbleTable tbody tr").on('click', function (event) {
-    //    debugger;
-    //    $("#marbleTable tbody tr").removeClass('row_selected');
-    //    $(this).css('background-color','red');
-    //});
     $(':input').on('change', function () {
         $("#saveproduct").attr("disabled", false);
     });

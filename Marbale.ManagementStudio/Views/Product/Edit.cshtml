@@ -15,7 +15,7 @@
     }
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="min-width: 10px !important;">&times;</button>
 </div>
-<div class="modal-body" style="width: 1000px">
+<div class="modal-body">
 
     @using (Ajax.BeginForm("InsertOrUpdate", "Product", FormMethod.Post, new AjaxOptions { OnSuccess = "displayMessage" }))
     {
@@ -138,10 +138,6 @@
                                 @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control col-md-6" })
                             </div>
 
-                            <div class="form-group row"></div>
-                            <div class="form-group row"></div>
-                            <div class="form-group row"></div>
-                            <div class="form-group row"></div>
                             <div class="form-group col-md-13">
                                 <label class="col-md-5"><b>StartDate:</b></label>
                                 @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control col-md-6 datepicker", @id = "StartDate", @readonly = "readonly" })

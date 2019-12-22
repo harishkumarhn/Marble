@@ -168,6 +168,9 @@ namespace Marbale.Business
                         products.Add(product);
                     }
                 }
+                products = productType == (int)ProductTypeEnum.Manual ? products.Where(x => x.Type == ProductTypeEnum.Manual.ToString()).ToList() :
+                    products.Where(x => x.Type != ProductTypeEnum.Manual.ToString()).ToList();
+
                 if (products.Count == 0)
                 {
                     var defaultTypeList = new List<IdValue>();
@@ -185,7 +188,8 @@ namespace Marbale.Business
                         TypeList = defaultTypeList, 
                         CategoryList = categoryList,
                         TaxList=TaxList,
-                        DisplayGroupList = DisplayGroupList
+                        DisplayGroupList = DisplayGroupList,
+                        Type = productType.ToString()
                     };
                     products.Add(p);
                 }
