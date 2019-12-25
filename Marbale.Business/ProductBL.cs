@@ -298,9 +298,9 @@ namespace Marbale.Business
         {
             try
             {
-                
-                var dataTable = productData.GetProductDisplayGroup();
                 List<DisplayGroupModel> listProductGroups = new List<DisplayGroupModel>();
+
+                var dataTable = productData.GetProductDisplayGroup();
                 foreach (DataRow dr in dataTable.Rows)
                 {
                     DisplayGroupModel display = new DisplayGroupModel();
@@ -310,7 +310,6 @@ namespace Marbale.Business
                     display.SortOrder = dr.IsNull("SortOrder") ? 0 : int.Parse(dr["SortOrder"].ToString());
                     display.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                     display.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? "": (dr["LastUpdatedDate"]).ToString();
-         
 
                     listProductGroups.Add(display);
                 }
@@ -318,7 +317,6 @@ namespace Marbale.Business
             }
             catch (Exception)
             {
-                
                 throw;
             }
         }
