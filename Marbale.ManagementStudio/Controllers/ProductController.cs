@@ -241,7 +241,6 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult DisplayGroup()
         {
             List<DisplayGroupModel> DispalyGroups = productBussiness.GetProductDisplayGroup();
-            // ViewBag.categories = categories;
             return View(DispalyGroups);
         }
         public int UpdateProductDispalyGroup(List<DisplayGroupModel> model)
