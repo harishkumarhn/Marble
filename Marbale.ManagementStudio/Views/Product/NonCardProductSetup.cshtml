@@ -8,7 +8,7 @@
     <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width: 900px; height: 612px;" id="newproductmodel">
+            <div class="modal-content" style="width: 900px; height: 612px;left:30%;bottom:20px" id="newproductmodel">
                 <div class="modal-header" style="background-color: crimson; height: 9%;">
                     <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -56,21 +56,23 @@
                     <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
                 </td>
                 <td>
+                    @if(item.Id > 0) {
                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
                         <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
                     </a>
                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
                     </a>
+                    }
                 </td>
                 <td>
                     <input type="text" class="fixedCol3" value="@item.Name"/>
                 </td>
                 <td>
                     <select name="TypeList" id="TypeList">
-                        @foreach (var dow in @item.TypeList)
+                        @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
                         {
-                            if (@dow.Id != null && @item.Type == (@dow.Id).ToString())
+                            if (@item.Type == (@dow.Id).ToString())
                             {
                             <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
                             }
@@ -141,7 +143,7 @@
                    <select name="taxlist" id="taxlist">
                         @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
                         {
-                            if (@item.TaxName == (@dow.Id).ToString())
+                            if (@item.TaxId == (@dow.Id))
                             {
                             <option value="@dow.Value" id="@dow.Id"  selected>@dow.Value</option>
                             }
@@ -172,7 +174,7 @@
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
+    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="EditProduct(0)">
         New
     </button>
     <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
@@ -353,7 +355,7 @@
                     FaceValue: table.rows[rowIndex].cells[12].children[0].value,
                     TaxInclusive: table.rows[rowIndex].cells[13].children[0].checked,
                     Taxpercent: table.rows[rowIndex].cells[14].children[0].value,
-                    TaxName: table.rows[rowIndex].cells[15].children[0].options[selectedTaxIndex].id,
+                    TaxId: table.rows[rowIndex].cells[15].children[0].options[selectedTaxIndex].id,
                     FinalPrice: table.rows[rowIndex].cells[16].children[0].value,
                     EffectivePrice: table.rows[rowIndex].cells[17].children[0].value,
                     ExpiryDate: '10/10/2020',
@@ -385,10 +387,7 @@
     $('.close').click(function () {
         location.reload();
     });
-    //$("#marbleTable tbody tr").on('click', function (event) {
-    //    $("#marbleTable tbody tr").removeClass('row_selected');
-    //    $(this).css('background-color','red');
-    //});
+   
     $(':input').on('change', function () {
         $("#saveproduct").attr("disabled", false);
     });
@@ -396,16 +395,20 @@
     $("#newproductmodel").draggable({
         handle: ".modal-header"
     });
-    function targetmodel() {
-        $('#modelbody').load('/Product/Edit');
-        $('.modal-title').text('New Product');
-    }
+
 
     function EditProduct(id) {
+        $('#myModal').modal('show');
+        $('#modelBody').css({
+            'left': '-40%',
+            'width': 1000
+        });
         if (id != 0) {
+            $('#modelBody').load('/Product/NonCardEdit', { "id": id });
             $('.modal-title').text('Edit Product');
-            $('#basicExampleModal').modal('show');
-            $('#modelbody').load('/Product/NonCardEdit', { "id": id });
+        } else {
+            $('#modelBody').load('/Product/NonCardEdit');
+            $('.modal-title').text('New Product');
         }
     }
     function DeleteProduct(id) {

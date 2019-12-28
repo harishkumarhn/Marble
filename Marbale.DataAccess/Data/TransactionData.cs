@@ -307,7 +307,7 @@ namespace Marbale.DataAccess.Data
                         sqlParameters[6] = new SqlParameter("@ApprovedBy", 0);
 
                         conn.executeUpdateQuery("sp_InsertTransactionDiscountLines", sqlParameters);
-                    }                    
+                    }
                 }
             }
             catch (Exception e)
@@ -416,7 +416,7 @@ namespace Marbale.DataAccess.Data
 
                 custId = Convert.ToInt32(sqlParameters[11].Value);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -447,7 +447,7 @@ namespace Marbale.DataAccess.Data
                 {
                     sqlParameters[1] = new SqlParameter("@phoneNumber", DBNull.Value);
                 }
-                
+
                 return conn.executeSelectQuery("sp_GetCustomer", sqlParameters);
             }
             catch (Exception e)
@@ -481,7 +481,7 @@ namespace Marbale.DataAccess.Data
                 {
                     sqlParameters[2] = new SqlParameter("@IssueDate", DBNull.Value);
                 }
-                
+
                 sqlParameters[3] = new SqlParameter("@FaceValue", card.face_value);
 
                 if (card.refund_date != DateTime.MinValue)
@@ -493,7 +493,7 @@ namespace Marbale.DataAccess.Data
                     sqlParameters[4] = new SqlParameter("@RefundDate", DBNull.Value);
                 }
 
-                
+
                 sqlParameters[5] = new SqlParameter("@RefundFlag", card.refund_flag);
                 sqlParameters[6] = new SqlParameter("@RefundAmount", card.refund_amount);
                 sqlParameters[7] = new SqlParameter("@ValidFlag", card.valid_flag);
@@ -554,11 +554,11 @@ namespace Marbale.DataAccess.Data
                 {
                     sqlParameters[21] = new SqlParameter("@LastUpdatedBy", DBNull.Value);
                 }
-                   
+
                 sqlParameters[22] = new SqlParameter("@TechnicianCard", card.technician_card);
                 sqlParameters[23] = new SqlParameter("@TechGames", card.tech_games);
-              
-    
+
+
                 sqlParameters[24] = new SqlParameter("@TimerResetCard", card.TimerResetCard);
 
                 sqlParameters[25] = new SqlParameter("@LoyaltyPoints", card.loyalty_points);
@@ -578,7 +578,7 @@ namespace Marbale.DataAccess.Data
                 sqlParameters[28] = new SqlParameter("@CrdId", SqlDbType.Int);
                 sqlParameters[28].Direction = ParameterDirection.Output;
 
-                 conn.executeInsertQuery("sp_InsertOrUpdateCard", sqlParameters);
+                conn.executeInsertQuery("sp_InsertOrUpdateCard", sqlParameters);
 
                 return Convert.ToInt32(sqlParameters[28].Value);
             }
@@ -656,7 +656,7 @@ namespace Marbale.DataAccess.Data
                 sqlParameters[2] = new SqlParameter("@courtesy", toCard.courtesy);
                 sqlParameters[3] = new SqlParameter("@bonus", toCard.bonus);
                 sqlParameters[4] = new SqlParameter("@ticket_count", toCard.ticket_count);
-             
+
 
                 if (!string.IsNullOrEmpty(lastUpdatedBy))
                 {

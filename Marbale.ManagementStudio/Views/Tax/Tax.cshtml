@@ -26,7 +26,7 @@
                             <input type="text" id="TaxId@(count)" value="@item1.TaxId" disabled >
                         </td>
                         <td onclick="Getvalues(@item1.TaxId)">
-                            <input type="text" value="@item1.TaxName"  id="TaxName@(count)"/>
+                            <input type="text" value="@item1.TaxId"  id="TaxName@(count)"/>
                         </td>
                         <td onclick="Getvalues(@item1.TaxId)">
                             <input type="number" value="@item1.TaxPercent" class="numberbox" id="TaxPercent@(count)" />
@@ -41,10 +41,12 @@
             </table>
         </div>
         <div class="action">
-            <button class="btn btn-primary btn-md" role="button" onclick="SaveTax()">Save</button>
-            <button class="btn btn-primary btn-md" role="button" onclick="history.back();">Back</button>
-            <button class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add</button>
-            <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+            <div style="float:right;margin-right:20px">
+                <button class="btn btn-primary btn-md" role="button" onclick="SaveTax()">Save</button>
+                <button class="btn btn-primary btn-md" role="button" onclick="history.back();">Back</button>
+                <button class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add</button>
+                <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+            </div>
         </div>
     </div>
     <br />
@@ -83,11 +85,11 @@
     function AddProduct() {
         var index = $("#marbleTable tbody tr").length + 1;
         var TaxId = "TaxId" + index;
-        var TaxName = "TaxName" + index;
+        var TaxId = "TaxName" + index;
         var TaxPercent = "TaxPercent" + index;
         var ActiveFlag = "ActiveFlag" + index;
         var newRow = '<tr onchange=UpdatedList(this)> <td> <input type="text" disabled ></td>' +
-     '<td> <input type="text" id="' + TaxName + '" />  </td>' +
+     '<td> <input type="text" id="' + TaxId + '" />  </td>' +
      '<td> <input type="number"  id="' + TaxPercent + '" />  </td>' +
      '<td> <input type="checkbox" id="' + ActiveFlag + '"/></td>' + '</tr>';
         $('#marbleTable tr:last').after(newRow);
@@ -99,12 +101,12 @@
     function SaveTax() {
         var table = document.getElementById('marbleTable');
         var id = updatedArray[0];
-        var TaxName = $('#TaxName' + id).val();
+        var TaxId = $('#TaxName' + id).val();
         var TaxPercent = $('#TaxPercent' + id).val();
         var ActiveFlag = $('#ActiveFlag' + id).val();
         var taxmaster = {
             TaxId: $('#TaxId' + id).val(),
-            TaxName: $('#TaxName' + id).val(),
+            TaxId: $('#TaxName' + id).val(),
             TaxPercent: $('#TaxPercent' + id).val(),
             ActiveFlag: $("#ActiveFlag" + id).is(':checked')
         };
