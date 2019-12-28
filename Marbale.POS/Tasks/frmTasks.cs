@@ -101,6 +101,9 @@ namespace Marbale.POS
                          //PopulateCardBonusGrid();
                     break;
                     }
+                case (int)CommonTask.Task.REFUNDCARD:
+                    PopulateRefundCardGrid();
+                    break;
             }
         }
 
@@ -119,6 +122,23 @@ namespace Marbale.POS
             {
                 string[] row1 = new string[] { currentcard.CardNumber, currentcard.issue_date.ToString(), currentcard.bonus.ToString() };
                 dgvBonusCard.Rows.Add(row1);
+            }
+        }
+
+        void PopulateRefundCardGrid()
+        {
+            if (currentcard != null && currentcard.card_id > 0)
+            {
+                txtCardDeposit.Text = currentcard.face_value.ToString();
+                txtTotalCredits.Text = (currentcard.credits + currentcard.face_value).ToString();
+
+                string[] row1 = new string[] { currentcard.CardNumber, currentcard.issue_date.ToString(), currentcard.credits.ToString(), currentcard.bonus.ToString(), currentcard.ticket_count.ToString() };
+                dgvRefundCard.Rows.Add(row1);
+            }
+            else
+            {
+                txtCardDeposit.Text = "0".ToString();
+                txtTotalCredits.Text = "0".ToString();
             }
         }
 
@@ -454,6 +474,59 @@ namespace Marbale.POS
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnRefundCardOk_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (string.IsNullOrEmpty(txtCreditsToRefund.Text) || Convert.ToInt32(txtCreditsToRefund.Text) <= 0)
+                {
+                    MessageBox.Show("Enter credits greater than zero to Refund");
+                    return;
+                }
+
+                if (Convert.ToInt32(txtCreditsToRefund.Text) > Convert.ToInt32(txtTotalCredits.Text))
+                {
+                    MessageBox.Show("Enter credits less than or equal to available credits");
+                    return;
+                }
+
+
+                decimal creditsTorefund = Convert.ToInt32(txtCreditsToRefund.Text);
+                int faceValue = Convert.ToInt32(txtCardDeposit.Text);
+                decimal totalAvailableCredits = Convert.ToDecimal(txtTotalCredits.Text);
+
+                TransactionBL trxBL = new TransactionBL();
+
+                bool valid = true;
+
+                if (creditsTorefund == totalAvailableCredits)
+                {
+                    valid = false;
+                }
+                else
+                {
+                    faceValue = 0;
+                }
+
+
+                trxBL.RefundCard(currentcard.card_id, creditsTorefund, creditsTorefund, faceValue, valid, string.Empty);
+
+                MessageBox.Show("Card Refunded Successfully");
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+       
+
+        private void btnRefundCardClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

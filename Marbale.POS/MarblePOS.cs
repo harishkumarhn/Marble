@@ -1941,5 +1941,25 @@ namespace Marbale.POS
             frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.CANSOLIDATECARD, CurrentCard);
             frm.ShowDialog();
         }
+
+        private void btnRefund_Click(object sender, EventArgs e)
+        {
+            if(CurrentCard == null)
+            {
+                MessageBox.Show("Please tap the card");
+                return;
+            }
+
+            if (CurrentCard.card_id == -1 || CurrentCard.CardStatus == "NEW")
+            {
+                MessageBox.Show("Can't Refund New Card");
+                return;
+            }
+
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.REFUNDCARD, CurrentCard);
+            frm.ShowDialog();
+
+            HandleCardRead(CurrentCard.CardNumber, null);
+        }
     }
 }

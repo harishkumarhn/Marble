@@ -14,7 +14,8 @@ namespace Marbale.POS.Tasks
             LOADBONUS =  1,
             LOADMULTIPLE = 2,
             TRANSFERCARD = 3,
-            CANSOLIDATECARD = 4
+            CANSOLIDATECARD = 4,
+            REFUNDCARD = 5,
         }
     }
 }
