@@ -19,155 +19,164 @@
 
     @using (Ajax.BeginForm("InsertOrUpdate", "Product", FormMethod.Post, new AjaxOptions { OnSuccess = "displayMessage" }))
     {
-        <div id="editpopup" style="height:600px">
+        <div id="editpopup" style="height: 545px">
             <form>
-                <div style="height: 550px; overflow-y: scroll; overflow-x: hidden;">
-                    <div class="form-group row">
+                <div class="productEdit">
+                    <div class="row">
 
-                        <label class="col-md-2"><b>Id:</b></label>
-                        @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "form-control col-md-2" })
-                        <label class="col-md-1"><b>Name:</b></label>
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control col-md-3", placeholder = @Html.DisplayNameFor(n => n.Name) })
+                        <label class="col-md-2">Id:</label>
+                        @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "col-md-2" })
+                        <label class="col-md-1">Name:</label>
+                        @Html.TextBoxFor(m => m.Name, new { @class = "col-md-3", placeholder = @Html.DisplayNameFor(n => n.Name) })
 
                         <label class="col-md-1">Active:</label>
-                        @Html.CheckBoxFor(m => m.Active, new { @class = "form-control col-md-1" })
+                        @Html.CheckBoxFor(m => m.Active, new { @class = "col-md-1" })
 
                         <label class="col-md-1">DisplayIn POS:</label>
-                        @Html.CheckBoxFor(m => m.DisplayInPOS, new { @class = "form-control col-md-1" })
+                        @Html.CheckBoxFor(m => m.DisplayInPOS, new { @class = "col-md-1" })
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5"><b>Card Face Value:</b></label>
-                                @Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control col-md-6" })
+                        <div class="col-md-5">
+                            <div class="col-md-13">
+                                <label class="col-md-5">Face Value</label>
+                                @Html.TextBoxFor(m => m.FaceValue, new { @class = "col-md-6" })
                             </div>
-                            <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Price:</label>
-                                @Html.TextBoxFor(m => m.Price, new { @class = "form-control col-md-6" })
+                                @Html.TextBoxFor(m => m.Price, new { @class = "col-md-6" })
                             </div>
-                            <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">TaxInclusive:</label>
-                                @Html.CheckBoxFor(m => m.TaxInclusive, new { @class = "form-control col-md-6", @onchange = "TaxDetails('', this.value)", @style = "position:absolute;width:20px;" })
+                                @Html.CheckBoxFor(m => m.TaxInclusive, new { @class = "col-md-6", @onchange = "TaxDetails('', this.value)", @style = "position:absolute;width:20px;" })
 
                             </div>
-                            <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Tax:</label>
-                                @Html.DropDownListFor(m => m.TaxId, new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.TaxName) ? "SELECT" : Model.TaxName), new { @class = "form-control col-md-6", @style = "height: 35px;font-size: 14px", @onchange = "TaxDetails(this.value)" })
+                                @Html.DropDownListFor(m => m.TaxId, new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.TaxName) ? "SELECT" : Model.TaxName), new { @class = "col-md-6", @style = "height: 35px;font-size: 14px", @onchange = "TaxDetails(this.value)" })
                             </div>
-                            <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Tax %:</label>
-                                @Html.TextBoxFor(m => m.Taxpercent, new { @class = "form-control col-md-6" })
+                                @Html.TextBoxFor(m => m.Taxpercent, new { @class = "col-md-6" })
                             </div>
 
-                            <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Effective Price:</label>
-                                @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "form-control col-md-6" })
+                                @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "col-md-6" })
                             </div>
-                            <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Final Price:</label>
-                                @Html.TextBoxFor(m => m.FinalPrice, new { @class = "form-control col-md-6" })
+                                @Html.TextBoxFor(m => m.FinalPrice, new { @class = "col-md-6" })
                             </div>
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5"><b>Credits:</b></label>
-                                @Html.TextBoxFor(m => m.Credits, new { @class = "form-control col-md-6" })
+                            <div class="col-md-13">
+                                <label class="col-md-5">Credits:</label>
+                                @Html.TextBoxFor(m => m.Credits, new { @class = "col-md-6" })
 
                             </div>
-                            <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Courtesy:</label>
-                                @Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control col-md-6" })
+                                @Html.TextBoxFor(m => m.Courtesy, new { @class = "col-md-6" })
                             </div>
-                            <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Bonus:</label>
-                                @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control col-md-6" })
+                                @Html.TextBoxFor(m => m.Bonus, new { @class = "col-md-6" })
                             </div>
-                              <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Tickets:</label>
-                                @Html.TextBoxFor(m => m.Tickets, new { @class = "form-control col-md-6" })
+                                @Html.TextBoxFor(m => m.Tickets, new { @class = "col-md-6" })
                             </div>
-                             <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Time:</label>
-                                @Html.TextBoxFor(m => m.Time, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "form-control col-md-6" })
+                                @Html.TextBoxFor(m => m.Time, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-6" ,@style = "padding-right: 0px;padding-left: 0px;"})
                             </div>
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5">OnlyVIP:</label>
-                                @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "form-control col-md-6", @style = "position:absolute;width:20px;" })
-                            </div>
-
-                            <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Category:</label>
-                                @Html.DropDownListFor(m => m.Category, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Category) ? "SELECT" : Model.Category), new { @class = "form-control col-md-6", @style = "font-size: 14px" })
+                                @Html.DropDownListFor(m => m.Category, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Category) ? "SELECT" : Model.Category), new { @class = "col-md-6", @style = "font-size: 14px" })
                             </div>
-                            <div class="form-group col-md-13">
+                            <div class="col-md-13">
                                 <label class="col-md-5">Product Type:</label>
-                                @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "form-control col-md-6", @style = "font-size: 14px" })
-                            </div>
-                             <div class="form-group col-md-13">
-                                <label class="col-md-5">Ticket Allowed:</label>
-                                @Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "form-control col-md-6", @style = "position:absolute;width:20px;" })
-                            </div>
-
-                           <div class="form-group col-md-13">
-                                <label class="col-md-5">Quantity Prompt</label>
-                                @Html.CheckBoxFor(m => m.QuantityPrompt, new { @class = "form-control col-md-6", @style = "position:absolute;width:20px;" })
-                            </div>
-
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5">Allow Price Override</label>
-                                @Html.CheckBoxFor(m => m.AllowPriceOverride, new { @class = "form-control col-md-6", @style = "position:absolute;width:20px;" })
+                                @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "col-md-6", @style = "font-size: 14px" })
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5">Auto Generate CardNumber:</label>
-                                @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "form-control col-md-6", @style = "position:absolute;width:20px;" })
-                            </div>
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5">POS Counter:</label>
-                                @Html.TextBoxFor(m => m.POSCounter, new { @class = "form-control col-md-6" })
-                            </div>
-                            <div class="form-group col-md-13">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="col-md-13">
+                                        <label class="col-md-11">Ticket Allowed:</label>
+                                        @Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                    </div>
 
-                                <label class="col-md-5"><b>DisplayGroup:</b></label>
-                                @Html.DropDownListFor(m => m.DisplayGroupId, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.DisplayGroup) ? "SELECT" : Model.DisplayGroup), new { @class = "form-control col-md-6", @style = "font-size: 14px" })
+                                    <div class="col-md-13">
+                                        <label class="col-md-11">OnlyVIP:</label>
+                                        @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                    </div>
+
+                                    <div class="col-md-13">
+                                        <label class="col-md-11">Quantity Prompt</label>
+                                        @Html.CheckBoxFor(m => m.QuantityPrompt, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                    </div>
+
+                                    <div class="col-md-13">
+                                        <label class="col-md-11">Allow Price Override</label>
+                                        @Html.CheckBoxFor(m => m.AllowPriceOverride, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="col-md-13">
+                                        <label class="col-md-6">POS Counter:</label>
+                                        @Html.TextBoxFor(m => m.POSCounter, new { @class = "col-md-5" })
+                                    </div>
+                                    <div class="col-md-13">
+                                        <label class="col-md-6">DisplayGroup:</label>
+                                        @Html.DropDownListFor(m => m.DisplayGroupId, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.DisplayGroup) ? "SELECT" : Model.DisplayGroup), new { @class = "col-md-5" })
+                                    </div>
+                                    <div class="col-md-13">
+                                    <label class="col-md-6">CardValidFor:</label>
+                                    @Html.TextBoxFor(m => m.CardValidFor, new { @class = "col-md-5" })
+                                </div>
+                                     <div class="col-md-13">
+                                    <label class="col-md-8">Minimum quantity:</label>
+                                    @Html.TextBoxFor(m => m.MinimumQuantity, new { @class = "col-md-3" })
+                                </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="col-md-8">Auto Generate Card Number:</label>
+                                        @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="col-md-8">Manager Approval Required</label>
+                                    @Html.CheckBoxFor(m => m.ManagerApprovalRequired, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="col-md-8">Transaction Header Remarks Mandatory</label>
+                                    @Html.CheckBoxFor(m => m.TrxHeaderRemarksMandatory, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+
+                                <div class="col-md-12">
+                                    <label class="col-md-6">StartDate:</label>
+                                     @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-5",@readonly = "readonly" ,@style = "padding-right: 0px;padding-left: 0px;" })
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="col-md-6">ExpiryDate:</label>
+                                    @Html.TextBoxFor(m => m.ExpiryDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
+                                </div>                                
+                                <div class="col-md-12">
+                                    <label class="col-md-6">Last Updated User:</label>
+                                    @Html.TextBoxFor(m => m.LastUpdatedBy, new { @class = "col-md-5", @readonly = "readonly" })
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="col-md-6">LastUpdatedDate:</label>
+                                    @Html.TextBoxFor(m => m.LastUpdatedDate, new { @class = "col-md-5", @readonly = "readonly" })
+                                </div>
 
                             </div>
-
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5">CardValidFor:</label>
-                                @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control col-md-6" })
-                            </div>
-
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5"><b>StartDate:</b></label>
-                                @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control col-md-6 datepicker", @id = "StartDate", @readonly = "readonly" })
-                            </div>
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5">ExpiryDate:</label>
-                                @Html.TextBoxFor(m => m.ExpiryDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "form-control col-md-6" })
-                            </div>
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5">Manager Approval Required</label>
-                                @Html.CheckBoxFor(m => m.ManagerApprovalRequired, new { @class = "form-control col-md-6", @style = "position:absolute;width:20px;" })
-                            </div>
-                             <div class="form-group col-md-13">
-                                <label class="col-md-5">Transaction Header Remarks Mandatory</label>
-                                @Html.CheckBoxFor(m => m.TrxHeaderRemarksMandatory, new { @class = "form-control col-md-6", @style = "position:absolute;width:20px;" })
-                            </div>
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5">Last Updated User:</label>
-                                @Html.TextBoxFor(m => m.LastUpdatedUser, new { @class = "form-control col-md-6", @readonly = "readonly" })
-                            </div>
-                            <div class="form-group col-md-13">
-                                <label class="col-md-5">LastUpdatedDate:</label>
-                                @Html.TextBoxFor(m => m.LastUpdatedDate, new { @class = "form-control col-md-6", @readonly = "readonly" })
-                            </div>
-
                         </div>
                     </div>
-                </div>
             </form>
-            <div style="float:right;padding-right:50px">
+            <div style="float: right; padding-right: 50px">
                 <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
                 @if (Model.Id > 0)
                 {
@@ -231,19 +240,7 @@
 
 </script>
 <style>
-    input.form-control {
-        display: inline-block;
-    }
-
-    select.form-control {
-        display: inline-block;
-    }
-
     .modal-body {
         padding: 5px;
-    }
-
-    .form-group {
-        margin-bottom: 0px;
     }
 </style>
