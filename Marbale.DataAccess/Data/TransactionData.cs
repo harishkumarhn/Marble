@@ -674,6 +674,35 @@ namespace Marbale.DataAccess.Data
                 throw e;
             }
         }
+
+        public void RefundCard(int cardId, decimal refundAmount, decimal credits, int faceValue,  bool valid, string lastUpdatedBy)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[6];
+
+                sqlParameters[0] = new SqlParameter("@card_id", cardId);
+                sqlParameters[1] = new SqlParameter("@refund_amount", refundAmount);
+                sqlParameters[2] = new SqlParameter("@credits", credits);
+                sqlParameters[3] = new SqlParameter("@faceValue", faceValue);
+                sqlParameters[4] = new SqlParameter("@valid", valid);
+
+                if (!string.IsNullOrEmpty(lastUpdatedBy))
+                {
+                    sqlParameters[5] = new SqlParameter("@lastUpdatedBy", lastUpdatedBy);
+                }
+                else
+                {
+                    sqlParameters[5] = new SqlParameter("@lastUpdatedBy", DBNull.Value);
+                }
+
+                conn.executeInsertQuery("sp_RefundCard", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public DataSet GetTransactionList(int userId)
         {
 

@@ -227,5 +227,10 @@ namespace Marble.Business
         {
             trxData.ConsolidateCards(toCard, lastUpdatedBy);
         }
+
+        public void RefundCard(int cardId, decimal refundAmount, decimal credits, int faceValue, bool valid, string lastUpdatedBy)
+        {
+            trxData.RefundCard(cardId, refundAmount, credits, faceValue, valid, lastUpdatedBy);
+        }
     }
 }
