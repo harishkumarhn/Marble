@@ -10,8 +10,9 @@ namespace Marbale.BusinessObject.SiteSetup
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Role { get; set; }
         public string LoginId { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
         public string Status { get; set; }
         public string POSCounter { get; set; }
         public DateTime PaswardChangeDate { get; set; }
@@ -32,8 +33,5 @@ namespace Marbale.BusinessObject.SiteSetup
 
         public List<IdValue> Roles { get; set; }
         public List<IdValue> Statuses { get; set; }
-
-        public string password { get; set; }
-
     }
 }

@@ -31,22 +31,28 @@ namespace MarbaleManagementStudio.Controllers
 
         public ActionResult ProductSetup()
         {
-            try
+            if (Session["UserID"] != null)
             {
-                var products = productBussiness.GetProducts((int)ProductTypeEnum.Card);
-                Session["TaxList"] = products[0].TaxList;
-                Session["TypeList"] = products[0].TypeList;
-                Session["CategoryList"] = products[0].CategoryList;
-                Session["DisplayGroupList"] = products[0].DisplayGroupList;
-                ViewBag.productDetails = products;
-                return View();
+                try
+                {
+                    var products = productBussiness.GetProducts((int)ProductTypeEnum.Card);
+                    Session["TaxList"] = products[0].TaxList;
+                    Session["TypeList"] = products[0].TypeList;
+                    Session["CategoryList"] = products[0].CategoryList;
+                    Session["DisplayGroupList"] = products[0].DisplayGroupList;
+                    ViewBag.productDetails = products;
+                    return View();
+                }
+                catch (Exception e)
+                {
+                    LogError.Instance.LogException("ProductSetup", e);
+                    throw;
+                }
             }
-            catch (Exception e)
+            else
             {
-                LogError.Instance.LogException("ProductSetup", e);
-                throw;
-            }
-
+                return RedirectToAction("Login","Marble");
+            }  
         }
         public ActionResult NonCardProductSetup()
         {

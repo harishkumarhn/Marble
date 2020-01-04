@@ -135,6 +135,21 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetUser(string loginId, string password)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[2];
+                sqlParameters[0] = new SqlParameter("@loginId", loginId);
+                sqlParameters[1] = new SqlParameter("@password", password);
+
+                return conn.executeSelectQuery("sp_GetUser", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public int InsertOrUpdateUserRoles(List<UserRole> userRoles)
         {
             try
