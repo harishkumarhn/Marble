@@ -65,9 +65,10 @@ namespace Marbale.BusinessObject
         public bool TicketAllowed { get; set; }
         public bool ManagerApprovalRequired { get; set; }
         public bool TrxHeaderRemarksMandatory { get; set; }
-        public bool TrxRemarksMandatory { get; set; }
+        public bool TrxLineRemarksMandatory { get; set; }
         public bool AllowPriceOverride { get; set; }
         public bool QuantityPrompt { get; set; }
+        public int MinimumQuantity { get; set; }
 
         public List<IdValue> TypeList { get; set; }
         public List<IdValue> CategoryList { get; set; }

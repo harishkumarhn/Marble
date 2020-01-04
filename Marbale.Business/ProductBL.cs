@@ -51,7 +51,7 @@ namespace Marbale.Business
                         product.TypeName = dr.IsNull("TypeName") ? "" : dr["TypeName"].ToString();
                         product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
                         product.DisplayGroupId = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
-                        product.LastUpdatedBy = dr.IsNull("LastUpdatedUser") ? "" : dr["LastUpdatedBy"].ToString();
+                        product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                         product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                         product.TaxName = dr.IsNull("TaxName") ? "" : dr["TaxName"].ToString();
                         product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
@@ -75,10 +75,11 @@ namespace Marbale.Business
                         product.ManagerApprovalRequired = dr.IsNull("ManagerApprovalRequired") ? false : bool.Parse(dr["ManagerApprovalRequired"].ToString());
                         product.Tickets = dr.IsNull("Tickets") ? 0 : Convert.ToInt32(dr["Tickets"]);
                         product.TrxHeaderRemarksMandatory = dr.IsNull("TrxHeaderRemarksMandatory") ? false : bool.Parse(dr["TrxHeaderRemarksMandatory"].ToString());
-                        product.TrxRemarksMandatory = dr.IsNull("TrxRemarksMandatory") ? false : bool.Parse(dr["TrxRemarksMandatory"].ToString());
+                        product.TrxLineRemarksMandatory = dr.IsNull("TrxLineRemarksMandatory") ? false : bool.Parse(dr["TrxLineRemarksMandatory"].ToString());
                         product.QuantityPrompt = dr.IsNull("QuantityPrompt") ? false : bool.Parse(dr["QuantityPrompt"].ToString());
                         product.AllowPriceOverride = dr.IsNull("AllowPriceOverride") ? false : bool.Parse(dr["AllowPriceOverride"].ToString());
                         product.Time = dr.IsNull("Time") ? new DateTime() : Convert.ToDateTime(dr["Time"]);
+                        product.MinimumQuantity = dr.IsNull("MinimumQuantity") ? 0 : Convert.ToInt32(dr["MinimumQuantity"]);
 
                         product.CategoryList = categoryList;
                         product.TaxList = TaxList;
@@ -150,9 +151,10 @@ namespace Marbale.Business
                     product.ManagerApprovalRequired = dr.IsNull("ManagerApprovalRequired") ? false : bool.Parse(dr["ManagerApprovalRequired"].ToString());
                     product.Tickets = dr.IsNull("Tickets") ? 0 : Convert.ToInt32(dr["Tickets"]);
                     product.TrxHeaderRemarksMandatory = dr.IsNull("TrxHeaderRemarksMandatory") ? false : bool.Parse(dr["TrxHeaderRemarksMandatory"].ToString());
-                    product.TrxRemarksMandatory = dr.IsNull("TrxRemarksMandatory") ? false : bool.Parse(dr["TrxRemarksMandatory"].ToString());
+                    product.TrxLineRemarksMandatory = dr.IsNull("TrxLineRemarksMandatory") ? false : bool.Parse(dr["TrxLineRemarksMandatory"].ToString());
                     product.QuantityPrompt = dr.IsNull("QuantityPrompt") ? false : bool.Parse(dr["QuantityPrompt"].ToString());
                     product.AllowPriceOverride = dr.IsNull("AllowPriceOverride") ? false : bool.Parse(dr["AllowPriceOverride"].ToString());
+                    product.MinimumQuantity = dr.IsNull("MinimumQuantity") ? 0 : Convert.ToInt32(dr["MinimumQuantity"]);
 
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;
