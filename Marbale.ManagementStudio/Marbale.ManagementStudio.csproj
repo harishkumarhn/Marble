@@ -330,6 +330,7 @@
     <Content Include="Views\SiteSetup\Printer\PrinterList.cshtml" />
     <Content Include="Views\SiteSetup\Printer\PrintTemplate.cshtml" />
     <Content Include="Views\SiteSetup\Printer\PrintTemplateDataItems.cshtml" />
+    <Content Include="Views\Marble\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

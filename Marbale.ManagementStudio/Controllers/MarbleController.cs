@@ -21,6 +21,10 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.appModules = appModules;
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
 
     }
 }
