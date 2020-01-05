@@ -42,6 +42,10 @@ namespace MarbaleManagementStudio.Controllers
                     Session["UserName"] = obj.Name.ToString();
                     return RedirectToAction("Index");
                 }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid UserId Or Password");
+                }
             }
             return View(objUser);
         }

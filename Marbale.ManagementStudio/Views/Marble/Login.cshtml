@@ -39,12 +39,11 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <b style="margin-left: 20px; font-family: sans-serif;">Sign in to Marble account </b>
                         <div style="margin-left: 5%; font-family: cursive;">
-
-                            @using (Html.BeginForm("Login", "Marble", FormMethod.Post))
+                            @using (Ajax.BeginForm("Login", "Marble", FormMethod.Post, new AjaxOptions { OnSuccess = "displayMessage" }))
                             {  
                                 <fieldset>
                                     @Html.AntiForgeryToken()
-                                    @Html.ValidationSummary(true)
+                                     @Html.ValidationSummary("",new {@class = "text-danger"})
                                     @if (@ViewBag.Message != null)
                                     {  
                                         <div style="border: 1px solid red">
@@ -58,7 +57,6 @@
                                     @Html.TextBoxFor(a => a.Password, new { Type="password"})
 
                                     <button class="btn btn-primary btn-md" style="margin-left:20px" role="button" type="submit">Login</button>
-                                   
                                 </fieldset>  
                             }
                         </div>
@@ -70,6 +68,9 @@
         <img src="~/Content/Images/marbleHome.jpeg" alt="Marble" class="center">
     </div>
     <script type="text/javascript">
+        function displayMessage(response) {
+            $('#message').innerHTML = response;
+        }
     </script>
 
 </body>
