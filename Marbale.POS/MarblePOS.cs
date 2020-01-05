@@ -79,7 +79,7 @@ namespace Marbale.POS
             string USBReaderOptionalString = "0000";
 
             SiteSetupBL siteSetupBussiness = new SiteSetupBL();
-            List<AppSetting> ListAppSettings = siteSetupBussiness.GetAppSettings("SiteSetup");
+            List<AppSetting> ListAppSettings = siteSetupBussiness.GetAppSettings("POS");
 
             if (ListAppSettings != null && ListAppSettings.Count > 0)
             {
