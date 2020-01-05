@@ -25,7 +25,7 @@
                     <div class="row">
 
                         <label class="col-md-2"><b>Id:</b></label>
-                        @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "col-md-2" })
+                        @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "col-md-2" ,id="productId"})
                         <label class="col-md-1">Name:</label>
                         @Html.TextBoxFor(m => m.Name, new { @class = "col-md-3", placeholder = @Html.DisplayNameFor(n => n.Name) })
 
@@ -87,7 +87,7 @@
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Time:</label>
-                                @Html.TextBoxFor(m => m.Time, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-6" ,@style = "padding-right: 0px;padding-left: 0px;"})
+                                @Html.TextBoxFor(m => m.Time, "{0:HH:mm:ss}", new { type = "Time", @class = "col-md-6" ,@style = "padding-right: 0px;padding-left: 0px;"})
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Category:</label>
@@ -177,10 +177,10 @@
                     </div>
             </form>
             <div style="float:right;padding-right:50px">
-                <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
+                <input type="submit" name="submit" value="Save" onclick="duplicateClick(false)" class="btn btn-primary btn-md" />
                 @if (Model.Id > 0)
                 {
-                    <input type="submit" name="submit" value="Duplicate" class="btn btn-primary btn-md" />
+                     <button class="btn btn-primary btn-md" onclick="duplicateClick(true)">Duplicate</button>
                 }
                 <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
             </div>
@@ -190,11 +190,20 @@
 </div>
 
 <script type="text/javascript">
+    var duplicateClicked = false;
+    function duplicateClick(value) {
+        if (value == true) {
+            $('#productId').val(0);
+        }
+        duplicateClicked = value;
+    }
     function displayMessage(response) {
-        if (response == '') {
-            location.reload();
-        } else {
-            alert(response);
+        if (duplicateClicked == false) {
+            if (response == '') {
+                location.reload();
+            } else {
+                alert(response);
+            }
         }
     }
 
