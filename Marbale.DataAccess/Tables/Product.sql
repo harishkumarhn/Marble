@@ -1,7 +1,7 @@
 USE [Marbale]
 GO
 
-/****** Object:  Table [dbo].[Product]    Script Date: 12/22/2019 11:01:13 PM ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 1/4/2020 8:55:06 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -25,10 +25,7 @@ CREATE TABLE [dbo].[Product](
 	[TaxPercentage] [decimal](18, 3) NULL,
 	[FinalPrice] [decimal](18, 3) NULL,
 	[EffectivePrice] [decimal](18, 3) NULL,
-	[LastUpdatedBy] [varchar](50) NULL,
-	[LastUpdatedDate] [datetime] NULL,
 	[Bonus] [decimal](18, 3) NULL,
-	[LastUpdatedUser] [varchar](max) NULL,
 	[TaxName] [varchar](max) NULL,
 	[StartDate] [datetime] NULL,
 	[Games] [decimal](18, 3) NULL,
@@ -43,9 +40,12 @@ CREATE TABLE [dbo].[Product](
 	[TicketAllowed] [bit] NULL,
 	[ManagerApprovalRequired] [bit] NULL,
 	[TrxHeaderRemarksMandatory] [bit] NULL,
-	[TrxRemarksMandatory] [bit] NULL,
+	[TrxLineRemarksMandatory] [bit] NULL,
 	[AllowPriceOverride] [bit] NULL,
 	[QuantityPrompt] [bit] NULL,
+	[MinimumQuantity] [int] NULL,
+	[LastUpdatedBy] [varchar](50) NULL,
+	[LastUpdatedDate] [datetime] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
