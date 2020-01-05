@@ -1824,7 +1824,7 @@ namespace Marbale.POS
                 return;
             }
 
-            if(CurrentUser != null && CurrentUser.password != currentPassword)
+            if(CurrentUser != null && CurrentUser.Password != currentPassword)
             {
                 MessageBox.Show("Current Password is Incorrect");
                 return;
