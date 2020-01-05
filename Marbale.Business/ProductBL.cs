@@ -35,11 +35,20 @@ namespace Marbale.Business
                 var TaxList = new List<TaxSet>();
                 var DisplayGroupList = new List<IdValue>();
                 GetSessionData(typeList, categoryList, TaxList, DisplayGroupList);
+                if (productType == (int)ProductTypeEnum.Manual)
+                {
+                    typeList = typeList.Where(x => x.Value.ToLower() == ProductTypeEnum.Manual.ToString().ToLower()).ToList();
+                }
+                else
+                {
+                    typeList = typeList.Where(x => x.Value.ToLower() != ProductTypeEnum.Manual.ToString().ToLower()).ToList();
+                }
+                typeList.Insert(0, new IdValue() { Id = null, Value = "Select" });
 
                 if (id > 0)
                 {
                     var dataTable = productData.GetProductById(id);
-
+                    
                     foreach (DataRow dr in dataTable.Rows)
                     {
                         product = new Product();
@@ -84,14 +93,7 @@ namespace Marbale.Business
                         product.CategoryList = categoryList;
                         product.TaxList = TaxList;
                         product.DisplayGroupList = DisplayGroupList;
-                        if (productType != (int)ProductTypeEnum.Manual && product.TypeName != ProductTypeEnum.Manual.ToString())
-                        {
-                            product.TypeList = typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList();
-                        }
-                        else if ((int)ProductTypeEnum.Manual == productType && product.TypeName.ToLower() == ProductTypeEnum.Manual.ToString().ToLower())
-                        {
-                            product.TypeList = typeList.Where(x => x.Value == ProductTypeEnum.Manual.ToString()).ToList();
-                        }
+                        product.TypeList = typeList;
 
                     }
                 }
@@ -159,32 +161,37 @@ namespace Marbale.Business
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;
                     product.DisplayGroupList = DisplayGroupList;
-                    if (productType == (int)ProductTypeEnum.Card && product.TypeName != ProductTypeEnum.Manual.ToString())
+                    if (productType == (int)ProductTypeEnum.Card && product.TypeName.ToLower() != ProductTypeEnum.Manual.ToString().ToLower())
                     {
-                        product.TypeList = typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList();
+                        product.TypeList = typeList.Where(x => x.Value.ToLower() != ProductTypeEnum.Manual.ToString().ToLower()).ToList();
+                        product.TypeList.Insert(0,new IdValue() { Id = null, Value = "Select" });
                         products.Add(product);
                     }
                     else if ((int)ProductTypeEnum.Manual == productType && product.TypeName.ToLower() == ProductTypeEnum.Manual.ToString().ToLower())
                     {
-                        product.TypeList = typeList.Where(x => x.Value == ProductTypeEnum.Manual.ToString()).ToList();
+                        product.TypeList = typeList.Where(x => x.Value.ToLower() == ProductTypeEnum.Manual.ToString().ToLower()).ToList();
+                        product.TypeList.Insert(0, new IdValue() { Id = null, Value = "Select" });
                         products.Add(product);
                     }
                 }
-                products = productType == (int)ProductTypeEnum.Manual ? products.Where(x => x.Type == ProductTypeEnum.Manual.ToString()).ToList() :
-                    products.Where(x => x.Type != ProductTypeEnum.Manual.ToString()).ToList();
+                //products = productType == (int)ProductTypeEnum.Manual ? products.Where(x => x.TypeName.ToLower() == ProductTypeEnum.Manual.ToString().ToLower()).ToList() :
+                //    products.Where(x => x.TypeName.ToLower() != ProductTypeEnum.Manual.ToString().ToLower()).ToList();
 
                 if (products.Count == 0)
                 {
                     var defaultTypeList = new List<IdValue>();
-                    defaultTypeList.Add(new IdValue() { Id = null, Value = "Select" });
                     if (productType == (int)ProductTypeEnum.Card)
                     {
-                        defaultTypeList.AddRange(typeList.Where(x => x.Value != ProductTypeEnum.Manual.ToString()).ToList());
+                        var cardTypes = typeList.Where(x => x.Value.ToLower() != ProductTypeEnum.Manual.ToString().ToLower()).ToList();
+                        defaultTypeList.AddRange(cardTypes);
                     }
                     else if ((int)ProductTypeEnum.Manual == productType)
                     {
-                        defaultTypeList.AddRange(typeList.Where(x => x.Value == ProductTypeEnum.Manual.ToString()).ToList());
+                        var manualTypes = typeList.Where(x => x.Value.ToLower() == ProductTypeEnum.Manual.ToString().ToLower()).ToList();
+                        defaultTypeList.AddRange(manualTypes);
                     }
+                    defaultTypeList.Insert(0, new IdValue() { Id = null, Value = "Select" });
+
                     var p = new Product() 
                     {
                         TypeList = defaultTypeList, 
@@ -207,7 +214,6 @@ namespace Marbale.Business
         public void GetSessionData(List<IdValue> typeList, List<IdValue> categoryList, List<TaxSet> TaxList, List<IdValue> DisplayGroupList)
         {
             var typeListDataTable = productData.GetProductTypeLookUp();
-            typeList.Add(new IdValue() { Id = null, Value = "Select" });
             foreach (DataRow dr in typeListDataTable.Rows)
             {
                 IdValue idValues = new IdValue();

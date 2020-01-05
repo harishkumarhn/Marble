@@ -58,7 +58,6 @@ namespace Marbale.BusinessObject
         public string TaxName { get; set; }
         public string TypeName { get; set; }
         public decimal Taxpercent { get; set; }
-        public string LastUpdatedUser { get; set; }
         public int CardValidFor { get; set; }
         public DateTime? Time { get; set; }
         public int Tickets { get; set; }
