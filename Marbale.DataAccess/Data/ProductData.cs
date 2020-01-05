@@ -201,7 +201,7 @@ namespace Marbale.DataAccess
                 sqlParameters[16] = new SqlParameter("@Bonus", product.Bonus);
                 sqlParameters[17] = new SqlParameter("@LastUpdatedBy", string.IsNullOrEmpty(product.LastUpdatedBy) ? "" : product.LastUpdatedBy);
                 sqlParameters[18] = new SqlParameter("@TaxName", product.TaxName);
-                sqlParameters[19] = new SqlParameter("@StartDate", DateTime.Now);
+                sqlParameters[19] = new SqlParameter("@StartDate", product.StartDate);
                 sqlParameters[20] = new SqlParameter("@Games", product.Games);
                 sqlParameters[21] = new SqlParameter("@CreditsPlus", product.CreditsPlus);
                 sqlParameters[22] = new SqlParameter("@Credits", product.Credits);
