@@ -45,6 +45,7 @@ CREATE TABLE [dbo].[Product](
 	[QuantityPrompt] [bit] NULL,
 	[MinimumQuantity] [int] NULL,
 	[LastUpdatedBy] [varchar](50) NULL,
+	[LastUpdatedUser] [varchar](50) NULL,
 	[LastUpdatedDate] [datetime] NULL,
 PRIMARY KEY CLUSTERED 
 (
