@@ -238,11 +238,11 @@ namespace Marble.Business
             }
         }
 
-        public int InsertOrUpdateUsers(List<User> users)
+        public int InsertOrUpdateUsers(User user)
         {
             try
             {
-                return siteSetupData.InsertOrUpdateUsers(users);
+                return siteSetupData.InsertOrUpdateUsers(user);
             }
             catch (Exception e)
             {

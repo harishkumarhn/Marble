@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Linq;
 using MarbaleManagementStudio.Models;
 using System.Web;
+using System;
 
 namespace MarbaleManagementStudio.Controllers
 {
@@ -301,18 +302,44 @@ namespace MarbaleManagementStudio.Controllers
             return View(user);
         }
 
-        public int InsertOrUpdateUsers(List<User> users)
+       [HttpPost]
+       public JsonResult InsertOrUpdateUsers(List<User> users)
         {
-            var result = siteSetup.InsertOrUpdateUsers(users);
-            return 0;
+            var message = string.Empty;
+
+            foreach (var user in users)
+            {
+                message = message + InsertOrUpdateUserObject(user);
+            }
+            return Json(new {ok = string.IsNullOrEmpty(message), message = message});
+        }
+        private string InsertOrUpdateUserObject(User user)
+        {
+            var message = string.Empty;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    siteSetup.InsertOrUpdateUsers(user);
+                }
+                else
+                {
+                    message = string.Join(" | ", ModelState.Values
+                                  .SelectMany(v => v.Errors)
+                                  .Select(e => e.ErrorMessage));
+                }
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("InsertOrUpdateUsers", e);
+                throw;
+            }
+            return message;
         }
 
-        public int AddOrEditUser(User user)
+        public string AddOrEditUser(User user)
         {
-            List<User> users = new List<User>();
-            users.Add(user);
-            var result = siteSetup.InsertOrUpdateUsers(users);
-            return 0;
+            return InsertOrUpdateUserObject(user);
         }
 
         #endregion

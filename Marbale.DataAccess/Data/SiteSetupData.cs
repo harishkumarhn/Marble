@@ -195,12 +195,10 @@ namespace Marbale.DataAccess
 
             return 0;
         }
-        public int InsertOrUpdateUsers(List<User> users)
+        public int InsertOrUpdateUsers(User user)
         {
             try
             {
-                foreach (var user in users)
-                {
                     SqlParameter[] sqlParameters = new SqlParameter[15];
                     sqlParameters[0] = new SqlParameter("@Id", user.Id);
                     sqlParameters[1] = new SqlParameter("@Name", string.IsNullOrWhiteSpace(user.Name) ? "" : user.Name);
@@ -218,15 +216,12 @@ namespace Marbale.DataAccess
                     sqlParameters[13] = new SqlParameter("@Status", string.IsNullOrWhiteSpace(user.Status) ? "" : user.Status);
                     sqlParameters[14] = new SqlParameter("@POSCounter", string.IsNullOrWhiteSpace(user.POSCounter) ? "" : user.POSCounter);
 
-                    conn.executeUpdateQuery("sp_InsertOrUpdateUser", sqlParameters);
-                }
+                    return conn.executeUpdateQuery("sp_InsertOrUpdateUser", sqlParameters);
             }
             catch (Exception e)
             {
                 throw e;
             }
-
-            return 0;
         }
 
         public DataTable ValidateUser(string username, string password)
