@@ -213,7 +213,8 @@ namespace Marbale.Business
 
         public void GetSessionData(List<IdValue> typeList, List<IdValue> categoryList, List<TaxSet> TaxList, List<IdValue> DisplayGroupList)
         {
-            var typeListDataTable = productData.GetProductTypeLookUp();
+
+            var typeListDataTable = productData.GetActiveProductTypes();
             foreach (DataRow dr in typeListDataTable.Rows)
             {
                 IdValue idValues = new IdValue();

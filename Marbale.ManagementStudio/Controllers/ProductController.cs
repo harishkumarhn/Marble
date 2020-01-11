@@ -154,7 +154,7 @@ namespace MarbaleManagementStudio.Controllers
             }
 
         }
-
+        [HttpPost]
         public string InsertOrUpdate(Product pObject, string submit)
         {
             var message = string.Empty;
@@ -194,8 +194,6 @@ namespace MarbaleManagementStudio.Controllers
             try
             {
                 var result = 0;
-
-
                 foreach (var product in products)
                 {
                     result = productBussiness.InsertOrUpdateProduct(product);

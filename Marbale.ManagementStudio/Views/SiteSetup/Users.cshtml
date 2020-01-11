@@ -2,24 +2,6 @@
     ViewBag.Title = "Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div>
-    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width: 900px; height: 610px;">
-                <div class="modal-header" style="background-color: crimson">
-                    <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modelbody">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
     <thead>
         <th>Id</th>
@@ -151,7 +133,7 @@
 
     <button class="btn btn-primary btn-md" role="button" onclick="SaveUsers()">Save</button>
     <button class="btn btn-primary btn-md" role="button" id="addRow">Add User</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="targetmodel()">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="EditUser()">
         New
     </button>
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
@@ -245,11 +227,6 @@
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
     });
-
-    function targetmodel() {
-        $('#modelbody').load('/SiteSetup/EditUser');
-    }
-   
     function SaveUsers() {
         var items = [];
         var table = document.getElementById('marbleTable');
@@ -285,12 +262,15 @@
             url: '@Url.Action("InsertOrUpdateUsers", "SiteSetup")',
             data: JSON.stringify({ users: items }),
             dataType: "json",
-            success: function (data) {
-                alert('Data Saved');
-                location.reload();
-            },
-            error: function (e) {
-                alert(e);
+            success: function (returndata) {
+                if (returndata.ok) {
+                    alert("Data Saved")
+                }
+                else {
+                    //this is an error from the server
+                    window.alert(' error : ' + returndata.message);
+                }
+
             }
         });
     }
@@ -301,8 +281,18 @@
         }
     }
     function EditUser(id) {
-        $('#basicExampleModal').modal('show');
-        $('#modelbody').load('/SiteSetup/EditUser', { "id": id });
+        $('#myModal').modal('show');
+        $('#modelBody').css({
+            'left': '-40%',
+            'width': 850
+        });
+        if (id != 0) {
+            $('#modelBody').load('/SiteSetup/EditUser', { "id": id });
+            $('.modal-title').text('Edit Product');
+        } else {
+            $('#modelbody').load('/SiteSetup/EditUser');
+            $('.modal-title').text('New User');
+        }
     }
     function DeleteUser(id) {
         if (confirm('Are you sure you want to delete this from database?')) {

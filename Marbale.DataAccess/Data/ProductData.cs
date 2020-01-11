@@ -116,22 +116,11 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-        public DataTable GetProductTypeLookUp()
+        public DataTable GetActiveProductTypes()
         {
             try
             {
-                return conn.executeSelectQuery("sp_GetProductTypeLookUp");
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-        public DataTable GetListItemsByGroupId()
-        {
-            try
-            {
-                return conn.executeSelectQuery("sp_GetProductTypeLookUp");
+                return conn.executeSelectQuery("sp_GetActiveProductTypes");
             }
             catch (Exception e)
             {
