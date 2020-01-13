@@ -43,20 +43,22 @@
                             {  
                                 <fieldset>
                                     @Html.AntiForgeryToken()
-                                     @Html.ValidationSummary("",new {@class = "text-danger"})
+                                    @Html.ValidationSummary("", new { @class = "text-danger" })
                                     @if (@ViewBag.Message != null)
                                     {  
                                         <div style="border: 1px solid red">
                                             @ViewBag.Message
                                         </div>  
                                     }
+                                    @Html.HiddenFor(model => model.Name,
+                                            new { id = "Name", Value = "marbale" })
                                     <label>UserId</label>
                                     @Html.TextBoxFor(a => a.LoginId)
 
                                     <label>Password</label>
-                                    @Html.TextBoxFor(a => a.Password, new { Type="password"})
+                                    @Html.TextBoxFor(a => a.Password, new { Type = "password" })
 
-                                    <button class="btn btn-primary btn-md" style="margin-left:20px" role="button" type="submit">Login</button>
+                                    <button class="btn btn-primary btn-md" style="margin-left: 20px" role="button" type="submit">Login</button>
                                 </fieldset>  
                             }
                         </div>
