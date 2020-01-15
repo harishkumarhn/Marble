@@ -135,10 +135,13 @@
     <Content Include="Content\CSS\layout.css" />
     <Content Include="Content\CSS\Material\meterialIcon.css" />
     <Content Include="Content\CSS\StyleSheet1.css" />
+    <Content Include="Content\images\avatar.png" />
+    <Content Include="Content\images\logout.jpg" />
     <Content Include="Content\JS\jquery.dataTables.min.js" />
     <Content Include="Content\JS\dataTables.fixedColumns.min.js" />
     <Content Include="Content\CSS\fonts\font.css" />
     <Content Include="Content\CSS\fonts\font1.css" />
+    <Compile Include="AuthorizationFilter.cs" />
     <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\GameController.cs" />

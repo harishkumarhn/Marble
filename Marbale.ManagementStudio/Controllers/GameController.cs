@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MarbaleManagementStudio.Controllers
 {
-
+    [AuthorizationFilter]
     public class GameController : Controller
     {
         public GameBL gameBussiness;
