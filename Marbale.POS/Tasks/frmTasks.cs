@@ -537,5 +537,11 @@ namespace Marbale.POS
         {
             this.Close();
         }
+
+        private void btnSelectProduct_Click(object sender, EventArgs e)
+        {
+            frmSelectProducts frm = new frmSelectProducts();
+            frm.ShowDialog();
+        }
     }
 }

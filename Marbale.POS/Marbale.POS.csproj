@@ -85,6 +85,12 @@
       <DependentUpon>frmGenericDataEntry.cs</DependentUpon>
     </Compile>
     <Compile Include="Tasks\CommonTask.cs" />
+    <Compile Include="Tasks\frmSelectProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tasks\frmSelectProducts.Designer.cs">
+      <DependentUpon>frmSelectProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tasks\frmTasks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmGenericDataEntry.resx">
       <DependentUpon>frmGenericDataEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\frmSelectProducts.resx">
+      <DependentUpon>frmSelectProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tasks\frmTasks.resx">
       <DependentUpon>frmTasks.cs</DependentUpon>
