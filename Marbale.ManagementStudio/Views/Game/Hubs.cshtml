@@ -56,7 +56,7 @@
     <button class="btn btn-primary btn-md" role="button" onclick="SaveHubs()">Save</button>
     <button class="btn btn-primary btn-md" role="button" id="addRow">Add</button>
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/index'">Close</button>
 
 </div>
 @*<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
@@ -123,41 +123,43 @@
 
     
     function SaveHubs() {
-        var hubs = [];
-        var table = document.getElementById('marbleTable');
-        var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
-        var fixedcolumn2 = $('.DTFC_Cloned input.fixedCol2');
+        if (updatedArray.length > 0) {
+            var hubs = [];
+            var table = document.getElementById('marbleTable');
+            var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
+            var fixedcolumn2 = $('.DTFC_Cloned input.fixedCol2');
 
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-            if (updatedArray.includes(r)) {
-                var rowIndex = r + 1;
-                hubs.push({
-                    Id: fixedcolumn1[r].innerHTML,
-                    Name: fixedcolumn2[r].value,
-                    Address: table.rows[rowIndex].cells[2].children[0].value,
-                    Frequency: table.rows[rowIndex].cells[3].children[0].value,
-                    Note: table.rows[rowIndex].cells[4].children[0].value,
-                    Active: table.rows[rowIndex].cells[5].children[0].checked,
-                    MacAddress: table.rows[rowIndex].cells[6].children[0].value,
-                    IPAddress: table.rows[rowIndex].cells[7].children[0].value,
-                    TCPPort: table.rows[rowIndex].cells[8].children[0].value,
-                });
+            for (var r = 0, n = table.rows.length; r < n; r++) {
+                if (updatedArray.includes(r)) {
+                    var rowIndex = r + 1;
+                    hubs.push({
+                        Id: fixedcolumn1[r].innerHTML,
+                        Name: fixedcolumn2[r].value,
+                        Address: table.rows[rowIndex].cells[2].children[0].value,
+                        Frequency: table.rows[rowIndex].cells[3].children[0].value,
+                        Note: table.rows[rowIndex].cells[4].children[0].value,
+                        Active: table.rows[rowIndex].cells[5].children[0].checked,
+                        MacAddress: table.rows[rowIndex].cells[6].children[0].value,
+                        IPAddress: table.rows[rowIndex].cells[7].children[0].value,
+                        TCPPort: table.rows[rowIndex].cells[8].children[0].value,
+                    });
+                }
             }
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("UpdateHubs", "Game")',
+                data: JSON.stringify({ hubs: hubs }),
+                dataType: "json",
+                success: function (data) {
+                    alert('Data Saved');
+                    location.reload();
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
         }
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdateHubs", "Game")',
-            data: JSON.stringify({ hubs: hubs }),
-            dataType: "json",
-            success: function (data) {
-                alert('Data Saved');
-                location.reload();
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
     }
     var updatedArray = [];
     function UpdatedList(index) {

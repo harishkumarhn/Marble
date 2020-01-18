@@ -177,7 +177,7 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" onclick="EditProduct(0)">
         New
     </button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/index'">Close</button>
 </div>
 <script>
     var updatedArray = [];
@@ -319,65 +319,67 @@
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
     });
     function SaveProducts() {
-        var items = [];
-        var table = document.getElementById('marbleTable');
-        var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
-        var fixedcolumn3 = $('.DTFC_Cloned input.fixedCol3');
+        if (updatedArray.length > 0) {
+            var items = [];
+            var table = document.getElementById('marbleTable');
+            var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
+            var fixedcolumn3 = $('.DTFC_Cloned input.fixedCol3');
 
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-            if (updatedArray.includes(r)) {
-                var rowIndex = r + 1;
-                if (fixedcolumn3[r].value.trim() == '') {
-                    alert('Please Enter Product Name');
-                    return false;
-                }
-                if (table.rows[rowIndex].cells[11].children[0].value == '') {
-                    alert('Please Enter Price');
-                    return false;
-                }
-                var selectedTypeIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
-                var selectedCategoryIndex = table.rows[rowIndex].cells[4].children[0].options["selectedIndex"];
-                var selectedTaxIndex = table.rows[rowIndex].cells[15].children[0].options["selectedIndex"];
-                var selectedDisplayGroupIndex = table.rows[rowIndex].cells[8].children[0].options["selectedIndex"];
+            for (var r = 0, n = table.rows.length; r < n; r++) {
+                if (updatedArray.includes(r)) {
+                    var rowIndex = r + 1;
+                    if (fixedcolumn3[r].value.trim() == '') {
+                        alert('Please Enter Product Name');
+                        return false;
+                    }
+                    if (table.rows[rowIndex].cells[11].children[0].value == '') {
+                        alert('Please Enter Price');
+                        return false;
+                    }
+                    var selectedTypeIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
+                    var selectedCategoryIndex = table.rows[rowIndex].cells[4].children[0].options["selectedIndex"];
+                    var selectedTaxIndex = table.rows[rowIndex].cells[15].children[0].options["selectedIndex"];
+                    var selectedDisplayGroupIndex = table.rows[rowIndex].cells[8].children[0].options["selectedIndex"];
 
-                items.push({
-                    Id: fixedcolumn1[r].innerHTML,
-                    Name: fixedcolumn3[r].value,
-                    Type: table.rows[rowIndex].cells[3].children[0].options[selectedTypeIndex].id,
-                    Category: table.rows[rowIndex].cells[4].children[0].options[selectedCategoryIndex].id,
-                    POSCounter: table.rows[rowIndex].cells[5].children[0].value,
-                    Active: table.rows[rowIndex].cells[6].children[0].checked,
-                    DisplayInPOS: table.rows[rowIndex].cells[7].children[0].checked,
-                    DisplayGroupId: table.rows[rowIndex].cells[8].children[0].options[selectedDisplayGroupIndex].id,
-                    AutoGenerateCardNumber: table.rows[rowIndex].cells[9].children[0].checked,
-                    OnlyVIP: table.rows[rowIndex].cells[10].children[0].checked,
-                    Price: table.rows[rowIndex].cells[11].children[0].value,
-                    FaceValue: table.rows[rowIndex].cells[12].children[0].value,
-                    TaxInclusive: table.rows[rowIndex].cells[13].children[0].checked,
-                    Taxpercent: table.rows[rowIndex].cells[14].children[0].value,
-                    TaxId: table.rows[rowIndex].cells[15].children[0].options[selectedTaxIndex].id,
-                    FinalPrice: table.rows[rowIndex].cells[16].children[0].value,
-                    EffectivePrice: table.rows[rowIndex].cells[17].children[0].value,
-                    ExpiryDate: '10/10/2020',
-                    StartDate: '10/10/2020'
-                });
+                    items.push({
+                        Id: fixedcolumn1[r].innerHTML,
+                        Name: fixedcolumn3[r].value,
+                        Type: table.rows[rowIndex].cells[3].children[0].options[selectedTypeIndex].id,
+                        Category: table.rows[rowIndex].cells[4].children[0].options[selectedCategoryIndex].id,
+                        POSCounter: table.rows[rowIndex].cells[5].children[0].value,
+                        Active: table.rows[rowIndex].cells[6].children[0].checked,
+                        DisplayInPOS: table.rows[rowIndex].cells[7].children[0].checked,
+                        DisplayGroupId: table.rows[rowIndex].cells[8].children[0].options[selectedDisplayGroupIndex].id,
+                        AutoGenerateCardNumber: table.rows[rowIndex].cells[9].children[0].checked,
+                        OnlyVIP: table.rows[rowIndex].cells[10].children[0].checked,
+                        Price: table.rows[rowIndex].cells[11].children[0].value,
+                        FaceValue: table.rows[rowIndex].cells[12].children[0].value,
+                        TaxInclusive: table.rows[rowIndex].cells[13].children[0].checked,
+                        Taxpercent: table.rows[rowIndex].cells[14].children[0].value,
+                        TaxId: table.rows[rowIndex].cells[15].children[0].options[selectedTaxIndex].id,
+                        FinalPrice: table.rows[rowIndex].cells[16].children[0].value,
+                        EffectivePrice: table.rows[rowIndex].cells[17].children[0].value,
+                        ExpiryDate: '10/10/2020',
+                        StartDate: '10/10/2020'
+                    });
+                }
             }
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("UpdateProducts", "product")',
+                data: JSON.stringify({ products: items }),
+                dataType: "json",
+                success: function (data) {
+                    alert('Data Saved');
+                    location.reload();
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
         }
-
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdateProducts", "product")',
-            data: JSON.stringify({ products: items }),
-            dataType: "json",
-            success: function (data) {
-                alert('Data Saved');
-                location.reload();
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
     }
     $(document).ready(function () {
         $('.dropdown-toggle').collapse({

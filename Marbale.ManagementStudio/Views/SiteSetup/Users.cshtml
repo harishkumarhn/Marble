@@ -228,51 +228,53 @@
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
     });
     function SaveUsers() {
-        var items = [];
-        var table = document.getElementById('marbleTable');
-        var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
-        var fixedcolumn3 = $('.DTFC_Cloned input.fixedCol3');
+        if (updatedArray.length > 0) {
+            var items = [];
+            var table = document.getElementById('marbleTable');
+            var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
+            var fixedcolumn3 = $('.DTFC_Cloned input.fixedCol3');
 
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-            if (updatedArray.includes(r)) {
-                var rowIndex = r + 1;
-                var selectedRoleIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
-                var selectedStatusIndex = table.rows[rowIndex].cells[6].children[0].options["selectedIndex"];
+            for (var r = 0, n = table.rows.length; r < n; r++) {
+                if (updatedArray.includes(r)) {
+                    var rowIndex = r + 1;
+                    var selectedRoleIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
+                    var selectedStatusIndex = table.rows[rowIndex].cells[6].children[0].options["selectedIndex"];
 
-                items.push({
-                    Id: fixedcolumn1[r].innerHTML,
-                    Name: fixedcolumn3[r].value,
-                    Role: table.rows[rowIndex].cells[3].children[0].options[selectedRoleIndex].innerText,
-                    Email: table.rows[rowIndex].cells[4].children[0].value,
-                    LoginId: table.rows[rowIndex].cells[5].children[0].value,
-                    Status: table.rows[rowIndex].cells[6].children[0].options[selectedStatusIndex].innerText,
-                    POSCounter: table.rows[rowIndex].cells[7].children[0].value,
-                    Department: table.rows[rowIndex].cells[8].children[0].value,
-                    Manager: table.rows[rowIndex].cells[9].children[0].value,
-                    CompanyAdmin: table.rows[rowIndex].cells[10].children[0].checked,
-                    EmpStartDate: table.rows[rowIndex].cells[11].children[0].value,
-                    EmpEndDate: table.rows[rowIndex].cells[12].children[0].value,
-                    EmpEnsReason: table.rows[rowIndex].cells[13].children[0].value
-                });
+                    items.push({
+                        Id: fixedcolumn1[r].innerHTML,
+                        Name: fixedcolumn3[r].value,
+                        Role: table.rows[rowIndex].cells[3].children[0].options[selectedRoleIndex].innerText,
+                        Email: table.rows[rowIndex].cells[4].children[0].value,
+                        LoginId: table.rows[rowIndex].cells[5].children[0].value,
+                        Status: table.rows[rowIndex].cells[6].children[0].options[selectedStatusIndex].innerText,
+                        POSCounter: table.rows[rowIndex].cells[7].children[0].value,
+                        Department: table.rows[rowIndex].cells[8].children[0].value,
+                        Manager: table.rows[rowIndex].cells[9].children[0].value,
+                        CompanyAdmin: table.rows[rowIndex].cells[10].children[0].checked,
+                        EmpStartDate: table.rows[rowIndex].cells[11].children[0].value,
+                        EmpEndDate: table.rows[rowIndex].cells[12].children[0].value,
+                        EmpEnsReason: table.rows[rowIndex].cells[13].children[0].value
+                    });
+                }
             }
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("InsertOrUpdateUsers", "SiteSetup")',
+                data: JSON.stringify({ users: items }),
+                dataType: "json",
+                success: function (returndata) {
+                    if (returndata.ok) {
+                        alert("Data Saved")
+                    }
+                    else {
+                        //this is an error from the server
+                        window.alert(' error : ' + returndata.message);
+                    }
+
+                }
+            });
         }
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("InsertOrUpdateUsers", "SiteSetup")',
-            data: JSON.stringify({ users: items }),
-            dataType: "json",
-            success: function (returndata) {
-                if (returndata.ok) {
-                    alert("Data Saved")
-                }
-                else {
-                    //this is an error from the server
-                    window.alert(' error : ' + returndata.message);
-                }
-
-            }
-        });
     }
     var updatedArray = [];
     function UpdatedList(rowIndex) {
