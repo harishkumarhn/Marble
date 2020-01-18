@@ -493,6 +493,15 @@ namespace Marbale.POS
                     return;
                 }
 
+                //Check for partially refund face value
+                //Partially face value refund is not allowed
+                if(Convert.ToInt32(txtCreditsToRefund.Text) > currentcard.credits 
+                    && Convert.ToInt32(txtCreditsToRefund.Text) < Convert.ToInt32(txtTotalCredits.Text))
+                {
+                    MessageBox.Show("Partially face value Refund is not Allowed");
+                    return;
+                }
+
 
                 decimal creditsTorefund = Convert.ToInt32(txtCreditsToRefund.Text);
                 int faceValue = Convert.ToInt32(txtCardDeposit.Text);
@@ -527,6 +536,12 @@ namespace Marbale.POS
         private void btnRefundCardClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSelectProduct_Click(object sender, EventArgs e)
+        {
+            frmSelectProducts frm = new frmSelectProducts();
+            frm.ShowDialog();
         }
     }
 }
