@@ -37,11 +37,12 @@
 <body>
 
     <div class="wrapper">
+        <p style="cursor: pointer; float: right; margin: 21px"><a href="/Marble/logout">
+                <img src="~/Content/images/logout.png" height="30px" title="logout"/>
+            </a>
+        </p>
         <!-- Sidebar  -->
         <nav id="sidebar">
-            <div id="dismiss">
-                <i class="fas fa-arrow-left"></i>
-            </div>
             <div class="sidebar-header">
                 <h3>Marbale Dashboard</h3>
             </div>
@@ -51,10 +52,10 @@
                     <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product</a>
                     <ul class="collapse list-unstyled" id="productSubmenu">
                         <li>
-                            <a href="/product">Products</a>
+                            <a href="/product/Index">Products</a>
                         </li>
                         <li>
-                            <a href="/discount" id="disc">Discounts</a>
+                            <a href="/discount/Index" id="disc">Discounts</a>
                         </li>
                         <li>
                             <a href="/Tax/Index">Tax</a>

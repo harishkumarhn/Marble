@@ -9,6 +9,7 @@ using Marbale.BusinessObject;
 
 namespace MarbaleManagementStudio.Controllers
 {
+    [AuthorizationFilter]
     public class DiscountController : Controller
     {
         ProductBL b = new ProductBL();

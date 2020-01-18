@@ -19,7 +19,7 @@ namespace Marbale.BusinessObject
         public int Id { get; set; }
         public string DisplayGroup { get; set; }
         [Required(ErrorMessage = "Enter Product name.")]
-        [Remote("IsAlreadySigned", "Product", AdditionalFields = "Id", HttpMethod = "POST", ErrorMessage = "Product Exsist Already")]
+        [Remote("IsAlreadySigned", "Product", AdditionalFields = "Id", HttpMethod = "POST", ErrorMessage = "Product Exist Already")]
         public string Name { get; set; }
         public string Type { get; set; }
         public string POSCounter { get; set; }
@@ -58,7 +58,6 @@ namespace Marbale.BusinessObject
         public string TaxName { get; set; }
         public string TypeName { get; set; }
         public decimal Taxpercent { get; set; }
-        public string LastUpdatedUser { get; set; }
         public int CardValidFor { get; set; }
         public DateTime? Time { get; set; }
         public int Tickets { get; set; }

@@ -238,11 +238,11 @@ namespace Marble.Business
             }
         }
 
-        public int InsertOrUpdateUsers(List<User> users)
+        public int InsertOrUpdateUsers(User user)
         {
             try
             {
-                return siteSetupData.InsertOrUpdateUsers(users);
+                return siteSetupData.InsertOrUpdateUsers(user);
             }
             catch (Exception e)
             {
@@ -399,6 +399,25 @@ namespace Marble.Business
             return user;
 
         }
+        public User GetUser(string loginId,string password)
+        {
+            User user = null;
+            if (!string.IsNullOrWhiteSpace(loginId))
+            {
+                var dataTable = siteSetupData.GetUser(loginId,password);
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    user = new User();
+                    user.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
+                    user.Role = dr.IsNull("Role") ? "" : dr["Role"].ToString();
+                    user.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
+                    user.LoginId = dr.IsNull("LoginId") ? "" : dr["LoginId"].ToString();
+                    user.Password = dr.IsNull("Password") ? "" : dr["Password"].ToString();
+                }
+            }
+            return user;
+
+        }
 
         private void GetUserRoleAndStatusList(out List<IdValue> rolesList, out List<IdValue> statusList)
         {
@@ -466,7 +485,7 @@ namespace Marble.Business
                     user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                     user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                     user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
-                    user.password = password;
+                    user.Password = password;
                     break;
                 }
             }

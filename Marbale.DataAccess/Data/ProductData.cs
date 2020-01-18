@@ -116,22 +116,11 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-        public DataTable GetProductTypeLookUp()
+        public DataTable GetActiveProductTypes()
         {
             try
             {
-                return conn.executeSelectQuery("sp_GetProductTypeLookUp");
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-        public DataTable GetListItemsByGroupId()
-        {
-            try
-            {
-                return conn.executeSelectQuery("sp_GetProductTypeLookUp");
+                return conn.executeSelectQuery("sp_GetActiveProductTypes");
             }
             catch (Exception e)
             {
@@ -181,7 +170,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[37];
+                SqlParameter[] sqlParameters = new SqlParameter[36];
                 sqlParameters[0] = new SqlParameter("@name", string.IsNullOrEmpty(product.Name) ? "" : product.Name);
                 sqlParameters[1] = new SqlParameter("@type", string.IsNullOrEmpty(product.Type) ? "" : product.Type);
                 sqlParameters[2] = new SqlParameter("@active", product.Active);
@@ -199,27 +188,26 @@ namespace Marbale.DataAccess
                 sqlParameters[14] = new SqlParameter("@taxPercentage", product.Taxpercent);
                 sqlParameters[15] = new SqlParameter("@id", product.Id);
                 sqlParameters[16] = new SqlParameter("@Bonus", product.Bonus);
-                sqlParameters[17] = new SqlParameter("@LastUpdatedUser", string.IsNullOrEmpty(product.LastUpdatedUser) ? "" : product.LastUpdatedUser);
+                sqlParameters[17] = new SqlParameter("@LastUpdatedBy", string.IsNullOrEmpty(product.LastUpdatedBy) ? "" : product.LastUpdatedBy);
                 sqlParameters[18] = new SqlParameter("@TaxName", product.TaxName);
-                sqlParameters[19] = new SqlParameter("@StartDate", DateTime.Now);
-                sqlParameters[20] = new SqlParameter("@LastUpdatedDate", DateTime.Now);
-                sqlParameters[21] = new SqlParameter("@Games", product.Games);
-                sqlParameters[22] = new SqlParameter("@CreditsPlus", product.CreditsPlus);
-                sqlParameters[23] = new SqlParameter("@Credits", product.Credits);
-                sqlParameters[24] = new SqlParameter("@CardValidFor", product.CardValidFor);
-                sqlParameters[25] = new SqlParameter("@Courtesy", product.Courtesy);
-                sqlParameters[26] = new SqlParameter("@ExpiryDate", product.ExpiryDate);
-                sqlParameters[27] = new SqlParameter("@taxId", product.TaxId);
+                sqlParameters[19] = new SqlParameter("@StartDate", product.StartDate);
+                sqlParameters[20] = new SqlParameter("@Games", product.Games);
+                sqlParameters[21] = new SqlParameter("@CreditsPlus", product.CreditsPlus);
+                sqlParameters[22] = new SqlParameter("@Credits", product.Credits);
+                sqlParameters[23] = new SqlParameter("@CardValidFor", product.CardValidFor);
+                sqlParameters[24] = new SqlParameter("@Courtesy", product.Courtesy);
+                sqlParameters[25] = new SqlParameter("@ExpiryDate", product.ExpiryDate);
+                sqlParameters[26] = new SqlParameter("@taxId", product.TaxId);
 
-                sqlParameters[28] = new SqlParameter("@Time", product.Time);
-                sqlParameters[29] = new SqlParameter("@Tickets", product.Tickets);
-                sqlParameters[30] = new SqlParameter("@TicketAllowed", product.TicketAllowed);
-                sqlParameters[31] = new SqlParameter("@TrxHeaderRemarksMandatory", product.TrxHeaderRemarksMandatory);
-                sqlParameters[32] = new SqlParameter("@TrxLineRemarksMandatory", product.TrxLineRemarksMandatory);
-                sqlParameters[33] = new SqlParameter("@QuantityPrompt", product.QuantityPrompt);
-                sqlParameters[34] = new SqlParameter("@ManagerApprovalRequired", product.ManagerApprovalRequired);
-                sqlParameters[35] = new SqlParameter("@AllowPriceOverride", product.AllowPriceOverride);
-                sqlParameters[36] = new SqlParameter("@MinimumQuantity", product.MinimumQuantity);
+                sqlParameters[27] = new SqlParameter("@Time", product.Time);
+                sqlParameters[28] = new SqlParameter("@Tickets", product.Tickets);
+                sqlParameters[29] = new SqlParameter("@TicketAllowed", product.TicketAllowed);
+                sqlParameters[30] = new SqlParameter("@TrxHeaderRemarksMandatory", product.TrxHeaderRemarksMandatory);
+                sqlParameters[31] = new SqlParameter("@TrxLineRemarksMandatory", product.TrxLineRemarksMandatory);
+                sqlParameters[32] = new SqlParameter("@QuantityPrompt", product.QuantityPrompt);
+                sqlParameters[33] = new SqlParameter("@ManagerApprovalRequired", product.ManagerApprovalRequired);
+                sqlParameters[34] = new SqlParameter("@AllowPriceOverride", product.AllowPriceOverride);
+                sqlParameters[35] = new SqlParameter("@MinimumQuantity", product.MinimumQuantity);
 
 
                 return conn.executeUpdateQuery("sp_InsertOrUpdateProduct", sqlParameters);

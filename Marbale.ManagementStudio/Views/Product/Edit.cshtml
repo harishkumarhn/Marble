@@ -23,9 +23,8 @@
             <form>
                 <div class="productEdit">
                     <div class="row">
-
                         <label class="col-md-2">Id:</label>
-                        @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "col-md-2" })
+                        @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "col-md-2", id = "productId" })
                         <label class="col-md-1">Name:</label>
                         @Html.TextBoxFor(m => m.Name, new { @class = "col-md-3", placeholder = @Html.DisplayNameFor(n => n.Name) })
 
@@ -87,7 +86,7 @@
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Time:</label>
-                                @Html.TextBoxFor(m => m.Time, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-6" ,@style = "padding-right: 0px;padding-left: 0px;"})
+                                @Html.TextBoxFor(m => m.Time, "{0:HH:mm:ss}", new { type = "Time", @class = "col-md-6", @style = "padding-right: 0px;padding-left: 0px;" })
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Category:</label>
@@ -131,17 +130,17 @@
                                         @Html.DropDownListFor(m => m.DisplayGroupId, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.DisplayGroup) ? "SELECT" : Model.DisplayGroup), new { @class = "col-md-5" })
                                     </div>
                                     <div class="col-md-13">
-                                    <label class="col-md-6">CardValidFor:</label>
-                                    @Html.TextBoxFor(m => m.CardValidFor, new { @class = "col-md-5" })
-                                </div>
-                                     <div class="col-md-13">
-                                    <label class="col-md-8">Minimum quantity:</label>
-                                    @Html.TextBoxFor(m => m.MinimumQuantity, new { @class = "col-md-3" })
-                                </div>
+                                        <label class="col-md-6">CardValidFor:</label>
+                                        @Html.TextBoxFor(m => m.CardValidFor, new { @class = "col-md-5" })
+                                    </div>
+                                    <div class="col-md-13">
+                                        <label class="col-md-8">Minimum quantity:</label>
+                                        @Html.TextBoxFor(m => m.MinimumQuantity, new { @class = "col-md-3" })
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <label class="col-md-8">Auto Generate Card Number:</label>
-                                        @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                    @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
                                 </div>
                                 <div class="col-md-12">
                                     <label class="col-md-8">Manager Approval Required</label>
@@ -157,12 +156,12 @@
 
                                 <div class="col-md-12">
                                     <label class="col-md-6">StartDate:</label>
-                                     @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-5",@readonly = "readonly" ,@style = "padding-right: 0px;padding-left: 0px;" })
+                                    @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-5", @readonly = "readonly", @style = "padding-right: 0px;padding-left: 0px;" })
                                 </div>
                                 <div class="col-md-12">
                                     <label class="col-md-6">ExpiryDate:</label>
                                     @Html.TextBoxFor(m => m.ExpiryDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
-                                </div>                                
+                                </div>
                                 <div class="col-md-12">
                                     <label class="col-md-6">Last Updated User:</label>
                                     @Html.TextBoxFor(m => m.LastUpdatedBy, new { @class = "col-md-5", @readonly = "readonly" })
@@ -175,14 +174,15 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </form>
             <div style="float: right; padding-right: 50px">
-                <input type="submit" name="submit" value="Save" class="btn btn-primary btn-md" />
+                <input type="submit" name="submit" value="Save" onclick="duplicateClick(false)" class="btn btn-primary btn-md" />
                 @if (Model.Id > 0)
                 {
-                    <input type="submit" name="submit" value="Duplicate" class="btn btn-primary btn-md" />
+                    <button class="btn btn-primary btn-md" onclick="duplicateClick(true)">Duplicate</button>
                 }
-                <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+               <button class="btn btn-primary btn-md" role="button" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
         </div>
   
@@ -190,11 +190,20 @@
 </div>
 
 <script type="text/javascript">
+    var duplicateClicked = false;
+    function duplicateClick(value) {
+        if (value == true) {
+            $('#productId').val(0);
+        }
+        duplicateClicked = value;
+    }
     function displayMessage(response) {
-        if (response == '') {
-            location.reload();
-        } else {
-            alert(response);
+        if (duplicateClicked == false) {
+            if (response == '') {
+                location.reload();
+            } else {
+                alert(response);
+            }
         }
     }
 
@@ -236,8 +245,6 @@
             });
         }
     }
-
-
 </script>
 <style>
     .modal-body {

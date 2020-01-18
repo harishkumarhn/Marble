@@ -5,20 +5,18 @@ using Marbale.BusinessObject.Tax;
 using MarbaleManagementStudio.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace MarbaleManagementStudio.Controllers
 {
 
     // [LogCustomExceptionFilter]
+    [AuthorizationFilter]
     public class ProductController : Controller
     {
         public ProductBL productBussiness;
+
         public ProductController()
         {
             productBussiness = new ProductBL();
@@ -28,7 +26,6 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
-
         public ActionResult ProductSetup()
         {
             try
@@ -148,7 +145,7 @@ namespace MarbaleManagementStudio.Controllers
             }
 
         }
-
+        [HttpPost]
         public string InsertOrUpdate(Product pObject, string submit)
         {
             var message = string.Empty;
@@ -188,8 +185,6 @@ namespace MarbaleManagementStudio.Controllers
             try
             {
                 var result = 0;
-
-
                 foreach (var product in products)
                 {
                     result = productBussiness.InsertOrUpdateProduct(product);

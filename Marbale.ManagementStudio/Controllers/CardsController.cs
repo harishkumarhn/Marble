@@ -10,6 +10,7 @@ using System.Web.Routing;
 
 namespace MarbaleManagementStudio.Controllers
 {
+    [AuthorizationFilter]
     public class CardsController : Controller
     {
         public CardsBL cardBussiness;

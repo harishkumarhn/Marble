@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,12 @@ namespace Marbale.BusinessObject.SiteSetup
     public class User
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Enter user name.")]
         public string Name { get; set; }
-        public string Role { get; set; }
+        [Required(ErrorMessage = "Enter login id.")]
         public string LoginId { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
         public string Status { get; set; }
         public string POSCounter { get; set; }
         public DateTime PaswardChangeDate { get; set; }
@@ -32,8 +36,5 @@ namespace Marbale.BusinessObject.SiteSetup
 
         public List<IdValue> Roles { get; set; }
         public List<IdValue> Statuses { get; set; }
-
-        public string password { get; set; }
-
     }
 }
