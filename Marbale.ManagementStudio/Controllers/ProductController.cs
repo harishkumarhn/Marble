@@ -5,20 +5,18 @@ using Marbale.BusinessObject.Tax;
 using MarbaleManagementStudio.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace MarbaleManagementStudio.Controllers
 {
 
     // [LogCustomExceptionFilter]
+    [AuthorizationFilter]
     public class ProductController : Controller
     {
         public ProductBL productBussiness;
+
         public ProductController()
         {
             productBussiness = new ProductBL();
@@ -28,31 +26,24 @@ namespace MarbaleManagementStudio.Controllers
         {
             return View();
         }
-
         public ActionResult ProductSetup()
         {
-            if (Session["UserID"] != null)
+            try
             {
-                try
-                {
-                    var products = productBussiness.GetProducts((int)ProductTypeEnum.Card);
-                    Session["TaxList"] = products[0].TaxList;
-                    Session["TypeList"] = products[0].TypeList;
-                    Session["CategoryList"] = products[0].CategoryList;
-                    Session["DisplayGroupList"] = products[0].DisplayGroupList;
-                    ViewBag.productDetails = products;
-                    return View();
-                }
-                catch (Exception e)
-                {
-                    LogError.Instance.LogException("ProductSetup", e);
-                    throw;
-                }
+                var products = productBussiness.GetProducts((int)ProductTypeEnum.Card);
+                Session["TaxList"] = products[0].TaxList;
+                Session["TypeList"] = products[0].TypeList;
+                Session["CategoryList"] = products[0].CategoryList;
+                Session["DisplayGroupList"] = products[0].DisplayGroupList;
+                ViewBag.productDetails = products;
+                return View();
             }
-            else
+            catch (Exception e)
             {
-                return RedirectToAction("Login","Marble");
-            }  
+                LogError.Instance.LogException("ProductSetup", e);
+                throw;
+            }
+
         }
         public ActionResult NonCardProductSetup()
         {

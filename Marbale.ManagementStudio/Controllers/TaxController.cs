@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MarbaleManagementStudio.Controllers
 {
+    [AuthorizationFilter]
     public class TaxController : Controller
     {
         //
