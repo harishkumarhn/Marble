@@ -15,7 +15,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	get products by screen
 -- =============================================
-CREATE PROCEDURE [dbo].[sp_GetProductsByScreenGroup] 
+ALTER PROCEDURE [dbo].[sp_GetProductsByScreenGroup] 
 	-- Add the parameters for the stored procedure here
 	@displayGroupId INT = 0
 AS
@@ -29,7 +29,7 @@ BEGIN
  Courtesy,  
  p.Id ,Name  ,POSCounter, P.Active, DisplayInPOS, P.Type, DG.DisplayGroup ,Category ,
  AutoGenerateCardNumber ,OnlyVIP, Price, FaceValue, TaxInclusive, TaxPercentage, FinalPrice, EffectivePrice,    
-  P.LastUpdatedBy, P.LastUpdatedDate, Bonus, LastUpdatedUser ,TaxName, StartDate as 'StartDate', Games ,    
+  P.LastUpdatedBy, P.LastUpdatedDate, Bonus ,TaxName, StartDate as 'StartDate', Games ,    
   CreditsPlus, Credits ,CardValidFor   
   from Product P
 

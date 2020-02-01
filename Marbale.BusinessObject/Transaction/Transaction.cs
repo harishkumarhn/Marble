@@ -9,6 +9,8 @@ namespace Marbale.BusinessObject.POSTransaction
 {
     public class Transaction
     {
+        public int Trx_id { get; set; }
+        public DateTime TransactionDate { get; set; }
         public double CashAmount { get; set; }
         public double Discount_Amount { get; set; }
 
@@ -30,12 +32,12 @@ namespace Marbale.BusinessObject.POSTransaction
         public double Tip_Amount { get; set; }
         public int TokenNumber { get; set; }
         public double TotalPaidAmount { get; set; }
-        public DateTime TransactionDate { get; set; }
+
         public decimal Transaction_Amount { get; set; }
         public DateTime TrxDate { get; set; }
         public List<TransactionLine> TrxLines { get; set; }
         public int TrxProfileId { get; set; }
-        public int Trx_id { get; set; }
+
         public string Trx_No { get; set; }
         public string Username { get; set; }
 
@@ -70,6 +72,13 @@ namespace Marbale.BusinessObject.POSTransaction
 
     public class TransactionLine
     {
+        public int trxId { get; set; }
+
+        public string ProductName { get; set; }
+        public decimal quantity { get; set; }
+
+        public decimal Price { get; set; }
+
         public bool AllowCancel { get; set; }
         public bool AllowEdit { get; set; }
         public bool AllowPriceOverride { get; set; }
@@ -98,15 +107,15 @@ namespace Marbale.BusinessObject.POSTransaction
         public int OrigRentalTrxId { get; set; }
         public TransactionLine ParentLine { get; set; }
 
-        public decimal Price { get; set; }
+
         public bool PrintKOT { get; set; }
         public int ProductID { get; set; }
-        public string ProductName { get; set; }
+
         public bool productSplitTaxExists { get; set; }
         public string ProductType { get; set; }
         public string ProductTypeCode { get; set; }
 
-        public decimal quantity { get; set; }
+
 
         public string Remarks { get; set; }
 
@@ -118,7 +127,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public int tax_structer_id { get; set; }
 
         public decimal tax_percentage { get; set; }
-        public int trxId { get; set; }
+
 
         public decimal LineAmount { get; set; }
         public decimal amount { get; set; }

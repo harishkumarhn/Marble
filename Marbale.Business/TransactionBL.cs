@@ -138,6 +138,7 @@ namespace Marble.Business
                     trx.POSTypeId = rw["POSTypeId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["POSTypeId"]);
                     trx.OtherModeAmount = rw["OtherPaymentModeAmount"] == DBNull.Value ? 0 : Convert.ToDouble(rw["OtherPaymentModeAmount"]);
                     trx.CustomerId = rw["CustomerId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["CustomerId"]);
+                    trx.Discount_Percentage = rw["TrxDiscountPercentage"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["TrxDiscountPercentage"]);
 
                     trx.TransactionLines = GetTraxLines(trx.Trx_id, ds.Tables[1]);
                     lstTransaction.Add(trx);
@@ -202,6 +203,7 @@ namespace Marble.Business
                             trxLn.tickets = rw["Tickets"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["Tickets"]);
                             trxLn.Remarks = rw["Remarks"] != DBNull.Value ? rw["Remarks"].ToString() : string.Empty;
 
+
                             trxLines.Add(trxLn);
                         }
                     }
@@ -231,6 +233,13 @@ namespace Marble.Business
         public void RefundCard(int cardId, decimal refundAmount, decimal credits, int faceValue, bool valid, string lastUpdatedBy)
         {
             trxData.RefundCard(cardId, refundAmount, credits, faceValue, valid, lastUpdatedBy);
+        }
+
+
+        public int ReverseTransaction(int TrxId, int posMachineId, string loginName)
+        {
+            trxData = new TransactionData();
+            return trxData.ReverseTransaction(TrxId, posMachineId, loginName);
         }
     }
 }
