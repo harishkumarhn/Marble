@@ -19,7 +19,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public string LoginID { get; set; }
         public decimal Net_Transaction_Amount { get; set; }
         public string originalSystemReference { get; set; }
-        public int OriginalTrxId { get; set; }
+
         public double OtherModeAmount { get; set; }
         public int PaymentMode { get; set; }
         public string PaymentReference { get; set; }
@@ -28,6 +28,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public int POSTypeId { get; set; }
         public double Pre_TaxAmount { get; set; }
         public string Status { get; set; }
+        public int OriginalTrxId { get; set; }
         public decimal Tax_Amount { get; set; }
         public double Tip_Amount { get; set; }
         public int TokenNumber { get; set; }
