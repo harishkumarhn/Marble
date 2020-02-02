@@ -45,6 +45,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControlCardAction = new System.Windows.Forms.TabControl();
             this.tabPageTrx = new System.Windows.Forms.TabPage();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -186,6 +187,8 @@
             this.posContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changeLayoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enterMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Cancel = new System.Windows.Forms.DataGridViewImageColumn();
+            this.trxlnCancel = new System.Windows.Forms.DataGridViewImageColumn();
             this.tabControlCardAction.SuspendLayout();
             this.tabPageTrx.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransaction)).BeginInit();
@@ -617,6 +620,8 @@
             this.dgvTrxLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTrxLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTrxLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.trxlnCancel});
             this.dgvTrxLines.Location = new System.Drawing.Point(12, 271);
             this.dgvTrxLines.MultiSelect = false;
             this.dgvTrxLines.Name = "dgvTrxLines";
@@ -624,12 +629,15 @@
             this.dgvTrxLines.RowHeadersVisible = false;
             this.dgvTrxLines.Size = new System.Drawing.Size(692, 185);
             this.dgvTrxLines.TabIndex = 1;
+            this.dgvTrxLines.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrxLines_CellContentClick);
             // 
             // dgvTrxHeader
             // 
             this.dgvTrxHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTrxHeader.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTrxHeader.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Cancel});
             this.dgvTrxHeader.Location = new System.Drawing.Point(12, 25);
             this.dgvTrxHeader.MultiSelect = false;
             this.dgvTrxHeader.Name = "dgvTrxHeader";
@@ -638,6 +646,7 @@
             this.dgvTrxHeader.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTrxHeader.Size = new System.Drawing.Size(692, 220);
             this.dgvTrxHeader.TabIndex = 0;
+            this.dgvTrxHeader.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrxHeader_CellContentClick);
             this.dgvTrxHeader.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrxHeader_RowEnter);
             // 
             // tabPageActivities
@@ -1286,17 +1295,19 @@
             this.dgvCard.AllowUserToDeleteRows = false;
             this.dgvCard.AllowUserToResizeColumns = false;
             this.dgvCard.AllowUserToResizeRows = false;
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.White;
+            this.dgvCard.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvCard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvCard.BackgroundColor = System.Drawing.Color.White;
             this.dgvCard.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvCard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCard.ColumnHeadersVisible = false;
             this.dgvCard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1315,22 +1326,22 @@
             // 
             // dataGridViewTextBoxColumn1
             // 
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewTextBoxColumn1.HeaderText = "ColumnHeader";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.Width = 5;
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewTextBoxColumn2.HeaderText = "Value";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.Width = 5;
@@ -1960,8 +1971,8 @@
             // 
             // btnReConnectCardReader
             // 
-            this.btnReConnectCardReader.BackColor = System.Drawing.SystemColors.Control;
-            this.btnReConnectCardReader.BackgroundImage = global::Marbale.POS.Properties.Resources.Reconnect;
+            this.btnReConnectCardReader.BackColor = System.Drawing.Color.Transparent;
+            this.btnReConnectCardReader.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnReConnectCardReader.BackgroundImage")));
             this.btnReConnectCardReader.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnReConnectCardReader.FlatAppearance.BorderSize = 0;
             this.btnReConnectCardReader.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -1973,6 +1984,7 @@
             this.btnReConnectCardReader.Name = "btnReConnectCardReader";
             this.btnReConnectCardReader.Size = new System.Drawing.Size(152, 44);
             this.btnReConnectCardReader.TabIndex = 3;
+            this.btnReConnectCardReader.Text = "          Re Connect";
             this.btnReConnectCardReader.UseVisualStyleBackColor = false;
             this.btnReConnectCardReader.Click += new System.EventHandler(this.btnReConnectCardReader_Click);
             // 
@@ -2001,7 +2013,7 @@
             // btnChangeSkinColor
             // 
             this.btnChangeSkinColor.BackColor = System.Drawing.Color.Transparent;
-            this.btnChangeSkinColor.BackgroundImage = global::Marbale.POS.Properties.Resources.changeColor;
+            this.btnChangeSkinColor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnChangeSkinColor.BackgroundImage")));
             this.btnChangeSkinColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnChangeSkinColor.FlatAppearance.BorderSize = 0;
             this.btnChangeSkinColor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -2012,13 +2024,14 @@
             this.btnChangeSkinColor.Name = "btnChangeSkinColor";
             this.btnChangeSkinColor.Size = new System.Drawing.Size(152, 43);
             this.btnChangeSkinColor.TabIndex = 5;
+            this.btnChangeSkinColor.Text = "     Change Color";
             this.btnChangeSkinColor.UseVisualStyleBackColor = false;
             this.btnChangeSkinColor.Click += new System.EventHandler(this.btnChangeSkinColor_Click);
             // 
             // buttonSkinColorReset
             // 
             this.buttonSkinColorReset.BackColor = System.Drawing.Color.Transparent;
-            this.buttonSkinColorReset.BackgroundImage = global::Marbale.POS.Properties.Resources.Reset;
+            this.buttonSkinColorReset.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonSkinColorReset.BackgroundImage")));
             this.buttonSkinColorReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonSkinColorReset.FlatAppearance.BorderSize = 0;
             this.buttonSkinColorReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -2029,6 +2042,7 @@
             this.buttonSkinColorReset.Name = "buttonSkinColorReset";
             this.buttonSkinColorReset.Size = new System.Drawing.Size(152, 43);
             this.buttonSkinColorReset.TabIndex = 3;
+            this.buttonSkinColorReset.Text = "          Reset";
             this.buttonSkinColorReset.UseVisualStyleBackColor = false;
             this.buttonSkinColorReset.Click += new System.EventHandler(this.buttonSkinColorReset_Click);
             // 
@@ -2068,11 +2082,13 @@
             this.btnChangePassword.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnChangePassword.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangePassword.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnChangePassword.Location = new System.Drawing.Point(166, 113);
+            this.btnChangePassword.Location = new System.Drawing.Point(158, 113);
             this.btnChangePassword.Name = "btnChangePassword";
-            this.btnChangePassword.Size = new System.Drawing.Size(147, 43);
+            this.btnChangePassword.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnChangePassword.Size = new System.Drawing.Size(155, 43);
             this.btnChangePassword.TabIndex = 7;
+            this.btnChangePassword.Text = "           Change Pwd";
+            this.btnChangePassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnChangePassword.UseVisualStyleBackColor = false;
             this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
@@ -2200,6 +2216,21 @@
             this.enterMessageToolStripMenuItem.Name = "enterMessageToolStripMenuItem";
             this.enterMessageToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.enterMessageToolStripMenuItem.Text = "Enter Message";
+            // 
+            // Cancel
+            // 
+            this.Cancel.FillWeight = 40F;
+            this.Cancel.HeaderText = "Cancel";
+            this.Cancel.Name = "Cancel";
+            this.Cancel.ReadOnly = true;
+            this.Cancel.Width = 60;
+            // 
+            // trxlnCancel
+            // 
+            this.trxlnCancel.HeaderText = "Cancel";
+            this.trxlnCancel.Name = "trxlnCancel";
+            this.trxlnCancel.ReadOnly = true;
+            this.trxlnCancel.Width = 60;
             // 
             // MarblePOS
             // 
@@ -2419,5 +2450,7 @@
         private System.Windows.Forms.TabControl tabControlProducts;
         private System.Windows.Forms.TabPage tabPageProductGroups;
         private System.Windows.Forms.Label lblCustomerMessage;
+        private System.Windows.Forms.DataGridViewImageColumn Cancel;
+        private System.Windows.Forms.DataGridViewImageColumn trxlnCancel;
     }
 }

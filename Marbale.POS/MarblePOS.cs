@@ -1246,6 +1246,7 @@ namespace Marbale.POS
                     {
                         tendered_amount = varAmount;
                         updateScreenAmounts();
+
                         break;
                     }
                     else
@@ -1258,6 +1259,8 @@ namespace Marbale.POS
                     return;
                 }
             }
+
+            Transaction.Status = "CLOSED";
 
             TransactionBL trxBL = new TransactionBL();
             int trxId = trxBL.SaveTransaction(Transaction);
@@ -1331,6 +1334,7 @@ namespace Marbale.POS
             }
         }
 
+
         private void UpdateTransactionTab(int userId)
         {
             TransactionBL trxBL = new TransactionBL();
@@ -1340,11 +1344,10 @@ namespace Marbale.POS
             if (ListTransaction != null)
             {
                 dgvTrxHeader.DataSource = ListTransaction;
-
+                
                 dgvTrxHeader.Columns["POSMachineId"].Visible = false;
                 dgvTrxHeader.Columns["POSTypeId"].Visible = false;
                 dgvTrxHeader.Columns["Pre_TaxAmount"].Visible = false;
-                dgvTrxHeader.Columns["Status"].Visible = false;
                 dgvTrxHeader.Columns["Tax_Amount"].Visible = false;
                 dgvTrxHeader.Columns["Tip_Amount"].Visible = false;
                 dgvTrxHeader.Columns["TokenNumber"].Visible = false;
@@ -1364,8 +1367,26 @@ namespace Marbale.POS
                 dgvTrxHeader.Columns["ExternalSystemReference"].Visible = false;
                 //dgvTrxHeader.Columns["DateTimeLastUpdatedTime"].Visible = false;
                 dgvTrxHeader.Columns["Customer"].Visible = false;
+
+                ApplyColorsToMyTransactionGrid();
             }
         }
+
+        public void ApplyColorsToMyTransactionGrid()
+        {
+            if(dgvTrxHeader.DataSource != null && dgvTrxHeader.Rows.Count > 0)
+            {
+                foreach(DataGridViewRow rw in dgvTrxHeader.Rows)
+                {
+                    if(rw.Cells["status"].Value != null && rw.Cells["status"].Value.ToString().ToLower() == "cancelled")
+                    {
+                        rw.DefaultCellStyle.BackColor = Color.Red;
+                        rw.DefaultCellStyle.ForeColor = Color.Red;
+                    }
+                }
+            }
+        }
+    
 
         private void txtPhoneno_Leave(object sender, EventArgs e)
         {
@@ -1494,6 +1515,8 @@ namespace Marbale.POS
                     //dgvTrxLines.Columns["TransactionLineParentLine"].Visible = false;
                     dgvTrxLines.Columns["PrintKOT"].Visible = false;
                     dgvTrxLines.Columns["ParentLine"].Visible = false;
+                    dgvTrxLines.Columns["loyaltyPoints"].Visible = false;
+                    
                 }
             }
         }
@@ -1614,7 +1637,7 @@ namespace Marbale.POS
             }
             else if (b.Equals(btnClearTrxn))
             {
-                b.BackgroundImage = Properties.Resources.Clear_Transaction;
+               // b.BackgroundImage = Properties.Resources.Clear_Transaction;
             }
             else if (b.Equals(btnCancelTrxnLine))
             {
@@ -1960,6 +1983,56 @@ namespace Marbale.POS
             frm.ShowDialog();
 
             HandleCardRead(CurrentCard.CardNumber, null);
+        }
+
+        private void dgvTrxHeader_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+
+                if (e.ColumnIndex == 0)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure you want Reverse the Transaction ?", "Confirmation Message", MessageBoxButtons.YesNo);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        if (dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value != null 
+                            && dgvTrxHeader["status", e.RowIndex].Value != null )
+                        {
+                            if (dgvTrxHeader["status", e.RowIndex].Value.ToString().ToLower() != "cancelled"
+                                && (dgvTrxHeader["OriginalTrxId", e.RowIndex].Value == null || Convert.ToInt32(dgvTrxHeader["OriginalTrxId", e.RowIndex].Value) == 0))
+                            {
+                                int trxId = Convert.ToInt32(dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value);
+                                TransactionBL traxBl = new TransactionBL();
+                                int reversedTrxId = traxBl.ReverseTransaction(trxId, 0, string.Empty);
+
+                                MessageBox.Show("Reverse Transaction was successful, Reversed Transaction Id is : " + reversedTrxId, "Message");
+                            }
+                            else
+                            {
+                                MessageBox.Show("This Transaction is Already Cancelled");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void dgvTrxLines_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want Reverse the Transaction Line ?", "Confirmation Message", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+
+                }
+            }
         }
     }
 }
