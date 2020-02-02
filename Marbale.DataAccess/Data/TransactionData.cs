@@ -728,5 +728,37 @@ namespace Marbale.DataAccess.Data
             }
 
         }
+
+
+        public int ReverseTransaction(int TrxId, int posMachineId, string loginName)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[4];
+                sqlParameters[0] = new SqlParameter("@RevereseTrxId", TrxId);
+
+                sqlParameters[1] = new SqlParameter("@POSMachineId", posMachineId);
+
+                if (!string.IsNullOrEmpty(loginName))
+                {
+                    sqlParameters[2] = new SqlParameter("@LoginName", loginName);
+                }
+                else
+                {
+                    sqlParameters[2] = new SqlParameter("@LoginName", DBNull.Value);
+                }
+
+                sqlParameters[3] = new SqlParameter("@trxId", SqlDbType.Int);
+                sqlParameters[3].Direction = ParameterDirection.Output;
+
+                conn.executeUpdateQuery("sp_ReverseTransaction", sqlParameters);
+
+                return Convert.ToInt32(sqlParameters[3].Value);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

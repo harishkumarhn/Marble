@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CardTabControl = new System.Windows.Forms.TabControl();
             this.tbLoadTickets = new System.Windows.Forms.TabPage();
             this.lblCardDetails = new System.Windows.Forms.Label();
@@ -60,6 +62,22 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbLoadMultiple = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbTransferCard = new System.Windows.Forms.TabPage();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -98,6 +116,16 @@
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbRefundCard = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtCardDeposit = new System.Windows.Forms.TextBox();
+            this.txtTotalCredits = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtCreditsToRefund = new System.Windows.Forms.TextBox();
+            this.lblCredits = new System.Windows.Forms.Label();
+            this.btnRefundCardClose = new System.Windows.Forms.Button();
+            this.btnRefundCardOk = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.dgvRefundCard = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,21 +133,16 @@
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnRefundCardClose = new System.Windows.Forms.Button();
-            this.btnRefundCardOk = new System.Windows.Forms.Button();
-            this.txtCreditsToRefund = new System.Windows.Forms.TextBox();
-            this.lblCredits = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtTotalCredits = new System.Windows.Forms.TextBox();
-            this.txtCardDeposit = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.CardTabControl.SuspendLayout();
             this.tbLoadTickets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardTickets)).BeginInit();
             this.tbLoadBonus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBonusCard)).BeginInit();
+            this.tbLoadMultiple.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tbTransferCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvToCard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFromCard)).BeginInit();
@@ -248,14 +271,14 @@
             this.dgvCardTickets.Name = "dgvCardTickets";
             this.dgvCardTickets.ReadOnly = true;
             this.dgvCardTickets.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCardTickets.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCardTickets.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCardTickets.RowHeadersVisible = false;
             this.dgvCardTickets.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvCardTickets.Size = new System.Drawing.Size(535, 50);
@@ -385,14 +408,14 @@
             this.dgvBonusCard.Name = "dgvBonusCard";
             this.dgvBonusCard.ReadOnly = true;
             this.dgvBonusCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBonusCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBonusCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvBonusCard.RowHeadersVisible = false;
             this.dgvBonusCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvBonusCard.Size = new System.Drawing.Size(535, 50);
@@ -421,6 +444,13 @@
             // 
             // tbLoadMultiple
             // 
+            this.tbLoadMultiple.Controls.Add(this.button2);
+            this.tbLoadMultiple.Controls.Add(this.button1);
+            this.tbLoadMultiple.Controls.Add(this.button3);
+            this.tbLoadMultiple.Controls.Add(this.textBox1);
+            this.tbLoadMultiple.Controls.Add(this.label12);
+            this.tbLoadMultiple.Controls.Add(this.groupBox1);
+            this.tbLoadMultiple.Controls.Add(this.groupBox2);
             this.tbLoadMultiple.Location = new System.Drawing.Point(4, 24);
             this.tbLoadMultiple.Name = "tbLoadMultiple";
             this.tbLoadMultiple.Size = new System.Drawing.Size(736, 395);
@@ -428,6 +458,185 @@
             this.tbLoadMultiple.Tag = "2";
             this.tbLoadMultiple.Text = "Load Multiple";
             this.tbLoadMultiple.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button2.Location = new System.Drawing.Point(524, 334);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(102, 39);
+            this.button2.TabIndex = 27;
+            this.button2.Text = "Close";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(391, 19);
+            this.button1.Name = "button1";
+            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button1.Size = new System.Drawing.Size(93, 23);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "Add Details";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button3.Location = new System.Drawing.Point(137, 334);
+            this.button3.Name = "button3";
+            this.button3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button3.Size = new System.Drawing.Size(102, 39);
+            this.button3.TabIndex = 26;
+            this.button3.Text = "OK";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(210, 19);
+            this.textBox1.MaxLength = 10;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(161, 23);
+            this.textBox1.TabIndex = 25;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label12.Location = new System.Drawing.Point(36, 22);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(133, 15);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "Enter CardNumber :";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Location = new System.Drawing.Point(8, 50);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(161, 265);
+            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "NEW Cards";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn20});
+            this.dataGridView1.Location = new System.Drawing.Point(6, 22);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridView1.Size = new System.Drawing.Size(143, 237);
+            this.dataGridView1.TabIndex = 27;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.HeaderText = "Card Number";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            this.dataGridViewTextBoxColumn20.Width = 140;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.dataGridView2);
+            this.groupBox2.Location = new System.Drawing.Point(175, 50);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(539, 265);
+            this.groupBox2.TabIndex = 29;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Selected Products";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(377, 218);
+            this.button5.Name = "button5";
+            this.button5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button5.Size = new System.Drawing.Size(118, 35);
+            this.button5.TabIndex = 31;
+            this.button5.Text = "Remove Product";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(20, 218);
+            this.button4.Name = "button4";
+            this.button4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button4.Size = new System.Drawing.Size(118, 35);
+            this.button4.TabIndex = 30;
+            this.button4.Text = "Select Product";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn21,
+            this.dataGridViewTextBoxColumn24,
+            this.dataGridViewTextBoxColumn25,
+            this.Column4});
+            this.dataGridView2.Location = new System.Drawing.Point(6, 22);
+            this.dataGridView2.MultiSelect = false;
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridView2.Size = new System.Drawing.Size(527, 190);
+            this.dataGridView2.TabIndex = 18;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.HeaderText = "Product Name";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            this.dataGridViewTextBoxColumn21.ReadOnly = true;
+            this.dataGridViewTextBoxColumn21.Width = 190;
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            this.dataGridViewTextBoxColumn24.HeaderText = "Bonus";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            this.dataGridViewTextBoxColumn24.ReadOnly = true;
+            this.dataGridViewTextBoxColumn24.Width = 110;
+            // 
+            // dataGridViewTextBoxColumn25
+            // 
+            this.dataGridViewTextBoxColumn25.HeaderText = "Price";
+            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            this.dataGridViewTextBoxColumn25.ReadOnly = true;
+            this.dataGridViewTextBoxColumn25.Width = 110;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Credits";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 110;
             // 
             // tbTransferCard
             // 
@@ -561,14 +770,14 @@
             this.dgvToCard.Name = "dgvToCard";
             this.dgvToCard.ReadOnly = true;
             this.dgvToCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvToCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvToCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvToCard.RowHeadersVisible = false;
             this.dgvToCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvToCard.Size = new System.Drawing.Size(605, 50);
@@ -632,14 +841,14 @@
             this.dgvFromCard.Name = "dgvFromCard";
             this.dgvFromCard.ReadOnly = true;
             this.dgvFromCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFromCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFromCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvFromCard.RowHeadersVisible = false;
             this.dgvFromCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvFromCard.Size = new System.Drawing.Size(605, 50);
@@ -779,14 +988,14 @@
             this.dgvConsolidateCard.Name = "dgvConsolidateCard";
             this.dgvConsolidateCard.ReadOnly = true;
             this.dgvConsolidateCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvConsolidateCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvConsolidateCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvConsolidateCard.RowHeadersVisible = false;
             this.dgvConsolidateCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvConsolidateCard.Size = new System.Drawing.Size(605, 49);
@@ -847,6 +1056,102 @@
             this.tbRefundCard.Text = "Refund Card";
             this.tbRefundCard.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label11.Location = new System.Drawing.Point(162, 114);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(105, 15);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "Card Deposit :";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label10.Location = new System.Drawing.Point(85, 147);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(182, 15);
+            this.label10.TabIndex = 36;
+            this.label10.Text = "Total Available Credits :";
+            // 
+            // txtCardDeposit
+            // 
+            this.txtCardDeposit.Enabled = false;
+            this.txtCardDeposit.Location = new System.Drawing.Point(284, 111);
+            this.txtCardDeposit.MaxLength = 5;
+            this.txtCardDeposit.Name = "txtCardDeposit";
+            this.txtCardDeposit.Size = new System.Drawing.Size(107, 23);
+            this.txtCardDeposit.TabIndex = 35;
+            // 
+            // txtTotalCredits
+            // 
+            this.txtTotalCredits.Enabled = false;
+            this.txtTotalCredits.Location = new System.Drawing.Point(284, 144);
+            this.txtTotalCredits.MaxLength = 5;
+            this.txtTotalCredits.Name = "txtTotalCredits";
+            this.txtTotalCredits.Size = new System.Drawing.Size(107, 23);
+            this.txtTotalCredits.TabIndex = 34;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(284, 213);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(364, 42);
+            this.textBox2.TabIndex = 33;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label9.Location = new System.Drawing.Point(197, 213);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(70, 15);
+            this.label9.TabIndex = 32;
+            this.label9.Text = "Remarks :";
+            // 
+            // txtCreditsToRefund
+            // 
+            this.txtCreditsToRefund.Location = new System.Drawing.Point(284, 178);
+            this.txtCreditsToRefund.MaxLength = 5;
+            this.txtCreditsToRefund.Name = "txtCreditsToRefund";
+            this.txtCreditsToRefund.Size = new System.Drawing.Size(202, 23);
+            this.txtCreditsToRefund.TabIndex = 31;
+            // 
+            // lblCredits
+            // 
+            this.lblCredits.AutoSize = true;
+            this.lblCredits.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblCredits.Location = new System.Drawing.Point(85, 181);
+            this.lblCredits.Name = "lblCredits";
+            this.lblCredits.Size = new System.Drawing.Size(182, 15);
+            this.lblCredits.TabIndex = 30;
+            this.lblCredits.Text = "Enter Credits to Refund :";
+            // 
+            // btnRefundCardClose
+            // 
+            this.btnRefundCardClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnRefundCardClose.Location = new System.Drawing.Point(426, 331);
+            this.btnRefundCardClose.Name = "btnRefundCardClose";
+            this.btnRefundCardClose.Size = new System.Drawing.Size(102, 39);
+            this.btnRefundCardClose.TabIndex = 29;
+            this.btnRefundCardClose.Text = "Close";
+            this.btnRefundCardClose.UseVisualStyleBackColor = true;
+            this.btnRefundCardClose.Click += new System.EventHandler(this.btnRefundCardClose_Click);
+            // 
+            // btnRefundCardOk
+            // 
+            this.btnRefundCardOk.Location = new System.Drawing.Point(137, 331);
+            this.btnRefundCardOk.Name = "btnRefundCardOk";
+            this.btnRefundCardOk.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnRefundCardOk.Size = new System.Drawing.Size(102, 39);
+            this.btnRefundCardOk.TabIndex = 28;
+            this.btnRefundCardOk.Text = "OK";
+            this.btnRefundCardOk.UseVisualStyleBackColor = true;
+            this.btnRefundCardOk.Click += new System.EventHandler(this.btnRefundCardOk_Click);
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -873,14 +1178,14 @@
             this.dgvRefundCard.Name = "dgvRefundCard";
             this.dgvRefundCard.ReadOnly = true;
             this.dgvRefundCard.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRefundCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRefundCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvRefundCard.RowHeadersVisible = false;
             this.dgvRefundCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvRefundCard.Size = new System.Drawing.Size(605, 48);
@@ -918,102 +1223,6 @@
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
             // 
-            // btnRefundCardClose
-            // 
-            this.btnRefundCardClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnRefundCardClose.Location = new System.Drawing.Point(426, 331);
-            this.btnRefundCardClose.Name = "btnRefundCardClose";
-            this.btnRefundCardClose.Size = new System.Drawing.Size(102, 39);
-            this.btnRefundCardClose.TabIndex = 29;
-            this.btnRefundCardClose.Text = "Close";
-            this.btnRefundCardClose.UseVisualStyleBackColor = true;
-            this.btnRefundCardClose.Click += new System.EventHandler(this.btnRefundCardClose_Click);
-            // 
-            // btnRefundCardOk
-            // 
-            this.btnRefundCardOk.Location = new System.Drawing.Point(137, 331);
-            this.btnRefundCardOk.Name = "btnRefundCardOk";
-            this.btnRefundCardOk.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnRefundCardOk.Size = new System.Drawing.Size(102, 39);
-            this.btnRefundCardOk.TabIndex = 28;
-            this.btnRefundCardOk.Text = "OK";
-            this.btnRefundCardOk.UseVisualStyleBackColor = true;
-            this.btnRefundCardOk.Click += new System.EventHandler(this.btnRefundCardOk_Click);
-            // 
-            // txtCreditsToRefund
-            // 
-            this.txtCreditsToRefund.Location = new System.Drawing.Point(284, 178);
-            this.txtCreditsToRefund.MaxLength = 5;
-            this.txtCreditsToRefund.Name = "txtCreditsToRefund";
-            this.txtCreditsToRefund.Size = new System.Drawing.Size(202, 23);
-            this.txtCreditsToRefund.TabIndex = 31;
-            // 
-            // lblCredits
-            // 
-            this.lblCredits.AutoSize = true;
-            this.lblCredits.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblCredits.Location = new System.Drawing.Point(85, 181);
-            this.lblCredits.Name = "lblCredits";
-            this.lblCredits.Size = new System.Drawing.Size(182, 15);
-            this.lblCredits.TabIndex = 30;
-            this.lblCredits.Text = "Enter Credits to Refund :";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(284, 213);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(364, 42);
-            this.textBox2.TabIndex = 33;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label9.Location = new System.Drawing.Point(197, 213);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(70, 15);
-            this.label9.TabIndex = 32;
-            this.label9.Text = "Remarks :";
-            // 
-            // txtTotalCredits
-            // 
-            this.txtTotalCredits.Enabled = false;
-            this.txtTotalCredits.Location = new System.Drawing.Point(284, 144);
-            this.txtTotalCredits.MaxLength = 5;
-            this.txtTotalCredits.Name = "txtTotalCredits";
-            this.txtTotalCredits.Size = new System.Drawing.Size(107, 23);
-            this.txtTotalCredits.TabIndex = 34;
-            // 
-            // txtCardDeposit
-            // 
-            this.txtCardDeposit.Enabled = false;
-            this.txtCardDeposit.Location = new System.Drawing.Point(284, 111);
-            this.txtCardDeposit.MaxLength = 5;
-            this.txtCardDeposit.Name = "txtCardDeposit";
-            this.txtCardDeposit.Size = new System.Drawing.Size(107, 23);
-            this.txtCardDeposit.TabIndex = 35;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(85, 147);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(182, 15);
-            this.label10.TabIndex = 36;
-            this.label10.Text = "Total Available Credits :";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label11.Location = new System.Drawing.Point(162, 114);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(105, 15);
-            this.label11.TabIndex = 37;
-            this.label11.Text = "Card Deposit :";
-            // 
             // frmTasks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1033,6 +1242,12 @@
             this.tbLoadBonus.ResumeLayout(false);
             this.tbLoadBonus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBonusCard)).EndInit();
+            this.tbLoadMultiple.ResumeLayout(false);
+            this.tbLoadMultiple.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tbTransferCard.ResumeLayout(false);
             this.tbTransferCard.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvToCard)).EndInit();
@@ -1130,5 +1345,21 @@
         private System.Windows.Forms.TextBox txtCardDeposit;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
     }
 }
