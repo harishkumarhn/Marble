@@ -150,6 +150,7 @@
     <Compile Include="Controllers\SiteSetupController.cs" />
     <Compile Include="Controllers\TaskTypeController.cs" />
     <Compile Include="Controllers\TaxController.cs" />
+    <Compile Include="CustomAuthorizeAttribute .cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

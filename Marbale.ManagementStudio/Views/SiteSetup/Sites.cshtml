@@ -119,43 +119,43 @@
         }
     }
     function SaveSites() {
-        var sites = [];
-        var table = document.getElementById('marbleTable');
-        var fixedcolumn1 = $('.DTFC_Cloned lable, select');
-        var fixedcolumn2 = $('.DTFC_Cloned input, select');
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-            if (updatedArray.includes(r)) {
-                var rowIndex = r + 1;
-                sites.push({
-                    SiteId: fixedcolumn1[r].innerHTML,
-                    SiteName: fixedcolumn2[r].value,
-                    SiteCode: table.rows[rowIndex].cells[2].children[0].value,
-                    SiteAddress: table.rows[rowIndex].cells[3].children[0].value,
-                    Notes: table.rows[rowIndex].cells[4].children[0].value,
-                    SiteGUID: table.rows[rowIndex].cells[5].children[0].value,
-                    //Logo: table.rows[rowIndex].cells[6].children[0].value,
-                    Version: table.rows[rowIndex].cells[6].children[0].value,
-                    CustomerKey: table.rows[rowIndex].cells[7].children[0].value
-                });
+        if (updatedArray.length > 0) {
+            var sites = [];
+            var table = document.getElementById('marbleTable');
+            var fixedcolumn1 = $('.DTFC_Cloned lable, select');
+            var fixedcolumn2 = $('.DTFC_Cloned input, select');
+            for (var r = 0, n = table.rows.length; r < n; r++) {
+                if (updatedArray.includes(r)) {
+                    var rowIndex = r + 1;
+                    sites.push({
+                        SiteId: fixedcolumn1[r].innerHTML,
+                        SiteName: fixedcolumn2[r].value,
+                        SiteCode: table.rows[rowIndex].cells[2].children[0].value,
+                        SiteAddress: table.rows[rowIndex].cells[3].children[0].value,
+                        Notes: table.rows[rowIndex].cells[4].children[0].value,
+                        SiteGUID: table.rows[rowIndex].cells[5].children[0].value,
+                        //Logo: table.rows[rowIndex].cells[6].children[0].value,
+                        Version: table.rows[rowIndex].cells[6].children[0].value,
+                        CustomerKey: table.rows[rowIndex].cells[7].children[0].value
+                    });
+                }
             }
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("UpdateSites", "SiteSetup")',
+                data: JSON.stringify({ sites: sites }),
+                dataType: "json",
+                success: function (data) {
+                    alert('Data Saved');
+                    location.reload();
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
         }
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdateSites", "SiteSetup")',
-            data: JSON.stringify({ sites: sites }),
-            dataType: "json",
-            success: function (data) {
-                alert('Data Saved');
-                location.reload();
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
     }
-   
-
 </script>
 
 
