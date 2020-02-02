@@ -1378,10 +1378,11 @@ namespace Marbale.POS
             {
                 foreach(DataGridViewRow rw in dgvTrxHeader.Rows)
                 {
-                    if(rw.Cells["status"].Value != null && rw.Cells["status"].Value.ToString().ToLower() == "cancelled")
+                    if(rw.Cells["status"].Value != null 
+                        && (rw.Cells["status"].Value.ToString().ToLower() == "cancelled" || Convert.ToInt32(rw.Cells["OriginalTrxId"].Value) > 0)
+                       )
                     {
                         rw.DefaultCellStyle.BackColor = Color.Red;
-                        rw.DefaultCellStyle.ForeColor = Color.Red;
                     }
                 }
             }
@@ -1637,7 +1638,7 @@ namespace Marbale.POS
             }
             else if (b.Equals(btnClearTrxn))
             {
-               // b.BackgroundImage = Properties.Resources.Clear_Transaction;
+                b.BackgroundImage = Properties.Resources.Clear_Transaction;
             }
             else if (b.Equals(btnCancelTrxnLine))
             {
@@ -2007,6 +2008,7 @@ namespace Marbale.POS
                                 int reversedTrxId = traxBl.ReverseTransaction(trxId, 0, string.Empty);
 
                                 MessageBox.Show("Reverse Transaction was successful, Reversed Transaction Id is : " + reversedTrxId, "Message");
+                                UpdateTransactionTab(0);
                             }
                             else
                             {
