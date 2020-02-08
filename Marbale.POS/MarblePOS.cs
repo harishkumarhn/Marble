@@ -1517,7 +1517,8 @@ namespace Marbale.POS
                     dgvTrxLines.Columns["PrintKOT"].Visible = false;
                     dgvTrxLines.Columns["ParentLine"].Visible = false;
                     dgvTrxLines.Columns["loyaltyPoints"].Visible = false;
-                    
+                    dgvTrxLines.Columns["DBLineId"].Visible = true;
+
                 }
             }
         }
@@ -2032,7 +2033,23 @@ namespace Marbale.POS
 
                 if (dialogResult == DialogResult.Yes)
                 {
+                    if (dgvTrxLines[e.ColumnIndex + 1, e.RowIndex].Value != null)
+                    {
+                        if (dgvTrxLines["OriginalLineID", e.RowIndex].Value !=null && Convert.ToInt32(dgvTrxLines["OriginalLineID", e.RowIndex].Value) > -1)
+                        {
+                            int trxId = Convert.ToInt32(dgvTrxLines[e.ColumnIndex + 1, e.RowIndex].Value);
+                            int lineId = Convert.ToInt32(dgvTrxLines["DBLineId", e.RowIndex].Value);
+                            TransactionBL traxBl = new TransactionBL();
+                            int reversedTrxId = traxBl.ReverseTransactionLine(trxId, lineId, 0, string.Empty,0, string.Empty, string.Empty);
 
+                            MessageBox.Show("Reverse Transaction Line was successful, Reversed Transaction Id is : " + reversedTrxId, "Message");
+                            UpdateTransactionTab(0);
+                        }
+                        else
+                        {
+                            MessageBox.Show("This Transaction Line is Already Cancelled");
+                        }
+                    }
                 }
             }
         }

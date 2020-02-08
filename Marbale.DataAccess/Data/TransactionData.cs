@@ -760,5 +760,57 @@ namespace Marbale.DataAccess.Data
                 throw e;
             }
         }
+
+        public int ReverseTransactionLine(int TrxId, int lineId, int userId, string loginName, int posMachineId, string posMachine, string reference)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[8];
+                sqlParameters[0] = new SqlParameter("@oldTrxid", TrxId);
+                sqlParameters[1] = new SqlParameter("@lineId", lineId);
+
+                sqlParameters[2] = new SqlParameter("@userId", userId);
+
+                if (!string.IsNullOrEmpty(loginName))
+                {
+                    sqlParameters[3] = new SqlParameter("@loginId", loginName);
+                }
+                else
+                {
+                    sqlParameters[3] = new SqlParameter("@loginId", DBNull.Value);
+                }
+
+                sqlParameters[4] = new SqlParameter("@pos_machineId", posMachineId);
+
+                if (!string.IsNullOrEmpty(posMachine))
+                {
+                    sqlParameters[5] = new SqlParameter("@pos_machine", posMachine);
+                }
+                else
+                {
+                    sqlParameters[5] = new SqlParameter("@pos_machine", DBNull.Value);
+                }
+
+                if (!string.IsNullOrEmpty(reference))
+                {
+                    sqlParameters[6] = new SqlParameter("@reference", reference);
+                }
+                else
+                {
+                    sqlParameters[6] = new SqlParameter("@reference", DBNull.Value);
+                }
+
+                sqlParameters[7] = new SqlParameter("@reversedTrxId", SqlDbType.Int);
+                sqlParameters[7].Direction = ParameterDirection.Output;
+
+                conn.executeUpdateQuery("sp_ReverseTransactionLine", sqlParameters);
+
+                return Convert.ToInt32(sqlParameters[7].Value);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

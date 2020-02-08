@@ -191,9 +191,11 @@ namespace Marble.Business
                             trxLn.trxId = trxId;
                             trxLn.ProductName = rw["name"] != DBNull.Value ? rw["name"].ToString() : string.Empty;
                             trxLn.ProductID = rw["ProductId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["ProductId"]);
+                            trxLn.OriginalLineID = rw["OriginalLineID"] == DBNull.Value ? -1 : Convert.ToInt32(rw["OriginalLineID"]);
                             trxLn.Price = rw["Price"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["Price"]);
                             trxLn.trxId = rw["TrxId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["TrxId"]);
                             trxLn.LineId = rw["LineId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["LineId"]);
+                            trxLn.DBLineId = rw["LineId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["LineId"]);
                             trxLn.quantity = rw["Quantity"] == DBNull.Value ? 0 : Convert.ToInt32(rw["Quantity"]);
                             trxLn.amount = rw["Amount"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["Amount"]);
                             trxLn.cardId = rw["CardId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["CardId"]);
@@ -243,6 +245,12 @@ namespace Marble.Business
         {
             trxData = new TransactionData();
             return trxData.ReverseTransaction(TrxId, posMachineId, loginName);
+        }
+
+        public int ReverseTransactionLine(int TrxId, int lineId, int userId, string loginName, int posMachineId, string posMachine, string reference)
+        {
+            trxData = new TransactionData();
+            return trxData.ReverseTransactionLine(TrxId, lineId, userId, loginName, posMachineId, posMachine, reference);
         }
     }
 }
