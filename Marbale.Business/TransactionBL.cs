@@ -207,7 +207,7 @@ namespace Marble.Business
                             trxLn.Bonus = rw["Bonus"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["Bonus"]);
                             trxLn.tickets = rw["Tickets"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["Tickets"]);
                             trxLn.Remarks = rw["Remarks"] != DBNull.Value ? rw["Remarks"].ToString() : string.Empty;
-
+                            trxLn.IsLineReversed = rw["IsLineCancelled"] != DBNull.Value ? Convert.ToBoolean(rw["IsLineCancelled"]) : false;
 
                             trxLines.Add(trxLn);
                         }

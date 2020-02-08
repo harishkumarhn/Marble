@@ -149,7 +149,8 @@ BEGIN
 			ProductDescription, 
 			IsWaiverSignRequired,
 			OriginalLineID, 
-			MasterEntityId
+			MasterEntityId,
+			IsLineCancelled
 		)
 
 		SELECT 
@@ -184,12 +185,19 @@ BEGIN
 			ProductDescription, 
 			IsWaiverSignRequired,
 			LineId, 
-			MasterEntityId
+			MasterEntityId,
+			1
 		FROM 
 				TransactionLines
 			WHERE 
 				TrxId = @RevereseTrxId
 			 
+UPDATE 
+		TransactionLines
+			SET IsLineCancelled = 1
+WHERE
+	TrxId = @RevereseTrxId
+
 	INSERT INTO 
 			 TransactionTaxLines
 			 (

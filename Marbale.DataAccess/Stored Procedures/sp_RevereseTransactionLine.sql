@@ -2,7 +2,7 @@ USE [Marbale]
 GO
 
 /****** Object:  StoredProcedure [dbo].[sp_ReverseTransactionLine]]   Script Date: 03/08/2019 12:26:45 ******/
- DROP PROCEDURE [dbo].[sp_ReverseTransactionLine]
+-- DROP PROCEDURE [dbo].[sp_ReverseTransactionLine]
 GO
 
 /****** Object:  StoredProcedure [dbo].[sp_ReverseTransactionLine]    Script Date: 03/08/2019 12:26:45 ******/
@@ -53,7 +53,8 @@ BEGIN
 				PaymentReference,
 				Status, 
 				LastUpdateTime, 
-				LastUpdatedBy
+				LastUpdatedBy,
+				OriginalTrxID
 			)
 		SELECT 
 				GETDATE()
@@ -74,7 +75,8 @@ BEGIN
 				,@reference  
 				,Status, 
 				getdate(), 
-				@loginId  
+				@loginId,
+				@oldTrxid 
 			
 				FROM 
 					TransactionHeader h, TransactionLines L LEFT JOIN
@@ -149,7 +151,8 @@ BEGIN
 			ProductDescription, 
 			IsWaiverSignRequired,
 			OriginalLineID, 
-			MasterEntityId
+			MasterEntityId,
+			IsLineCancelled
 		)
 
 		SELECT 
@@ -184,13 +187,22 @@ BEGIN
 			ProductDescription, 
 			IsWaiverSignRequired,
 			@lineId, 
-			MasterEntityId
+			MasterEntityId,
+			1
 		FROM 
 				TransactionLines
 		WHERE 
 				TrxId = @oldTrxid
 		AND 
 				LineId = @lineId
+
+	UPDATE 
+			TransactionLines
+			SET IsLineCancelled = 1
+	WHERE
+			TrxId = @oldTrxid
+		AND 
+			LineId = @lineId
 
 	INSERT INTO 
 			 TransactionTaxLines
