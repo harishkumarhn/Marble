@@ -9,6 +9,7 @@ namespace Marbale.BusinessObject.POSTransaction
 {
     public class Transaction
     {
+       
         public int Trx_id { get; set; }
         public DateTime TransactionDate { get; set; }
         public double CashAmount { get; set; }
@@ -150,5 +151,7 @@ namespace Marbale.BusinessObject.POSTransaction
         public int LineId;
 
         public bool toBeSaved = false;
+
+        public bool IsLineReversed { get; set; }
     }
 }

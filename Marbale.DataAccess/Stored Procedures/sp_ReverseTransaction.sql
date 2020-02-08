@@ -111,8 +111,8 @@ BEGIN
 			SET Status = 'CANCELLED'
 	WHERE 
 			TrxId = @RevereseTrxId
-			AND
-			status in ('OPEN', 'CANCELLED')
+			--AND
+			--status in ('OPEN', 'CANCELLED')
   
     
 	INSERT INTO 
@@ -149,14 +149,15 @@ BEGIN
 			ProductDescription, 
 			IsWaiverSignRequired,
 			OriginalLineID, 
-			MasterEntityId
+			MasterEntityId,
+			IsLineCancelled
 		)
 
 		SELECT 
-			TrxId, 
+			@trxId, 
 			LineId, 
 			ProductId, 
-			Price * -1, 
+			Price, 
 			Quantity, 
 			Amount * -1, 
 			CardId, 
@@ -183,13 +184,20 @@ BEGIN
 			@loginName, 
 			ProductDescription, 
 			IsWaiverSignRequired,
-			@RevereseTrxId, 
-			MasterEntityId
+			LineId, 
+			MasterEntityId,
+			1
 		FROM 
 				TransactionLines
 			WHERE 
 				TrxId = @RevereseTrxId
 			 
+UPDATE 
+		TransactionLines
+			SET IsLineCancelled = 1
+WHERE
+	TrxId = @RevereseTrxId
+
 	INSERT INTO 
 			 TransactionTaxLines
 			 (
@@ -202,7 +210,7 @@ BEGIN
 				ProductSplitAmount
 			 )
 	 SELECT 
-				TrxId, 
+				@trxId, 
 				LineId, 
 				TaxId, 
 				TaxStructureId, 
@@ -228,7 +236,7 @@ BEGIN
 				ApprovedBy
 			)
 		SELECT 
-				TrxId, 
+				@trxId, 
 				LineId, 
 				DiscountId, 
 				DiscountPercentage, 

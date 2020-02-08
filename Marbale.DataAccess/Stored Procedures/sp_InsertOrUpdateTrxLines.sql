@@ -43,6 +43,7 @@ CREATE PROCEDURE dbo.sp_InsertOrUpdateTrxLines @TrxId INT,
 												@CancelledBy NVARCHAR(50) = NULL,
 												@ProductDescription NVARCHAR(255),
 												@OriginalLineID INT
+												
 AS 
   BEGIN 
       -- SET NOCOUNT ON added to prevent extra result sets from 
@@ -77,7 +78,8 @@ AS
 							[CancelledTime],
 							[CancelledBy],
 							[ProductDescription],
-							[OriginalLineID]
+							[OriginalLineID],
+							[IsLineCancelled]
 
 						 ) 
 
@@ -108,7 +110,8 @@ AS
 							@CancelledTime,
 							@CancelledBy,
 							@ProductDescription,
-							@OriginalLineID
+							@OriginalLineID,
+							0
 						 ) 
         END 
 
