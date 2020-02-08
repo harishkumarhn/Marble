@@ -562,6 +562,7 @@ namespace Marbale.POS
             }
 
             TransactionLine trxLine = new TransactionLine();
+            trxLine.OriginalLineID = -1;
             trxLine.ProductID = product.Id;
             trxLine.ProductName = product.Name;
             trxLine.Price = Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
@@ -614,6 +615,7 @@ namespace Marbale.POS
         void CreateDepositLine(Product product)
         {
             TransactionLine trxLine = new TransactionLine();
+            trxLine.OriginalLineID = -1;
             trxLine.ProductID = 0;
             trxLine.ProductName = "Card Deposit";
             trxLine.Price = Convert.ToDecimal(product.FaceValue);
@@ -1292,8 +1294,6 @@ namespace Marbale.POS
             ClearCustomer();
         }
 
-
-
         private void btnSaveCustomer_Click(object sender, EventArgs e)
         {
             if (Customer == null)
@@ -1518,6 +1518,7 @@ namespace Marbale.POS
                     dgvTrxLines.Columns["ParentLine"].Visible = false;
                     dgvTrxLines.Columns["loyaltyPoints"].Visible = false;
                     dgvTrxLines.Columns["DBLineId"].Visible = true;
+                    dgvTrxLines.Columns["IsLineReversed"].Visible = true;
 
                 }
             }
@@ -2001,10 +2002,11 @@ namespace Marbale.POS
                         if (dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value != null 
                             && dgvTrxHeader["status", e.RowIndex].Value != null )
                         {
+                            int trxId = Convert.ToInt32(dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value);
                             if (dgvTrxHeader["status", e.RowIndex].Value.ToString().ToLower() != "cancelled"
                                 && (dgvTrxHeader["OriginalTrxId", e.RowIndex].Value == null || Convert.ToInt32(dgvTrxHeader["OriginalTrxId", e.RowIndex].Value) == 0))
                             {
-                                int trxId = Convert.ToInt32(dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value);
+                                
                                 TransactionBL traxBl = new TransactionBL();
                                 int reversedTrxId = traxBl.ReverseTransaction(trxId, 0, string.Empty);
 
@@ -2013,7 +2015,7 @@ namespace Marbale.POS
                             }
                             else
                             {
-                                MessageBox.Show("This Transaction is Already Cancelled");
+                                MessageBox.Show("This Transaction or Line Already Reversed, can not Reverse");
                             }
                         }
                     }
@@ -2024,6 +2026,26 @@ namespace Marbale.POS
                 MessageBox.Show(ex.ToString());
             }
         }
+        
+        bool IsAnyTransactionLineCancelled(int trxId)
+        {
+            bool cancelledLineFound = false;
+
+            try
+            {
+                if (ListTransaction != null)
+                {
+                    TransactionLine trxLine = ListTransaction.Find(x => x.Trx_id == trxId).TransactionLines.Find(x => x.IsLineReversed);
+
+                    if (trxLine != null)
+                        cancelledLineFound = true;
+                }
+            }
+            catch { }
+
+            return cancelledLineFound;
+        }
+
 
         private void dgvTrxLines_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -2035,7 +2057,8 @@ namespace Marbale.POS
                 {
                     if (dgvTrxLines[e.ColumnIndex + 1, e.RowIndex].Value != null)
                     {
-                        if (dgvTrxLines["OriginalLineID", e.RowIndex].Value !=null && Convert.ToInt32(dgvTrxLines["OriginalLineID", e.RowIndex].Value) > -1)
+                        if (dgvTrxLines["OriginalLineID", e.RowIndex].Value !=null && Convert.ToInt32(dgvTrxLines["OriginalLineID", e.RowIndex].Value) < 0 
+                            && !Convert.ToBoolean(dgvTrxLines["IsLineReversed", e.RowIndex].Value))
                         {
                             int trxId = Convert.ToInt32(dgvTrxLines[e.ColumnIndex + 1, e.RowIndex].Value);
                             int lineId = Convert.ToInt32(dgvTrxLines["DBLineId", e.RowIndex].Value);
