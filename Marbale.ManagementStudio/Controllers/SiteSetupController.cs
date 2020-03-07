@@ -11,7 +11,7 @@ using System;
 
 namespace MarbaleManagementStudio.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public class SiteSetupController : Controller
     {
         SiteSetupBL siteSetup = new SiteSetupBL();
@@ -303,8 +303,8 @@ namespace MarbaleManagementStudio.Controllers
             return View(user);
         }
 
-       [HttpPost]
-       public JsonResult InsertOrUpdateUsers(List<User> users)
+        [HttpPost]
+        public JsonResult InsertOrUpdateUsers(List<User> users)
         {
             var message = string.Empty;
 
@@ -312,23 +312,23 @@ namespace MarbaleManagementStudio.Controllers
             {
                 message = message + InsertOrUpdateUserObject(user);
             }
-            return Json(new {ok = string.IsNullOrEmpty(message), message = message});
+            return Json(new { ok = string.IsNullOrEmpty(message), message = message });
         }
         private string InsertOrUpdateUserObject(User user)
         {
             var message = string.Empty;
             try
             {
-                if (ModelState.IsValid)
-                {
+                //if (ModelState.IsValid)
+                //{
                     siteSetup.InsertOrUpdateUsers(user);
-                }
-                else
-                {
-                    message = string.Join(" | ", ModelState.Values
-                                  .SelectMany(v => v.Errors)
-                                  .Select(e => e.ErrorMessage));
-                }
+                //}
+                //else
+                //{
+                //    message = string.Join(" | ", ModelState.Values
+                //                  .SelectMany(v => v.Errors)
+                //                  .Select(e => e.ErrorMessage));
+                //}
             }
             catch (Exception e)
             {
@@ -355,7 +355,7 @@ namespace MarbaleManagementStudio.Controllers
             //    ViewBag.PartialTypes = types;
             //   List<CustomDropdown> myLevels = Enum.GetValues(typeof(CustomDropdown)).Cast<CustomDropdown>().ToList();
             ViewBag.RequiredLevel = new SelectList(types);
-            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Customer.cshtml",data);
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Customer.cshtml", data);
         }
         #endregion
 
@@ -401,7 +401,7 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult PrintTemplate()
         {
             ViewBag.PrintTemplateHeadersAndItems = siteSetup.GetPrintTemplateHeaderAndItems();
-            ViewBag.FontNameList = new string[]{"auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset"};
+            ViewBag.FontNameList = new string[] { "auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset" };
             return View("~/Views/SiteSetup/Printer/PrintTemplate.cshtml");
         }
         public ActionResult PrintTemplateDataItems(int headerId)

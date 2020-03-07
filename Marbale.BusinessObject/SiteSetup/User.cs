@@ -15,7 +15,7 @@ namespace Marbale.BusinessObject.SiteSetup
         [Required(ErrorMessage = "Enter login id.")]
         public string LoginId { get; set; }
         public string Password { get; set; }
-        public string Role { get; set; }
+        public int RoleId { get; set; }
         public string Status { get; set; }
         public string POSCounter { get; set; }
         public DateTime PaswardChangeDate { get; set; }
