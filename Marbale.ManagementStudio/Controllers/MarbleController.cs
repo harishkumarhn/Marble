@@ -56,6 +56,9 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult Logout()
         {
             Session["UserID"] = null;
+            Session["UserName"] = null;
+            Session["AllowedPages"] = null;
+
             return RedirectToAction("Login");
         }
 

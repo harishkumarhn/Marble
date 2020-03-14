@@ -19,7 +19,7 @@ namespace MarbaleManagementStudio
             var userId = Convert.ToString(httpContext.Session["UserId"]);
             if (!string.IsNullOrEmpty(userId))
             {
-                
+                authorize = true;
             }
 
             return authorize;
