@@ -729,6 +729,22 @@ namespace Marbale.DataAccess.Data
 
         }
 
+        public double GetCardRechargedAmount(int cardId)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@cardId", cardId);
+
+            DataTable dt = conn.executeSelectQuery("[sp_GetCardRechargedAmount]", sqlParameters);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return Convert.ToDouble(dt.Rows[0][0]);
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         public int ReverseTransaction(int TrxId, int posMachineId, string loginName)
         {
