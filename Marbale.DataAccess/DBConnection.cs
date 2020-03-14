@@ -20,7 +20,7 @@ namespace Marbale.DataAccess
         public DBConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn = new SqlConnection(@"Data Source=Harish-PC\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;");
+            conn = new SqlConnection(@"Data Source=DESKTOP-6LG6FHB;Initial Catalog=Marbale;Trusted_Connection=True;");
         }
 
 
