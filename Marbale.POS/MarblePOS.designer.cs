@@ -32,11 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarblePOS));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -46,6 +41,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControlCardAction = new System.Windows.Forms.TabControl();
             this.tabPageTrx = new System.Windows.Forms.TabPage();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -55,23 +55,13 @@
             this.btnPayment = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvTransaction = new System.Windows.Forms.DataGridView();
-            this.Product_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Product_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Line_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Line_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TaxName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Card_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageMyTrx = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.dgvTrxLines = new System.Windows.Forms.DataGridView();
+            this.trxlnCancel = new System.Windows.Forms.DataGridViewImageColumn();
             this.dgvTrxHeader = new System.Windows.Forms.DataGridView();
+            this.Cancel = new System.Windows.Forms.DataGridViewImageColumn();
             this.tabPageActivities = new System.Windows.Forms.TabPage();
             this.labelPurchases = new System.Windows.Forms.Label();
             this.dgvPurchases = new System.Windows.Forms.DataGridView();
@@ -187,8 +177,18 @@
             this.posContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changeLayoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enterMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Cancel = new System.Windows.Forms.DataGridViewImageColumn();
-            this.trxlnCancel = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Product_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Product_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Line_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Line_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TaxName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Card_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControlCardAction.SuspendLayout();
             this.tabPageTrx.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransaction)).BeginInit();
@@ -477,107 +477,6 @@
             this.dgvTransaction.TabIndex = 4;
             this.dgvTransaction.TabStop = false;
             // 
-            // Product_Type
-            // 
-            this.Product_Type.HeaderText = "Type";
-            this.Product_Type.Name = "Product_Type";
-            // 
-            // Product_Name
-            // 
-            this.Product_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Product_Name.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Product_Name.HeaderText = "Product";
-            this.Product_Name.MinimumWidth = 100;
-            this.Product_Name.Name = "Product_Name";
-            this.Product_Name.ReadOnly = true;
-            this.Product_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Quantity
-            // 
-            this.Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Quantity.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Quantity.HeaderText = "Quantity";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.ReadOnly = true;
-            this.Quantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Quantity.Width = 68;
-            // 
-            // Price
-            // 
-            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.Price.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Price.Width = 47;
-            // 
-            // Tax
-            // 
-            this.Tax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.Tax.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Tax.HeaderText = "Tax";
-            this.Tax.Name = "Tax";
-            this.Tax.ReadOnly = true;
-            this.Tax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Tax.Width = 33;
-            // 
-            // Line_Amount
-            // 
-            this.Line_Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.Line_Amount.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Line_Amount.HeaderText = "Amount";
-            this.Line_Amount.MinimumWidth = 100;
-            this.Line_Amount.Name = "Line_Amount";
-            this.Line_Amount.ReadOnly = true;
-            this.Line_Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Remarks
-            // 
-            this.Remarks.HeaderText = "Remarks";
-            this.Remarks.Name = "Remarks";
-            this.Remarks.Visible = false;
-            // 
-            // Line_Type
-            // 
-            this.Line_Type.HeaderText = "Line_Type";
-            this.Line_Type.Name = "Line_Type";
-            this.Line_Type.Visible = false;
-            // 
-            // TaxName
-            // 
-            this.TaxName.HeaderText = "Tax Name";
-            this.TaxName.Name = "TaxName";
-            this.TaxName.Visible = false;
-            // 
-            // Card_Number
-            // 
-            this.Card_Number.HeaderText = "Card Number";
-            this.Card_Number.Name = "Card_Number";
-            this.Card_Number.Visible = false;
-            // 
-            // LineId
-            // 
-            this.LineId.HeaderText = "LineId";
-            this.LineId.Name = "LineId";
-            this.LineId.Visible = false;
-            // 
-            // ProductId
-            // 
-            this.ProductId.HeaderText = "ProductId";
-            this.ProductId.Name = "ProductId";
-            this.ProductId.Visible = false;
-            // 
             // tabPageMyTrx
             // 
             this.tabPageMyTrx.BackColor = System.Drawing.Color.Gray;
@@ -631,6 +530,13 @@
             this.dgvTrxLines.TabIndex = 1;
             this.dgvTrxLines.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrxLines_CellContentClick);
             // 
+            // trxlnCancel
+            // 
+            this.trxlnCancel.HeaderText = "Cancel";
+            this.trxlnCancel.Name = "trxlnCancel";
+            this.trxlnCancel.ReadOnly = true;
+            this.trxlnCancel.Width = 60;
+            // 
             // dgvTrxHeader
             // 
             this.dgvTrxHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -648,6 +554,14 @@
             this.dgvTrxHeader.TabIndex = 0;
             this.dgvTrxHeader.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrxHeader_CellContentClick);
             this.dgvTrxHeader.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrxHeader_RowEnter);
+            // 
+            // Cancel
+            // 
+            this.Cancel.FillWeight = 40F;
+            this.Cancel.HeaderText = "Cancel";
+            this.Cancel.Name = "Cancel";
+            this.Cancel.ReadOnly = true;
+            this.Cancel.Width = 60;
             // 
             // tabPageActivities
             // 
@@ -2217,20 +2131,107 @@
             this.enterMessageToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.enterMessageToolStripMenuItem.Text = "Enter Message";
             // 
-            // Cancel
+            // Product_Type
             // 
-            this.Cancel.FillWeight = 40F;
-            this.Cancel.HeaderText = "Cancel";
-            this.Cancel.Name = "Cancel";
-            this.Cancel.ReadOnly = true;
-            this.Cancel.Width = 60;
+            this.Product_Type.HeaderText = "Type";
+            this.Product_Type.Name = "Product_Type";
+            this.Product_Type.Width = 130;
             // 
-            // trxlnCancel
+            // Product_Name
             // 
-            this.trxlnCancel.HeaderText = "Cancel";
-            this.trxlnCancel.Name = "trxlnCancel";
-            this.trxlnCancel.ReadOnly = true;
-            this.trxlnCancel.Width = 60;
+            this.Product_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Product_Name.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Product_Name.HeaderText = "Product";
+            this.Product_Name.MinimumWidth = 100;
+            this.Product_Name.Name = "Product_Name";
+            this.Product_Name.ReadOnly = true;
+            this.Product_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Quantity
+            // 
+            this.Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Quantity.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            this.Quantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Quantity.Width = 68;
+            // 
+            // Price
+            // 
+            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.Price.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Price.Width = 47;
+            // 
+            // Tax
+            // 
+            this.Tax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.Tax.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Tax.HeaderText = "Tax";
+            this.Tax.Name = "Tax";
+            this.Tax.ReadOnly = true;
+            this.Tax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Tax.Width = 33;
+            // 
+            // Line_Amount
+            // 
+            this.Line_Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.Line_Amount.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Line_Amount.HeaderText = "Amount";
+            this.Line_Amount.MinimumWidth = 100;
+            this.Line_Amount.Name = "Line_Amount";
+            this.Line_Amount.ReadOnly = true;
+            this.Line_Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Remarks
+            // 
+            this.Remarks.HeaderText = "Remarks";
+            this.Remarks.Name = "Remarks";
+            this.Remarks.Visible = false;
+            // 
+            // Line_Type
+            // 
+            this.Line_Type.HeaderText = "Line_Type";
+            this.Line_Type.Name = "Line_Type";
+            this.Line_Type.Visible = false;
+            // 
+            // TaxName
+            // 
+            this.TaxName.HeaderText = "Tax Name";
+            this.TaxName.Name = "TaxName";
+            this.TaxName.Visible = false;
+            // 
+            // Card_Number
+            // 
+            this.Card_Number.HeaderText = "Card Number";
+            this.Card_Number.Name = "Card_Number";
+            this.Card_Number.Visible = false;
+            // 
+            // LineId
+            // 
+            this.LineId.HeaderText = "LineId";
+            this.LineId.Name = "LineId";
+            this.LineId.Visible = false;
+            // 
+            // ProductId
+            // 
+            this.ProductId.HeaderText = "ProductId";
+            this.ProductId.Name = "ProductId";
+            this.ProductId.Visible = false;
             // 
             // MarblePOS
             // 
@@ -2431,6 +2432,15 @@
         private System.Windows.Forms.ContextMenuStrip posContextMenu;
         private System.Windows.Forms.ToolStripMenuItem changeLayoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enterMessageToolStripMenuItem;
+        private System.Windows.Forms.Button btnPrevProductGroup;
+        private System.Windows.Forms.Button btnDisplayGroupDropDown;
+        private System.Windows.Forms.Button btnNextProductGroup;
+        private System.Windows.Forms.Label lblTabText;
+        private System.Windows.Forms.TabControl tabControlProducts;
+        private System.Windows.Forms.TabPage tabPageProductGroups;
+        private System.Windows.Forms.Label lblCustomerMessage;
+        private System.Windows.Forms.DataGridViewImageColumn Cancel;
+        private System.Windows.Forms.DataGridViewImageColumn trxlnCancel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Product_Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Product_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
@@ -2443,14 +2453,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Card_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn LineId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
-        private System.Windows.Forms.Button btnPrevProductGroup;
-        private System.Windows.Forms.Button btnDisplayGroupDropDown;
-        private System.Windows.Forms.Button btnNextProductGroup;
-        private System.Windows.Forms.Label lblTabText;
-        private System.Windows.Forms.TabControl tabControlProducts;
-        private System.Windows.Forms.TabPage tabPageProductGroups;
-        private System.Windows.Forms.Label lblCustomerMessage;
-        private System.Windows.Forms.DataGridViewImageColumn Cancel;
-        private System.Windows.Forms.DataGridViewImageColumn trxlnCancel;
     }
 }

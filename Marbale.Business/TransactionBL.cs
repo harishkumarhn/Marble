@@ -87,9 +87,10 @@ namespace Marble.Business
                 //card.TimerResetCard = dr.IsNull("TimerResetCard") ? false : bool.Parse(dr["TimerResetCard"].ToString());
                 //card.vip_customer = dr.IsNull("VIPCustomer") ? false : bool.Parse(dr["VIPCustomer"].ToString());
 
-                card.credits = dt.Rows[0]["Credits"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Credits"]);                
-                //card.credits_played = dr.IsNull("CreditsPlayed") ? 0 : float.Parse(dr["CreditsPlayed"].ToString());
+                card.credits = dt.Rows[0]["Credits"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Credits"]);
+                card.credits_played = dt.Rows[0]["CreditsPlayed"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["CreditsPlayed"]);
 
+                card.TotalRechargeAmount = GetCardRechargedAmount(card.card_id);
 
                 card.courtesy = dt.Rows[0]["Courtesy"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Courtesy"]);
                 card.bonus = dt.Rows[0]["Bonus"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Bonus"]);
@@ -107,6 +108,13 @@ namespace Marble.Business
             }
 
             return card;
+        }
+
+        double GetCardRechargedAmount(int cardId)
+        {
+            double rechargedAmount = trxData.GetCardRechargedAmount(cardId);
+
+            return rechargedAmount;
         }
 
 
