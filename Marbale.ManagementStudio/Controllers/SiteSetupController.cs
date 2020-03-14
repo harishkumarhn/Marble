@@ -303,8 +303,8 @@ namespace MarbaleManagementStudio.Controllers
             return View(user);
         }
 
-       [HttpPost]
-       public JsonResult InsertOrUpdateUsers(List<User> users)
+        [HttpPost]
+        public JsonResult InsertOrUpdateUsers(List<User> users)
         {
             var message = string.Empty;
 
@@ -312,7 +312,7 @@ namespace MarbaleManagementStudio.Controllers
             {
                 message = message + InsertOrUpdateUserObject(user);
             }
-            return Json(new {ok = string.IsNullOrEmpty(message), message = message});
+            return Json(new { ok = string.IsNullOrEmpty(message), message = message });
         }
         private string InsertOrUpdateUserObject(User user)
         {
@@ -355,7 +355,7 @@ namespace MarbaleManagementStudio.Controllers
             //    ViewBag.PartialTypes = types;
             //   List<CustomDropdown> myLevels = Enum.GetValues(typeof(CustomDropdown)).Cast<CustomDropdown>().ToList();
             ViewBag.RequiredLevel = new SelectList(types);
-            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Customer.cshtml",data);
+            return View("~/Views/SiteSetup/ConfigurationTabs/Values/Customer.cshtml", data);
         }
         #endregion
 
@@ -401,7 +401,7 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult PrintTemplate()
         {
             ViewBag.PrintTemplateHeadersAndItems = siteSetup.GetPrintTemplateHeaderAndItems();
-            ViewBag.FontNameList = new string[]{"auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset"};
+            ViewBag.FontNameList = new string[] { "auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset" };
             return View("~/Views/SiteSetup/Printer/PrintTemplate.cshtml");
         }
         public ActionResult PrintTemplateDataItems(int headerId)
