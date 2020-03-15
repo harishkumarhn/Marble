@@ -167,8 +167,8 @@ namespace Marbale.POS
 
         private void HandleCardRead(string CardNumber, DeviceClass readerDevice)
         {
-            if(CardReader.CardSwiped)
-               CardReader.CardSwiped = false;
+            if (CardReader.CardSwiped)
+                CardReader.CardSwiped = false;
 
             ClearCard();
 
@@ -442,8 +442,8 @@ namespace Marbale.POS
                     Pre_TaxAmount += preTaxLineAmount;
                     if (Transaction.TransactionLines[i].quantity == 1)
                         Transaction.TransactionLines[i].tax_amount = preTaxLineAmount * Transaction.TransactionLines[i].tax_percentage / 100;
-                    
-                   
+
+
 
                     Tax_Amount += Transaction.TransactionLines[i].tax_amount;
                     Transaction.TransactionLines[i].LineAmount += Transaction.TransactionLines[i].tax_amount;
@@ -462,7 +462,7 @@ namespace Marbale.POS
             }
             Transaction_Amount = Pre_TaxAmount + Tax_Amount;
             Transaction.Discount_Percentage = GetTransactionDiscountPercentage();
-            Transaction.Net_Transaction_Amount =  Math.Round(Transaction_Amount - Discount_Amount, 2, MidpointRounding.AwayFromZero);
+            Transaction.Net_Transaction_Amount = Math.Round(Transaction_Amount - Discount_Amount, 2, MidpointRounding.AwayFromZero);
         }
 
         private decimal GetTransactionDiscountPercentage()
@@ -471,14 +471,14 @@ namespace Marbale.POS
 
             if (Transaction != null && Transaction.discounts != null)
             {
-                foreach(Discounts.DiscountLine d in Transaction.discounts.DiscountLines)
+                foreach (Discounts.DiscountLine d in Transaction.discounts.DiscountLines)
                 {
                     if (d.LineValid && !distinctDiscountLines.Any(x => x.DiscountId == d.DiscountId && x.LineValid))
                         distinctDiscountLines.Add(d);
                 }
             }
 
-           return distinctDiscountLines.Sum(x => x.DiscountPercentage);
+            return distinctDiscountLines.Sum(x => x.DiscountPercentage);
         }
 
 
@@ -510,7 +510,6 @@ namespace Marbale.POS
                 Transaction.TransactionLines = new List<TransactionLine>();
 
             Transaction.TransactionDate = DateTime.Now;
-
 
             if (product.Type == "NEW")
             {
@@ -551,12 +550,40 @@ namespace Marbale.POS
                     MessageBox.Show("Please tap the card");
                     return;
                 }
+
+                if (CurrentCard.CardStatus == "NEW")
+                {
+                    MessageBox.Show("Cannot recharge to New cards. First select New card product");
+                    return;
+                }
+
+                UpdateCardForTransaction(product);
             }
-            else if (product.Type == "RECHARGE")
+            else if (product.Type == "VARIABLE_RECHARGE")
             {
                 if (CurrentCard == null)
                 {
                     MessageBox.Show("Please tap the card");
+                    return;
+                }
+                if (CurrentCard.CardStatus == "NEW")
+                {
+                    MessageBox.Show("Cannot recharge to New cards. First select New card product");
+                    return;
+                }
+
+                bool variableRechargeProductExists = false;
+                for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+                {
+                    if (Transaction.TransactionLines[i].ProductType == "VARIABLE_RECHARGE" && Transaction.TransactionLines[i].CancelledLine == false)
+                    {
+                        variableRechargeProductExists = true;
+                        break;
+                    }
+                }
+                if (variableRechargeProductExists)
+                {
+                    MessageBox.Show("Cannot have multiple Variable Recharge products on same card");
                     return;
                 }
             }
@@ -566,19 +593,44 @@ namespace Marbale.POS
             trxLine.ProductID = product.Id;
             trxLine.ProductName = product.Name;
             trxLine.Price = Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
+
+
+            decimal productPrice = Convert.ToDecimal(product.Price);
+
+            if (product.Type == "VARIABLE_RECHARGE")
+            {
+                double varAmount = NumberPadForm.ShowNumberPadForm("Enter Recharge Amount", '-');
+                productPrice = trxLine.Price = Convert.ToDecimal(varAmount);
+
+                if(productPrice <= 0)
+                {
+                    MessageBox.Show("Please Enter the Recharge amount greater than zero");
+                    return;
+                }
+            }
+
             trxLine.quantity = 1;
 
             trxLine.tax_percentage = product.TaxPercentage;
             trxLine.tax_id = product.TaxId;
-            trxLine.tax_amount = (decimal) ((product.Price - product.FaceValue) * product.TaxPercentage) / 100;
+            trxLine.tax_amount = (decimal)((productPrice - product.FaceValue) * product.TaxPercentage) / 100;
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
-            trxLine.amount = Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
+
+            if (product.Type == "NEW" || product.Type == "RECHARGE" || product.Type == "VARIABLE_RECHARGE")
+            {
+                trxLine.CardNumber = CurrentCard != null ? CurrentCard.CardNumber : "";
+            }
+
+            trxLine.ProductType = product.Type;
+
+            trxLine.amount = productPrice - Convert.ToDecimal(product.FaceValue);
             trxLine.ProductTypeCode = product.Type;
-            trxLine.LineAmount = (Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue)) + Convert.ToDecimal(trxLine.tax_amount);
+            trxLine.LineAmount = (productPrice - Convert.ToDecimal(product.FaceValue)) + Convert.ToDecimal(trxLine.tax_amount);
             trxLine.Credits = Convert.ToDecimal(product.Credits);
             trxLine.Bonus = Convert.ToDecimal(product.Bonus);
             trxLine.Courtesy = Convert.ToDecimal(product.Courtesy);
+            
 
             //Transaction.Tax_Amount = 0;
             bool found = false;
@@ -629,6 +681,14 @@ namespace Marbale.POS
             trxLine.LineAmount = Convert.ToDecimal(product.FaceValue);
             trxLine.ProductType = product.Type;
 
+            trxLine.CardNumber = CurrentCard.CardNumber;
+            UpdateCardForTransaction(product);
+
+            Transaction.TransactionLines.Add(trxLine);
+        }
+
+        void UpdateCardForTransaction(Product product)
+        {
             if (CurrentCard != null)
             {
                 CurrentCard.credits = Convert.ToDecimal(product.Credits);
@@ -636,10 +696,8 @@ namespace Marbale.POS
                 CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
                 CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
             }
-
-
-            Transaction.TransactionLines.Add(trxLine);
         }
+
 
         void UpdateTransactionAmount()
         {
@@ -664,8 +722,6 @@ namespace Marbale.POS
             validTrxLine.tax_amount += newTrxline.tax_amount;
             validTrxLine.amount += newTrxline.amount;
             validTrxLine.LineAmount += newTrxline.LineAmount;
-
-
         }
 
         public void RefreshTransactionGrid()
@@ -693,7 +749,7 @@ namespace Marbale.POS
             for (int i = 0; i < Transaction.TransactionLines.Count; i++) // display card lines
             {
                 if (Transaction.TransactionLines[i].LineValid && !Transaction.TransactionLines[i].LineProcessed
-                    && Transaction.TransactionLines[i].CardNumber != null)
+                    && Transaction.TransactionLines[i].CardNumber != null && !Transaction.TransactionLines[i].CancelledLine)
                 {
                     dgvTransaction.Rows.Add();
 
@@ -721,7 +777,7 @@ namespace Marbale.POS
                                 dgvTransaction.Rows[rowcount].Cells["Quantity"].Value = Transaction.TransactionLines[j].quantity;
                                 dgvTransaction.Rows[rowcount].Cells["Price"].Value = Transaction.TransactionLines[j].Price;
                                 dgvTransaction.Rows[rowcount].Cells["Remarks"].Value = Transaction.TransactionLines[j].Remarks;
-                                dgvTransaction.Rows[rowcount].Cells["AttractionDetails"].Value = Transaction.TransactionLines[j].AttractionDetails;
+                                //dgvTransaction.Rows[rowcount].Cells["AttractionDetails"].Value = Transaction.TransactionLines[j].AttractionDetails;
 
                                 dgvTransaction.Rows[rowcount].Cells["Tax"].Value = Transaction.TransactionLines[j].tax_amount;
                                 dgvTransaction.Rows[rowcount].Cells["TaxName"].Value = Transaction.TransactionLines[j].taxName;
@@ -743,7 +799,18 @@ namespace Marbale.POS
                     && Transaction.TransactionLines[i].CardNumber == null && !Transaction.TransactionLines[i].CancelledLine)
                 {
                     dgvTransaction.Rows.Add();
-                    dgvTransaction.Rows[rowcount].Cells["Product_Type"].Value = "Item Sale";
+
+                    dgvTransaction.Rows[rowcount].Cells["Product_Type"].Value = "Product Sale";
+
+                    //if (Transaction.TransactionLines[i].ProductTypeCode == "NEW")
+                    //{
+                        
+                    //}
+                    //else if (Transaction.TransactionLines[i].ProductTypeCode == "RECHARGE")
+                    //{
+                    //    dgvTransaction.Rows[rowcount].Cells["Product_Type"].Value = "Card Sale";
+                    //}
+
                     dgvTransaction.Rows[rowcount].Cells["LineId"].Value = Transaction.TransactionLines[i].LineId = i;
                     dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = Transaction.TransactionLines[i].ProductTypeCode;
                     dgvTransaction.Rows[rowcount].Cells["ProductId"].Value = Transaction.TransactionLines[i].ProductID;
@@ -1204,7 +1271,7 @@ namespace Marbale.POS
                 dgvCard.Rows[1].Cells[1].Value = CurrentCard.loyalty_points;
 
                 //Recharged / Spent
-                dgvCard.Rows[2].Cells[1].Value = "0/0"; // CurrentCard.TotalRechargeAmount;
+                dgvCard.Rows[2].Cells[1].Value = CurrentCard.TotalRechargeAmount + " / " + CurrentCard.credits_played;
 
                 if (CurrentCard.customer != null)
                 {
