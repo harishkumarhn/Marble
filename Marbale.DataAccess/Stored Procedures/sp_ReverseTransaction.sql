@@ -158,7 +158,7 @@ BEGIN
 			LineId, 
 			ProductId, 
 			Price, 
-			Quantity, 
+			Quantity * -1, 
 			Amount * -1, 
 			CardId, 
 			CardNumber, 

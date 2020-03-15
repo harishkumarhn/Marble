@@ -35,11 +35,15 @@ namespace MarbaleManagementStudio.Controllers
         {
             if (ModelState.IsValid)
             {
-                var obj = this.siteSetup.GetUser(objUser.LoginId, objUser.Password);
-                if (obj != null)
+                var user = this.siteSetup.GetUser(objUser.LoginId, objUser.Password);
+                if (user != null)
                 {
-                    Session["UserID"] = obj.LoginId.ToString();
-                    Session["UserName"] = obj.Name.ToString();
+                    var moduleActions = this.siteSetup.GetModuleActionsByRole(user.RoleId);
+
+                    Session["UserID"] = user.LoginId.ToString();
+                    Session["UserName"] = user.Name.ToString();
+                    Session["AllowedPages"] = moduleActions;
+
                     return RedirectToAction("Index");
                 }
                 else
@@ -52,6 +56,9 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult Logout()
         {
             Session["UserID"] = null;
+            Session["UserName"] = null;
+            Session["AllowedPages"] = null;
+
             return RedirectToAction("Login");
         }
 
