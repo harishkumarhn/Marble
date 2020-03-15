@@ -53,7 +53,7 @@ namespace Marbale.POS
             }
 
             SiteSetupBL siteSetupBL = new SiteSetupBL();
-            User userAdaptr  = siteSetupBL.ValidateUser(username, password);
+            User userAdaptr  = siteSetupBL.GetUser(username, password);
             if (userAdaptr != null && userAdaptr.Id > 0)
             {
                 loggedInUser = userAdaptr;

@@ -42,7 +42,7 @@
     <button class="btn btn-primary btn-md" role="button" id="saveproductcat" onclick="SaveProductCategory()" disabled>Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button">Add Product Category</button>
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/Index'">Close</button>
 </div>
 <script>
 
@@ -99,34 +99,36 @@
     });
 
     function SaveProductCategory() {
-        var productCategories = [];
-        var table = document.getElementById('marbleTable');
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-            var rowIndex = r + 1;
+        if (updatedArray.length > 0) {
+            var productCategories = [];
+            var table = document.getElementById('marbleTable');
+            for (var r = 0, n = table.rows.length; r < n; r++) {
+                var rowIndex = r + 1;
 
-            if (updatedArray.includes(r)) {
-                var selectedIndex = table.rows[rowIndex].cells[2].children[0].options["selectedIndex"];
-                productCategories.push({
-                    Id: table.rows[rowIndex].cells[0].innerHTML,
-                    Name: table.rows[rowIndex].cells[1].children[0].value,
-                    ParentCategory: table.rows[rowIndex].cells[2].children[0].options[selectedIndex].innerHTML,
-                    Active: table.rows[rowIndex].cells[3].children[0].checked,
-                });
+                if (updatedArray.includes(r)) {
+                    var selectedIndex = table.rows[rowIndex].cells[2].children[0].options["selectedIndex"];
+                    productCategories.push({
+                        Id: table.rows[rowIndex].cells[0].innerHTML,
+                        Name: table.rows[rowIndex].cells[1].children[0].value,
+                        ParentCategory: table.rows[rowIndex].cells[2].children[0].options[selectedIndex].innerHTML,
+                        Active: table.rows[rowIndex].cells[3].children[0].checked,
+                    });
+                }
             }
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("UpdateProductCategories", "Product")',
+                data: JSON.stringify({ categories: productCategories }),
+                dataType: "json",
+                success: function (data) {
+                    alert('Data Saved');
+                    location.reload();
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
         }
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdateProductCategories", "Product")',
-            data: JSON.stringify({ categories: productCategories }),
-            dataType: "json",
-            success: function (data) {
-                alert('Data Saved');
-                location.reload();
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
     }
 </script>
