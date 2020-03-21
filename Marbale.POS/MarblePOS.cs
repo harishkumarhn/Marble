@@ -557,7 +557,8 @@ namespace Marbale.POS
                     return;
                 }
 
-                UpdateCardForTransaction(product);
+                UpdateCardForRechargeTransaction(product);
+
             }
             else if (product.Type == "VARIABLE_RECHARGE")
             {
@@ -607,13 +608,16 @@ namespace Marbale.POS
                     MessageBox.Show("Please Enter the Recharge amount greater than zero");
                     return;
                 }
+
+                product.Price = productPrice;
+                UpdateCardForRechargeTransaction(product);
             }
 
             trxLine.quantity = 1;
 
             trxLine.tax_percentage = product.TaxPercentage;
             trxLine.tax_id = product.TaxId;
-            trxLine.tax_amount = (decimal)((productPrice - product.FaceValue) * product.TaxPercentage) / 100;
+            trxLine.tax_amount = (decimal)((product.Price - product.FaceValue) * product.TaxPercentage) / 100;
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
 
@@ -624,9 +628,9 @@ namespace Marbale.POS
 
             trxLine.ProductType = product.Type;
 
-            trxLine.amount = productPrice - Convert.ToDecimal(product.FaceValue);
+            trxLine.amount = Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
             trxLine.ProductTypeCode = product.Type;
-            trxLine.LineAmount = (productPrice - Convert.ToDecimal(product.FaceValue)) + Convert.ToDecimal(trxLine.tax_amount);
+            trxLine.LineAmount = (Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue)) + Convert.ToDecimal(trxLine.tax_amount);
             trxLine.Credits = Convert.ToDecimal(product.Credits);
             trxLine.Bonus = Convert.ToDecimal(product.Bonus);
             trxLine.Courtesy = Convert.ToDecimal(product.Courtesy);
@@ -687,17 +691,21 @@ namespace Marbale.POS
             Transaction.TransactionLines.Add(trxLine);
         }
 
-        void UpdateCardForTransaction(Product product)
+        void UpdateCardForRechargeTransaction(Product product)
         {
             if (CurrentCard != null)
             {
-                CurrentCard.credits = Convert.ToDecimal(product.Credits);
+                CurrentCard.credits = CurrentCard.credits + Convert.ToDecimal(product.Price);
                 CurrentCard.bonus = Convert.ToDecimal(product.Bonus);
                 CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
                 CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
             }
         }
 
+        void UpdateCardForTransaction(Product product)
+        {
+
+        }
 
         void UpdateTransactionAmount()
         {
