@@ -558,6 +558,7 @@ namespace Marbale.POS
                 }
 
                 UpdateCardForRechargeTransaction(product);
+
             }
             else if (product.Type == "VARIABLE_RECHARGE")
             {

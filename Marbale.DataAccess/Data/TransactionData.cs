@@ -581,6 +581,7 @@ namespace Marbale.DataAccess.Data
                 conn.executeInsertQuery("sp_InsertOrUpdateCard", sqlParameters);
 
                 return Convert.ToInt32(sqlParameters[28].Value);
+
             }
             catch (Exception e)
             {
