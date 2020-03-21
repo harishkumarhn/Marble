@@ -244,9 +244,8 @@
                     var rowIndex = r + 1;
                     var selectedRoleIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
                     var selectedStatusIndex = table.rows[rowIndex].cells[7].children[0].options["selectedIndex"];
-
                     items.push({
-                        Id: fixedcolumn1[r].innerHTML,
+                        Id: fixedcolumn1[r].innerHTML.trime() == '' ? -1 : fixedcolumn1[r].innerHTML,
                         Name: fixedcolumn3[r].value,
                         RoleId: table.rows[rowIndex].cells[3].children[0].options[selectedRoleIndex].id,
                         Email: table.rows[rowIndex].cells[4].children[0].value,

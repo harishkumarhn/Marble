@@ -11,7 +11,7 @@ using System;
 
 namespace MarbaleManagementStudio.Controllers
 {
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public class SiteSetupController : Controller
     {
         SiteSetupBL siteSetup = new SiteSetupBL();
@@ -319,16 +319,16 @@ namespace MarbaleManagementStudio.Controllers
             var message = string.Empty;
             try
             {
-                //if (ModelState.IsValid)
-                //{
+                if (ModelState.IsValid)
+                {
                     siteSetup.InsertOrUpdateUsers(user);
-                //}
-                //else
-                //{
-                //    message = string.Join(" | ", ModelState.Values
-                //                  .SelectMany(v => v.Errors)
-                //                  .Select(e => e.ErrorMessage));
-                //}
+                }
+                else
+                {
+                    message = string.Join(" | ", ModelState.Values
+                                  .SelectMany(v => v.Errors)
+                                  .Select(e => e.ErrorMessage));
+                }
             }
             catch (Exception e)
             {

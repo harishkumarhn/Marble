@@ -130,6 +130,12 @@
   <data name="Consolidate_Cards" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Consolidate_Cards.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Password change" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Password change.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Clear_Transaction_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Clear_Transaction_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Cancel_Transaction" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cancel_Transaction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -151,17 +157,14 @@
   <data name="Cancel_Button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cancel_Button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconfinder_payment_1954199" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconfinder_payment_1954199.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconfinder_Delete_1493279" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconfinder_Delete_1493279.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Save_Transaction" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Save_Transaction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Consolidate_Cards_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Consolidate_Cards_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Transfer_Card_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Transfer_Card_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Load_Tickets_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Load_Tickets_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -190,14 +193,11 @@
   <data name="Username_16_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Username_16_25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Load_Multiple_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Load_Multiple_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="changeColor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\changeColor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Print" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Print.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="changeColor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\changeColor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Dropdown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dropdown1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,14 +211,17 @@
   <data name="Print_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Print_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RefundCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RefundCard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Load_Bonus_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Load_Bonus_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Transfer_Card_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Transfer_Card_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="backward" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\backward.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Payment" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Payment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RefundCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RefundCard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Username_16_251" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Username_16_251.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,17 +235,17 @@
   <data name="RightArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RightArrow1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Clear_Transaction_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Clear_Transaction_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Payment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Payment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconfinder_Delete_1493279" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconfinder_Delete_1493279.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconfinder_payment_1954199" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconfinder_payment_1954199.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iconfinder_bookmark-new_118908 (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconfinder_bookmark-new_118908 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Load_Bonus_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Load_Bonus_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Load_Multiple_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Load_Multiple_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Cancel_Trx_Line_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cancel_Trx_Line_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -262,7 +265,7 @@
   <data name="Reconnect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Reconnect.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Password change" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Password change.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
+  <!--<data name="reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>-->
 </root>
