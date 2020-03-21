@@ -11,10 +11,6 @@
         height:4vh;
         margin-bottom:1vh;
     }
-    .editor-label{
-        margin-bottom: 1vh;
-        margin-top: 1vh;
-    }
 </style>
 <div class="modal-header">
     <h4 class="modal-title">Configuration</h4>
@@ -30,7 +26,7 @@
         <div style="width: 800px;">
             <div style="width: 370px; float: left">
                 <div style="width:280px; float:left">
-                    <div class="editor-label">
+                    <div class="editor-label" style="margin-top:1vh">
                         @Html.LabelFor(model => model.StartInPhysicalTicketMode)
                     </div>
                     <div class="editor-label">
@@ -39,7 +35,7 @@
                     <div class="editor-label">
                         @Html.LabelFor(model => model.TicketPulseWidth)                       
                     </div>
-                    <div class="editor-label">
+                    <div class="editor-label" style="margin-bottom:-1vh;">
                         @Html.LabelFor(model => model.TicketPulseGap)
                     </div>
                     <div class="editor-label">
@@ -51,16 +47,16 @@
                     <div class="editor-label">
                         @Html.LabelFor(model => model.StartScreenNumber)                        
                     </div>
-                    <div class="editor-label">
+                    <div class="editor-label" style="margin-bottom:-1vh">
                         @Html.LabelFor(model => model.BalanceDelay)                        
                     </div>
-                    <div class="editor-label">
+                    <div class="editor-label" style="margin-bottom:-1.2vh">
                         @Html.LabelFor(model => model.EnableResetPulse)                        
                     </div>
-                    <div class="editor-label">
+                    <div class="editor-label" style="margin-bottom:-1vh">
                         @Html.LabelFor(model => model.MinSecondsBetweenRepeatPlay)
                     </div>
-                    <div class="editor-label">
+                    <div class="editor-label" style="margin-bottom:-0.5vh">
                         @Html.LabelFor(model => model.EnableExtAntenna)
                     </div>
                     <div class="editor-label">
@@ -139,7 +135,7 @@
                         @Html.LabelFor(model => model.CoinPulseGap)                        
                     </div>
                    
-                    <div class="editor-label">
+                    <div class="editor-label" style="margin-bottom:-1vh">
                         @Html.LabelFor(model => model.SensorInterval)                        
                     </div>
                    
@@ -147,7 +143,7 @@
                         @Html.LabelFor(model => model.DisableTickets)                        
                     </div>
                    
-                    <div class="editor-label">
+                    <div class="editor-label" style="margin-bottom:-0.5vh">
                         @Html.LabelFor(model => model.DisableTickets)                        
                     </div>
                    
@@ -167,7 +163,7 @@
                         @Html.LabelFor(model => model.DisplayLanguage)                        
                     </div>
                    
-                    <div class="editor-label">
+                    <div class="editor-label" style="margin-bottom:-1vh;">
                         @Html.LabelFor(model => model.MaxTicketPerGamePlay)
                     </div>
                    
@@ -252,7 +248,7 @@
 </div>
 <div class="modal-footer">
     <button id="update" type="button" class="btn btn-primary" onclick="SaveConfiguration(this)">Save</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 </div>
 
 
