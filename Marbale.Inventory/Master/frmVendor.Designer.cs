@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.txtVendorName = new System.Windows.Forms.TextBox();
             this.grpFilter = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtVendorCodeSearch = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtVendorNameSearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtVendorId = new System.Windows.Forms.TextBox();
@@ -45,6 +46,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPostalCode = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.txtCountry = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txtRemarks = new System.Windows.Forms.TextBox();
@@ -64,14 +67,37 @@
             this.label16 = new System.Windows.Forms.Label();
             this.txtEmailId = new System.Windows.Forms.TextBox();
             this.dgvVendor = new System.Windows.Forms.DataGridView();
+            this.vendorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.grpVendorDetails = new System.Windows.Forms.GroupBox();
             this.btnClose = new System.Windows.Forms.Button();
+            this.VendorId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.VendorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddressLine1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddressLine2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.City = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Country = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PostalCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddressRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Website = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastUpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastUpdatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsChanged = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.grpFilter.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vendorBindingSource)).BeginInit();
             this.grpVendorDetails.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,34 +123,35 @@
             this.grpFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpFilter.BackColor = System.Drawing.Color.White;
-            this.grpFilter.Controls.Add(this.button1);
-            this.grpFilter.Controls.Add(this.textBox3);
+            this.grpFilter.Controls.Add(this.btnSearch);
+            this.grpFilter.Controls.Add(this.txtVendorCodeSearch);
             this.grpFilter.Controls.Add(this.label3);
-            this.grpFilter.Controls.Add(this.textBox2);
+            this.grpFilter.Controls.Add(this.txtVendorNameSearch);
             this.grpFilter.Controls.Add(this.label2);
             this.grpFilter.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.grpFilter.Location = new System.Drawing.Point(1, -2);
             this.grpFilter.Name = "grpFilter";
-            this.grpFilter.Size = new System.Drawing.Size(856, 57);
+            this.grpFilter.Size = new System.Drawing.Size(919, 57);
             this.grpFilter.TabIndex = 2;
             this.grpFilter.TabStop = false;
             this.grpFilter.Text = "Filter";
             // 
-            // button1
+            // btnSearch
             // 
-            this.button1.Location = new System.Drawing.Point(527, 22);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 25);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSearch.Location = new System.Drawing.Point(527, 22);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 25);
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // textBox3
+            // txtVendorCodeSearch
             // 
-            this.textBox3.Location = new System.Drawing.Point(367, 22);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(127, 25);
-            this.textBox3.TabIndex = 5;
+            this.txtVendorCodeSearch.Location = new System.Drawing.Point(367, 22);
+            this.txtVendorCodeSearch.Name = "txtVendorCodeSearch";
+            this.txtVendorCodeSearch.Size = new System.Drawing.Size(127, 25);
+            this.txtVendorCodeSearch.TabIndex = 5;
             // 
             // label3
             // 
@@ -135,12 +162,12 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Vendor Code :";
             // 
-            // textBox2
+            // txtVendorNameSearch
             // 
-            this.textBox2.Location = new System.Drawing.Point(112, 22);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(127, 25);
-            this.textBox2.TabIndex = 3;
+            this.txtVendorNameSearch.Location = new System.Drawing.Point(112, 22);
+            this.txtVendorNameSearch.Name = "txtVendorNameSearch";
+            this.txtVendorNameSearch.Size = new System.Drawing.Size(127, 25);
+            this.txtVendorNameSearch.TabIndex = 3;
             // 
             // label2
             // 
@@ -223,6 +250,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtPostalCode);
+            this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.txtCountry);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.txtRemarks);
@@ -244,6 +273,23 @@
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Address";
+            // 
+            // txtPostalCode
+            // 
+            this.txtPostalCode.Location = new System.Drawing.Point(365, 81);
+            this.txtPostalCode.Name = "txtPostalCode";
+            this.txtPostalCode.Size = new System.Drawing.Size(145, 20);
+            this.txtPostalCode.TabIndex = 26;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label17.Location = new System.Drawing.Point(270, 81);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(78, 17);
+            this.label17.TabIndex = 25;
+            this.label17.Text = "Postal Code";
             // 
             // txtCountry
             // 
@@ -402,14 +448,42 @@
             // dgvVendor
             // 
             this.dgvVendor.AllowUserToAddRows = false;
+            this.dgvVendor.AutoGenerateColumns = false;
             this.dgvVendor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVendor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.VendorId,
+            this.IsActive,
+            this.VendorName,
+            this.Remarks,
+            this.Code,
+            this.AddressLine1,
+            this.AddressLine2,
+            this.City,
+            this.State,
+            this.Country,
+            this.PostalCode,
+            this.AddressRemarks,
+            this.ContactName,
+            this.Phone,
+            this.Email,
+            this.Website,
+            this.CreatedBy,
+            this.LastUpdatedBy,
+            this.CreatedDate,
+            this.LastUpdatedDate,
+            this.IsChanged});
+            this.dgvVendor.DataSource = this.vendorBindingSource;
             this.dgvVendor.Location = new System.Drawing.Point(9, 16);
             this.dgvVendor.MultiSelect = false;
             this.dgvVendor.Name = "dgvVendor";
             this.dgvVendor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVendor.Size = new System.Drawing.Size(834, 191);
             this.dgvVendor.TabIndex = 30;
-            this.dgvVendor.SelectionChanged += new System.EventHandler(this.dgvVendor_SelectionChanged);
+            this.dgvVendor.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVendor_CellClick);
+            // 
+            // vendorBindingSource
+            // 
+            this.vendorBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.Vendor);
             // 
             // btnSave
             // 
@@ -419,6 +493,7 @@
             this.btnSave.TabIndex = 34;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnDelete
             // 
@@ -446,7 +521,7 @@
             this.grpVendorDetails.Controls.Add(this.dgvVendor);
             this.grpVendorDetails.Location = new System.Drawing.Point(4, 321);
             this.grpVendorDetails.Name = "grpVendorDetails";
-            this.grpVendorDetails.Size = new System.Drawing.Size(852, 213);
+            this.grpVendorDetails.Size = new System.Drawing.Size(915, 213);
             this.grpVendorDetails.TabIndex = 35;
             this.grpVendorDetails.TabStop = false;
             this.grpVendorDetails.Text = "Vendor Details";
@@ -461,12 +536,158 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // VendorId
+            // 
+            this.VendorId.DataPropertyName = "VendorId";
+            this.VendorId.HeaderText = "VendorId";
+            this.VendorId.Name = "VendorId";
+            // 
+            // IsActive
+            // 
+            this.IsActive.DataPropertyName = "IsActive";
+            this.IsActive.HeaderText = "IsActive";
+            this.IsActive.Name = "IsActive";
+            this.IsActive.ReadOnly = true;
+            // 
+            // VendorName
+            // 
+            this.VendorName.DataPropertyName = "VendorName";
+            this.VendorName.HeaderText = "VendorName";
+            this.VendorName.Name = "VendorName";
+            this.VendorName.ReadOnly = true;
+            // 
+            // Remarks
+            // 
+            this.Remarks.DataPropertyName = "Remarks";
+            this.Remarks.HeaderText = "Remarks";
+            this.Remarks.Name = "Remarks";
+            this.Remarks.ReadOnly = true;
+            // 
+            // Code
+            // 
+            this.Code.DataPropertyName = "Code";
+            this.Code.HeaderText = "Code";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            // 
+            // AddressLine1
+            // 
+            this.AddressLine1.DataPropertyName = "AddressLine1";
+            this.AddressLine1.HeaderText = "AddressLine1";
+            this.AddressLine1.Name = "AddressLine1";
+            this.AddressLine1.ReadOnly = true;
+            // 
+            // AddressLine2
+            // 
+            this.AddressLine2.DataPropertyName = "AddressLine2";
+            this.AddressLine2.HeaderText = "AddressLine2";
+            this.AddressLine2.Name = "AddressLine2";
+            this.AddressLine2.ReadOnly = true;
+            // 
+            // City
+            // 
+            this.City.DataPropertyName = "City";
+            this.City.HeaderText = "City";
+            this.City.Name = "City";
+            this.City.ReadOnly = true;
+            // 
+            // State
+            // 
+            this.State.DataPropertyName = "State";
+            this.State.HeaderText = "State";
+            this.State.Name = "State";
+            this.State.ReadOnly = true;
+            // 
+            // Country
+            // 
+            this.Country.DataPropertyName = "Country";
+            this.Country.HeaderText = "Country";
+            this.Country.Name = "Country";
+            this.Country.ReadOnly = true;
+            // 
+            // PostalCode
+            // 
+            this.PostalCode.DataPropertyName = "PostalCode";
+            this.PostalCode.HeaderText = "PostalCode";
+            this.PostalCode.Name = "PostalCode";
+            this.PostalCode.ReadOnly = true;
+            // 
+            // AddressRemarks
+            // 
+            this.AddressRemarks.DataPropertyName = "AddressRemarks";
+            this.AddressRemarks.HeaderText = "AddressRemarks";
+            this.AddressRemarks.Name = "AddressRemarks";
+            this.AddressRemarks.ReadOnly = true;
+            // 
+            // ContactName
+            // 
+            this.ContactName.DataPropertyName = "ContactName";
+            this.ContactName.HeaderText = "ContactName";
+            this.ContactName.Name = "ContactName";
+            this.ContactName.ReadOnly = true;
+            // 
+            // Phone
+            // 
+            this.Phone.DataPropertyName = "Phone";
+            this.Phone.HeaderText = "Phone";
+            this.Phone.Name = "Phone";
+            this.Phone.ReadOnly = true;
+            // 
+            // Email
+            // 
+            this.Email.DataPropertyName = "Email";
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // Website
+            // 
+            this.Website.DataPropertyName = "Website";
+            this.Website.HeaderText = "Website";
+            this.Website.Name = "Website";
+            this.Website.ReadOnly = true;
+            // 
+            // CreatedBy
+            // 
+            this.CreatedBy.DataPropertyName = "CreatedBy";
+            this.CreatedBy.HeaderText = "CreatedBy";
+            this.CreatedBy.Name = "CreatedBy";
+            this.CreatedBy.ReadOnly = true;
+            // 
+            // LastUpdatedBy
+            // 
+            this.LastUpdatedBy.DataPropertyName = "LastUpdatedBy";
+            this.LastUpdatedBy.HeaderText = "LastUpdatedBy";
+            this.LastUpdatedBy.Name = "LastUpdatedBy";
+            this.LastUpdatedBy.ReadOnly = true;
+            // 
+            // CreatedDate
+            // 
+            this.CreatedDate.DataPropertyName = "CreatedDate";
+            this.CreatedDate.HeaderText = "CreatedDate";
+            this.CreatedDate.Name = "CreatedDate";
+            this.CreatedDate.ReadOnly = true;
+            // 
+            // LastUpdatedDate
+            // 
+            this.LastUpdatedDate.DataPropertyName = "LastUpdatedDate";
+            this.LastUpdatedDate.HeaderText = "LastUpdatedDate";
+            this.LastUpdatedDate.Name = "LastUpdatedDate";
+            this.LastUpdatedDate.ReadOnly = true;
+            // 
+            // IsChanged
+            // 
+            this.IsChanged.DataPropertyName = "IsChanged";
+            this.IsChanged.HeaderText = "IsChanged";
+            this.IsChanged.Name = "IsChanged";
+            this.IsChanged.Visible = false;
+            // 
             // frmVendor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(863, 546);
+            this.ClientSize = new System.Drawing.Size(926, 546);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnDelete);
@@ -499,6 +720,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vendorBindingSource)).EndInit();
             this.grpVendorDetails.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -510,10 +732,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtVendorName;
         private System.Windows.Forms.GroupBox grpFilter;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtVendorCodeSearch;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtVendorNameSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtVendorId;
@@ -548,5 +770,29 @@
         private System.Windows.Forms.GroupBox grpVendorDetails;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox txtCountry;
+        private System.Windows.Forms.TextBox txtPostalCode;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.BindingSource vendorBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VendorId;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsActive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VendorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressLine1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressLine2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn City;
+        private System.Windows.Forms.DataGridViewTextBoxColumn State;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Country;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PostalCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressRemarks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContactName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Website;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreatedBy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdatedBy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreatedDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdatedDate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsChanged;
     }
 }

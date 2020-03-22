@@ -41,15 +41,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AdminData.cs" />
-    <Compile Include="Data\CategoryData.cs" />
     <Compile Include="Data\CommonData.cs" />
+    <Compile Include="Data\Common\SortableBindingList.cs" />
     <Compile Include="Data\GameData.cs" />
     <Compile Include="Data\CardsData.cs" />
-    <Compile Include="Data\LocationData.cs" />
-    <Compile Include="Data\LocationTypeData.cs" />
+    <Compile Include="Data\Inventory\CategoryData.cs" />
+    <Compile Include="Data\Inventory\InventoryProductData.cs" />
+    <Compile Include="Data\Inventory\LocationData.cs" />
+    <Compile Include="Data\Inventory\LocationTypeData.cs" />
+    <Compile Include="Data\Inventory\PurchaseTaxData.cs" />
+    <Compile Include="Data\Inventory\UnitOfMeasureData.cs" />
+    <Compile Include="Data\Inventory\VendorData.cs" />
     <Compile Include="Data\TransactionData.cs" />
-    <Compile Include="Data\UnitOfMeasureData.cs" />
-    <Compile Include="Data\VendorData.cs" />
     <Compile Include="DBConnection.cs" />
     <Compile Include="Data\ProductData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

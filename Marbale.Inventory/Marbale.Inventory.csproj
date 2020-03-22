@@ -114,6 +114,18 @@
     <Compile Include="MenuPopups\MasterPopup.Designer.cs">
       <DependentUpon>MasterPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Product\frmProductShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Product\frmProductShow.designer.cs">
+      <DependentUpon>frmProductShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Product\frm_ProductList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Product\frm_ProductList.Designer.cs">
+      <DependentUpon>frm_ProductList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmProduct.resx">
@@ -146,6 +158,12 @@
     <EmbeddedResource Include="MenuPopups\MasterPopup.resx">
       <DependentUpon>MasterPopup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Product\frmProductShow.resx">
+      <DependentUpon>frmProductShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Product\frm_ProductList.resx">
+      <DependentUpon>frm_ProductList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -177,6 +195,10 @@
     <ProjectReference Include="..\Marbale.Business\Marbale.Business.csproj">
       <Project>{D3791924-6C85-4AAD-8BAB-3E3CD23C22E6}</Project>
       <Name>Marbale.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Marbale.DataAccess\Marbale.DataAccess.csproj">
+      <Project>{6A6D1608-F1EC-435A-A3EC-10237AB280AF}</Project>
+      <Name>Marbale.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,7 +11,7 @@ using Marbale.DataAccess.Data;
 using Marble.Business;
 using Marbale.BusinessObject.Inventory;
 
-namespace Marble.Business.InventoryBL
+namespace Marble.Business
 {
     public class LocationBL
     {
@@ -50,5 +50,19 @@ namespace Marble.Business.InventoryBL
 
             return lstLocation;
         }
+
+
+        public int Save(Location location, string userId)
+        {
+            try
+            {
+                return LocationData.InsertOrUpdateLocation(location, userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

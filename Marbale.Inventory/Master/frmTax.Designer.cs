@@ -28,55 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.grpUOM = new System.Windows.Forms.GroupBox();
-            this.dgvCategory = new System.Windows.Forms.DataGridView();
+            this.dgvTax = new System.Windows.Forms.DataGridView();
+            this.taxBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.taxIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taxNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taxPercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.createdByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastUpdatedByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.grpUOM.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taxBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // button4
+            // btnRefresh
             // 
-            this.button4.Location = new System.Drawing.Point(114, 318);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(81, 30);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "Refresh";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnRefresh.Location = new System.Drawing.Point(114, 318);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(81, 30);
+            this.btnRefresh.TabIndex = 14;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnDelete
             // 
-            this.button3.Location = new System.Drawing.Point(209, 318);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(81, 30);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnDelete.Location = new System.Drawing.Point(209, 318);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(81, 30);
+            this.btnDelete.TabIndex = 13;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // button2
+            // btnClose
             // 
-            this.button2.Location = new System.Drawing.Point(306, 318);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(81, 30);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Close";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnClose.Location = new System.Drawing.Point(306, 318);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(81, 30);
+            this.btnClose.TabIndex = 12;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // button1
+            // btnSave
             // 
-            this.button1.Location = new System.Drawing.Point(17, 318);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 30);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(17, 318);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(81, 30);
+            this.btnSave.TabIndex = 11;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // grpUOM
             // 
-            this.grpUOM.Controls.Add(this.dgvCategory);
+            this.grpUOM.Controls.Add(this.dgvTax);
             this.grpUOM.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.grpUOM.Location = new System.Drawing.Point(9, 6);
             this.grpUOM.Name = "grpUOM";
@@ -85,13 +100,83 @@
             this.grpUOM.TabStop = false;
             this.grpUOM.Text = "Tax Details";
             // 
-            // dgvCategory
+            // dgvTax
             // 
-            this.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategory.Location = new System.Drawing.Point(8, 21);
-            this.dgvCategory.Name = "dgvCategory";
-            this.dgvCategory.Size = new System.Drawing.Size(531, 274);
-            this.dgvCategory.TabIndex = 6;
+            this.dgvTax.AutoGenerateColumns = false;
+            this.dgvTax.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTax.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.taxIdDataGridViewTextBoxColumn,
+            this.taxNameDataGridViewTextBoxColumn,
+            this.taxPercentageDataGridViewTextBoxColumn,
+            this.isActiveDataGridViewCheckBoxColumn,
+            this.createdByDataGridViewTextBoxColumn,
+            this.lastUpdatedByDataGridViewTextBoxColumn,
+            this.createdDateDataGridViewTextBoxColumn,
+            this.lastUpdatedDateDataGridViewTextBoxColumn,
+            this.isChangedDataGridViewCheckBoxColumn});
+            this.dgvTax.DataSource = this.taxBindingSource;
+            this.dgvTax.Location = new System.Drawing.Point(8, 21);
+            this.dgvTax.Name = "dgvTax";
+            this.dgvTax.Size = new System.Drawing.Size(531, 274);
+            this.dgvTax.TabIndex = 6;
+            // 
+            // taxBindingSource
+            // 
+            this.taxBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.PurchaseTax);
+            // 
+            // taxIdDataGridViewTextBoxColumn
+            // 
+            this.taxIdDataGridViewTextBoxColumn.DataPropertyName = "TaxId";
+            this.taxIdDataGridViewTextBoxColumn.HeaderText = "TaxId";
+            this.taxIdDataGridViewTextBoxColumn.Name = "taxIdDataGridViewTextBoxColumn";
+            // 
+            // taxNameDataGridViewTextBoxColumn
+            // 
+            this.taxNameDataGridViewTextBoxColumn.DataPropertyName = "TaxName";
+            this.taxNameDataGridViewTextBoxColumn.HeaderText = "TaxName";
+            this.taxNameDataGridViewTextBoxColumn.Name = "taxNameDataGridViewTextBoxColumn";
+            // 
+            // taxPercentageDataGridViewTextBoxColumn
+            // 
+            this.taxPercentageDataGridViewTextBoxColumn.DataPropertyName = "TaxPercentage";
+            this.taxPercentageDataGridViewTextBoxColumn.HeaderText = "TaxPercentage";
+            this.taxPercentageDataGridViewTextBoxColumn.Name = "taxPercentageDataGridViewTextBoxColumn";
+            // 
+            // isActiveDataGridViewCheckBoxColumn
+            // 
+            this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            // 
+            // createdByDataGridViewTextBoxColumn
+            // 
+            this.createdByDataGridViewTextBoxColumn.DataPropertyName = "CreatedBy";
+            this.createdByDataGridViewTextBoxColumn.HeaderText = "CreatedBy";
+            this.createdByDataGridViewTextBoxColumn.Name = "createdByDataGridViewTextBoxColumn";
+            // 
+            // lastUpdatedByDataGridViewTextBoxColumn
+            // 
+            this.lastUpdatedByDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedBy";
+            this.lastUpdatedByDataGridViewTextBoxColumn.HeaderText = "LastUpdatedBy";
+            this.lastUpdatedByDataGridViewTextBoxColumn.Name = "lastUpdatedByDataGridViewTextBoxColumn";
+            // 
+            // createdDateDataGridViewTextBoxColumn
+            // 
+            this.createdDateDataGridViewTextBoxColumn.DataPropertyName = "CreatedDate";
+            this.createdDateDataGridViewTextBoxColumn.HeaderText = "CreatedDate";
+            this.createdDateDataGridViewTextBoxColumn.Name = "createdDateDataGridViewTextBoxColumn";
+            // 
+            // lastUpdatedDateDataGridViewTextBoxColumn
+            // 
+            this.lastUpdatedDateDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedDate";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.HeaderText = "LastUpdatedDate";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.Name = "lastUpdatedDateDataGridViewTextBoxColumn";
+            // 
+            // isChangedDataGridViewCheckBoxColumn
+            // 
+            this.isChangedDataGridViewCheckBoxColumn.DataPropertyName = "IsChanged";
+            this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
+            this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
             // 
             // frmTax
             // 
@@ -99,26 +184,38 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(562, 355);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grpUOM);
             this.Name = "frmTax";
             this.Text = "Tax";
+            this.Load += new System.EventHandler(this.frmTax_Load);
             this.grpUOM.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taxBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.GroupBox grpUOM;
-        private System.Windows.Forms.DataGridView dgvCategory;
+        private System.Windows.Forms.DataGridView dgvTax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn taxIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn taxNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn taxPercentageDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdByDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedByDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.BindingSource taxBindingSource;
     }
 }

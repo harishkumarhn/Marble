@@ -11,7 +11,7 @@ using Marbale.DataAccess.Data;
 using Marble.Business;
 using Marbale.BusinessObject.Inventory;
 
-namespace Marble.Business.InventoryBL
+namespace Marble.Business
 {
     public class UnitOfMeasureBL
     {
@@ -32,7 +32,7 @@ namespace Marble.Business.InventoryBL
             foreach (DataRow dr in dt.Rows)
             {
                 uom = new UnitOfMeasure();
-                uom.UomId = dr.IsNull("UomId") ? 0 : int.Parse(dr["UomId"].ToString());
+                uom.UOMId = dr.IsNull("UomId") ? 0 : int.Parse(dr["UomId"].ToString());
                 uom.isActive = dr.IsNull("IsActive") ? false : bool.Parse(dr["IsActive"].ToString());
                 uom.UomName = dr.IsNull("UomName") ? "" : dr["UomName"].ToString();
                 uom.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
@@ -44,6 +44,19 @@ namespace Marble.Business.InventoryBL
             }
 
             return lstCategroy;
+        }
+
+
+        public int Save(UnitOfMeasure uom, string userId)
+        {
+            try
+            {
+                return Uomdata.InsertOrUpdateUOM(uom, userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

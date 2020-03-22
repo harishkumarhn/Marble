@@ -1,4 +1,5 @@
 ﻿using Marbale.Inventory.Master;
+using Marbale.Inventory.Product;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,6 +52,12 @@ namespace Marbale.Inventory
         {
             frmLocation frm = new frmLocation();
             frm.ShowDialog();
+        }
+
+        private void productToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_ProductList frm_ProductList = new Frm_ProductList();
+            frm_ProductList.ShowDialog();
         }
     }
 }

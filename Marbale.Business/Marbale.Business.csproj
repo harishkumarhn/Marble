@@ -56,8 +56,10 @@
     <Compile Include="GameBL.cs" />
     <Compile Include="CardsBL.cs" />
     <Compile Include="Enum\TypeEnum.cs" />
+    <Compile Include="InventoryBL\InventoryProductBL.cs" />
     <Compile Include="InventoryBL\LocationBL.cs" />
     <Compile Include="InventoryBL\LocationTypeBL.cs" />
+    <Compile Include="InventoryBL\PurchaseTaxBL.cs" />
     <Compile Include="InventoryBL\UnitOfMeasureBL.cs" />
     <Compile Include="InventoryBL\VendorBL.cs" />
     <Compile Include="ProductBL.cs" />
@@ -81,6 +83,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

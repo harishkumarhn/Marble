@@ -11,21 +11,24 @@ using Marbale.DataAccess.Data;
 using Marble.Business;
 using Marbale.BusinessObject.Inventory;
 
-namespace Marble.Business.InventoryBL
+namespace Marble.Business
 {
     public class VendorBL
     {
-        private VendorData VendorData;
+        private VendorData vendorData;
 
         public VendorBL()
         {
-            VendorData = new VendorData();
+            vendorData = new VendorData();
+        }
+        public List<Vendor> GetVendorList(List<KeyValuePair<Vendor.SearchByVendorParameters, string>> searchParameters)
+        {
+            return vendorData.GetVendorList(searchParameters);
         }
 
-
-        public List<Vendor> GetVendor()
+            public List<Vendor> GetVendor()
         {
-            DataTable dt = VendorData.GetVendorData();
+            DataTable dt = vendorData.GetVendorData();
             List<Vendor> lstVendor = new List<Vendor>();
             Vendor Vendor;
 
@@ -55,6 +58,18 @@ namespace Marble.Business.InventoryBL
             }
 
             return lstVendor;
+        }
+
+        public int Save(Vendor vendor, string userId)
+        {
+            try
+            {
+                return vendorData.InsertOrUpdateVendor(vendor, userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

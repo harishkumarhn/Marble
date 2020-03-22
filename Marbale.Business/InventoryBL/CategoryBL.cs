@@ -1,5 +1,5 @@
 ﻿using Marbale.BusinessObject;
-using Marbale.BusinessObject.Tax;
+ 
 using Marbale.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -33,7 +33,7 @@ namespace Marble.Business
             {
                 category = new Category();
                 category.CategoryId = dr.IsNull("CategoryId") ? 0 : int.Parse(dr["CategoryId"].ToString());
-                category.isActive = dr.IsNull("IsActive") ? false : bool.Parse(dr["IsActive"].ToString());
+                category.IsActive = dr.IsNull("IsActive") ? false : bool.Parse(dr["IsActive"].ToString());
                 category.CategoryName = dr.IsNull("CategoryName") ? "" : dr["CategoryName"].ToString();
                 category.CreatedBy = dr.IsNull("CreatedBy") ? "" : dr["CreatedBy"].ToString();
                 category.CreatedDate = dr.IsNull("CreatedDate") ? new DateTime() : Convert.ToDateTime(dr["CreatedDate"]);
@@ -45,11 +45,11 @@ namespace Marble.Business
             return lstCategroy;
         }
 
-        public int Save(Category category)
+        public int Save(Category category ,string userId)
         {
             try
             {
-                return Categorydata.InsertOrUpdateCategroy(category);
+                return Categorydata.InsertOrUpdateCategroy(category, userId);
             }
             catch (Exception e)
             {
