@@ -178,7 +178,6 @@
     }
 
     $(document).on('change', '#taxlist', function () {
-        debugger;
         var rowid = $(this).closest('tr').attr('id');
         var TaxId = $(this).find('option:selected').attr('id');
         //TaxId = $('#taxlist' + rowid + ' option:selected').val();
@@ -235,7 +234,6 @@
                 $('td', row).addClass('tblRow');
             },
             rowCallback: function (row, data) {
-                debugger;
                 var element = $('td', row);
                 element.on("change", function (e) {
                     UpdatedList($(this).parent().index());
