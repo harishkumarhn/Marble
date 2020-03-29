@@ -307,7 +307,7 @@
     <Content Include="Views\Game\Hubs.cshtml" />
     <Content Include="Views\Game\Profiles.cshtml" />
     <Content Include="Views\Game\Games.cshtml" />
-    <Content Include="Views\Cards\Cards.cshtml" />
+    <Content Include="Views\Cards\NewCard.cshtml" />
     <Content Include="Views\Cards\ViewCards.cshtml" />
     <Content Include="Views\Cards\Inventory.cshtml" />
     <Content Include="Views\SiteSetup\ConfigurationTabs\Values\Limit.cshtml" />

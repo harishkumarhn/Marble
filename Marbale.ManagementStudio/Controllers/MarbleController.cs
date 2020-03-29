@@ -18,7 +18,7 @@ namespace MarbaleManagementStudio.Controllers
             siteSetup = new SiteSetupBL();
             admin = new AdminBL();
         }
-
+        [AuthorizationFilter]
         public ActionResult Index()
         {
             var appModules = admin.GetAppModules("Admin");
@@ -38,11 +38,14 @@ namespace MarbaleManagementStudio.Controllers
                 var user = this.siteSetup.GetUser(objUser.LoginId, objUser.Password);
                 if (user != null)
                 {
-                    var moduleActions = this.siteSetup.GetModuleActionsByRole(user.RoleId);
+                    var moduleActions = this.siteSetup.GetModuleActionsByRole(user.RoleId,false);
 
                     Session["UserID"] = user.LoginId.ToString();
                     Session["UserName"] = user.Name.ToString();
-                    Session["AllowedPages"] = moduleActions;
+                    Session["Product"] = moduleActions.Where(x => x.Root == "Product").ToList();
+                    Session["Communication"] = moduleActions.Where(x => x.Root == "Communication").ToList();
+                    Session["SiteSetup"] = moduleActions.Where(x => x.Root == "Site Setup").ToList();
+                    Session["Cards"] = moduleActions.Where(x => x.Root == "Cards").ToList();
 
                     return RedirectToAction("Index");
                 }
