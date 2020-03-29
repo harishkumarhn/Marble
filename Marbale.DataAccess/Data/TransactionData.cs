@@ -581,6 +581,7 @@ namespace Marbale.DataAccess.Data
                 conn.executeInsertQuery("sp_InsertOrUpdateCard", sqlParameters);
 
                 return Convert.ToInt32(sqlParameters[28].Value);
+
             }
             catch (Exception e)
             {
@@ -736,7 +737,7 @@ namespace Marbale.DataAccess.Data
 
             DataTable dt = conn.executeSelectQuery("[sp_GetCardRechargedAmount]", sqlParameters);
 
-            if (dt != null && dt.Rows.Count > 0)
+            if (dt != null && dt.Rows.Count > 0 && dt.Rows[0][0] != DBNull.Value)
             {
                 return Convert.ToDouble(dt.Rows[0][0]);
             }
