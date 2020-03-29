@@ -52,84 +52,92 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product</a>
-                    <ul class="collapse list-unstyled" id="productSubmenu">
-                        <li>
-                            <a href="/product/Index">Products</a>
-                        </li>
-                        <li>
-                            <a href="/discount/Index" id="disc">Discounts</a>
-                        </li>
-                        <li>
-                            <a href="/Tax/Index">Tax</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="active">
-                    <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Communication</a>
-                    <ul class="collapse list-unstyled" id="gameSubmenu">
-                        <li>
-                            <a href="/game/hubs">Hubs</a>
-                        </li>
-                        <li>
-                            <a href="/game/profiles">Game Profile</a>
-                        </li>
-                        <li>
-                            <a href="/game/games">Games</a>
-                        </li>
-                        <li>
-                            <a href="/game/machines">Machines</a>
-                        </li>
-                        <li>
-                            <a href="#" id="configuration">Configuration</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#siteSetupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Site Setup</a>
-                    <ul class="collapse list-unstyled" id="siteSetupSubmenu">
-                        <li>
-                            <a href="/SiteSetup/configuration" id="config">Configuration</a>
-                        </li>
-                        <li>
-                            <a href="/SiteSetup/sites" id="site">Site</a>
-                        </li>
-                        <li>
-                            <a href="/SiteSetup/users" id="users">Users</a>
-                        </li>
-                        <li>
-                            <a href="/SiteSetup/userRoles" id="userRole">User Roles</a>
-                        </li>
-                        <li>
-                            <a href="/SiteSetup/Messages">Messages</a>
-                        </li>
-                        <li>
-                            <a href="/TaskType/TaskType/TaskType">Task-Type</a>
-                        </li>
-                        <li>
-                            <a id="productKey" data-target="#myModal">Product Key</a>
-                        </li>
-                        <li>
-                            <a href="/SiteSetup/printer">Printer</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#pageSubmenucards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cards</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenucards">
-                        <li>
-                            <a href="/Cards/ViewCards" id="viewcard">View Card</a>
-                        </li>
-                        <li>
-                            <a id="newcards">New Cards</a>
-                        </li>
-                        <li>
-                            <a href="/Cards/Inventory">Inventory</a>
-                        </li>
+                @if (Session["Product"] != null)
+                {
+                    <li class="active">
+                        <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product</a>
+                        <ul class="collapse list-unstyled" id="productSubmenu">
+                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Product"])
+                            {
+                                <li>
+                                    <a href="@page.URL">@page.Page</a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (Session["Communication"] != null)
+                {
+                    <li class="active">
+                        <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Communication</a>
+                        <ul class="collapse list-unstyled" id="gameSubmenu">
+                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"])
+                            {
+                                if (page.Page == "Configuration")
+                                {
+                                    <li>
+                                        <a href="#" onclick="DisplayPopUp(@page.Page,@page.URL)">@page.Page</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@page.URL">@page.Page</a>
+                                    </li>
 
-                    </ul>
-                </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (Session["SiteSetup"] != null)
+                {
+                    <li class="active">
+                        <a href="#siteSetupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Site Setup</a>
+                        <ul class="collapse list-unstyled" id="siteSetupSubmenu">
+                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"])
+                            {
+                                if (page.Page == "Product Key")
+                                {
+                                    <li>
+                                        <a href="#" onclick="DisplayPopUp(@page.Page,@page.URL)">@page.Page</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@page.URL">@page.Page</a>
+                                    </li>
+
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (Session["Cards"] != null)
+                {
+                    <li class="active">
+                        <a href="#pageSubmenucards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cards</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenucards">
+                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"])
+                            {
+                                if (page.Page == "New Card")
+                                {
+                                    <li>
+                                        <a href="#" onclick="DisplayPopUp(@page.Page,@page.URL)">@page.Page</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@page.URL">@page.Page</a>
+                                    </li>
+
+                                }
+                            }
+                        </ul>
+                    </li>
+                }                
             </ul>
         </nav>
 
@@ -183,36 +191,26 @@
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
         });
-        $('#inventery').click(function () {
-            $(".modal-body").html("");
-            $('#newcardmodel .modal-Content').css('height', 590);
-            $('#newcardmodel .modal-Content').css('width', 719);
-            $('#newupdatecardmodal').text("Inventory").addClass('modal-centre');
-            $('#newcardmodel').modal('show');
+        ////$('#inventery').click(function () {
+        ////    $(".modal-body").html("");
+        ////    $('#newcardmodel .modal-Content').css('height', 590);
+        ////    $('#newcardmodel .modal-Content').css('width', 719);
+        ////    $('#newupdatecardmodal').text("Inventory").addClass('modal-centre');
+        ////    $('#newcardmodel').modal('show');
 
-            $('#modelbody').load('/Cards/Inventory');
-        });
-        $('#newcards').click(function () {
+        ////    $('#modelbody').load('/Cards/Inventory');
+        ////});
+        function DisplayPopUp(page,url) {
             $('#myModal').modal('show');
-            $('#modelBody').css({
-                'left': '-30%',
-                'width': 900
-            });
-            $('#modelBody').load('/Cards/Cards');
-        });
-        $('#configuration').click(function () {
-            $('#myModal').modal('show');
-            $('#modelBody').css({
-                'left': '-30%',
-                'width': 800,
-            });
-            $('#modelBody').load('/game/configuration');
+            if(page != "Product key") {
+                $('#modelBody').css({
+                    'left': '-30%',
+                    'width': 800,
+                });
+            }
+            $('#modelBody').load(url);
+        }
 
-        });
-        $('#productKey').click(function () {
-            $('#myModal').modal('show');
-            $('#modelBody').load('/siteSetup/ProductKey');
-        });
         $("#myModal").draggable({
             handle: ".modal-header"
         });

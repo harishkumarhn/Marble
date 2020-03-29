@@ -153,23 +153,23 @@ namespace Marbale.DataAccess
                     sqlParameters[7] = new SqlParameter("@LastUpdatedBy", role.LastUpdatedBy == null ? "Harish" : role.LastUpdatedBy);
                     conn.executeUpdateQuery("sp_InsertOrUpdateUserRole", sqlParameters);
 
-                    if (!string.IsNullOrWhiteSpace(role.AvalibleModuleActions))
+                    if (!string.IsNullOrWhiteSpace(role.AvailableModuleActions))
                     {
-                        if (role.AvalibleModuleActions.Contains("-Module") || role.AvalibleModuleActions.Contains("-Root"))
+                        if (role.AvailableModuleActions.Contains("-Module") || role.AvailableModuleActions.Contains("-Root"))
                         {
-                            string[] arr = role.AvalibleModuleActions.Split(',');
+                            string[] arr = role.AvailableModuleActions.Split(',');
                             arr = arr.Skip(1).ToArray();
-                            role.AvalibleModuleActions = "";
+                            role.AvailableModuleActions = "";
                             foreach (var item in arr)
                             {
-                                role.AvalibleModuleActions = role.AvalibleModuleActions + item + ",";
+                                role.AvailableModuleActions = role.AvailableModuleActions + item + ",";
                             }
-                            role.AvalibleModuleActions = role.AvalibleModuleActions.Substring(0, role.AvalibleModuleActions.Length - 1);
+                            role.AvailableModuleActions = role.AvailableModuleActions.Substring(0, role.AvailableModuleActions.Length - 1);
 
                         }
                         SqlParameter[] sqlParams = new SqlParameter[2];
                         sqlParams[0] = new SqlParameter("@RoleId", role.Id.ToString());
-                        sqlParams[1] = new SqlParameter("@PageIds", role.AvalibleModuleActions);
+                        sqlParams[1] = new SqlParameter("@PageIds", role.AvailableModuleActions);
                         conn.executeUpdateQuery("sp_InsertUserRoleModuleAction", sqlParams);
                     }
                 }
