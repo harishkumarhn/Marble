@@ -52,7 +52,7 @@
             </div>
 
             <ul class="list-unstyled components">
-                @if (Session["Product"] != null)
+                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Product"]).Count > 0)
                 {
                     <li class="active">
                         <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product</a>
@@ -66,17 +66,17 @@
                         </ul>
                     </li>
                 }
-                @if (Session["Communication"] != null)
+                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"]).Count > 0)
                 {
                     <li class="active">
                         <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Communication</a>
                         <ul class="collapse list-unstyled" id="gameSubmenu">
                             @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"])
                             {
-                                if (page.Page == "Configuration")
+                                if (page.Page == "Configurations")
                                 {
                                     <li>
-                                        <a href="#" onclick="DisplayPopUp(@page.Page,@page.URL)">@page.Page</a>
+                                        <a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
                                     </li>
                                 }
                                 else
@@ -90,17 +90,17 @@
                         </ul>
                     </li>
                 }
-                @if (Session["SiteSetup"] != null)
+                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"]).Count > 0)
                 {
                     <li class="active">
                         <a href="#siteSetupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Site Setup</a>
                         <ul class="collapse list-unstyled" id="siteSetupSubmenu">
                             @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"])
                             {
-                                if (page.Page == "Product Key")
+                                if (page.Page == "Product key")
                                 {
                                     <li>
-                                        <a href="#" onclick="DisplayPopUp(@page.Page,@page.URL)">@page.Page</a>
+                                        <a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
                                     </li>
                                 }
                                 else
@@ -114,7 +114,7 @@
                         </ul>
                     </li>
                 }
-                @if (Session["Cards"] != null)
+                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"]).Count > 0)
                 {
                     <li class="active">
                         <a href="#pageSubmenucards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cards</a>
@@ -124,7 +124,7 @@
                                 if (page.Page == "New Card")
                                 {
                                     <li>
-                                        <a href="#" onclick="DisplayPopUp(@page.Page,@page.URL)">@page.Page</a>
+                                        <a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
                                     </li>
                                 }
                                 else

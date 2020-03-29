@@ -24,7 +24,7 @@ namespace MarbaleManagementStudio.Controllers
         }
 
         [HttpGet]
-        public ActionResult Cards()
+        public ActionResult NewCard()
         {
             var data = cardBussiness.gettechcardtype();
             Session["TechCardType"] = data;

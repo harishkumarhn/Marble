@@ -158,10 +158,11 @@ namespace Marbale.DataAccess
                         if (role.AvailableModuleActions.Contains("-Module") || role.AvailableModuleActions.Contains("-Root"))
                         {
                             string[] arr = role.AvailableModuleActions.Split(',');
-                            arr = arr.Skip(1).ToArray();
+                           // arr = arr.Skip(1).ToArray();
                             role.AvailableModuleActions = "";
                             foreach (var item in arr)
                             {
+                                if(!(item.Contains("-Module") || item.Contains("-Root")))
                                 role.AvailableModuleActions = role.AvailableModuleActions + item + ",";
                             }
                             role.AvailableModuleActions = role.AvailableModuleActions.Substring(0, role.AvailableModuleActions.Length - 1);
@@ -272,12 +273,13 @@ namespace Marbale.DataAccess
             }
         }
 
-        public DataTable GetModuleActionsByRole(int roleId)
+        public DataTable GetModuleActionsByRole(int roleId,bool isSuperUser = false)
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[1];
+                SqlParameter[] sqlParameters = new SqlParameter[2];
                 sqlParameters[0] = new SqlParameter("@id", roleId);
+                sqlParameters[1] = new SqlParameter("@isSuperUser", isSuperUser);
                 return conn.executeSelectQuery("sp_GetRoleModuleActions", sqlParameters);
             }
             catch (Exception e)

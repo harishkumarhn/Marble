@@ -239,7 +239,7 @@ namespace MarbaleManagementStudio.Controllers
         public JsonResult ModuleActionPermission(int roleId)
         {
             List<Module> moduleTree = new List<Module>();
-            var moduleActions = siteSetup.GetModuleActionsByRole(roleId);
+            var moduleActions = siteSetup.GetModuleActionsByRole(roleId,true);
             GetTreeViewModel(moduleTree, moduleActions);
             return Json(moduleTree, JsonRequestBehavior.AllowGet);
         }
