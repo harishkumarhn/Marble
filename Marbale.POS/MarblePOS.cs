@@ -557,7 +557,7 @@ namespace Marbale.POS
                     return;
                 }
 
-                UpdateCardForTransaction(product);
+                UpdateCardForRechargeTransaction(product);
             }
             else if (product.Type == "VARIABLE_RECHARGE")
             {
@@ -587,6 +587,8 @@ namespace Marbale.POS
                     MessageBox.Show("Cannot have multiple Variable Recharge products on same card");
                     return;
                 }
+
+               // UpdateCardForRechargeTransaction(product);
             }
 
             TransactionLine trxLine = new TransactionLine();
@@ -608,6 +610,9 @@ namespace Marbale.POS
                     MessageBox.Show("Please Enter the Recharge amount greater than zero");
                     return;
                 }
+
+                product.Price = productPrice;
+                UpdateCardForRechargeTransaction(product);
             }
 
             trxLine.quantity = 1;
@@ -686,6 +691,17 @@ namespace Marbale.POS
             UpdateCardForTransaction(product);
 
             Transaction.TransactionLines.Add(trxLine);
+        }
+
+        void UpdateCardForRechargeTransaction(Product product)
+        {
+            if (CurrentCard != null)
+            {
+                CurrentCard.credits = Convert.ToDecimal(product.Price);
+                CurrentCard.bonus = Convert.ToDecimal(product.Bonus);
+                CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
+                CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
+            }
         }
 
         void UpdateCardForTransaction(Product product)
