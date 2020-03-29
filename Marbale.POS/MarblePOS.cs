@@ -583,6 +583,7 @@ namespace Marbale.POS
                 }
                 if (variableRechargeProductExists)
                 {
+
                     MessageBox.Show("Cannot have multiple Variable Recharge products on same card");
                     return;
                 }
