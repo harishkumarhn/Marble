@@ -3,14 +3,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .highlight{
+        border:2px solid blue;
+        background-color: #7774b0
+    }
+</style>
 <div class="config2">
     <div class="panel panel-default">
         <div id="Tabs" role="tabpanel">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <button onclick="getValues()" aria-controls="personal" role="tab" data-toggle="tab" class="tblev" style="width: 50%;">Values</button>
-                <button aria-controls="employment" onclick="getSettings()" role="tab" data-toggle="tab" class="tblev" style="width: 50%;">Settings</button>
-            </ul>
+                <button id="values" onclick="getValues()" aria-controls="personal" role="tab" data-toggle="tab" class="tblev" style="width: 50%;">Values</button>
+                <button id = "settings" aria-controls="employment" onclick="getSettings()" role="tab" data-toggle="tab" class="tblev" style="width: 50%;">Settings</button>
+            </ul> 
             <!-- Tab panes -->
 
         </div>
@@ -31,12 +37,15 @@
     function getValues() {
         $('#loading').show();
         $('#container1').load('/SiteSetup/Values');
+        $('#values').addClass('highlight');
+        $('#settings').removeClass('highlight');
     }
     function getSettings() {
         $('#loading').fadeIn();
         $('#container1').load('/SiteSetup/Settings');
         $('#loading').fadeOut();
-
+        $('#settings').addClass('highlight');
+        $('#values').removeClass('highlight');
     }
     $('.tablinks').click(function () {
         $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');

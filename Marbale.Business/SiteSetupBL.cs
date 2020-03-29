@@ -324,9 +324,11 @@ namespace Marble.Business
             {
                 User user = new User();
                 user.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                user.Role = dr.IsNull("Role") ? "" : dr["Role"].ToString();
+                user.RoleId = dr.IsNull("RoleId") ? 0 : int.Parse(dr["RoleId"].ToString());
                 user.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                 user.LoginId = dr.IsNull("LoginId") ? "" : dr["LoginId"].ToString();
+                var bytes_s = (byte[])dr["Password"];
+                user.Password = Encoding.ASCII.GetString(bytes_s, 0, bytes_s.Length);
                 user.Manager = dr.IsNull("Manager") ? "" : dr["Manager"].ToString();
                 user.Department = dr.IsNull("Department") ? "" : dr["Department"].ToString();
                 user.Email = dr.IsNull("Email") ? "" : dr["Email"].ToString();
@@ -369,7 +371,7 @@ namespace Marble.Business
                 foreach (DataRow dr in dataTable.Rows)
                 {
                     user.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    user.Role = dr.IsNull("Role") ? "" : dr["Role"].ToString();
+                    user.RoleId = dr.IsNull("RoleId") ? 0 : int.Parse(dr["RoleId"].ToString());
                     user.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     user.LoginId = dr.IsNull("LoginId") ? "" : dr["LoginId"].ToString();
                     user.Manager = dr.IsNull("Manager") ? "" : dr["Manager"].ToString();
@@ -395,25 +397,6 @@ namespace Marble.Business
             {
                 user.Roles = rolesList;
                 user.Statuses = statusList;
-            }
-            return user;
-
-        }
-        public User GetUser(string loginId,string password)
-        {
-            User user = null;
-            if (!string.IsNullOrWhiteSpace(loginId))
-            {
-                var dataTable = siteSetupData.GetUser(loginId,password);
-                foreach (DataRow dr in dataTable.Rows)
-                {
-                    user = new User();
-                    user.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    user.Role = dr.IsNull("Role") ? "" : dr["Role"].ToString();
-                    user.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
-                    user.LoginId = dr.IsNull("LoginId") ? "" : dr["LoginId"].ToString();
-                    user.Password = dr.IsNull("Password") ? "" : dr["Password"].ToString();
-                }
             }
             return user;
 
@@ -458,17 +441,18 @@ namespace Marble.Business
         }
 
 
-        public User ValidateUser(string username, string password)
+        public User GetUser(string username, string password)
         {
-            DataTable dt = siteSetupData.ValidateUser(username, password);
-            User user = new User();
-
+            User user = null;
+            DataTable dt = siteSetupData.GetUser(username, password);
             if (dt != null && dt.Rows.Count > 0)
             {
+                user = new User();
+
                 foreach (DataRow dr in dt.Rows)
                 {
                     user.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                    user.Role = dr.IsNull("Role") ? "" : dr["Role"].ToString();
+                    user.RoleId = dr.IsNull("RoleId") ? 0 : int.Parse(dr["RoleId"].ToString());
                     user.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     user.LoginId = dr.IsNull("LoginId") ? "" : dr["LoginId"].ToString();
                     user.Manager = dr.IsNull("Manager") ? "" : dr["Manager"].ToString();

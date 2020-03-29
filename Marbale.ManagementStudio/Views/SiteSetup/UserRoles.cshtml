@@ -70,7 +70,7 @@
     <button class="btn btn-primary btn-md" role="button" onclick="SaveUserRoles()">Save</button>
     <button class="btn btn-primary btn-md" role="button" id="addRow">Add UserRole</button>
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/index'">Close</button>
 </div>
 
 <script>
@@ -151,41 +151,43 @@
 
 
     function SaveUserRoles() {
-        var items = [];
-        var table = document.getElementById('marbleTable');
-        var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
-        var fixedcolumn2 = $('.DTFC_Cloned input.fixedCol2');
+        if (updatedArray.length > 0) {
+            var items = [];
+            var table = document.getElementById('marbleTable');
+            var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
+            var fixedcolumn2 = $('.DTFC_Cloned input.fixedCol2');
 
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-            if (updatedArray.includes(r)) {
-                var rowIndex = r + 1;
+            for (var r = 0, n = table.rows.length; r < n; r++) {
+                if (updatedArray.includes(r)) {
+                    var rowIndex = r + 1;
 
-                items.push({
-                    Id: fixedcolumn1[r].innerHTML,
-                    Role: fixedcolumn2[r].value,
-                    Description: table.rows[rowIndex].cells[2].children[0].value,
-                    ManagerFlag: table.rows[rowIndex].cells[3].children[0].checked,
-                    AllowPOSAccess: table.rows[rowIndex].cells[4].children[0].checked,
-                    POSClockInOut: table.rows[rowIndex].cells[5].children[0].checked,
-                    AllowShiftOpenClose: table.rows[rowIndex].cells[6].children[0].checked,
-                    AavalibleModuleActions: selectedTreeItems
-                });
+                    items.push({
+                        Id: fixedcolumn1[r].innerHTML,
+                        Role: fixedcolumn2[r].value,
+                        Description: table.rows[rowIndex].cells[2].children[0].value,
+                        ManagerFlag: table.rows[rowIndex].cells[3].children[0].checked,
+                        AllowPOSAccess: table.rows[rowIndex].cells[4].children[0].checked,
+                        POSClockInOut: table.rows[rowIndex].cells[5].children[0].checked,
+                        AllowShiftOpenClose: table.rows[rowIndex].cells[6].children[0].checked,
+                        AavalibleModuleActions: selectedTreeItems
+                    });
+                }
             }
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("UpdateUserRoles", "SiteSetup")',
+                data: JSON.stringify({ userRoles: items }),
+                dataType: "json",
+                success: function (data) {
+                    alert('Data Saved');
+                    location.reload();
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
         }
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdateUserRoles", "SiteSetup")',
-            data: JSON.stringify({ userRoles: items }),
-            dataType: "json",
-            success: function (data) {
-                alert('Data Saved');
-                location.reload();
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
     }
     function UpdateModuleActionTree(roleId) {
         $("#treeview").remove();
