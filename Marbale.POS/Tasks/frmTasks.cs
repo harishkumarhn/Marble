@@ -543,5 +543,19 @@ namespace Marbale.POS
             frmSelectProducts frm = new frmSelectProducts();
             frm.ShowDialog();
         }
+
+        private void txtCreditsToRefund_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.'))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
