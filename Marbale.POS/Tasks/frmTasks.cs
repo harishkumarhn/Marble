@@ -481,7 +481,7 @@ namespace Marbale.POS
             try
             {
 
-                if (string.IsNullOrEmpty(txtCreditsToRefund.Text) || Convert.ToInt32(txtCreditsToRefund.Text) <= 0)
+                if (string.IsNullOrEmpty(txtCreditsToRefund.Text) || Convert.ToInt32(txtCreditsToRefund.Text) < 0)
                 {
                     MessageBox.Show("Enter credits greater than zero to Refund");
                     return;
