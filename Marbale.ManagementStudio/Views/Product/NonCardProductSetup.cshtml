@@ -35,7 +35,6 @@
         <th>AutoGenerateCardNumber</th>
         <th>OnlyVIP</th>
         <th>Price</th>
-        <th>FaceValue</th>
         <th>TaxInclusive</th>
         <th>TaxPercent</th>
         <th>Tax</th>
@@ -130,9 +129,6 @@
                 </td>
                 <td>
                     <input type="number" value="@item.Price" id="Price@(count)" />
-                </td>
-                <td>
-                    <input type="text" value="@item.FaceValue" id="FaceValue@(count)" />
                 </td>
                 <td>
                     <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)"  />
