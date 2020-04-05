@@ -135,8 +135,8 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                int result = productBussiness.DeleteProductbyId(Id);
-                return Json(1, JsonRequestBehavior.AllowGet);
+                int result = productBussiness.DeleteProductbyId(Id,"product");
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {

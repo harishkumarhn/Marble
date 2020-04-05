@@ -306,7 +306,7 @@
             $.ajax({
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
-                url: '@Url.Action("DeleteUser", "User")',
+                url: '@Url.Action("DeleteUser", "SiteSetup")',
                 data: { Id: id },
                 dataType: "json",
                 success: function (data) {

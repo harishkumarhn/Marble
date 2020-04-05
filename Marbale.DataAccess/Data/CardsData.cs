@@ -110,14 +110,5 @@ namespace Marbale.DataAccess.Data
             return conn.executeSelectQuery("GetInventory", sqlParameters);
        
         }
-
-        public int DeleteCardById(int Id)
-        {
-
-            SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@CardId", Id);
-
-            return conn.executeInsertQuery("DeleteCardById", sqlParameters);
-        }
     }
 }

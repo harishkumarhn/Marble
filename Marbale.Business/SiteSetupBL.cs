@@ -5,23 +5,23 @@ using Marbale.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
-using System.IO;
 
 namespace Marble.Business
 {
     public class SiteSetupBL
     {
         private SiteSetupData siteSetupData;
+        private CommonData commonData;
+
         string key = "sblw-3hn8-sqoy19";
 
 
         public SiteSetupBL()
         {
             siteSetupData = new SiteSetupData();
+            commonData = new CommonData();
         }
         #region settings
         public List<Settings> GetSettings()
@@ -164,6 +164,18 @@ namespace Marble.Business
             }
             return userRoles;
         }
+        public int DeleteUserbyId(int Id, string from)
+        {
+            try
+            {
+                return commonData.DeleteById(Id, from);
+            }
+            catch (Exception e)
+            {
+                //   LogError.Instance.LogException("DeleteProductbyId", e);
+                throw e;
+            }
+        }
         public List<MessagesModel> GetAllMessages()
         {
             var dataTable = siteSetupData.GetAllMessages();
@@ -300,7 +312,7 @@ namespace Marble.Business
 
             return appModuleActions;
         }
-
+      
         public List<User> GetUsers()
         {
             var roles = GetUserRoles();
