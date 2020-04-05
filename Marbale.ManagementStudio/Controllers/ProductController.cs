@@ -272,7 +272,7 @@ namespace MarbaleManagementStudio.Controllers
                 if (model.TaxInclusive == true)
                 {
                     model.EffectivePrice = (model.Price * TaxDetails[0].TaxPercent) / (100 + (TaxDetails[0].TaxPercent));
-                    model.FinalPrice = model.Price + model.FaceValue;
+                    model.FinalPrice = model.Price + model.EffectivePrice;
                     model.Taxpercent = TaxDetails[0].TaxPercent;
                 }
                 else

@@ -39,6 +39,8 @@ BEGIN
 				FROM 
 				TransactionHeader
 
+				Order by TrxId DESC
+
 	SELECT 
 			ln.*, p.Name 
 				FROM 
