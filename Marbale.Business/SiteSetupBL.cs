@@ -158,6 +158,7 @@ namespace Marble.Business
                 userRole.AllowPOSAccess = dr.IsNull("AllowPOSAccess") ? false : bool.Parse(dr["AllowPOSAccess"].ToString());
                 userRole.AllowShiftOpenClose = dr.IsNull("AllowShiftOpenClose") ? false : bool.Parse(dr["AllowShiftOpenClose"].ToString());
                 userRole.POSClockInOut = dr.IsNull("POSClockInOut") ? false : bool.Parse(dr["POSClockInOut"].ToString());
+                userRole.ReadOnly = dr.IsNull("ReadOnly") ? false : bool.Parse(dr["ReadOnly"].ToString());
                 userRole.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                 userRole.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                 userRoles.Add(userRole);
@@ -357,7 +358,7 @@ namespace Marble.Business
                 user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                 user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                 user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
-
+                user.ReadOnly = dr.IsNull("ReadOnly") ? false : bool.Parse(dr["ReadOnly"].ToString());
 
                 user.Roles = rolesList;
                 user.Statuses = statusList;

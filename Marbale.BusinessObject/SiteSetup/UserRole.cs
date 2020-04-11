@@ -12,6 +12,8 @@ namespace Marbale.BusinessObject.SiteSetup
         public bool POSClockInOut { get; set; }
         public bool AllowShiftOpenClose { get; set; }
         public string AvailableModuleActions { get; set; }
+        public bool ReadOnly { get; set; }
+
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDate { get; set; }
 
