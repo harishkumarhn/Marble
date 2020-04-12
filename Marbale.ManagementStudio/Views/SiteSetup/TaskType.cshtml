@@ -18,12 +18,12 @@
     @foreach (var item in ViewBag.TaskType)
     {
         <tr onchange="UpdatedList(this)">
-            <td>@item.TaskTypeId  </td>
+            <td> @item.TaskTypeId  </td>
             <td>
-                <input type="text" value="@item.TaskType">
+                <label>@item.TaskType</label>
             </td>
             <td>
-                <input type="text" value="@item.TaskTypeName">
+                <label>@item.TaskTypeName</label>
             </td>
             <td>
                 <input type="checkbox" @(item.RequiresManagerApproval ? "checked='checked'" : "") value="@item.RequiresManagerApproval" />
@@ -61,17 +61,14 @@
         });
     });
     function SaveTaskType() {
-        var TaskTypeObject = [];
-        var table = document.getElementById('TasktypeTable');
+        var taskTypes = [];
+        var table = document.getElementById('marbleTable');
         for (var r = 1, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
-                messageObject.push({
+                taskTypes.push({
                     TaskTypeId: table.rows[r].cells[0].innerHTML,
-                    TaskType: table.rows[r].cells[1].children[0].value,
-                    TaskTypeName: table.rows[r].cells[2].children[0].value,
                     RequiresManagerApproval: table.rows[r].cells[3].children[0].value,
                     DispalyinPOS: table.rows[r].cells[4].children[0].value
-
                 });
             }
         }
@@ -79,7 +76,7 @@
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: '@Url.Action("UpdateTaskType", "SiteSetup")',
-            data: JSON.stringify({ messageObject: messageObject }),
+            data: JSON.stringify({ taskTypes: taskTypes }),
             dataType: "json",
             success: function (data) {
                 $('#successMessages').text('Data Saved Successfully');
@@ -91,9 +88,10 @@
         });
     }
     var updatedArray = [];
-    function UpdatedList(x) {
-        if (!updatedArray.includes(x.rowIndex)) {
-            updatedArray.push(x.rowIndex);
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
         }
     }
+
 </script>

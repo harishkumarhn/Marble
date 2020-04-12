@@ -437,9 +437,9 @@ namespace MarbaleManagementStudio.Controllers
             return View();
         }
 
-        public int UpdateTaskType(List<TaskTypeModel> tasktype)
+        public int UpdateTaskType(List<TaskTypeModel> taskTypes)
         {
-            int status = siteSetup.UpdateTaskType(tasktype);
+            int status = siteSetup.UpdateTaskType(taskTypes);
             if (status == 1)
             {
                 RedirectToAction("TaskType");
