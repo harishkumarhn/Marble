@@ -218,8 +218,6 @@ namespace Marble.Business
                 s = siteSetupData.UpdateTaskType(item);
             }
             return s;
-
-
         }
 
         public List<TaskTypeModel> GetTaskType()

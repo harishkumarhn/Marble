@@ -2,13 +2,11 @@
     ViewBag.Title = "TaskType";
 }
 
-<h2>TaskType</h2>
-
 <div>
     <label id="successMessages" class="pos-text"></label>
 </div>
 
-<table id="marbleTable" class="stripe row-border order-column">
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
     <thead>
     <th>Task Type Id</th>
     <th>Task Type</th>
@@ -22,7 +20,7 @@
         <tr onchange="UpdatedList(this)">
             <td>@item.TaskTypeId  </td>
             <td>
-                <input type="text" value="@item.TaskType" class="gridText" style="width: 958px;">
+                <input type="text" value="@item.TaskType">
             </td>
             <td>
                 <input type="text" value="@item.TaskTypeName">
@@ -59,10 +57,6 @@
                 element.on("change", function (e) {
                     UpdatedList($(this).parent().index());
                 });
-            },
-            //order: [[ 0, "desc" ]],
-            fixedColumns: {
-                leftColumns: 2
             }
         });
     });
