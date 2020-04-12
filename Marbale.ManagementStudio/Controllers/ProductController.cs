@@ -271,14 +271,16 @@ namespace MarbaleManagementStudio.Controllers
                 List<TaxSet> TaxDetails = model.TaxList.Where(a => a.TaxId == model.Id).ToList();
                 if (model.TaxInclusive == true)
                 {
-                    model.EffectivePrice = (model.Price * TaxDetails[0].TaxPercent) / (100 + (TaxDetails[0].TaxPercent));
-                    model.FinalPrice = model.Price + model.EffectivePrice;
+                    var divider = (TaxDetails[0].TaxPercent / 100) + 1;
+                    model.EffectivePrice = (model.Price - (model.FaceValue != null ? model.FaceValue : 0)) / divider;
+                    model.FinalPrice = model.Price;
                     model.Taxpercent = TaxDetails[0].TaxPercent;
                 }
                 else
                 {
-                    model.EffectivePrice = model.Price * (TaxDetails[0].TaxPercent / 100);
-                    model.FinalPrice = model.Price + model.EffectivePrice;
+                    model.EffectivePrice = model.Price;
+                    var tempPrice = (model.Price - (model.FaceValue != null ? model.FaceValue : 0));
+                    model.FinalPrice = tempPrice + ( tempPrice* (TaxDetails[0].TaxPercent / 100));
                     model.Taxpercent = TaxDetails[0].TaxPercent;
                 }
             }
