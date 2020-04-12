@@ -230,18 +230,11 @@
             bInfo: false,
             bFilter: false,
             bSort: false,
-            "createdRow": function (row, data, index) {
-                $('td', row).addClass('tblRow');
-            },
             rowCallback: function (row, data) {
                 var element = $('td', row);
                 element.on("change", function (e) {
                     UpdatedList($(this).parent().index());
                 });
-            },
-            //order: [[ 0, "desc" ]],
-            fixedColumns: {
-                leftColumns: 3
             }
         });
         var counter = 1;
