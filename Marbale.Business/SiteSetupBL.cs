@@ -218,8 +218,6 @@ namespace Marble.Business
                 s = siteSetupData.UpdateTaskType(item);
             }
             return s;
-
-
         }
 
         public List<TaskTypeModel> GetTaskType()
@@ -229,9 +227,9 @@ namespace Marble.Business
             foreach (DataRow dr in datatable.Rows)
             {
                 TaskTypeModel m = new TaskTypeModel();
-                m.TaskTypeId = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                m.TaskType = dr.IsNull("Type") ? "" : (dr["Type"].ToString());
-                m.TaskTypeName = dr.IsNull("Name") ? "" : (dr["Name"].ToString());
+                m.TaskTypeId = dr.IsNull("TaskTypeId") ? 0 : int.Parse(dr["TaskTypeId"].ToString());
+                m.TaskType = dr.IsNull("TaskType") ? "" : (dr["TaskType"].ToString());
+                m.TaskTypeName = dr.IsNull("TaskTypeName") ? "" : (dr["TaskTypeName"].ToString());
                 m.RequiresManagerApproval = dr.IsNull("RequiresManagerApproval") ? false : bool.Parse(dr["RequiresManagerApproval"].ToString());
                 m.DispalyinPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
                 tasktype.Add(m);

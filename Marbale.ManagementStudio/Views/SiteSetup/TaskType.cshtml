@@ -2,51 +2,64 @@
     ViewBag.Title = "TaskType";
 }
 
-<h2>TaskType</h2>
-
 <div>
     <label id="successMessages" class="pos-text"></label>
 </div>
-<div>
-    <table id="TasktypeTable" class="table messagesTable table-bordered" style="display: block; height: 500px; overflow-x: auto">
-        <thead>
-            <th>Task Type Id</th>
-            <th>Task Type</th>
-            <th>Task Type Name</th>
-            <th>Requires Manager Approval</th>
-            <th>Dispaly in POS</th>
-        </thead>
-        @{
-            int count = 1;
-        }
-        @foreach (var item in ViewBag.TaskType)
-        {  
-            <tr onchange="UpdatedList(this)">
-                <td>@item.TaskTypeId  </td>
 
-                <td>
-                    <input type="text" value="@item.TaskType" class="gridText" style="width: 958px;">
-                </td>
-                <td>
-                    <input type="text" value="@item.TaskTypeName">
-                </td>
-                <td>
-                    <input type="checkbox"  @(item.RequiresManagerApproval ? "checked='checked'" : "") value="@item.RequiresManagerApproval"  id="ActiveFlag@(count)"/>
-                </td>
-                <td>
-                    <input type="checkbox"  @(item.DispalyinPOS ? "checked='checked'" : "") value="@item.DispalyinPOS"  id="DispalyinPOS@(count)"/>
-                </td>
-            </tr>  
-            count++;
-        }
-    </table>
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+    <thead>
+    <th>Task Type Id</th>
+    <th>Task Type</th>
+    <th>Task Type Name</th>
+    <th>Requires Manager Approval</th>
+    <th>Dispaly in POS</th>
+    </thead>
 
+    @foreach (var item in ViewBag.TaskType)
+    {
+        <tr onchange="UpdatedList(this)">
+            <td>@item.TaskTypeId  </td>
+            <td>
+                <input type="text" value="@item.TaskType">
+            </td>
+            <td>
+                <input type="text" value="@item.TaskTypeName">
+            </td>
+            <td>
+                <input type="checkbox" @(item.RequiresManagerApproval ? "checked='checked'" : "") value="@item.RequiresManagerApproval" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.DispalyinPOS ? "checked='checked'" : "") value="@item.DispalyinPOS" />
+            </td>
+        </tr>
+    }
+</table>
+<div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveTaskType()">Save</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'"" >Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'" ">Close</button>
 </div>
-
 <script>
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            // paging: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            }
+        });
+    });
     function SaveTaskType() {
         var TaskTypeObject = [];
         var table = document.getElementById('TasktypeTable');
@@ -66,21 +79,21 @@
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: '@Url.Action("UpdateTaskType", "SiteSetup")',
-                 data: JSON.stringify({ messageObject: messageObject }),
-                 dataType: "json",
-                 success: function (data) {
-                     $('#successMessages').text('Data Saved Successfully');
-                 },
-                 error: function (e) {
+            data: JSON.stringify({ messageObject: messageObject }),
+            dataType: "json",
+            success: function (data) {
+                $('#successMessages').text('Data Saved Successfully');
+            },
+            error: function (e) {
 
-                     alert(e);
-                 }
-             });
-         }
-         var updatedArray = [];
-         function UpdatedList(x) {
-             if (!updatedArray.includes(x.rowIndex)) {
-                 updatedArray.push(x.rowIndex);
-             }
-         }
+                alert(e);
+            }
+        });
+    }
+    var updatedArray = [];
+    function UpdatedList(x) {
+        if (!updatedArray.includes(x.rowIndex)) {
+            updatedArray.push(x.rowIndex);
+        }
+    }
 </script>
