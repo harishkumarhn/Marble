@@ -319,6 +319,9 @@ namespace MarbaleManagementStudio.Controllers
             var message = string.Empty;
             try
             {
+                ModelState.Remove("Roles");
+                ModelState.Remove("Statuses");
+
                 if (ModelState.IsValid)
                 {
                     siteSetup.InsertOrUpdateUsers(user);
@@ -342,7 +345,19 @@ namespace MarbaleManagementStudio.Controllers
         {
             return InsertOrUpdateUserObject(user);
         }
-
+        public JsonResult DeleteUser(int id)
+        {
+            try
+            {
+                int result = siteSetup.DeleteUserbyId(id,"user");
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("DeleteUser", e);
+                throw;
+            }
+        }
         #endregion
         #region Customer
         public ActionResult Customer()

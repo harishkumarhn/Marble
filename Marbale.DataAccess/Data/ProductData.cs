@@ -218,7 +218,7 @@ namespace Marbale.DataAccess
             }
 
         }
-        
+
         public int SaveDiscount(bool ActiveFlag, bool AutomaticApply, bool CouponMendatory, float DiscountAmount, int DiscountID, string DiscountName, decimal DiscountPercentage, string DiscountType, bool DisplayInPOS, int DisplayOrder, DateTime LastUpdatedDate, string LastUpdatedUser, bool ManagerApproval, float MinimumSaleAmount, float MinimumUsedCredits, bool RemarkMendatory, bool Type)
         {
             try
@@ -294,7 +294,7 @@ namespace Marbale.DataAccess
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -401,14 +401,13 @@ namespace Marbale.DataAccess
 
         public int InsertUpdateTax(BusinessObject.Tax.TaxSet taxset)
         {
-           
-                SqlParameter[] sqlParameters = new SqlParameter[4];
-                sqlParameters[0] = new SqlParameter("@TaxId", taxset.TaxId);
-                sqlParameters[1] = new SqlParameter("@TaxName", taxset.TaxName);
-                sqlParameters[2] = new SqlParameter("@TaxPercent", taxset.TaxPercent);
-                sqlParameters[3] = new SqlParameter("@ActiveFlag", taxset.ActiveFlag);
-             return   conn.executeUpdateQuery("sp_InsertOrUpdateTax", sqlParameters);
-            
+            SqlParameter[] sqlParameters = new SqlParameter[4];
+            sqlParameters[0] = new SqlParameter("@TaxId", taxset.TaxId);
+            sqlParameters[1] = new SqlParameter("@TaxName", taxset.TaxName);
+            sqlParameters[2] = new SqlParameter("@TaxPercent", taxset.TaxPercent);
+            sqlParameters[3] = new SqlParameter("@ActiveFlag", taxset.ActiveFlag);
+            return conn.executeUpdateQuery("sp_InsertOrUpdateTax", sqlParameters);
+
         }
         public int InsertUpdateTax(BusinessObject.Tax.TaxStructure taxstructure)
         {
@@ -418,13 +417,6 @@ namespace Marbale.DataAccess
             sqlParameters[2] = new SqlParameter("@TaxStructurePercentage", taxstructure.TaxStructurePercentage);
             sqlParameters[3] = new SqlParameter("@TaxStructureName", taxstructure.TaxStructureName);
             return conn.executeUpdateQuery("sp_InsertOrUpdateTaxStructure", sqlParameters);
-        }
-
-        public int DeleteProductbyId(int Id)
-        {
-            SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@Id",Id);
-            return conn.executeUpdateQuery("sp_DeleteProductById", sqlParameters);
         }
 
         public DataTable GetProductTaxLookUp()

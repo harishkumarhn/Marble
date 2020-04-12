@@ -66,8 +66,8 @@ namespace MarbaleManagementStudio.Controllers
         #region DeleteCard
         public JsonResult DeleteCard(int Id)
         {
-            int i = cardBussiness.DeleteCardById(Id);
-            return Json(i, JsonRequestBehavior.AllowGet);
+            int result = cardBussiness.DeleteCardById(Id,"card");
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

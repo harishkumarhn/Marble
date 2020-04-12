@@ -22,6 +22,7 @@ CREATE TABLE [dbo].[User](
 	[CompanyAdmin] [bit] NULL,
 	[Department] [varchar](200) NULL,
 	[Manager] [varchar](200) NULL,
+	[ReadOnly] [bit] NULL,
 	[EmpStartDate] [datetime] NULL,
 	[EmpEndDate] [datetime] NULL,
 	[EmpEndReason] [varchar](200) NULL,

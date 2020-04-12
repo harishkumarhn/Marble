@@ -135,7 +135,6 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-
         public int InsertOrUpdateUserRoles(List<UserRole> userRoles)
         {
             try
@@ -190,7 +189,7 @@ namespace Marbale.DataAccess
                     sqlParameters[0] = new SqlParameter("@Id", user.Id);
                     sqlParameters[1] = new SqlParameter("@Name", string.IsNullOrWhiteSpace(user.Name) ? "" : user.Name);
                     sqlParameters[2] = new SqlParameter("@LoginId", string.IsNullOrWhiteSpace(user.LoginId) ? "" : user.LoginId);
-                    sqlParameters[3] = new SqlParameter("@Password", string.IsNullOrWhiteSpace(user.LoginId) ? Encoding.ASCII.GetBytes("") : Encoding.ASCII.GetBytes(user.Password));
+                    sqlParameters[3] = new SqlParameter("@Password", string.IsNullOrWhiteSpace(user.Password) ? Encoding.ASCII.GetBytes("") : Encoding.ASCII.GetBytes(user.Password));
                     sqlParameters[4] = new SqlParameter("@RoleId", user.RoleId);
                     sqlParameters[5] = new SqlParameter("@Email", string.IsNullOrWhiteSpace(user.Email) ? "" : user.Email);
                     sqlParameters[6] = new SqlParameter("@Manager", string.IsNullOrWhiteSpace(user.Manager) ? "" : user.Manager);

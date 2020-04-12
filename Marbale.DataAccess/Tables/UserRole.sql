@@ -16,6 +16,7 @@ CREATE TABLE [dbo].[UserRole](
 	[AllowPOSAccess] [bit] NULL,
 	[POSClockInOut] [bit] NULL,
 	[AllowShiftOpenClose] [bit] NULL,
+	[ReadOnly] [bit] NULL,
 	[LastUpdatedBy] [varchar](500) NULL,
 	[LastUpdatedDate] [datetime] NULL,
 PRIMARY KEY CLUSTERED 

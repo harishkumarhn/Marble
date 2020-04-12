@@ -606,11 +606,11 @@ namespace Marbale.Business
             }
         }
 
-        public int DeleteProductbyId(int Id)
+        public int DeleteProductbyId(int Id,string from)
         {
             try
             {
-                return productData.DeleteProductbyId(Id);
+                return commonData.DeleteById(Id,from);
             }
             catch (Exception e)
             {
