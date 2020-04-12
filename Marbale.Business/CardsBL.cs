@@ -1,21 +1,22 @@
 ﻿using Marbale.BusinessObject;
 using Marbale.BusinessObject.Cards;
+using Marbale.DataAccess;
 using Marbale.DataAccess.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Marble.Business
 {
     public class CardsBL
     {
         private CardsData cardData;
+        private CommonData commonData;
+
         public CardsBL()
         {
             cardData = new CardsData();
+            commonData = new CommonData();
         }
         public int InsertOrUpdateCards(CardsModel cardmodel)
         {
@@ -139,10 +140,19 @@ namespace Marble.Business
             }
             return inventorylist;
         }
-
-        public int DeleteCardById(int Id)
+      
+        public int DeleteCardById(int Id, string from)
         {
-            return cardData.DeleteCardById(Id);
+            try
+            {
+                return commonData.DeleteById(Id, from);
+            }
+            catch (Exception e)
+            {
+                //   LogError.Instance.LogException("DeleteProductbyId", e);
+                throw e;
+            }
         }
+
     }
 }

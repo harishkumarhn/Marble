@@ -38,6 +38,10 @@
                         </div>
 
                         <div class="col-md-6">
+                            <label for="ex2" class="col-md-5"><b>Password:</b></label>
+                            @Html.TextBoxFor(m => m.Password, new { @class = "col-md-6", placeholder = @Html.DisplayNameFor(n => n.Password) })
+                        </div>
+                        <div class="col-md-6">
                             <label for="ex2" class="col-md-5"><b>Email:</b></label>
                             @Html.TextBoxFor(m => m.Email, new { @class = "col-md-6", placeholder = @Html.DisplayNameFor(n => n.Email) })
                         </div>
@@ -56,12 +60,12 @@
 
                         <div class="col-md-6">
                             <label for="ex4" class="col-md-5"><b>Status:</b></label>
-                            <select name="categoryList" id="categoryList" class="col-md-6">
-                                @foreach (var status in Model.Statuses)
-                                {
-                                    <option value="@status.Value">@status.Value</option>
-                                }
-                            </select>
+                            @Html.DropDownListFor(m => m.Status, Model.Statuses.Select(i => new SelectListItem()
+                       {
+                           Text = i.Value.ToString(),
+                           Value = i.Id.ToString()
+                       }), "Please select")
+
                         </div>
                         <div class="col-md-6">
                             <label for="ex4" class="col-md-5"><b>Admin</b></label>
@@ -74,12 +78,11 @@
                         <div class="col-md-4">
                             <div class="col-md-13">
                                 <label for="ex4" class="col-md-5"><b>Role:</b></label>
-                                <select name="Roles" id="Roles" class="col-md-6">
-                                    @foreach (var role in Model.Roles)
-                                    {
-                                        <option value="@role.Value">@role.Value</option>
-                                    }
-                                </select>
+                                @Html.DropDownListFor(m => m.RoleId, Model.Roles.Select(i => new SelectListItem()
+                           {
+                               Text = i.Value.ToString(),
+                               Value = i.Id.ToString()
+                           }), "Please select")
                             </div>
                         </div>
 

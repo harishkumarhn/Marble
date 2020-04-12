@@ -16,6 +16,10 @@ namespace Marbale.Reports.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// All reports
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AllReports()
         {
             List<ReportMenuViewModel> modelList = new List<ReportMenuViewModel>();

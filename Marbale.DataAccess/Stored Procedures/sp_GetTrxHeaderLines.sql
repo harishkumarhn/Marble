@@ -28,9 +28,18 @@ BEGIN
 
     -- Insert statements for procedure here
 	SELECT 
-			* 
+				TrxId, TrxDate, TrxAmount, TrxDiscountPercentage, 
+				TaxAmount, TrxNetAmount, POSMachine, UserId, 
+				PaymentMode, CashAmount, CreditCardAmount, GameCardAmount, 
+				PaymentReference, PrimaryCardId, OrderId, POSTypeId, 
+				SiteId, TrxNummber, Remarks, POSMachineId, SynchStatus, 
+				OtherPaymentModeAmount, Status, TrxProfileId, LastUpdateTime, 
+				LastUpdatedBy, TokenNumber, Original_System_Reference, CustomerId, 
+				ExternalSystemReference, ReprintCount, OriginalTrxID, MasterEntityId 
 				FROM 
 				TransactionHeader
+
+				Order by TrxId DESC
 
 	SELECT 
 			ln.*, p.Name 

@@ -481,7 +481,7 @@ namespace Marbale.POS
             try
             {
 
-                if (string.IsNullOrEmpty(txtCreditsToRefund.Text) || Convert.ToInt32(txtCreditsToRefund.Text) <= 0)
+                if (string.IsNullOrEmpty(txtCreditsToRefund.Text) || Convert.ToInt32(txtCreditsToRefund.Text) < 0)
                 {
                     MessageBox.Show("Enter credits greater than zero to Refund");
                     return;
@@ -542,6 +542,20 @@ namespace Marbale.POS
         {
             frmSelectProducts frm = new frmSelectProducts();
             frm.ShowDialog();
+        }
+
+        private void txtCreditsToRefund_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.'))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

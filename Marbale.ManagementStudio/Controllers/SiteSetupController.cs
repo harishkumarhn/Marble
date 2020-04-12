@@ -239,7 +239,7 @@ namespace MarbaleManagementStudio.Controllers
         public JsonResult ModuleActionPermission(int roleId)
         {
             List<Module> moduleTree = new List<Module>();
-            var moduleActions = siteSetup.GetModuleActionsByRole(roleId);
+            var moduleActions = siteSetup.GetModuleActionsByRole(roleId,true);
             GetTreeViewModel(moduleTree, moduleActions);
             return Json(moduleTree, JsonRequestBehavior.AllowGet);
         }
@@ -319,16 +319,19 @@ namespace MarbaleManagementStudio.Controllers
             var message = string.Empty;
             try
             {
-                //if (ModelState.IsValid)
-                //{
+                ModelState.Remove("Roles");
+                ModelState.Remove("Statuses");
+
+                if (ModelState.IsValid)
+                {
                     siteSetup.InsertOrUpdateUsers(user);
-                //}
-                //else
-                //{
-                //    message = string.Join(" | ", ModelState.Values
-                //                  .SelectMany(v => v.Errors)
-                //                  .Select(e => e.ErrorMessage));
-                //}
+                }
+                else
+                {
+                    message = string.Join(" | ", ModelState.Values
+                                  .SelectMany(v => v.Errors)
+                                  .Select(e => e.ErrorMessage));
+                }
             }
             catch (Exception e)
             {
@@ -342,7 +345,19 @@ namespace MarbaleManagementStudio.Controllers
         {
             return InsertOrUpdateUserObject(user);
         }
-
+        public JsonResult DeleteUser(int id)
+        {
+            try
+            {
+                int result = siteSetup.DeleteUserbyId(id,"user");
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("DeleteUser", e);
+                throw;
+            }
+        }
         #endregion
         #region Customer
         public ActionResult Customer()

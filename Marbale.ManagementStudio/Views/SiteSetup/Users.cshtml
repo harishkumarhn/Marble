@@ -4,41 +4,41 @@
 }
 <table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
     <thead>
-        <th>Id</th>
-        <th>Edit</th>
-        <th>Name</th>
-        <th>Role</th>
-        <th>Email</th>
-        <th>LoginId</th>
-        <th>Password</th>
-        <th>Status</th>
-        <th>POSCounter</th>
-        <th>Department</th>
-        <th>Manager</th>
-        <th>CompanyAdmin</th>
-        <th>EmpStartDate</th>
-        <th>EmpEndDate</th>
-        <th>EmpEndResone</th>
-        <th>PasswordChangeDate</th>
-        <th>Invalid Attempts</th>
-        <th>LastLoginTime</th>
-        <th>LastLogoutTime</th>
-        <th>CreationDate</th>
-        <th>CreatedBy</th>
-        <th>LastUpdatedBy</th>
-        <th>LastUpdatedDate</th>
+    <th>Id</th>
+    <th>Edit</th>
+    <th>Name</th>
+    <th>Role</th>
+    <th>Email</th>
+    <th>LoginId</th>
+    <th>Password</th>
+    <th>Status</th>
+    <th>POSCounter</th>
+    <th>Department</th>
+    <th>Manager</th>
+    <th>CompanyAdmin</th>
+    <th>EmpStartDate</th>
+    <th>EmpEndDate</th>
+    <th>EmpEndResone</th>
+    <th>PasswordChangeDate</th>
+    <th>Invalid Attempts</th>
+    <th>LastLoginTime</th>
+    <th>LastLogoutTime</th>
+    <th>CreationDate</th>
+    <th>CreatedBy</th>
+    <th>LastUpdatedBy</th>
+    <th>LastUpdatedDate</th>
     </thead>
     @foreach (var item in ViewBag.users)
-    {  
-        <tr>
+    {
+        <tr disableRow="@(item.ReadOnly == true ? "disable" : "enable")">
             <td>
                 <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
             </td>
             <td>
-                <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditUser('@item.Id')">
+                <a class="edit" title="Edit" data-toggle="tooltip" style="pointer-events: @(item.ReadOnly == true ? "none":"all")" onclick="EditUser('@item.Id')">
                     <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
                 </a>
-                <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteUser('@item.Id')">
+                <a class="delete" title="Delete" data-toggle="tooltip" style="pointer-events: @(item.ReadOnly == true ? "none":"all")" onclick="DeleteUser('@item.Id','@item.ReadOnly')">
                     <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
                 </a>
             </td>
@@ -51,23 +51,23 @@
                     {
                         if (@item.RoleId == @dow.Id)
                         {
-                        <option id="@dow.Id" value="@dow.Value" selected>@dow.Value</option>
+                            <option id="@dow.Id" value="@dow.Value" selected>@dow.Value</option>
                         }
                         else
                         {
-                        <option id="@dow.Id" value="@dow.Value">@dow.Value</option>
+                            <option id="@dow.Id" value="@dow.Value">@dow.Value</option>
                         }
                     }
                 </select>
             </td>
             <td>
-                <input type="text" value="@item.Email"  />
+                <input type="text" value="@item.Email" />
             </td>
             <td>
-                <input type="text" value="@item.LoginId"  />
+                <input type="text" value="@item.LoginId" />
             </td>
             <td>
-                <input type="text" value="@item.Password"  />
+                <input type="text" value="@item.Password" />
             </td>
             <td>
                 <select name="Statuses" id="Statuses">
@@ -75,17 +75,17 @@
                     {
                         if (@item.Status == @dow.Value)
                         {
-                        <option value="@dow.Value" selected>@dow.Value</option>
+                            <option value="@dow.Value" selected>@dow.Value</option>
                         }
                         else
                         {
-                        <option value="@dow.Value">@dow.Value</option>
+                            <option value="@dow.Value">@dow.Value</option>
                         }
                     }
                 </select>
             </td>
             <td>
-                <input type="text" value="@item.POSCounter"  />
+                <input type="text" value="@item.POSCounter" />
             </td>
             <td>
                 <input type="text" value="@item.Department" />
@@ -94,42 +94,42 @@
                 <input type="text" value="@item.Manager" />
             </td>
             <td>
-                <input type="checkbox"  @(item.CompanyAdmin ? "checked='checked'" : "") value="@item.CompanyAdmin" />
+                <input type="checkbox" @(item.CompanyAdmin ? "checked='checked'" : "") value="@item.CompanyAdmin" />
             </td>
             <td>
-                <input type="text" value="@item.EmpStartDate"  />
+                <input type="text" value="@item.EmpStartDate" />
             </td>
             <td>
                 <input type="text" value="@item.EmpEndDate" />
             </td>
             <td>
-                <input type="text" value="@item.EmpEndReason"  />
+                <input type="text" value="@item.EmpEndReason" />
             </td>
             <td>
-                <input type="text" value="@item.PaswardChangeDate"  disabled/>
+                <input type="text" value="@item.PaswardChangeDate" disabled />
             </td>
             <td>
-                <input type="text" value="@item.InvalidAttempts"  disabled/>
+                <input type="text" value="@item.InvalidAttempts" disabled />
             </td>
             <td>
-                <input type="text" value="@item.LastLoginTime"  disabled/>
+                <input type="text" value="@item.LastLoginTime" disabled />
             </td>
             <td>
-                <input type="text" value="@item.LastLogoutTime"  disabled/>
+                <input type="text" value="@item.LastLogoutTime" disabled />
             </td>
             <td>
-                <input type="text" value="@item.CreationDate"  disabled/>
+                <input type="text" value="@item.CreationDate" disabled />
             </td>
             <td>
-                <input type="text" value="@item.CreatedBy"  disabled/>
+                <input type="text" value="@item.CreatedBy" disabled />
             </td>
             <td>
-                <input type="text" value="@item.LastUpdatedBy"  disabled/>
+                <input type="text" value="@item.LastUpdatedBy" disabled />
             </td>
             <td>
-                <input type="text" value="@item.LastUpdatedDate"  disabled/>
+                <input type="text" value="@item.LastUpdatedDate" disabled />
             </td>
-        </tr>  
+        </tr>
     }
 </table>
 
@@ -140,7 +140,7 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="EditUser()">
         New
     </button>
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
 
 
@@ -186,16 +186,16 @@
             var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol3');
 
             var rolesOptions = '';
-              @foreach (var dow in ViewBag.users[0].Roles)
+            @foreach (var dow in ViewBag.users[0].Roles)
               {
                  @: rolesOptions = rolesOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
-              }
+                          }
             rolesOptions = rolesOptions + '</select>';
             var statusListOptions = '';
-              @foreach (var dow in ViewBag.users[0].Statuses)
+            @foreach (var dow in ViewBag.users[0].Statuses)
               {
                  @: statusListOptions = statusListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
-              }
+                          }
             statusListOptions = statusListOptions + '</select>';
             table.row.add([
                 '<lable class="fixedCol1"></lable>',
@@ -231,7 +231,11 @@
             }
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+
+        var superUserElement = $('tr[disableRow="disable"]');
+        superUserElement.find('input,select').prop('disabled', true);
     });
+
     function SaveUsers() {
         if (updatedArray.length > 0) {
             var items = [];
@@ -244,9 +248,8 @@
                     var rowIndex = r + 1;
                     var selectedRoleIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
                     var selectedStatusIndex = table.rows[rowIndex].cells[7].children[0].options["selectedIndex"];
-
                     items.push({
-                        Id: fixedcolumn1[r].innerHTML,
+                        Id: fixedcolumn1[r].innerHTML.trim() == '' ? -1 : fixedcolumn1[r].innerHTML,
                         Name: fixedcolumn3[r].value,
                         RoleId: table.rows[rowIndex].cells[3].children[0].options[selectedRoleIndex].id,
                         Email: table.rows[rowIndex].cells[4].children[0].value,
@@ -307,7 +310,7 @@
             $.ajax({
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
-                url: '@Url.Action("DeleteUser", "User")',
+                url: '@Url.Action("DeleteUser", "SiteSetup")',
                 data: { Id: id },
                 dataType: "json",
                 success: function (data) {
@@ -318,6 +321,5 @@
                 }
             });
         }
-
     }
 </script>

@@ -24,7 +24,7 @@ namespace MarbaleManagementStudio.Controllers
         }
 
         [HttpGet]
-        public ActionResult Cards()
+        public ActionResult NewCard()
         {
             var data = cardBussiness.gettechcardtype();
             Session["TechCardType"] = data;
@@ -66,8 +66,8 @@ namespace MarbaleManagementStudio.Controllers
         #region DeleteCard
         public JsonResult DeleteCard(int Id)
         {
-            int i = cardBussiness.DeleteCardById(Id);
-            return Json(i, JsonRequestBehavior.AllowGet);
+            int result = cardBussiness.DeleteCardById(Id,"card");
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

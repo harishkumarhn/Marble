@@ -581,6 +581,7 @@ namespace Marbale.DataAccess.Data
                 conn.executeInsertQuery("sp_InsertOrUpdateCard", sqlParameters);
 
                 return Convert.ToInt32(sqlParameters[28].Value);
+
             }
             catch (Exception e)
             {
@@ -727,6 +728,106 @@ namespace Marbale.DataAccess.Data
                 throw e;
             }
 
+        }
+
+        public double GetCardRechargedAmount(int cardId)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@cardId", cardId);
+
+            DataTable dt = conn.executeSelectQuery("[sp_GetCardRechargedAmount]", sqlParameters);
+
+            if (dt != null && dt.Rows.Count > 0 && dt.Rows[0][0] != DBNull.Value)
+            {
+                return Convert.ToDouble(dt.Rows[0][0]);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public int ReverseTransaction(int TrxId, int posMachineId, string loginName)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[4];
+                sqlParameters[0] = new SqlParameter("@RevereseTrxId", TrxId);
+
+                sqlParameters[1] = new SqlParameter("@POSMachineId", posMachineId);
+
+                if (!string.IsNullOrEmpty(loginName))
+                {
+                    sqlParameters[2] = new SqlParameter("@LoginName", loginName);
+                }
+                else
+                {
+                    sqlParameters[2] = new SqlParameter("@LoginName", DBNull.Value);
+                }
+
+                sqlParameters[3] = new SqlParameter("@trxId", SqlDbType.Int);
+                sqlParameters[3].Direction = ParameterDirection.Output;
+
+                conn.executeUpdateQuery("sp_ReverseTransaction", sqlParameters);
+
+                return Convert.ToInt32(sqlParameters[3].Value);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public int ReverseTransactionLine(int TrxId, int lineId, int userId, string loginName, int posMachineId, string posMachine, string reference)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[8];
+                sqlParameters[0] = new SqlParameter("@oldTrxid", TrxId);
+                sqlParameters[1] = new SqlParameter("@lineId", lineId);
+
+                sqlParameters[2] = new SqlParameter("@userId", userId);
+
+                if (!string.IsNullOrEmpty(loginName))
+                {
+                    sqlParameters[3] = new SqlParameter("@loginId", loginName);
+                }
+                else
+                {
+                    sqlParameters[3] = new SqlParameter("@loginId", DBNull.Value);
+                }
+
+                sqlParameters[4] = new SqlParameter("@pos_machineId", posMachineId);
+
+                if (!string.IsNullOrEmpty(posMachine))
+                {
+                    sqlParameters[5] = new SqlParameter("@pos_machine", posMachine);
+                }
+                else
+                {
+                    sqlParameters[5] = new SqlParameter("@pos_machine", DBNull.Value);
+                }
+
+                if (!string.IsNullOrEmpty(reference))
+                {
+                    sqlParameters[6] = new SqlParameter("@reference", reference);
+                }
+                else
+                {
+                    sqlParameters[6] = new SqlParameter("@reference", DBNull.Value);
+                }
+
+                sqlParameters[7] = new SqlParameter("@reversedTrxId", SqlDbType.Int);
+                sqlParameters[7].Direction = ParameterDirection.Output;
+
+                conn.executeUpdateQuery("sp_ReverseTransactionLine", sqlParameters);
+
+                return Convert.ToInt32(sqlParameters[7].Value);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

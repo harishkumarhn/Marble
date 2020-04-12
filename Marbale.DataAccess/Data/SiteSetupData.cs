@@ -135,7 +135,6 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-
         public int InsertOrUpdateUserRoles(List<UserRole> userRoles)
         {
             try
@@ -153,23 +152,24 @@ namespace Marbale.DataAccess
                     sqlParameters[7] = new SqlParameter("@LastUpdatedBy", role.LastUpdatedBy == null ? "Harish" : role.LastUpdatedBy);
                     conn.executeUpdateQuery("sp_InsertOrUpdateUserRole", sqlParameters);
 
-                    if (!string.IsNullOrWhiteSpace(role.AvalibleModuleActions))
+                    if (!string.IsNullOrWhiteSpace(role.AvailableModuleActions))
                     {
-                        if (role.AvalibleModuleActions.Contains("-Module") || role.AvalibleModuleActions.Contains("-Root"))
+                        if (role.AvailableModuleActions.Contains("-Module") || role.AvailableModuleActions.Contains("-Root"))
                         {
-                            string[] arr = role.AvalibleModuleActions.Split(',');
-                            arr = arr.Skip(1).ToArray();
-                            role.AvalibleModuleActions = "";
+                            string[] arr = role.AvailableModuleActions.Split(',');
+                           // arr = arr.Skip(1).ToArray();
+                            role.AvailableModuleActions = "";
                             foreach (var item in arr)
                             {
-                                role.AvalibleModuleActions = role.AvalibleModuleActions + item + ",";
+                                if(!(item.Contains("-Module") || item.Contains("-Root")))
+                                role.AvailableModuleActions = role.AvailableModuleActions + item + ",";
                             }
-                            role.AvalibleModuleActions = role.AvalibleModuleActions.Substring(0, role.AvalibleModuleActions.Length - 1);
+                            role.AvailableModuleActions = role.AvailableModuleActions.Substring(0, role.AvailableModuleActions.Length - 1);
 
                         }
                         SqlParameter[] sqlParams = new SqlParameter[2];
                         sqlParams[0] = new SqlParameter("@RoleId", role.Id.ToString());
-                        sqlParams[1] = new SqlParameter("@PageIds", role.AvalibleModuleActions);
+                        sqlParams[1] = new SqlParameter("@PageIds", role.AvailableModuleActions);
                         conn.executeUpdateQuery("sp_InsertUserRoleModuleAction", sqlParams);
                     }
                 }
@@ -189,7 +189,7 @@ namespace Marbale.DataAccess
                     sqlParameters[0] = new SqlParameter("@Id", user.Id);
                     sqlParameters[1] = new SqlParameter("@Name", string.IsNullOrWhiteSpace(user.Name) ? "" : user.Name);
                     sqlParameters[2] = new SqlParameter("@LoginId", string.IsNullOrWhiteSpace(user.LoginId) ? "" : user.LoginId);
-                    sqlParameters[3] = new SqlParameter("@Password", string.IsNullOrWhiteSpace(user.LoginId) ? Encoding.ASCII.GetBytes("") : Encoding.ASCII.GetBytes(user.Password));
+                    sqlParameters[3] = new SqlParameter("@Password", string.IsNullOrWhiteSpace(user.Password) ? Encoding.ASCII.GetBytes("") : Encoding.ASCII.GetBytes(user.Password));
                     sqlParameters[4] = new SqlParameter("@RoleId", user.RoleId);
                     sqlParameters[5] = new SqlParameter("@Email", string.IsNullOrWhiteSpace(user.Email) ? "" : user.Email);
                     sqlParameters[6] = new SqlParameter("@Manager", string.IsNullOrWhiteSpace(user.Manager) ? "" : user.Manager);
@@ -272,12 +272,13 @@ namespace Marbale.DataAccess
             }
         }
 
-        public DataTable GetModuleActionsByRole(int roleId)
+        public DataTable GetModuleActionsByRole(int roleId,bool isSuperUser = false)
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[1];
+                SqlParameter[] sqlParameters = new SqlParameter[2];
                 sqlParameters[0] = new SqlParameter("@id", roleId);
+                sqlParameters[1] = new SqlParameter("@isSuperUser", isSuperUser);
                 return conn.executeSelectQuery("sp_GetRoleModuleActions", sqlParameters);
             }
             catch (Exception e)

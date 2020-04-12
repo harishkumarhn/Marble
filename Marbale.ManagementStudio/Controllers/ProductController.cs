@@ -12,14 +12,14 @@ namespace MarbaleManagementStudio.Controllers
 {
 
     // [LogCustomExceptionFilter]
-   // [AuthorizationFilter]
+    [AuthorizationFilter]
     public class ProductController : Controller
     {
-        public ProductBL productBussiness;
+        public ProductBL productBl;
 
         public ProductController()
         {
-            productBussiness = new ProductBL();
+            productBl = new ProductBL();
         }
 
         public ActionResult Index()
@@ -30,7 +30,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                var products = productBussiness.GetProducts((int)ProductTypeEnum.Card);
+                var products = productBl.GetProducts((int)ProductTypeEnum.Card);
                 Session["TaxList"] = products[0].TaxList;
                 Session["TypeList"] = products[0].TypeList;
                 Session["CategoryList"] = products[0].CategoryList;
@@ -49,7 +49,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                var products = productBussiness.GetProducts((int)ProductTypeEnum.Manual);
+                var products = productBl.GetProducts((int)ProductTypeEnum.Manual);
                 Session["TaxList"] = products[0].TaxList;
                 Session["TypeList"] = products[0].TypeList;
                 Session["CategoryList"] = products[0].CategoryList;
@@ -100,7 +100,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                var product = productBussiness.GetProductById(id);
+                var product = productBl.GetProductById(id);
                 return View(product);
             }
             catch (Exception e)
@@ -114,7 +114,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                var product = productBussiness.GetProductById(id);
+                var product = productBl.GetProductById(id);
                 Session["TaxList"] = product.TaxList;
                 Session["TypeList"] = product.TypeList;
                 Session["CategoryList"] = product.CategoryList;
@@ -135,8 +135,8 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                int result = productBussiness.DeleteProductbyId(Id);
-                return Json(1, JsonRequestBehavior.AllowGet);
+                int result = productBl.DeleteProductbyId(Id,"product");
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -156,11 +156,11 @@ namespace MarbaleManagementStudio.Controllers
                     switch (submit)
                     {
                         case "Save":
-                            var result = productBussiness.InsertOrUpdateProduct(pObject);
+                            var result = productBl.InsertOrUpdateProduct(pObject);
                             break;
                         case "Duplicate":
                             pObject.Id = 0;
-                            var result1 = productBussiness.InsertOrUpdateProduct(pObject);
+                            var result1 = productBl.InsertOrUpdateProduct(pObject);
                             break;
 
                     }
@@ -187,7 +187,7 @@ namespace MarbaleManagementStudio.Controllers
                 var result = 0;
                 foreach (var product in products)
                 {
-                    result = productBussiness.InsertOrUpdateProduct(product);
+                    result = productBl.InsertOrUpdateProduct(product);
                 }
                 return result;
 
@@ -203,7 +203,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                var productTypes = productBussiness.GetProductTypes();
+                var productTypes = productBl.GetProductTypes();
                 ViewBag.productTypes = productTypes;
                 return View(productTypes);
             }
@@ -219,7 +219,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                return productBussiness.UpdateProductTypes(productTypes);
+                return productBl.UpdateProductTypes(productTypes);
             }
             catch (Exception e)
             {
@@ -230,22 +230,22 @@ namespace MarbaleManagementStudio.Controllers
         }
         public ActionResult DeleteDisplayGroup(int Id)
         {
-            int a = productBussiness.DeleteDisplayGroup(Id);
+            int a = productBl.DeleteDisplayGroup(Id);
             return Json(1, JsonRequestBehavior.AllowGet);
         }
         public ActionResult DisplayGroup()
         {
-            List<DisplayGroupModel> DispalyGroups = productBussiness.GetProductDisplayGroup();
+            List<DisplayGroupModel> DispalyGroups = productBl.GetProductDisplayGroup();
             return View(DispalyGroups);
         }
         public int UpdateProductDispalyGroup(List<DisplayGroupModel> model)
         {
-            return productBussiness.UpdateProductDispalyGroup(model);
+            return productBl.UpdateProductDispalyGroup(model);
 
         }
         public ActionResult Category()
         {
-            var categories = productBussiness.GetProductCategory();
+            var categories = productBl.GetProductCategory();
             ViewBag.categories = categories;
             return View();
         }
@@ -253,7 +253,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                return productBussiness.UpdateProductCategory(categories);
+                return productBl.UpdateProductCategory(categories);
             }
             catch (Exception e)
             {
@@ -271,23 +271,26 @@ namespace MarbaleManagementStudio.Controllers
                 List<TaxSet> TaxDetails = model.TaxList.Where(a => a.TaxId == model.Id).ToList();
                 if (model.TaxInclusive == true)
                 {
-                    model.Price = model.Price - model.FaceValue;
-                    model.EffectivePrice = (model.Price * TaxDetails[0].TaxPercent) / (100 + (TaxDetails[0].TaxPercent));
-                    model.EffectivePrice = model.Price - model.EffectivePrice;
-                    model.FinalPrice = model.Price + model.FaceValue;
+                    var divider = (TaxDetails[0].TaxPercent / 100) + 1;
+                    model.EffectivePrice = (model.Price - (model.FaceValue != null ? model.FaceValue : 0)) / divider;
+                    model.FinalPrice = model.Price;
                     model.Taxpercent = TaxDetails[0].TaxPercent;
                 }
                 else
                 {
-                    model.Price = model.Price - model.FaceValue;
-                    model.EffectivePrice = model.Price * (TaxDetails[0].TaxPercent / 100);
-                    model.FinalPrice = model.Price + model.EffectivePrice;
                     model.EffectivePrice = model.Price;
+                    var tempPrice = (model.Price - (model.FaceValue != null ? model.FaceValue : 0));
+                    model.FinalPrice = tempPrice + ( tempPrice* (TaxDetails[0].TaxPercent / 100));
                     model.Taxpercent = TaxDetails[0].TaxPercent;
                 }
             }
-
-            return Json(model, JsonRequestBehavior.AllowGet);
+            var result = new
+            {
+                EffectivePrice = string.Format("{0:F2}", model.EffectivePrice),
+                FinalPrice = string.Format("{0:F2}", model.FinalPrice),
+                Taxpercent = model.Taxpercent
+            };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
     }
