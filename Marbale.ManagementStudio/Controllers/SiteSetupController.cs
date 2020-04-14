@@ -11,7 +11,7 @@ using System;
 
 namespace MarbaleManagementStudio.Controllers
 {
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public class SiteSetupController : Controller
     {
         SiteSetupBL siteSetup = new SiteSetupBL();
