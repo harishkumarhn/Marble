@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgvCategory = new System.Windows.Forms.DataGridView();
+            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@
             this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -68,6 +68,10 @@
             this.dgvCategory.Name = "dgvCategory";
             this.dgvCategory.Size = new System.Drawing.Size(519, 281);
             this.dgvCategory.TabIndex = 0;
+            // 
+            // categoryBindingSource
+            // 
+            this.categoryBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.Category);
             // 
             // btnSave
             // 
@@ -124,55 +128,58 @@
             // categoryIdDataGridViewTextBoxColumn
             // 
             this.categoryIdDataGridViewTextBoxColumn.DataPropertyName = "CategoryId";
-            this.categoryIdDataGridViewTextBoxColumn.HeaderText = "CategoryId";
+            this.categoryIdDataGridViewTextBoxColumn.HeaderText = "Category Id";
             this.categoryIdDataGridViewTextBoxColumn.Name = "categoryIdDataGridViewTextBoxColumn";
             this.categoryIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // categoryNameDataGridViewTextBoxColumn
             // 
             this.categoryNameDataGridViewTextBoxColumn.DataPropertyName = "CategoryName";
-            this.categoryNameDataGridViewTextBoxColumn.HeaderText = "CategoryName";
+            this.categoryNameDataGridViewTextBoxColumn.HeaderText = "Category Name";
             this.categoryNameDataGridViewTextBoxColumn.Name = "categoryNameDataGridViewTextBoxColumn";
+            this.categoryNameDataGridViewTextBoxColumn.Width = 150;
             // 
             // isActiveDataGridViewCheckBoxColumn
             // 
             this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
             this.isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
             this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            this.isActiveDataGridViewCheckBoxColumn.Visible = false;
             // 
             // createdByDataGridViewTextBoxColumn
             // 
             this.createdByDataGridViewTextBoxColumn.DataPropertyName = "CreatedBy";
             this.createdByDataGridViewTextBoxColumn.HeaderText = "CreatedBy";
             this.createdByDataGridViewTextBoxColumn.Name = "createdByDataGridViewTextBoxColumn";
+            this.createdByDataGridViewTextBoxColumn.Visible = false;
             // 
             // lastUpdatedByDataGridViewTextBoxColumn
             // 
             this.lastUpdatedByDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedBy";
             this.lastUpdatedByDataGridViewTextBoxColumn.HeaderText = "LastUpdatedBy";
             this.lastUpdatedByDataGridViewTextBoxColumn.Name = "lastUpdatedByDataGridViewTextBoxColumn";
+            this.lastUpdatedByDataGridViewTextBoxColumn.Visible = false;
             // 
             // createdDateDataGridViewTextBoxColumn
             // 
             this.createdDateDataGridViewTextBoxColumn.DataPropertyName = "CreatedDate";
             this.createdDateDataGridViewTextBoxColumn.HeaderText = "CreatedDate";
             this.createdDateDataGridViewTextBoxColumn.Name = "createdDateDataGridViewTextBoxColumn";
+            this.createdDateDataGridViewTextBoxColumn.Visible = false;
             // 
             // lastUpdatedDateDataGridViewTextBoxColumn
             // 
             this.lastUpdatedDateDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedDate";
             this.lastUpdatedDateDataGridViewTextBoxColumn.HeaderText = "LastUpdatedDate";
             this.lastUpdatedDateDataGridViewTextBoxColumn.Name = "lastUpdatedDateDataGridViewTextBoxColumn";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.Visible = false;
             // 
             // isChangedDataGridViewCheckBoxColumn
             // 
             this.isChangedDataGridViewCheckBoxColumn.DataPropertyName = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
-            // 
-            // categoryBindingSource
-            // 
-            this.categoryBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.Category);
+            this.isChangedDataGridViewCheckBoxColumn.Visible = false;
             // 
             // frmCategory
             // 
@@ -206,6 +213,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.BindingSource categoryBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveDataGridViewCheckBoxColumn;
@@ -214,6 +222,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.BindingSource categoryBindingSource;
     }
 }

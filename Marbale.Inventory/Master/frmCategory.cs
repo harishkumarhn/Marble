@@ -1,6 +1,7 @@
 ﻿using Marbale.BusinessObject.Inventory;
 using Marbale.DataAccess;
 using Marble.Business;
+using Marble.Business.InventoryBL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,15 +33,7 @@ namespace Marbale.Inventory.Master
             List<Category> lstCategory = categoryBL.GetCategory();
 
             BindingSource categoryListBS = new BindingSource();
-
-            //if (lstCategory != null && lstCategory.Count > 0)
-            //{
-            //    categoryListBS.DataSource = lstCategory;
-            //}
-            //else
-            //{
-            //    categoryListBS.DataSource = new List<Vendor>();
-            //}
+ 
             if (categoryListBS != null)
                 categoryListBS.DataSource = new SortableBindingList<Category>(lstCategory);
             else

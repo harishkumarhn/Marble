@@ -41,9 +41,13 @@ namespace Marbale.BusinessObject.Inventory
             locationTypeId = 0;
             locationTypeName = "";
         }
-
+        public LocationType(int locationTypeId, string locationTypeName)
+        {
+            this.locationTypeId = locationTypeId;
+            this.locationTypeName = locationTypeName;
+        }
         /// <summary>
-      
+
         public LocationType(int locationTypeId, string locationTypeName, string notes, string createdBy, DateTime createdDate, string lastUpdatedBy, DateTime lastUpdatedDate, bool isActive)
         {
             this.locationTypeId = locationTypeId;

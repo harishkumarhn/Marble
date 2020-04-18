@@ -60,6 +60,7 @@ namespace Marbale.Inventory.Master
                 {
                     foreach (LocationType locationType in locationTypeList)
                     {
+                        locationType.IsActive = true;
                         if (locationType.IsChanged)
                         {
                             locationTypeBL.Save(locationType, "rakshith");

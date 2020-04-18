@@ -10,14 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marbale.DataAccess.Data
+namespace Marbale.DataAccess.Data.Inventory
 {
     public class LocationTypeData
     {
         private DBConnection conn;
         private static readonly Dictionary<LocationType.SearchByLocationTypeParameters, string> DBSearchParameters = new Dictionary<LocationType.SearchByLocationTypeParameters, string>
                {
-                    {LocationType.SearchByLocationTypeParameters.IS_ACTIVE, "1"},
+                    {LocationType.SearchByLocationTypeParameters.IS_ACTIVE, "isActive"},
 
     };
         public LocationTypeData()

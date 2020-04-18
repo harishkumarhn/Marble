@@ -1,4 +1,4 @@
-﻿using Marbale.BusinessObject;
+﻿ 
  
 using Marbale.DataAccess;
 using System;
@@ -9,9 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Marbale.DataAccess.Data;
 using Marble.Business;
+using Marbale.DataAccess.Data.Inventory;
 using Marbale.BusinessObject.Inventory;
 
-namespace Marble.Business
+namespace Marble.Business.InventoryBL
 {
     public class CategoryBL
     {

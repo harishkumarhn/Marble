@@ -109,8 +109,20 @@ namespace Marbale.Inventory.Master
                 {
                     foreach (UnitOfMeasure  unitOfMeasure in uomList)
                     {
+                        unitOfMeasure.isActive = true;
                         if (unitOfMeasure.IsChanged)
                         {
+
+                            if(string.IsNullOrEmpty( unitOfMeasure.UomName))
+                            {
+                                MessageBox.Show("Please enter the UOM Name");
+                                return;
+                            }
+                            if (string.IsNullOrEmpty(unitOfMeasure.Notes))
+                            {
+                                MessageBox.Show("Please enter the Notes");
+                                return;
+                            }
                             uomBL.Save(unitOfMeasure, "rakshith");
                         }
                         else

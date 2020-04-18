@@ -47,8 +47,12 @@
     <Compile Include="Data\CardsData.cs" />
     <Compile Include="Data\Inventory\CategoryData.cs" />
     <Compile Include="Data\Inventory\InventoryProductData.cs" />
+    <Compile Include="Data\Inventory\InventoryReceiptData.cs" />
     <Compile Include="Data\Inventory\LocationData.cs" />
     <Compile Include="Data\Inventory\LocationTypeData.cs" />
+    <Compile Include="Data\Inventory\PurchaseOrderData.cs" />
+    <Compile Include="Data\Inventory\PurchaseOrderLineData.cs" />
+    <Compile Include="Data\Inventory\PurchaseOrderReceiveLineData.cs" />
     <Compile Include="Data\Inventory\PurchaseTaxData.cs" />
     <Compile Include="Data\Inventory\UnitOfMeasureData.cs" />
     <Compile Include="Data\Inventory\VendorData.cs" />

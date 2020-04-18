@@ -40,11 +40,11 @@ namespace Marbale.Inventory.Product
             
             dgvProducts.BackgroundColor = this.BackColor;
             
-            //LoadCategoryCombobox();
-            //LoadUOMCombobox();
-            ////LoadInOutBoundLocationCombobox();
-            //LoadVendorCombobox();
-            //LoadTaxCombobox();
+           LoadCategoryCombobox();
+           LoadUOMCombobox();
+            LoadLocationCombobox();
+             LoadVendorCombobox();
+            LoadTaxCombobox();
             //LoadExpiryType();
              PopulateProductGrid();
         }
@@ -59,6 +59,16 @@ namespace Marbale.Inventory.Product
 
             List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>> searchParameters = new List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>>();
             searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.IS_ACTIVE, "1"));
+
+            if(!string.IsNullOrEmpty(txt_searchCode.Text))
+            {
+                searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.PRODUCT_CODE, txt_searchCode.Text));
+            }
+            if (!string.IsNullOrEmpty(txt_searchProdName.Text))
+            {
+                searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.PRODUCT_NAME, txt_searchProdName.Text));
+            }
+            
             // lblFilter.Text = filter;
             productList = productBL.GetInventoryProductList(searchParameters);
 
@@ -86,9 +96,9 @@ namespace Marbale.Inventory.Product
             lstCategory[0].CategoryName = "None";
             lstCategory[0].CategoryId = -1;
 
-            categoryIdDataGridViewTextBoxColumn.DataSource = lstCategory;
-            categoryIdDataGridViewTextBoxColumn.DisplayMember = "CategoryName";
-            categoryIdDataGridViewTextBoxColumn.ValueMember = "CategoryId";
+            drpDataGridViewCategoryId.DataSource = lstCategory;
+            drpDataGridViewCategoryId.DisplayMember = "CategoryName";
+            drpDataGridViewCategoryId.ValueMember = "CategoryId";
         }
 
         void LoadUOMCombobox()
@@ -102,9 +112,9 @@ namespace Marbale.Inventory.Product
             lstUom.Insert(0, new UnitOfMeasure());
             lstUom[0].UomName = "None";
             lstUom[0].UOMId = -1;
-            uomIdDataGridViewTextBoxColumn.DataSource = lstUom;
-            uomIdDataGridViewTextBoxColumn.DisplayMember = "UomName";
-            uomIdDataGridViewTextBoxColumn.ValueMember = "UOMId";
+            drpDataGridViewUomId.DataSource = lstUom;
+            drpDataGridViewUomId.DisplayMember = "UomName";
+            drpDataGridViewUomId.ValueMember = "UOMId";
         }
 
         void LoadLocationCombobox()
@@ -122,20 +132,14 @@ namespace Marbale.Inventory.Product
 
             lstLocation.Insert(0, new Location());
             lstLocation[0].LocationName = "None";
-            defaultLocationIdDataGridViewTextBoxColumn.DataSource = lstLocation;
-            defaultLocationIdDataGridViewTextBoxColumn.DisplayMember = "LocationName";
-            defaultLocationIdDataGridViewTextBoxColumn.ValueMember = "LocationId";
+            drpDataGridViewInnerLocationId.DataSource = lstLocation;
+            drpDataGridViewInnerLocationId.DisplayMember = "LocationName";
+            drpDataGridViewInnerLocationId.ValueMember = "LocationId";
 
-            //outBoundLocationDTOList = locationList.GetAllLocations(locationDTOSearchParams);
-            //if (outBoundLocationDTOList == null)
-            //{
-            //    outBoundLocationDTOList = new List<LocationDTO>();
-            //}
-            //outBoundLocationDTOList.Insert(0, new LocationDTO());
-            //outBoundLocationDTOList[0].Name = "None";
-            outboundLocationIdDataGridViewTextBoxColumn.DataSource = locationBS;
-            outboundLocationIdDataGridViewTextBoxColumn.DisplayMember = "Name";
-            outboundLocationIdDataGridViewTextBoxColumn.ValueMember = "LocationId";
+
+            drpDataGridViewOutboundLocationId.DataSource = lstLocation;
+            drpDataGridViewOutboundLocationId.DisplayMember = "LocationName";
+            drpDataGridViewOutboundLocationId.ValueMember = "LocationId";
 
 
             
@@ -156,9 +160,9 @@ namespace Marbale.Inventory.Product
             lstVendor[0].VendorName = "None";
             lstVendor[0].VendorId = -1;
 
-            defaultVendorIdDataGridViewTextBoxColumn.DataSource = lstVendor;
-            defaultVendorIdDataGridViewTextBoxColumn.DisplayMember = "VendorName";
-            defaultVendorIdDataGridViewTextBoxColumn.ValueMember = "VendorId";
+            drpDataGridViewVendorId.DataSource = lstVendor;
+            drpDataGridViewVendorId.DisplayMember = "VendorName";
+            drpDataGridViewVendorId.ValueMember = "VendorId";
         }
 
         void LoadTaxCombobox()
@@ -178,38 +182,25 @@ namespace Marbale.Inventory.Product
             ListTax.Insert(0, new PurchaseTax());
             ListTax[0].TaxName = "None";
 
-            taxIdDataGridViewTextBoxColumn.DataSource = ListTax;
-            taxIdDataGridViewTextBoxColumn.ValueMember = "TaxId";
-            taxIdDataGridViewTextBoxColumn.DisplayMember = "TaxName";
+            drpDataGridViewTaxId.DataSource = ListTax;
+            drpDataGridViewTaxId.ValueMember = "TaxId";
+            drpDataGridViewTaxId.DisplayMember = "TaxName";
 
-            //List<KeyValuePair<TaxDTO.SearchByTaxParameters, string>> taxListSearchParams = new List<KeyValuePair<TaxDTO.SearchByTaxParameters, string>>();
-
-            //TaxList taxlist = new TaxList();
-            //List<TaxDTO> taxListOnDisplay = taxlist.GetAllTaxes();
-
-            //if (taxListOnDisplay == null)
-            //    taxListOnDisplay = new List<TaxDTO>();
-
-            //taxListOnDisplay.Insert(0, new TaxDTO());
-            //taxListOnDisplay[0].TaxId = -1;
-            //taxListOnDisplay[0].TaxName = "None";
-            //taxIdDataGridViewTextBoxColumn.DataSource = taxListOnDisplay;
-            //taxIdDataGridViewTextBoxColumn.DisplayMember = "TaxName";
-            //taxIdDataGridViewTextBoxColumn.ValueMember = "TaxId";
+           
         }
 
-        void LoadExpiryType()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Type");
-            dt.Columns.Add("ExpiryName");
-            dt.Rows.Add("N", "None");
-            dt.Rows.Add("D", "In Days");
-            dt.Rows.Add("E", "Expiry Date");
-            expiryTypeDataGridViewTextBoxColumn.DataSource = dt;
-            expiryTypeDataGridViewTextBoxColumn.ValueMember = "Type";
-            expiryTypeDataGridViewTextBoxColumn.DisplayMember = "ExpiryName";
-        }
+        //void LoadExpiryType()
+        //{
+        //    DataTable dt = new DataTable();
+        //    dt.Columns.Add("Type");
+        //    dt.Columns.Add("ExpiryName");
+        //    dt.Rows.Add("N", "None");
+        //    dt.Rows.Add("D", "In Days");
+        //    dt.Rows.Add("E", "Expiry Date");
+        //    expiryTypeDataGridViewTextBoxColumn.DataSource = dt;
+        //    expiryTypeDataGridViewTextBoxColumn.ValueMember = "Type";
+        //    expiryTypeDataGridViewTextBoxColumn.DisplayMember = "ExpiryName";
+        //}
 
         private void dgvProducts_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
@@ -234,8 +225,8 @@ namespace Marbale.Inventory.Product
             try
             {
                 
-                MessageBox.Show("Error in Product grid data at row " + (e.RowIndex + 1).ToString() + ", Column " + dgvProducts.Columns[e.ColumnIndex].DataPropertyName +
-                ": " + e.Exception.Message);
+                //MessageBox.Show("Error in Product grid data at row " + (e.RowIndex + 1).ToString() + ", Column " + dgvProducts.Columns[e.ColumnIndex].DataPropertyName +
+                //": " + e.Exception.Message);
                 e.Cancel = true;
 
             }
@@ -244,41 +235,7 @@ namespace Marbale.Inventory.Product
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //Product productBL;
-            //try
-            //{
-            //    BindingSource productBS = (BindingSource)dgvProducts.DataSource;
-            //    var productList= (List<Product>)productBS.DataSource;
-
-            //    foreach (Product d in productList)
-            //    {
-            //        if (d.IsChanged)
-            //        {
-            //            //Start update 23-Feb-2017
-            //            if (d.LotControlled && d.IssuingApproach == "None")
-            //            {
-            //                if (d.ExpiryType == "E" || d.ExpiryType == "D")
-            //                    d.IssuingApproach = "FEFO";
-            //                else
-            //                    d.IssuingApproach = "FIFO";
-            //            }
-            //            //End update 23-Feb-2017
-            //            productBL = new Product(d);
-            //            productBL.Save();
-            //            //Start update 23-Feb-2017
-            //            if (d.LotControlled && d.IssuingApproach == "FIFO")
-            //            {
-            //                Semnox.Parafait.InventoryLot.InventoryLotBL inventoryLot = new Semnox.Parafait.InventoryLot.InventoryLotBL();
-            //                inventoryLot.UpdateNonLotableToLotable(d.ProductId, null);
-            //            }
-            //            //End update 23-Feb-2017
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+            
 
             PopulateProductGrid();
         }
@@ -287,7 +244,24 @@ namespace Marbale.Inventory.Product
         {
             try
             {
-                dgvProducts.CurrentRow.Cells["isActiveDataGridViewTextBoxColumn"].Value = "N";
+
+                InventoryProduct currentObject = (InventoryProduct)dgvProducts.CurrentRow.DataBoundItem;
+
+                var confirmResult = MessageBox.Show("Are you sure to delete this item ??",
+                                     "Confirm Delete!!",
+                                     MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    currentObject.IsActive = false;
+                    InventoryProductBL inventoryProductBL = new InventoryProductBL();
+                    int id = inventoryProductBL.Save(currentObject, "rakshith");
+                   
+                    dgvProducts.Rows.Remove(dgvProducts.CurrentRow);
+                     
+                }
+                
+                
+                //dgvProducts.CurrentRow.Cells["isActiveDataGridViewTextBoxColumn"].Value = "N";
                 //dgvProducts.Rows.Remove(dgvProducts.CurrentRow);
             }
             catch (Exception ex)
@@ -387,61 +361,11 @@ namespace Marbale.Inventory.Product
             this.Close();
         }
 
-        //private void dgvProducts_CellEnter(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (dgvProducts.Columns[e.ColumnIndex].DataPropertyName == "Code")
-        //    {
-        //        CurrencyManager xCM = (CurrencyManager)dgvProducts.BindingContext[dgvProducts.DataSource, dgvProducts.DataMember];
-        //        if (xCM.Count <= 0) return;
-
-        //        try
-        //        {
-        //            if (dgvProducts["codeDataGridViewTextBoxColumn", e.RowIndex].Value == null ||
-        //                Convert.ToInt32(dgvProducts["codeDataGridViewTextBoxColumn", e.RowIndex].Value) == -1)
-        //            {
-        //                dgvProducts["codeDataGridViewTextBoxColumn", e.RowIndex].ReadOnly = false;
-        //            }
-        //            else
-        //            {
-        //                dgvProducts["codeDataGridViewTextBoxColumn", e.RowIndex].ReadOnly = true;
-        //            }
-        //        }
-
-        //        catch { }
-        //    }
-        //}
+        
 
         private void dgvProducts_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
         {
-            //if ((!dgvProducts.Rows[e.RowIndex].IsNewRow && dgvProducts["uomIdDataGridViewTextBoxColumn", e.RowIndex].Value.ToString() == "-1"))
-            //{
-            //    MessageBox.Show("Error", "Validation");
-            //    e.Cancel = true;
-            //}
-
-            //else if (!dgvProducts.Rows[e.RowIndex].IsNewRow && dgvProducts["codeDataGridViewTextBoxColumn", e.RowIndex].Value == null || dgvProducts["codeDataGridViewTextBoxColumn", e.RowIndex].Value == DBNull.Value)
-            //{
-            //    MessageBox.Show("Error", "Validation");
-            //    e.Cancel = true;
-            //}
-
-            //else if (!dgvProducts.Rows[e.RowIndex].IsNewRow && dgvProducts["categoryIdDataGridViewTextBoxColumn", e.RowIndex].Value.ToString() == "-1")
-            //{
-            //    MessageBox.Show("Error", "Validation");
-            //    e.Cancel = true;
-            //}
-
-            //else if (!dgvProducts.Rows[e.RowIndex].IsNewRow && dgvProducts["defaultLocationIdDataGridViewTextBoxColumn", e.RowIndex].Value.ToString() == "-1")
-            //{
-            //    MessageBox.Show("Error", "Validation");
-            //    e.Cancel = true;
-            //}
-
-            //else if (!dgvProducts.Rows[e.RowIndex].IsNewRow && dgvProducts["outboundLocationIdDataGridViewTextBoxColumn", e.RowIndex].Value.ToString() == "-1")
-            //{
-            //    MessageBox.Show("Error", "Validation");
-            //    e.Cancel = true;
-            //}
+            
 
         }
 
@@ -472,28 +396,7 @@ namespace Marbale.Inventory.Product
 
         private void dgvProducts_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
-            //if (e.Row.Index > -1)
-            //{
-            //    if (e.Row.Cells["productIdDataGridViewTextBoxColumn"].Value != null && e.Row.Cells["codeDataGridViewTextBoxColumn"].Value != null)
-            //    {
-            //        if (e.Row.Cells["BarCode"].Value == null)
-            //        {
-            //            SqlCommand cmd = CommonFuncs.Utilities.getCommand();
-            //            cmd.CommandText = @"select top 1 barcode
-            //                                from (
-		          //                                  select *, row_number() over(partition by productid order by productid, LastUpdatedDate desc) as num 
-		          //                                  from productbarcode	
-		          //                                  where isactive = 'Y' and productid = @productid)v 
-            //                                where num = 1";
-            //            cmd.Parameters.AddWithValue("@productid", e.Row.Cells["productIdDataGridViewTextBoxColumn"].Value);
-            //            object o = cmd.ExecuteScalar();
-            //            if (o != null)
-            //                e.Row.Cells["BarCode"].Value = o.ToString();
-            //            else
-            //                e.Row.Cells["BarCode"].Value = "";
-            //        }
-            //    }
-            //}
+           
         }
 
         private void frm_ProductTabular_FormClosed(object sender, FormClosedEventArgs e)
@@ -528,8 +431,9 @@ namespace Marbale.Inventory.Product
         private void btnCreate_Click(object sender, EventArgs e)
         {
 
-            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(-1);
+            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(-1,"");
             frm_AddProduct.ShowDialog();
+            PopulateProductGrid();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -539,9 +443,23 @@ namespace Marbale.Inventory.Product
             int pid = -1;
             int.TryParse( dgvProducts.CurrentRow.Cells["ProductId"].Value.ToString(),  out pid);
 
-            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid);
+            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid,"");
             frm_AddProduct.ShowDialog();
+            PopulateProductGrid();
 
+        }
+
+        private void Btn_Duplicate_Click(object sender, EventArgs e)
+        {
+            int pid = -1;
+            int.TryParse(dgvProducts.CurrentRow.Cells["ProductId"].Value.ToString(), out pid);
+            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid, "duplicate");
+            frm_AddProduct.ShowDialog();
+        }
+
+        private void btn_searchStrip_Click(object sender, EventArgs e)
+        {
+            PopulateProductGrid();
         }
     }
 }

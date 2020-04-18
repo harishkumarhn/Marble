@@ -75,8 +75,12 @@
     <Compile Include="Game\ActiveHubMachine.cs" />
     <Compile Include="Inventory\Category.cs" />
     <Compile Include="Inventory\InventoryProduct.cs" />
+    <Compile Include="Inventory\InventoryReceipt.cs" />
     <Compile Include="Inventory\Location.cs" />
     <Compile Include="Inventory\LocationType.cs" />
+    <Compile Include="Inventory\PurchaseOrder.cs" />
+    <Compile Include="Inventory\PurchaseOrderLine.cs" />
+    <Compile Include="Inventory\PurchaseOrderReceiveLine.cs" />
     <Compile Include="Inventory\PurchaseTax.cs" />
     <Compile Include="Inventory\UnitOfMeasure.cs" />
     <Compile Include="Inventory\Vendor.cs" />

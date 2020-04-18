@@ -1,6 +1,6 @@
 ﻿using Marbale.BusinessObject;
 using Marbale.BusinessObject.Inventory;
-using Marbale.DataAccess.Data;
+using Marbale.DataAccess.Data.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,11 +12,11 @@ namespace Marble.Business.InventoryBL
 {
     public class InventoryProductBL
     {
-        private InventoryProductData locationTypeData;
+        private InventoryProductData inventoryProductData;
 
         public InventoryProductBL()
         {
-            locationTypeData = new InventoryProductData();
+            inventoryProductData = new InventoryProductData();
         }
 
 
@@ -26,7 +26,7 @@ namespace Marble.Business.InventoryBL
             searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.IS_ACTIVE, "1"));
             searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.PRODUCT_ID, "productId"));
 
-            InventoryProduct inventoryProduct= locationTypeData.GetInventoryProductList(searchParameters).FirstOrDefault(); ;
+            InventoryProduct inventoryProduct= inventoryProductData.GetInventoryProductList(searchParameters).FirstOrDefault(); ;
             if(inventoryProduct==null)
             {
                 inventoryProduct = new InventoryProduct();
@@ -36,15 +36,15 @@ namespace Marble.Business.InventoryBL
 
         public List<InventoryProduct> GetInventoryProductList(List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>> searchParameters)
         {
-            return locationTypeData.GetInventoryProductList(searchParameters);
+            return inventoryProductData.GetInventoryProductList(searchParameters);
 
 
         }
-        public int Save(InventoryProduct locationType, string userId)
+        public int Save(InventoryProduct inventoryProduct, string userId)
         {
             try
             {
-                return locationTypeData.InsertOrUpdateInventoryProduct(locationType, userId);
+                return inventoryProductData.InsertOrUpdateInventoryProduct(inventoryProduct, userId);
             }
             catch (Exception e)
             {

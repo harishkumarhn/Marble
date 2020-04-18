@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.masterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,6 +38,8 @@
             this.vendorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.locationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.issueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,8 +48,10 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -89,44 +94,61 @@
             // categoryToolStripMenuItem
             // 
             this.categoryToolStripMenuItem.Name = "categoryToolStripMenuItem";
-            this.categoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.categoryToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.categoryToolStripMenuItem.Text = "Category";
             this.categoryToolStripMenuItem.Click += new System.EventHandler(this.categoryToolStripMenuItem_Click);
             // 
             // uOMToolStripMenuItem
             // 
             this.uOMToolStripMenuItem.Name = "uOMToolStripMenuItem";
-            this.uOMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uOMToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.uOMToolStripMenuItem.Text = "UOM";
             this.uOMToolStripMenuItem.Click += new System.EventHandler(this.uOMToolStripMenuItem_Click);
             // 
             // taxToolStripMenuItem
             // 
             this.taxToolStripMenuItem.Name = "taxToolStripMenuItem";
-            this.taxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.taxToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.taxToolStripMenuItem.Text = "Tax";
             this.taxToolStripMenuItem.Click += new System.EventHandler(this.taxToolStripMenuItem_Click);
             // 
             // vendorToolStripMenuItem
             // 
             this.vendorToolStripMenuItem.Name = "vendorToolStripMenuItem";
-            this.vendorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vendorToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.vendorToolStripMenuItem.Text = "Vendor";
             this.vendorToolStripMenuItem.Click += new System.EventHandler(this.vendorToolStripMenuItem_Click);
             // 
             // locationToolStripMenuItem
             // 
             this.locationToolStripMenuItem.Name = "locationToolStripMenuItem";
-            this.locationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.locationToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.locationToolStripMenuItem.Text = "Location";
             this.locationToolStripMenuItem.Click += new System.EventHandler(this.locationToolStripMenuItem_Click);
             // 
             // productToolStripMenuItem
             // 
+            this.productToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listToolStripMenuItem,
+            this.newToolStripMenuItem});
             this.productToolStripMenuItem.Name = "productToolStripMenuItem";
             this.productToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.productToolStripMenuItem.Text = "Product";
             this.productToolStripMenuItem.Click += new System.EventHandler(this.productToolStripMenuItem_Click);
+            // 
+            // listToolStripMenuItem
+            // 
+            this.listToolStripMenuItem.Name = "listToolStripMenuItem";
+            this.listToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.listToolStripMenuItem.Text = "List";
+            this.listToolStripMenuItem.Click += new System.EventHandler(this.listToolStripMenuItem_Click);
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // orderToolStripMenuItem
             // 
@@ -139,6 +161,7 @@
             this.receiveToolStripMenuItem.Name = "receiveToolStripMenuItem";
             this.receiveToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.receiveToolStripMenuItem.Text = "Receive";
+            this.receiveToolStripMenuItem.Click += new System.EventHandler(this.receiveToolStripMenuItem_Click);
             // 
             // issueToolStripMenuItem
             // 
@@ -172,11 +195,22 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1140, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
             // 
             // statusStrip1
             // 
@@ -201,6 +235,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,5 +262,8 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripMenuItem vendorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem locationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
     }
 }

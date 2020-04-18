@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace Marbale.DataAccess.Data
+namespace Marbale.DataAccess.Data.Inventory
 {
     public class LocationData
     {

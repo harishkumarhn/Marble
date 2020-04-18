@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marbale.DataAccess.Data
+namespace Marbale.DataAccess.Data.Inventory
 {
     public class InventoryProductData
     {
@@ -20,6 +20,7 @@ namespace Marbale.DataAccess.Data
                     {InventoryProduct.SearchByProductParameters.IS_ACTIVE, "IsActive"},
                       {InventoryProduct.SearchByProductParameters.PRODUCT_NAME, "ProductName"},
                         {InventoryProduct.SearchByProductParameters.PRODUCT_ID, "ProductId"},
+                           {InventoryProduct.SearchByProductParameters.PRODUCT_CODE, "code"},
 
     };
         public InventoryProductData()
@@ -80,10 +81,10 @@ namespace Marbale.DataAccess.Data
                                ,TaxInclusiveCost
                                ,IsPurchaseable
                                ,IsSellable
-                               ,LotControlled
+                                
                                ,IsActive
                                ,IsRedeemable
-                               ,MarketListItem
+                                
                                ,InnerPackQty
                                ,LowerLimitCost
                                ,CostVariancePercentage
@@ -92,10 +93,10 @@ namespace Marbale.DataAccess.Data
                                ,UpperLimitCost
                                ,LastPurchasePrice
                                ,TurnInPriceInTickets
-                               ,ExpiryType
+                                
                                ,IssuingApproach
-                               ,ExpiryDays
-                               ,ItemMarkupPercent
+                                
+                                
                                ,CreatedBy
                                ,CreatedDate
                                )
@@ -118,10 +119,10 @@ namespace Marbale.DataAccess.Data
                                ,@TaxInclusiveCost
                                ,@IsPurchaseable
                                ,@IsSellable
-                               ,@LotControlled
+                                
                                ,@IsActive
                                ,@IsRedeemable
-                               ,@MarketListItem
+                                
                                ,@InnerPackQty
                                ,@LowerLimitCost
                                ,@CostVariancePercentage
@@ -130,10 +131,10 @@ namespace Marbale.DataAccess.Data
                                ,@UpperLimitCost
                                ,@LastPurchasePrice
                                ,@TurnInPriceInTickets
-                               ,@ExpiryType
+                           
                                ,@IssuingApproach
-                               ,@ExpiryDays
-                               ,@ItemMarkupPercent
+                                
+                                
                                ,@CreatedBy
                                ,getdate()
                                 )SELECT CAST(scope_identity() AS int)";
@@ -173,6 +174,15 @@ namespace Marbale.DataAccess.Data
             {
                 param.Add(new SqlParameter("@Remarks", inventoryProduct.Remarks));
             }
+
+            if (string.IsNullOrEmpty(inventoryProduct.BarCode))
+            {
+                param.Add(new SqlParameter("@BarCode", DBNull.Value));
+            }
+            else
+            {
+                param.Add(new SqlParameter("@BarCode", inventoryProduct.BarCode));
+            }
             if (inventoryProduct.CategoryId == -1)
             {
                 param.Add(new SqlParameter("@CategoryId", DBNull.Value));
@@ -233,25 +243,25 @@ namespace Marbale.DataAccess.Data
             param.Add(new SqlParameter("@IsPurchaseable", Convert.ToBoolean(inventoryProduct.IsPurchaseable)));
             param.Add(new SqlParameter("@IsSellable", Convert.ToBoolean(inventoryProduct.IsSellable)));
 
-            if (inventoryProduct.ExpiryType == "E" || inventoryProduct.ExpiryType == "D")
-                param.Add(new SqlParameter("@LotControlled", true));
-            else if (inventoryProduct.LotControlled == false)
-                param.Add(new SqlParameter("@LotControlled", false));
-            else
-            {
-                param.Add(new SqlParameter("@LotControlled", inventoryProduct.LotControlled));
-            }
+            //if (inventoryProduct.ExpiryType == "E" || inventoryProduct.ExpiryType == "D")
+            //    param.Add(new SqlParameter("@LotControlled", true));
+            //else if (inventoryProduct.LotControlled == false)
+            //    param.Add(new SqlParameter("@LotControlled", false));
+            //else
+            //{
+            //    param.Add(new SqlParameter("@LotControlled", inventoryProduct.LotControlled));
+            //}
             param.Add(new SqlParameter("@isActive", Convert.ToBoolean(inventoryProduct.IsActive)));
             param.Add(new SqlParameter("@IsRedeemable", Convert.ToBoolean(inventoryProduct.IsRedeemable)));
 
-            if (inventoryProduct.MarketListItem)
-            {
-                param.Add(new SqlParameter("@MarketListItem", inventoryProduct.MarketListItem));
-            }
-            else
-            {
-                param.Add(new SqlParameter("@MarketListItem", false));
-            }
+            //if (inventoryProduct.MarketListItem)
+            //{
+            //    param.Add(new SqlParameter("@MarketListItem", inventoryProduct.MarketListItem));
+            //}
+            //else
+            //{
+            //    param.Add(new SqlParameter("@MarketListItem", false));
+            //}
             param.Add(new SqlParameter("@InnerPackQty", inventoryProduct.InnerPackQty));
 
             param.Add(new SqlParameter("@LowerLimitCost", inventoryProduct.LowerLimitCost));
@@ -271,18 +281,18 @@ namespace Marbale.DataAccess.Data
 
             param.Add(new SqlParameter("@TurnInPriceInTickets", inventoryProduct.TurnInPriceInTickets));
 
-            param.Add(new SqlParameter("@ExpiryType", string.IsNullOrEmpty(inventoryProduct.ExpiryType) ? "N" : inventoryProduct.ExpiryType));
+            //param.Add(new SqlParameter("@ExpiryType", string.IsNullOrEmpty(inventoryProduct.ExpiryType) ? "N" : inventoryProduct.ExpiryType));
             param.Add(new SqlParameter("@IssuingApproach", string.IsNullOrEmpty(inventoryProduct.IssuingApproach) ? "None" : inventoryProduct.IssuingApproach));
-            param.Add(new SqlParameter("@ExpiryDays", inventoryProduct.ExpiryDays));
-            double verifyDouble = 0;
-            if ((Double.TryParse(inventoryProduct.ItemMarkupPercent.ToString(), out verifyDouble) == false) || inventoryProduct.ItemMarkupPercent.ToString() == "NaN" || inventoryProduct.ItemMarkupPercent.ToString() == "")
-            {
-                param.Add(new SqlParameter("@ItemMarkupPercent", DBNull.Value));
-            }
-            else
-            {
-                param.Add(new SqlParameter("@ItemMarkupPercent", inventoryProduct.ItemMarkupPercent));
-            }
+            //param.Add(new SqlParameter("@ExpiryDays", inventoryProduct.ExpiryDays));
+            //double verifyDouble = 0;
+            //if ((Double.TryParse(inventoryProduct.ItemMarkupPercent.ToString(), out verifyDouble) == false) || inventoryProduct.ItemMarkupPercent.ToString() == "NaN" || inventoryProduct.ItemMarkupPercent.ToString() == "")
+            //{
+            //    param.Add(new SqlParameter("@ItemMarkupPercent", DBNull.Value));
+            //}
+            //else
+            //{
+            //    param.Add(new SqlParameter("@ItemMarkupPercent", inventoryProduct.ItemMarkupPercent));
+            //}
             param.Add(new SqlParameter("@CreatedBy", userId));
 
             int idOfRowInserted = conn.executeInsertScript(query, param.ToArray());
@@ -292,42 +302,42 @@ namespace Marbale.DataAccess.Data
         public int UpdateInventoryProduct(InventoryProduct inventoryProduct, string userId)
         {
             string query = @"UPDATE dbo.InventoryProduct
-                            SET Code = @Code, 
-                            ,ProductName = @ProductName, 
-                            ,Description = @Description, 
-                            ,Remarks = @Remarks, 
-                            ,BarCode = @BarCode, 
-                            ,CategoryId = @CategoryId, 
-                            ,UomId = @UomId, 
-                            ,DefaultVendorId = @DefaultVendorId, 
-                            ,DefaultLocationId = @DefaultLocationId, 
-                            ,TaxId = @TaxId, 
-                            ,OutboundLocationId = @OutboundLocationId, 
-                            ,ReorderPoint = @ReorderPoint, 
-                            ,ReorderQuantity = @ReorderQuantity, 
-                            ,PriceInTickets = @PriceInTickets, 
-                            ,MasterPackQty = @MasterPackQty, 
-                            ,TaxInclusiveCost = @TaxInclusiveCost, 
-                            ,IsPurchaseable = @IsPurchaseable, 
-                            ,IsSellable = @IsSellable, 
-                            ,LotControlled = @LotControlled, 
-                            ,IsActive = @IsActive, 
-                            ,IsRedeemable = @IsRedeemable, 
-                            ,MarketListItem = @MarketListItem, 
-                            ,InnerPackQty = @InnerPackQty, 
-                            ,LowerLimitCost = @LowerLimitCost, 
-                            ,CostVariancePercentage = @CostVariancePercentage, 
-                            ,SalePrice = @SalePrice,
-                            ,Cost = @Cost, 
-                            ,UpperLimitCost = @UpperLimitCost, 
-                            ,LastPurchasePrice = @LastPurchasePrice, 
-                            ,TurnInPriceInTickets = @TurnInPriceInTickets, 
-                            ,ExpiryType = @ExpiryType, 
-                            ,IssuingApproach = @IssuingApproach, 
-                            ,ExpiryDays = @ExpiryDays, 
-                            ,ItemMarkupPercent = @ItemMarkupPercent,  
-                            ,LastUpdatedBy = @LastUpdatedBy,  
-                            ,LastUpdatedDate = getdate(), 
+                            SET Code = @Code
+                            ,ProductName = @ProductName 
+                            ,Description = @Description
+                            ,Remarks = @Remarks
+                            ,BarCode = @BarCode
+                            ,CategoryId = @CategoryId
+                            ,UomId = @UomId
+                            ,DefaultVendorId = @DefaultVendorId
+                            ,DefaultLocationId = @DefaultLocationId 
+                            ,TaxId = @TaxId 
+                            ,OutboundLocationId = @OutboundLocationId
+                            ,ReorderPoint = @ReorderPoint 
+                            ,ReorderQuantity = @ReorderQuantity 
+                            ,PriceInTickets = @PriceInTickets
+                            ,MasterPackQty = @MasterPackQty
+                            ,TaxInclusiveCost = @TaxInclusiveCost
+                            ,IsPurchaseable = @IsPurchaseable
+                            ,IsSellable = @IsSellable
+                            --,LotControlled = @LotControlled 
+                            ,IsActive = @IsActive
+                            ,IsRedeemable = @IsRedeemable 
+                            ,MarketListItem = @MarketListItem
+                            ,InnerPackQty = @InnerPackQty
+                            ,LowerLimitCost = @LowerLimitCost
+                            ,CostVariancePercentage = @CostVariancePercentage
+                            ,SalePrice = @SalePrice
+                            ,Cost = @Cost
+                            ,UpperLimitCost = @UpperLimitCost
+                            ,LastPurchasePrice = @LastPurchasePrice 
+                            ,TurnInPriceInTickets = @TurnInPriceInTickets 
+                            --,ExpiryType = @ExpiryType 
+                            ,IssuingApproach = @IssuingApproach
+                            ,ExpiryDays = @ExpiryDays
+                            ,ItemMarkupPercent = @ItemMarkupPercent 
+                            ,LastUpdatedBy = @LastUpdatedBy  
+                            ,LastUpdatedDate = getdate()
                             WHERE ProductId =@ProductId
                  ";
             List<SqlParameter> param = new List<SqlParameter>();
@@ -365,6 +375,14 @@ namespace Marbale.DataAccess.Data
             {
                 param.Add(new SqlParameter("@Remarks", inventoryProduct.Remarks));
             }
+            if (string.IsNullOrEmpty(inventoryProduct.BarCode))
+            {
+                param.Add(new SqlParameter("@BarCode", DBNull.Value));
+            }
+            else
+            {
+                param.Add(new SqlParameter("@BarCode", inventoryProduct.BarCode));
+            }
             if (inventoryProduct.CategoryId == -1)
             {
                 param.Add(new SqlParameter("@CategoryId", DBNull.Value));
@@ -425,14 +443,14 @@ namespace Marbale.DataAccess.Data
             param.Add(new SqlParameter("@IsPurchaseable", Convert.ToBoolean(inventoryProduct.IsPurchaseable)));
             param.Add(new SqlParameter("@IsSellable", Convert.ToBoolean(inventoryProduct.IsSellable)));
 
-            if (inventoryProduct.ExpiryType == "E" || inventoryProduct.ExpiryType == "D")
-                param.Add(new SqlParameter("@LotControlled", true));
-            else if (inventoryProduct.LotControlled == false)
-                param.Add(new SqlParameter("@LotControlled", false));
-            else
-            {
-                param.Add(new SqlParameter("@LotControlled", inventoryProduct.LotControlled));
-            }
+            //if (inventoryProduct.ExpiryType == "E" || inventoryProduct.ExpiryType == "D")
+            //    param.Add(new SqlParameter("@LotControlled", true));
+            //else if (inventoryProduct.LotControlled == false)
+            //    param.Add(new SqlParameter("@LotControlled", false));
+            //else
+            //{
+            //    param.Add(new SqlParameter("@LotControlled", inventoryProduct.LotControlled));
+            //}
             param.Add(new SqlParameter("@isActive", Convert.ToBoolean(inventoryProduct.IsActive)));
             param.Add(new SqlParameter("@IsRedeemable", Convert.ToBoolean(inventoryProduct.IsRedeemable)));
 
@@ -463,7 +481,7 @@ namespace Marbale.DataAccess.Data
 
             param.Add(new SqlParameter("@TurnInPriceInTickets", inventoryProduct.TurnInPriceInTickets));
 
-            param.Add(new SqlParameter("@ExpiryType", string.IsNullOrEmpty(inventoryProduct.ExpiryType) ? "N" : inventoryProduct.ExpiryType));
+            //param.Add(new SqlParameter("@ExpiryType", string.IsNullOrEmpty(inventoryProduct.ExpiryType) ? "N" : inventoryProduct.ExpiryType));
             param.Add(new SqlParameter("@IssuingApproach", string.IsNullOrEmpty(inventoryProduct.IssuingApproach) ? "None" : inventoryProduct.IssuingApproach));
             param.Add(new SqlParameter("@ExpiryDays", inventoryProduct.ExpiryDays));
             double verifyDouble = 0;
@@ -547,9 +565,9 @@ namespace Marbale.DataAccess.Data
                         {
                             query.Append(joiner + DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value);
                         }
-                        else if (searchParameter.Key.Equals(InventoryProduct.SearchByProductParameters.PRODUCT_NAME))
+                        else if (searchParameter.Key.Equals(InventoryProduct.SearchByProductParameters.PRODUCT_NAME) || searchParameter.Key.Equals(InventoryProduct.SearchByProductParameters.PRODUCT_CODE))
                         {
-                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " like %'" + searchParameter.Value+"%'");
+                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " like '%" + searchParameter.Value+"%'");
                         }
                         else if (searchParameter.Key.Equals(InventoryProduct.SearchByProductParameters.PRODUCT_ID))
                         {

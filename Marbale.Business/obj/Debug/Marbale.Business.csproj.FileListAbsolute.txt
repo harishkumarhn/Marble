@@ -6,7 +6,6 @@ C:\Code\Marble\Marbale.Business\bin\Debug\Marble.Business.pdb
 C:\Code\Marble\Marbale.Business\bin\Debug\Marbale.BusinessObject.dll
 C:\Code\Marble\Marbale.Business\bin\Debug\Marbale.DataAccess.dll
 C:\Code\Marble\Marbale.Business\bin\Debug\Marbale.Reports.dll
-C:\Code\Marble\Marbale.Business\bin\Debug\System.Web.Mvc.dll
 C:\Code\Marble\Marbale.Business\bin\Debug\System.Web.Optimization.dll
 C:\Code\Marble\Marbale.Business\bin\Debug\System.Web.Http.dll
 C:\Code\Marble\Marbale.Business\bin\Debug\EntityFramework.dll
@@ -42,7 +41,4 @@ C:\Code\Marble\Marbale.Business\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Code\Marble\Marbale.Business\obj\Debug\Marbale.Business.csproj.CopyComplete
 C:\Code\Marble\Marbale.Business\obj\Debug\Marble.Business.dll
 C:\Code\Marble\Marbale.Business\obj\Debug\Marble.Business.pdb
-C:\Code\Marble\Marbale.Business\bin\Debug\MarbaleManagementStudio.dll
-C:\Code\Marble\Marbale.Business\bin\Debug\MarbaleManagementStudio.pdb
-C:\Code\Marble\Marbale.Business\bin\Debug\MarbaleManagementStudio.dll.config
-C:\Code\Marble\Marbale.Business\bin\Debug\System.Web.Mvc.xml
+C:\Code\Marble\Marbale.Business\bin\Debug\System.Web.Mvc.dll

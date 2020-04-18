@@ -128,6 +128,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recieve\Frm_ReciewInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recieve\Frm_ReciewInventory.Designer.cs">
+      <DependentUpon>Frm_ReciewInventory.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmProduct.resx">
       <DependentUpon>frmProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -173,6 +179,63 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Recieve\Frm_ReciewInventory.resx">
+      <DependentUpon>Frm_ReciewInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Marbale.BusinessObject.AppSetting.datasource" />
+    <None Include="Marbale.BusinessObject.Buttons.datasource" />
+    <None Include="Marbale.BusinessObject.Cards.Card.datasource" />
+    <None Include="Marbale.BusinessObject.Cards.CardsModel.datasource" />
+    <None Include="Marbale.BusinessObject.Cards.Inventory.datasource" />
+    <None Include="Marbale.BusinessObject.Customer.Customers.datasource" />
+    <None Include="Marbale.BusinessObject.customIDVa.datasource" />
+    <None Include="Marbale.BusinessObject.Discount.Discounts+DiscountLine.datasource" />
+    <None Include="Marbale.BusinessObject.Discount.Discounts.datasource" />
+    <None Include="Marbale.BusinessObject.DisplayGroup.DisplayGroup.datasource" />
+    <None Include="Marbale.BusinessObject.DisplayGroupModel.datasource" />
+    <None Include="Marbale.BusinessObject.Game.ActiveHubMachine.datasource" />
+    <None Include="Marbale.BusinessObject.Game.Game.datasource" />
+    <None Include="Marbale.BusinessObject.Game.GameProfile.datasource" />
+    <None Include="Marbale.BusinessObject.Game.Hub.datasource" />
+    <None Include="Marbale.BusinessObject.Game.Machine.datasource" />
+    <None Include="Marbale.BusinessObject.GameDiscount.datasource" />
+    <None Include="Marbale.BusinessObject.IdValue.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.Category.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryProduct+SearchByProductParameters.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryProduct.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.Location.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.LocationType+SearchByLocationTypeParameters.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.LocationType.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.PurchaseTax+SearchByTaxParameters.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.PurchaseTax.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.UnitOfMeasure.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.Vendor+SearchByVendorParameters.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.Vendor.datasource" />
+    <None Include="Marbale.BusinessObject.KeyValue.datasource" />
+    <None Include="Marbale.BusinessObject.LoginModel.datasource" />
+    <None Include="Marbale.BusinessObject.MasterDiscounts.datasource" />
+    <None Include="Marbale.BusinessObject.Messages.MessagesModel.datasource" />
+    <None Include="Marbale.BusinessObject.NameValue.datasource" />
+    <None Include="Marbale.BusinessObject.POSModel.datasource" />
+    <None Include="Marbale.BusinessObject.POSTransaction.Transaction.datasource" />
+    <None Include="Marbale.BusinessObject.POSTransaction.TransactionLine.datasource" />
+    <None Include="Marbale.BusinessObject.Product.datasource" />
+    <None Include="Marbale.BusinessObject.ProductCategory.datasource" />
+    <None Include="Marbale.BusinessObject.ProductType.datasource" />
+    <None Include="Marbale.BusinessObject.Settings.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.AppModuleAction.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.Printer.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.ProductKey.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.ReceiptPrintTemplate.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.ReceiptPrintTemplateHeader.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.Site.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.TaskTypeModel.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.User.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.UserRole.datasource" />
+    <None Include="Marbale.BusinessObject.Tax.MasterTax.datasource" />
+    <None Include="Marbale.BusinessObject.Tax.TaxSet.datasource" />
+    <None Include="Marbale.BusinessObject.Tax.TaxStructure.datasource" />
+    <None Include="Marbale.BusinessObject.TransactionDiscount.datasource" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

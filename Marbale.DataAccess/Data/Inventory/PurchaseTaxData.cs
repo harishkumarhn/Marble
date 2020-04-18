@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marbale.DataAccess.Data
+namespace Marbale.DataAccess.Data.Inventory
 {
     public class PurchaseTaxData
     {
@@ -15,7 +15,7 @@ namespace Marbale.DataAccess.Data
         private DBConnection conn;
         private static readonly Dictionary<BusinessObject.Inventory.PurchaseTax.SearchByTaxParameters, string> DBSearchParameters = new Dictionary<BusinessObject.Inventory.PurchaseTax.SearchByTaxParameters, string>
                {
-                    {BusinessObject.Inventory.PurchaseTax.SearchByTaxParameters.IS_ACTIVE, "1"},
+                    {BusinessObject.Inventory.PurchaseTax.SearchByTaxParameters.IS_ACTIVE, "IsActive"},
 
                 };
         public PurchaseTaxData()

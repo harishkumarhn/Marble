@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Marbale.DataAccess.Data;
 using Marble.Business;
 using Marbale.BusinessObject.Inventory;
+using Marbale.DataAccess.Data.Inventory;
 
 namespace Marble.Business
 {

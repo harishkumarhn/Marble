@@ -1,6 +1,6 @@
 ﻿using Marbale.BusinessObject.Inventory;
 using Marbale.DataAccess.Data;
- 
+using Marbale.DataAccess.Data.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Data;

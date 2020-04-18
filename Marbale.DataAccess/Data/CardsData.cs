@@ -91,25 +91,25 @@ namespace Marbale.DataAccess.Data
             return conn.executeSelectQuery("GetTechCardType");
         }
 
-        public int AddDeleteInventory(Inventory inventory)
-        {
-            SqlParameter[] sqlParameters = new SqlParameter[3];
-            sqlParameters[0] = new SqlParameter("@Action", inventory.ActionName);
-            sqlParameters[1] = new SqlParameter("@NumberOfCards", inventory.NumberOfCards);
-            sqlParameters[2] = new SqlParameter("@ActionDate", DateTime.Now);
-            return conn.executeInsertQuery("InsertDeleteInventory", sqlParameters);
-        }
+        //public int AddDeleteInventory(Inventory inventory)
+        //{
+        //    SqlParameter[] sqlParameters = new SqlParameter[3];
+        //    sqlParameters[0] = new SqlParameter("@Action", inventory.ActionName);
+        //    sqlParameters[1] = new SqlParameter("@NumberOfCards", inventory.NumberOfCards);
+        //    sqlParameters[2] = new SqlParameter("@ActionDate", DateTime.Now);
+        //    return conn.executeInsertQuery("InsertDeleteInventory", sqlParameters);
+        //}
 
-        public DataTable GetInventory(Inventory inventory)
-        {
+        //public DataTable GetInventory(Inventory inventory)
+        //{
          
 
-            SqlParameter[] sqlParameters = new SqlParameter[2];
-            sqlParameters[0] = new SqlParameter("@From", inventory.From);
-            sqlParameters[1] = new SqlParameter("@To", inventory.To);
-            return conn.executeSelectQuery("GetInventory", sqlParameters);
+        //    SqlParameter[] sqlParameters = new SqlParameter[2];
+        //    sqlParameters[0] = new SqlParameter("@From", inventory.From);
+        //    sqlParameters[1] = new SqlParameter("@To", inventory.To);
+        //    return conn.executeSelectQuery("GetInventory", sqlParameters);
        
-        }
+        //}
 
         public int DeleteCardById(int Id)
         {

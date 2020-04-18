@@ -34,13 +34,13 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvUOM = new System.Windows.Forms.DataGridView();
-            this.grpUOM = new System.Windows.Forms.GroupBox();
             this.unitOfMeasureBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.grpUOM = new System.Windows.Forms.GroupBox();
             this.uOMIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.uomNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.notesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createdByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.lastUpdatedByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,10 +97,10 @@
             this.dgvUOM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUOM.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.uOMIdDataGridViewTextBoxColumn,
-            this.isActiveDataGridViewCheckBoxColumn,
             this.uomNameDataGridViewTextBoxColumn,
             this.notesDataGridViewTextBoxColumn,
             this.createdByDataGridViewTextBoxColumn,
+            this.isActiveDataGridViewCheckBoxColumn,
             this.lastUpdatedByDataGridViewTextBoxColumn,
             this.createdDateDataGridViewTextBoxColumn,
             this.lastUpdatedDateDataGridViewTextBoxColumn,
@@ -110,6 +110,10 @@
             this.dgvUOM.Name = "dgvUOM";
             this.dgvUOM.Size = new System.Drawing.Size(528, 273);
             this.dgvUOM.TabIndex = 5;
+            // 
+            // unitOfMeasureBindingSource
+            // 
+            this.unitOfMeasureBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.UnitOfMeasure);
             // 
             // grpUOM
             // 
@@ -123,26 +127,16 @@
             this.grpUOM.TabStop = false;
             this.grpUOM.Text = "UOM Details";
             // 
-            // unitOfMeasureBindingSource
-            // 
-            this.unitOfMeasureBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.UnitOfMeasure);
-            // 
             // uOMIdDataGridViewTextBoxColumn
             // 
             this.uOMIdDataGridViewTextBoxColumn.DataPropertyName = "UOMId";
-            this.uOMIdDataGridViewTextBoxColumn.HeaderText = "UOMId";
+            this.uOMIdDataGridViewTextBoxColumn.HeaderText = "UOM Id";
             this.uOMIdDataGridViewTextBoxColumn.Name = "uOMIdDataGridViewTextBoxColumn";
-            // 
-            // isActiveDataGridViewCheckBoxColumn
-            // 
-            this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
-            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
-            this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
             // 
             // uomNameDataGridViewTextBoxColumn
             // 
             this.uomNameDataGridViewTextBoxColumn.DataPropertyName = "UomName";
-            this.uomNameDataGridViewTextBoxColumn.HeaderText = "UomName";
+            this.uomNameDataGridViewTextBoxColumn.HeaderText = "UOM Name";
             this.uomNameDataGridViewTextBoxColumn.Name = "uomNameDataGridViewTextBoxColumn";
             // 
             // notesDataGridViewTextBoxColumn
@@ -156,30 +150,42 @@
             this.createdByDataGridViewTextBoxColumn.DataPropertyName = "CreatedBy";
             this.createdByDataGridViewTextBoxColumn.HeaderText = "CreatedBy";
             this.createdByDataGridViewTextBoxColumn.Name = "createdByDataGridViewTextBoxColumn";
+            this.createdByDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // isActiveDataGridViewCheckBoxColumn
+            // 
+            this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            this.isActiveDataGridViewCheckBoxColumn.Visible = false;
             // 
             // lastUpdatedByDataGridViewTextBoxColumn
             // 
             this.lastUpdatedByDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedBy";
             this.lastUpdatedByDataGridViewTextBoxColumn.HeaderText = "LastUpdatedBy";
             this.lastUpdatedByDataGridViewTextBoxColumn.Name = "lastUpdatedByDataGridViewTextBoxColumn";
+            this.lastUpdatedByDataGridViewTextBoxColumn.Visible = false;
             // 
             // createdDateDataGridViewTextBoxColumn
             // 
             this.createdDateDataGridViewTextBoxColumn.DataPropertyName = "CreatedDate";
             this.createdDateDataGridViewTextBoxColumn.HeaderText = "CreatedDate";
             this.createdDateDataGridViewTextBoxColumn.Name = "createdDateDataGridViewTextBoxColumn";
+            this.createdDateDataGridViewTextBoxColumn.Visible = false;
             // 
             // lastUpdatedDateDataGridViewTextBoxColumn
             // 
             this.lastUpdatedDateDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedDate";
             this.lastUpdatedDateDataGridViewTextBoxColumn.HeaderText = "LastUpdatedDate";
             this.lastUpdatedDateDataGridViewTextBoxColumn.Name = "lastUpdatedDateDataGridViewTextBoxColumn";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.Visible = false;
             // 
             // isChangedDataGridViewCheckBoxColumn
             // 
             this.isChangedDataGridViewCheckBoxColumn.DataPropertyName = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
+            this.isChangedDataGridViewCheckBoxColumn.Visible = false;
             // 
             // frmUOM
             // 
@@ -211,15 +217,15 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DataGridView dgvUOM;
         private System.Windows.Forms.GroupBox grpUOM;
+        private System.Windows.Forms.BindingSource unitOfMeasureBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn uOMIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn uomNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn createdByDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedByDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.BindingSource unitOfMeasureBindingSource;
     }
 }

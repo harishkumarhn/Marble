@@ -24,11 +24,14 @@ namespace Marbale.Inventory.Master
         {
             frmLocationType frm = new frmLocationType();
             frm.ShowDialog();
+            PopulateLocationType();
         }
 
         private void frmLocation_Load(object sender, EventArgs e)
         {
-            PopulateLocationGrid();
+            
+             PopulateLocationGrid();
+           
         }
 
         void PopulateLocationGrid()
@@ -47,14 +50,14 @@ namespace Marbale.Inventory.Master
 
 
             locationListBS.AddingNew += dgvLocation_BindingSourceAddNew;
-            dgvLocation.DataSource = locationListBS;
+            dgv_Location.DataSource = locationListBS;
         }
 
         private void dgvLocation_BindingSourceAddNew(object sender, AddingNewEventArgs e)
         {
             try
             {
-                if (dgvLocation.Rows.Count == locationListBS.Count)
+                if (dgv_Location.Rows.Count == locationListBS.Count)
                 {
                     locationListBS.RemoveAt(locationListBS.Count - 1);
                 }
@@ -80,19 +83,26 @@ namespace Marbale.Inventory.Master
                 BindingSource bindingSourceLocationTypes = new BindingSource();
                 if (inventoryLocationsListDrp != null)
                 {
-                    inventoryLocationsListDrp.Insert(0, new LocationType());
+                    inventoryLocationsListDrp.Insert(0, new LocationType(0,""));
                     SortableBindingList<LocationType> inventoryDocumentTypeDTOSortList = new SortableBindingList<LocationType>(inventoryLocationsListDrp);
                     bindingSourceLocationTypes.DataSource = inventoryDocumentTypeDTOSortList;
                 }
                 else
                 {
                     inventoryLocationsListDrp = new List<LocationType>();
-                    inventoryLocationsListDrp.Insert(0, new LocationType());
+                    inventoryLocationsListDrp.Insert(0, new LocationType(0, ""));
                     bindingSourceLocationTypes.DataSource = new SortableBindingList<LocationType>();
                 }
+
+
+                //LocationType location = new LocationType(0, "");
                 locationTypeIdDataGridViewTextBoxColumn.DataSource = bindingSourceLocationTypes;
                 locationTypeIdDataGridViewTextBoxColumn.ValueMember = "LocationTypeId";
-                locationTypeIdDataGridViewTextBoxColumn.DisplayMember = "LocationTypeId";
+                locationTypeIdDataGridViewTextBoxColumn.DisplayMember = "LocationTypeName";
+                locationTypeIdDataGridViewTextBoxColumn.ValueType=typeof(int);
+                //locationTypeIdDataGridViewTextBoxColumn.DisplayMember = "LocationTypeName";
+                
+
             }
             catch
             {
@@ -108,7 +118,7 @@ namespace Marbale.Inventory.Master
             try
             {
                 LocationBL locationBL = new LocationBL();
-                BindingSource locationListBS = (BindingSource)dgvLocation.DataSource;
+                BindingSource locationListBS = (BindingSource)dgv_Location.DataSource;
                 var locationList = (SortableBindingList<Location>)locationListBS.DataSource;
                 if (locationList.Count > 0)
                 {
@@ -136,32 +146,32 @@ namespace Marbale.Inventory.Master
         {
             try
             {
-                if (this.dgvLocation.SelectedRows.Count <= 0 && this.dgvLocation.SelectedCells.Count <= 0)
+                if (this.dgv_Location.SelectedRows.Count <= 0 && this.dgv_Location.SelectedCells.Count <= 0)
                 {
                     MessageBox.Show("No record selected");
                     return;
                 }
                 
-                if (this.dgvLocation.SelectedCells.Count > 0)
+                if (this.dgv_Location.SelectedCells.Count > 0)
                 {
-                    foreach (DataGridViewCell cell in this.dgvLocation.SelectedCells)
+                    foreach (DataGridViewCell cell in this.dgv_Location.SelectedCells)
                     {
-                        dgvLocation.Rows[cell.RowIndex].Selected = true;
+                        dgv_Location.Rows[cell.RowIndex].Selected = true;
                     }
                 }
-                foreach (DataGridViewRow row in this.dgvLocation.SelectedRows)
+                foreach (DataGridViewRow row in this.dgv_Location.SelectedRows)
                 {
                     if (row.Cells[0].Value != null)
                     {
                         if (Convert.ToInt32(row.Cells[0].Value) < 0)
                         {
-                            dgvLocation.Rows.RemoveAt(row.Index);
+                            dgv_Location.Rows.RemoveAt(row.Index);
                         }
                         else
                         {
                             if (  (MessageBox.Show("Do you wany to Delete", "Confirm Inactivation.", MessageBoxButtons.YesNo) == DialogResult.Yes))
                             {
-                                BindingSource ListBS = (BindingSource)dgvLocation.DataSource;
+                                BindingSource ListBS = (BindingSource)dgv_Location.DataSource;
                                 var datalist = (SortableBindingList<Location>)ListBS.DataSource;
                                 Location location = datalist[row.Index];
                                 location.IsActive = false;
@@ -186,8 +196,13 @@ namespace Marbale.Inventory.Master
 
         private void dgvLocation_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvLocation.CurrentRow == null)
+            if (dgv_Location.CurrentRow == null)
                 return;
+        }
+
+        private void dgv_Location_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
         }
     }
 }

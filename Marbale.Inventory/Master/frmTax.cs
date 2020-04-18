@@ -55,12 +55,18 @@ namespace Marbale.Inventory.Master
                     {
                         if (tax.IsChanged)
                         {
+
+                            if (string.IsNullOrEmpty(tax.TaxName))
+                            {
+                                MessageBox.Show("Please enter the Tax Name");
+                                return;
+                            }
                             taxBL.Save(tax, "rakshith");
                         }
-                        else
-                        {
-                            MessageBox.Show("nothing to delete");
-                        }
+                        //else
+                        //{
+                        //    MessageBox.Show("nothing to Save");
+                        //}
                     }
                     PopulateTaxGrid();
                 }
@@ -126,6 +132,11 @@ namespace Marbale.Inventory.Master
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            PopulateTaxGrid();
         }
     }
 }

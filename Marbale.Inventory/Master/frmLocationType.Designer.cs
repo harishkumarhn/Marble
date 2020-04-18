@@ -130,57 +130,66 @@
             // locationTypeIdDataGridViewTextBoxColumn
             // 
             this.locationTypeIdDataGridViewTextBoxColumn.DataPropertyName = "LocationTypeId";
-            this.locationTypeIdDataGridViewTextBoxColumn.HeaderText = "LocationTypeId";
+            this.locationTypeIdDataGridViewTextBoxColumn.HeaderText = "Location Type Id";
             this.locationTypeIdDataGridViewTextBoxColumn.Name = "locationTypeIdDataGridViewTextBoxColumn";
             this.locationTypeIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.locationTypeIdDataGridViewTextBoxColumn.Width = 150;
             // 
             // locationTypeNameDataGridViewTextBoxColumn
             // 
             this.locationTypeNameDataGridViewTextBoxColumn.DataPropertyName = "LocationTypeName";
-            this.locationTypeNameDataGridViewTextBoxColumn.HeaderText = "LocationTypeName";
+            this.locationTypeNameDataGridViewTextBoxColumn.HeaderText = "LocationType Name";
             this.locationTypeNameDataGridViewTextBoxColumn.Name = "locationTypeNameDataGridViewTextBoxColumn";
+            this.locationTypeNameDataGridViewTextBoxColumn.Width = 150;
             // 
             // notesDataGridViewTextBoxColumn
             // 
             this.notesDataGridViewTextBoxColumn.DataPropertyName = "Notes";
             this.notesDataGridViewTextBoxColumn.HeaderText = "Notes";
             this.notesDataGridViewTextBoxColumn.Name = "notesDataGridViewTextBoxColumn";
+            this.notesDataGridViewTextBoxColumn.Width = 150;
             // 
             // isActiveDataGridViewCheckBoxColumn
             // 
             this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
             this.isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
             this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            this.isActiveDataGridViewCheckBoxColumn.Visible = false;
             // 
             // createdByDataGridViewTextBoxColumn
             // 
             this.createdByDataGridViewTextBoxColumn.DataPropertyName = "CreatedBy";
             this.createdByDataGridViewTextBoxColumn.HeaderText = "CreatedBy";
             this.createdByDataGridViewTextBoxColumn.Name = "createdByDataGridViewTextBoxColumn";
+            this.createdByDataGridViewTextBoxColumn.Visible = false;
             // 
             // lastUpdatedByDataGridViewTextBoxColumn
             // 
             this.lastUpdatedByDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedBy";
             this.lastUpdatedByDataGridViewTextBoxColumn.HeaderText = "LastUpdatedBy";
             this.lastUpdatedByDataGridViewTextBoxColumn.Name = "lastUpdatedByDataGridViewTextBoxColumn";
+            this.lastUpdatedByDataGridViewTextBoxColumn.Visible = false;
             // 
             // createdDateDataGridViewTextBoxColumn
             // 
             this.createdDateDataGridViewTextBoxColumn.DataPropertyName = "CreatedDate";
             this.createdDateDataGridViewTextBoxColumn.HeaderText = "CreatedDate";
             this.createdDateDataGridViewTextBoxColumn.Name = "createdDateDataGridViewTextBoxColumn";
+            this.createdDateDataGridViewTextBoxColumn.Visible = false;
             // 
             // lastUpdatedDateDataGridViewTextBoxColumn
             // 
             this.lastUpdatedDateDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedDate";
             this.lastUpdatedDateDataGridViewTextBoxColumn.HeaderText = "LastUpdatedDate";
             this.lastUpdatedDateDataGridViewTextBoxColumn.Name = "lastUpdatedDateDataGridViewTextBoxColumn";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.Visible = false;
             // 
             // isChangedDataGridViewCheckBoxColumn
             // 
             this.isChangedDataGridViewCheckBoxColumn.DataPropertyName = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
+            this.isChangedDataGridViewCheckBoxColumn.Visible = false;
             // 
             // frmLocationType
             // 

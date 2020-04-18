@@ -16,7 +16,8 @@ namespace Marbale.BusinessObject.Inventory
         {
             PRODUCT_ID = 0,
             IS_ACTIVE = 1,
-            PRODUCT_NAME=2
+            PRODUCT_NAME=2,
+            PRODUCT_CODE=3
         }
 
         int productId;

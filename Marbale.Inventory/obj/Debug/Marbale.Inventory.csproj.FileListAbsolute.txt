@@ -41,3 +41,4 @@ C:\Code\Marble\Marbale.Inventory\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.csproj.CopyComplete
 C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.exe
 C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.pdb
+C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.Recieve.Frm_ReciewInventory.resources

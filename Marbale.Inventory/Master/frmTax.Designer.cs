@@ -58,6 +58,7 @@
             this.btnRefresh.TabIndex = 14;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnDelete
             // 
@@ -127,56 +128,64 @@
             // taxIdDataGridViewTextBoxColumn
             // 
             this.taxIdDataGridViewTextBoxColumn.DataPropertyName = "TaxId";
-            this.taxIdDataGridViewTextBoxColumn.HeaderText = "TaxId";
+            this.taxIdDataGridViewTextBoxColumn.HeaderText = "Tax Id";
             this.taxIdDataGridViewTextBoxColumn.Name = "taxIdDataGridViewTextBoxColumn";
+            this.taxIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // taxNameDataGridViewTextBoxColumn
             // 
             this.taxNameDataGridViewTextBoxColumn.DataPropertyName = "TaxName";
-            this.taxNameDataGridViewTextBoxColumn.HeaderText = "TaxName";
+            this.taxNameDataGridViewTextBoxColumn.HeaderText = "Tax Name";
             this.taxNameDataGridViewTextBoxColumn.Name = "taxNameDataGridViewTextBoxColumn";
             // 
             // taxPercentageDataGridViewTextBoxColumn
             // 
             this.taxPercentageDataGridViewTextBoxColumn.DataPropertyName = "TaxPercentage";
-            this.taxPercentageDataGridViewTextBoxColumn.HeaderText = "TaxPercentage";
+            this.taxPercentageDataGridViewTextBoxColumn.HeaderText = "Tax Percentage";
             this.taxPercentageDataGridViewTextBoxColumn.Name = "taxPercentageDataGridViewTextBoxColumn";
+            this.taxPercentageDataGridViewTextBoxColumn.Width = 150;
             // 
             // isActiveDataGridViewCheckBoxColumn
             // 
             this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
             this.isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
             this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            this.isActiveDataGridViewCheckBoxColumn.Visible = false;
             // 
             // createdByDataGridViewTextBoxColumn
             // 
             this.createdByDataGridViewTextBoxColumn.DataPropertyName = "CreatedBy";
             this.createdByDataGridViewTextBoxColumn.HeaderText = "CreatedBy";
             this.createdByDataGridViewTextBoxColumn.Name = "createdByDataGridViewTextBoxColumn";
+            this.createdByDataGridViewTextBoxColumn.Visible = false;
             // 
             // lastUpdatedByDataGridViewTextBoxColumn
             // 
             this.lastUpdatedByDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedBy";
             this.lastUpdatedByDataGridViewTextBoxColumn.HeaderText = "LastUpdatedBy";
             this.lastUpdatedByDataGridViewTextBoxColumn.Name = "lastUpdatedByDataGridViewTextBoxColumn";
+            this.lastUpdatedByDataGridViewTextBoxColumn.Visible = false;
             // 
             // createdDateDataGridViewTextBoxColumn
             // 
             this.createdDateDataGridViewTextBoxColumn.DataPropertyName = "CreatedDate";
             this.createdDateDataGridViewTextBoxColumn.HeaderText = "CreatedDate";
             this.createdDateDataGridViewTextBoxColumn.Name = "createdDateDataGridViewTextBoxColumn";
+            this.createdDateDataGridViewTextBoxColumn.Visible = false;
             // 
             // lastUpdatedDateDataGridViewTextBoxColumn
             // 
             this.lastUpdatedDateDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedDate";
             this.lastUpdatedDateDataGridViewTextBoxColumn.HeaderText = "LastUpdatedDate";
             this.lastUpdatedDateDataGridViewTextBoxColumn.Name = "lastUpdatedDateDataGridViewTextBoxColumn";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.Visible = false;
             // 
             // isChangedDataGridViewCheckBoxColumn
             // 
             this.isChangedDataGridViewCheckBoxColumn.DataPropertyName = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
+            this.isChangedDataGridViewCheckBoxColumn.Visible = false;
             // 
             // frmTax
             // 
@@ -207,6 +216,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.GroupBox grpUOM;
         private System.Windows.Forms.DataGridView dgvTax;
+        private System.Windows.Forms.BindingSource taxBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn taxIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn taxNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn taxPercentageDataGridViewTextBoxColumn;
@@ -216,6 +226,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.BindingSource taxBindingSource;
     }
 }
