@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Print";
+    Layout = null;
+}
+<div class="modal-header">
+    <h4 class="modal-title">Preview</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="min-width: 10px !important;">&times;</button>
+</div>
+<div class="modal-body">
+    @{
+        @Html.Raw(ViewBag.printHTML)
+    }
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>

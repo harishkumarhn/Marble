@@ -42,13 +42,19 @@
                     <input type="text" value="@(item.FontSize == 0 ? 8 : @item.FontSize)" />
                 </td>
                 <td>
-                    <button>--</button></td>
+                    <button class="preview" onclick="">Preview</button></td>
                 <td>
                     <button onclick="AddTemplateHeader()">Add</button></td>
             </tr>  
         }
     </tbody>
 </table>
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-centre">
+        <div id="modelBody" class="modal-content">
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function () {
         var table = $('#marbleTable_printTemplateHeaders').DataTable({
@@ -75,6 +81,8 @@
 
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
         $(".tblRow").on("click", function (e) { UpdatePrinterTemplateList($(this).parent().index()); });
+        $(".preview").on("click", function (e) { Preview($(this).parent().index()); });
+
     });
     function AddTemplateHeader() {
         $('#marbleTable_printTemplateHeaders').DataTable().row.add([
@@ -90,6 +98,18 @@
     function UpdatedList(index) {
         if (!updatedArray.includes(index)) {
             updatedArray.push(index);
+        }
+    }
+    function Preview(index) {
+        if (index != selectedItem) {
+            var id = document.getElementById('marbleTable_printTemplateHeaders').rows[1].cells[0].children[0].innerHTML;
+            if (id == null || id == undefined || id.trim() == '') {
+                id = '0';
+            }
+            var url = '/SiteSetup/PrintPreview?headerId=' + id.trim();
+            DisplayPopUp("printPreview", url);
+           // $('#templateData').load('/SiteSetup/PrintTemplateDataItems?headerId=' + id.trim());
+            //selectedItem = index;
         }
     }
     function UpdatePrinterTemplateList(index) {
@@ -113,17 +133,17 @@
         for (var r = 0, n = table_templateItems.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
                 var rowIndex = r + 1;
+                var section_index = $('.DTFC_Cloned')[1].rows[rowIndex].cells[1].children[0].options["selectedIndex"];
                 var Col1Alignment_index = table_templateItems.rows[rowIndex].cells[4].children[0].options["selectedIndex"];
                 var Col2Alignment_index = table_templateItems.rows[rowIndex].cells[6].children[0].options["selectedIndex"];
                 var Col3Alignment_index = table_templateItems.rows[rowIndex].cells[8].children[0].options["selectedIndex"];
                 var Col4Alignment_index = table_templateItems.rows[rowIndex].cells[10].children[0].options["selectedIndex"];
                 var Col5Alignment_index = table_templateItems.rows[rowIndex].cells[12].children[0].options["selectedIndex"];
                 var selectedFontIndex_dataItem = table_templateItems.rows[rowIndex].cells[13].children[0].options["selectedIndex"];
-                debugger;
                 templateDateItems.push({
                     Id: fixedcolumn1[r].innerHTML,
                     TemplateId: table.rows[headeTableRowIndex].cells[0].children[0].innerHTML,
-                    Section: fixedcolumn2[r].value,
+                    Section: table_templateItems.rows[rowIndex].cells[1].children[0].options[section_index].innerText,
                     Sequence: table_templateItems.rows[rowIndex].cells[2].children[0].value,
                     Col1Data: table_templateItems.rows[rowIndex].cells[3].children[0].value,
                     Col1Alignment: table_templateItems.rows[rowIndex].cells[4].children[0].options[Col1Alignment_index].innerText,

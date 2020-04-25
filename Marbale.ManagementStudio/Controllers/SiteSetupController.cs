@@ -425,6 +425,117 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.FontNameList = new string[] { "auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset" };
             return PartialView("~/Views/SiteSetup/Printer/PrintTemplateDataItems.cshtml");
         }
+        public ActionResult PrintPreview(int headerId)
+        {
+            var previewItems = siteSetup.GetPrintTemplates(headerId);
+            List<string> sections = new List<string>();
+            foreach(var item in previewItems)
+            {
+                if(!sections.Any(x => x.ToLower() == item.Section.ToLower()))
+                {
+                    sections.Add(item.Section);
+                }
+            }
+            string printHTML = "";
+            foreach(var section in sections)
+            {
+                var rowsBySection = previewItems.Where(x => x.Section == section.ToString()).OrderBy(o => o.Sequence).ToList();
+                foreach (var row in rowsBySection)
+                {
+                    string style = "";
+                    switch(row.Section.ToLower())
+                    {
+                        case "header":
+                            if (!string.IsNullOrWhiteSpace(row.Col1Data))
+                            {
+                                style = GetStyle(row, 1);
+                                printHTML = printHTML + "<p"+ style +">" + row.Col1Data + "</p>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col2Data))
+                            {
+                                style = GetStyle(row, 2);
+                                printHTML = printHTML + "<p"+ style +">" + row.Col2Data + "</p>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col3Data))
+                            {
+                                style = GetStyle(row, 3);
+                                printHTML = printHTML + "<p" + style + ">" + row.Col3Data + "</p>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col4Data))
+                            {
+                                style = GetStyle(row, 4);
+                                printHTML = printHTML + "<p" + style + ">" + row.Col4Data + "</p>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col5Data))
+                            {
+                                style = GetStyle(row, 5);
+                                printHTML = printHTML + "<p" + style + ">" + row.Col5Data + "</p>";
+                            }
+                            break;
+                        case "product":
+                            break;
+                        case "footer":
+                            printHTML = printHTML + "<div>" + row.Col1Data + "</div>";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            if (string.IsNullOrWhiteSpace(printHTML)) { printHTML = "<div>" + printHTML + "</div>"; }
+
+            ViewBag.printHTML = printHTML;
+            return PartialView("~/Views/SiteSetup/Printer/PrintPreview.cshtml");
+        }
+        private string GetStyle(ReceiptPrintTemplate template,int columnNumber)
+        {
+            string style = "";
+            switch (columnNumber)
+            {
+                case 1:
+                    if (!string.IsNullOrWhiteSpace(template.Col1Alignment))
+                    {
+                        style = style + "text-align:" + template.Col1Alignment +";";
+                    }
+                    break;
+                case 2:
+                    if (!string.IsNullOrWhiteSpace(template.Col2Alignment))
+                    {
+                        style = style + "text-align:" + template.Col2Alignment + ";";
+                    }
+                    break;
+                case 3:
+                    if (!string.IsNullOrWhiteSpace(template.Col3Alignment))
+                    {
+                        style = style + "text-align:" + template.Col3Alignment + ";";
+                    }
+                    break;
+                case 4:
+                    if (!string.IsNullOrWhiteSpace(template.Col4Alignment))
+                    {
+                        style = style + "text-align:" + template.Col4Alignment + ";";
+                    }
+                    break;
+                case 5:
+                    if (!string.IsNullOrWhiteSpace(template.Col5Alignment))
+                    {
+                        style = style + "text-align:" + template.Col5Alignment + ";";
+                    }
+                    break;
+                default: break;
+
+            }
+            if (!string.IsNullOrWhiteSpace(template.FontName))
+            {
+                style = style + "font-family:" + template.FontName + ";";
+            }
+            if (template.FontSize > 0)
+            {
+                style = style + "font-size:" + template.FontSize.ToString() + ";";
+            }
+            if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "'";
+            return style;
+        }
         public int UpdatePrintTemplate(ReceiptPrintTemplateHeader template)
         {
             return siteSetup.InsertOrUpdatePrintTemplateHeaderAndItems(template);

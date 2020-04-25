@@ -25,5 +25,7 @@ namespace Marbale.BusinessObject.SiteSetup
         public string Col5Data { get; set; }
         public string Col5Alignment { get; set; }
         public List<IdValue> AlignmentList { get; set; }
+        public List<IdValue> SectionTypes { get; set; }
+
     }
 }

@@ -640,12 +640,18 @@ namespace Marble.Business
         public List<ReceiptPrintTemplate> GetPrintTemplates(int headerId)
         {
             List<ReceiptPrintTemplate> templates = new List<ReceiptPrintTemplate>();
-            var list = new List<IdValue>();
-            list.Add(new IdValue() { Id = 1, Value = "Header" });
-            list.Add(new IdValue() { Id = 2, Value = "Left" });
-            list.Add(new IdValue() { Id = 3, Value = "Right" });
-            list.Add(new IdValue() { Id = 4, Value = "Footer" });
+            var alignmentList = new List<IdValue>();
+            alignmentList.Add(new IdValue() { Id = 1, Value = "Center" });
+            alignmentList.Add(new IdValue() { Id = 2, Value = "Left" });
+            alignmentList.Add(new IdValue() { Id = 3, Value = "Right" });
+            alignmentList.Add(new IdValue() { Id = 4, Value = "Hide" });
 
+            var sectionTypes = new List<IdValue>();
+            sectionTypes.Add(new IdValue() { Id = 1, Value = "Header" });
+            sectionTypes.Add(new IdValue() { Id = 2, Value = "Product" });
+            sectionTypes.Add(new IdValue() { Id = 3, Value = "Total" });
+            sectionTypes.Add(new IdValue() { Id = 4, Value = "Footer" });
+            
             if (headerId > 0)
             {
                 DataTable dt = siteSetupData.GetPrintTemplates(headerId);
@@ -664,14 +670,16 @@ namespace Marble.Business
                         template.Col2Alignment = dr.IsNull("Col2Alignment") ? "" : dr["Col2Alignment"].ToString();
                         template.Col2Data = dr.IsNull("Col2Data") ? "" : dr["Col2Data"].ToString();
                         template.Col3Alignment = dr.IsNull("Col3Alignment") ? "" : dr["Col3Alignment"].ToString();
-                        template.Col3Data = dr.IsNull("Col1Data") ? "" : dr["Col1Data"].ToString();
+                        template.Col3Data = dr.IsNull("Col3Data") ? "" : dr["Col3Data"].ToString();
                         template.Col4Alignment = dr.IsNull("Col4Alignment") ? "" : dr["Col4Alignment"].ToString();
                         template.Col4Data = dr.IsNull("Col4Data") ? "" : dr["Col4Data"].ToString();
                         template.Col5Alignment = dr.IsNull("Col5Alignment") ? "" : dr["Col5Alignment"].ToString();
                         template.Col5Data = dr.IsNull("Col5Data") ? "" : dr["Col5Data"].ToString();
                         template.FontName = dr.IsNull("FontName") ? "" : dr["FontName"].ToString();
                         template.FontSize = dr.IsNull("FontSize") ? 0 : decimal.Parse(dr["FontSize"].ToString());
-                        template.AlignmentList = list;
+                        template.AlignmentList = alignmentList;
+                        template.SectionTypes = sectionTypes;
+
                         templates.Add(template);
                     }
 
@@ -679,7 +687,8 @@ namespace Marble.Business
             }
             if (templates.Count == 0)
             {
-                templates.Add(new ReceiptPrintTemplate() { AlignmentList = list });
+                templates.Add(new ReceiptPrintTemplate() { AlignmentList = alignmentList });
+                templates.Add(new ReceiptPrintTemplate() { SectionTypes = sectionTypes });
             }
             return templates;
         }
