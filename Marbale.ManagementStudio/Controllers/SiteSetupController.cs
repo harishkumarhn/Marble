@@ -11,7 +11,7 @@ using System;
 
 namespace MarbaleManagementStudio.Controllers
 {
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public class SiteSetupController : Controller
     {
         SiteSetupBL siteSetup = new SiteSetupBL();
@@ -437,9 +437,9 @@ namespace MarbaleManagementStudio.Controllers
             return View();
         }
 
-        public int UpdateTaskType(List<TaskTypeModel> tasktype)
+        public int UpdateTaskType(List<TaskTypeModel> taskTypes)
         {
-            int status = siteSetup.UpdateTaskType(tasktype);
+            int status = siteSetup.UpdateTaskType(taskTypes);
             if (status == 1)
             {
                 RedirectToAction("TaskType");

@@ -63,8 +63,8 @@
                             @Html.DropDownListFor(m => m.Status, Model.Statuses.Select(i => new SelectListItem()
                        {
                            Text = i.Value.ToString(),
-                           Value = i.Id.ToString()
-                       }), "Please select")
+                           Value = i.Value.ToString()
+                       }))
 
                         </div>
                         <div class="col-md-6">
@@ -82,7 +82,7 @@
                            {
                                Text = i.Value.ToString(),
                                Value = i.Id.ToString()
-                           }), "Please select")
+                           }))
                             </div>
                         </div>
 

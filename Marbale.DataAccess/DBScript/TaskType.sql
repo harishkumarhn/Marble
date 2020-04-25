@@ -1,0 +1,13 @@
+
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'LOADTICKETS', N'Load Tickets', 1, 1)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'EXCHANGETOKENFORCREDIT', N'Exchange Token For Credit', 0, 0)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'EXCHANGECREDITFORTOKEN', N'Exchange Credit For Token', 0, 0)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'TRANSFERCARD', N'Transfer Card', 1, 1)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'CONSOLIDATE', N'Consolidate Cards', 1, 1)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'LOADMULTIPLE', N'Load Multiple', 0, 0)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'REFUNDCARD', N'Refund Card', 1, 1)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'REALETICKET', N'Real / e-Tickets', 0, 0)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'LOADBONUS', N'Load Bonus', 1, 1)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'DISCOUNT', N'Apply Discount', 1, 0)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'REDEEMLOYALTY', N'Redeem Loyalty Points', 1, 0)
+INSERT [dbo].[TaskType] ( [TaskType], [TaskTypeName], [RequiresManagerApproval], [DisplayInPOS]) VALUES ( N'SPECIALPRICING', N'Special Pricing', 0, 0)
