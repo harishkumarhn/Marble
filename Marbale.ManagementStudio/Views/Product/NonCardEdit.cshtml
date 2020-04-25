@@ -97,6 +97,22 @@
                                 <label class="col-md-5">Product Type:</label>
                                 @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "col-md-6", @style = "font-size: 14px" })
                             </div>
+                            <div class="col-md-13">
+                                <button class="col-md-5 btn btn-success btn-md" role="button" style="width:fit-content;margin-left:1vw;margin-right:1.7vw">GetProducts</button>                                
+                                @Html.DropDownList("type", new SelectList(new List<Marbale.BusinessObject.IdValue> { new Marbale.BusinessObject.IdValue { Id = 1, Value = "" } }, "Id", "Value", selectedValue: ""), new { @class="col-md-6", @style = "font-size: 14px" })
+                                <div class="col-md-13" style="text-align:end;padding-right:2vw">
+                                   <button class="col-md-1 btn btn-success btn-md" role="button" style="padding:4px 15px 4px 15px;min-width:fit-content;">Assign</button> 
+                                   <button class="col-md-1 btn btn-success btn-md" role="button" style="padding:4px 15px 4px 15px;min-width:fit-content;margin-left:2.5vw">Clear</button> 
+                                </div>
+                            </div>
+                            <div class="col-md-13">
+                                <label class="col-md-5">Inventory Product Code:</label>
+                                @Html.TextBox("code", "",new { @class = "col-md-6" })     <!-- add attribute to model and change it to TextBoxFor-->                       
+                            </div>
+                            <div class="col-md-13">
+                                <label class="col-md-5">Description:</label>
+                                @Html.TextBox("Description","",new { @class = "col-md-6" })  <!-- add attribute to model and change it to TextBoxFor-->                           
+                            </div>
                         </div>
                         <div class="col-md-7">
                             <div class="row">
