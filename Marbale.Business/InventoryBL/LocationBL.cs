@@ -12,7 +12,7 @@ using Marble.Business;
 using Marbale.BusinessObject.Inventory;
 using Marbale.DataAccess.Data.Inventory;
 
-namespace Marble.Business
+namespace Marble.Business.InventoryBL
 {
     public class LocationBL
     {

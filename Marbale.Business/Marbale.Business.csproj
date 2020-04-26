@@ -57,9 +57,13 @@
     <Compile Include="CardsBL.cs" />
     <Compile Include="Enum\TypeEnum.cs" />
     <Compile Include="InventoryBL\InventoryProductBL.cs" />
+    <Compile Include="InventoryBL\InventoryReceiptBL.cs" />
+    <Compile Include="InventoryBL\InventoryStoreBL.cs" />
     <Compile Include="InventoryBL\LocationBL.cs" />
     <Compile Include="InventoryBL\LocationTypeBL.cs" />
     <Compile Include="InventoryBL\PurchaseOrderBL.cs" />
+    <Compile Include="InventoryBL\PurchaseOrderLineBL.cs" />
+    <Compile Include="InventoryBL\PurchaseOrderReceiveLineBL.cs" />
     <Compile Include="InventoryBL\PurchaseTaxBL.cs" />
     <Compile Include="InventoryBL\UnitOfMeasureBL.cs" />
     <Compile Include="InventoryBL\VendorBL.cs" />

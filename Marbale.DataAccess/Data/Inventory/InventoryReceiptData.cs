@@ -15,7 +15,7 @@ namespace Marbale.DataAccess.Data.Inventory
         private static readonly Dictionary<InventoryReceipt.SearchByInventoryReceiptParameters, string> DBSearchParameters = new Dictionary<InventoryReceipt.SearchByInventoryReceiptParameters, string>
                {
                     {InventoryReceipt.SearchByInventoryReceiptParameters.IS_ACTIVE, "IsActive"},
-
+                     {InventoryReceipt.SearchByInventoryReceiptParameters.INVENTORY_RECEIPT_ID, "InventoryReceiptID"},
 
         };
         public InventoryReceiptData()
@@ -46,7 +46,7 @@ namespace Marbale.DataAccess.Data.Inventory
         }
         public int InsertInventoryReceipt(InventoryReceipt inventoryReceipt, string userId)
         {
-            string query = @"INSERT INTO  dbo . InventoryReceipt 
+            string query = @"INSERT INTO  dbo.InventoryReceipt 
                                    ( VendorBillNumber 
                                    , GatePassNumber 
                                    , GRN 
@@ -54,6 +54,7 @@ namespace Marbale.DataAccess.Data.Inventory
                                    , Remarks 
                                    , ReceiveDate 
                                    , ReceivedBy 
+                                   ,IsActive
                                    , CreatedBy 
                                    , CreatedDate 
                                     )
@@ -66,6 +67,7 @@ namespace Marbale.DataAccess.Data.Inventory
                                    ,@Remarks 
                                    ,@ReceiveDate 
                                    ,@ReceivedBy 
+                                   ,@IsActive
                                    ,@CreatedBy 
                                    ,getdate() 
                                    )
@@ -134,7 +136,8 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 sqParameters.Add(new SqlParameter("@ReceivedBy", inventoryReceipt.GatePassNumber));
             }
-
+            sqParameters.Add(new SqlParameter("@IsActive", inventoryReceipt.IsActive));
+           
             if (string.IsNullOrEmpty(inventoryReceipt.CreatedBy))
             {
                 sqParameters.Add(new SqlParameter("@CreatedBy", DBNull.Value));
@@ -242,7 +245,7 @@ namespace Marbale.DataAccess.Data.Inventory
         }
 
 
-        public List<InventoryReceipt> GetPurchaseOrderList(List<KeyValuePair<InventoryReceipt.SearchByInventoryReceiptParameters, string>> searchParameters)
+        public List<InventoryReceipt> GetInventoryReceiptList(List<KeyValuePair<InventoryReceipt.SearchByInventoryReceiptParameters, string>> searchParameters)
         {
             int count = 0;
             string selectLocationQuery = @"select *

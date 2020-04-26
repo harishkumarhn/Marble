@@ -69,14 +69,14 @@ namespace Marbale.DataAccess.Data.Inventory
                                    ,ShipToAddressRemarks
                                    ,RequestShipDate
                                    ,OrderTotal
-                                   ,LastModUserId
-                                   ,OrderRemarks
+                                   --,LastModUserId
+                                  -- ,OrderRemarks
                                    ,ReceiveRemarks
+                                    ,IsActive
                                    ,CancelledDate
                                    ,CreatedBy
                                    ,CreatedDate
-                                   ,LastupdatedBy
-                                   ,LastupdatedDate)
+                                   )
                              VALUES
                                    (
 		                           @OrderStatus
@@ -101,8 +101,9 @@ namespace Marbale.DataAccess.Data.Inventory
                                    ,@RequestShipDate
                                    ,@OrderTotal
                                    
-                                   ,@OrderRemarks
+                                  -- ,@OrderRemarks
                                    ,@ReceiveRemarks
+                                    ,@IsActive
                                    ,@CancelledDate
                                    ,@CreatedBy
                                    ,getdate()
@@ -161,8 +162,11 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 sqParameters.Add(new SqlParameter("@RequestShipDate", purchaseOrder.RequestShipDate));
             }
-
+            sqParameters.Add(new SqlParameter("@IsActive", purchaseOrder.IsActive));
+            
             //sqParameters.Add(new SqlParameter("@OrderRemarks", string.IsNullOrEmpty(purchaseOrder.OrderRemarks) ? "" : purchaseOrder.OrderRemarks));
+
+            sqParameters.Add(new SqlParameter("@ReceiveRemarks", string.IsNullOrEmpty(purchaseOrder.ReceiveRemarks) ? "" : purchaseOrder.ReceiveRemarks));
             sqParameters.Add(new SqlParameter("@OrderTotal", purchaseOrder.OrderTotal));
             //sqParameters.Add(new SqlParameter("@LastModUserId", userId));
 
@@ -174,7 +178,7 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 sqParameters.Add(new SqlParameter("@CancelledDate", purchaseOrder.CancelledDate));
             }
-
+            sqParameters.Add(new SqlParameter("@CreatedBy", userId));
 
 
             int idOfRowInserted = conn.executeInsertScript(query, sqParameters.ToArray());

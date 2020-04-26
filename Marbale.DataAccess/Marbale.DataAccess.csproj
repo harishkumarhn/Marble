@@ -48,6 +48,7 @@
     <Compile Include="Data\Inventory\CategoryData.cs" />
     <Compile Include="Data\Inventory\InventoryProductData.cs" />
     <Compile Include="Data\Inventory\InventoryReceiptData.cs" />
+    <Compile Include="Data\Inventory\InventoryStoreData.cs" />
     <Compile Include="Data\Inventory\LocationData.cs" />
     <Compile Include="Data\Inventory\LocationTypeData.cs" />
     <Compile Include="Data\Inventory\PurchaseOrderData.cs" />

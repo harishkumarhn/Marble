@@ -24,7 +24,7 @@ namespace Marble.Business.InventoryBL
         {
             List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>> searchParameters = new List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>>();
             searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.IS_ACTIVE, "1"));
-            searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.PRODUCT_ID, "productId"));
+            searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.PRODUCT_ID, productId.ToString()));
 
             InventoryProduct inventoryProduct= inventoryProductData.GetInventoryProductList(searchParameters).FirstOrDefault(); ;
             if(inventoryProduct==null)

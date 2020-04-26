@@ -14,8 +14,8 @@ namespace Marbale.DataAccess.Data.Inventory
         private DBConnection conn;
         private static readonly Dictionary<PurchaseOrderReceiveLine.SearchByPurchaseOrderRecieveLineParameters, string> DBSearchParameters = new Dictionary<PurchaseOrderReceiveLine.SearchByPurchaseOrderRecieveLineParameters, string>
                {
-                    {PurchaseOrderReceiveLine.SearchByPurchaseOrderRecieveLineParameters.IS_ACTIVE, "IsActive"},
-
+                    {PurchaseOrderReceiveLine.SearchByPurchaseOrderRecieveLineParameters.IS_ACTIVE, "IsActive"},  {PurchaseOrderReceiveLine.SearchByPurchaseOrderRecieveLineParameters.RECEIPT_ID, "ReceiptId"},
+                    
 
         };
         public PurchaseOrderReceiveLineData()
@@ -28,7 +28,7 @@ namespace Marbale.DataAccess.Data.Inventory
         {
             try
             {
-                if (purchaseOrderReceiveLine.PurchaseOrderLineId <= 0)
+                if (purchaseOrderReceiveLine.PurchaseOrderReceiveLineId <= 0)
                 {
                     int id = InsertPurchaseOrderReceiveLine(purchaseOrderReceiveLine, userid);
                     return id;
@@ -46,7 +46,7 @@ namespace Marbale.DataAccess.Data.Inventory
         }
         public int InsertPurchaseOrderReceiveLine(PurchaseOrderReceiveLine purchaseOrderReceiveLine, string userId)
         {
-            string query = @"INSERT INTO  dbo . PurchaseOrderReceive_Line 
+            string query = @"INSERT INTO  dbo . PurchaseOrderReceiveLine 
                                    ( PurchaseOrderId 
                                    , ProductId 
                                    , Description 
@@ -63,28 +63,30 @@ namespace Marbale.DataAccess.Data.Inventory
                                    , ReceiptId 
                                    , VendorBillNumber 
                                    , ReceivedBy 
+                                    ,IsActive
                                    , CreatedBy 
                                    , CreatedDate 
                                    )
                              VALUES
                                    (
-		                           @PurchaseOrderId 
-                                   @ProductId 
-                                   @Description 
-                                   @VendorItemCode 
-                                   @Quantity 
-                                   @LocationId 
-                                   @IsReceived 
-                                   @PurchaseOrderLineId 
-                                   @Price 
-                                   @TaxPercentage 
-                                   @Amount 
-                                   @TaxInclusive 
-                                   @TaxId 
-                                   @ReceiptId 
-                                   @VendorBillNumber 
-                                   @ReceivedBy 
-                                   @CreatedBy 
+		                           @PurchaseOrderId ,
+                                   @ProductId ,
+                                   @Description, 
+                                   @VendorItemCode ,
+                                   @Quantity ,
+                                   @LocationId ,
+                                   @IsReceived ,
+                                   @PurchaseOrderLineId, 
+                                   @Price ,
+                                   @TaxPercentage, 
+                                   @Amount ,
+                                   @TaxInclusive ,
+                                   @TaxId ,
+                                   @ReceiptId ,
+                                   @VendorBillNumber ,
+                                   @ReceivedBy ,
+                                    @IsActive,
+                                   @CreatedBy ,
                                    GETDATE()
 		   
 		                            )SELECT CAST(scope_identity() AS int)";
@@ -100,7 +102,7 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 sqParameters.Add(new SqlParameter("@PurchaseOrderId", purchaseOrderReceiveLine.PurchaseOrderId));
             }
-            if (purchaseOrderReceiveLine.ProductId == -1)
+            if (purchaseOrderReceiveLine.ProductId <=0)
             {
                 sqParameters.Add(new SqlParameter("@ProductId", DBNull.Value));
             }
@@ -116,16 +118,16 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 sqParameters.Add(new SqlParameter("@Description", purchaseOrderReceiveLine.Description));
             }
-            //if (string.IsNullOrEmpty(purchaseOrderReceiveLine.VendorItemCode))
-            //{
-            //    sqParameters.Add(new SqlParameter("@VendorItemCode", DBNull.Value));
+            if (string.IsNullOrEmpty(purchaseOrderReceiveLine.VendorItemCode))
+            {
+                sqParameters.Add(new SqlParameter("@VendorItemCode", DBNull.Value));
+            }
+            else
+            {
+                sqParameters.Add(new SqlParameter("@VendorItemCode", purchaseOrderReceiveLine.VendorItemCode));
+            }
 
-            //else
-            //{
-            //        sqParameters.Add(new SqlParameter("@VendorItemCode", purchaseOrderReceiveLine.VendorItemCode));
-            //    }
-
-            if (purchaseOrderReceiveLine.Quantity == -1)
+            if (purchaseOrderReceiveLine.Quantity <= 0)
             {
                 sqParameters.Add(new SqlParameter("@Quantity", DBNull.Value));
             }
@@ -133,7 +135,7 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 sqParameters.Add(new SqlParameter("@Quantity", purchaseOrderReceiveLine.Quantity));
             }
-            if (purchaseOrderReceiveLine.LocationId == -1)
+            if (purchaseOrderReceiveLine.LocationId <= 0)
             {
                 sqParameters.Add(new SqlParameter("@LocationId", DBNull.Value));
             }
@@ -142,7 +144,7 @@ namespace Marbale.DataAccess.Data.Inventory
                 sqParameters.Add(new SqlParameter("@LocationId", purchaseOrderReceiveLine.LocationId));
             }
             sqParameters.Add(new SqlParameter("@IsReceived", purchaseOrderReceiveLine.IsReceived));
-            if (purchaseOrderReceiveLine.PurchaseOrderLineId == -1)
+            if (purchaseOrderReceiveLine.PurchaseOrderLineId <= 0)
             {
                 sqParameters.Add(new SqlParameter("@PurchaseOrderLineId", DBNull.Value));
             }
@@ -152,7 +154,7 @@ namespace Marbale.DataAccess.Data.Inventory
             }
 
             sqParameters.Add(new SqlParameter("@Price", purchaseOrderReceiveLine.Price));
-            if (purchaseOrderReceiveLine.TaxPercentage == -1)
+            if (purchaseOrderReceiveLine.TaxPercentage <= 0)
             {
                 sqParameters.Add(new SqlParameter("@TaxPercentage", DBNull.Value));
             }
@@ -162,7 +164,7 @@ namespace Marbale.DataAccess.Data.Inventory
             }
             sqParameters.Add(new SqlParameter("@Amount", purchaseOrderReceiveLine.Amount));
             sqParameters.Add(new SqlParameter("@TaxInclusive", purchaseOrderReceiveLine.TaxInclusive));
-            if (purchaseOrderReceiveLine.TaxId == -1)
+            if (purchaseOrderReceiveLine.TaxId <= 0)
             {
                 sqParameters.Add(new SqlParameter("@TaxId", DBNull.Value));
             }
@@ -170,8 +172,9 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 sqParameters.Add(new SqlParameter("@TaxId", purchaseOrderReceiveLine.TaxId));
             }
-
-            sqParameters.Add(new SqlParameter("@TaxId", purchaseOrderReceiveLine.ReceiptId));
+            ;
+            sqParameters.Add(new SqlParameter("@IsActive", purchaseOrderReceiveLine.IsActive));
+            sqParameters.Add(new SqlParameter("@ReceiptId", purchaseOrderReceiveLine.ReceiptId));
             sqParameters.Add(new SqlParameter("@VendorBillNumber", purchaseOrderReceiveLine.VendorBillNumber));
             sqParameters.Add(new SqlParameter("@ReceivedBy", purchaseOrderReceiveLine.ReceivedBy));
             sqParameters.Add(new SqlParameter("@CreatedBy", userId));
@@ -183,7 +186,7 @@ namespace Marbale.DataAccess.Data.Inventory
 
         public int UpdatePurchaseOrderReceiveLine(PurchaseOrderReceiveLine purchaseOrderReceiveLine, string userId)
         {
-            string query = @" UPDATE dbo.PurchaseOrderReceive_Line
+            string query = @" UPDATE dbo.PurchaseOrderReceiveLine
                                    SET PurchaseOrderId = @PurchaseOrderId 
                                       ,ProductId = @ProductId 
                                       ,Description = @Description 
@@ -208,7 +211,7 @@ namespace Marbale.DataAccess.Data.Inventory
                  ";
             List<SqlParameter> sqParameters = new List<SqlParameter>();
             sqParameters.Add(new SqlParameter("@PurchaseOrderReceiveLineId", purchaseOrderReceiveLine.PurchaseOrderReceiveLineId));
-            if (purchaseOrderReceiveLine.PurchaseOrderId == -1)
+            if (purchaseOrderReceiveLine.PurchaseOrderId <= 0)
             {
                 sqParameters.Add(new SqlParameter("@PurchaseOrderId", DBNull.Value));
             }
@@ -216,7 +219,7 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 sqParameters.Add(new SqlParameter("@PurchaseOrderId", purchaseOrderReceiveLine.PurchaseOrderId));
             }
-            if (purchaseOrderReceiveLine.ProductId == -1)
+            if (purchaseOrderReceiveLine.ProductId <= 0)
             {
                 sqParameters.Add(new SqlParameter("@ProductId", DBNull.Value));
             }
@@ -233,15 +236,15 @@ namespace Marbale.DataAccess.Data.Inventory
                 sqParameters.Add(new SqlParameter("@Description", purchaseOrderReceiveLine.Description));
             }
             if (string.IsNullOrEmpty(purchaseOrderReceiveLine.VendorItemCode))
-                //{
-                //    sqParameters.Add(new SqlParameter("@VendorItemCode", DBNull.Value));
+            {
+                sqParameters.Add(new SqlParameter("@VendorItemCode", DBNull.Value));
+            }
+            else
+            {
+                sqParameters.Add(new SqlParameter("@VendorItemCode", purchaseOrderReceiveLine.VendorItemCode));
+            }
 
-                //else
-                //{
-                //        sqParameters.Add(new SqlParameter("@VendorItemCode", purchaseOrderReceiveLine.VendorItemCode));
-                //    }
-
-                if (purchaseOrderReceiveLine.Quantity == -1)
+                if (purchaseOrderReceiveLine.Quantity <= 0)
                 {
                     sqParameters.Add(new SqlParameter("@Quantity", DBNull.Value));
                 }
@@ -249,7 +252,7 @@ namespace Marbale.DataAccess.Data.Inventory
                 {
                     sqParameters.Add(new SqlParameter("@Quantity", purchaseOrderReceiveLine.Quantity));
                 }
-            if (purchaseOrderReceiveLine.LocationId == -1)
+            if (purchaseOrderReceiveLine.LocationId <= 0)
             {
                 sqParameters.Add(new SqlParameter("@LocationId", DBNull.Value));
             }
@@ -258,7 +261,7 @@ namespace Marbale.DataAccess.Data.Inventory
                 sqParameters.Add(new SqlParameter("@LocationId", purchaseOrderReceiveLine.LocationId));
             }
             sqParameters.Add(new SqlParameter("@IsReceived", purchaseOrderReceiveLine.IsReceived));
-            if (purchaseOrderReceiveLine.PurchaseOrderLineId == -1)
+            if (purchaseOrderReceiveLine.PurchaseOrderLineId <= 0)
             {
                 sqParameters.Add(new SqlParameter("@PurchaseOrderLineId", DBNull.Value));
             }
@@ -268,7 +271,7 @@ namespace Marbale.DataAccess.Data.Inventory
             }
 
             sqParameters.Add(new SqlParameter("@Price", purchaseOrderReceiveLine.Price));
-            if (purchaseOrderReceiveLine.TaxPercentage == -1)
+            if (purchaseOrderReceiveLine.TaxPercentage <= 0)
             {
                 sqParameters.Add(new SqlParameter("@TaxPercentage", DBNull.Value));
             }
@@ -278,7 +281,7 @@ namespace Marbale.DataAccess.Data.Inventory
             }
             sqParameters.Add(new SqlParameter("@Amount", purchaseOrderReceiveLine.Amount));
             sqParameters.Add(new SqlParameter("@TaxInclusive", purchaseOrderReceiveLine.TaxInclusive));
-            if (purchaseOrderReceiveLine.TaxId == -1)
+            if (purchaseOrderReceiveLine.TaxId <= 0)
             {
                 sqParameters.Add(new SqlParameter("@TaxId", DBNull.Value));
             }
@@ -287,7 +290,7 @@ namespace Marbale.DataAccess.Data.Inventory
                 sqParameters.Add(new SqlParameter("@TaxId", purchaseOrderReceiveLine.TaxId));
             }
 
-            sqParameters.Add(new SqlParameter("@TaxId", purchaseOrderReceiveLine.ReceiptId));
+            sqParameters.Add(new SqlParameter("@ReceiptId", purchaseOrderReceiveLine.ReceiptId));
             sqParameters.Add(new SqlParameter("@VendorBillNumber", purchaseOrderReceiveLine.VendorBillNumber));
             sqParameters.Add(new SqlParameter("@ReceivedBy", purchaseOrderReceiveLine.ReceivedBy));
             sqParameters.Add(new SqlParameter("@CreatedBy", userId));
@@ -302,7 +305,7 @@ namespace Marbale.DataAccess.Data.Inventory
         {
             int count = 0;
             string selectLocationQuery = @"select *
-                                         from PurchaseOrdPurchaseOrderReceive_Lineer_Line";
+                                         from PurchaseOrderReceiveLine";
             if (searchParameters != null)
             {
                 string joiner = " ";
@@ -312,9 +315,14 @@ namespace Marbale.DataAccess.Data.Inventory
                     if (DBSearchParameters.ContainsKey(searchParameter.Key))
                     {
                         joiner = (count == 0) ? " " : " and ";
-                        if (searchParameter.Key.Equals(Vendor.SearchByVendorParameters.IS_ACTIVE))
+                        if (searchParameter.Key.Equals(PurchaseOrderReceiveLine.SearchByPurchaseOrderRecieveLineParameters.IS_ACTIVE))
                         {
                             query.Append(joiner + DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value);
+                        }
+                       else if (searchParameter.Key.Equals(PurchaseOrderReceiveLine.SearchByPurchaseOrderRecieveLineParameters.RECEIPT_ID))
+                        {
+                             
+                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value  );
                         }
                         //else if (searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_CODE) || searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_NAME))
                         //{
@@ -388,4 +396,5 @@ namespace Marbale.DataAccess.Data.Inventory
         }
 
     }
+
 }

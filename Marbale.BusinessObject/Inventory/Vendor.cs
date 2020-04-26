@@ -15,6 +15,7 @@ namespace Marbale.BusinessObject.Inventory
             IS_ACTIVE = 1,
             VENDOR_NAME = 2,
             VENDOR_CODE = 3,
+            VENDOR_ID=4
         }
         int vendorId;
          bool isActive;

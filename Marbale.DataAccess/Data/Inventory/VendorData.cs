@@ -17,6 +17,7 @@ namespace Marbale.DataAccess.Data.Inventory
                     {Vendor.SearchByVendorParameters.IS_ACTIVE, "IsActive"},
                     {Vendor.SearchByVendorParameters.VENDOR_CODE, "Code"},
                     {Vendor.SearchByVendorParameters.VENDOR_NAME, "Name"},
+                     {Vendor.SearchByVendorParameters.VENDOR_ID, "VendorId"},
 
     };
         public VendorData()
@@ -377,6 +378,10 @@ namespace Marbale.DataAccess.Data.Inventory
                        else if (searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_CODE) || searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_NAME))
                         {
                             query.Append(joiner + DBSearchParameters[searchParameter.Key] + " like '%" + searchParameter.Value+"%'");
+                        }
+                        else if (searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_CODE) || searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_NAME))
+                        {
+                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " like '%" + searchParameter.Value + "%'");
                         }
                         else
                         {

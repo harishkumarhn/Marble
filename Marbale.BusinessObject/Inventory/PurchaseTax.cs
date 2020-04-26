@@ -13,7 +13,8 @@ namespace Marbale.BusinessObject.Inventory
         private readonly object notifyingObjectIsChangedSyncRoot = new Object();
         public enum SearchByTaxParameters
         {
-            IS_ACTIVE = 1,
+            IS_ACTIVE = 0,
+            PURCHASE_TAX_ID=1
         }
 
 
@@ -31,10 +32,7 @@ namespace Marbale.BusinessObject.Inventory
             taxId = -1;
             isActive = true;
         }
-
-        /// <summary>
-        /// Parameterized Constructor with all the data fields
-        /// </summary>
+ 
         public PurchaseTax(int taxId, string taxName, double taxPercentage, bool activeFlag , string createdBy, string lastUpdatedBy, DateTime createdDate, DateTime lastUpdatedDate)
         {
             this.taxId = taxId;

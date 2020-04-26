@@ -1,5 +1,6 @@
 ﻿using Marbale.BusinessObject.Inventory;
 using Marble.Business;
+using Marble.Business.InventoryBL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -88,7 +89,7 @@ namespace Marbale.Inventory.Master
             txtEmailId.Text = string.Empty;
             txtWebsite.Text = string.Empty;
             chkActive.Checked = true;
-
+            txtPostalCode.Text = "";
         }
 
         private void btnClose_Click(object sender, EventArgs e)

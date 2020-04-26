@@ -13,9 +13,10 @@ namespace Marbale.DataAccess.Data.Inventory
     {
 
         private DBConnection conn;
-        private static readonly Dictionary<BusinessObject.Inventory.PurchaseTax.SearchByTaxParameters, string> DBSearchParameters = new Dictionary<BusinessObject.Inventory.PurchaseTax.SearchByTaxParameters, string>
+        private static readonly Dictionary<PurchaseTax.SearchByTaxParameters, string> DBSearchParameters = new Dictionary<PurchaseTax.SearchByTaxParameters, string>
                {
-                    {BusinessObject.Inventory.PurchaseTax.SearchByTaxParameters.IS_ACTIVE, "IsActive"},
+                    {PurchaseTax.SearchByTaxParameters.IS_ACTIVE, "IsActive"},
+                    {PurchaseTax.SearchByTaxParameters.PURCHASE_TAX_ID, "TaxId"},
 
                 };
         public PurchaseTaxData()
@@ -23,7 +24,7 @@ namespace Marbale.DataAccess.Data.Inventory
             conn = new DBConnection();
         }
 
-        public int InsertTax(BusinessObject.Inventory.PurchaseTax tax, string userId)
+        public int InsertTax(PurchaseTax tax, string userId)
         {
             string query = @"INSERT INTO dbo.PurchaseTax
                             (TaxName
@@ -59,7 +60,7 @@ namespace Marbale.DataAccess.Data.Inventory
             return idOfRowInserted;
         }
 
-        public int InsertOrUpdateTax(BusinessObject.Inventory.PurchaseTax tax, string userid)
+        public int InsertOrUpdateTax(PurchaseTax tax, string userid)
         {
             try
             {
@@ -81,7 +82,7 @@ namespace Marbale.DataAccess.Data.Inventory
         }
 
 
-        public int UpdateTax(BusinessObject.Inventory.PurchaseTax tax, string userId)
+        public int UpdateTax(PurchaseTax tax, string userId)
         {
             string query = @"UPDATE dbo.PurchaseTax
                                 SET TaxName = @TaxName 
@@ -112,7 +113,7 @@ namespace Marbale.DataAccess.Data.Inventory
 
         private PurchaseTax GetTax(DataRow locationDataRow)
         {
-            BusinessObject.Inventory.PurchaseTax location = new BusinessObject.Inventory.PurchaseTax(
+            PurchaseTax location = new PurchaseTax(
             Convert.ToInt32(locationDataRow["TaxId"]),
             locationDataRow["TaxName"] == DBNull.Value ? string.Empty : Convert.ToString(locationDataRow["TaxName"]),
             locationDataRow["TaxPercentage"] == DBNull.Value ? 0 : Convert.ToDouble(locationDataRow["TaxPercentage"]),
@@ -129,7 +130,7 @@ namespace Marbale.DataAccess.Data.Inventory
 
 
 
-        public List<BusinessObject.Inventory.PurchaseTax> GetTaxList(List<KeyValuePair<BusinessObject.Inventory.PurchaseTax.SearchByTaxParameters, string>> searchParameters)
+        public List<PurchaseTax> GetTaxList(List<KeyValuePair<PurchaseTax.SearchByTaxParameters, string>> searchParameters)
         {
             int count = 0;
             string selectLocationQuery = @"select *
@@ -138,16 +139,19 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 string joiner = " ";
                 StringBuilder query = new StringBuilder(" where ");
-                foreach (KeyValuePair<BusinessObject.Inventory.PurchaseTax.SearchByTaxParameters, string> searchParameter in searchParameters)
+                foreach (KeyValuePair<PurchaseTax.SearchByTaxParameters, string> searchParameter in searchParameters)
                 {
                     if (DBSearchParameters.ContainsKey(searchParameter.Key))
                     {
                         joiner = (count == 0) ? " " : " and ";
-                        if (searchParameter.Key.Equals(BusinessObject.Inventory.PurchaseTax.SearchByTaxParameters.IS_ACTIVE))
+                        if (searchParameter.Key.Equals(PurchaseTax.SearchByTaxParameters.IS_ACTIVE))
                         {
                             query.Append(joiner + DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value);
                         }
-
+                        else if (searchParameter.Key.Equals(PurchaseTax.SearchByTaxParameters.PURCHASE_TAX_ID))
+                        {
+                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value);
+                        }
                         else
                         {
                             query.Append(joiner + "Isnull(" + DBSearchParameters[searchParameter.Key] + ",'') = '" + searchParameter.Value + "'");
@@ -168,10 +172,10 @@ namespace Marbale.DataAccess.Data.Inventory
             DataTable taxData = conn.executeSelectScript(selectLocationQuery, null);
             if (taxData.Rows.Count > 0)
             {
-                List<BusinessObject.Inventory.PurchaseTax> taxList = new List<BusinessObject.Inventory.PurchaseTax>();
+                List<PurchaseTax> taxList = new List<PurchaseTax>();
                 foreach (DataRow row in taxData.Rows)
                 {
-                    BusinessObject.Inventory.PurchaseTax locationDataObject = GetTax(row);
+                    PurchaseTax locationDataObject = GetTax(row);
                     taxList.Add(locationDataObject);
                 }
                 return taxList;

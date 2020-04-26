@@ -42,3 +42,7 @@ C:\Code\Marble\Marbale.Business\obj\Debug\Marbale.Business.csproj.CopyComplete
 C:\Code\Marble\Marbale.Business\obj\Debug\Marble.Business.dll
 C:\Code\Marble\Marbale.Business\obj\Debug\Marble.Business.pdb
 C:\Code\Marble\Marbale.Business\bin\Debug\System.Web.Mvc.dll
+C:\Code\Marble\Marbale.Business\bin\Debug\MarbaleManagementStudio.dll
+C:\Code\Marble\Marbale.Business\bin\Debug\MarbaleManagementStudio.pdb
+C:\Code\Marble\Marbale.Business\bin\Debug\MarbaleManagementStudio.dll.config
+C:\Code\Marble\Marbale.Business\bin\Debug\System.Web.Mvc.xml

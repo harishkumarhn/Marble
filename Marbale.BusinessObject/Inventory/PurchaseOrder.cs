@@ -115,7 +115,6 @@ namespace Marbale.BusinessObject.Inventory
             this.shipToAddressRemarks= shipToAddressRemarks;
             this.requestShipDate= requestShipDate;
             this.orderTotal= orderTotal;
-         
             this.receiveRemarks= receiveRemarks;
             this.cancelledDate = cancelledDate;
             this.isActive = isActive;
@@ -123,6 +122,7 @@ namespace Marbale.BusinessObject.Inventory
             this.createdDate= createdDate;
             this.lastupdatedBy= lastupdatedBy;
             this.lastupdatedDate= lastupdatedDate;
+
         }
 
         public bool IsChanged
@@ -134,7 +134,6 @@ namespace Marbale.BusinessObject.Inventory
                     return notifyingObjIsChanged;
                 }
             }
-
             set
             {
                 lock (notifyingObjIsChangedSyncRoot)

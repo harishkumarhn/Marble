@@ -33,7 +33,7 @@ namespace Marbale.BusinessObject.Inventory
         public Category()
         {
             categoryId = -1;
-
+            isActive = true;
         }
 
 

@@ -14,6 +14,7 @@ namespace Marbale.BusinessObject.Inventory
         public enum SearchByPurchaseOrderRecieveLineParameters
         {
             IS_ACTIVE = 0,
+            RECEIPT_ID=1
         }
 
         int purchaseOrderReceiveLineId;

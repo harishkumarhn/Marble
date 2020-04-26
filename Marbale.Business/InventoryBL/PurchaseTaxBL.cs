@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marble.Business
+namespace Marble.Business.InventoryBL
 {
    public  class PurchaseTaxBL
     {
@@ -25,7 +25,22 @@ namespace Marble.Business
             List < PurchaseTax > taxList = taxData.GetTaxList(taxSearchParams);
             return taxList;
         }
+        public  PurchaseTax  GetPurchaseTax(int taxid)
+        {
+            List<KeyValuePair<PurchaseTax.SearchByTaxParameters, string>> taxSearchParams = new List<KeyValuePair<PurchaseTax.SearchByTaxParameters, string>>();
+            taxSearchParams.Add(new KeyValuePair<PurchaseTax.SearchByTaxParameters, string>(PurchaseTax.SearchByTaxParameters.PURCHASE_TAX_ID, taxid.ToString()));
+            List<PurchaseTax> taxList = taxData.GetTaxList(taxSearchParams);
 
+            if(taxList==null || taxList.Count==0)
+            {
+                return new PurchaseTax();
+            }
+            else
+            {
+                return taxList.FirstOrDefault();
+            }
+          
+        }
 
         public int Save(PurchaseTax tax, string userId)
         {

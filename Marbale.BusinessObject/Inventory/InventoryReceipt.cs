@@ -14,6 +14,8 @@ namespace Marbale.BusinessObject.Inventory
         public enum SearchByInventoryReceiptParameters
         {
             IS_ACTIVE = 0,
+            INVENTORY_RECEIPT_ID=1
+
         }
 
 

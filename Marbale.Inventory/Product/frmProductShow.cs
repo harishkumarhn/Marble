@@ -28,14 +28,14 @@ namespace Marbale.Inventory.Product
         frmUOM uomForm;
         frmVendor vendorForm;
         int loadProductId;
-        string mode = "";
-        //string imageFolder = CommonFuncs.Utilities.getParafaitDefaults("IMAGE_DIRECTORY");
-        //ProductDTO productDTO = new ProductDTO();
+        string pmode = "";
+       
         public Frm_AddProduct(int ProductId, string mode)
         {
             InitializeComponent();
             loadProductId = ProductId;
             //InitializeVariables();
+            pmode = mode;
             btn_duplicate.Enabled = false;
 
         }
@@ -145,11 +145,13 @@ namespace Marbale.Inventory.Product
             loadProduct(loadProductId);
 
 
-            if (mode == "duplicate")
+            if (pmode == "duplicate")
             {
                 btn_duplicate.Enabled = true;
                 loadProductId = -1;
                 lb_productid.Text = "";
+
+                txtCode.ReadOnly = false;
             }
 
 
@@ -164,8 +166,7 @@ namespace Marbale.Inventory.Product
                 inventoryProduct = inventoryProductBL.GetInventoryProduct(pid);
                 txtCode.ReadOnly = true;
             }
-
-
+            
             lb_productid.Text = inventoryProduct.ProductId.ToString();
 
             txtCode.Text = inventoryProduct.Code;
@@ -354,8 +355,11 @@ namespace Marbale.Inventory.Product
  
             try
             {
+                
                 if (ProductSave())
                 {
+
+
                     ResetControls();
                     MessageBox.Show("Product Saved Successfully");
                 }
@@ -373,7 +377,19 @@ namespace Marbale.Inventory.Product
 
            
         }
-
+        private bool SaveInventoryStore(InventoryProduct inventoryProduct)
+        {
+            InventoryStoreBL inventoryProductBL = new InventoryStoreBL();
+            InventoryStore inventoryStore = new InventoryStore()
+            {
+                ProductId = inventoryProduct.ProductId,
+                LocationId = inventoryProduct.DefaultLocationId,
+                IsActive = true,
+                Quantity = 1
+            };
+            inventoryProductBL.Save(inventoryStore, "rakshith");
+            return true;
+        }
         
         private bool ProductSave()
         {
@@ -425,7 +441,7 @@ namespace Marbale.Inventory.Product
             try
             {
 
-
+                bool isNewProduct = string.IsNullOrEmpty(lb_productid.Text) ? true : false;
                 InventoryProduct inventoryProduct = new InventoryProduct();
                 if (!string.IsNullOrEmpty(lb_productid.Text))
                     inventoryProduct.ProductId = Convert.ToInt32(lb_productid.Text);
@@ -491,7 +507,11 @@ namespace Marbale.Inventory.Product
 
                 InventoryProductBL inventoryProductBL = new InventoryProductBL();
                 int id = inventoryProductBL.Save(inventoryProduct, "rakshith");
-
+                inventoryProduct.ProductId = id;
+                if (isNewProduct)
+                {
+                    SaveInventoryStore(inventoryProduct);
+                }
                 if (id > 0)
                 {
 

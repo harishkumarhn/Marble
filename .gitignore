@@ -5,3 +5,7 @@
 /Marbale.ViewModel/bin/Debug
 /obj
 /Marbale.ManagementStudio/bin
+/Marbale.Business/bin
+/Marbale.Business/obj
+/Marbale.BusinessObject/bin
+/Marbale.BusinessObject/obj

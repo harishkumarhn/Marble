@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Marbale.DataAccess;
+using Marble.Business.InventoryBL;
 
 namespace Marbale.Inventory.Master
 {

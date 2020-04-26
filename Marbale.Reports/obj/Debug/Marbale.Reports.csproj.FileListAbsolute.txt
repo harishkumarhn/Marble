@@ -49,3 +49,4 @@ C:\Code\Marble\Marbale.Reports\obj\Debug\Marbale.Reports.csproj.CoreCompileInput
 C:\Code\Marble\Marbale.Reports\obj\Debug\Marbale.Reports.csproj.CopyComplete
 C:\Code\Marble\Marbale.Reports\obj\Debug\Marbale.Reports.dll
 C:\Code\Marble\Marbale.Reports\obj\Debug\Marbale.Reports.pdb
+C:\Code\Marble\Marbale.Reports\obj\Debug\Marbale.Reports.csprojAssemblyReference.cache

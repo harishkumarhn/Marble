@@ -24,7 +24,7 @@ namespace Marbale.DataAccess.Data.Inventory
         }
 
 
-        public int InsertOrUpdatePurchaseOrder(PurchaseOrderLine purchaseOrderLine, string userid)
+        public int InsertOrUpdatePurchaseOrderLine(PurchaseOrderLine purchaseOrderLine, string userid)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Marbale.DataAccess.Data.Inventory
         }
         public int InsertPurchaseOrderLine(PurchaseOrderLine purchaseOrderLine, string userId)
         {
-            string query = @"INSERT INTO  dbo . PurchaseOrder_Line 
+            string query = @"INSERT INTO  dbo . PurchaseOrderLine 
                            (
 		                    PurchaseOrderId 
                            , ItemCode 
@@ -159,7 +159,7 @@ namespace Marbale.DataAccess.Data.Inventory
 
         public int UpdatePurchaseOrderLine(PurchaseOrderLine purchaseOrderLine, string userId)
         {
-            string query = @" UPDATE dbo.PurchaseOrder_Line
+            string query = @" UPDATE dbo.PurchaseOrderLine
                                SET PurchaseOrderId = @PurchaseOrderId 
                                   ,ItemCode = @ItemCode 
                                   ,Description = @Description 
@@ -246,7 +246,7 @@ namespace Marbale.DataAccess.Data.Inventory
         }
 
 
-        public List<PurchaseOrderLine> GetPurchaseOrderList(List<KeyValuePair<PurchaseOrderLine.SearchByPurchaseOrderLineParameters, string>> searchParameters)
+        public List<PurchaseOrderLine> GetPurchaseOrderLineList(List<KeyValuePair<PurchaseOrderLine.SearchByPurchaseOrderLineParameters, string>> searchParameters)
         {
             int count = 0;
             string selectLocationQuery = @"select *

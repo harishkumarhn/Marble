@@ -12,7 +12,7 @@ using Marble.Business;
 using Marbale.BusinessObject.Inventory;
 using Marbale.DataAccess.Data.Inventory;
 
-namespace Marble.Business
+namespace Marble.Business.InventoryBL
 {
     public class VendorBL
     {
@@ -26,8 +26,20 @@ namespace Marble.Business
         {
             return vendorData.GetVendorList(searchParameters);
         }
-
-            public List<Vendor> GetVendor()
+        public  Vendor  GetVendor(int vendorId)
+        {
+            List<KeyValuePair<Vendor.SearchByVendorParameters, string>> searchParameters = new List<KeyValuePair<Vendor.SearchByVendorParameters, string>>();
+            List<Vendor> vendors= vendorData.GetVendorList(searchParameters);
+            if(vendors==null || vendors.Count == 0)
+            {
+                return new Vendor();
+            }
+            else
+            {
+                return vendors.FirstOrDefault();
+            }
+        }
+        public List<Vendor> GetVendor()
         {
             DataTable dt = vendorData.GetVendorData();
             List<Vendor> lstVendor = new List<Vendor>();
