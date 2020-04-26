@@ -19,11 +19,11 @@
         
                                  
         <label for="ex4"><b>User:</b></label>
-     @Html.LabelFor(m => m.User,"Semnox", new { @class = "form-control"})
+     @Html.LabelFor(m => m.User,Model.User,new { @class = "form-control"})
     
            
         <label for="ex3"><b>Recieved Date:</b></label>
-     @Html.LabelFor(m => m.RecievedDate,"04/06/2019", new { @class = "form-control"})
+     @Html.LabelFor(m => m.RecievedDate,Model.RecievedDate, new { @class = "form-control"})
     
                  
         <label for="ex3"><b>Number Of Cards:</b></label>
@@ -54,11 +54,11 @@
                      
                  
         <label for="ex4"><b>User:</b></label>
-     @Html.LabelFor(m => m.User,"Semnox", new { @class = "form-control"})
+     @Html.LabelFor(m => m.User,Model.User, new { @class = "form-control"})
     
            
         <label for="ex3"><b>Recieved Date:</b></label>
-     @Html.LabelFor(m => m.RecievedDate,"04/06/2019", new { @class = "form-control"})
+     @Html.LabelFor(m => m.RecievedDate,Model.RecievedDate, new { @class = "form-control"})
     
                  
         <label for="ex3"><b>Number Of Cards:</b></label>
@@ -93,7 +93,7 @@
  </div>
 
        <div class="col-md-3 datepickers">
-         @Html.TextBoxFor(m => m.From, new {@class="form-control datapicker", data_select="datepicker",placeholder ="From Date"})
+         @Html.TextBoxFor(m => m.From,new {@class="form-control datapicker", data_select="datepicker",placeholder ="From Date"})
            </div>
     <div class="col-md-3 datepickers">
    @Html.TextBoxFor(m => m.To, new {@class="form-control datapicker", data_select="datepicker",placeholder ="To Date"})
