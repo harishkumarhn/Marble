@@ -76,6 +76,9 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult Inventory()
         {
             Inventory m = new Marbale.BusinessObject.Cards.Inventory();
+            m.User = Session["UserID"].ToString();
+            m.From = m.To = DateTime.Now;
+            m.RecievedDate = DateTime.Now.ToString();
             List<Inventory> data = cardBussiness.GetInventory(m);
             if (data.Count > 0)
             {
@@ -85,7 +88,7 @@ namespace MarbaleManagementStudio.Controllers
             {
                 ViewBag.TotalNumberOfCards = 0;
             }
-            return View();
+            return View(m);
         }
         public int AddDeleteInventory(Inventory inventory)
         {

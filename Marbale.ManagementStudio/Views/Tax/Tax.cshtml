@@ -45,18 +45,19 @@
                 }
             </table>
         </div>
-        <div class="action" style="width:50%;right:0vh;left:auto">
-            <div style="float:right;margin-right:20px">
-                <button class="btn btn-primary btn-md" role="button" onclick="SaveTax()">Save</button>
-                <button class="btn btn-primary btn-md" role="button" onclick="history.back();">Back</button>
-                <button class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add</button>
-                <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
-            </div>
-        </div>
+        
     </div>
     <br />
     <br />
     <div id="taxstructure">
+    </div>
+</div>
+<div id = "TaxActions" class="action" style="width:50%;right:0vh;left:auto">
+    <div style="float:right;margin-right:20px">
+        <button class="btn btn-primary btn-md" role="button" onclick="SaveTax()">Save</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="history.back();">Back</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
     </div>
 </div>
 <script>
@@ -75,6 +76,7 @@
         $("#marbleTable tr").removeClass("highlight");
         if (!selected)
             $(this).addClass("highlight");
+        $("#TaxActions").css({"width":"100%","position":"relative"});
     });
 
     var GetvaluesList = [];
