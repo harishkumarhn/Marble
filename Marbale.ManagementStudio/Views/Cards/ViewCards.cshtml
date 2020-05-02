@@ -39,6 +39,9 @@
 
             </div>
             <input type="submit" name="submit" value="Search" class="btn btn-primary btn-md"/>
+            <button id="newcard" class="btn btn-primary btn-md" role="button">New Card</button>
+            <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+            <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
         </div>
     }
 </div>
@@ -87,9 +90,6 @@
                   <td>
                      <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditCard('@item.CardId')">
                          <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
-                     </a>
-                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteCard('@item.CardId')">
-                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
                      </a>
                 </td>
                 <td>
@@ -191,11 +191,11 @@
         }
     </table>
 </div>
-<div class="action">
+<!--<div class="action" style="margin-bottom:-3.5vh">
     <button id="newcard" class="btn btn-primary btn-md" role="button">New Card</button>
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
-</div>
+</div>-->
 
 <script>
     $(function () {
