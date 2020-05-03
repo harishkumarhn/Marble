@@ -440,6 +440,8 @@ namespace MarbaleManagementStudio.Controllers
             foreach(var section in sections)
             {
                 var rowsBySection = previewItems.Where(x => x.Section == section.ToString()).OrderBy(o => o.Sequence).ToList();
+                int productRowCount = previewItems.Where(x => x.Section.ToLower() == "product").OrderBy(o => o.Sequence).ToList().Count;
+                string productPreviewRows = "";
                 foreach (var row in rowsBySection)
                 {
                     string style = "";
@@ -449,30 +451,71 @@ namespace MarbaleManagementStudio.Controllers
                             if (!string.IsNullOrWhiteSpace(row.Col1Data))
                             {
                                 style = GetStyle(row, 1);
-                                printHTML = printHTML + "<p"+ style +">" + row.Col1Data + "</p>";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
+                                printHTML = printHTML + "<p "+ style +">" + row.Col1Data + "</p>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col2Data))
                             {
                                 style = GetStyle(row, 2);
-                                printHTML = printHTML + "<p"+ style +">" + row.Col2Data + "</p>";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "'";
+                                printHTML = printHTML + "<p "+ style +">" + row.Col2Data + "</p>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col3Data))
                             {
                                 style = GetStyle(row, 3);
-                                printHTML = printHTML + "<p" + style + ">" + row.Col3Data + "</p>";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "'";
+                                printHTML = printHTML + "<p " + style + ">" + row.Col3Data + "</p>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col4Data))
                             {
                                 style = GetStyle(row, 4);
-                                printHTML = printHTML + "<p" + style + ">" + row.Col4Data + "</p>";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "'";
+                                printHTML = printHTML + "<p " + style + ">" + row.Col4Data + "</p>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col5Data))
                             {
                                 style = GetStyle(row, 5);
-                                printHTML = printHTML + "<p" + style + ">" + row.Col5Data + "</p>";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "'";
+                                printHTML = printHTML + "<p " + style + ">" + row.Col5Data + "</p>";
                             }
                             break;
                         case "product":
+                            productPreviewRows = "<tr>";
+                            if (!string.IsNullOrWhiteSpace(row.Col1Data))
+                            {
+                                style = GetStyle(row, 1);
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:40%;'";
+                                productPreviewRows = productPreviewRows + "<td "+ style + ">" + row.Col1Data + "</td>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col2Data))
+                            {
+                                style = GetStyle(row, 2);
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
+                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col1Data + "</td>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col3Data))
+                            {
+                                style = GetStyle(row, 3);
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
+                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col1Data + "</td>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col4Data))
+                            {
+                                style = GetStyle(row, 4);
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
+                                productPreviewRows = productPreviewRows + "<td "+ style + ">" + row.Col1Data + "</td>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col5Data))
+                            {
+                                style = GetStyle(row, 5);
+                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col1Data + "</td>";
+                            }
+                            productPreviewRows = productPreviewRows + "</tr>";
+                            productRowCount--;
+                            if (productRowCount <= 0)
+                            {
+                                printHTML = printHTML + "<table width='100 %'>" + productPreviewRows + "</table>";
+                            }
                             break;
                         case "footer":
                             printHTML = printHTML + "<div>" + row.Col1Data + "</div>";
@@ -495,31 +538,31 @@ namespace MarbaleManagementStudio.Controllers
                 case 1:
                     if (!string.IsNullOrWhiteSpace(template.Col1Alignment))
                     {
-                        style = style + "text-align:" + template.Col1Alignment +";";
+                        style = style + "text-align:" + getAlignment(template.Col1Alignment) +";";
                     }
                     break;
                 case 2:
                     if (!string.IsNullOrWhiteSpace(template.Col2Alignment))
                     {
-                        style = style + "text-align:" + template.Col2Alignment + ";";
+                        style = style + "text-align:" + getAlignment(template.Col2Alignment) + ";";
                     }
                     break;
                 case 3:
                     if (!string.IsNullOrWhiteSpace(template.Col3Alignment))
                     {
-                        style = style + "text-align:" + template.Col3Alignment + ";";
+                        style = style + "text-align:" + getAlignment(template.Col3Alignment) + ";";
                     }
                     break;
                 case 4:
                     if (!string.IsNullOrWhiteSpace(template.Col4Alignment))
                     {
-                        style = style + "text-align:" + template.Col4Alignment + ";";
+                        style = style + "text-align:" + getAlignment(template.Col4Alignment) + ";";
                     }
                     break;
                 case 5:
                     if (!string.IsNullOrWhiteSpace(template.Col5Alignment))
                     {
-                        style = style + "text-align:" + template.Col5Alignment + ";";
+                        style = style + "text-align:" + getAlignment(template.Col5Alignment) + ";";
                     }
                     break;
                 default: break;
@@ -533,9 +576,22 @@ namespace MarbaleManagementStudio.Controllers
             {
                 style = style + "font-size:" + template.FontSize.ToString() + ";";
             }
-            if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "'";
             return style;
         }
+        private string getAlignment(string alignment)
+        {
+            string value;
+            switch (alignment.ToLower())
+            {
+                case "l": value = "left"; break;
+                case "c": value = "center"; break;
+                case "r": value = "right"; break;
+                case "h": value = "hide"; break;
+                default: value = ""; break;
+            }
+            return value;
+        }
+
         public int UpdatePrintTemplate(ReceiptPrintTemplateHeader template)
         {
             return siteSetup.InsertOrUpdatePrintTemplateHeaderAndItems(template);

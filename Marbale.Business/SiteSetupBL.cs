@@ -647,6 +647,7 @@ namespace Marble.Business
             alignmentList.Add(new IdValue() { Id = 4, Value = "Hide" });
 
             var sectionTypes = new List<IdValue>();
+            sectionTypes.Add(new IdValue() { Id = 1, Value = "Select" });
             sectionTypes.Add(new IdValue() { Id = 1, Value = "Header" });
             sectionTypes.Add(new IdValue() { Id = 2, Value = "Product" });
             sectionTypes.Add(new IdValue() { Id = 3, Value = "Total" });
@@ -687,8 +688,7 @@ namespace Marble.Business
             }
             if (templates.Count == 0)
             {
-                templates.Add(new ReceiptPrintTemplate() { AlignmentList = alignmentList });
-                templates.Add(new ReceiptPrintTemplate() { SectionTypes = sectionTypes });
+                templates.Add(new ReceiptPrintTemplate() { AlignmentList = alignmentList , SectionTypes = sectionTypes });
             }
             return templates;
         }

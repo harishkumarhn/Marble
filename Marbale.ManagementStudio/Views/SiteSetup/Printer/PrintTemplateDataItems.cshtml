@@ -9,6 +9,8 @@
             <th>Id</th>
             <th>Section</th>
             <th>Sequence</th>
+            <th>FontName</th>
+            <th>FontSize</th>
             <th>Col1Data</th>
             <th>Col1Alignment</th>
             <th>Col2Data</th>
@@ -19,8 +21,6 @@
             <th>Col4Alignment</th>
             <th>Col5Data</th>
             <th>Col5Alignment</th>
-            <th>FontName</th>
-            <th>FontSize</th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +31,7 @@
                     <lable class="fixedCol1"> @(item.Id == 0 ? "" : item.Id) </lable>
                 </td>
                 <td>
-                    <select name="Col1Alignment" id="Col1Alignment">
+                    <select name="section" id="section" onchange="sectionChanges(this)">
                         @foreach (var dow in @item.SectionTypes)
                         {
                             if (@item.Section == (@dow.Value).ToString())
@@ -46,7 +46,25 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" value="@item.Sequence" />
+                    <input style="width:90px" type="text" value="@item.Sequence" />
+                </td>
+                <td>
+                    <select name="fontName">
+                        @foreach (var dow in ViewBag.FontNameList)
+                        {
+                            if (@item.FontName == @dow)
+                            {
+                                <option value="@dow" selected style="font-family:@dow">@dow</option>
+                            }
+                            else
+                            {
+                                <option value="@dow" style="font-family:@dow">@dow</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="text" value="@item.FontSize" />
                 </td>
                 <td>
                     <input type="text" value="@item.Col1Data" />
@@ -138,24 +156,6 @@
                         }
                     </select>
                 </td>
-                <td>
-                    <select name="fontName">
-                        @foreach (var dow in ViewBag.FontNameList)
-                        {
-                            if (@item.FontName == @dow)
-                            {
-                                <option value="@dow" selected style="font-family:@dow">@dow</option>
-                            }
-                            else
-                            {
-                                <option value="@dow" style="font-family:@dow">@dow</option>
-                            }
-                        }
-                    </select>
-                </td>
-                <td>
-                    <input type="text" value="@item.FontSize" />
-                </td>
             </tr>
         }
     </tbody>
@@ -212,6 +212,8 @@
                 '<lable></lable>',
                 '<select name="Section" id="Section">' + sectionOptions,
                 '<input type="text" value="" />',
+                '<input style="width:90px" type="text" value="" />',
+                '<select name="fontNames" id="fontNames">' + fontNames,
                 '<input type="text" value="" />',
                 '<select name="Col1Alignment" id="Col1Alignment">' + alignmentOptions,
                 '<input type="text" value="" />',
@@ -222,8 +224,6 @@
                 '<select name="Col4Alignment" id="Col4Alignment">' + alignmentOptions,
                 '<input type="text" value="" />',
                 '<select name="Col5Alignment" id="Col5Alignment">' + alignmentOptions,
-                '<select name="fontNames" id="fontNames">' + fontNames,
-                '<input type="text" value="" />',
                 '<input type="text" value="" />'
 
             ]).draw(false);
@@ -235,5 +235,8 @@
         if (!updatedArray.includes(index)) {
             updatedArray.push(index);
         }
+    }
+    function sectionChanges(value) {
+
     }
 </script>
