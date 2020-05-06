@@ -211,9 +211,9 @@
             table.row.add([
                 '<lable></lable>',
                 '<select name="Section" id="Section">' + sectionOptions,
-                '<input type="text" value="" />',
                 '<input style="width:90px" type="text" value="" />',
                 '<select name="fontNames" id="fontNames">' + fontNames,
+                '<input type="text" value="" />',
                 '<input type="text" value="" />',
                 '<select name="Col1Alignment" id="Col1Alignment">' + alignmentOptions,
                 '<input type="text" value="" />',
@@ -223,9 +223,7 @@
                 '<input type="text" value="" />',
                 '<select name="Col4Alignment" id="Col4Alignment">' + alignmentOptions,
                 '<input type="text" value="" />',
-                '<select name="Col5Alignment" id="Col5Alignment">' + alignmentOptions,
-                '<input type="text" value="" />'
-
+                '<select name="Col5Alignment" id="Col5Alignment">' + alignmentOptions                
             ]).draw(false);
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });

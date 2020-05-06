@@ -133,7 +133,11 @@ button.btn-settings {
         text-align: center;
     }
 
-    .modal-body p {
+    .modal-body-p {
+        padding-top: 10px;
+        font-size: 1.1em;
+    }
+     .modal-body p printPre{
         padding-top: 10px;
         font-size: 1.1em;
     }
@@ -164,6 +168,7 @@ td a.edit {
 td a {
     cursor: pointer;
 }
+
 #marbaleTable th {
     border: 1px solid #29d2da;
 }
@@ -238,17 +243,20 @@ thead {
 .buttoncolor-change {
     background-color: cornflowerblue;
 }
+
 select {
-    max-height:30px;
-    font-size:14px;
+    max-height: 30px;
+    font-size: 14px;
 }
+
 .productEdit {
-    height: 535px; 
-    overflow-y: scroll; 
+    height: 535px;
+    overflow-y: scroll;
     overflow-x: hidden;
     font-size: 14px !important;
 }
+
 a:hover {
- cursor:pointer;
+    cursor: pointer;
 }
 /*end*/

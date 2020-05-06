@@ -451,36 +451,36 @@ namespace MarbaleManagementStudio.Controllers
                             if (!string.IsNullOrWhiteSpace(row.Col1Data))
                             {
                                 style = GetStyle(row, 1);
-                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
                                 printHTML = printHTML + "<p "+ style +">" + row.Col1Data + "</p>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col2Data))
                             {
                                 style = GetStyle(row, 2);
-                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "'";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
                                 printHTML = printHTML + "<p "+ style +">" + row.Col2Data + "</p>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col3Data))
                             {
                                 style = GetStyle(row, 3);
-                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "'";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
                                 printHTML = printHTML + "<p " + style + ">" + row.Col3Data + "</p>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col4Data))
                             {
                                 style = GetStyle(row, 4);
-                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "'";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
                                 printHTML = printHTML + "<p " + style + ">" + row.Col4Data + "</p>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col5Data))
                             {
                                 style = GetStyle(row, 5);
-                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "'";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
                                 printHTML = printHTML + "<p " + style + ">" + row.Col5Data + "</p>";
                             }
                             break;
                         case "product":
-                            productPreviewRows = "<tr>";
+                            productPreviewRows = productPreviewRows + "<tr>";
                             if (!string.IsNullOrWhiteSpace(row.Col1Data))
                             {
                                 style = GetStyle(row, 1);
@@ -491,30 +491,31 @@ namespace MarbaleManagementStudio.Controllers
                             {
                                 style = GetStyle(row, 2);
                                 if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
-                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col1Data + "</td>";
+                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col2Data + "</td>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col3Data))
                             {
                                 style = GetStyle(row, 3);
                                 if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
-                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col1Data + "</td>";
+                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col3Data + "</td>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col4Data))
                             {
                                 style = GetStyle(row, 4);
                                 if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
-                                productPreviewRows = productPreviewRows + "<td "+ style + ">" + row.Col1Data + "</td>";
+                                productPreviewRows = productPreviewRows + "<td "+ style + ">" + row.Col4Data + "</td>";
                             }
                             if (!string.IsNullOrWhiteSpace(row.Col5Data))
                             {
                                 style = GetStyle(row, 5);
-                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col1Data + "</td>";
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
+                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col5Data + "</td>";
                             }
                             productPreviewRows = productPreviewRows + "</tr>";
                             productRowCount--;
                             if (productRowCount <= 0)
                             {
-                                printHTML = printHTML + "<table width='100 %'>" + productPreviewRows + "</table>";
+                                printHTML = printHTML + "<table width='100%'>" + productPreviewRows + "</table>";
                             }
                             break;
                         case "footer":
@@ -525,7 +526,7 @@ namespace MarbaleManagementStudio.Controllers
                     }
                 }
             }
-            if (string.IsNullOrWhiteSpace(printHTML)) { printHTML = "<div>" + printHTML + "</div>"; }
+            if (!string.IsNullOrWhiteSpace(printHTML)) { printHTML = "<div style=''>" + printHTML + "</div>"; }
 
             ViewBag.printHTML = printHTML;
             return PartialView("~/Views/SiteSetup/Printer/PrintPreview.cshtml");
