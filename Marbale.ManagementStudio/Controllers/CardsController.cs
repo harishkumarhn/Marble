@@ -36,11 +36,13 @@ namespace MarbaleManagementStudio.Controllers
         [HttpGet]
         public ActionResult ViewCards(CardsModel c)
         {
+            
             var data1 = cardBussiness.gettechcardtype();
             Session["TechCardType"] = data1;
             List<CardsModel> data = cardBussiness.GetAllCards(c);
+            c.IssueDate = c.ToDate = DateTime.Now;
             ViewBag.cardsDetails = data;
-            return View();
+            return View(c);
         }
 
         public ActionResult Cards(int CardId)
