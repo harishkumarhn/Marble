@@ -5,3 +5,4 @@
 /Marbale.ViewModel/bin/Debug
 /obj
 /Marbale.ManagementStudio/bin
+/Marbale.DataAccess/DBConnection.cs
