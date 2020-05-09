@@ -10,7 +10,7 @@
             <th>Font Name</th>
             <th>Font Size</th>
             <th>Preview</th>
-            <th>Add</th>
+            <th>Action</th>            
         </tr>
     </thead>
     <tbody>
@@ -42,9 +42,17 @@
                     <input type="text" value="@(item.FontSize == 0 ? 8 : @item.FontSize)" />
                 </td>
                 <td>
-                    <button class="preview" onclick="">Preview</button></td>
+                    <a class="preview" id ="printPreview" title="preview" data-toggle="tooltip">
+                        <i class="material-icons print" style="cursor: pointer;margin-left: 22px;">&#xe8ad;</i>
+                    </a>
                 <td>
-                    <button id="addTemplateHader">Add</button></td>
+                    <a class="add" title="add" id="addTemplateHader" data-toggle="tooltip">
+                        <i class="material-icons" style="cursor: pointer;">&#xe145;</i>
+                    </a>
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteTemplate('@item.TemplateId')">
+                        <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
+                    </a>
+                </td>
             </tr>  
         }
     </tbody>
@@ -90,14 +98,14 @@
                      '<input type="text" value="" />',
                      '<select name="fontNames" id="fontNames">' + fontNames,
                      '<input type="text" value="" />',
-                     '<button>--</button>',
-                     '<button id="AddTemplateHeader()">Add</button>'
+                     '<lable></lable>',
+                     '<lable></lable>'
             ]).draw(false);
             $(".tblRow").on("click", function (e) { UpdatePrinterTemplateList($(this).parent().index()); });
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
         $(".tblRow").on("click", function (e) { UpdatePrinterTemplateList($(this).parent().index()); });
-        $(".preview").on("click", function (e) { Preview($(this).parent().index()); });
+        $("#printPreview").on("click", function (e) { Preview($(this).parent().index()); });
     });
     var selectedItem = -1;
     function UpdatedList(index) {
