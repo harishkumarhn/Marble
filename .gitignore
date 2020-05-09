@@ -5,4 +5,15 @@
 /Marbale.ViewModel/bin/Debug
 /obj
 /Marbale.ManagementStudio/bin
-/Marbale.DataAccess/DBConnection.cs
+/Marbale.Business/obj/Debug
+/Marbale.Business/bin
+/Marbale.BusinessObject/obj/Debug
+/Marbale.DataAccess/obj/Debug
+/Marbale.Inventory/obj/Debug
+/Marbale.KeyGen/obj/Debug
+/Marbale.ManagementStudio/obj/Debug
+/Marbale.POS/obj/Debug
+/Marble.PrimaryServer/obj/Debug
+/SiteConfiguaration/obj/Debug
+/Marbale.Reports/bin
+/Marbale.Reports/obj/Debug
