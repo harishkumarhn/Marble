@@ -12,8 +12,8 @@
     {
         <div>
             <b style="color: cadetblue">Main</b>
-            <div id="mainclass" style="border: 2px solid black; border-color: cornsilk">
-                <div class="form-group row">
+            <div id="mainclass" style="border: 2px solid black; border-color: cadetblue">
+                <div class="form-group row" style="margin-bottom:0">
 
                     <div class="col-md-1">
                         <label for="ex1"><b>CardId:</b></label>
@@ -39,7 +39,7 @@
                         <label for="ex4"><b>Customer:</b></label>
                         @Html.TextBoxFor(m => m.Customer, new { @class = "form-control" })
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2" style="padding:0">
                         <label for="ex4"><b>VIP Customer:</b></label>
                         @Html.CheckBoxFor(m => m.VIPCustomer, new { @class = "form-control", @style = "position:absolute;width:20px;" })
                     </div>
@@ -47,9 +47,9 @@
                 </div>
             </div>
 
-            <b style="color: cadetblue">Value</b>
-            <div id="valueclass" style="border: 2px solid black; border-color: cornsilk">
-                <div class="form-group row">
+            <b style="color: rosybrown">Value</b>
+            <div id="valueclass" style="border: 2px solid black; border-color: rosybrown">
+                <div class="form-group row" style="margin-bottom:0">
 
                     <div class="col-md-2">
                         <label for="ex1"><b>Credits:</b></label>
@@ -83,19 +83,19 @@
 
             <b style="color: chocolate">Game Time</b>  <b style="color: darkblue; position: absolute; right: 475px">Refund/Expiry</b>
 
-            <div id="gametimeclass" style="border: 2px solid black; border-color: cornsilk">
-                <div class="form-group row">
+            <div id="gametimeclass" style="border: 2px solid black; border-color: chocolate">
+                <div class="form-group row" style="margin-bottom:0">
                     <div class="col-md-2">
                         <label for="ex1"><b>StartTime:</b></label>
                         @Html.TextBoxFor(m => m.StartTime, new { @class = "form-control datepicker" })
 
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3" style="padding:0 1vw 0 0;margin-right:-3vw">
                         <label for="ex2"><b>Last Play time:</b></label>
-                        @Html.TextBoxFor(m => m.LastPlayTime, new { @class = "form-control datepicker", placeholder = @Html.DisplayNameFor(n => n.LastPlayTime) })
+                        @Html.TextBoxFor(m => m.LastPlayTime, new { @class = "form-control datepicker", placeholder = @Html.DisplayNameFor(n => n.LastPlayTime), @style="width:75%" })
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-2" style="padding:0">
                         <label for="ex1"><b>Expiry Date:</b></label>
                         @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control datepicker" })
 
@@ -105,7 +105,7 @@
                         @Html.TextBoxFor(m => m.RefundAmount, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.RefundAmount, "", new { @class = "text-danger" })
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" style="padding:0">
                         <label for="ex2"><b>Refund Date:</b></label>
                         @Html.TextBoxFor(m => m.RefundDate, new { @class = "form-control datepicker" })
                     </div>
@@ -113,30 +113,38 @@
             </div>
 
             <b style="color: deeppink">Ticket</b>
-            <div id="ticketclass" style="border: 2px solid black; border-color: cornsilk">
-                <div class="form-group row">
-                    <div class="col-md-3">
+            <div id="ticketclass" style="border: 2px solid black; border-color: deeppink">
+                <div class="form-group row" style="margin-bottom:0">
+                    <div class="col-md-3" style="padding:0;margin-left:1.5vw;margin-right:-5vw">
                         <label for="ex1"><b>Ticket Count:</b></label>
-                        @Html.TextBoxFor(m => m.TicketCount, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.TicketCount, new { @class = "form-control" ,@style = "width:50%"})
                         @Html.ValidationMessageFor(model => model.TicketCount, "", new { @class = "text-danger" })
 
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="padding:0;margin-right:-4vw">
                         <label for="ex3"><b>Ticket Allowed:</b></label>
                         @Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "form-control" })
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3" style="padding:0;margin-right:-2vw">
                         <label for="ex2"><b>Real Ticket Mode:</b></label>
                         @Html.CheckBoxFor(m => m.RealTicketMode, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-3" style="padding:0;margin-right:-2vw">
+                        <label for="ex2"><b>Timer Reset Card:</b></label>
+                        @Html.CheckBoxFor(m => m.TimerResetCard, new { @class = "form-control check-boxs" })
+                    </div>
+                    <div class="col-md-2" style="padding:0px">
+                        <label for="ex3"><b>Tech Game:</b></label>
+                        @Html.TextBoxFor(m => m.TechGames, new { @class = "form-control", @style = "width:70%" })
                     </div>
                 </div>
             </div>
 
 
-            <b style="color: deeppink">miscellaneous</b>
-            <div id="miscolaniuseclass" style="border: 2px solid black; border-color: cornsilk">
-                <div class="form-group row">
-                    <div class="col-md-3">
+            <b style="color: lightseagreen">miscellaneous</b>
+            <div id="miscolaniuseclass" style="border: 2px solid black; border-color: lightseagreen">
+                <div class="form-group row" style="margin-bottom:0">
+                    <div class="col-md-3" style="padding:0 0 0 1.5vw">
                         <label for="ex1"><b>Last Updated Time:</b></label>
                         @Html.TextBoxFor(m => m.LastUpdatedTime, new { @class = "form-control datepicker" })
 
@@ -149,23 +157,9 @@
                         <label for="ex2"><b>Notes:</b></label>
                         @Html.TextAreaFor(m => m.Note, 2, 10, new { @class = "form-control" })
                     </div>
-                </div>
-            </div>
-            <b style="color: lightseagreen">Technician</b>
-            <div id="technicianclass" style="border: 2px solid black; border-color: cornsilk">
-                <div class="form-group row">
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="padding:0">
                         <label for="ex2"><b>Tech Card Type:</b></label>
-                        @Html.DropDownListFor(m => m.TechCardType, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TechCardType"], "Id", "Value"), new { @class = "form-control" })
-
-                    </div>
-                    <div class="col-md-3">
-                        <label for="ex3"><b>Tech Game:</b></label>
-                        @Html.TextBoxFor(m => m.TechGames, new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-2">
-                        <label for="ex2"><b>Timer Reset Card:</b></label>
-                        @Html.CheckBoxFor(m => m.TimerResetCard, new { @class = "form-control check-boxs" })
+                        @Html.DropDownListFor(m => m.TechCardType, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TechCardType"], "Id", "Value"), new { @class = "form-control", @style = "width:70%" })  
                     </div>
                 </div>
             </div>
@@ -183,7 +177,7 @@
         $('.modal-body').css({
             'width': '900px;',
             'height': '500px',
-            'overflow-y': 'scroll'
+            'padding-bottom':'0px'
         });
         $(document).off('focusin.modal');
         //$('#newcardmodel').modal('show');
