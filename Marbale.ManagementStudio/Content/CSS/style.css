@@ -144,7 +144,7 @@ button.btn-settings {
 /*end*/
 
 .dataTables_scrollBody {
-    max-height: 400px !important;
+    /*max-height: 400px !important;*/
 }
 
 .focusedRow {
@@ -163,6 +163,9 @@ td a.delete {
 
 td a.edit {
     color: #7cab81 !important;
+}
+table.dataTable tbody tr.selected {
+    background-color: #d6d9e0 !important;
 }
 
 td a {

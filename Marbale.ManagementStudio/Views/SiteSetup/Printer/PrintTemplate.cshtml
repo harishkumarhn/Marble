@@ -42,11 +42,11 @@
                     <input type="text" value="@(item.FontSize == 0 ? 8 : @item.FontSize)" />
                 </td>
                 <td>
-                    <a class="preview" id ="printPreview" title="preview" data-toggle="tooltip">
+                    <a class="preview" onclick ="Preview(@item.TemplateId)" title="preview" data-toggle="tooltip">
                         <i class="material-icons print" style="cursor: pointer;margin-left: 22px;">&#xe8ad;</i>
                     </a>
                 <td>
-                    <a class="add" title="add" id="addTemplateHader" data-toggle="tooltip">
+                    <a class="add" title="add" onclick="addTemplateHeader()" data-toggle="tooltip">
                         <i class="material-icons" style="cursor: pointer;">&#xe145;</i>
                     </a>
                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteTemplate('@item.TemplateId')">
@@ -64,9 +64,10 @@
     </div>
 </div>
 <script>
+    var table;
     $(document).ready(function () {
-        var table = $('#marbleTable_printTemplateHeaders').DataTable({
-            scrollY: "400px",
+         table = $('#marbleTable_printTemplateHeaders').DataTable({
+            scrollY: "300px",
             scrollX: true,
             scrollCollapse: true,
             editable: true,
@@ -86,27 +87,38 @@
             }
         });
         
-
-        $('#addTemplateHader').on('click', function () {
-            var fontNames = '';
-            @foreach (var dow in ViewBag.FontNameList)
-            {
-                @: fontNames = fontNames + '<option value="" >@dow</option>';
+       
+        $('#marbleTable_printTemplateHeaders tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
             }
-            table.row.add([
-                     '<lable></lable>',
-                     '<input type="text" value="" />',
-                     '<select name="fontNames" id="fontNames">' + fontNames,
-                     '<input type="text" value="" />',
-                     '<lable></lable>',
-                     '<lable></lable>'
-            ]).draw(false);
-            $(".tblRow").on("click", function (e) { UpdatePrinterTemplateList($(this).parent().index()); });
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
         $(".tblRow").on("click", function (e) { UpdatePrinterTemplateList($(this).parent().index()); });
-        $("#printPreview").on("click", function (e) { Preview($(this).parent().index()); });
+      
     });
+    function addTemplateHeader() {
+        var fontNames = '';
+            @foreach (var dow in ViewBag.FontNameList)
+        {
+            @: fontNames = fontNames + '<option value="" >@dow</option>';
+        }
+        table.row.add([
+                 '<lable></lable>',
+                 '<input type="text" value="" />',
+                 '<select name="fontNames" id="fontNames">' + fontNames,
+                 '<input type="text" value="" />',
+                 '<lable></lable>',
+                 '<lable></lable>'
+        ]).draw(false);
+        $(".tblRow").on("click", function (e) {
+            UpdatePrinterTemplateList($(this).parent().index());
+        });
+    }
     var selectedItem = -1;
     function UpdatedList(index) {
         if (!updatedArray.includes(index)) {
@@ -115,14 +127,8 @@
     }
     function Preview(index) {
         if (index != selectedItem) {
-            var id = document.getElementById('marbleTable_printTemplateHeaders').rows[1].cells[0].children[0].innerHTML;
-            if (id == null || id == undefined || id.trim() == '') {
-                id = '0';
-            }
-            var url = '/SiteSetup/PrintPreview?headerId=' + id.trim();
+            var url = '/SiteSetup/PrintPreview?headerId=' + index;
             DisplayPopUp("printPreview", url);
-           // $('#templateData').load('/SiteSetup/PrintTemplateDataItems?headerId=' + id.trim());
-            //selectedItem = index;
         }
     }
     function UpdatePrinterTemplateList(index) {
@@ -143,7 +149,8 @@
         var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
         var fixedcolumn2 = $('.DTFC_Cloned input.fixedCol2');
         var table_templateItems = document.getElementById('marbleTable_printTemplate');
-        for (var r = 0, n = table_templateItems.rows.length; r < n; r++) {
+        var error = false;
+        for (var r = 0, n = table_templateItems.rows.length - 1; r < n; r++) {
             if (updatedArray.includes(r)) {
                 var rowIndex = r + 1;
                 var section_index = $('.DTFC_Cloned')[1].rows[rowIndex].cells[1].children[0].options["selectedIndex"];
@@ -172,46 +179,50 @@
                     Col5Data: table_templateItems.rows[rowIndex].cells[13].children[0].value,
                     Col5Alignment: table_templateItems.rows[rowIndex].cells[14].children[0].options[Col5Alignment_index].innerText,
                 });
-                if (!templateDateItems[length].Section) {
+                if (templateDateItems[length].Section == 'Select') {
+                    error = true;
                     alert('Please select section');
                     templateDateItems.pop();
                 }
             }
         }
-        var selectedFontIndex = table.rows[headeTableRowIndex].cells[2].children[0].options["selectedIndex"];
-        var fontName = table.rows[headeTableRowIndex].cells[2].children[0].options[selectedFontIndex].innerText;
-        template = {
-            TemplateId: table.rows[headeTableRowIndex].cells[0].children[0].innerHTML,
-            TemplateName: table.rows[headeTableRowIndex].cells[1].children[0].value,
-            FontName: fontName,
-            FontSize: table.rows[headeTableRowIndex].cells[3].children[0].value,
-            PrintTemplateItems: templateDateItems
-        };
+        if (!error) {
+            var selectedFontIndex = table.rows[headeTableRowIndex].cells[2].children[0].options["selectedIndex"];
+            var fontName = table.rows[headeTableRowIndex].cells[2].children[0].options[selectedFontIndex].innerText;
+            template = {
+                TemplateId: table.rows[headeTableRowIndex].cells[0].children[0].innerHTML,
+                TemplateName: table.rows[headeTableRowIndex].cells[1].children[0].value,
+                FontName: fontName,
+                FontSize: table.rows[headeTableRowIndex].cells[3].children[0].value,
+                PrintTemplateItems: templateDateItems
+            };
 
 
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdatePrintTemplate", "SiteSetup")',
-            data: JSON.stringify({ template: template }),
-            dataType: "json",
-            success: function (data) {
-                alert('Data Saved');
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("UpdatePrintTemplate", "SiteSetup")',
+                data: JSON.stringify({ template: template }),
+                dataType: "json",
+                success: function (data) {
+                    alert('Data Saved');
+                    $('#tabBody').load('/SiteSetup/printTemplate');
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
 
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
+        } else { error = false;}
     }
 </script>
-<div id="templateData">
-</div>
+    <div id="templateData">
+    </div>
 
-<div class="action">
-    <button class="btn btn-primary btn-md" role="button" onclick="SavePrintTemplates()">Save</button>
-    <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+    <div class="action">
+        <button class="btn btn-primary btn-md" role="button" onclick="SavePrintTemplates()">Save</button>
+        <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
 </div>
 
