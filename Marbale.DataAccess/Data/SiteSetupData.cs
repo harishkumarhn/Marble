@@ -231,6 +231,7 @@ namespace Marbale.DataAccess
             SqlParameter[] sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@MessageNo", messages.MessageNo);
             sqlParameters[1] = new SqlParameter("@MessageName", messages.MessageName);
+            sqlParameters[1].IsNullable = true;
             sqlParameters[2] = new SqlParameter("@MessageDescription", messages.MessageDescription);
             return conn.executeUpdateQuery("sp_UpdateMessages", sqlParameters);
         }
