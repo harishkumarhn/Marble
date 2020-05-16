@@ -329,7 +329,7 @@
 
                 selectedRowStyle: "select",
                 columns: grid.Columns(
-                 grid.Column("ID", format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountId @(item.DiscountID)" value="@(item.DiscountID)" readonly / ></text>),
+                 grid.Column("ID", format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountId@(item.DiscountID)" value="@(item.DiscountID)" readonly / ></text>),
                  grid.Column("DiscountName", format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountName@(item.DiscountID)" value="@(item.DiscountName)" / ></text>),
                  grid.Column("DiscountAmount", format: @<text><input name="textbox" type="text" class="grid-row" id="DiscountAmount@(item.DiscountID)" value="@(item.DiscountAmount)"  /></text>),
                  grid.Column("CouponMendatory", format: @<text><input name="chkbox" type="checkbox"@(item.CouponMendatory ? "checked='checked'" : "")  id="CouponMendatory@(item.DiscountID)" value="CouponMendatory" /></text>, style: "grid-row"),
