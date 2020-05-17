@@ -76,6 +76,7 @@
             bInfo: false,
             bFilter: false,
             bSort: false,
+            select: true,
             "createdRow": function (row, data, index) {
                 $('td', row).addClass('tblRow');
             },
@@ -87,16 +88,6 @@
             }
         });
         
-       
-        $('#marbleTable_printTemplateHeaders tbody').on('click', 'tr', function () {
-            if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected');
-            }
-            else {
-                table.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
-        });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
         $(".tblRow").on("click", function (e) { UpdatePrinterTemplateList($(this).parent().index()); });
       

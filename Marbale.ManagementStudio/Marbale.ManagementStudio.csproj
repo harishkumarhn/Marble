@@ -192,12 +192,41 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSS\bootstrap.css" />
+    <Content Include="Content\CSS\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\CSS\fonts\font.css" />
+    <Content Include="Content\CSS\fonts\font1.css" />
+    <Content Include="Content\CSS\jquery.dataTables.min.css" />
+    <Content Include="Content\CSS\kendo.common-material.min.css" />
+    <Content Include="Content\CSS\kendo.common.min.css" />
+    <Content Include="Content\CSS\kendo.default.css" />
+    <Content Include="Content\CSS\kendo.material.min.css" />
+    <Content Include="Content\CSS\layout.css" />
+    <Content Include="Content\CSS\Material\loading.gif" />
+    <Content Include="Content\CSS\Material\meterialIcon.css" />
+    <Content Include="Content\CSS\select.dataTables.css" />
+    <Content Include="Content\CSS\style.css" />
+    <Content Include="Content\CSS\StyleSheet1.css" />
+    <Content Include="Content\JS\bootstrap.min.js" />
+    <Content Include="Content\JS\dataTables.fixedColumns.min.js" />
+    <Content Include="Content\JS\dataTables.select.js" />
+    <Content Include="Content\JS\fontawesome.js" />
+    <Content Include="Content\JS\fontawesome.solid.js" />
+    <Content Include="Content\JS\jquery.dataTables.js" />
+    <Content Include="Content\JS\kendo.all.min.js" />
+    <Content Include="Content\JS\popper.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\CSS\fonts\flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
+    <Content Include="Content\CSS\fonts\glyphs\WebComponentsIcons.ttf" />
+    <Content Include="Content\CSS\fonts\pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2" />
+    <Content Include="Content\CSS\fonts\pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2" />
+    <Content Include="Content\CSS\fonts\pxiEyp8kv8JHgFVrJJfecg.woff2" />
+    <Content Include="Content\CSS\Material\flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -294,11 +323,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\CSS\" />
     <Folder Include="Content\DatetimePicker\" />
     <Folder Include="Content\Fabrastics\" />
     <Folder Include="Content\images\" />
-    <Folder Include="Content\JS\" />
     <Folder Include="Content\PluginTab\" />
     <Folder Include="Content\sidebar\" />
     <Folder Include="Content\themes\" />
