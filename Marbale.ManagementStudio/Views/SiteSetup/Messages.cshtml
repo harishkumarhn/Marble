@@ -15,9 +15,17 @@
         @foreach (var item in ViewBag.Messages)  
         {  
             <tr onchange="UpdatedList(this)"> 
-        <td > @item.MessageNo  </td>
-    
-        <td> <input type="text" value="@item.MessageDescription" class="gridText" style="width: 100vw;">  </td>
+        <td style="padding:0"> @item.MessageNo  </td>    
+        <td style="padding:0"> 
+                @if (@item.MessageNo % 2 != 0)
+                {
+                <input type="text" value="@item.MessageDescription" class="gridText" style="width: 88vw;background-color:antiquewhite">
+                }
+                else
+                {
+                    <input type="text" value="@item.MessageDescription" class="gridText" style="width: 88vw;">
+                }
+        </td>
     </tr>  
         }  
     </table>

@@ -20,9 +20,9 @@
                         @Html.TextBoxFor(m => m.CardId, new { @readonly = "readonly", @class = "form-control" })
 
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3" style="padding:0 0 0 22px;margin-right:-2vw">
                         <label for="ex2"><b>CardNumber:</b></label>
-                        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CardNumber) })
+                        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CardNumber), @style="width:82%"})
                         @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
                     </div>
 
@@ -159,7 +159,7 @@
                     </div>
                     <div class="col-md-3" style="padding:0">
                         <label for="ex2"><b>Tech Card Type:</b></label>
-                        @Html.DropDownListFor(m => m.TechCardType, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TechCardType"], "Id", "Value"), new { @class = "form-control", @style = "width:70%" })  
+                        @Html.DropDownListFor(m => m.TechCardType, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TechCardType"], "Id", "Value"), new { @class = "form-control", @style = "width:70%;max-height:none" })  
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@
 </div>
 <div class="modal-footer">
     <button id="update" type="submit" class="btn btn-primary" onclick="Save(this)">Save</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 </div>
 @*<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
