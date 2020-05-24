@@ -44,7 +44,7 @@
                 <input type="text" class="fixedCol2" value="@item.Name" />
             </td>
             <td>
-                <input type="text" value="@item.GameName" />
+                <input type="text" value="@item.GameName" style="width:10vw"/>
             </td>
             <td>
                 <select name="AvalibleHubs" id="AvalibleHubs">
@@ -62,13 +62,13 @@
                 </select>
             </td>
             <td>
-                <input type="text" value="@item.HubAddress" />
+                <input type="text" value="@item.HubAddress" style="width:10vw"/>
             </td>
             <td>
-                <input type="text" value="@item.MachineAddress" />
+                <input type="text" value="@item.MachineAddress" style="width:10vw"/>
             </td>
             <td>
-                <input type="text" value="@item.EffectiveMachineAddress" />
+                <input type="text" value="@item.EffectiveMachineAddress" style="width:10vw"/>
             </td>
             <td>
                 <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
@@ -89,22 +89,22 @@
                 </select>
             </td>
             <td>
-                <input type="text" value="@item.SoftwareVersion" />
+                <input type="text" value="@item.SoftwareVersion" style="width:5vw"/>
             </td>
             <td>
-                <input type="text" value="@item.TicketMode" />
+                <input type="text" value="@item.TicketMode" style="width:8vw"/>
             </td>
             <td>
-                <input type="text" value="@item.VIPPrice" />
+                <input type="text" value="@item.VIPPrice" style="width:9vw"/>
             </td>
             <td>
                 <input type="checkbox"  @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
             </td>
             <td>
-                <input type="text" value="@item.PurchasePrice" />
+                <input type="text" value="@item.PurchasePrice" style="width:10vw"/>
             </td>
             <td>
-                <input type="text" value="@item.Notes" />
+                <input type="text" value="@item.Notes" style="width:10vw"/>
             </td>
             <td>
                 <select name="AvalibleThemes" id="AvalibleThemes">
@@ -287,6 +287,9 @@
         if (!updatedArray.includes(index)) {
             updatedArray.push(index);
         }
+        // updating Effective Address = Hub Address + Machine Address
+        var table = document.getElementById('marbleTable');
+        table.rows[index+1].cells[6].children[0].value = table.rows[index+1].cells[4].children[0].value + table.rows[index+1].cells[5].children[0].value;
     }
 
     function Filter() {

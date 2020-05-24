@@ -201,7 +201,7 @@ namespace Marble.Business
                      machine.HubName = dr.IsNull("HubName") ? "" : dr["HubName"].ToString();
                      machine.MachineAddress = dr.IsNull("MachineAddress") ? "" : dr["MachineAddress"].ToString();
                      machine.HubAddress = dr.IsNull("HubAddress") ? "" : dr["HubAddress"].ToString();
-                     machine.EffectiveMachineAddress = dr.IsNull("EffectiveMachineAddress") ? "" : dr["EffectiveMachineAddress"].ToString();
+                     machine.EffectiveMachineAddress = dr.IsNull("EffectiveMachineAddress") ? machine.HubAddress+ machine.MachineAddress : string.IsNullOrWhiteSpace(dr["EffectiveMachineAddress"].ToString())? machine.HubAddress + machine.MachineAddress : dr["EffectiveMachineAddress"].ToString();
                      machine.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                      machine.VIPPrice = dr.IsNull("VIPPrice") ? 0 : int.Parse(dr["VIPPrice"].ToString());
                      machine.PurchasePrice = dr.IsNull("PurchasePrice") ? 0 : int.Parse(dr["PurchasePrice"].ToString());
