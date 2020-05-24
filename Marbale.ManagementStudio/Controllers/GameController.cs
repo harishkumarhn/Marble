@@ -51,6 +51,7 @@ namespace MarbaleManagementStudio.Controllers
             var result = 0;
             foreach (var gameProfile in gameProfiles)
             {
+                gameProfile.LastUpdatedBy = Session["UserID"].ToString();
                 result = gameBussiness.InsertOrUpdateGameProfile(gameProfile);
             }
             return result;
