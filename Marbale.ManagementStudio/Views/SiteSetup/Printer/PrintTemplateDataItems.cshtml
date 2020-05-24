@@ -21,6 +21,7 @@
             <th>Col4Alignment</th>
             <th>Col5Data</th>
             <th>Col5Alignment</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +32,7 @@
                     <lable class="fixedCol1"> @(item.Id == 0 ? "" : item.Id) </lable>
                 </td>
                 <td>
-                    <select name="section" id="section" onchange="sectionChanges(this)">
+                    <select id="sectionDropDown">
                         @foreach (var dow in @item.SectionTypes)
                         {
                             if (@item.Section == (@dow.Value).ToString())
@@ -157,7 +158,7 @@
                     </select>
                 </td>
                 <td>
-                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteTemplateDataItem('@item.TemplateId')">
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteTemplateDataItem('@item.Id',@item.TemplateId)">
                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
                     </a>
                 </td>
@@ -189,13 +190,11 @@
             fixedColumns: {
                 leftColumns: 2
             },
-            select: true
+            //select: true
         });
         var counter = 1;
 
         $('#addRow').on('click', function () {
-            var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
-            var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol2');
 
             var alignmentOptions = '';
             @foreach (var dow in ViewBag.PrintTemplate[0].AlignmentList)
@@ -216,7 +215,7 @@
             }
             table.row.add([
                 '<lable></lable>',
-                '<select name="Section" id="Section">' + sectionOptions,
+                '<select id="SectionDropDown">' + sectionOptions,
                 '<input style="width:90px" type="text" value="" />',
                 '<select name="fontNames" id="fontNames">' + fontNames,
                 '<input type="text" value="" />',
@@ -229,10 +228,34 @@
                 '<input type="text" value="" />',
                 '<select name="Col4Alignment" id="Col4Alignment">' + alignmentOptions,
                 '<input type="text" value="" />',
-                '<select name="Col5Alignment" id="Col5Alignment">' + alignmentOptions
+                '<select name="Col5Alignment" id="Col5Alignment">' + alignmentOptions,
+                ''
             ]).draw(false);
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+        $('#marbleTable_printTemplate tbody').on('click', 'tr', function () {
+            for (var i = 1 ; i <= this.parentElement.rows.length; i++) {
+                if (i == this.rowIndex) {
+                    this.style.backgroundColor = '#d6d9e0';
+                    document.getElementsByClassName('stripe row-border order-column dataTable no-footer DTFC_Cloned')[1].rows[this.rowIndex].style.backgroundColor = '#d6d9e0';
+                } else {
+                    this.parentElement.rows[i-1].style.backgroundColor = 'white';
+                    document.getElementsByClassName('stripe row-border order-column dataTable no-footer DTFC_Cloned')[1].rows[i].style.backgroundColor = 'white'
+                }
+            }
+        });
+        $('.DTFC_Cloned tbody').on('click', 'tr', function () {
+            for (var i = 1 ; i <= this.parentElement.rows.length; i++)
+            {
+                if (i == this.rowIndex) {
+                    this.style.backgroundColor = '#d6d9e0';
+                    document.getElementById('marbleTable_printTemplate').rows[this.rowIndex].style.backgroundColor = '#d6d9e0';
+                } else {
+                    this.parentElement.rows[i-1].style.backgroundColor = 'white';
+                    document.getElementById('marbleTable_printTemplate').rows[i].style.backgroundColor = 'white'
+                }
+            }
+        });
     });
     var updatedArray = [];
     function UpdatedList(index) {
@@ -240,16 +263,16 @@
             updatedArray.push(index);
         }
     }
-    function DeleteTemplateDataItem(id) {
+    function DeleteTemplateDataItem(id,templateId) {
         if (confirm('Are you sure you want to delete this from database?')) {
             $.ajax({
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 url: '@Url.Action("DeletePrintTemplate", "SiteSetup")',
-                data: { templateId: id, ssdataItem: true },
+                data: { templateId: id, isdataItem: true },
                 dataType: "json",
                 success: function (data) {
-                    //$('#tabBody').load('/SiteSetup/printTemplate');
+                    $('#templateData').load('/SiteSetup/PrintTemplateDataItems?headerId=' + templateId);
                 },
                 error: function (e) {
                     alert(e);

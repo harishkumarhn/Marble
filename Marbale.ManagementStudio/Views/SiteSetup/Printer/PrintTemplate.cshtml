@@ -123,14 +123,14 @@
         }
     }
     function UpdatePrinterTemplateList(index) {
-        if (index != selectedItem) {
+        //if (index != selectedItem) {
             var id = document.getElementById('marbleTable_printTemplateHeaders').rows[index + 1].cells[0].children[0].innerHTML;
             if (id == null || id == undefined || id.trim() == '') {
                 id = '0';
             }
             $('#templateData').load('/SiteSetup/PrintTemplateDataItems?headerId=' + id.trim());
             selectedItem = index;
-        }
+       // }
     }
     function SavePrintTemplates() {
         var template,templateDateItems = [];
