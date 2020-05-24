@@ -156,6 +156,11 @@
                         }
                     </select>
                 </td>
+                <td>
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteTemplateDataItem('@item.TemplateId')">
+                        <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
@@ -202,7 +207,7 @@
             @foreach (var dow in ViewBag.PrintTemplate[0].SectionTypes)
                 {
                     @: sectionOptions = sectionOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
-            
+
                 }
             var fontNames = '';
             @foreach (var dow in ViewBag.FontNameList)
@@ -224,7 +229,7 @@
                 '<input type="text" value="" />',
                 '<select name="Col4Alignment" id="Col4Alignment">' + alignmentOptions,
                 '<input type="text" value="" />',
-                '<select name="Col5Alignment" id="Col5Alignment">' + alignmentOptions                
+                '<select name="Col5Alignment" id="Col5Alignment">' + alignmentOptions
             ]).draw(false);
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
@@ -235,7 +240,21 @@
             updatedArray.push(index);
         }
     }
-    function sectionChanges(value) {
-
+    function DeleteTemplateDataItem(id) {
+        if (confirm('Are you sure you want to delete this from database?')) {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("DeletePrintTemplate", "SiteSetup")',
+                data: { templateId: id, ssdataItem: true },
+                dataType: "json",
+                success: function (data) {
+                    //$('#tabBody').load('/SiteSetup/printTemplate');
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
     }
 </script>

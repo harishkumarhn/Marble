@@ -87,10 +87,10 @@
                 });
             }
         });
-        
+
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
         $(".tblRow").on("click", function (e) { UpdatePrinterTemplateList($(this).parent().index()); });
-      
+
     });
     function addTemplateHeader() {
         var fontNames = '';
@@ -205,6 +205,23 @@
             });
 
         } else { error = false;}
+    }
+    function DeleteTemplate(id) {
+        if (confirm('Are you sure you want to delete this from database?')) {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("DeletePrintTemplate", "SiteSetup")',
+                data: { templateId: id, isdataItem: false },
+                dataType: "json",
+                success: function (data) {
+                    $('#tabBody').load('/SiteSetup/printTemplate');
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
     }
 </script>
     <div id="templateData">

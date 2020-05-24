@@ -177,6 +177,18 @@ namespace Marble.Business
                 throw e;
             }
         }
+        public int DeletePrintTemplatebyId(int templateId,string from, bool isDataItem = false)
+        {
+            try
+            {
+                return commonData.DeleteById(templateId, from, isDataItem);
+            }
+            catch (Exception e)
+            {
+                //   LogError.Instance.LogException("DeleteProductbyId", e);
+                throw e;
+            }
+        }
         public List<MessagesModel> GetAllMessages()
         {
             var dataTable = siteSetupData.GetAllMessages();

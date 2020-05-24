@@ -620,6 +620,19 @@ namespace MarbaleManagementStudio.Controllers
             }
             return 1;
         }
+        public int DeletePrintTemplate(int templateId,bool isDataItem = false)
+        {
+            try
+            {
+                int result = siteSetup.DeletePrintTemplatebyId(templateId, "print", isDataItem);
+                return result;
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("DeletePrintTemplatebyId", e);
+                throw;
+            }
+        }
     }
 
 }
