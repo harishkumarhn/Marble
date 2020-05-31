@@ -83,10 +83,10 @@
     }
 </table>
 <div class="action">
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveGames()" id="saveGame">Save</button>
     <button class="btn btn-primary btn-md" role="button" id="addRow">Add</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/index'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault();window.location = '/Marble/Index'">Close</button>
 
 </div>
 <script>
