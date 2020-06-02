@@ -9,3 +9,15 @@
 /Marbale.Business/obj
 /Marbale.BusinessObject/bin
 /Marbale.BusinessObject/obj
+/Marbale.DataAccess/obj
+/Marbale.Inventory/obj
+/Marbale.Inventory/bin
+/Marbale.KeyGen/obj
+/Marbale.KeyGen/bin
+/Marbale.ManagementStudio/obj
+/Marbale.POS/obj
+/Marbale.Reports/obj
+/Marbale.Reports/bin
+/Marble.PrimaryServer/bin
+/Marble.PrimaryServer/obj
+/MarblePublishedSite/bin
