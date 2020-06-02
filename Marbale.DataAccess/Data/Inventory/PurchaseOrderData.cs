@@ -306,7 +306,7 @@ namespace Marbale.DataAccess.Data.Inventory
                     if (DBSearchParameters.ContainsKey(searchParameter.Key))
                     {
                         joiner = (count == 0) ? " " : " and ";
-                        if (searchParameter.Key.Equals(Vendor.SearchByVendorParameters.IS_ACTIVE))
+                        if (searchParameter.Key.Equals(PurchaseOrder.SearchByPurchaseOrderParameters.IS_ACTIVE))
                         {
                             query.Append(joiner + DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value);
                         }
@@ -354,7 +354,7 @@ namespace Marbale.DataAccess.Data.Inventory
 
           
 
-            PurchaseOrder vendor = new PurchaseOrder(
+            PurchaseOrder purchaseOrder = new PurchaseOrder(
                                 Convert.ToInt32(dr["PurchaseOrderId"]),
                                             dr["OrderStatus"].ToString(),
                                             dr["OrderNumber"].ToString(),
@@ -387,7 +387,7 @@ namespace Marbale.DataAccess.Data.Inventory
                                             dr["LastupdatedDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["LastupdatedDate"])
                                             );
 
-            return vendor;
+            return purchaseOrder;
         }
     }
 }

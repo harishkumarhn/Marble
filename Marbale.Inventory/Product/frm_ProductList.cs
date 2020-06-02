@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,10 +22,10 @@ namespace Marbale.Inventory.Product
 
         //List<Product> filterProductListDTO;
 
-        public Frm_ProductList( )
+        public Frm_ProductList()
         {
             InitializeComponent();
-          
+
         }
 
 
@@ -37,16 +37,16 @@ namespace Marbale.Inventory.Product
 
         private void frm_ProductTabular_Load(object sender, EventArgs e)
         {
-            
+
             dgvProducts.BackgroundColor = this.BackColor;
-            
-           LoadCategoryCombobox();
-           LoadUOMCombobox();
+
+            LoadCategoryCombobox();
+            LoadUOMCombobox();
             LoadLocationCombobox();
-             LoadVendorCombobox();
+            LoadVendorCombobox();
             LoadTaxCombobox();
             //LoadExpiryType();
-             PopulateProductGrid();
+            PopulateProductGrid();
         }
 
         void PopulateProductGrid()
@@ -60,7 +60,7 @@ namespace Marbale.Inventory.Product
             List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>> searchParameters = new List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>>();
             searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.IS_ACTIVE, "1"));
 
-            if(!string.IsNullOrEmpty(txt_searchCode.Text))
+            if (!string.IsNullOrEmpty(txt_searchCode.Text))
             {
                 searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.PRODUCT_CODE, txt_searchCode.Text));
             }
@@ -68,7 +68,7 @@ namespace Marbale.Inventory.Product
             {
                 searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.PRODUCT_NAME, txt_searchProdName.Text));
             }
-            
+
             // lblFilter.Text = filter;
             productList = productBL.GetInventoryProductList(searchParameters);
 
@@ -122,7 +122,7 @@ namespace Marbale.Inventory.Product
             LocationBL locationTypeBL = new LocationBL();
             List<Location> lstLocation = locationTypeBL.GetLocation();
 
-             
+
             BindingSource locationBS = new BindingSource();
             //inBoundLocationDTOList = locationList.GetAllLocations("Store");
             if (lstLocation == null)
@@ -142,7 +142,7 @@ namespace Marbale.Inventory.Product
             drpDataGridViewOutboundLocationId.ValueMember = "LocationId";
 
 
-            
+
         }
 
         void LoadVendorCombobox()
@@ -186,7 +186,7 @@ namespace Marbale.Inventory.Product
             drpDataGridViewTaxId.ValueMember = "TaxId";
             drpDataGridViewTaxId.DisplayMember = "TaxName";
 
-           
+
         }
 
         //void LoadExpiryType()
@@ -224,7 +224,7 @@ namespace Marbale.Inventory.Product
         {
             try
             {
-                
+
                 //MessageBox.Show("Error in Product grid data at row " + (e.RowIndex + 1).ToString() + ", Column " + dgvProducts.Columns[e.ColumnIndex].DataPropertyName +
                 //": " + e.Exception.Message);
                 e.Cancel = true;
@@ -235,7 +235,7 @@ namespace Marbale.Inventory.Product
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            
+
 
             PopulateProductGrid();
         }
@@ -255,12 +255,12 @@ namespace Marbale.Inventory.Product
                     currentObject.IsActive = false;
                     InventoryProductBL inventoryProductBL = new InventoryProductBL();
                     int id = inventoryProductBL.Save(currentObject, "rakshith");
-                   
+
                     dgvProducts.Rows.Remove(dgvProducts.CurrentRow);
-                     
+
                 }
-                
-                
+
+
                 //dgvProducts.CurrentRow.Cells["isActiveDataGridViewTextBoxColumn"].Value = "N";
                 //dgvProducts.Rows.Remove(dgvProducts.CurrentRow);
             }
@@ -361,11 +361,11 @@ namespace Marbale.Inventory.Product
             this.Close();
         }
 
-        
+
 
         private void dgvProducts_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
         {
-            
+
 
         }
 
@@ -383,10 +383,10 @@ namespace Marbale.Inventory.Product
                     if (dgvProducts["productIdDataGridViewTextBoxColumn", e.RowIndex].Value != null && dgvProducts["codeDataGridViewTextBoxColumn", e.RowIndex].Value != null)
                     {
                     }
-                    
+
                 }
-                
-               // btnRefresh.PerformClick();
+
+                // btnRefresh.PerformClick();
             }
             catch (Exception ex)
             {
@@ -396,7 +396,7 @@ namespace Marbale.Inventory.Product
 
         private void dgvProducts_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
-           
+
         }
 
         private void frm_ProductTabular_FormClosed(object sender, FormClosedEventArgs e)
@@ -431,7 +431,7 @@ namespace Marbale.Inventory.Product
         private void btnCreate_Click(object sender, EventArgs e)
         {
 
-            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(-1,"");
+            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(-1, "");
             frm_AddProduct.ShowDialog();
             PopulateProductGrid();
         }
@@ -439,11 +439,11 @@ namespace Marbale.Inventory.Product
         private void btnEdit_Click(object sender, EventArgs e)
         {
 
-            
-            int pid = -1;
-            int.TryParse( dgvProducts.CurrentRow.Cells["ProductId"].Value.ToString(),  out pid);
 
-            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid,"");
+            int pid = -1;
+            int.TryParse(dgvProducts.CurrentRow.Cells["ProductId"].Value.ToString(), out pid);
+
+            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid, "");
             frm_AddProduct.ShowDialog();
             PopulateProductGrid();
 
@@ -455,6 +455,7 @@ namespace Marbale.Inventory.Product
             int.TryParse(dgvProducts.CurrentRow.Cells["ProductId"].Value.ToString(), out pid);
             Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid, "duplicate");
             frm_AddProduct.ShowDialog();
+            PopulateProductGrid();
         }
 
         private void btn_searchStrip_Click(object sender, EventArgs e)

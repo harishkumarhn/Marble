@@ -74,7 +74,12 @@
     <Compile Include="Cards\Inventory.cs" />
     <Compile Include="Game\ActiveHubMachine.cs" />
     <Compile Include="Inventory\Category.cs" />
+    <Compile Include="Inventory\InventoryAdjustments.cs" />
+    <Compile Include="Inventory\InventoryAdjustmentsActivity.cs" />
+    <Compile Include="Inventory\InventoryPhysicalCount.cs" />
+    <Compile Include="Inventory\InventoryPhysicalCountLog.cs" />
     <Compile Include="Inventory\InventoryProduct.cs" />
+    <Compile Include="Inventory\InventoryProductBarcode.cs" />
     <Compile Include="Inventory\InventoryReceipt.cs" />
     <Compile Include="Inventory\InventoryStore.cs" />
     <Compile Include="Inventory\Location.cs" />

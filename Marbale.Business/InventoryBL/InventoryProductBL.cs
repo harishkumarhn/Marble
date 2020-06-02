@@ -38,6 +38,10 @@ namespace Marble.Business.InventoryBL
         {
             return inventoryProductData.GetInventoryProductList(searchParameters);
 
+        }
+        public List<InventoryProduct> GetInventoryProductListWithStoreData(List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>> searchParameters)
+        {
+            return inventoryProductData.GetInventoryProductListWithStoreData(searchParameters);
 
         }
         public int Save(InventoryProduct inventoryProduct, string userId)

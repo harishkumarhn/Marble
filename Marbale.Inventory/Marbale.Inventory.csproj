@@ -54,11 +54,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adjustments\Form_InventoryStoreActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adjustments\Form_InventoryStoreActivity.Designer.cs">
+      <DependentUpon>Form_InventoryStoreActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Adjustments\Frm_Adjustmnets.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Adjustments\Frm_Adjustmnets.Designer.cs">
       <DependentUpon>Frm_Adjustmnets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adjustments\Frm_PhysicalCount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adjustments\Frm_PhysicalCount.Designer.cs">
+      <DependentUpon>Frm_PhysicalCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adjustments\Frm_PhysicalCountPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adjustments\Frm_PhysicalCountPopup.Designer.cs">
+      <DependentUpon>Frm_PhysicalCountPopup.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -146,8 +164,17 @@
     <Compile Include="Recieve\Frm_ReciewInventory.Designer.cs">
       <DependentUpon>Frm_ReciewInventory.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Adjustments\Form_InventoryStoreActivity.resx">
+      <DependentUpon>Form_InventoryStoreActivity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Adjustments\Frm_Adjustmnets.resx">
       <DependentUpon>Frm_Adjustmnets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adjustments\Frm_PhysicalCount.resx">
+      <DependentUpon>Frm_PhysicalCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adjustments\Frm_PhysicalCountPopup.resx">
+      <DependentUpon>Frm_PhysicalCountPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmProduct.resx">
       <DependentUpon>frmProduct.cs</DependentUpon>
@@ -219,9 +246,11 @@
     <None Include="Marbale.BusinessObject.GameDiscount.datasource" />
     <None Include="Marbale.BusinessObject.IdValue.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.Category.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryAdjustmentsActivity.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.InventoryProduct+SearchByProductParameters.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.InventoryProduct.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.InventoryReceipt.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryStore.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.Location.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.LocationType+SearchByLocationTypeParameters.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.LocationType.datasource" />

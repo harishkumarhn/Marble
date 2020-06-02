@@ -14,7 +14,7 @@ namespace Marbale.DataAccess.Data.Inventory
     {
 
         private DBConnection conn;
-        private static readonly Dictionary<InventoryStore.SearchByInventoryStoreParameters, string> DBSearchParameters = new Dictionary<InventoryStore.SearchByInventoryStoreParameters, string>
+        private static readonly Dictionary<InventoryStore.SearchByInventoryStoreParameters, string> DBSearchInventoryStoreParameters = new Dictionary<InventoryStore.SearchByInventoryStoreParameters, string>
                {
                     {InventoryStore.SearchByInventoryStoreParameters.IS_ACTIVE, "IsActive"},
                     {InventoryStore.SearchByInventoryStoreParameters.PRODUCT_ID, "ProductId"},
@@ -182,6 +182,41 @@ namespace Marbale.DataAccess.Data.Inventory
             int rowsUpdated = conn.executeUpdateScript(query, sqParameters.ToArray());
             return rowsUpdated;
         }
+        public int UpdateInventoryStoreOnAdjustment(InventoryStore inventoryStore, string userId)
+        {
+            string query = @"UPDATE   dbo . InventoryStore 
+                    SET  
+                   Quantity  =  isnull(Quantity,0) + (@Quantity)
+                    , LastUpdatedBy  =@LastUpdatedBy
+                    , LastUpdatedDate  = getdate() 
+                    where ProductId  =@ProductId 
+                    and LocationId  = @LocationId";
+            List<SqlParameter> sqParameters = new List<SqlParameter>();
+
+            if (inventoryStore.ProductId <= 0)
+            {
+                sqParameters.Add(new SqlParameter("@ProductId", DBNull.Value));
+            }
+            else
+            {
+                sqParameters.Add(new SqlParameter("@ProductId", inventoryStore.ProductId));
+            }
+            if (inventoryStore.LocationId <= 0)
+            {
+                sqParameters.Add(new SqlParameter("@LocationId", DBNull.Value));
+            }
+            else
+            {
+                sqParameters.Add(new SqlParameter("@LocationId", inventoryStore.LocationId));
+            }
+           
+           
+                sqParameters.Add(new SqlParameter("@Quantity", inventoryStore.Quantity));
+            
+             sqParameters.Add(new SqlParameter("@LastUpdatedBy", userId));
+            int rowsUpdated = conn.executeUpdateScript(query, sqParameters.ToArray());
+            return rowsUpdated;
+        }
 
 
         private InventoryStore GetInventoryStore(DataRow row)
@@ -218,21 +253,21 @@ namespace Marbale.DataAccess.Data.Inventory
                 StringBuilder query = new StringBuilder(" where ");
                 foreach (KeyValuePair<InventoryStore.SearchByInventoryStoreParameters, string> searchParameter in searchParameters)
                 {
-                    if (DBSearchParameters.ContainsKey(searchParameter.Key))
+                    if (DBSearchInventoryStoreParameters.ContainsKey(searchParameter.Key))
                     {
                         joiner = (count == 0) ? " " : " and ";
                         if (searchParameter.Key.Equals(InventoryStore.SearchByInventoryStoreParameters.IS_ACTIVE))
                         {
-                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value);
+                            query.Append(joiner + DBSearchInventoryStoreParameters[searchParameter.Key] + " = " + searchParameter.Value);
                         }
                         else if (searchParameter.Key.Equals(InventoryStore.SearchByInventoryStoreParameters.PRODUCT_ID) ||
                                 searchParameter.Key.Equals(InventoryStore.SearchByInventoryStoreParameters.LOCATION_ID))
                         {
-                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value);
+                            query.Append(joiner + DBSearchInventoryStoreParameters[searchParameter.Key] + " = " + searchParameter.Value);
                         }
                         else
                         {
-                            query.Append(joiner + "Isnull(" + DBSearchParameters[searchParameter.Key] + ",'') = '" + searchParameter.Value + "'");
+                            query.Append(joiner + "Isnull(" + DBSearchInventoryStoreParameters[searchParameter.Key] + ",'') = '" + searchParameter.Value + "'");
                         }
 
                         count++;

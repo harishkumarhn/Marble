@@ -46,6 +46,10 @@
     <Compile Include="Data\GameData.cs" />
     <Compile Include="Data\CardsData.cs" />
     <Compile Include="Data\Inventory\CategoryData.cs" />
+    <Compile Include="Data\Inventory\InventoryAdjustmentsActivityData.cs" />
+    <Compile Include="Data\Inventory\InventoryAdjustmentsData.cs" />
+    <Compile Include="Data\Inventory\InventoryPhysicalCountData.cs" />
+    <Compile Include="Data\Inventory\InventoryPhysicalCountLogData.cs" />
     <Compile Include="Data\Inventory\InventoryProductData.cs" />
     <Compile Include="Data\Inventory\InventoryReceiptData.cs" />
     <Compile Include="Data\Inventory\InventoryStoreData.cs" />

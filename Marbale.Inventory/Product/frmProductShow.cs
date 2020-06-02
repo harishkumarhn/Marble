@@ -150,7 +150,7 @@ namespace Marbale.Inventory.Product
                 btn_duplicate.Enabled = true;
                 loadProductId = -1;
                 lb_productid.Text = "";
-
+                txtCode.Text = "";
                 txtCode.ReadOnly = false;
             }
 
@@ -379,16 +379,24 @@ namespace Marbale.Inventory.Product
         }
         private bool SaveInventoryStore(InventoryProduct inventoryProduct)
         {
-            InventoryStoreBL inventoryProductBL = new InventoryStoreBL();
-            InventoryStore inventoryStore = new InventoryStore()
+            try
             {
-                ProductId = inventoryProduct.ProductId,
-                LocationId = inventoryProduct.DefaultLocationId,
-                IsActive = true,
-                Quantity = 1
-            };
-            inventoryProductBL.Save(inventoryStore, "rakshith");
-            return true;
+
+                InventoryStoreBL inventoryProductBL = new InventoryStoreBL();
+                InventoryStore inventoryStore = new InventoryStore()
+                {
+                    ProductId = inventoryProduct.ProductId,
+                    LocationId = inventoryProduct.DefaultLocationId,
+                    IsActive = true,
+                    Quantity = 1
+                };
+                inventoryProductBL.Save(inventoryStore, "rakshith");
+                return true;
+            }
+            catch (Exception ex)
+            {
+            }
+            return false;
         }
         
         private bool ProductSave()

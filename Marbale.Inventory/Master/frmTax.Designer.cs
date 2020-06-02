@@ -35,7 +35,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.grpUOM = new System.Windows.Forms.GroupBox();
             this.dgvTax = new System.Windows.Forms.DataGridView();
-            this.taxBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.taxIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taxNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taxPercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +44,7 @@
             this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.taxBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.grpUOM.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.taxBindingSource)).BeginInit();
@@ -120,10 +120,7 @@
             this.dgvTax.Name = "dgvTax";
             this.dgvTax.Size = new System.Drawing.Size(531, 274);
             this.dgvTax.TabIndex = 6;
-            // 
-            // taxBindingSource
-            // 
-            this.taxBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.PurchaseTax);
+            this.dgvTax.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvTax_DataError);
             // 
             // taxIdDataGridViewTextBoxColumn
             // 
@@ -186,6 +183,10 @@
             this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
             this.isChangedDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // taxBindingSource
+            // 
+            this.taxBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.PurchaseTax);
             // 
             // frmTax
             // 

@@ -15,7 +15,7 @@ namespace Marbale.BusinessObject.Inventory
         {
             IS_ACTIVE = 0,
             PRODUCT_ID = 1,
-            LOCATION_ID = 1
+            LOCATION_ID = 2
         }
 
 
@@ -38,10 +38,10 @@ namespace Marbale.BusinessObject.Inventory
         }
 
          
-        public InventoryStore(int i,int productId,int locationId,double quantity,double allocatedQuantity,string remarks,bool isActive,
+        public InventoryStore(int id,int productId,int locationId,double quantity,double allocatedQuantity,string remarks,bool isActive,
         string createdBy,string lastUpdatedBy,DateTime createdDate,DateTime lastUpdatedDate )
         {
-            this.id=id;
+            this.id= id;
        this.productId=productId;
         this.locationId=locationId;
         this.quantity=quantity;

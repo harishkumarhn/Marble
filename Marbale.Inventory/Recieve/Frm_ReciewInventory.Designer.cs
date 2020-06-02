@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gb_receive = new System.Windows.Forms.GroupBox();
             this.lb_orderid = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -43,12 +43,15 @@
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TaxId = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.purchaseTaxBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TaxPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TaxInclusive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RequiredByDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chkGrdRecieve = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txt_Address = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtReceiptId = new System.Windows.Forms.Label();
             this.lblOrderDocumentType = new System.Windows.Forms.Label();
             this.lnkApplyTaxToAllLines = new System.Windows.Forms.LinkLabel();
@@ -125,10 +128,9 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.cb_complete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txt_Address = new System.Windows.Forms.TextBox();
             this.gb_receive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_receive)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.purchaseTaxBindingSource)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_products)).BeginInit();
@@ -149,7 +151,7 @@
             this.gb_receive.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gb_receive.Location = new System.Drawing.Point(355, 12);
             this.gb_receive.Name = "gb_receive";
-            this.gb_receive.Size = new System.Drawing.Size(1002, 519);
+            this.gb_receive.Size = new System.Drawing.Size(908, 560);
             this.gb_receive.TabIndex = 18;
             this.gb_receive.TabStop = false;
             this.gb_receive.Text = "Receive Products";
@@ -191,14 +193,14 @@
             this.dgv_receive.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_receive.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_receive.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_receive.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_receive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_receive.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProductId,
@@ -212,26 +214,26 @@
             this.Amount,
             this.RequiredByDate,
             this.chkGrdRecieve});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_receive.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_receive.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgv_receive.GridColor = System.Drawing.Color.Khaki;
             this.dgv_receive.Location = new System.Drawing.Point(9, 198);
             this.dgv_receive.Name = "dgv_receive";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_receive.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgv_receive.Size = new System.Drawing.Size(892, 246);
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_receive.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgv_receive.Size = new System.Drawing.Size(798, 246);
             this.dgv_receive.TabIndex = 37;
             this.dgv_receive.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_receive_CellValueChanged);
             this.dgv_receive.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_receive_DataError);
@@ -269,9 +271,16 @@
             // 
             // TaxId
             // 
+            this.TaxId.DataSource = this.purchaseTaxBindingSource;
+            this.TaxId.DisplayMember = "TaxName";
             this.TaxId.HeaderText = "Tax";
             this.TaxId.Name = "TaxId";
+            this.TaxId.ValueMember = "TaxId";
             this.TaxId.Width = 39;
+            // 
+            // purchaseTaxBindingSource
+            // 
+            this.purchaseTaxBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.PurchaseTax);
             // 
             // TaxPercentage
             // 
@@ -345,8 +354,25 @@
             this.panel2.Controls.Add(this.label8);
             this.panel2.Location = new System.Drawing.Point(3, 17);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(901, 498);
+            this.panel2.Size = new System.Drawing.Size(886, 537);
             this.panel2.TabIndex = 34;
+            // 
+            // txt_Address
+            // 
+            this.txt_Address.Location = new System.Drawing.Point(82, 96);
+            this.txt_Address.Multiline = true;
+            this.txt_Address.Name = "txt_Address";
+            this.txt_Address.Size = new System.Drawing.Size(189, 49);
+            this.txt_Address.TabIndex = 80;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 100);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.TabIndex = 79;
+            this.label3.Text = "Address";
             // 
             // txtReceiptId
             // 
@@ -623,6 +649,7 @@
             this.btn_search.TabIndex = 20;
             this.btn_search.Text = "Search";
             this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // txt_prodcode
             // 
@@ -979,7 +1006,7 @@
             // 
             this.btn_Receipts.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btn_Receipts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Receipts.Location = new System.Drawing.Point(355, 547);
+            this.btn_Receipts.Location = new System.Drawing.Point(358, 578);
             this.btn_Receipts.Name = "btn_Receipts";
             this.btn_Receipts.Size = new System.Drawing.Size(121, 23);
             this.btn_Receipts.TabIndex = 44;
@@ -990,18 +1017,19 @@
             // btnRefresh
             // 
             this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRefresh.Location = new System.Drawing.Point(493, 547);
+            this.btnRefresh.Location = new System.Drawing.Point(496, 578);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(97, 23);
             this.btnRefresh.TabIndex = 46;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // cb_complete
             // 
             this.cb_complete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_complete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cb_complete.Location = new System.Drawing.Point(609, 547);
+            this.cb_complete.Location = new System.Drawing.Point(612, 578);
             this.cb_complete.Name = "cb_complete";
             this.cb_complete.Size = new System.Drawing.Size(86, 23);
             this.cb_complete.TabIndex = 45;
@@ -1012,7 +1040,7 @@
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(713, 547);
+            this.btnSave.Location = new System.Drawing.Point(716, 578);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(86, 23);
             this.btnSave.TabIndex = 47;
@@ -1020,28 +1048,11 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 100);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 13);
-            this.label3.TabIndex = 79;
-            this.label3.Text = "Address";
-            // 
-            // txt_Address
-            // 
-            this.txt_Address.Location = new System.Drawing.Point(82, 96);
-            this.txt_Address.Multiline = true;
-            this.txt_Address.Name = "txt_Address";
-            this.txt_Address.Size = new System.Drawing.Size(189, 49);
-            this.txt_Address.TabIndex = 80;
-            // 
             // Frm_ReciewInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1322, 595);
+            this.ClientSize = new System.Drawing.Size(1322, 675);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.cb_complete);
@@ -1054,6 +1065,7 @@
             this.gb_receive.ResumeLayout(false);
             this.gb_receive.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_receive)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.purchaseTaxBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1147,18 +1159,19 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button cb_complete;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox txt_Address;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewComboBoxColumn TaxId;
+        private System.Windows.Forms.BindingSource purchaseTaxBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaxPercentage;
         private System.Windows.Forms.DataGridViewCheckBoxColumn TaxInclusive;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn RequiredByDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chkGrdRecieve;
-        private System.Windows.Forms.TextBox txt_Address;
-        private System.Windows.Forms.Label label3;
     }
 }

@@ -350,7 +350,16 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 sqParameters.Add(new SqlParameter("@Email", vendor.Email));
             }
+            if (string.IsNullOrEmpty(vendor.Website))
+            {
+                sqParameters.Add(new SqlParameter("@Website", DBNull.Value));
+            }
+            else
+            {
+                sqParameters.Add(new SqlParameter("@Website", vendor.Website));
+            }
 
+            sqParameters.Add(new SqlParameter("@IsActive", Convert.ToBoolean(vendor.IsActive)));
             sqParameters.Add(new SqlParameter("@LastupdatedBy", userId));
             int rowsUpdated = conn.executeUpdateScript(query, sqParameters.ToArray());
             return rowsUpdated;

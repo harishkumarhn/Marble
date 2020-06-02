@@ -44,12 +44,14 @@
             this.receiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.issueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adjustToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adjustmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.requisitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.physicalCountingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -171,9 +173,19 @@
             // 
             // adjustToolStripMenuItem
             // 
+            this.adjustToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adjustmentsToolStripMenuItem,
+            this.physicalCountingToolStripMenuItem});
             this.adjustToolStripMenuItem.Name = "adjustToolStripMenuItem";
             this.adjustToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.adjustToolStripMenuItem.Text = "Adjust";
+            // 
+            // adjustmentsToolStripMenuItem
+            // 
+            this.adjustmentsToolStripMenuItem.Name = "adjustmentsToolStripMenuItem";
+            this.adjustmentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.adjustmentsToolStripMenuItem.Text = "Adjustments";
+            this.adjustmentsToolStripMenuItem.Click += new System.EventHandler(this.adjustmentsToolStripMenuItem_Click);
             // 
             // requisitionToolStripMenuItem
             // 
@@ -220,6 +232,13 @@
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // physicalCountingToolStripMenuItem
+            // 
+            this.physicalCountingToolStripMenuItem.Name = "physicalCountingToolStripMenuItem";
+            this.physicalCountingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.physicalCountingToolStripMenuItem.Text = "Physical Counting";
+            this.physicalCountingToolStripMenuItem.Click += new System.EventHandler(this.physicalCountingToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,5 +284,7 @@
         private System.Windows.Forms.ToolStripMenuItem listToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem adjustmentsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem physicalCountingToolStripMenuItem;
     }
 }

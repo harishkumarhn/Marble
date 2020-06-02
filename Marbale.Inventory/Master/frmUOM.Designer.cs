@@ -132,6 +132,7 @@
             this.uOMIdDataGridViewTextBoxColumn.DataPropertyName = "UOMId";
             this.uOMIdDataGridViewTextBoxColumn.HeaderText = "UOM Id";
             this.uOMIdDataGridViewTextBoxColumn.Name = "uOMIdDataGridViewTextBoxColumn";
+            this.uOMIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // uomNameDataGridViewTextBoxColumn
             // 

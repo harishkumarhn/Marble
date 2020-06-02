@@ -67,12 +67,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.txtEmailId = new System.Windows.Forms.TextBox();
             this.dgvVendor = new System.Windows.Forms.DataGridView();
-            this.vendorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.grpVendorDetails = new System.Windows.Forms.GroupBox();
-            this.btnClose = new System.Windows.Forms.Button();
             this.VendorId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VendorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,6 +88,12 @@
             this.LastUpdatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsChanged = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.vendorBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.grpVendorDetails = new System.Windows.Forms.GroupBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.grpFilter.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendor)).BeginInit();
@@ -482,61 +482,6 @@
             this.dgvVendor.TabIndex = 30;
             this.dgvVendor.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVendor_CellClick);
             // 
-            // vendorBindingSource
-            // 
-            this.vendorBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.Vendor);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(87, 262);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(70, 30);
-            this.btnSave.TabIndex = 34;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(166, 262);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(70, 30);
-            this.btnDelete.TabIndex = 33;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnNew
-            // 
-            this.btnNew.Location = new System.Drawing.Point(8, 262);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(70, 30);
-            this.btnNew.TabIndex = 31;
-            this.btnNew.Text = "New";
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // grpVendorDetails
-            // 
-            this.grpVendorDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpVendorDetails.Controls.Add(this.dgvVendor);
-            this.grpVendorDetails.Location = new System.Drawing.Point(4, 321);
-            this.grpVendorDetails.Name = "grpVendorDetails";
-            this.grpVendorDetails.Size = new System.Drawing.Size(915, 213);
-            this.grpVendorDetails.TabIndex = 35;
-            this.grpVendorDetails.TabStop = false;
-            this.grpVendorDetails.Text = "Vendor Details";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(246, 262);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(70, 30);
-            this.btnClose.TabIndex = 36;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // VendorId
             // 
             this.VendorId.DataPropertyName = "VendorId";
@@ -692,6 +637,62 @@
             this.IsActive.Name = "IsActive";
             this.IsActive.ReadOnly = true;
             this.IsActive.Visible = false;
+            // 
+            // vendorBindingSource
+            // 
+            this.vendorBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.Vendor);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(87, 262);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(70, 30);
+            this.btnSave.TabIndex = 34;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(166, 262);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(70, 30);
+            this.btnDelete.TabIndex = 33;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(8, 262);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(70, 30);
+            this.btnNew.TabIndex = 31;
+            this.btnNew.Text = "New";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // grpVendorDetails
+            // 
+            this.grpVendorDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpVendorDetails.Controls.Add(this.dgvVendor);
+            this.grpVendorDetails.Location = new System.Drawing.Point(4, 321);
+            this.grpVendorDetails.Name = "grpVendorDetails";
+            this.grpVendorDetails.Size = new System.Drawing.Size(915, 213);
+            this.grpVendorDetails.TabIndex = 35;
+            this.grpVendorDetails.TabStop = false;
+            this.grpVendorDetails.Text = "Vendor Details";
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(246, 262);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(70, 30);
+            this.btnClose.TabIndex = 36;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // frmVendor
             // 

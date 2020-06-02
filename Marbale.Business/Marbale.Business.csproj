@@ -56,6 +56,10 @@
     <Compile Include="GameBL.cs" />
     <Compile Include="CardsBL.cs" />
     <Compile Include="Enum\TypeEnum.cs" />
+    <Compile Include="InventoryBL\InventoryAdjustmentsActivityBL.cs" />
+    <Compile Include="InventoryBL\InventoryAdjustmentsBL.cs" />
+    <Compile Include="InventoryBL\InventoryPhysicalCountBL.cs" />
+    <Compile Include="InventoryBL\InventoryPhysicalCountLogBL.cs" />
     <Compile Include="InventoryBL\InventoryProductBL.cs" />
     <Compile Include="InventoryBL\InventoryReceiptBL.cs" />
     <Compile Include="InventoryBL\InventoryStoreBL.cs" />

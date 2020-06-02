@@ -88,23 +88,19 @@ namespace Marbale.Inventory.Recieve
                 ListTax = new List<PurchaseTax>();
             }
             BindingSource taxBS = new BindingSource();
-
+            BindingSource taxBS1 = new BindingSource();
             ListTax.Insert(0, new PurchaseTax());
-            cmb_DefaultTax.DataSource = ListTax;
+            taxBS.DataSource = ListTax;
+            taxBS1.DataSource = ListTax;
+           
+            cmb_DefaultTax.DataSource = taxBS;
             cmb_DefaultTax.ValueMember = "TaxId";
             cmb_DefaultTax.DisplayMember = "TaxName";
             cmb_DefaultTax.SelectedIndex = 0;
-
-
-
-            TaxId.DataSource = ListTax;
-
+            TaxId.DataSource = taxBS1;
             TaxId.ValueMember = "TaxId";
             TaxId.DisplayMember = "TaxName";
             //TaxId.SelectedIndex = 0;
-
-
-
         }
         private void btn_Receipts_Click(object sender, EventArgs e)
         {
@@ -144,8 +140,11 @@ namespace Marbale.Inventory.Recieve
                         dgv_receive[2, e.RowIndex].Value = ptable.Rows[0]["Description"];
                         dgv_receive[3, e.RowIndex].Value = ptable.Rows[0]["ReorderQuantity"];
                         dgv_receive[4, e.RowIndex].Value = ptable.Rows[0]["Cost"];
-                        dgv_receive[5, e.RowIndex].Value = ptable.Rows[0]["TaxId"];
-                        dgv_receive[5, e.RowIndex].Value = 0;// ptable.Rows[0]["taxpercentage"];
+                        int taxid = 0;
+                        if (ptable.Rows[0]["TaxId"] != null)
+                            int.TryParse(ptable.Rows[0]["TaxId"].ToString(), out taxid);
+                        dgv_receive[5, e.RowIndex].Value = taxid;
+                        //dgv_receive[5, e.RowIndex].Value = 0;// ptable.Rows[0]["taxpercentage"];
                         dgv_receive[6, e.RowIndex].Value = "";// ptable.Rows[0]["TaxInclusiveCost"];
                         dgv_receive[7, e.RowIndex].Value = 0;
                         dgv_receive[8, e.RowIndex].Value = DBNull.Value;
@@ -192,7 +191,9 @@ namespace Marbale.Inventory.Recieve
         }
         public void SetAmount(int rowIndex)
         {
-            decimal taxPer = Convert.ToDecimal((dgv_receive["TaxPercentage", rowIndex].Value == DBNull.Value ? 0 : dgv_receive["TaxPercentage", rowIndex].Value));
+            //decimal taxPer = Convert.ToDecimal((dgv_receive["TaxPercentage", rowIndex].Value == DBNull.Value ? 0 : dgv_receive["TaxPercentage", rowIndex].Value));
+
+            decimal taxPer = 0;
             decimal price = Convert.ToDecimal((dgv_receive["Price", rowIndex].Value == DBNull.Value ? 0 : dgv_receive["Price", rowIndex].Value));
             decimal qty = Convert.ToDecimal((dgv_receive["Qty", rowIndex].Value == DBNull.Value ? 0 : dgv_receive["Qty", rowIndex].Value));
 
@@ -352,7 +353,7 @@ namespace Marbale.Inventory.Recieve
         {
 
 
-            if (cmb_vendor.SelectedText == "")
+            if (cmb_vendor.SelectedIndex <=0)
             {
                 MessageBox.Show("Please select Vendor.");
                 return;
@@ -360,6 +361,7 @@ namespace Marbale.Inventory.Recieve
             if (txt_BillNo.Text == "")
             {
                 MessageBox.Show("Bill/Invoice number required.");
+                return;
             }
 
             if (dgv_receive.RowCount > 0)
@@ -476,6 +478,10 @@ namespace Marbale.Inventory.Recieve
 
                     }
                 }
+
+
+                MessageBox.Show("Saved successfully");
+                Reset();
             }
         }
 
@@ -492,6 +498,49 @@ namespace Marbale.Inventory.Recieve
             txt_contact.Text = vendor.ContactName;
             txt_phone.Text = vendor.Phone;
             txt_Address.Text = vendor.AddressLine1 + "\n" + vendor.AddressLine2 ;
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
+
+        private void Reset()
+        {
+            dgv_receive.Rows.Clear();
+            cmb_vendor.SelectedIndex =0;
+            txt_contact.Text = "";
+            txt_phone.Text = "";
+            txt_Address.Text = "";
+            txt_BillNo.Text = "";
+            txtGRN.Text = "";
+            txt_GatePassNo.Text = "";
+            cmb_DefaultTax.SelectedIndex = 0;
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+
+            BindingSource productListBS = new BindingSource();
+            InventoryProductBL productBL = new InventoryProductBL();
+            List<InventoryProduct> productList;
+
+            List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>> searchParameters = new List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>>();
+            searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.IS_ACTIVE, "1"));
+            searchParameters.Add(new KeyValuePair<InventoryProduct.SearchByProductParameters, string>(InventoryProduct.SearchByProductParameters.PRODUCT_CODE, txt_prodcode.Text));
+
+            productList = productBL.GetInventoryProductList(searchParameters);
+
+            if (productList != null)
+            {
+                productListBS.DataSource = productList;
+            }
+            else
+            {
+                productListBS.DataSource = new List<InventoryProduct>();
+            }
+
+            grd_products.DataSource = productListBS;
         }
     }
 

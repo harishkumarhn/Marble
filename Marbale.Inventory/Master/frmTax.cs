@@ -62,6 +62,19 @@ namespace Marbale.Inventory.Master
                                 MessageBox.Show("Please enter the Tax Name");
                                 return;
                             }
+                            if ( tax.TaxPercentage==null)
+                            {
+                                MessageBox.Show("Please enter the Tax Percentage");
+                                return;
+                            }
+                            else
+                            {
+                                double tpercentage = 0;
+                                double.TryParse(tax.TaxPercentage.ToString(), out tpercentage);
+                                tax.TaxPercentage = tpercentage;
+
+                            }
+
                             taxBL.Save(tax, "rakshith");
                         }
                         //else
@@ -77,6 +90,15 @@ namespace Marbale.Inventory.Master
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //public bool Validate()
+        //{
+        //    bool success = true;
+
+
+
+        //    return success;
+        //}
 
         private void frmTax_Load(object sender, EventArgs e)
         {
@@ -138,6 +160,11 @@ namespace Marbale.Inventory.Master
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             PopulateTaxGrid();
+        }
+
+        private void dgvTax_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show(e.Exception.Message);
         }
     }
 }

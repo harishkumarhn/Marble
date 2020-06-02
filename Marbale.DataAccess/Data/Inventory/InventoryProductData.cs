@@ -17,10 +17,12 @@ namespace Marbale.DataAccess.Data.Inventory
         private DBConnection conn;
         private static readonly Dictionary<InventoryProduct.SearchByProductParameters, string> DBSearchParameters = new Dictionary<InventoryProduct.SearchByProductParameters, string>
                {
-                    {InventoryProduct.SearchByProductParameters.IS_ACTIVE, "IsActive"},
-                      {InventoryProduct.SearchByProductParameters.PRODUCT_NAME, "ProductName"},
-                        {InventoryProduct.SearchByProductParameters.PRODUCT_ID, "ProductId"},
-                           {InventoryProduct.SearchByProductParameters.PRODUCT_CODE, "code"},
+            {InventoryProduct.SearchByProductParameters.IS_ACTIVE, "IsActive"},
+            {InventoryProduct.SearchByProductParameters.PRODUCT_NAME, "ProductName"},
+            {InventoryProduct.SearchByProductParameters.PRODUCT_ID, "ProductId"},
+            {InventoryProduct.SearchByProductParameters.PRODUCT_CODE, "code"},
+            {InventoryProduct.SearchByProductParameters.DESCRIPTION, "Description"},
+            {InventoryProduct.SearchByProductParameters.DEFAULT_LOCATION, "DefaultLocationId"},
 
     };
         public InventoryProductData()
@@ -545,6 +547,57 @@ namespace Marbale.DataAccess.Data.Inventory
             return product;
         }
 
+        private InventoryProduct GetInventoryProductWithStore(DataRow row)
+        {
+            InventoryProduct product = new InventoryProduct(
+                            Convert.ToInt32(row["ProductId"]),
+                            row["Code"].ToString(),
+                            row["ProductName"].ToString(),
+                            row["Description"].ToString(),
+                            row["Remarks"].ToString(),
+                            row["BarCode"].ToString(),
+                            row["CategoryId"] == DBNull.Value ? -1 : Convert.ToInt32(row["CategoryId"]),
+                            row["UomId"] == DBNull.Value ? -1 : Convert.ToInt32(row["UomId"]),
+                            row["DefaultVendorId"] == DBNull.Value ? -1 : Convert.ToInt32(row["DefaultVendorId"]),
+                            row["DefaultLocationId"] == DBNull.Value ? -1 : Convert.ToInt32(row["DefaultLocationId"]),
+                            row["TaxId"] == DBNull.Value ? -1 : Convert.ToInt32(row["TaxId"]),
+                            row["OutboundLocationId"] == DBNull.Value ? -1 : Convert.ToInt32(row["OutboundLocationId"]),
+                            row["ReorderPoint"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["ReorderPoint"]),
+                            row["ReorderQuantity"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["ReorderQuantity"]),
+                            row["PriceInTickets"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["PriceInTickets"]),
+                            row["MasterPackQty"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["MasterPackQty"]),
+                            row["TaxInclusiveCost"] == DBNull.Value ? false : Convert.ToBoolean(row["TaxInclusiveCost"].ToString()),
+                            row["IsPurchaseable"] == DBNull.Value ? false : Convert.ToBoolean(row["IsPurchaseable"].ToString()),
+                            row["IsSellable"] == DBNull.Value ? false : Convert.ToBoolean(row["IsSellable"]),
+                            row["LotControlled"] == DBNull.Value ? false : Convert.ToBoolean(row["LotControlled"]),
+                            row["IsActive"] == DBNull.Value ? false : Convert.ToBoolean(row["IsActive"]),
+                            row["IsRedeemable"] == DBNull.Value ? false : Convert.ToBoolean(row["IsRedeemable"].ToString()),
+                            row["MarketListItem"] == DBNull.Value ? false : Convert.ToBoolean(row["MarketListItem"]),
+                            row["InnerPackQty"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["InnerPackQty"]),
+                            row["LowerLimitCost"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["LowerLimitCost"]),
+                            row["CostVariancePercentage"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["CostVariancePercentage"]),
+                            row["SalePrice"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["SalePrice"]),
+                            row["Cost"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["Cost"]),
+                            row["UpperLimitCost"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["UpperLimitCost"]),
+                            row["LastPurchasePrice"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["LastPurchasePrice"]),
+                            row["TurnInPriceInTickets"] == DBNull.Value ? 0 : Convert.ToInt32(row["TurnInPriceInTickets"]),
+                            row["ExpiryType"].ToString(),
+                            row["IssuingApproach"] == DBNull.Value ? "None" : row["IssuingApproach"].ToString(),
+                            row["ExpiryDays"] == DBNull.Value ? 0 : Convert.ToInt32(row["ExpiryDays"]),
+                            row["ItemMarkupPercent"] == DBNull.Value ? double.NaN : Convert.ToDouble(row["ItemMarkupPercent"]),
+                            row["CreatedBy"] == DBNull.Value ? string.Empty : Convert.ToString(row["CreatedBy"]),
+                            row["LastupdatedBy"] == DBNull.Value ? string.Empty : Convert.ToString(row["LastupdatedBy"]),
+                            row["CreatedDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(row["CreatedDate"]),
+                            row["LastupdatedDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(row["LastupdatedDate"]),
+                            row["BarCode1"].ToString()
+                            );
+            product.Avail_Quantity = row["Quantity"] == DBNull.Value ? 0 : Convert.ToInt32(row["Quantity"]);
+            product.AllocatedQuantity = row["AllocatedQuantity"] == DBNull.Value ? 0 : Convert.ToInt32(row["AllocatedQuantity"]);
+            product.StoreLocationId = row["StoreLocationId"] == DBNull.Value ? 0 : Convert.ToInt32(row["StoreLocationId"]);
+            product.StoreRemarks = row["StoreRemarks"] == DBNull.Value ? string.Empty : Convert.ToString(row["StoreRemarks"]);
+            return product;
+        }
+
 
 
         public List<InventoryProduct> GetInventoryProductList(List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>> searchParameters)
@@ -597,6 +650,72 @@ namespace Marbale.DataAccess.Data.Inventory
                 foreach (DataRow locationDataRow in locationTypeData.Rows)
                 {
                     InventoryProduct locationDataObject = GetInventoryProduct(locationDataRow);
+                    pList.Add(locationDataObject);
+                }
+                return pList;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        public List<InventoryProduct> GetInventoryProductListWithStoreData(List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>> searchParameters)
+        {
+            int count = 0;
+            string selectLocationQuery = @"select p.*,s.Quantity,s.AllocatedQuantity,s.LocationId StoreLocationId ,s.Remarks 'StoreRemarks',
+                                        (select top 1 BarCode from InventoryProductBarcode  b where b.IsActive=1) BarCode1
+                                        from InventoryProduct p
+                                        inner join  InventoryStore s on s.ProductId=p.ProductId
+                                        ";
+            if (searchParameters != null)
+            {
+                string joiner = " ";
+                StringBuilder query = new StringBuilder(" where ");
+                foreach (KeyValuePair<InventoryProduct.SearchByProductParameters, string> searchParameter in searchParameters)
+                {
+                    if (DBSearchParameters.ContainsKey(searchParameter.Key))
+                    {
+                        joiner = (count == 0) ? " " : " and ";
+                        if (searchParameter.Key.Equals(InventoryProduct.SearchByProductParameters.IS_ACTIVE))
+                        {
+                            query.Append(joiner +"p."+ DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value);
+                        }
+                        else if (searchParameter.Key.Equals(InventoryProduct.SearchByProductParameters.PRODUCT_NAME) || searchParameter.Key.Equals(InventoryProduct.SearchByProductParameters.PRODUCT_CODE)  ||
+                            searchParameter.Key.Equals(InventoryProduct.SearchByProductParameters.DESCRIPTION))
+                        {
+                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " like '%" + searchParameter.Value + "%'");
+                        }
+                        else if (searchParameter.Key.Equals(InventoryProduct.SearchByProductParameters.PRODUCT_ID) ||
+                            searchParameter.Key.Equals(InventoryProduct.SearchByProductParameters.DEFAULT_LOCATION))
+                        {
+                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " =" + searchParameter.Value);
+                        }
+
+                        else
+                        {
+                            query.Append(joiner + "Isnull(" + DBSearchParameters[searchParameter.Key] + ",'') = '" + searchParameter.Value + "'");
+                        }
+
+                        count++;
+                    }
+                    else
+                    {
+                        throw new Exception("The query parameter does not exist " + searchParameter.Key);
+                    }
+                }
+                if (searchParameters.Count > 0)
+                    selectLocationQuery = selectLocationQuery + query;
+            }
+
+            DataTable dt = conn.executeSelectScript(selectLocationQuery, null);
+            if (dt.Rows.Count > 0)
+            {
+                List<InventoryProduct> pList = new List<InventoryProduct>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    InventoryProduct locationDataObject = GetInventoryProductWithStore(row);
                     pList.Add(locationDataObject);
                 }
                 return pList;

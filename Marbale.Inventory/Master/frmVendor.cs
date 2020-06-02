@@ -109,43 +109,52 @@ namespace Marbale.Inventory.Master
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Validate())
+            try
             {
-                Vendor vendor = new Vendor();
-                vendor.VendorName = txtVendorName.Text;
-                vendor.Code = txtCode.Text;
-                vendor.AddressLine1 = txtAddressLine1.Text;
-                vendor.AddressLine2 = txtAddressLine2.Text;
-                vendor.Remarks = txtRemarks.Text;
-                vendor.City = txtCity.Text;
-                //vendor.State = ddlState.Text;
-                //vendor.Country = ddlCountry.Text;
-                vendor.PostalCode = txtPostalCode.Text;
-                //vendor.AddressRemarks = txtRemarks.Text;
-                vendor.ContactName = txtContactPerson.Text;
-                vendor.Phone = txtPhoneNo.Text;
-                vendor.Email = txtEmailId.Text;
-                vendor.IsActive = chkActive.Checked;
-                vendor.Website = txtWebsite.Text;
-
-                VendorBL vendorBL = new VendorBL();
-                int vendorId = vendorBL.Save(vendor, "rakshith");
-                vendor.VendorId = vendorId;
-                MessageBox.Show("Saved successfully");
-                // ResetFields();
-                //refreshDgv();
-                PopulateVendorGrid();
-                ClearControls();
-                DataGridViewRow row = dgvVendor.Rows.Cast<DataGridViewRow>()
-                                     .Where(r => r.Cells["VendorId"].Value.ToString().Equals(vendorId.ToString()))
-                                      .First();
-                if (row.Index >= 0)
+                if (Validate())
                 {
-                    dgvVendor.Rows[row.Index].Selected = true;
-                    dgvVendor.CurrentCell = dgvVendor.Rows[row.Index].Cells["vendorname"];
-                    dgvVendor.Refresh();
+                    Vendor vendor = new Vendor();
+                    vendor.VendorName = txtVendorName.Text;
+                    vendor.Code = txtCode.Text;
+                    vendor.AddressLine1 = txtAddressLine1.Text;
+                    vendor.AddressLine2 = txtAddressLine2.Text;
+                    vendor.Remarks = txtRemarks.Text;
+                    vendor.City = txtCity.Text;
+                    //vendor.State = ddlState.Text;
+                    //vendor.Country = ddlCountry.Text;
+                    vendor.PostalCode = txtPostalCode.Text;
+                    //vendor.AddressRemarks = txtRemarks.Text;
+                    vendor.ContactName = txtContactPerson.Text;
+                    vendor.Phone = txtPhoneNo.Text;
+                    vendor.Email = txtEmailId.Text;
+                    vendor.IsActive = chkActive.Checked;
+                    vendor.Website = txtWebsite.Text;
+
+                    VendorBL vendorBL = new VendorBL();
+                    int vendorId = vendorBL.Save(vendor, "rakshith");
+                    vendor.VendorId = vendorId;
+                    MessageBox.Show("Saved successfully");
+                    // ResetFields();
+                    //refreshDgv();
+                    PopulateVendorGrid();
+                    ClearControls();
+                    DataGridViewRow row = dgvVendor.Rows.Cast<DataGridViewRow>()
+                                         .Where(r => r.Cells["VendorId"].Value.ToString().Equals(vendorId.ToString()))
+                                          .First();
+                    if (row.Index >= 0)
+                    {
+                        dgvVendor.Rows[row.Index].Selected = true;
+                        dgvVendor.CurrentCell = dgvVendor.Rows[row.Index].Cells["vendorname"];
+                        dgvVendor.Refresh();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+
+                
+            }
+       
         }
 
          
@@ -224,6 +233,44 @@ namespace Marbale.Inventory.Master
             chkActive.Text = dgvVendor.Rows[rowindex].Cells["IsActive"].Value.ToString();
             txtWebsite.Text = dgvVendor.Rows[rowindex].Cells["Website"].Value.ToString();
             txtCode.Text = dgvVendor.Rows[rowindex].Cells["Code"].Value.ToString();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvVendor.CurrentRow!=null && dgvVendor.CurrentRow.Cells["VendorID"].Value.ToString()!="")
+            {
+
+                try
+                {
+                    int Vendorid = Convert.ToInt32(dgvVendor.CurrentRow.Cells["VendorID"].Value.ToString());
+                    if (Vendorid > 0)
+                    {
+                        List<KeyValuePair<Vendor.SearchByVendorParameters, string>> searchParameters = new List<KeyValuePair<Vendor.SearchByVendorParameters, string>>();
+                        searchParameters.Add(new KeyValuePair<Vendor.SearchByVendorParameters, string>(Vendor.SearchByVendorParameters.VENDOR_ID, Vendorid.ToString()));
+                        VendorBL vendorBl = new VendorBL();
+                        List<Vendor> lstVendor = vendorBl.GetVendorList(searchParameters);
+                        if (lstVendor != null && lstVendor.Count == 1)
+                        {
+                            Vendor vendor = lstVendor.FirstOrDefault();
+                            vendor.IsActive = false;
+                            vendorBl.Save(vendor, "rakshith");
+                            MessageBox.Show("Delete successfully");
+                            PopulateVendorGrid();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Unable delete");
+                        }
+
+                    }
+                }
+                catch (Exception ex )
+                {
+                    MessageBox.Show(" Error Occured");
+                }
+               
+            }
+             
         }
     }
 }

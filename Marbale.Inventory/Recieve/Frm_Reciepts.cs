@@ -19,13 +19,63 @@ namespace Marbale.Inventory.Recieve
         {
             //purchaseorderId = poId;
             InitializeComponent();
+
+            //
         }
 
         private void Frm_Reciepts_Load(object sender, EventArgs e)
         {
+            LoadLocationCombobox();
             LoadInventotyReciepts();
+            LoadInventotyReciepts();
+
+        }
+        void populateTax()
+        {
+
+            PurchaseTaxBL taxBL = new PurchaseTaxBL();
+            List<KeyValuePair<PurchaseTax.SearchByTaxParameters, string>> taxSearchParams = new List<KeyValuePair<PurchaseTax.SearchByTaxParameters, string>>();
+            taxSearchParams.Add(new KeyValuePair<PurchaseTax.SearchByTaxParameters, string>(PurchaseTax.SearchByTaxParameters.IS_ACTIVE, "1"));
+
+            List<PurchaseTax> ListTax = taxBL.GetTaxList(taxSearchParams);
+
+
+            if (ListTax == null)
+            {
+                ListTax = new List<PurchaseTax>();
+            }
+            BindingSource taxBS = new BindingSource();
+            BindingSource taxBS1 = new BindingSource();
+            ListTax.Insert(0, new PurchaseTax());
+            taxBS.DataSource = ListTax;
+            taxIdDataGridViewTextBoxColumn.DataSource = taxBS;
+            taxIdDataGridViewTextBoxColumn.ValueMember = "TaxId";
+            taxIdDataGridViewTextBoxColumn.DisplayMember = "TaxName";
+            
+
+ 
+
+
+
         }
 
+        void LoadLocationCombobox()
+        {
+            LocationBL locationTypeBL = new LocationBL();
+            List<Location> lstLocation = locationTypeBL.GetLocation();
+            BindingSource locationBS = new BindingSource();
+            if (lstLocation == null)
+            {
+                lstLocation = new List<Location>();
+            }
+
+            lstLocation.Insert(0, new Location());
+            lstLocation[0].LocationName = "None";
+            locationIdDataGridViewTextBoxColumn.DataSource = lstLocation;
+            locationIdDataGridViewTextBoxColumn.DisplayMember = "LocationName";
+            locationIdDataGridViewTextBoxColumn.ValueMember = "LocationId";
+            
+        }
         public void LoadInventotyReciepts()
         {
             InventoryReceiptBL obBL= new InventoryReceiptBL();
@@ -77,6 +127,18 @@ namespace Marbale.Inventory.Recieve
             int rid = -1;
             int.TryParse(dgv_Reciepts.CurrentRow.Cells["InventoryReceiptID"].Value.ToString(), out rid);
             LoadInventotyRecieptDetails(rid);
+        }
+
+        private void dgv_Reciepts_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rid = -1;
+            int.TryParse(dgv_Reciepts.CurrentRow.Cells["InventoryReceiptID"].Value.ToString(), out rid);
+            LoadInventotyRecieptDetails(rid);
+        }
+
+        private void dgv_RecieptDetails_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
         }
     }
 }

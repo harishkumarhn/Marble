@@ -44,3 +44,6 @@ C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.pdb
 C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.Recieve.Frm_ReciewInventory.resources
 C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.Recieve.Frm_Reciepts.resources
 C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.Adjustments.Frm_Adjustmnets.resources
+C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.Adjustments.Form_InventoryStoreActivity.resources
+C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.Adjustments.Frm_PhysicalCount.resources
+C:\Code\Marble\Marbale.Inventory\obj\Debug\Marbale.Inventory.Adjustments.Frm_PhysicalCountPopup.resources
