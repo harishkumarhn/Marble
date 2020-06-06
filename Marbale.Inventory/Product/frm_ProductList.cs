@@ -431,8 +431,9 @@ namespace Marbale.Inventory.Product
         private void btnCreate_Click(object sender, EventArgs e)
         {
 
-            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(-1, "");
-            frm_AddProduct.ShowDialog();
+            //Frm_AddProduct frm_AddProduct = new Frm_AddProduct(-1, "");
+            //frm_AddProduct.ShowDialog();
+            showProductForm(-1, "");
             PopulateProductGrid();
         }
 
@@ -443,23 +444,44 @@ namespace Marbale.Inventory.Product
             int pid = -1;
             int.TryParse(dgvProducts.CurrentRow.Cells["ProductId"].Value.ToString(), out pid);
 
-             //this.IsMdiContainer = true;
-            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid, "");
+            //this.IsMdiContainer = true;
+            //Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid, "");
 
-            frm_AddProduct.StartPosition = FormStartPosition.CenterScreen;
-            frm_AddProduct.ShowDialog();
+            showProductForm(pid, "");
+
+
+
             PopulateProductGrid();
 
         }
+        private void showProductForm(int pid ,string mode)
+        {
+            Frm_AddProduct frm_AddProduct = null;
 
+            if(mode== "duplicate")
+            {
+                frm_AddProduct = new Frm_AddProduct(pid, "");
+            }
+            else
+            {
+                frm_AddProduct = new Frm_AddProduct(pid,"");
+            }
+            frm_AddProduct.MdiParent = this.MdiParent;
+            frm_AddProduct.Location = new Point(0, 0);
+
+            frm_AddProduct.Show();
+            frm_AddProduct.BringToFront();
+
+        }
         private void Btn_Duplicate_Click(object sender, EventArgs e)
         {
             int pid = -1;
             int.TryParse(dgvProducts.CurrentRow.Cells["ProductId"].Value.ToString(), out pid);
 
-            
-            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid, "duplicate");
-            frm_AddProduct.ShowDialog();
+
+            //Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid, "duplicate");
+            //frm_AddProduct.ShowDialog();
+            showProductForm(pid, "duplicate");
             PopulateProductGrid();
         }
 
