@@ -305,9 +305,9 @@ namespace Marbale.DataAccess
             try
             {
                 SqlParameter[] sqlParameters = new SqlParameter[1];
-                sqlParameters[0] = new SqlParameter("@SiteKey", Convert.ToInt32(siteId));
+                sqlParameters[0] = new SqlParameter("@SiteId", Convert.ToInt32(siteId));
 
-                return conn.executeSelectQuery("sp_getProducyKey", sqlParameters);
+                return conn.executeSelectQuery("sp_getProductKey", sqlParameters);
             }
             catch (Exception ex)
             {
@@ -394,10 +394,11 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[3];
+                SqlParameter[] sqlParameters = new SqlParameter[4];
                 sqlParameters[0] = new SqlParameter("@SiteId", pk.SiteId);
                 sqlParameters[1] = new SqlParameter("@SiteKey", Encoding.ASCII.GetBytes(pk.SiteKey));
                 sqlParameters[2] = new SqlParameter("@LicenseKey", Encoding.ASCII.GetBytes(pk.LicenseKey));
+                sqlParameters[3] = new SqlParameter("@CardsCount", pk.CardsCount);
                 return conn.executeUpdateQuery("sp_UpdateProductKey", sqlParameters);
             }
             catch (Exception e)

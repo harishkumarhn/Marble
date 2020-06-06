@@ -214,7 +214,12 @@
         ////});
         function DisplayPopUp(page,url) {
             $('#myModal').modal('show');
-            if(page != "Product key") {
+            if(page == "Product key") {
+                $('#modelBody').css({
+                    'width': 640,
+                    'margin-top':70
+                });
+            } else {
                 $('#modelBody').css({
                     'left': '-30%',
                     'width': 800,

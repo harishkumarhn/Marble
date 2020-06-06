@@ -509,6 +509,7 @@ namespace Marble.Business
                 foreach (DataRow dr in dt.Rows)
                 {
                     pk.SiteId = dr.IsNull("site_id") ? 0 : int.Parse(dr["site_id"].ToString());
+                    pk.CardsCount = dr.IsNull("MaxCards") ? 0 : int.Parse(dr["MaxCards"].ToString());
 
                     if (!dr.IsNull("SiteKey"))
                     {
