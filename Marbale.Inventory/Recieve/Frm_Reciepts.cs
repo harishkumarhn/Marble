@@ -27,7 +27,7 @@ namespace Marbale.Inventory.Recieve
         {
             LoadLocationCombobox();
             LoadInventotyReciepts();
-            LoadInventotyReciepts();
+            //LoadInventotyReciepts();
 
         }
         void populateTax()
@@ -81,6 +81,10 @@ namespace Marbale.Inventory.Recieve
             InventoryReceiptBL obBL= new InventoryReceiptBL();
             List<KeyValuePair<InventoryReceipt.SearchByInventoryReceiptParameters, string>> sparams = new List<KeyValuePair<InventoryReceipt.SearchByInventoryReceiptParameters, string>>();
             sparams.Add(new KeyValuePair<InventoryReceipt.SearchByInventoryReceiptParameters, string>(InventoryReceipt.SearchByInventoryReceiptParameters.IS_ACTIVE, "1"));
+           if(!string.IsNullOrEmpty(txt_vendor.Text))
+            sparams.Add(new KeyValuePair<InventoryReceipt.SearchByInventoryReceiptParameters, string>(InventoryReceipt.SearchByInventoryReceiptParameters.VENDOR_NAME, txt_vendor.Text));
+            if (!string.IsNullOrEmpty(txt_GRN.Text))
+                sparams.Add(new KeyValuePair<InventoryReceipt.SearchByInventoryReceiptParameters, string>(InventoryReceipt.SearchByInventoryReceiptParameters.GRN, txt_GRN.Text));
             //sparams.Add(new KeyValuePair<InventoryReceipt.SearchByInventoryReceiptParameters, string>(InventoryReceipt.SearchByInventoryReceiptParameters.INVENTORY_RECEIPT_ID, purchaseorderId.ToString()));
 
             List<InventoryReceipt> inventoryReceiptList = obBL.GetInventoryReceiptList(sparams);
@@ -139,6 +143,18 @@ namespace Marbale.Inventory.Recieve
         private void dgv_RecieptDetails_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
 
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            LoadInventotyReciepts();
+        }
+
+        private void btn_Clear_Click(object sender, EventArgs e)
+        {
+            txt_GRN.Text = "";
+            txt_vendor.Text = "";
+            LoadInventotyReciepts();
         }
     }
 }

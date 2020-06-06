@@ -1,4 +1,3 @@
- --drop table InventoryProduct
 
 CREATE TABLE [dbo].[InventoryProduct](
 	[ProductId] [int] IDENTITY(1,1) primary key,
@@ -20,10 +19,10 @@ CREATE TABLE [dbo].[InventoryProduct](
 	[TaxInclusiveCost] [bit] NULL,
 	[IsPurchaseable] [bit] NULL,
 	[IsSellable] [bit] NULL,
-	[LotControlled] [bit] NULL,
+	 
 	[IsActive] [bit] NOT NULL,
 	[IsRedeemable] [bit] NULL,
-	[MarketListItem] [bit] NULL,
+	 
 	[InnerPackQty] [decimal](18, 4) NULL,
 	[LowerLimitCost] [decimal](18, 4) NULL,
 	[CostVariancePercentage] [decimal](6, 2) NULL,
@@ -32,16 +31,9 @@ CREATE TABLE [dbo].[InventoryProduct](
 	[UpperLimitCost] [decimal](18, 4) NULL,
 	[LastPurchasePrice] [decimal](18, 4) NULL,
 	[TurnInPriceInTickets] [int] NULL,
-	[ExpiryType] [bit] NULL,
-	[IssuingApproach] [nvarchar](10) NULL,
-	[ExpiryDays] [int] NULL DEFAULT ((0)),
-	[ItemMarkupPercent] [float] NULL,
+ 
 	[CreatedBy] [varchar](200) NULL,
 	[CreatedDate] [datetime] NULL,
 	[LastUpdatedBy] [varchar](200) NULL,
 	[LastUpdatedDate] [datetime] NULL
 )  
-
-GO
- 
-

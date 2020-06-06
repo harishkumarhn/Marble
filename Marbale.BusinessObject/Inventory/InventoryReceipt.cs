@@ -14,7 +14,9 @@ namespace Marbale.BusinessObject.Inventory
         public enum SearchByInventoryReceiptParameters
         {
             IS_ACTIVE = 0,
-            INVENTORY_RECEIPT_ID=1
+            INVENTORY_RECEIPT_ID=1,
+            VENDOR_NAME= 2,
+            GRN=3
 
         }
 
@@ -32,7 +34,7 @@ namespace Marbale.BusinessObject.Inventory
         DateTime createdDate;
         string lastupdatedBy;
         DateTime lastupdatedDate;
-
+        string vendorName;
 
         public int InventoryReceiptID { get { return inventoryReceiptID; } set { inventoryReceiptID = value; this.IsChanged = true; } }
         public string VendorBillNumber { get { return vendorBillNumber; } set { vendorBillNumber = value; this.IsChanged = true; } }
@@ -47,7 +49,8 @@ namespace Marbale.BusinessObject.Inventory
         public string LastUpdatedBy { get { return lastupdatedBy; } set { lastupdatedBy = value; this.IsChanged = true; } }
         public DateTime CreatedDate { get { return createdDate; } set { createdDate = value; this.IsChanged = true; } }
         public DateTime LastUpdatedDate { get { return lastupdatedDate; } set { lastupdatedDate = value; this.IsChanged = true; } }
-
+        public string VendorName { get { return vendorName; } set { vendorName = value; this.IsChanged = true; } }
+        
 
         public InventoryReceipt()
         {
@@ -56,7 +59,7 @@ namespace Marbale.BusinessObject.Inventory
         }
 
 
-        public InventoryReceipt(int inventoryReceiptID, string vendorBillNumber, string gatePassNumber, string gRN, int purchaseOrderId, string remarks, DateTime receiveDate, string receivedBy,bool isActive, string createdBy, DateTime createdDate, string lastupdatedBy, DateTime lastupdatedDate)
+        public InventoryReceipt(int inventoryReceiptID, string vendorBillNumber, string gatePassNumber, string gRN, int purchaseOrderId, string remarks, DateTime receiveDate, string receivedBy,bool isActive, string createdBy, DateTime createdDate, string lastupdatedBy, DateTime lastupdatedDate,string vendorName)
         {
             this.inventoryReceiptID = inventoryReceiptID;
             this.vendorBillNumber = vendorBillNumber;
@@ -71,6 +74,7 @@ namespace Marbale.BusinessObject.Inventory
             this.createdDate = createdDate;
             this.lastupdatedBy = lastupdatedBy;
             this.lastupdatedDate = lastupdatedDate;
+            this.vendorName = vendorName;
 
         }
 

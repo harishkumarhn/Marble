@@ -384,9 +384,9 @@ namespace Marbale.DataAccess.Data.Inventory
                         {
                             query.Append(joiner + DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value);
                         }
-                       else if (searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_CODE) || searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_NAME))
+                       else if (searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_ID) )
                         {
-                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " like '%" + searchParameter.Value+"%'");
+                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " =" + searchParameter.Value);
                         }
                         else if (searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_CODE) || searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_NAME))
                         {

@@ -30,7 +30,7 @@ namespace Marbale.Inventory
             };
 
 
-    }
+        }
 
         private void categoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -68,12 +68,17 @@ namespace Marbale.Inventory
 
         private void productToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        
+            Frm_ProductList frm_ProductList = new Frm_ProductList();
+            frm_ProductList.MdiParent = this;
+            frm_ProductList.StartPosition = FormStartPosition.CenterScreen;
+            frm_ProductList.Show();
+
+            //frm_ProductList.Show(this);
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(-1,"");
+            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(-1, "");
             frm_AddProduct.ShowDialog();
         }
 

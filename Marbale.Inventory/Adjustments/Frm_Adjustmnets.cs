@@ -72,6 +72,8 @@ namespace Marbale.Inventory.Adjustments
             LocationBL locationTypeBL = new LocationBL();
             List<Location> lstLocation = locationTypeBL.GetLocation();
             BindingSource locationBS = new BindingSource();
+            BindingSource locationBS1 = new BindingSource();
+            BindingSource locationBS2= new BindingSource();
             if (lstLocation == null)
             {
                 lstLocation = new List<Location>();
@@ -79,15 +81,19 @@ namespace Marbale.Inventory.Adjustments
 
             lstLocation.Insert(0, new Location());
             lstLocation[0].LocationName = "None";
-            drp_Location.DataSource = lstLocation;
+            locationBS.DataSource = lstLocation;
+            locationBS1.DataSource = lstLocation;
+            locationBS2.DataSource = lstLocation;
+
+            drp_Location.DataSource = locationBS1;
             drp_Location.DisplayMember = "LocationName";
             drp_Location.ValueMember = "LocationId";
 
-            storeLocationIdDgvColumn.DataSource = lstLocation;
+            storeLocationIdDgvColumn.DataSource = locationBS1;
             storeLocationIdDgvColumn.DisplayMember = "LocationName";
             storeLocationIdDgvColumn.ValueMember = "LocationId";
 
-            cmb_TransferLocation.DataSource = lstLocation;
+            cmb_TransferLocation.DataSource = locationBS2;
             cmb_TransferLocation.DisplayMember = "LocationName";
             cmb_TransferLocation.ValueMember = "LocationId";
         }
@@ -97,6 +103,7 @@ namespace Marbale.Inventory.Adjustments
             rb_FromLocation.Checked = false;
             rb_ToLocation.Checked = false;
             txtTransferRemarks.Text = "";
+            cmb_TransferLocation.SelectedIndex = 0;
         }
         private void ResetAdjustments()
         {

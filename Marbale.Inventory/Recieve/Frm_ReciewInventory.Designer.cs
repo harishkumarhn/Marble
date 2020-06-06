@@ -29,26 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gb_receive = new System.Windows.Forms.GroupBox();
             this.lb_orderid = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgv_receive = new System.Windows.Forms.DataGridView();
-            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TaxId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.purchaseTaxBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.TaxPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TaxInclusive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RequiredByDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkGrdRecieve = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txt_Address = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -110,13 +99,7 @@
             this.upperLimitCostDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.costVariancePercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.turnInPriceInTicketsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lotControlledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.marketListItemDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.expiryTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issuingApproachDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expiryDaysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemMarkupPercentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createdByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -128,6 +111,17 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.cb_complete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TaxId = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.TaxPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TaxInclusive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RequiredByDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkGrdRecieve = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.gb_receive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_receive)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.purchaseTaxBindingSource)).BeginInit();
@@ -193,14 +187,14 @@
             this.dgv_receive.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_receive.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_receive.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_receive.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_receive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_receive.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProductId,
@@ -214,110 +208,33 @@
             this.Amount,
             this.RequiredByDate,
             this.chkGrdRecieve});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_receive.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_receive.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_receive.GridColor = System.Drawing.Color.Khaki;
             this.dgv_receive.Location = new System.Drawing.Point(9, 198);
             this.dgv_receive.Name = "dgv_receive";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_receive.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_receive.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_receive.Size = new System.Drawing.Size(798, 246);
             this.dgv_receive.TabIndex = 37;
             this.dgv_receive.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_receive_CellValueChanged);
             this.dgv_receive.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_receive_DataError);
             // 
-            // ProductId
-            // 
-            this.ProductId.HeaderText = "ProductId";
-            this.ProductId.Name = "ProductId";
-            this.ProductId.Width = 78;
-            // 
-            // ProductCode
-            // 
-            this.ProductCode.HeaderText = "Product Code";
-            this.ProductCode.Name = "ProductCode";
-            this.ProductCode.Width = 97;
-            // 
-            // Description
-            // 
-            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
-            // 
-            // Qty
-            // 
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.Width = 48;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.Width = 56;
-            // 
-            // TaxId
-            // 
-            this.TaxId.DataSource = this.purchaseTaxBindingSource;
-            this.TaxId.DisplayMember = "TaxName";
-            this.TaxId.HeaderText = "Tax";
-            this.TaxId.Name = "TaxId";
-            this.TaxId.ValueMember = "TaxId";
-            this.TaxId.Width = 39;
-            // 
             // purchaseTaxBindingSource
             // 
             this.purchaseTaxBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.PurchaseTax);
-            // 
-            // TaxPercentage
-            // 
-            this.TaxPercentage.HeaderText = "Tax %";
-            this.TaxPercentage.Name = "TaxPercentage";
-            this.TaxPercentage.ReadOnly = true;
-            this.TaxPercentage.Width = 61;
-            // 
-            // TaxInclusive
-            // 
-            this.TaxInclusive.FalseValue = "N";
-            this.TaxInclusive.HeaderText = "Tax Incl";
-            this.TaxInclusive.Name = "TaxInclusive";
-            this.TaxInclusive.TrueValue = "Y";
-            this.TaxInclusive.Width = 51;
-            // 
-            // Amount
-            // 
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
-            this.Amount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Amount.Width = 49;
-            // 
-            // RequiredByDate
-            // 
-            this.RequiredByDate.HeaderText = "Required Date";
-            this.RequiredByDate.Name = "RequiredByDate";
-            this.RequiredByDate.ReadOnly = true;
-            this.RequiredByDate.Width = 101;
-            // 
-            // chkGrdRecieve
-            // 
-            this.chkGrdRecieve.HeaderText = "Recieve";
-            this.chkGrdRecieve.Name = "chkGrdRecieve";
-            this.chkGrdRecieve.Width = 53;
             // 
             // panel2
             // 
@@ -699,13 +616,7 @@
             this.upperLimitCostDataGridViewTextBoxColumn,
             this.costVariancePercentageDataGridViewTextBoxColumn,
             this.turnInPriceInTicketsDataGridViewTextBoxColumn,
-            this.lotControlledDataGridViewCheckBoxColumn,
-            this.marketListItemDataGridViewCheckBoxColumn,
-            this.expiryTypeDataGridViewTextBoxColumn,
-            this.issuingApproachDataGridViewTextBoxColumn,
-            this.expiryDaysDataGridViewTextBoxColumn,
             this.barCodeDataGridViewTextBoxColumn,
-            this.itemMarkupPercentDataGridViewTextBoxColumn,
             this.productNameDataGridViewTextBoxColumn,
             this.createdByDataGridViewTextBoxColumn,
             this.lastUpdatedByDataGridViewTextBoxColumn,
@@ -907,54 +818,12 @@
             this.turnInPriceInTicketsDataGridViewTextBoxColumn.Name = "turnInPriceInTicketsDataGridViewTextBoxColumn";
             this.turnInPriceInTicketsDataGridViewTextBoxColumn.Visible = false;
             // 
-            // lotControlledDataGridViewCheckBoxColumn
-            // 
-            this.lotControlledDataGridViewCheckBoxColumn.DataPropertyName = "LotControlled";
-            this.lotControlledDataGridViewCheckBoxColumn.HeaderText = "LotControlled";
-            this.lotControlledDataGridViewCheckBoxColumn.Name = "lotControlledDataGridViewCheckBoxColumn";
-            this.lotControlledDataGridViewCheckBoxColumn.Visible = false;
-            // 
-            // marketListItemDataGridViewCheckBoxColumn
-            // 
-            this.marketListItemDataGridViewCheckBoxColumn.DataPropertyName = "MarketListItem";
-            this.marketListItemDataGridViewCheckBoxColumn.HeaderText = "MarketListItem";
-            this.marketListItemDataGridViewCheckBoxColumn.Name = "marketListItemDataGridViewCheckBoxColumn";
-            this.marketListItemDataGridViewCheckBoxColumn.Visible = false;
-            // 
-            // expiryTypeDataGridViewTextBoxColumn
-            // 
-            this.expiryTypeDataGridViewTextBoxColumn.DataPropertyName = "ExpiryType";
-            this.expiryTypeDataGridViewTextBoxColumn.HeaderText = "ExpiryType";
-            this.expiryTypeDataGridViewTextBoxColumn.Name = "expiryTypeDataGridViewTextBoxColumn";
-            this.expiryTypeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // issuingApproachDataGridViewTextBoxColumn
-            // 
-            this.issuingApproachDataGridViewTextBoxColumn.DataPropertyName = "IssuingApproach";
-            this.issuingApproachDataGridViewTextBoxColumn.HeaderText = "IssuingApproach";
-            this.issuingApproachDataGridViewTextBoxColumn.Name = "issuingApproachDataGridViewTextBoxColumn";
-            this.issuingApproachDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // expiryDaysDataGridViewTextBoxColumn
-            // 
-            this.expiryDaysDataGridViewTextBoxColumn.DataPropertyName = "ExpiryDays";
-            this.expiryDaysDataGridViewTextBoxColumn.HeaderText = "ExpiryDays";
-            this.expiryDaysDataGridViewTextBoxColumn.Name = "expiryDaysDataGridViewTextBoxColumn";
-            this.expiryDaysDataGridViewTextBoxColumn.Visible = false;
-            // 
             // barCodeDataGridViewTextBoxColumn
             // 
             this.barCodeDataGridViewTextBoxColumn.DataPropertyName = "BarCode";
             this.barCodeDataGridViewTextBoxColumn.HeaderText = "BarCode";
             this.barCodeDataGridViewTextBoxColumn.Name = "barCodeDataGridViewTextBoxColumn";
             this.barCodeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // itemMarkupPercentDataGridViewTextBoxColumn
-            // 
-            this.itemMarkupPercentDataGridViewTextBoxColumn.DataPropertyName = "ItemMarkupPercent";
-            this.itemMarkupPercentDataGridViewTextBoxColumn.HeaderText = "ItemMarkupPercent";
-            this.itemMarkupPercentDataGridViewTextBoxColumn.Name = "itemMarkupPercentDataGridViewTextBoxColumn";
-            this.itemMarkupPercentDataGridViewTextBoxColumn.Visible = false;
             // 
             // productNameDataGridViewTextBoxColumn
             // 
@@ -1047,6 +916,83 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // ProductId
+            // 
+            this.ProductId.HeaderText = "ProductId";
+            this.ProductId.Name = "ProductId";
+            this.ProductId.Width = 78;
+            // 
+            // ProductCode
+            // 
+            this.ProductCode.HeaderText = "Product Code";
+            this.ProductCode.Name = "ProductCode";
+            this.ProductCode.Width = 97;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
+            // Qty
+            // 
+            this.Qty.HeaderText = "Qty";
+            this.Qty.Name = "Qty";
+            this.Qty.Width = 48;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.Width = 56;
+            // 
+            // TaxId
+            // 
+            this.TaxId.DataSource = this.purchaseTaxBindingSource;
+            this.TaxId.DisplayMember = "TaxName";
+            this.TaxId.HeaderText = "Tax";
+            this.TaxId.Name = "TaxId";
+            this.TaxId.ValueMember = "TaxId";
+            this.TaxId.Width = 39;
+            // 
+            // TaxPercentage
+            // 
+            this.TaxPercentage.HeaderText = "Tax %";
+            this.TaxPercentage.Name = "TaxPercentage";
+            this.TaxPercentage.ReadOnly = true;
+            this.TaxPercentage.Width = 61;
+            // 
+            // TaxInclusive
+            // 
+            this.TaxInclusive.FalseValue = "";
+            this.TaxInclusive.HeaderText = "Tax Incl";
+            this.TaxInclusive.Name = "TaxInclusive";
+            this.TaxInclusive.TrueValue = "";
+            this.TaxInclusive.Width = 51;
+            // 
+            // Amount
+            // 
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
+            this.Amount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Amount.Width = 49;
+            // 
+            // RequiredByDate
+            // 
+            this.RequiredByDate.HeaderText = "Required Date";
+            this.RequiredByDate.Name = "RequiredByDate";
+            this.RequiredByDate.ReadOnly = true;
+            this.RequiredByDate.Width = 101;
+            // 
+            // chkGrdRecieve
+            // 
+            this.chkGrdRecieve.HeaderText = "Recieve";
+            this.chkGrdRecieve.Name = "chkGrdRecieve";
+            this.chkGrdRecieve.Width = 53;
             // 
             // Frm_ReciewInventory
             // 
@@ -1161,13 +1107,13 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox txt_Address;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.BindingSource purchaseTaxBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewComboBoxColumn TaxId;
-        private System.Windows.Forms.BindingSource purchaseTaxBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaxPercentage;
         private System.Windows.Forms.DataGridViewCheckBoxColumn TaxInclusive;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;

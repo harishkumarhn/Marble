@@ -47,6 +47,7 @@
             this.cmb_TransferLocation = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgv_Products = new System.Windows.Forms.DataGridView();
+            this.inventoryProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txt_Barcode = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -73,15 +74,14 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbScannedLocation = new System.Windows.Forms.ComboBox();
-            this.inventoryProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.chkSelectItem = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.productIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barCode1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_BarcodeD = new System.Windows.Forms.DataGridViewButtonColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txt_TQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.storeLocationIdDgvColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Def = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.availQuantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remarksDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,6 +92,7 @@
             this.masterPackQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.innerPackQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.defaultVendorIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.storeLocationIdDgvColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.lastPurchasePriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isRedeemableDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.isSellableDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -106,20 +107,13 @@
             this.upperLimitCostDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.costVariancePercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.turnInPriceInTicketsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lotControlledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.marketListItemDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.expiryTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issuingApproachDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expiryDaysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemMarkupPercentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createdByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.allocatedQuantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.storeLocationIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.storeRemarksDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl1.SuspendLayout();
@@ -129,12 +123,12 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Products)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tab_barcode.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_transfer)).BeginInit();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -334,13 +328,13 @@
             this.dgv_Products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.chkSelectItem,
-            this.productIdDataGridViewTextBoxColumn,
+            this.productIdColumn,
             this.codeDataGridViewTextBoxColumn,
             this.barCode1DataGridViewTextBoxColumn,
             this.btn_BarcodeD,
             this.descriptionDataGridViewTextBoxColumn,
             this.txt_TQuantity,
-            this.storeLocationIdDgvColumn,
+            this.Def,
             this.availQuantityDataGridViewTextBoxColumn,
             this.remarksDataGridViewTextBoxColumn,
             this.categoryIdDataGridViewTextBoxColumn,
@@ -351,6 +345,7 @@
             this.masterPackQtyDataGridViewTextBoxColumn,
             this.innerPackQtyDataGridViewTextBoxColumn,
             this.defaultVendorIdDataGridViewTextBoxColumn,
+            this.storeLocationIdDgvColumn,
             this.lastPurchasePriceDataGridViewTextBoxColumn,
             this.isRedeemableDataGridViewCheckBoxColumn,
             this.isSellableDataGridViewCheckBoxColumn,
@@ -365,20 +360,13 @@
             this.upperLimitCostDataGridViewTextBoxColumn,
             this.costVariancePercentageDataGridViewTextBoxColumn,
             this.turnInPriceInTicketsDataGridViewTextBoxColumn,
-            this.lotControlledDataGridViewCheckBoxColumn,
-            this.marketListItemDataGridViewCheckBoxColumn,
-            this.expiryTypeDataGridViewTextBoxColumn,
-            this.issuingApproachDataGridViewTextBoxColumn,
-            this.expiryDaysDataGridViewTextBoxColumn,
             this.barCodeDataGridViewTextBoxColumn,
-            this.itemMarkupPercentDataGridViewTextBoxColumn,
             this.productNameDataGridViewTextBoxColumn,
             this.createdByDataGridViewTextBoxColumn,
             this.lastUpdatedByDataGridViewTextBoxColumn,
             this.createdDateDataGridViewTextBoxColumn,
             this.lastUpdatedDateDataGridViewTextBoxColumn,
             this.allocatedQuantityDataGridViewTextBoxColumn,
-            this.storeLocationIdDataGridViewTextBoxColumn,
             this.storeRemarksDataGridViewTextBoxColumn,
             this.isChangedDataGridViewCheckBoxColumn});
             this.dgv_Products.DataSource = this.inventoryProductBindingSource;
@@ -389,6 +377,10 @@
             this.dgv_Products.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Products_CellContentClick);
             this.dgv_Products.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Products_CellValidated);
             this.dgv_Products.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Products_CellValueChanged);
+            // 
+            // inventoryProductBindingSource
+            // 
+            this.inventoryProductBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.InventoryProduct);
             // 
             // groupBox1
             // 
@@ -656,21 +648,18 @@
             this.cmbScannedLocation.TabIndex = 9;
             this.cmbScannedLocation.ValueMember = "LocationId";
             // 
-            // inventoryProductBindingSource
-            // 
-            this.inventoryProductBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.InventoryProduct);
-            // 
             // chkSelectItem
             // 
             this.chkSelectItem.HeaderText = "Select";
             this.chkSelectItem.Name = "chkSelectItem";
             // 
-            // productIdDataGridViewTextBoxColumn
+            // productIdColumn
             // 
-            this.productIdDataGridViewTextBoxColumn.DataPropertyName = "ProductId";
-            this.productIdDataGridViewTextBoxColumn.HeaderText = "ProductId";
-            this.productIdDataGridViewTextBoxColumn.Name = "productIdDataGridViewTextBoxColumn";
-            this.productIdDataGridViewTextBoxColumn.Visible = false;
+            this.productIdColumn.DataPropertyName = "ProductId";
+            this.productIdColumn.HeaderText = "ProductId";
+            this.productIdColumn.Name = "productIdColumn";
+            this.productIdColumn.ReadOnly = true;
+            this.productIdColumn.Visible = false;
             // 
             // codeDataGridViewTextBoxColumn
             // 
@@ -695,31 +684,36 @@
             this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
             this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
             this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // txt_TQuantity
             // 
             this.txt_TQuantity.HeaderText = "TransferQuantity";
             this.txt_TQuantity.Name = "txt_TQuantity";
             // 
-            // storeLocationIdDgvColumn
+            // Def
             // 
-            this.storeLocationIdDgvColumn.DataPropertyName = "DefaultLocationId";
-            this.storeLocationIdDgvColumn.HeaderText = "DefaultLocationId";
-            this.storeLocationIdDgvColumn.Name = "storeLocationIdDgvColumn";
-            this.storeLocationIdDgvColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.storeLocationIdDgvColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Def.DataPropertyName = "DefaultLocationId";
+            this.Def.HeaderText = "DefaultLocationId";
+            this.Def.Name = "Def";
+            this.Def.ReadOnly = true;
+            this.Def.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Def.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Def.Visible = false;
             // 
             // availQuantityDataGridViewTextBoxColumn
             // 
             this.availQuantityDataGridViewTextBoxColumn.DataPropertyName = "Avail_Quantity";
             this.availQuantityDataGridViewTextBoxColumn.HeaderText = "Avail_Quantity";
             this.availQuantityDataGridViewTextBoxColumn.Name = "availQuantityDataGridViewTextBoxColumn";
+            this.availQuantityDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // remarksDataGridViewTextBoxColumn
             // 
             this.remarksDataGridViewTextBoxColumn.DataPropertyName = "Remarks";
             this.remarksDataGridViewTextBoxColumn.HeaderText = "Remarks";
             this.remarksDataGridViewTextBoxColumn.Name = "remarksDataGridViewTextBoxColumn";
+            this.remarksDataGridViewTextBoxColumn.ReadOnly = true;
             this.remarksDataGridViewTextBoxColumn.Visible = false;
             // 
             // categoryIdDataGridViewTextBoxColumn
@@ -727,6 +721,7 @@
             this.categoryIdDataGridViewTextBoxColumn.DataPropertyName = "CategoryId";
             this.categoryIdDataGridViewTextBoxColumn.HeaderText = "CategoryId";
             this.categoryIdDataGridViewTextBoxColumn.Name = "categoryIdDataGridViewTextBoxColumn";
+            this.categoryIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.categoryIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // costDataGridViewTextBoxColumn
@@ -734,24 +729,28 @@
             this.costDataGridViewTextBoxColumn.DataPropertyName = "Cost";
             this.costDataGridViewTextBoxColumn.HeaderText = "Cost";
             this.costDataGridViewTextBoxColumn.Name = "costDataGridViewTextBoxColumn";
+            this.costDataGridViewTextBoxColumn.Visible = false;
             // 
             // reorderPointDataGridViewTextBoxColumn
             // 
             this.reorderPointDataGridViewTextBoxColumn.DataPropertyName = "ReorderPoint";
             this.reorderPointDataGridViewTextBoxColumn.HeaderText = "ReorderPoint";
             this.reorderPointDataGridViewTextBoxColumn.Name = "reorderPointDataGridViewTextBoxColumn";
+            this.reorderPointDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // reorderQuantityDataGridViewTextBoxColumn
             // 
             this.reorderQuantityDataGridViewTextBoxColumn.DataPropertyName = "ReorderQuantity";
             this.reorderQuantityDataGridViewTextBoxColumn.HeaderText = "ReorderQuantity";
             this.reorderQuantityDataGridViewTextBoxColumn.Name = "reorderQuantityDataGridViewTextBoxColumn";
+            this.reorderQuantityDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // uomIdDataGridViewTextBoxColumn
             // 
             this.uomIdDataGridViewTextBoxColumn.DataPropertyName = "UomId";
             this.uomIdDataGridViewTextBoxColumn.HeaderText = "UomId";
             this.uomIdDataGridViewTextBoxColumn.Name = "uomIdDataGridViewTextBoxColumn";
+            this.uomIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.uomIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // masterPackQtyDataGridViewTextBoxColumn
@@ -759,12 +758,15 @@
             this.masterPackQtyDataGridViewTextBoxColumn.DataPropertyName = "MasterPackQty";
             this.masterPackQtyDataGridViewTextBoxColumn.HeaderText = "MasterPackQty";
             this.masterPackQtyDataGridViewTextBoxColumn.Name = "masterPackQtyDataGridViewTextBoxColumn";
+            this.masterPackQtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.masterPackQtyDataGridViewTextBoxColumn.Visible = false;
             // 
             // innerPackQtyDataGridViewTextBoxColumn
             // 
             this.innerPackQtyDataGridViewTextBoxColumn.DataPropertyName = "InnerPackQty";
             this.innerPackQtyDataGridViewTextBoxColumn.HeaderText = "InnerPackQty";
             this.innerPackQtyDataGridViewTextBoxColumn.Name = "innerPackQtyDataGridViewTextBoxColumn";
+            this.innerPackQtyDataGridViewTextBoxColumn.ReadOnly = true;
             this.innerPackQtyDataGridViewTextBoxColumn.Visible = false;
             // 
             // defaultVendorIdDataGridViewTextBoxColumn
@@ -772,13 +774,24 @@
             this.defaultVendorIdDataGridViewTextBoxColumn.DataPropertyName = "DefaultVendorId";
             this.defaultVendorIdDataGridViewTextBoxColumn.HeaderText = "DefaultVendorId";
             this.defaultVendorIdDataGridViewTextBoxColumn.Name = "defaultVendorIdDataGridViewTextBoxColumn";
+            this.defaultVendorIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.defaultVendorIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // storeLocationIdDgvColumn
+            // 
+            this.storeLocationIdDgvColumn.DataPropertyName = "StoreLocationId";
+            this.storeLocationIdDgvColumn.HeaderText = "StoreLocationId";
+            this.storeLocationIdDgvColumn.Name = "storeLocationIdDgvColumn";
+            this.storeLocationIdDgvColumn.ReadOnly = true;
+            this.storeLocationIdDgvColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.storeLocationIdDgvColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // lastPurchasePriceDataGridViewTextBoxColumn
             // 
             this.lastPurchasePriceDataGridViewTextBoxColumn.DataPropertyName = "LastPurchasePrice";
             this.lastPurchasePriceDataGridViewTextBoxColumn.HeaderText = "LastPurchasePrice";
             this.lastPurchasePriceDataGridViewTextBoxColumn.Name = "lastPurchasePriceDataGridViewTextBoxColumn";
+            this.lastPurchasePriceDataGridViewTextBoxColumn.ReadOnly = true;
             this.lastPurchasePriceDataGridViewTextBoxColumn.Visible = false;
             // 
             // isRedeemableDataGridViewCheckBoxColumn
@@ -786,6 +799,7 @@
             this.isRedeemableDataGridViewCheckBoxColumn.DataPropertyName = "IsRedeemable";
             this.isRedeemableDataGridViewCheckBoxColumn.HeaderText = "IsRedeemable";
             this.isRedeemableDataGridViewCheckBoxColumn.Name = "isRedeemableDataGridViewCheckBoxColumn";
+            this.isRedeemableDataGridViewCheckBoxColumn.ReadOnly = true;
             this.isRedeemableDataGridViewCheckBoxColumn.Visible = false;
             // 
             // isSellableDataGridViewCheckBoxColumn
@@ -800,6 +814,7 @@
             this.isPurchaseableDataGridViewCheckBoxColumn.DataPropertyName = "IsPurchaseable";
             this.isPurchaseableDataGridViewCheckBoxColumn.HeaderText = "IsPurchaseable";
             this.isPurchaseableDataGridViewCheckBoxColumn.Name = "isPurchaseableDataGridViewCheckBoxColumn";
+            this.isPurchaseableDataGridViewCheckBoxColumn.ReadOnly = true;
             this.isPurchaseableDataGridViewCheckBoxColumn.Visible = false;
             // 
             // isActiveDataGridViewCheckBoxColumn
@@ -814,6 +829,7 @@
             this.priceInTicketsDataGridViewTextBoxColumn.DataPropertyName = "PriceInTickets";
             this.priceInTicketsDataGridViewTextBoxColumn.HeaderText = "PriceInTickets";
             this.priceInTicketsDataGridViewTextBoxColumn.Name = "priceInTicketsDataGridViewTextBoxColumn";
+            this.priceInTicketsDataGridViewTextBoxColumn.ReadOnly = true;
             this.priceInTicketsDataGridViewTextBoxColumn.Visible = false;
             // 
             // outboundLocationIdDataGridViewTextBoxColumn
@@ -821,6 +837,7 @@
             this.outboundLocationIdDataGridViewTextBoxColumn.DataPropertyName = "OutboundLocationId";
             this.outboundLocationIdDataGridViewTextBoxColumn.HeaderText = "OutboundLocationId";
             this.outboundLocationIdDataGridViewTextBoxColumn.Name = "outboundLocationIdDataGridViewTextBoxColumn";
+            this.outboundLocationIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.outboundLocationIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // salePriceDataGridViewTextBoxColumn
@@ -828,6 +845,7 @@
             this.salePriceDataGridViewTextBoxColumn.DataPropertyName = "SalePrice";
             this.salePriceDataGridViewTextBoxColumn.HeaderText = "SalePrice";
             this.salePriceDataGridViewTextBoxColumn.Name = "salePriceDataGridViewTextBoxColumn";
+            this.salePriceDataGridViewTextBoxColumn.ReadOnly = true;
             this.salePriceDataGridViewTextBoxColumn.Visible = false;
             // 
             // taxIdDataGridViewTextBoxColumn
@@ -835,6 +853,7 @@
             this.taxIdDataGridViewTextBoxColumn.DataPropertyName = "TaxId";
             this.taxIdDataGridViewTextBoxColumn.HeaderText = "TaxId";
             this.taxIdDataGridViewTextBoxColumn.Name = "taxIdDataGridViewTextBoxColumn";
+            this.taxIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.taxIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // taxInclusiveCostDataGridViewCheckBoxColumn
@@ -842,6 +861,7 @@
             this.taxInclusiveCostDataGridViewCheckBoxColumn.DataPropertyName = "TaxInclusiveCost";
             this.taxInclusiveCostDataGridViewCheckBoxColumn.HeaderText = "TaxInclusiveCost";
             this.taxInclusiveCostDataGridViewCheckBoxColumn.Name = "taxInclusiveCostDataGridViewCheckBoxColumn";
+            this.taxInclusiveCostDataGridViewCheckBoxColumn.ReadOnly = true;
             this.taxInclusiveCostDataGridViewCheckBoxColumn.Visible = false;
             // 
             // lowerLimitCostDataGridViewTextBoxColumn
@@ -849,6 +869,7 @@
             this.lowerLimitCostDataGridViewTextBoxColumn.DataPropertyName = "LowerLimitCost";
             this.lowerLimitCostDataGridViewTextBoxColumn.HeaderText = "LowerLimitCost";
             this.lowerLimitCostDataGridViewTextBoxColumn.Name = "lowerLimitCostDataGridViewTextBoxColumn";
+            this.lowerLimitCostDataGridViewTextBoxColumn.ReadOnly = true;
             this.lowerLimitCostDataGridViewTextBoxColumn.Visible = false;
             // 
             // upperLimitCostDataGridViewTextBoxColumn
@@ -856,6 +877,7 @@
             this.upperLimitCostDataGridViewTextBoxColumn.DataPropertyName = "UpperLimitCost";
             this.upperLimitCostDataGridViewTextBoxColumn.HeaderText = "UpperLimitCost";
             this.upperLimitCostDataGridViewTextBoxColumn.Name = "upperLimitCostDataGridViewTextBoxColumn";
+            this.upperLimitCostDataGridViewTextBoxColumn.ReadOnly = true;
             this.upperLimitCostDataGridViewTextBoxColumn.Visible = false;
             // 
             // costVariancePercentageDataGridViewTextBoxColumn
@@ -863,6 +885,7 @@
             this.costVariancePercentageDataGridViewTextBoxColumn.DataPropertyName = "CostVariancePercentage";
             this.costVariancePercentageDataGridViewTextBoxColumn.HeaderText = "CostVariancePercentage";
             this.costVariancePercentageDataGridViewTextBoxColumn.Name = "costVariancePercentageDataGridViewTextBoxColumn";
+            this.costVariancePercentageDataGridViewTextBoxColumn.ReadOnly = true;
             this.costVariancePercentageDataGridViewTextBoxColumn.Visible = false;
             // 
             // turnInPriceInTicketsDataGridViewTextBoxColumn
@@ -870,61 +893,23 @@
             this.turnInPriceInTicketsDataGridViewTextBoxColumn.DataPropertyName = "TurnInPriceInTickets";
             this.turnInPriceInTicketsDataGridViewTextBoxColumn.HeaderText = "TurnInPriceInTickets";
             this.turnInPriceInTicketsDataGridViewTextBoxColumn.Name = "turnInPriceInTicketsDataGridViewTextBoxColumn";
+            this.turnInPriceInTicketsDataGridViewTextBoxColumn.ReadOnly = true;
             this.turnInPriceInTicketsDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // lotControlledDataGridViewCheckBoxColumn
-            // 
-            this.lotControlledDataGridViewCheckBoxColumn.DataPropertyName = "LotControlled";
-            this.lotControlledDataGridViewCheckBoxColumn.HeaderText = "LotControlled";
-            this.lotControlledDataGridViewCheckBoxColumn.Name = "lotControlledDataGridViewCheckBoxColumn";
-            this.lotControlledDataGridViewCheckBoxColumn.Visible = false;
-            // 
-            // marketListItemDataGridViewCheckBoxColumn
-            // 
-            this.marketListItemDataGridViewCheckBoxColumn.DataPropertyName = "MarketListItem";
-            this.marketListItemDataGridViewCheckBoxColumn.HeaderText = "MarketListItem";
-            this.marketListItemDataGridViewCheckBoxColumn.Name = "marketListItemDataGridViewCheckBoxColumn";
-            this.marketListItemDataGridViewCheckBoxColumn.Visible = false;
-            // 
-            // expiryTypeDataGridViewTextBoxColumn
-            // 
-            this.expiryTypeDataGridViewTextBoxColumn.DataPropertyName = "ExpiryType";
-            this.expiryTypeDataGridViewTextBoxColumn.HeaderText = "ExpiryType";
-            this.expiryTypeDataGridViewTextBoxColumn.Name = "expiryTypeDataGridViewTextBoxColumn";
-            this.expiryTypeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // issuingApproachDataGridViewTextBoxColumn
-            // 
-            this.issuingApproachDataGridViewTextBoxColumn.DataPropertyName = "IssuingApproach";
-            this.issuingApproachDataGridViewTextBoxColumn.HeaderText = "IssuingApproach";
-            this.issuingApproachDataGridViewTextBoxColumn.Name = "issuingApproachDataGridViewTextBoxColumn";
-            this.issuingApproachDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // expiryDaysDataGridViewTextBoxColumn
-            // 
-            this.expiryDaysDataGridViewTextBoxColumn.DataPropertyName = "ExpiryDays";
-            this.expiryDaysDataGridViewTextBoxColumn.HeaderText = "ExpiryDays";
-            this.expiryDaysDataGridViewTextBoxColumn.Name = "expiryDaysDataGridViewTextBoxColumn";
-            this.expiryDaysDataGridViewTextBoxColumn.Visible = false;
             // 
             // barCodeDataGridViewTextBoxColumn
             // 
             this.barCodeDataGridViewTextBoxColumn.DataPropertyName = "BarCode";
             this.barCodeDataGridViewTextBoxColumn.HeaderText = "BarCode";
             this.barCodeDataGridViewTextBoxColumn.Name = "barCodeDataGridViewTextBoxColumn";
+            this.barCodeDataGridViewTextBoxColumn.ReadOnly = true;
             this.barCodeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // itemMarkupPercentDataGridViewTextBoxColumn
-            // 
-            this.itemMarkupPercentDataGridViewTextBoxColumn.DataPropertyName = "ItemMarkupPercent";
-            this.itemMarkupPercentDataGridViewTextBoxColumn.HeaderText = "ItemMarkupPercent";
-            this.itemMarkupPercentDataGridViewTextBoxColumn.Name = "itemMarkupPercentDataGridViewTextBoxColumn";
             // 
             // productNameDataGridViewTextBoxColumn
             // 
             this.productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
             this.productNameDataGridViewTextBoxColumn.HeaderText = "ProductName";
             this.productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
+            this.productNameDataGridViewTextBoxColumn.ReadOnly = true;
             this.productNameDataGridViewTextBoxColumn.Visible = false;
             // 
             // createdByDataGridViewTextBoxColumn
@@ -960,19 +945,14 @@
             this.allocatedQuantityDataGridViewTextBoxColumn.DataPropertyName = "AllocatedQuantity";
             this.allocatedQuantityDataGridViewTextBoxColumn.HeaderText = "AllocatedQuantity";
             this.allocatedQuantityDataGridViewTextBoxColumn.Name = "allocatedQuantityDataGridViewTextBoxColumn";
-            this.allocatedQuantityDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // storeLocationIdDataGridViewTextBoxColumn
-            // 
-            this.storeLocationIdDataGridViewTextBoxColumn.DataPropertyName = "StoreLocationId";
-            this.storeLocationIdDataGridViewTextBoxColumn.HeaderText = "StoreLocationId";
-            this.storeLocationIdDataGridViewTextBoxColumn.Name = "storeLocationIdDataGridViewTextBoxColumn";
+            this.allocatedQuantityDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // storeRemarksDataGridViewTextBoxColumn
             // 
             this.storeRemarksDataGridViewTextBoxColumn.DataPropertyName = "StoreRemarks";
             this.storeRemarksDataGridViewTextBoxColumn.HeaderText = "StoreRemarks";
             this.storeRemarksDataGridViewTextBoxColumn.Name = "storeRemarksDataGridViewTextBoxColumn";
+            this.storeRemarksDataGridViewTextBoxColumn.Visible = false;
             // 
             // isChangedDataGridViewCheckBoxColumn
             // 
@@ -999,6 +979,7 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Products)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tab_barcode.ResumeLayout(false);
@@ -1006,7 +987,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_transfer)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1058,14 +1038,20 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cmbScannedLocation;
         private System.Windows.Forms.BindingSource inventoryProductBindingSource;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn lotControlledDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn marketListItemDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn expiryTypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn issuingApproachDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn expiryDaysDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemMarkupPercentDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chkSelectItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productIdColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn barCode1DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewButtonColumn btn_BarcodeD;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn txt_TQuantity;
-        private System.Windows.Forms.DataGridViewComboBoxColumn storeLocationIdDgvColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Def;
         private System.Windows.Forms.DataGridViewTextBoxColumn availQuantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn remarksDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryIdDataGridViewTextBoxColumn;
@@ -1076,6 +1062,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn masterPackQtyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn innerPackQtyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn defaultVendorIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn storeLocationIdDgvColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastPurchasePriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isRedeemableDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isSellableDataGridViewCheckBoxColumn;
@@ -1090,20 +1077,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn upperLimitCostDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn costVariancePercentageDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn turnInPriceInTicketsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn lotControlledDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn marketListItemDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn expiryTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn issuingApproachDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn expiryDaysDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn barCodeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn itemMarkupPercentDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn createdByDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedByDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn allocatedQuantityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn storeLocationIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn storeRemarksDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
     }

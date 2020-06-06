@@ -29,6 +29,7 @@ namespace Marble.Business.InventoryBL
         public  Vendor  GetVendor(int vendorId)
         {
             List<KeyValuePair<Vendor.SearchByVendorParameters, string>> searchParameters = new List<KeyValuePair<Vendor.SearchByVendorParameters, string>>();
+            searchParameters.Add(new KeyValuePair<Vendor.SearchByVendorParameters, string>(Vendor.SearchByVendorParameters.VENDOR_ID, vendorId.ToString()));
             List<Vendor> vendors= vendorData.GetVendorList(searchParameters);
             if(vendors==null || vendors.Count == 0)
             {

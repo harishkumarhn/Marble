@@ -465,7 +465,7 @@ namespace Marbale.Inventory.Recieve
                         purchaseOrderReceiveLine.Price = dgv_receive["Price", i].Value != null ? 0 : Convert.ToDouble(dgv_receive["Price", i].Value);
                         //purchaseOrderReceiveLine.TaxPercentage =  Convert.ToDouble(dgv_receive["TaxPercentage", i].Value);
                         purchaseOrderReceiveLine.Amount = dgv_receive["Amount", i].Value != null ? 0 : Convert.ToDouble(dgv_receive["Amount", i].Value);
-                        purchaseOrderReceiveLine.TaxInclusive = Convert.ToBoolean(dgv_receive["TaxInclusive", i].Value);
+                        purchaseOrderReceiveLine.TaxInclusive = dgv_receive["TaxInclusive", i].Value ==null?false: Convert.ToBoolean(dgv_receive["TaxInclusive", i].Value);
                         purchaseOrderReceiveLine.TaxId = dgv_receive["TaxId", i].Value != null ? -1 : Convert.ToInt32(dgv_receive["TaxId", i].Value);
                         purchaseOrderReceiveLine.ReceiptId = inventoryReceipt.InventoryReceiptID;
                         purchaseOrderReceiveLine.VendorBillNumber = txt_BillNo.Text;

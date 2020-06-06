@@ -69,8 +69,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tb_lastpurchaseprice = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.cmbIssueApproach = new System.Windows.Forms.ComboBox();
-            this.label27 = new System.Windows.Forms.Label();
             this.chk_IsSellable = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.chk_Purchaseable = new System.Windows.Forms.CheckBox();
@@ -206,6 +204,7 @@
             this.btn_Add.TabIndex = 33;
             this.btn_Add.Text = "New";
             this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
             // BOMEditMenu
             // 
@@ -351,9 +350,9 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.tb_lastpurchaseprice);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(8, 313);
+            this.groupBox1.Location = new System.Drawing.Point(8, 286);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(862, 89);
+            this.groupBox1.Size = new System.Drawing.Size(862, 97);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Costing";
@@ -478,28 +477,6 @@
             this.label6.Text = "Last Purch Price:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // cmbIssueApproach
-            // 
-            this.cmbIssueApproach.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbIssueApproach.FormattingEnabled = true;
-            this.cmbIssueApproach.Items.AddRange(new object[] {
-            "None",
-            "FIFO",
-            "FEFO"});
-            this.cmbIssueApproach.Location = new System.Drawing.Point(453, 160);
-            this.cmbIssueApproach.Name = "cmbIssueApproach";
-            this.cmbIssueApproach.Size = new System.Drawing.Size(124, 21);
-            this.cmbIssueApproach.TabIndex = 88;
-            // 
-            // label27
-            // 
-            this.label27.Location = new System.Drawing.Point(331, 168);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(118, 13);
-            this.label27.TabIndex = 87;
-            this.label27.Text = "Issuing Approach:*";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // chk_IsSellable
             // 
             this.chk_IsSellable.Location = new System.Drawing.Point(817, 100);
@@ -551,9 +528,7 @@
             this.groupBox3.Controls.Add(this.chk_IsRedeemable);
             this.groupBox3.Controls.Add(this.label16);
             this.groupBox3.Controls.Add(this.txtCode);
-            this.groupBox3.Controls.Add(this.cmbIssueApproach);
             this.groupBox3.Controls.Add(this.btnUPCBarcode);
-            this.groupBox3.Controls.Add(this.label27);
             this.groupBox3.Controls.Add(this.lb_productid);
             this.groupBox3.Controls.Add(this.tb_barcode);
             this.groupBox3.Controls.Add(this.lblActive);
@@ -594,7 +569,7 @@
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
             this.groupBox3.Location = new System.Drawing.Point(8, 21);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(862, 286);
+            this.groupBox3.Size = new System.Drawing.Size(862, 259);
             this.groupBox3.TabIndex = 74;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Item Details";
@@ -737,7 +712,7 @@
             this.btnAddTax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddTax.ForeColor = System.Drawing.Color.Black;
-            this.btnAddTax.Location = new System.Drawing.Point(559, 102);
+            this.btnAddTax.Location = new System.Drawing.Point(551, 76);
             this.btnAddTax.Name = "btnAddTax";
             this.btnAddTax.Size = new System.Drawing.Size(66, 23);
             this.btnAddTax.TabIndex = 102;
@@ -762,7 +737,7 @@
             this.cmb_OutboundLocation.DisplayMember = "LocationId";
             this.cmb_OutboundLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_OutboundLocation.FormattingEnabled = true;
-            this.cmb_OutboundLocation.Location = new System.Drawing.Point(109, 244);
+            this.cmb_OutboundLocation.Location = new System.Drawing.Point(452, 215);
             this.cmb_OutboundLocation.Name = "cmb_OutboundLocation";
             this.cmb_OutboundLocation.Size = new System.Drawing.Size(121, 21);
             this.cmb_OutboundLocation.TabIndex = 81;
@@ -770,7 +745,7 @@
             // 
             // label15
             // 
-            this.label15.Location = new System.Drawing.Point(-1, 246);
+            this.label15.Location = new System.Drawing.Point(348, 215);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(108, 15);
             this.label15.TabIndex = 101;
@@ -820,7 +795,7 @@
             this.btn_addvendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addvendor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addvendor.ForeColor = System.Drawing.Color.Black;
-            this.btn_addvendor.Location = new System.Drawing.Point(577, 202);
+            this.btn_addvendor.Location = new System.Drawing.Point(578, 159);
             this.btn_addvendor.Name = "btn_addvendor";
             this.btn_addvendor.Size = new System.Drawing.Size(113, 23);
             this.btn_addvendor.TabIndex = 100;
@@ -885,7 +860,7 @@
             this.cmb_Vendor.DisplayMember = "VendorId";
             this.cmb_Vendor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_Vendor.FormattingEnabled = true;
-            this.cmb_Vendor.Location = new System.Drawing.Point(451, 204);
+            this.cmb_Vendor.Location = new System.Drawing.Point(452, 161);
             this.cmb_Vendor.Name = "cmb_Vendor";
             this.cmb_Vendor.Size = new System.Drawing.Size(121, 21);
             this.cmb_Vendor.TabIndex = 82;
@@ -893,7 +868,7 @@
             // 
             // label10
             // 
-            this.label10.Location = new System.Drawing.Point(347, 209);
+            this.label10.Location = new System.Drawing.Point(348, 166);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 15);
             this.label10.TabIndex = 93;
@@ -1124,8 +1099,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbIssueApproach;
-        private System.Windows.Forms.Label label27;
         private System.Windows.Forms.DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;

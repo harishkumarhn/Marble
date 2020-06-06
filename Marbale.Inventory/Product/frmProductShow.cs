@@ -37,6 +37,7 @@ namespace Marbale.Inventory.Product
             //InitializeVariables();
             pmode = mode;
             btn_duplicate.Enabled = false;
+            chk_active.Checked = true;
 
         }
 
@@ -87,6 +88,7 @@ namespace Marbale.Inventory.Product
             List<Location> lstLocation = locationTypeBL.GetLocation();
 
             BindingSource locationBS = new BindingSource();
+            BindingSource locationBS1 = new BindingSource();
             //inBoundLocationDTOList = locationList.GetAllLocations("Store");
             if (lstLocation == null)
             {
@@ -96,12 +98,15 @@ namespace Marbale.Inventory.Product
             lstLocation.Insert(0, new Location());
             lstLocation[0].LocationName = "None";
 
-            cmb_InboundLocation.DataSource = lstLocation;
+            locationBS.DataSource = lstLocation;
+            locationBS1.DataSource = lstLocation;
+
+            cmb_InboundLocation.DataSource = locationBS;
             cmb_InboundLocation.ValueMember = "LocationId";
             cmb_InboundLocation.DisplayMember = "LocationName";
 
 
-            cmb_OutboundLocation.DataSource = lstLocation;
+            cmb_OutboundLocation.DataSource = locationBS1;
             cmb_OutboundLocation.ValueMember = "LocationId";
             cmb_OutboundLocation.DisplayMember = "LocationName";
         }
@@ -142,8 +147,7 @@ namespace Marbale.Inventory.Product
             populateTax();
             populateLocation();
 
-            loadProduct(loadProductId);
-
+           
 
             if (pmode == "duplicate")
             {
@@ -155,7 +159,7 @@ namespace Marbale.Inventory.Product
             }
 
 
-
+            loadProduct(loadProductId);
         }
         private void loadProduct(int pid)
         {
@@ -181,7 +185,7 @@ namespace Marbale.Inventory.Product
             chk_IsSellable.Checked = inventoryProduct.IsSellable;
             //chkLotControlled.Checked = inventoryProduct.LotControlled;
             //chkLotControlled.Enabled = !inventoryProduct.LotControlled;
-            cmbIssueApproach.Enabled = inventoryProduct.LotControlled;
+            
             chk_Purchaseable.Checked = inventoryProduct.IsPurchaseable.Equals("Y");
             chkTaxInclusiveCost.Checked = (inventoryProduct.TaxInclusiveCost.Equals("Y"));
             txtReorderpoint.Text = inventoryProduct.ReorderPoint.ToString();
@@ -201,7 +205,7 @@ namespace Marbale.Inventory.Product
             //else if (inventoryProduct.ExpiryType.Equals("E"))
             //    cmbExpiryType.Text = "Expiry Date";
 
-            cmbIssueApproach.Text = inventoryProduct.IssuingApproach;
+           
             txtDescription.Text = inventoryProduct.Description;
             tb_remarks.Text = inventoryProduct.Remarks;
             cmb_category.SelectedValue = inventoryProduct.CategoryId;
@@ -309,11 +313,11 @@ namespace Marbale.Inventory.Product
             txt_InnerCostUnit.Text = "";
             cmbTax.SelectedIndex = 0;
             cmbUOM.SelectedIndex = 0;
-            chk_active.Checked = false;
+            chk_active.Checked = true;
             chk_IsSellable.Checked = false;
             chk_IsRedeemable.Checked = false;
             //cmbExpiryType.Text = "";
-            cmbIssueApproach.Text = "";
+           
             chk_Purchaseable.Checked = false;
             chkTaxInclusiveCost.Checked = false;
 
@@ -449,7 +453,8 @@ namespace Marbale.Inventory.Product
             try
             {
 
-                bool isNewProduct = string.IsNullOrEmpty(lb_productid.Text) ? true : false;
+                //bool isNewProduct = string.IsNullOrEmpty(lb_productid.Text) ? true : false;
+                bool isNewProduct = chk_Purchaseable.Checked;
                 InventoryProduct inventoryProduct = new InventoryProduct();
                 if (!string.IsNullOrEmpty(lb_productid.Text))
                     inventoryProduct.ProductId = Convert.ToInt32(lb_productid.Text);
@@ -512,7 +517,7 @@ namespace Marbale.Inventory.Product
 
                 if (!string.IsNullOrEmpty(txt_UpperCostLimit.Text))
                     inventoryProduct.UpperLimitCost = Convert.ToDouble(txt_UpperCostLimit.Text);
-
+                inventoryProduct.TaxInclusiveCost = chkTaxInclusiveCost.Checked;
                 InventoryProductBL inventoryProductBL = new InventoryProductBL();
                 int id = inventoryProductBL.Save(inventoryProduct, "rakshith");
                 inventoryProduct.ProductId = id;
@@ -684,8 +689,10 @@ namespace Marbale.Inventory.Product
             }
         }
 
-
-        
+        private void btn_Add_Click(object sender, EventArgs e)
+        {
+            loadProduct(-1);
+        }
     }
 }
 

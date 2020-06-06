@@ -44,10 +44,10 @@ namespace Marbale.BusinessObject.Inventory
         bool taxInclusiveCost;
         bool isPurchaseable;
         bool isSellable;
-        bool lotControlled;
+       
         bool isActive;
         bool isRedeemable;
-        bool marketListItem;
+        
 
         double innerPackQty;
         double lowerLimitCost;
@@ -58,10 +58,8 @@ namespace Marbale.BusinessObject.Inventory
         double lastPurchasePrice;
 
         int turnInPriceInTickets;
-        string expiryType;
-        string issuingApproach;
-        int expiryDays;
-        double itemMarkupPercent;
+         
+         
 
         string createdBy;
         string lastUpdatedBy;
@@ -89,13 +87,10 @@ namespace Marbale.BusinessObject.Inventory
             isRedeemable = false;
             isSellable = false;
             isPurchaseable = false;
-            lotControlled = false;
-            expiryType = "N";
-            issuingApproach = "None";
-            expiryDays = 0;
+            
         }
 
-        public InventoryProduct(int productId, string code, string productName, string description, string remarks, string barCode, int categoryId, int uomId, int defaultVendorId, int defaultLocationId, int taxId, int outboundLocationId, double reorderPoint, double reorderQuantity, double priceInTickets, double masterPackQty, bool taxInclusiveCost, bool isPurchaseable, bool isSellable, bool lotControlled, bool isActive, bool isRedeemable, bool marketListItem, double innerPackQty, double lowerLimitCost, double costVariancePercentage, double salePrice, double cost, double upperLimitCost, double lastPurchasePrice, int turnInPriceInTickets, string expiryType, string issuingApproach, int expiryDays, double itemMarkupPercent, string createdBy, string lastUpdatedBy, DateTime createdDate, DateTime lastUpdatedDate
+        public InventoryProduct(int productId, string code, string productName, string description, string remarks, string barCode, int categoryId, int uomId, int defaultVendorId, int defaultLocationId, int taxId, int outboundLocationId, double reorderPoint, double reorderQuantity, double priceInTickets, double masterPackQty, bool taxInclusiveCost, bool isPurchaseable, bool isSellable,   bool isActive, bool isRedeemable,  double innerPackQty, double lowerLimitCost, double costVariancePercentage, double salePrice, double cost, double upperLimitCost, double lastPurchasePrice, int turnInPriceInTickets,   string createdBy, string lastUpdatedBy, DateTime createdDate, DateTime lastUpdatedDate
 )
         {
             this.productName = productName;
@@ -130,12 +125,7 @@ namespace Marbale.BusinessObject.Inventory
            
             this.turnInPriceInTickets = turnInPriceInTickets;
          
-            this.lotControlled = lotControlled;
-            this.marketListItem = marketListItem;
-            this.expiryType = expiryType;
-            this.issuingApproach = issuingApproach;
-          
-            this.expiryDays = expiryDays;
+        
             this.barCode = barCode;
             this.createdBy = createdBy;
             this.createdDate = createdDate;
@@ -144,7 +134,7 @@ namespace Marbale.BusinessObject.Inventory
 
         }
 
-        public InventoryProduct(int productId, string code, string productName, string description, string remarks, string barCode, int categoryId, int uomId, int defaultVendorId, int defaultLocationId, int taxId, int outboundLocationId, double reorderPoint, double reorderQuantity, double priceInTickets, double masterPackQty, bool taxInclusiveCost, bool isPurchaseable, bool isSellable, bool lotControlled, bool isActive, bool isRedeemable, bool marketListItem, double innerPackQty, double lowerLimitCost, double costVariancePercentage, double salePrice, double cost, double upperLimitCost, double lastPurchasePrice, int turnInPriceInTickets, string expiryType, string issuingApproach, int expiryDays, double itemMarkupPercent, string createdBy, string lastUpdatedBy, DateTime createdDate, DateTime lastUpdatedDate,string barcode1
+        public InventoryProduct(int productId, string code, string productName, string description, string remarks, string barCode, int categoryId, int uomId, int defaultVendorId, int defaultLocationId, int taxId, int outboundLocationId, double reorderPoint, double reorderQuantity, double priceInTickets, double masterPackQty, bool taxInclusiveCost, bool isPurchaseable, bool isSellable,  bool isActive, bool isRedeemable,  double innerPackQty, double lowerLimitCost, double costVariancePercentage, double salePrice, double cost, double upperLimitCost, double lastPurchasePrice, int turnInPriceInTickets,   string createdBy, string lastUpdatedBy, DateTime createdDate, DateTime lastUpdatedDate,string barcode1
 )
         {
             this.productName = productName;
@@ -179,12 +169,7 @@ namespace Marbale.BusinessObject.Inventory
 
             this.turnInPriceInTickets = turnInPriceInTickets;
 
-            this.lotControlled = lotControlled;
-            this.marketListItem = marketListItem;
-            this.expiryType = expiryType;
-            this.issuingApproach = issuingApproach;
-
-            this.expiryDays = expiryDays;
+            
             this.barCode = barCode;
             this.barCode1 = barcode1;
             this.createdBy = createdBy;
@@ -221,14 +206,9 @@ namespace Marbale.BusinessObject.Inventory
         public double UpperLimitCost { get { return upperLimitCost; } set { upperLimitCost = value; this.IsChanged = true; } }
         public double CostVariancePercentage { get { return costVariancePercentage; } set { costVariancePercentage = value; this.IsChanged = true; } }
         public int TurnInPriceInTickets { get { return turnInPriceInTickets; } set { turnInPriceInTickets = value; this.IsChanged = true; } }
-        public bool LotControlled { get { return lotControlled; } set { lotControlled = value; this.IsChanged = true; } }
-        public bool MarketListItem { get { return marketListItem; } set { marketListItem = value; this.IsChanged = true; } }
-        public string ExpiryType { get { return expiryType; } set { expiryType = value; this.IsChanged = true; } }
-        public string IssuingApproach { get { return issuingApproach; } set { issuingApproach = value; this.IsChanged = true; } }
-        public int ExpiryDays { get { return expiryDays; } set { expiryDays = value; this.IsChanged = true; } }
+       
         public string BarCode { get { return barCode; } set { barCode = value; this.IsChanged = true; } }
         public string BarCode1 { get { return barCode1; } set { barCode1 = value; this.IsChanged = true; } }
-        public double ItemMarkupPercent { get { return itemMarkupPercent; } set { itemMarkupPercent = value; this.IsChanged = true; } }
         public string ProductName { get { return productName; } set { productName = value; this.IsChanged = true; } }
         public string CreatedBy { get { return createdBy; } set { createdBy = value; this.IsChanged = true; } }
         public string LastUpdatedBy { get { return lastUpdatedBy; } set { lastUpdatedBy = value; this.IsChanged = true; } }

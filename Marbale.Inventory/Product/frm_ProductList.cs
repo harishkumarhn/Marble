@@ -294,69 +294,69 @@ namespace Marbale.Inventory.Product
             {
                 MessageBox.Show(ex.Message);
             }
-            if (isChanged)
-            {
-                DialogResult DR = MessageBox.Show("Do you want save", "Save", MessageBoxButtons.YesNoCancel);
-                switch (DR)
-                {
-                    case DialogResult.Yes: saverequired = true; break;
-                    case DialogResult.No: break;
-                    case DialogResult.Cancel: return;
-                    default: break;
-                }
-            }
+            //if (isChanged)
+            //{
+            //    DialogResult DR = MessageBox.Show("Do you want save", "Save", MessageBoxButtons.YesNoCancel);
+            //    switch (DR)
+            //    {
+            //        case DialogResult.Yes: saverequired = true; break;
+            //        case DialogResult.No: break;
+            //        case DialogResult.Cancel: return;
+            //        default: break;
+            //    }
+            //}
 
-            if (saverequired)
-            {
-                if (!ValidateChildren())
-                    return;
-                btnSave.PerformClick();
-            }
+            //if (saverequired)
+            //{
+            //    if (!ValidateChildren())
+            //        return;
+            //   // btnSave.PerformClick();
+            //}
 
             PopulateProductGrid();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            bool saverequired = false;
-            bool isChanged = false;
-            try
-            {
-                BindingSource productBS = (BindingSource)dgvProducts.DataSource;
-                var productListOnDisplay = (List<InventoryProduct>)productBS.DataSource;
+            //bool saverequired = false;
+            //bool isChanged = false;
+            //try
+            //{
+            //    BindingSource productBS = (BindingSource)dgvProducts.DataSource;
+            //    var productListOnDisplay = (List<InventoryProduct>)productBS.DataSource;
 
-                foreach (InventoryProduct d in productListOnDisplay)
-                {
-                    if (d.IsChanged == true)
-                    {
-                        isChanged = true;
-                        break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //    foreach (InventoryProduct d in productListOnDisplay)
+            //    {
+            //        if (d.IsChanged == true)
+            //        {
+            //            isChanged = true;
+            //            break;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
 
-            if (isChanged)
-            {
-                DialogResult DR = MessageBox.Show("Do you want save", "Save", MessageBoxButtons.YesNoCancel);
-                switch (DR)
-                {
-                    case DialogResult.Yes: saverequired = true; break;
-                    case DialogResult.No: break;
-                    case DialogResult.Cancel: return;
-                    default: break;
-                }
-            }
+            //if (isChanged)
+            //{
+            //    DialogResult DR = MessageBox.Show("Do you want save", "Save", MessageBoxButtons.YesNoCancel);
+            //    switch (DR)
+            //    {
+            //        case DialogResult.Yes: saverequired = true; break;
+            //        case DialogResult.No: break;
+            //        case DialogResult.Cancel: return;
+            //        default: break;
+            //    }
+            //}
 
-            if (saverequired)
-            {
-                if (!ValidateChildren())
-                    return;
-                btnSave.PerformClick();
-            }
+            //if (saverequired)
+            //{
+            //    if (!ValidateChildren())
+            //        return;
+            //    btnSave.PerformClick();
+            //}
 
             this.Close();
         }
@@ -443,7 +443,10 @@ namespace Marbale.Inventory.Product
             int pid = -1;
             int.TryParse(dgvProducts.CurrentRow.Cells["ProductId"].Value.ToString(), out pid);
 
+             //this.IsMdiContainer = true;
             Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid, "");
+
+            frm_AddProduct.StartPosition = FormStartPosition.CenterScreen;
             frm_AddProduct.ShowDialog();
             PopulateProductGrid();
 
@@ -453,6 +456,8 @@ namespace Marbale.Inventory.Product
         {
             int pid = -1;
             int.TryParse(dgvProducts.CurrentRow.Cells["ProductId"].Value.ToString(), out pid);
+
+            
             Frm_AddProduct frm_AddProduct = new Frm_AddProduct(pid, "duplicate");
             frm_AddProduct.ShowDialog();
             PopulateProductGrid();
@@ -461,6 +466,12 @@ namespace Marbale.Inventory.Product
         private void btn_searchStrip_Click(object sender, EventArgs e)
         {
             PopulateProductGrid();
+        }
+
+        private void tsbClear_Click(object sender, EventArgs e)
+        {
+            txt_searchCode.Text = "";
+            txt_searchProdName.Text = "";
         }
     }
 }

@@ -16,6 +16,8 @@ namespace Marbale.DataAccess.Data.Inventory
                {
                     {InventoryReceipt.SearchByInventoryReceiptParameters.IS_ACTIVE, "IsActive"},
                      {InventoryReceipt.SearchByInventoryReceiptParameters.INVENTORY_RECEIPT_ID, "InventoryReceiptID"},
+                      {InventoryReceipt.SearchByInventoryReceiptParameters.VENDOR_NAME, "VendorName"},
+                       {InventoryReceipt.SearchByInventoryReceiptParameters.GRN, "GRN"},
 
         };
         public InventoryReceiptData()
@@ -248,8 +250,12 @@ namespace Marbale.DataAccess.Data.Inventory
         public List<InventoryReceipt> GetInventoryReceiptList(List<KeyValuePair<InventoryReceipt.SearchByInventoryReceiptParameters, string>> searchParameters)
         {
             int count = 0;
-            string selectLocationQuery = @"select *
-                                         from InventoryReceipt";
+            string selectLocationQuery = @" select * from
+                                         (
+                                         select r.*,v.Name 'VendorName' from InventoryReceipt r
+                                         inner join PurchaseOrder po on po.PurchaseOrderId=r.PurchaseOrderId
+                                         inner join  vendor v on po.vendorId = v.vendorId
+                                         )a";
             if (searchParameters != null)
             {
                 string joiner = " ";
@@ -259,14 +265,14 @@ namespace Marbale.DataAccess.Data.Inventory
                     if (DBSearchParameters.ContainsKey(searchParameter.Key))
                     {
                         joiner = (count == 0) ? " " : " and ";
-                        if (searchParameter.Key.Equals(Vendor.SearchByVendorParameters.IS_ACTIVE))
+                        if (searchParameter.Key.Equals(InventoryReceipt.SearchByInventoryReceiptParameters.IS_ACTIVE))
                         {
                             query.Append(joiner + DBSearchParameters[searchParameter.Key] + " = " + searchParameter.Value);
                         }
-                        //else if (searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_CODE) || searchParameter.Key.Equals(Vendor.SearchByVendorParameters.VENDOR_NAME))
-                        //{
-                        //    query.Append(joiner + DBSearchParameters[searchParameter.Key] + " like '%" + searchParameter.Value + "%'");
-                        //}
+                        else if (searchParameter.Key.Equals(InventoryReceipt.SearchByInventoryReceiptParameters.VENDOR_NAME) || searchParameter.Key.Equals(InventoryReceipt.SearchByInventoryReceiptParameters.GRN))
+                        {
+                            query.Append(joiner + DBSearchParameters[searchParameter.Key] + " like '%" + searchParameter.Value + "%'");
+                        }
                         else
                         {
                             query.Append(joiner + "Isnull(" + DBSearchParameters[searchParameter.Key] + ",'') = '" + searchParameter.Value + "'");
@@ -319,7 +325,9 @@ namespace Marbale.DataAccess.Data.Inventory
                                             dr["CreatedBy"].ToString(),
                                             dr["CreatedDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["CreatedDate"]),
                                             dr["LastupdatedBy"].ToString(),
-                                            dr["LastupdatedDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["LastupdatedDate"])
+                                            dr["LastupdatedDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["LastupdatedDate"]),
+                                            dr["VendorName"].ToString()
+                                            
                                             );
 
             return inventoryReceipt;

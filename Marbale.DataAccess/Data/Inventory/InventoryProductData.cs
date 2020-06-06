@@ -96,7 +96,7 @@ namespace Marbale.DataAccess.Data.Inventory
                                ,LastPurchasePrice
                                ,TurnInPriceInTickets
                                 
-                               ,IssuingApproach
+                               
                                 
                                 
                                ,CreatedBy
@@ -134,7 +134,7 @@ namespace Marbale.DataAccess.Data.Inventory
                                ,@LastPurchasePrice
                                ,@TurnInPriceInTickets
                            
-                               ,@IssuingApproach
+                              
                                 
                                 
                                ,@CreatedBy
@@ -284,7 +284,7 @@ namespace Marbale.DataAccess.Data.Inventory
             param.Add(new SqlParameter("@TurnInPriceInTickets", inventoryProduct.TurnInPriceInTickets));
 
             //param.Add(new SqlParameter("@ExpiryType", string.IsNullOrEmpty(inventoryProduct.ExpiryType) ? "N" : inventoryProduct.ExpiryType));
-            param.Add(new SqlParameter("@IssuingApproach", string.IsNullOrEmpty(inventoryProduct.IssuingApproach) ? "None" : inventoryProduct.IssuingApproach));
+            
             //param.Add(new SqlParameter("@ExpiryDays", inventoryProduct.ExpiryDays));
             //double verifyDouble = 0;
             //if ((Double.TryParse(inventoryProduct.ItemMarkupPercent.ToString(), out verifyDouble) == false) || inventoryProduct.ItemMarkupPercent.ToString() == "NaN" || inventoryProduct.ItemMarkupPercent.ToString() == "")
@@ -322,10 +322,10 @@ namespace Marbale.DataAccess.Data.Inventory
                             ,TaxInclusiveCost = @TaxInclusiveCost
                             ,IsPurchaseable = @IsPurchaseable
                             ,IsSellable = @IsSellable
-                            --,LotControlled = @LotControlled 
+                         
                             ,IsActive = @IsActive
                             ,IsRedeemable = @IsRedeemable 
-                            ,MarketListItem = @MarketListItem
+                           
                             ,InnerPackQty = @InnerPackQty
                             ,LowerLimitCost = @LowerLimitCost
                             ,CostVariancePercentage = @CostVariancePercentage
@@ -334,10 +334,6 @@ namespace Marbale.DataAccess.Data.Inventory
                             ,UpperLimitCost = @UpperLimitCost
                             ,LastPurchasePrice = @LastPurchasePrice 
                             ,TurnInPriceInTickets = @TurnInPriceInTickets 
-                            --,ExpiryType = @ExpiryType 
-                            ,IssuingApproach = @IssuingApproach
-                            ,ExpiryDays = @ExpiryDays
-                            ,ItemMarkupPercent = @ItemMarkupPercent 
                             ,LastUpdatedBy = @LastUpdatedBy  
                             ,LastUpdatedDate = getdate()
                             WHERE ProductId =@ProductId
@@ -385,7 +381,7 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 param.Add(new SqlParameter("@BarCode", inventoryProduct.BarCode));
             }
-            if (inventoryProduct.CategoryId == -1)
+            if (inventoryProduct.CategoryId <= 0)
             {
                 param.Add(new SqlParameter("@CategoryId", DBNull.Value));
             }
@@ -393,7 +389,7 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 param.Add(new SqlParameter("@CategoryId", inventoryProduct.CategoryId));
             }
-            if (inventoryProduct.UomId == -1)
+            if (inventoryProduct.UomId <= 0)
             {
                 param.Add(new SqlParameter("@UomId", DBNull.Value));
             }
@@ -401,7 +397,7 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 param.Add(new SqlParameter("@UomId", inventoryProduct.UomId));
             }
-            if (inventoryProduct.DefaultVendorId == -1)
+            if (inventoryProduct.DefaultVendorId <= 0)
             {
                 param.Add(new SqlParameter("@DefaultVendorId", DBNull.Value));
             }
@@ -409,7 +405,7 @@ namespace Marbale.DataAccess.Data.Inventory
             {
                 param.Add(new SqlParameter("@DefaultVendorId", inventoryProduct.DefaultVendorId));
             }
-            if (inventoryProduct.DefaultLocationId == -1)
+            if (inventoryProduct.DefaultLocationId <= 0)
             {
                 param.Add(new SqlParameter("@DefaultLocationId", DBNull.Value));
             }
@@ -418,7 +414,7 @@ namespace Marbale.DataAccess.Data.Inventory
                 param.Add(new SqlParameter("@DefaultLocationId", inventoryProduct.DefaultLocationId));
             }
 
-            if (inventoryProduct.TaxId == -1)
+            if (inventoryProduct.TaxId <= 0)
             {
                 param.Add(new SqlParameter("@taxId", DBNull.Value));
             }
@@ -427,7 +423,7 @@ namespace Marbale.DataAccess.Data.Inventory
                 param.Add(new SqlParameter("@taxId", inventoryProduct.TaxId));
             }
 
-            if (inventoryProduct.OutboundLocationId == -1)
+            if (inventoryProduct.OutboundLocationId <= 0)
             {
                 param.Add(new SqlParameter("@outboundLocationId", DBNull.Value));
             }
@@ -456,14 +452,7 @@ namespace Marbale.DataAccess.Data.Inventory
             param.Add(new SqlParameter("@isActive", Convert.ToBoolean(inventoryProduct.IsActive)));
             param.Add(new SqlParameter("@IsRedeemable", Convert.ToBoolean(inventoryProduct.IsRedeemable)));
 
-            if (inventoryProduct.MarketListItem)
-            {
-                param.Add(new SqlParameter("@MarketListItem", inventoryProduct.MarketListItem));
-            }
-            else
-            {
-                param.Add(new SqlParameter("@MarketListItem", false));
-            }
+          
             param.Add(new SqlParameter("@InnerPackQty", inventoryProduct.InnerPackQty));
 
             param.Add(new SqlParameter("@LowerLimitCost", inventoryProduct.LowerLimitCost));
@@ -483,18 +472,9 @@ namespace Marbale.DataAccess.Data.Inventory
 
             param.Add(new SqlParameter("@TurnInPriceInTickets", inventoryProduct.TurnInPriceInTickets));
 
-            //param.Add(new SqlParameter("@ExpiryType", string.IsNullOrEmpty(inventoryProduct.ExpiryType) ? "N" : inventoryProduct.ExpiryType));
-            param.Add(new SqlParameter("@IssuingApproach", string.IsNullOrEmpty(inventoryProduct.IssuingApproach) ? "None" : inventoryProduct.IssuingApproach));
-            param.Add(new SqlParameter("@ExpiryDays", inventoryProduct.ExpiryDays));
+            
             double verifyDouble = 0;
-            if ((Double.TryParse(inventoryProduct.ItemMarkupPercent.ToString(), out verifyDouble) == false) || inventoryProduct.ItemMarkupPercent.ToString() == "NaN" || inventoryProduct.ItemMarkupPercent.ToString() == "")
-            {
-                param.Add(new SqlParameter("@ItemMarkupPercent", DBNull.Value));
-            }
-            else
-            {
-                param.Add(new SqlParameter("@ItemMarkupPercent", inventoryProduct.ItemMarkupPercent));
-            }
+         
             param.Add(new SqlParameter("@LastupdatedBy", userId));
             int rowsUpdated = conn.executeUpdateScript(query, param.ToArray());
             return rowsUpdated;
@@ -523,10 +503,9 @@ namespace Marbale.DataAccess.Data.Inventory
                             row["TaxInclusiveCost"] == DBNull.Value ? false : Convert.ToBoolean(row["TaxInclusiveCost"].ToString()),
                             row["IsPurchaseable"] == DBNull.Value ? false : Convert.ToBoolean(row["IsPurchaseable"].ToString()),
                             row["IsSellable"] == DBNull.Value ? false : Convert.ToBoolean(row["IsSellable"]),
-                            row["LotControlled"] == DBNull.Value ? false : Convert.ToBoolean(row["LotControlled"]),
                             row["IsActive"] == DBNull.Value ? false : Convert.ToBoolean(row["IsActive"]),
                             row["IsRedeemable"] == DBNull.Value ? false : Convert.ToBoolean(row["IsRedeemable"].ToString()),
-                            row["MarketListItem"] == DBNull.Value ? false : Convert.ToBoolean(row["MarketListItem"]),
+                           
                             row["InnerPackQty"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["InnerPackQty"]),
                             row["LowerLimitCost"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["LowerLimitCost"]),
                             row["CostVariancePercentage"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["CostVariancePercentage"]),
@@ -535,10 +514,7 @@ namespace Marbale.DataAccess.Data.Inventory
                             row["UpperLimitCost"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["UpperLimitCost"]),
                             row["LastPurchasePrice"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["LastPurchasePrice"]),
                             row["TurnInPriceInTickets"] == DBNull.Value ? 0 : Convert.ToInt32(row["TurnInPriceInTickets"]),
-                            row["ExpiryType"].ToString(),
-                            row["IssuingApproach"] == DBNull.Value ? "None" : row["IssuingApproach"].ToString(),
-                            row["ExpiryDays"] == DBNull.Value ? 0 : Convert.ToInt32(row["ExpiryDays"]),
-                            row["ItemMarkupPercent"] == DBNull.Value ? double.NaN : Convert.ToDouble(row["ItemMarkupPercent"]),
+                            
                             row["CreatedBy"] == DBNull.Value ? string.Empty : Convert.ToString(row["CreatedBy"]),
                             row["LastupdatedBy"] == DBNull.Value ? string.Empty : Convert.ToString(row["LastupdatedBy"]),
                             row["CreatedDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(row["CreatedDate"]),
@@ -569,10 +545,10 @@ namespace Marbale.DataAccess.Data.Inventory
                             row["TaxInclusiveCost"] == DBNull.Value ? false : Convert.ToBoolean(row["TaxInclusiveCost"].ToString()),
                             row["IsPurchaseable"] == DBNull.Value ? false : Convert.ToBoolean(row["IsPurchaseable"].ToString()),
                             row["IsSellable"] == DBNull.Value ? false : Convert.ToBoolean(row["IsSellable"]),
-                            row["LotControlled"] == DBNull.Value ? false : Convert.ToBoolean(row["LotControlled"]),
+                         
                             row["IsActive"] == DBNull.Value ? false : Convert.ToBoolean(row["IsActive"]),
                             row["IsRedeemable"] == DBNull.Value ? false : Convert.ToBoolean(row["IsRedeemable"].ToString()),
-                            row["MarketListItem"] == DBNull.Value ? false : Convert.ToBoolean(row["MarketListItem"]),
+                             
                             row["InnerPackQty"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["InnerPackQty"]),
                             row["LowerLimitCost"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["LowerLimitCost"]),
                             row["CostVariancePercentage"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["CostVariancePercentage"]),
@@ -581,10 +557,7 @@ namespace Marbale.DataAccess.Data.Inventory
                             row["UpperLimitCost"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["UpperLimitCost"]),
                             row["LastPurchasePrice"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["LastPurchasePrice"]),
                             row["TurnInPriceInTickets"] == DBNull.Value ? 0 : Convert.ToInt32(row["TurnInPriceInTickets"]),
-                            row["ExpiryType"].ToString(),
-                            row["IssuingApproach"] == DBNull.Value ? "None" : row["IssuingApproach"].ToString(),
-                            row["ExpiryDays"] == DBNull.Value ? 0 : Convert.ToInt32(row["ExpiryDays"]),
-                            row["ItemMarkupPercent"] == DBNull.Value ? double.NaN : Convert.ToDouble(row["ItemMarkupPercent"]),
+                        
                             row["CreatedBy"] == DBNull.Value ? string.Empty : Convert.ToString(row["CreatedBy"]),
                             row["LastupdatedBy"] == DBNull.Value ? string.Empty : Convert.ToString(row["LastupdatedBy"]),
                             row["CreatedDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(row["CreatedDate"]),
