@@ -32,10 +32,14 @@ namespace Marble.Business
 
         public List<CardsModel> GetAllCards(CardsModel c)
         {
-            var cardslist = cardData.GetAllCards(c);
-            List<CardsModel> listcards = new List<CardsModel>();
-            listcards = getAllCardsProperties(cardslist);
-            return listcards;
+            if (c.IssueDate != null || c.ToDate != null)
+            {
+                var cardslist = cardData.GetAllCards(c);
+                List<CardsModel> listcards = new List<CardsModel>();
+                listcards = getAllCardsProperties(cardslist);
+                return listcards;
+            }
+            return null;
         }
         public List<CardsModel> getAllCardsProperties(DataTable cardslist)
         {

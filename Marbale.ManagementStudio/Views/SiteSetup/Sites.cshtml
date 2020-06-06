@@ -57,8 +57,8 @@
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveSites()">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button" >Add</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();"  id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
 </div>
 <script>
 

@@ -161,7 +161,7 @@
     </tbody>
 </table>
 <div class="action">
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
     <button type="button" class="btn btn-primary" data-toggle="modal" onclick="EditProduct(0)">
