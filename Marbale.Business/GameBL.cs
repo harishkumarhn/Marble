@@ -192,7 +192,16 @@ namespace Marble.Business
                  themes.Add(new IdValue() { Id = 0, Value = "Theme1" });
                  themes.Add(new IdValue() { Id = 0, Value = "Theme2" });
 
-                 foreach (DataRow dr in gameDataTable.Rows)
+                List<IdValue> ticketmodes = new List<IdValue>();
+                ticketmodes.Add(new IdValue() { Id = 0, Value = "E-Tick" });
+                ticketmodes.Add(new IdValue() { Id = 1, Value = "Physical-TiK" });
+                ticketmodes.Add(new IdValue() { Id = 2, Value = "Default" });
+
+                List<Game> games = new List<Game>();
+                games.Add(new Game() { Id = 0, Name = "Select" });
+                games.AddRange(GetGames());
+
+                foreach (DataRow dr in gameDataTable.Rows)
                  {
                      Machine machine = new Machine();
                      machine.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
@@ -217,7 +226,8 @@ namespace Marble.Business
                      machine.AvalibleHubs = hubs;
                      machine.AvalibleReaders = readers;
                      machine.AvalibleThemes = themes;
-
+                    machine.AvailableTicketModes = ticketmodes;
+                    machine.AvailableGames = games;
                      machines.Add(machine);
                  }
                  if (machines.Count == 0)
@@ -226,6 +236,8 @@ namespace Marble.Business
                      obj.AvalibleHubs = hubs;
                      obj.AvalibleReaders = readers;
                      obj.AvalibleThemes = themes;
+                    obj.AvailableTicketModes = ticketmodes;
+                    obj.AvailableGames = games;
                      machines.Add(obj);
                  }
                  return machines;

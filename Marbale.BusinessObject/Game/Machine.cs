@@ -29,5 +29,7 @@ namespace Marbale.BusinessObject.Game
         public List<IdValue> AvalibleThemes { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public string LastUpdatedBy { get; set; }
+        public List<IdValue> AvailableTicketModes { get; set; }
+        public List<Game> AvailableGames { get; set; }
     }
 }
