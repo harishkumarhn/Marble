@@ -55,9 +55,9 @@
 <div id = "TaxActions" class="action" style="width:50%;right:0vh;left:auto">
     <div style="float:right;margin-right:20px">
         <button class="btn btn-primary btn-md" role="button" onclick="SaveTax()">Save</button>
-        <button class="btn btn-primary btn-md" role="button" onclick="history.back();">Back</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();">Back</button>
         <button class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add</button>
-        <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
     </div>
 </div>
 <script>

@@ -15,7 +15,7 @@
 <table id="marbleTable" class="stripe row-border order-column">
     <thead>
         <th>ID</th>
-        <th>Name</th>
+        <th>Machine Name</th>
         <th>Game Name</th>
         <th>Hub Name</th>
         <th>Hub Address</th>
@@ -44,7 +44,20 @@
                 <input type="text" class="fixedCol2" value="@item.Name" />
             </td>
             <td>
-                <input type="text" value="@item.GameName" />
+                <!--<input type="text" value="@item.GameName" style="width:10vw"/>-->
+                <select name="AvailableGames" id="AvailableGames">
+                    @foreach (var dow in item.AvailableGames)
+                    {
+                        if (@item.GameName == @dow.Name)
+                        {
+                            <option value="@dow.Name" id="@dow.Id" selected>@dow.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@dow.Name" id="@dow.Id">@dow.Name</option>
+                        }
+                    }
+                </select>
             </td>
             <td>
                 <select name="AvalibleHubs" id="AvalibleHubs">
@@ -62,13 +75,13 @@
                 </select>
             </td>
             <td>
-                <input type="text" value="@item.HubAddress" />
+                <input type="text" value="@item.HubAddress" maxlength = "3" style="width:5vw"/>
             </td>
             <td>
-                <input type="text" value="@item.MachineAddress" />
+                <input type="text" value="@item.MachineAddress" maxlength = "3" style="width:5vw"/>
             </td>
             <td>
-                <input type="text" value="@item.EffectiveMachineAddress" />
+                <input type="text" value="@item.EffectiveMachineAddress" style="width:10vw"/>
             </td>
             <td>
                 <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
@@ -89,22 +102,35 @@
                 </select>
             </td>
             <td>
-                <input type="text" value="@item.SoftwareVersion" />
+                <input type="text" value="@item.SoftwareVersion" style="width:5vw"/>
             </td>
             <td>
-                <input type="text" value="@item.TicketMode" />
+                <!--<input type="text" value="@item.TicketMode" style="width:8vw"/>-->
+                <select name="AvailableTicketModes" id="AvailableTicketModes">
+                    @foreach (var dow in item.AvailableTicketModes)
+                    {
+                        if (@item.TicketMode == @dow.Value)
+                        {
+                            <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                        }
+                    }
+                </select>      
             </td>
             <td>
-                <input type="text" value="@item.VIPPrice" />
+                <input type="text" value="@item.VIPPrice" style="width:9vw"/>
             </td>
             <td>
                 <input type="checkbox"  @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
             </td>
             <td>
-                <input type="text" value="@item.PurchasePrice" />
+                <input type="text" value="@item.PurchasePrice" style="width:10vw"/>
             </td>
             <td>
-                <input type="text" value="@item.Notes" />
+                <input type="text" value="@item.Notes" style="width:10vw"/>
             </td>
             <td>
                 <select name="AvalibleThemes" id="AvalibleThemes">
@@ -134,10 +160,10 @@
     }
 </table>
 <div class="action">
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveMachines()">Save</button>
     <button class="btn btn-primary btn-md" role="button" id="addRow">Add</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/index'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
 </div>
 <script>
     $(document).ready(function () {
@@ -287,6 +313,9 @@
         if (!updatedArray.includes(index)) {
             updatedArray.push(index);
         }
+        // updating Effective Address = Hub Address + Machine Address
+        var table = document.getElementById('marbleTable');
+        table.rows[index+1].cells[6].children[0].value = table.rows[index+1].cells[4].children[0].value + table.rows[index+1].cells[5].children[0].value;
     }
 
     function Filter() {

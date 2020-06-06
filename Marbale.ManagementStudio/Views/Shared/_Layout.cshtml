@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/Content/CSS/bootstrap.css">
     <link href="~/Content/CSS/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/CSS/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/select.dataTables.css" rel="stylesheet" />
     <link href="~/Content/CSS/Material/meterialIcon.css" rel="stylesheet" />
     <link href="~/Content/DatetimePicker/jquery.datepicker2.css" rel="stylesheet" />
     <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
@@ -22,13 +23,14 @@
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <script src="~/Content/JS/jquery.dataTables.min.js"></script>
+    <script src="~/Content/JS/jquery.dataTables.js"></script>
     <script src="~/Content/JS/dataTables.fixedColumns.min.js"></script>
+    <script src="~/Content/JS/dataTables.select.js"></script>
     <script src="~/Content/DatetimePicker/jquery.datepicker2.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/JS/popper.min.js"></script>
     <script src="~/Content/JS/bootstrap.min.js"></script>
 
-    <script src="~/Content/JS/popper.min.js"></script>
     <script defer src="~/Content/JS/fontawesome.solid.js"></script>
     <script defer src="~/Content/JS/fontawesome.js"></script>
 
@@ -37,11 +39,21 @@
 <body>
 
     <div class="wrapper">
-        <p style="cursor: pointer; float: right; margin: 21px">
-            <a href="/Marble/logout">
-                <img src="~/Content/images/logout.png" height="30px" title="logout" />
-            </a>
-        </p>
+        <div style="cursor: pointer; float: right;margin: 10px 10px 0px 20px;">
+            <div class="btn-group">
+                <div class="btn-group dropleft" role="group">
+                    <button type="button" style="border:none;line-height: 1;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons" style="cursor: pointer;font-size:40px">&#xe853;</i>
+                        <br /><lable>@Session["UserID"]</lable>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Swith User</a>
+                        <a class="dropdown-item" href="#">Change Password</a>
+                        <a class="dropdown-item" href="/Marble/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div id="dismiss">

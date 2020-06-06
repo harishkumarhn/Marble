@@ -140,8 +140,8 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="EditUser()">
         New
     </button>
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
 
 
 </div>

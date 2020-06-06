@@ -29,10 +29,10 @@
                 <input class="fixedCol2" type="text" value="@item.Name" />
             </td>
             <td>
-                <input type="number" value="@item.NormalPrice" />
+                <input type="number" value="@item.NormalPrice" style="width:9vw;"/>
             </td>
             <td>
-                <input type="number" value="@item.VIPPrice" />
+                <input type="number" value="@item.VIPPrice" style="width:7vw;"/>
             </td>
             <td>
                 <input type="checkbox"  @(item.CreditAllowed ? "checked='checked'" : "") value="@item.CreditAllowed" />
@@ -75,8 +75,8 @@
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveGameProfiles()">Save</button>
     <button class="btn btn-primary btn-md" role="button" id="addRow">Add</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
 </div>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>

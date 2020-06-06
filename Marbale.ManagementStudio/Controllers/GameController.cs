@@ -51,6 +51,7 @@ namespace MarbaleManagementStudio.Controllers
             var result = 0;
             foreach (var gameProfile in gameProfiles)
             {
+                gameProfile.LastUpdatedBy = Session["UserID"].ToString();
                 result = gameBussiness.InsertOrUpdateGameProfile(gameProfile);
             }
             return result;
@@ -66,6 +67,7 @@ namespace MarbaleManagementStudio.Controllers
             var result = 0;
             foreach (var game in games)
             {
+                game.LastUpdatedBy = Session["UserID"].ToString();
                 result = gameBussiness.InsertOrUpdateGame(game);
             }
             return result;
@@ -81,6 +83,7 @@ namespace MarbaleManagementStudio.Controllers
             var result = 0;
             foreach (var machine in machines)
             {
+                machine.LastUpdatedBy = Session["UserID"].ToString();
                 result = gameBussiness.InsertOrUpdateMachine(machine);
             }
             return result;
