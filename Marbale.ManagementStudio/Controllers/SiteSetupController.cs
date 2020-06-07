@@ -633,6 +633,10 @@ namespace MarbaleManagementStudio.Controllers
                 throw;
             }
         }
+        public ActionResult LookUps()
+        {
+            return View();
+        }
     }
 
 }

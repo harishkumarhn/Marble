@@ -20,9 +20,13 @@
     <div class="col-xs-4">
         <label>Expire on: @ViewBag.ProductKey.ExpireOn </label>
     </div>
-    <div id="cardsCount" style="display: none">
-        <label>Cards count :</label>
-        <input id="maxCards" style="width:30%"  type="text" class="form-control input-sm" value="@ViewBag.ProductKey.CardsCount"></input>
+    <div class="row" id="cardsCountDiv" style="display: none;">
+        <label class="col-sm-3">Cards count : </label>
+        <lable id="maxCards">@ViewBag.ProductKey.CardsCount</lable>
+     </div>
+    <div class="row" id="addCardsDiv" style="display: none;margin-left: 0px;">
+        <input id="addCards" style="width:20%;left:15px" type="text" class="form-control input-sm"></input>&nbsp;&nbsp;&nbsp;
+        <a href="#" style="color:blue" onclick="addCards()">Add Cards</a>
     </div>
 </div>
 <div class="modal-footer">
@@ -35,7 +39,8 @@
         e = e || event; // to deal with IE
         map[e.keyCode] = e.type == 'keydown';
         if (map[17] && map[16] && map[65]) { // CTRL+SHIFT+A
-            $("#cardsCount").toggle();
+            $("#cardsCountDiv").toggle();
+            $("#addCardsDiv").toggle();
         }
     }
     function UpdateSiteData() {
@@ -43,7 +48,7 @@
             SiteId: $("#siteId").val(),
             SiteKey: $("#siteKey").val(),
             LicenseKey: $("#licenseKey").val(),
-            CardsCount: $("#maxCards").val()
+            CardsCount: $('#maxCards').text()
         };
         $.ajax({
             type: "POST",
@@ -59,5 +64,8 @@
                 alert("Update Operation failed");
             }
         });
+    }
+    function addCards() {
+        $('#maxCards').text(parseInt($('#addCards').val()) + parseInt($('#maxCards').text()));
     }
 </script>
