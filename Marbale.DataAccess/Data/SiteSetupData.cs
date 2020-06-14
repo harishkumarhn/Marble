@@ -498,7 +498,7 @@ namespace Marbale.DataAccess
                     sqlParameters[9] = new SqlParameter("@POSAvailable", mode.POSAvailable);
                     sqlParameters[10] = new SqlParameter("@SiteId", mode.SiteId);
                     sqlParameters[11] = new SqlParameter("@SynchStatus", mode.SynchStatus);
-                    result = conn.executeUpdateQuery("sp_InsertOrUpdateSite", sqlParameters);
+                    result = conn.executeUpdateQuery("sp_InsertOrUpdatePaymentMode", sqlParameters);
                 }
             }
             catch (Exception e)

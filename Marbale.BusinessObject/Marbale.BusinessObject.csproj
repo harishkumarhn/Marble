@@ -81,6 +81,7 @@
     <Compile Include="Setting\Settings.cs" />
     <Compile Include="Discount\TransactionDiscount.cs" />
     <Compile Include="SiteSetup\AppModuleAction.cs" />
+    <Compile Include="SiteSetup\PaymentMode.cs" />
     <Compile Include="SiteSetup\Printer.cs" />
     <Compile Include="SiteSetup\ReceiptPrintTemplateHeader.cs" />
     <Compile Include="SiteSetup\ReceiptPrintTemplate.cs" />
