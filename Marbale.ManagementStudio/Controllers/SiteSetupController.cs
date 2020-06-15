@@ -636,20 +636,20 @@ namespace MarbaleManagementStudio.Controllers
         #region lookUps
         public ActionResult LookUps()
         {
-            return View();
+            return View("~/Views/SiteSetup/LookUps/LookUps.cshtml");
         }
         public ActionResult LookUpData()
         {
-            return View();
+            return View("~/Views/SiteSetup/LookUps/LookUpData.cshtml");
         }
         public ActionResult PaymentMode()
         {
             ViewBag.PaymentModes = siteSetup.GetPaymentModes();
-            return View();
+            return View("~/Views/SiteSetup/LookUps/PaymentMode.cshtml");
         }
         public ActionResult Sequence()
         {
-            return View();
+            return View("~/Views/SiteSetup/LookUps/Sequence.cshtml");
         }
         public int UpdatePaymentMode(List<PaymentMode> paymentModes)
         {

@@ -49,6 +49,9 @@
                 <td>
                     <input type="text" value="@item.DisplayOrder" />
                 </td>
+                <td>
+                    <input type="text" value="@item.GateWay" />
+                </td>
             </tr>
         }
     </tbody>
@@ -94,8 +97,8 @@
                 '<input type="text" value="" />',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
+                '<input type="text" value="" />',
                 '<input type="text" value="" />'
-
             ]).draw(false);
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
@@ -107,29 +110,30 @@
         }
     }
     function SavePaymentMode() {
+        debugger;
         var paymentModes = [];
         var table = document.getElementById('marbleTable');
         for (var r = 0, n = table.rows.length; r < n; r++) {
             if (updatedArray.includes(r)) {
                 var rowIndex = r + 1;
                 paymentModes.push({
-                    PaymentModeId: table.rows[rowIndex].cells[0].children[0].value,
+                    PaymentModeId: table.rows[rowIndex].cells[0].children[0].innerHTML.trim(),
                     PaymentModeName: table.rows[rowIndex].cells[1].children[0].value,
-                    PrinterLocation: table.rows[rowIndex].cells[2].children[0].value,
-                    IsCash: table.rows[rowIndex].cells[3].children[0].checked,
-                    IsDebitCard: table.rows[rowIndex].cells[4].children[0].checked,
-                    IsCreditCard: table.rows[rowIndex].cells[5].children[0].checked,
-                    CreditCardSurchargePercentage: table.rows[rowIndex].cells[6].children[0].value,
-                    ManagerApprovalRequired: table.rows[rowIndex].cells[7].children[0].checked,
-                    POSAvailable: table.rows[rowIndex].cells[8].children[0].checked,
-                    DisplayOrder: table.rows[rowIndex].cells[9].children[0].value
+                    IsCash: table.rows[rowIndex].cells[2].children[0].checked,
+                    IsDebitCard: table.rows[rowIndex].cells[3].children[0].checked,
+                    IsCreditCard: table.rows[rowIndex].cells[4].children[0].checked,
+                    CreditCardSurchargePercentage: table.rows[rowIndex].cells[5].children[0].value,
+                    ManagerApprovalRequired: table.rows[rowIndex].cells[6].children[0].checked,
+                    POSAvailable: table.rows[rowIndex].cells[7].children[0].checked,
+                    DisplayOrder: table.rows[rowIndex].cells[8].children[0].value,
+                    GateWay: table.rows[rowIndex].cells[9].children[0].value
                 });
             }
         }
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("UpdatePaymantMode", "SiteSetup")',
+            url: '@Url.Action("UpdatePaymentMode", "SiteSetup")',
             data: JSON.stringify({ paymentModes: paymentModes }),
             dataType: "json",
             success: function (data) {

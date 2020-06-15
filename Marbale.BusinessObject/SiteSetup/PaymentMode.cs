@@ -21,5 +21,6 @@ namespace Marbale.BusinessObject.SiteSetup
         public bool IsRoundOff { get; set; }
         public bool POSAvailable { get; set; }
         public int DisplayOrder { get; set; }
+        public int GateWay { get; set; }
     }
 }

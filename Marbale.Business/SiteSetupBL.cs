@@ -728,7 +728,7 @@ namespace Marble.Business
         }
         public List<PaymentMode> GetPaymentModes()
         {
-            DataTable dt = siteSetupData.GetPrinters();
+            DataTable dt = siteSetupData.GetPaymentModes();
             List<PaymentMode> paymentModes = new List<PaymentMode>();
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -736,14 +736,17 @@ namespace Marble.Business
                 {
                     PaymentMode paymentMode = new PaymentMode();
                     paymentMode.PaymentModeId = dr.IsNull("PaymentModeId") ? 0 : int.Parse(dr["PaymentModeId"].ToString());
-                    paymentMode.PaymentModeName = dr.IsNull("PaymentModeName") ? "" : dr["PaymentModeName"].ToString();
-                    paymentMode.CreditCardSurchargePercentage = dr.IsNull("CreditCardSurchargePercentage") ? 0 : int.Parse(dr["CreditCardSurchargePercentage"].ToString());
+                    paymentMode.PaymentModeName = dr.IsNull("PaymentMode") ? "" : dr["PaymentMode"].ToString();
+                    int i;
+                    if (!int.TryParse(dr["CreditCardSurchargePercentage"].ToString(), out i)) i = 0;
+                    paymentMode.CreditCardSurchargePercentage = i;
                     paymentMode.DisplayOrder = dr.IsNull("DisplayOrder") ? 0 : int.Parse(dr["DisplayOrder"].ToString());
                     paymentMode.IsCash = dr.IsNull("IsCash") ? false : bool.Parse(dr["IsCash"].ToString());
                     paymentMode.IsDebitCard = dr.IsNull("IsDebitCard") ? false : bool.Parse(dr["IsDebitCard"].ToString());
                     paymentMode.IsCreditCard = dr.IsNull("IsCreditCard") ? false : bool.Parse(dr["IsCreditCard"].ToString());
                     paymentMode.ManagerApprovalRequired = dr.IsNull("ManagerApprovalRequired") ? false : bool.Parse(dr["ManagerApprovalRequired"].ToString());
                     paymentMode.POSAvailable = dr.IsNull("POSAvailable") ? false : bool.Parse(dr["POSAvailable"].ToString());
+                    paymentMode.GateWay = dr.IsNull("GateWay") ? 0 : int.Parse(dr["GateWay"].ToString());
 
                     paymentModes.Add(paymentMode);
                 }
