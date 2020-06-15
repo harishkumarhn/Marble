@@ -1,27 +1,31 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "LookUps";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'paymentMode')">Payment Mode</button>
-    <button class="tablinks" onclick="openTab(event, 'sequence')">Sequence</button>
-    <button class="tablinks" onclick="openTab(event, 'lookups')">Lookups</button>
+    <button id="lookupData" class="tablinks" onclick="getLookups()">Lookups</button>
+    <button class="tablinks" onclick="getPaymentMode()">Payment Mode</button>
+    <button class="tablinks" onclick="getSequence()">Sequence</button>
+</div>
+<div id="tabBody">
 </div>
 <script>
-function openTab(evt, action) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
+    $(document).ready(function () {
+        $("#lookupData").addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+        getLookups();
+    })
+    function getLookups() {
+        $('#tabBody').load('/SiteSetup/LookUpData');
+    }
+    function getPaymentMode() {
+        $('#tabBody').load('/SiteSetup/PaymentMode');
+    }
+    function getSequence() {
+        $('#tabBody').load('/SiteSetup/Sequence');
+    }
+    $('.tablinks').click(function () {
+        $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+    });
 </script>
 
 

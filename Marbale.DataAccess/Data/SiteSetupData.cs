@@ -487,7 +487,7 @@ namespace Marbale.DataAccess
                 {
                     SqlParameter[] sqlParameters = new SqlParameter[12];
                     sqlParameters[0] = new SqlParameter("@PaymentModeId", mode.PaymentModeId);
-                    sqlParameters[1] = new SqlParameter("@PaymentMode", string.IsNullOrWhiteSpace(mode.PaymentMode) ? "" : mode.PaymentMode);
+                    sqlParameters[1] = new SqlParameter("@PaymentMode", string.IsNullOrWhiteSpace(mode.PaymentModeName) ? "" : mode.PaymentModeName);
                     sqlParameters[2] = new SqlParameter("@CreditCardSurchargePercentage", mode.CreditCardSurchargePercentage);
                     sqlParameters[3] = new SqlParameter("@DisplayOrder", mode.DisplayOrder);
                     sqlParameters[4] = new SqlParameter("@Guid", mode.Guid == null ? Guid.NewGuid() : mode.Guid);

@@ -215,12 +215,10 @@ namespace Marble.Business
             }
             catch (Exception)
             {
-
                 throw;
             }
 
         }
-
 
         public int UpdateTaskType(List<Marbale.BusinessObject.SiteSetup.TaskTypeModel> tasktype)
         {
