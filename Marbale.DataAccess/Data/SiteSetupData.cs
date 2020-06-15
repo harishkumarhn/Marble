@@ -508,5 +508,16 @@ namespace Marbale.DataAccess
             return 0;
 
         }
+        public DataTable GetPaymentModes()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetPaymentModes");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

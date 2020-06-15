@@ -321,6 +321,9 @@
     <Content Include="Views\Product\ProductSetup.cshtml" />
     <Content Include="Views\Product\Types.cshtml" />
     <Content Include="Views\SiteSetup\LookUps.cshtml" />
+    <Content Include="Views\SiteSetup\LookUpData.cshtml" />
+    <Content Include="Views\SiteSetup\PaymentMode.cshtml" />
+    <Content Include="Views\SiteSetup\Sequence.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

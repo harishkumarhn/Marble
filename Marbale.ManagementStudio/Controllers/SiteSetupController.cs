@@ -640,9 +640,21 @@ namespace MarbaleManagementStudio.Controllers
         }
         public ActionResult LookUpData()
         {
-
+            return View();
         }
-
+        public ActionResult PaymentMode()
+        {
+            ViewBag.PaymentModes = siteSetup.GetPaymentModes();
+            return View();
+        }
+        public ActionResult Sequence()
+        {
+            return View();
+        }
+        public int UpdatePaymentMode(List<PaymentMode> paymentModes)
+        {
+            return siteSetup.InsertOrUpdatePaymentModes(paymentModes);
+        }
         #endregion
     }
 
