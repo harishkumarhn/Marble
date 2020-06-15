@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "Payment Mode";
+    Layout = null;
+}
+
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+    <thead>
+        <tr>
+            <th>Payment Mode ID</th>
+            <th>Payment Mode Name</th>
+            <th>Is Cash?</th>
+            <th>IS Debit Card?</th>
+            <th>IS Credit Card?</th>
+            <th>Credit Card Surcharge %?</th>
+            <th>Manager Approvel?</th>
+            <th>POS Avalible?</th>
+            <th>Display Order</th>
+            <th>GateWay</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.paymentModes)
+        {
+            <tr>
+                <td>
+                    <lable> @(item.PaymentModeId == 0 ? "" : item.PaymentModeId) </lable>
+                </td>
+                <td>
+                    <input type="text" value="@item.PaymentModeName" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.IsCash ? "checked='checked'" : "") value="@item.IsCash" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.IsDebitCard ? "checked='checked'" : "") value="@item.IsDebitCard" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.IsCreditCard ? "checked='checked'" : "") value="@item.IsCreditCard" />
+                </td>
+                <td>
+                    <input type="text" value="@item.CreditCardSurchargePercentage" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.ManagerApprovalRequired ? "checked='checked'" : "") value="@item.ManagerApprovalRequired" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.POSAvailable ? "checked='checked'" : "") value="@item.POSAvailable" />
+                </td>
+                <td>
+                    <input type="text" value="@item.DisplayOrder" />
+                </td>
+                <td>
+                    <input type="text" value="@item.GateWay" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="SavePaymentMode()">Save</button>
+    <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+</div>
+<script>
+
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            }
+        });
+        var counter = 1;
+
+        $('#addRow').on('click', function () {
+            table.row.add([
+                '<lable></lable>',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />'
+            ]).draw(false);
+        });
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+    });
+    var updatedArray = [];
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
+        }
+    }
+    function SavePaymentMode() {
+        debugger;
+        var paymentModes = [];
+        var table = document.getElementById('marbleTable');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                var rowIndex = r + 1;
+                paymentModes.push({
+                    PaymentModeId: table.rows[rowIndex].cells[0].children[0].innerHTML.trim(),
+                    PaymentModeName: table.rows[rowIndex].cells[1].children[0].value,
+                    IsCash: table.rows[rowIndex].cells[2].children[0].checked,
+                    IsDebitCard: table.rows[rowIndex].cells[3].children[0].checked,
+                    IsCreditCard: table.rows[rowIndex].cells[4].children[0].checked,
+                    CreditCardSurchargePercentage: table.rows[rowIndex].cells[5].children[0].value,
+                    ManagerApprovalRequired: table.rows[rowIndex].cells[6].children[0].checked,
+                    POSAvailable: table.rows[rowIndex].cells[7].children[0].checked,
+                    DisplayOrder: table.rows[rowIndex].cells[8].children[0].value,
+                    GateWay: table.rows[rowIndex].cells[9].children[0].value
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdatePaymentMode", "SiteSetup")',
+            data: JSON.stringify({ paymentModes: paymentModes }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+                location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+</script>

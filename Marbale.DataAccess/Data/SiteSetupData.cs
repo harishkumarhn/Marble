@@ -478,35 +478,49 @@ namespace Marbale.DataAccess
 
             return 0;
         }
-        //public int InsertOrUpdatePaymentMode(List<PaymentMode> paymentModes)
-        //{
-        //    int result;
-        //    try
-        //    {
-        //        foreach (var mode in paymentModes)
-        //        {
-        //            SqlParameter[] sqlParameters = new SqlParameter[12];
-        //            sqlParameters[0] = new SqlParameter("@PaymentModeId", mode.PaymentModeId);
-        //            sqlParameters[1] = new SqlParameter("@PaymentMode", string.IsNullOrWhiteSpace(mode.PaymentMode) ? "" : mode.PaymentMode);
-        //            sqlParameters[2] = new SqlParameter("@CreditCardSurchargePercentage", mode.CreditCardSurchargePercentage);
-        //            sqlParameters[3] = new SqlParameter("@DisplayOrder", mode.DisplayOrder);
-        //            sqlParameters[4] = new SqlParameter("@Guid", mode.Guid == null ? Guid.NewGuid() : mode.Guid);
-        //            sqlParameters[5] = new SqlParameter("@IsCash", mode.IsCash);
-        //            sqlParameters[6] = new SqlParameter("@IsDebitCard", mode.IsDebitCard);
-        //            sqlParameters[7] = new SqlParameter("@IsRoundOff", mode.IsRoundOff);
-        //            sqlParameters[8] = new SqlParameter("@ManagerApprovalRequired", mode.ManagerApprovalRequired);
-        //            sqlParameters[9] = new SqlParameter("@POSAvailable", mode.POSAvailable);
-        //            sqlParameters[10] = new SqlParameter("@SiteId", mode.SiteId);
-        //            sqlParameters[11] = new SqlParameter("@SynchStatus", mode.SynchStatus);
-        //            result = conn.executeUpdateQuery("sp_InsertOrUpdateSite", sqlParameters);
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-        //    return 0;
+        public int InsertOrUpdatePaymentMode(List<PaymentMode> paymentModes)
+        {
+            int result;
+            try
+            {
+                foreach (var mode in paymentModes)
+                {
+                    SqlParameter[] sqlParameters = new SqlParameter[14];
+                    sqlParameters[0] = new SqlParameter("@PaymentModeId", mode.PaymentModeId);
+                    sqlParameters[1] = new SqlParameter("@PaymentMode", string.IsNullOrWhiteSpace(mode.PaymentModeName) ? "" : mode.PaymentModeName);
+                    sqlParameters[2] = new SqlParameter("@CreditCardSurchargePercentage", mode.CreditCardSurchargePercentage);
+                    sqlParameters[3] = new SqlParameter("@DisplayOrder", mode.DisplayOrder);
+                    sqlParameters[4] = new SqlParameter("@Guid", mode.Guid == null ? Guid.NewGuid() : mode.Guid);
+                    sqlParameters[5] = new SqlParameter("@IsCash", mode.IsCash);
+                    sqlParameters[6] = new SqlParameter("@IsDebitCard", mode.IsDebitCard);
+                    sqlParameters[7] = new SqlParameter("@IsRoundOff", mode.IsRoundOff);
+                    sqlParameters[8] = new SqlParameter("@ManagerApprovalRequired", mode.ManagerApprovalRequired);
+                    sqlParameters[9] = new SqlParameter("@POSAvailable", mode.POSAvailable);
+                    sqlParameters[10] = new SqlParameter("@SiteId", mode.SiteId);
+                    sqlParameters[11] = new SqlParameter("@SynchStatus", string.IsNullOrWhiteSpace(mode.SynchStatus) ? "" : mode.SynchStatus);
+                    sqlParameters[12] = new SqlParameter("@GateWay", mode.GateWay);
+                    sqlParameters[13] = new SqlParameter("@IsCreditCard", mode.IsCreditCard);
 
-        //}
+                    result = conn.executeUpdateQuery("sp_InsertOrUpdatePaymentMode", sqlParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return 0;
+
+        }
+        public DataTable GetPaymentModes()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetPaymentModes");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

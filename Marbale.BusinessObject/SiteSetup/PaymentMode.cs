@@ -8,7 +8,7 @@ namespace Marbale.BusinessObject.SiteSetup
 {
     public class PaymentMode
     {
-        public string PaymentMode { get; set; }
+        public string PaymentModeName { get; set; }
         public int PaymentModeId { get; set; }
         public bool IsCreditCard { get; set; }
         public int CreditCardSurchargePercentage { get; set; }
@@ -16,11 +16,11 @@ namespace Marbale.BusinessObject.SiteSetup
         public Guid? Guid { get; set; }
         public int SiteId { get; set; }
         public bool IsCash { get; set; }
-        public bool IsCreditCard { get; set; }
         public bool IsDebitCard { get; set; }
         public bool ManagerApprovalRequired { get; set; }
         public bool IsRoundOff { get; set; }
         public bool POSAvailable { get; set; }
         public int DisplayOrder { get; set; }
+        public int GateWay { get; set; }
     }
 }
