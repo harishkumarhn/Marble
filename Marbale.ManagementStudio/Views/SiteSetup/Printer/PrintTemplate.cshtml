@@ -90,7 +90,18 @@
 
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
         $(".tblRow").on("click", function (e) { UpdatePrinterTemplateList($(this).parent().index()); });
-
+        $('#marbleTable_printTemplateHeaders tbody').on('click', 'tr', function () {
+            for (var i = 1 ; i <= this.parentElement.rows.length; i++)
+            {
+                if (i == this.rowIndex) {
+                    this.style.backgroundColor = '#d6d9e0';
+                    document.getElementById('marbleTable_printTemplate').rows[this.rowIndex].style.backgroundColor = '#d6d9e0';
+                } else {
+                    this.parentElement.rows[i-1].style.backgroundColor = 'white';
+                    document.getElementById('marbleTable_printTemplate').rows[i].style.backgroundColor = 'white'
+                }
+            }
+        });
     });
     function addTemplateHeader() {
         var fontNames = '';
