@@ -35,7 +35,6 @@
         <th>AutoGenerateCardNumber</th>
         <th>OnlyVIP</th>
         <th>Price</th>
-        <th>FaceValue</th>
         <th>TaxInclusive</th>
         <th>TaxPercent</th>
         <th>Tax</th>
@@ -132,9 +131,6 @@
                     <input type="number" value="@item.Price" id="Price@(count)" />
                 </td>
                 <td>
-                    <input type="text" value="@item.FaceValue" id="FaceValue@(count)" />
-                </td>
-                <td>
                     <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)"  />
                 </td>
                 <td>
@@ -171,13 +167,13 @@
     </tbody>
 </table>
 <div class="action">
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
     <button type="button" class="btn btn-primary" data-toggle="modal" onclick="EditProduct(0)">
         New
     </button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/index'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
 </div>
 <script>
     var updatedArray = [];

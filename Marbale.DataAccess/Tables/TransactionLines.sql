@@ -42,7 +42,8 @@ CREATE TABLE [dbo].[TransactionLines](
 	[ProductDescription] [nvarchar](200) NULL,
 	[IsWaiverSignRequired] [char](1) NULL,
 	[OriginalLineID] [int] NULL,
-	[MasterEntityId] [int] NULL
+	[MasterEntityId] [int] NULL,
+	[IsLineCancelled] BIT 
 ) ON [PRIMARY]
 GO
 

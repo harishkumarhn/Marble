@@ -167,8 +167,8 @@ namespace Marbale.POS
 
         private void HandleCardRead(string CardNumber, DeviceClass readerDevice)
         {
-            if(CardReader.CardSwiped)
-               CardReader.CardSwiped = false;
+            if (CardReader.CardSwiped)
+                CardReader.CardSwiped = false;
 
             ClearCard();
 
@@ -442,8 +442,8 @@ namespace Marbale.POS
                     Pre_TaxAmount += preTaxLineAmount;
                     if (Transaction.TransactionLines[i].quantity == 1)
                         Transaction.TransactionLines[i].tax_amount = preTaxLineAmount * Transaction.TransactionLines[i].tax_percentage / 100;
-                    
-                   
+
+
 
                     Tax_Amount += Transaction.TransactionLines[i].tax_amount;
                     Transaction.TransactionLines[i].LineAmount += Transaction.TransactionLines[i].tax_amount;
@@ -462,7 +462,7 @@ namespace Marbale.POS
             }
             Transaction_Amount = Pre_TaxAmount + Tax_Amount;
             Transaction.Discount_Percentage = GetTransactionDiscountPercentage();
-            Transaction.Net_Transaction_Amount =  Math.Round(Transaction_Amount - Discount_Amount, 2, MidpointRounding.AwayFromZero);
+            Transaction.Net_Transaction_Amount = Math.Round(Transaction_Amount - Discount_Amount, 2, MidpointRounding.AwayFromZero);
         }
 
         private decimal GetTransactionDiscountPercentage()
@@ -471,14 +471,14 @@ namespace Marbale.POS
 
             if (Transaction != null && Transaction.discounts != null)
             {
-                foreach(Discounts.DiscountLine d in Transaction.discounts.DiscountLines)
+                foreach (Discounts.DiscountLine d in Transaction.discounts.DiscountLines)
                 {
                     if (d.LineValid && !distinctDiscountLines.Any(x => x.DiscountId == d.DiscountId && x.LineValid))
                         distinctDiscountLines.Add(d);
                 }
             }
 
-           return distinctDiscountLines.Sum(x => x.DiscountPercentage);
+            return distinctDiscountLines.Sum(x => x.DiscountPercentage);
         }
 
 
@@ -510,7 +510,6 @@ namespace Marbale.POS
                 Transaction.TransactionLines = new List<TransactionLine>();
 
             Transaction.TransactionDate = DateTime.Now;
-
 
             if (product.Type == "NEW")
             {
@@ -551,33 +550,93 @@ namespace Marbale.POS
                     MessageBox.Show("Please tap the card");
                     return;
                 }
+
+                if (CurrentCard.CardStatus == "NEW")
+                {
+                    MessageBox.Show("Cannot recharge to New cards. First select New card product");
+                    return;
+                }
+
+                UpdateCardForRechargeTransaction(product);
             }
-            else if (product.Type == "RECHARGE")
+            else if (product.Type == "VARIABLE_RECHARGE")
             {
                 if (CurrentCard == null)
                 {
                     MessageBox.Show("Please tap the card");
                     return;
                 }
+                if (CurrentCard.CardStatus == "NEW")
+                {
+                    MessageBox.Show("Cannot recharge to New cards. First select New card product");
+                    return;
+                }
+
+                bool variableRechargeProductExists = false;
+                for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+                {
+                    if (Transaction.TransactionLines[i].ProductType == "VARIABLE_RECHARGE" && Transaction.TransactionLines[i].CancelledLine == false)
+                    {
+                        variableRechargeProductExists = true;
+                        break;
+                    }
+                }
+                if (variableRechargeProductExists)
+                {
+
+                    MessageBox.Show("Cannot have multiple Variable Recharge products on same card");
+                    return;
+                }
+
+               // UpdateCardForRechargeTransaction(product);
             }
 
             TransactionLine trxLine = new TransactionLine();
+            trxLine.OriginalLineID = -1;
             trxLine.ProductID = product.Id;
             trxLine.ProductName = product.Name;
             trxLine.Price = Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
+
+
+            decimal productPrice = Convert.ToDecimal(product.Price);
+
+            if (product.Type == "VARIABLE_RECHARGE")
+            {
+                double varAmount = NumberPadForm.ShowNumberPadForm("Enter Recharge Amount", '-');
+                productPrice = trxLine.Price = Convert.ToDecimal(varAmount);
+
+                if(productPrice <= 0)
+                {
+                    MessageBox.Show("Please Enter the Recharge amount greater than zero");
+                    return;
+                }
+
+                product.Price = productPrice;
+                UpdateCardForRechargeTransaction(product);
+            }
+
             trxLine.quantity = 1;
 
             trxLine.tax_percentage = product.TaxPercentage;
             trxLine.tax_id = product.TaxId;
-            trxLine.tax_amount = (decimal) ((product.Price - product.FaceValue) * product.TaxPercentage) / 100;
+            trxLine.tax_amount = (decimal)((productPrice - product.FaceValue) * product.TaxPercentage) / 100;
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
-            trxLine.amount = Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue);
+
+            if (product.Type == "NEW" || product.Type == "RECHARGE" || product.Type == "VARIABLE_RECHARGE")
+            {
+                trxLine.CardNumber = CurrentCard != null ? CurrentCard.CardNumber : "";
+            }
+
+            trxLine.ProductType = product.Type;
+
+            trxLine.amount = productPrice - Convert.ToDecimal(product.FaceValue);
             trxLine.ProductTypeCode = product.Type;
-            trxLine.LineAmount = (Convert.ToDecimal(product.Price) - Convert.ToDecimal(product.FaceValue)) + Convert.ToDecimal(trxLine.tax_amount);
+            trxLine.LineAmount = (productPrice - Convert.ToDecimal(product.FaceValue)) + Convert.ToDecimal(trxLine.tax_amount);
             trxLine.Credits = Convert.ToDecimal(product.Credits);
             trxLine.Bonus = Convert.ToDecimal(product.Bonus);
             trxLine.Courtesy = Convert.ToDecimal(product.Courtesy);
+            
 
             //Transaction.Tax_Amount = 0;
             bool found = false;
@@ -614,6 +673,7 @@ namespace Marbale.POS
         void CreateDepositLine(Product product)
         {
             TransactionLine trxLine = new TransactionLine();
+            trxLine.OriginalLineID = -1;
             trxLine.ProductID = 0;
             trxLine.ProductName = "Card Deposit";
             trxLine.Price = Convert.ToDecimal(product.FaceValue);
@@ -627,6 +687,25 @@ namespace Marbale.POS
             trxLine.LineAmount = Convert.ToDecimal(product.FaceValue);
             trxLine.ProductType = product.Type;
 
+            trxLine.CardNumber = CurrentCard.CardNumber;
+            UpdateCardForTransaction(product);
+
+            Transaction.TransactionLines.Add(trxLine);
+        }
+
+        void UpdateCardForRechargeTransaction(Product product)
+        {
+            if (CurrentCard != null)
+            {
+                CurrentCard.credits = Convert.ToDecimal(product.Price);
+                CurrentCard.bonus = Convert.ToDecimal(product.Bonus);
+                CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
+                CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
+            }
+        }
+
+        void UpdateCardForTransaction(Product product)
+        {
             if (CurrentCard != null)
             {
                 CurrentCard.credits = Convert.ToDecimal(product.Credits);
@@ -634,10 +713,8 @@ namespace Marbale.POS
                 CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
                 CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
             }
-
-
-            Transaction.TransactionLines.Add(trxLine);
         }
+
 
         void UpdateTransactionAmount()
         {
@@ -662,8 +739,6 @@ namespace Marbale.POS
             validTrxLine.tax_amount += newTrxline.tax_amount;
             validTrxLine.amount += newTrxline.amount;
             validTrxLine.LineAmount += newTrxline.LineAmount;
-
-
         }
 
         public void RefreshTransactionGrid()
@@ -691,7 +766,7 @@ namespace Marbale.POS
             for (int i = 0; i < Transaction.TransactionLines.Count; i++) // display card lines
             {
                 if (Transaction.TransactionLines[i].LineValid && !Transaction.TransactionLines[i].LineProcessed
-                    && Transaction.TransactionLines[i].CardNumber != null)
+                    && Transaction.TransactionLines[i].CardNumber != null && !Transaction.TransactionLines[i].CancelledLine)
                 {
                     dgvTransaction.Rows.Add();
 
@@ -719,7 +794,7 @@ namespace Marbale.POS
                                 dgvTransaction.Rows[rowcount].Cells["Quantity"].Value = Transaction.TransactionLines[j].quantity;
                                 dgvTransaction.Rows[rowcount].Cells["Price"].Value = Transaction.TransactionLines[j].Price;
                                 dgvTransaction.Rows[rowcount].Cells["Remarks"].Value = Transaction.TransactionLines[j].Remarks;
-                                dgvTransaction.Rows[rowcount].Cells["AttractionDetails"].Value = Transaction.TransactionLines[j].AttractionDetails;
+                                //dgvTransaction.Rows[rowcount].Cells["AttractionDetails"].Value = Transaction.TransactionLines[j].AttractionDetails;
 
                                 dgvTransaction.Rows[rowcount].Cells["Tax"].Value = Transaction.TransactionLines[j].tax_amount;
                                 dgvTransaction.Rows[rowcount].Cells["TaxName"].Value = Transaction.TransactionLines[j].taxName;
@@ -741,7 +816,18 @@ namespace Marbale.POS
                     && Transaction.TransactionLines[i].CardNumber == null && !Transaction.TransactionLines[i].CancelledLine)
                 {
                     dgvTransaction.Rows.Add();
-                    dgvTransaction.Rows[rowcount].Cells["Product_Type"].Value = "Item Sale";
+
+                    dgvTransaction.Rows[rowcount].Cells["Product_Type"].Value = "Product Sale";
+
+                    //if (Transaction.TransactionLines[i].ProductTypeCode == "NEW")
+                    //{
+                        
+                    //}
+                    //else if (Transaction.TransactionLines[i].ProductTypeCode == "RECHARGE")
+                    //{
+                    //    dgvTransaction.Rows[rowcount].Cells["Product_Type"].Value = "Card Sale";
+                    //}
+
                     dgvTransaction.Rows[rowcount].Cells["LineId"].Value = Transaction.TransactionLines[i].LineId = i;
                     dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = Transaction.TransactionLines[i].ProductTypeCode;
                     dgvTransaction.Rows[rowcount].Cells["ProductId"].Value = Transaction.TransactionLines[i].ProductID;
@@ -1202,7 +1288,7 @@ namespace Marbale.POS
                 dgvCard.Rows[1].Cells[1].Value = CurrentCard.loyalty_points;
 
                 //Recharged / Spent
-                dgvCard.Rows[2].Cells[1].Value = "0/0"; // CurrentCard.TotalRechargeAmount;
+                dgvCard.Rows[2].Cells[1].Value = CurrentCard.TotalRechargeAmount + " / " + CurrentCard.credits_played;
 
                 if (CurrentCard.customer != null)
                 {
@@ -1246,6 +1332,7 @@ namespace Marbale.POS
                     {
                         tendered_amount = varAmount;
                         updateScreenAmounts();
+
                         break;
                     }
                     else
@@ -1258,6 +1345,8 @@ namespace Marbale.POS
                     return;
                 }
             }
+
+            Transaction.Status = "CLOSED";
 
             TransactionBL trxBL = new TransactionBL();
             int trxId = trxBL.SaveTransaction(Transaction);
@@ -1288,8 +1377,6 @@ namespace Marbale.POS
         {
             ClearCustomer();
         }
-
-
 
         private void btnSaveCustomer_Click(object sender, EventArgs e)
         {
@@ -1331,6 +1418,7 @@ namespace Marbale.POS
             }
         }
 
+
         private void UpdateTransactionTab(int userId)
         {
             TransactionBL trxBL = new TransactionBL();
@@ -1340,11 +1428,10 @@ namespace Marbale.POS
             if (ListTransaction != null)
             {
                 dgvTrxHeader.DataSource = ListTransaction;
-
+                
                 dgvTrxHeader.Columns["POSMachineId"].Visible = false;
                 dgvTrxHeader.Columns["POSTypeId"].Visible = false;
                 dgvTrxHeader.Columns["Pre_TaxAmount"].Visible = false;
-                dgvTrxHeader.Columns["Status"].Visible = false;
                 dgvTrxHeader.Columns["Tax_Amount"].Visible = false;
                 dgvTrxHeader.Columns["Tip_Amount"].Visible = false;
                 dgvTrxHeader.Columns["TokenNumber"].Visible = false;
@@ -1364,8 +1451,27 @@ namespace Marbale.POS
                 dgvTrxHeader.Columns["ExternalSystemReference"].Visible = false;
                 //dgvTrxHeader.Columns["DateTimeLastUpdatedTime"].Visible = false;
                 dgvTrxHeader.Columns["Customer"].Visible = false;
+
+                ApplyColorsToMyTransactionGrid();
             }
         }
+
+        public void ApplyColorsToMyTransactionGrid()
+        {
+            if(dgvTrxHeader.DataSource != null && dgvTrxHeader.Rows.Count > 0)
+            {
+                foreach(DataGridViewRow rw in dgvTrxHeader.Rows)
+                {
+                    if(rw.Cells["status"].Value != null 
+                        && (rw.Cells["status"].Value.ToString().ToLower() == "cancelled" || Convert.ToInt32(rw.Cells["OriginalTrxId"].Value) > 0)
+                       )
+                    {
+                        rw.DefaultCellStyle.BackColor = Color.Red;
+                    }
+                }
+            }
+        }
+    
 
         private void txtPhoneno_Leave(object sender, EventArgs e)
         {
@@ -1494,6 +1600,10 @@ namespace Marbale.POS
                     //dgvTrxLines.Columns["TransactionLineParentLine"].Visible = false;
                     dgvTrxLines.Columns["PrintKOT"].Visible = false;
                     dgvTrxLines.Columns["ParentLine"].Visible = false;
+                    dgvTrxLines.Columns["loyaltyPoints"].Visible = false;
+                    dgvTrxLines.Columns["DBLineId"].Visible = true;
+                    dgvTrxLines.Columns["IsLineReversed"].Visible = true;
+
                 }
             }
         }
@@ -1960,6 +2070,95 @@ namespace Marbale.POS
             frm.ShowDialog();
 
             HandleCardRead(CurrentCard.CardNumber, null);
+        }
+
+        private void dgvTrxHeader_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+
+                if (e.ColumnIndex == 0)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure you want Reverse the Transaction ?", "Confirmation Message", MessageBoxButtons.YesNo);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        if (dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value != null 
+                            && dgvTrxHeader["status", e.RowIndex].Value != null )
+                        {
+                            int trxId = Convert.ToInt32(dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value);
+                            if (dgvTrxHeader["status", e.RowIndex].Value.ToString().ToLower() != "cancelled"
+                                && (dgvTrxHeader["OriginalTrxId", e.RowIndex].Value == null || Convert.ToInt32(dgvTrxHeader["OriginalTrxId", e.RowIndex].Value) == 0))
+                            {
+                                
+                                TransactionBL traxBl = new TransactionBL();
+                                int reversedTrxId = traxBl.ReverseTransaction(trxId, 0, string.Empty);
+
+                                MessageBox.Show("Reverse Transaction was successful, Reversed Transaction Id is : " + reversedTrxId, "Message");
+                                UpdateTransactionTab(0);
+                            }
+                            else
+                            {
+                                MessageBox.Show("This Transaction or Line Already Reversed, can not Reverse");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        
+        bool IsAnyTransactionLineCancelled(int trxId)
+        {
+            bool cancelledLineFound = false;
+
+            try
+            {
+                if (ListTransaction != null)
+                {
+                    TransactionLine trxLine = ListTransaction.Find(x => x.Trx_id == trxId).TransactionLines.Find(x => x.IsLineReversed);
+
+                    if (trxLine != null)
+                        cancelledLineFound = true;
+                }
+            }
+            catch { }
+
+            return cancelledLineFound;
+        }
+
+
+        private void dgvTrxLines_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want Reverse the Transaction Line ?", "Confirmation Message", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    if (dgvTrxLines[e.ColumnIndex + 1, e.RowIndex].Value != null)
+                    {
+                        if (dgvTrxLines["OriginalLineID", e.RowIndex].Value !=null && Convert.ToInt32(dgvTrxLines["OriginalLineID", e.RowIndex].Value) < 0 
+                            && !Convert.ToBoolean(dgvTrxLines["IsLineReversed", e.RowIndex].Value))
+                        {
+                            int trxId = Convert.ToInt32(dgvTrxLines[e.ColumnIndex + 1, e.RowIndex].Value);
+                            int lineId = Convert.ToInt32(dgvTrxLines["DBLineId", e.RowIndex].Value);
+                            TransactionBL traxBl = new TransactionBL();
+                            int reversedTrxId = traxBl.ReverseTransactionLine(trxId, lineId, 0, string.Empty,0, string.Empty, string.Empty);
+
+                            MessageBox.Show("Reverse Transaction Line was successful, Reversed Transaction Id is : " + reversedTrxId, "Message");
+                            UpdateTransactionTab(0);
+                        }
+                        else
+                        {
+                            MessageBox.Show("This Transaction Line is Already Cancelled");
+                        }
+                    }
+                }
+            }
         }
     }
 }

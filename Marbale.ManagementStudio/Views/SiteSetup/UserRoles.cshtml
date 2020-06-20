@@ -19,7 +19,7 @@
             </thead>
             @foreach (var item in ViewBag.userRoles)
             {
-                <tr onchange="UpdatedList(this)" tabindex ="@item.Id">
+                <tr onchange="UpdatedList(this)" tabindex ="@item.Id" disableRow="@(item.ReadOnly == true ? "disable" : "enable")">
                     <td>
                         <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
                     </td>
@@ -69,8 +69,8 @@
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="SaveUserRoles()">Save</button>
     <button class="btn btn-primary btn-md" role="button" id="addRow">Add UserRole</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/index'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();"  id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
 </div>
 
 <script>
@@ -121,7 +121,7 @@
         $('.dataTable').on('click', 'tbody td', function () {
             var tbl = document.getElementById('marbleTable');
             if (tbl.rows[this.parentNode.rowIndex].cells[0].children[0].innerHTML.trim().length > 0) {
-                UpdateModuleActionTree(tbl.rows[this.parentNode.rowIndex].cells[0].children[0].innerHTML.trim());
+                UpdateModuleActionTree(tbl.rows[this.parentNode.rowIndex].cells[0].children[0].innerHTML.trim(),tbl.rows[this.parentNode.rowIndex].getAttribute("disablerow"));
             }
         });
         $('#addRow').on('click', function () {
@@ -147,6 +147,10 @@
             }
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+
+
+        var superUserElement = $('tr[disableRow="disable"]');
+        superUserElement.find('input,select').prop('disabled', true);
     });
 
 
@@ -169,7 +173,7 @@
                         AllowPOSAccess: table.rows[rowIndex].cells[4].children[0].checked,
                         POSClockInOut: table.rows[rowIndex].cells[5].children[0].checked,
                         AllowShiftOpenClose: table.rows[rowIndex].cells[6].children[0].checked,
-                        AavalibleModuleActions: selectedTreeItems
+                        AvailableModuleActions: selectedTreeItems
                     });
                 }
             }
@@ -189,7 +193,7 @@
             });
         }
     }
-    function UpdateModuleActionTree(roleId) {
+    function UpdateModuleActionTree(roleId, disable) {
         $("#treeview").remove();
         moduleActions = new kendo.data.HierarchicalDataSource({
             transport: {
@@ -210,13 +214,17 @@
             dataSource: moduleActions,
             dataTextField: ["name"],
             checkboxes: {
-                checkChildren: true
+                checkChildren: true,
+                disabled: true
             },
             check: onCheck,
             dataBound: function (e) {
                 var treeView = $('#treeview').data('kendoTreeView');
                 treeView.expand(".k-item"); // in order to highlight the check boxes we need to expand and collpse
                 treeView.collapse(".k-item");
+                if (disable == 'disable') {
+                    $(".k-checkbox").attr("disabled", "disabled");
+                }
             }
         });
     }

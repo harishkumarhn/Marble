@@ -39,10 +39,16 @@
 
             </div>
             <input type="submit" name="submit" value="Search" class="btn btn-primary btn-md"/>
+            <button id="newcard" class="btn btn-primary btn-md" role="button">New Card</button>
+            <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault();history.back();" id="back">Back</button>
+            <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault();window.location = '/Marble/Index'">Close</button>
         </div>
     }
 </div>
+
 <div style="margin-top: 7px;">
+    @if (ViewBag.cardsDetails != null)
+    {
     <table id="cardtable" class="table marbleTable">
         <thead>
             <th>CardId</th>
@@ -81,26 +87,23 @@
         @if (ViewBag.cardsDetails != null)
         {
             foreach (var item in ViewBag.cardsDetails)
-            {  
+            {
             <tr onclick="UpdatedList(@item.CardId)">
                 <td>@item.CardId  </td>
                   <td>
                      <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditCard('@item.CardId')">
                          <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
                      </a>
-                     <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteCard('@item.CardId')">
-                         <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
-                     </a>
                 </td>
                 <td>
-                    <input type="text" value="@item.CardNumber" />
+                    <input type="text" value="@item.CardNumber" style="width:100%" />
                 </td>
                 <td>
                     <select name="TypeList" id="TypeList">
                         @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TechCardType"])
                         {
 
-                            if ((@item.TechCardType) ==  @dow.Id)
+                            if ((@item.TechCardType) == @dow.Id)
                             {
                             <option value="@dow.Value" selected>@dow.Value</option>
                             }
@@ -113,7 +116,7 @@
                 </td>
 
                 <td>
-                    <input type="text" value="@item.IssueDateP" />
+                    <input type="text" value="@item.IssueDateP" style="width:170px"/>
                 </td>
                 <td>
                     <input type="checkbox"  @(item.VIPCustomer ? "checked='checked'" : "") value="@item.VIPCustomer" />
@@ -122,62 +125,62 @@
                     <input type="checkbox"  @(item.TimerResetCard ? "checked='checked'" : "") value="@item.TimerResetCard" />
                 </td>
                 <td>
-                    <input type="text" value="@item.FaceValue" />
+                    <input type="text" value="@item.FaceValue" style="width:100%"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.Customer"/>
+                    <input type="text" value="@item.Customer" style="width:110%"/>
                 </td>
                 @*    <td>
                     <input type="text" value="@item.FaceValue"/>
                 </td>*@
 
                 <td>
-                    <input type="text" value="@item.RefundDate"/>
+                    <input type="text" value="@item.RefundDate" style="width:170px"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.LastUpdatedTime"/>
+                    <input type="text" value="@item.LastUpdatedTime" style="width:170px"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.LastUpdatedBy"/>
+                    <input type="text" value="@item.LastUpdatedBy" style="width:100%"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.RefundAmount"/>
-                </td>
-
-                <td>
-                    <input type="text" value="@item.Note"/>
-                </td>
-                <td>
-                    <input type="text" value="@item.StartTime"/>
+                    <input type="text" value="@item.RefundAmount" style="width:100%"/>
                 </td>
 
                 <td>
-                    <input type="text" value="@item.LastPlayTime"/>
+                    <input type="text" value="@item.Note" style="width:100%"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.TechGames"/>
+                    <input type="text" value="@item.StartTime" style="width:170px"/>
+                </td>
+
+                <td>
+                    <input type="text" value="@item.LastPlayTime" style="width:170px"/>
+                </td>
+                <td>
+                    <input type="text" value="@item.TechGames" style="width:100%"/>
                 </td>
              
 
 
                 <td>
-                    <input type="text" value="@item.Credits"/>
+                    <input type="text" value="@item.Credits" style="width:100%"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.CreditPlus"/>
+                    <input type="text" value="@item.CreditPlus" style="width:100%"/>
                 </td>
 
                 <td>
-                    <input type="text" value="@item.Courtesy"/>
+                    <input type="text" value="@item.Courtesy" style="width:100%"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.Bonus"/>
+                    <input type="text" value="@item.Bonus" style="width:100%"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.CreditsPlayed"/>
+                    <input type="text" value="@item.CreditsPlayed" style="width:100%"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.TicketCount"/>
+                    <input type="text" value="@item.TicketCount" style="width:100%"/>
                 </td>
                 <td>
                     <input type="checkbox"  @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
@@ -190,12 +193,13 @@
             }
         }
     </table>
+    }
 </div>
-<div class="action">
+<!--<div class="action" style="margin-bottom:-3.5vh">
     <button id="newcard" class="btn btn-primary btn-md" role="button">New Card</button>
     <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
-</div>
+</div>-->
 
 <script>
     $(function () {
@@ -278,13 +282,14 @@
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
     });
 
-    $('#newcard').click(function () {
+    $('#newcard').click(function (event) {
+        event.preventDefault();
         $('#myModal').modal('show');
         $('#modelBody').css({
             'left': '-30%',
             'width': 900
         });
-        $('#modelBody').load('/Cards/Cards');
+        $('#modelBody').load('/Cards/NewCard');
     });
     function UpdatedList(x) {
         updatedArray = [];

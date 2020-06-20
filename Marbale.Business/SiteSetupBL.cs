@@ -5,23 +5,23 @@ using Marbale.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
-using System.IO;
 
 namespace Marble.Business
 {
     public class SiteSetupBL
     {
         private SiteSetupData siteSetupData;
+        private CommonData commonData;
+
         string key = "sblw-3hn8-sqoy19";
 
 
         public SiteSetupBL()
         {
             siteSetupData = new SiteSetupData();
+            commonData = new CommonData();
         }
         #region settings
         public List<Settings> GetSettings()
@@ -158,11 +158,36 @@ namespace Marble.Business
                 userRole.AllowPOSAccess = dr.IsNull("AllowPOSAccess") ? false : bool.Parse(dr["AllowPOSAccess"].ToString());
                 userRole.AllowShiftOpenClose = dr.IsNull("AllowShiftOpenClose") ? false : bool.Parse(dr["AllowShiftOpenClose"].ToString());
                 userRole.POSClockInOut = dr.IsNull("POSClockInOut") ? false : bool.Parse(dr["POSClockInOut"].ToString());
+                userRole.ReadOnly = dr.IsNull("ReadOnly") ? false : bool.Parse(dr["ReadOnly"].ToString());
                 userRole.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                 userRole.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                 userRoles.Add(userRole);
             }
             return userRoles;
+        }
+        public int DeleteUserbyId(int Id, string from)
+        {
+            try
+            {
+                return commonData.DeleteById(Id, from);
+            }
+            catch (Exception e)
+            {
+                //   LogError.Instance.LogException("DeleteProductbyId", e);
+                throw e;
+            }
+        }
+        public int DeletePrintTemplatebyId(int templateId,string from, bool isDataItem = false)
+        {
+            try
+            {
+                return commonData.DeleteById(templateId, from, isDataItem);
+            }
+            catch (Exception e)
+            {
+                //   LogError.Instance.LogException("DeleteProductbyId", e);
+                throw e;
+            }
         }
         public List<MessagesModel> GetAllMessages()
         {
@@ -190,12 +215,10 @@ namespace Marble.Business
             }
             catch (Exception)
             {
-
                 throw;
             }
 
         }
-
 
         public int UpdateTaskType(List<Marbale.BusinessObject.SiteSetup.TaskTypeModel> tasktype)
         {
@@ -205,8 +228,6 @@ namespace Marble.Business
                 s = siteSetupData.UpdateTaskType(item);
             }
             return s;
-
-
         }
 
         public List<TaskTypeModel> GetTaskType()
@@ -216,9 +237,9 @@ namespace Marble.Business
             foreach (DataRow dr in datatable.Rows)
             {
                 TaskTypeModel m = new TaskTypeModel();
-                m.TaskTypeId = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
-                m.TaskType = dr.IsNull("Type") ? "" : (dr["Type"].ToString());
-                m.TaskTypeName = dr.IsNull("Name") ? "" : (dr["Name"].ToString());
+                m.TaskTypeId = dr.IsNull("TaskTypeId") ? 0 : int.Parse(dr["TaskTypeId"].ToString());
+                m.TaskType = dr.IsNull("TaskType") ? "" : (dr["TaskType"].ToString());
+                m.TaskTypeName = dr.IsNull("TaskTypeName") ? "" : (dr["TaskTypeName"].ToString());
                 m.RequiresManagerApproval = dr.IsNull("RequiresManagerApproval") ? false : bool.Parse(dr["RequiresManagerApproval"].ToString());
                 m.DispalyinPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
                 tasktype.Add(m);
@@ -280,9 +301,9 @@ namespace Marble.Business
             return appModuleActions;
         }
 
-        public List<AppModuleAction> GetModuleActionsByRole(int roleId)
+        public List<AppModuleAction> GetModuleActionsByRole(int roleId,bool isSuperUser)
         {
-            var dataTable = siteSetupData.GetModuleActionsByRole(roleId);
+            var dataTable = siteSetupData.GetModuleActionsByRole(roleId, isSuperUser);
             List<AppModuleAction> appModuleActions = new List<AppModuleAction>();
             foreach (DataRow dr in dataTable.Rows)
             {
@@ -291,6 +312,7 @@ namespace Marble.Business
                 appModuleAction.Module = dr.IsNull("Module") ? "" : dr["Module"].ToString();
                 appModuleAction.Root = dr.IsNull("Root") ? "" : dr["Root"].ToString();
                 appModuleAction.Page = dr.IsNull("Page") ? "" : dr["Page"].ToString();
+                appModuleAction.URL = dr.IsNull("URL") ? "" : dr["URL"].ToString();
                 appModuleAction.Active = dr.IsNull("Active") ? false : bool.Parse(dr["Active"].ToString());
                 appModuleAction.DisplayOrder = dr.IsNull("DisplayOrder") ? 0 : int.Parse(dr["DisplayOrder"].ToString());
                 appModuleAction.Checked = dr.IsNull("IsChecked") ? false : bool.Parse(dr["IsChecked"].ToString());
@@ -299,7 +321,7 @@ namespace Marble.Business
 
             return appModuleActions;
         }
-
+      
         public List<User> GetUsers()
         {
             var roles = GetUserRoles();
@@ -344,7 +366,7 @@ namespace Marble.Business
                 user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
                 user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                 user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
-
+                user.ReadOnly = dr.IsNull("ReadOnly") ? false : bool.Parse(dr["ReadOnly"].ToString());
 
                 user.Roles = rolesList;
                 user.Statuses = statusList;
@@ -485,6 +507,7 @@ namespace Marble.Business
                 foreach (DataRow dr in dt.Rows)
                 {
                     pk.SiteId = dr.IsNull("site_id") ? 0 : int.Parse(dr["site_id"].ToString());
+                    pk.CardsCount = dr.IsNull("MaxCards") ? 0 : int.Parse(dr["MaxCards"].ToString());
 
                     if (!dr.IsNull("SiteKey"))
                     {
@@ -628,12 +651,19 @@ namespace Marble.Business
         public List<ReceiptPrintTemplate> GetPrintTemplates(int headerId)
         {
             List<ReceiptPrintTemplate> templates = new List<ReceiptPrintTemplate>();
-            var list = new List<IdValue>();
-            list.Add(new IdValue() { Id = 1, Value = "Header" });
-            list.Add(new IdValue() { Id = 2, Value = "Left" });
-            list.Add(new IdValue() { Id = 3, Value = "Right" });
-            list.Add(new IdValue() { Id = 4, Value = "Footer" });
+            var alignmentList = new List<IdValue>();
+            alignmentList.Add(new IdValue() { Id = 1, Value = "Center" });
+            alignmentList.Add(new IdValue() { Id = 2, Value = "Left" });
+            alignmentList.Add(new IdValue() { Id = 3, Value = "Right" });
+            alignmentList.Add(new IdValue() { Id = 4, Value = "Hide" });
 
+            var sectionTypes = new List<IdValue>();
+            sectionTypes.Add(new IdValue() { Id = 1, Value = "Select" });
+            sectionTypes.Add(new IdValue() { Id = 1, Value = "Header" });
+            sectionTypes.Add(new IdValue() { Id = 2, Value = "Product" });
+            sectionTypes.Add(new IdValue() { Id = 3, Value = "Total" });
+            sectionTypes.Add(new IdValue() { Id = 4, Value = "Footer" });
+            
             if (headerId > 0)
             {
                 DataTable dt = siteSetupData.GetPrintTemplates(headerId);
@@ -652,14 +682,16 @@ namespace Marble.Business
                         template.Col2Alignment = dr.IsNull("Col2Alignment") ? "" : dr["Col2Alignment"].ToString();
                         template.Col2Data = dr.IsNull("Col2Data") ? "" : dr["Col2Data"].ToString();
                         template.Col3Alignment = dr.IsNull("Col3Alignment") ? "" : dr["Col3Alignment"].ToString();
-                        template.Col3Data = dr.IsNull("Col1Data") ? "" : dr["Col1Data"].ToString();
+                        template.Col3Data = dr.IsNull("Col3Data") ? "" : dr["Col3Data"].ToString();
                         template.Col4Alignment = dr.IsNull("Col4Alignment") ? "" : dr["Col4Alignment"].ToString();
                         template.Col4Data = dr.IsNull("Col4Data") ? "" : dr["Col4Data"].ToString();
                         template.Col5Alignment = dr.IsNull("Col5Alignment") ? "" : dr["Col5Alignment"].ToString();
                         template.Col5Data = dr.IsNull("Col5Data") ? "" : dr["Col5Data"].ToString();
                         template.FontName = dr.IsNull("FontName") ? "" : dr["FontName"].ToString();
                         template.FontSize = dr.IsNull("FontSize") ? 0 : decimal.Parse(dr["FontSize"].ToString());
-                        template.AlignmentList = list;
+                        template.AlignmentList = alignmentList;
+                        template.SectionTypes = sectionTypes;
+
                         templates.Add(template);
                     }
 
@@ -667,7 +699,7 @@ namespace Marble.Business
             }
             if (templates.Count == 0)
             {
-                templates.Add(new ReceiptPrintTemplate() { AlignmentList = list });
+                templates.Add(new ReceiptPrintTemplate() { AlignmentList = alignmentList , SectionTypes = sectionTypes });
             }
             return templates;
         }
@@ -688,6 +720,49 @@ namespace Marble.Business
             try
             {
                 return siteSetupData.InsertOrUpdatePrintTemplateHeaderAndItems(template);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public List<PaymentMode> GetPaymentModes()
+        {
+            DataTable dt = siteSetupData.GetPaymentModes();
+            List<PaymentMode> paymentModes = new List<PaymentMode>();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    PaymentMode paymentMode = new PaymentMode();
+                    paymentMode.PaymentModeId = dr.IsNull("PaymentModeId") ? 0 : int.Parse(dr["PaymentModeId"].ToString());
+                    paymentMode.PaymentModeName = dr.IsNull("PaymentMode") ? "" : dr["PaymentMode"].ToString();
+                    int i;
+                    if (!int.TryParse(dr["CreditCardSurchargePercentage"].ToString(), out i)) i = 0;
+                    paymentMode.CreditCardSurchargePercentage = i;
+                    paymentMode.DisplayOrder = dr.IsNull("DisplayOrder") ? 0 : int.Parse(dr["DisplayOrder"].ToString());
+                    paymentMode.IsCash = dr.IsNull("IsCash") ? false : bool.Parse(dr["IsCash"].ToString());
+                    paymentMode.IsDebitCard = dr.IsNull("IsDebitCard") ? false : bool.Parse(dr["IsDebitCard"].ToString());
+                    paymentMode.IsCreditCard = dr.IsNull("IsCreditCard") ? false : bool.Parse(dr["IsCreditCard"].ToString());
+                    paymentMode.ManagerApprovalRequired = dr.IsNull("ManagerApprovalRequired") ? false : bool.Parse(dr["ManagerApprovalRequired"].ToString());
+                    paymentMode.POSAvailable = dr.IsNull("POSAvailable") ? false : bool.Parse(dr["POSAvailable"].ToString());
+                    paymentMode.GateWay = dr.IsNull("GateWay") ? 0 : int.Parse(dr["GateWay"].ToString());
+
+                    paymentModes.Add(paymentMode);
+                }
+
+            }
+            if (paymentModes.Count == 0)
+            {
+                paymentModes.Add(new PaymentMode());
+            }
+            return paymentModes;
+        }
+        public int InsertOrUpdatePaymentModes(List<PaymentMode> paymentModes)
+        {
+            try
+            {
+                return siteSetupData.InsertOrUpdatePaymentMode(paymentModes);
             }
             catch (Exception e)
             {

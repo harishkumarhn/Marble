@@ -15,14 +15,21 @@
         @foreach (var item in ViewBag.Messages)  
         {  
             <tr onchange="UpdatedList(this)"> 
-        <td > @item.MessageNo  </td>
-    
-        <td> <input type="text" value="@item.MessageDescription" class="gridText" style="width: 958px;">  </td>
-        <td> <input type="hidden" value="@item.MessageName" style="display:none">  </td>
+        <td style="padding:0"> @item.MessageNo  </td>    
+        <td style="padding:0"> 
+                @if (@item.MessageNo % 2 != 0)
+                {
+                <input type="text" value="@item.MessageDescription" class="gridText" style="width: 88vw;background-color:antiquewhite">
+                }
+                else
+                {
+                    <input type="text" value="@item.MessageDescription" class="gridText" style="width: 88vw;">
+                }
+        </td>
     </tr>  
         }  
     </table>
-    
+    <button class="btn btn-primary btn-md" role="button" onclick="addMessage()">New</button> 
     <button class="btn btn-primary btn-md" role="button" onclick="SaveMeesages()">Save</button>  
      <a href="/Product/ClosePopUp" class="btn btn-primary">Close</a>  
 </div>
@@ -46,8 +53,7 @@
                      messageObject.push({
                          MessageNo: table.rows[r].cells[0].innerHTML,
                          MessageDescription: table.rows[r].cells[1].children[0].value,
-                         MessageName: table.rows[r].cells[2].children[0].value,
-                    
+                         MessageName: "",                    
                      });
                  }
              }
@@ -59,9 +65,9 @@
             dataType: "json",
             success: function (data) {
                 $('#successMessages').text('Data Saved Successfully');
+                window.location.reload();
             },
-            error: function (e) {
-              
+            error: function (e) {              
                 alert(e);
             }
         });
@@ -71,5 +77,14 @@
              if (!updatedArray.includes(x.rowIndex)) {
                  updatedArray.push(x.rowIndex);
              }
+         }
+
+         function addMessage() {
+             var table = document.getElementById('messagesTable');
+             table.getElementsByTagName('tbody')[0].innerHTML += "<tr onchange='UpdatedList(this)'><td ></td><td> <input type='text' class='gridText' style='width: 100vw;'>  </td></tr>"
+             table.scrollBy({
+                 top: table.offsetHeight,
+                 behavior: 'smooth'
+             });
          }
      </script>    

@@ -3,214 +3,281 @@
     Layout = null;
 }
 
- <table id="marbleTable_printTemplate" class="stripe row-border order-column" style="width: 100%">
-        <thead>
+<table id="marbleTable_printTemplate" class="stripe row-border order-column" style="width: 100%">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Section</th>
+            <th>Sequence</th>
+            <th>FontName</th>
+            <th>FontSize</th>
+            <th>Col1Data</th>
+            <th>Col1Alignment</th>
+            <th>Col2Data</th>
+            <th>Col2Alignment</th>
+            <th>Col3Data</th>
+            <th>Col3Alignment</th>
+            <th>Col4Data</th>
+            <th>Col4Alignment</th>
+            <th>Col5Data</th>
+            <th>Col5Alignment</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.PrintTemplate)
+        {
             <tr>
-                <th>Id</th>
-                <th>Section</th>
-                <th>Sequence</th>
-                <th>Col1Data</th>
-                <th>Col1Alignment</th>
-                <th>Col2Data</th>
-                <th>Col2Alignment</th>
-                <th>Col3Data</th>
-                <th>Col3Alignment</th>
-                <th>Col4Data</th>
-                <th>Col4Alignment</th>
-                <th>Col5Data</th>
-                <th>Col5Alignment</th>
-                <th>FontName</th>
-                <th>FontSize</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in ViewBag.PrintTemplate)
-            {  
-                <tr>
-                    <td>
-                        <lable class="fixedCol1"> @(item.Id == 0 ? "" : item.Id) </lable>
-                    </td>
-                    <td>
-                        <input type="text" class="fixedCol2" value="@item.Section" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Sequence" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Col1Data" />
-                    </td>
-                    <td>
-                        <select name="Col1Alignment" id="Col1Alignment">
-                            @foreach (var dow in @item.AlignmentList)
+                <td>
+                    <lable class="fixedCol1"> @(item.Id == 0 ? "" : item.Id) </lable>
+                </td>
+                <td>
+                    <select id="sectionDropDown">
+                        @foreach (var dow in @item.SectionTypes)
+                        {
+                            if (@item.Section == (@dow.Value).ToString())
                             {
-                                if (@item.Col1Alignment == (@dow.Value[0]).ToString())
-                                {
                                 <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                                }
                             }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Col2Data" />
-                    </td>
-                    <td>
-                        <select name="Col2Alignment" id="Col2Alignment">
-                            @foreach (var dow in @item.AlignmentList)
+                            else
                             {
-                                if (@item.Col2Alignment == (@dow.Value[0]).ToString())
-                                {
-                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                                }
-                                else
-                                {
                                 <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                                }
                             }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Col3Data" />
-                    </td>
-                    <td>
-                        <select name="Col3Alignment" id="Col3Alignment">
-                            @foreach (var dow in @item.AlignmentList)
-                            {
-                                if (@item.Col3Alignment == (@dow.Value[0]).ToString())
-                                {
-                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Col4Data" />
-                    </td>
-                    <td>
-                        <select name="Col4Alignment" id="Col4Alignment">
-                            @foreach (var dow in @item.AlignmentList)
-                            {
-                                if (@item.Col4Alignment == (@dow.Value[0]).ToString())
-                                {
-                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Col5Data" />
-                    </td>
-                    <td>
-                        <select name="Col5Alignment" id="Col5Alignment">
-                            @foreach (var dow in @item.AlignmentList)
-                            {
-                                if (@item.Col5Alignment == (@dow.Value[0]).ToString())
-                                {
-                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                         <select name="fontName">
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input style="width:90px" type="text" value="@item.Sequence" />
+                </td>
+                <td>
+                    <select name="fontName">
                         @foreach (var dow in ViewBag.FontNameList)
                         {
                             if (@item.FontName == @dow)
                             {
-                            <option value="@dow" selected style="font-family:@dow">@dow</option>
+                                <option value="@dow" selected style="font-family:@dow">@dow</option>
                             }
                             else
                             {
-                            <option value="@dow" style="font-family:@dow">@dow</option>
+                                <option value="@dow" style="font-family:@dow">@dow</option>
                             }
                         }
                     </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.FontSize" />
-                    </td>
-                </tr>  
-            }
-        </tbody>
-    </table>
-    <script>
-        $(document).ready(function () {
-            var table = $('#marbleTable_printTemplate').DataTable({
-                scrollY: "400px",
-                scrollX: true,
-                scrollCollapse: true,
-                editable: true,
-                stateSave: true,
-                bPaginate: false,
-                bInfo: false,
-                bFilter: false,
-                bSort: false,
-                "createdRow": function (row, data, index) {
-                    $('td', row).addClass('tblRow');
-                },
-                rowCallback: function (row, data) {
-                    var element = $('td', row);
-                    element.on("change", function (e) {
-                        UpdatedList($(this).parent().index());
-                    });
-                },
-                fixedColumns: {
-                    leftColumns: 2
-                }
-            });
-            var counter = 1;
+                </td>
+                <td>
+                    <input type="text" value="@item.FontSize" />
+                </td>
+                <td>
+                    <input type="text" value="@item.Col1Data" />
+                </td>
+                <td>
+                    <select name="Col1Alignment" id="Col1Alignment">
+                        @foreach (var dow in @item.AlignmentList)
+                        {
+                            if (@item.Col1Alignment == (@dow.Value[0]).ToString())
+                            {
+                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="text" value="@item.Col2Data" />
+                </td>
+                <td>
+                    <select name="Col2Alignment" id="Col2Alignment">
+                        @foreach (var dow in @item.AlignmentList)
+                        {
+                            if (@item.Col2Alignment == (@dow.Value[0]).ToString())
+                            {
+                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="text" value="@item.Col3Data" />
+                </td>
+                <td>
+                    <select name="Col3Alignment" id="Col3Alignment">
+                        @foreach (var dow in @item.AlignmentList)
+                        {
+                            if (@item.Col3Alignment == (@dow.Value[0]).ToString())
+                            {
+                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="text" value="@item.Col4Data" />
+                </td>
+                <td>
+                    <select name="Col4Alignment" id="Col4Alignment">
+                        @foreach (var dow in @item.AlignmentList)
+                        {
+                            if (@item.Col4Alignment == (@dow.Value[0]).ToString())
+                            {
+                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="text" value="@item.Col5Data" />
+                </td>
+                <td>
+                    <select name="Col5Alignment" id="Col5Alignment">
+                        @foreach (var dow in @item.AlignmentList)
+                        {
+                            if (@item.Col5Alignment == (@dow.Value[0]).ToString())
+                            {
+                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td>
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteTemplateDataItem('@item.Id',@item.TemplateId)">
+                        <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        var table = $('#marbleTable_printTemplate').DataTable({
+            scrollY: "230px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            },
+            fixedColumns: {
+                leftColumns: 2
+            },
+            //select: true
+        });
+        var counter = 1;
 
-            $('#addRow').on('click', function () {
-                var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
-                var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol2');
+        $('#addRow').on('click', function () {
 
-                var alignmentListOptions = '';
-              @foreach (var dow in ViewBag.PrintTemplate[0].AlignmentList)
+            var alignmentOptions = '';
+            @foreach (var dow in ViewBag.PrintTemplate[0].AlignmentList)
               {
-                 @: alignmentListOptions = alignmentListOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
-                          
+                 @: alignmentOptions = alignmentOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
+
               }
+            var sectionOptions = '';
+            @foreach (var dow in ViewBag.PrintTemplate[0].SectionTypes)
+                {
+                    @: sectionOptions = sectionOptions + '<option id="@dow.Id" value="" >@dow.Value</option>';
+
+                }
+            var fontNames = '';
+            @foreach (var dow in ViewBag.FontNameList)
+            {
+                @: fontNames = fontNames + '<option value="" >@dow</option>';
+            }
             table.row.add([
                 '<lable></lable>',
+                '<select id="SectionDropDown">' + sectionOptions,
+                '<input style="width:90px" type="text" value="" />',
+                '<select name="fontNames" id="fontNames">' + fontNames,
                 '<input type="text" value="" />',
                 '<input type="text" value="" />',
+                '<select name="Col1Alignment" id="Col1Alignment">' + alignmentOptions,
                 '<input type="text" value="" />',
-                '<select name="Col1Alignment" id="Col1Alignment">' + alignmentListOptions,
+                '<select name="Col2Alignment" id="Col2Alignment">' + alignmentOptions,
                 '<input type="text" value="" />',
-                '<select name="Col2Alignment" id="Col2Alignment">' + alignmentListOptions,
+                '<select name="Col3Alignment" id="Col3Alignment">' + alignmentOptions,
                 '<input type="text" value="" />',
-                '<select name="Col3Alignment" id="Col3Alignment">' + alignmentListOptions,
+                '<select name="Col4Alignment" id="Col4Alignment">' + alignmentOptions,
                 '<input type="text" value="" />',
-                '<select name="Col4Alignment" id="Col4Alignment">' + alignmentListOptions,
-                '<input type="text" value="" />',
-                '<select name="Col5Alignment" id="Col5Alignment">' + alignmentListOptions,
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />'
-
+                '<select name="Col5Alignment" id="Col5Alignment">' + alignmentOptions,
+                ''
             ]).draw(false);
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+        $('#marbleTable_printTemplate tbody').on('click', 'tr', function () {
+            for (var i = 1 ; i <= this.parentElement.rows.length; i++) {
+                if (i == this.rowIndex) {
+                    this.style.backgroundColor = '#d6d9e0';
+                    document.getElementsByClassName('stripe row-border order-column dataTable no-footer DTFC_Cloned')[1].rows[this.rowIndex].style.backgroundColor = '#d6d9e0';
+                } else {
+                    this.parentElement.rows[i-1].style.backgroundColor = 'white';
+                    document.getElementsByClassName('stripe row-border order-column dataTable no-footer DTFC_Cloned')[1].rows[i].style.backgroundColor = 'white'
+                }
+            }
+        });
+        $('.DTFC_Cloned tbody').on('click', 'tr', function () {
+            for (var i = 1 ; i <= this.parentElement.rows.length; i++)
+            {
+                if (i == this.rowIndex) {
+                    this.style.backgroundColor = '#d6d9e0';
+                    document.getElementById('marbleTable_printTemplate').rows[this.rowIndex].style.backgroundColor = '#d6d9e0';
+                } else {
+                    this.parentElement.rows[i-1].style.backgroundColor = 'white';
+                    document.getElementById('marbleTable_printTemplate').rows[i].style.backgroundColor = 'white'
+                }
+            }
+        });
     });
     var updatedArray = [];
     function UpdatedList(index) {
         if (!updatedArray.includes(index)) {
             updatedArray.push(index);
+        }
+    }
+    function DeleteTemplateDataItem(id,templateId) {
+        if (confirm('Are you sure you want to delete this from database?')) {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("DeletePrintTemplate", "SiteSetup")',
+                data: { templateId: id, isdataItem: true },
+                dataType: "json",
+                success: function (data) {
+                    $('#templateData').load('/SiteSetup/PrintTemplateDataItems?headerId=' + templateId);
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
         }
     }
 </script>

@@ -24,7 +24,7 @@ namespace MarbaleManagementStudio.Controllers
         }
 
         [HttpGet]
-        public ActionResult Cards()
+        public ActionResult NewCard()
         {
             var data = cardBussiness.gettechcardtype();
             Session["TechCardType"] = data;
@@ -36,11 +36,13 @@ namespace MarbaleManagementStudio.Controllers
         [HttpGet]
         public ActionResult ViewCards(CardsModel c)
         {
+            
             var data1 = cardBussiness.gettechcardtype();
             Session["TechCardType"] = data1;
             List<CardsModel> data = cardBussiness.GetAllCards(c);
+            c.IssueDate = c.ToDate = DateTime.Now;
             ViewBag.cardsDetails = data;
-            return View();
+            return View(c);
         }
 
         public ActionResult Cards(int CardId)
@@ -66,8 +68,8 @@ namespace MarbaleManagementStudio.Controllers
         #region DeleteCard
         public JsonResult DeleteCard(int Id)
         {
-            int i = cardBussiness.DeleteCardById(Id);
-            return Json(i, JsonRequestBehavior.AllowGet);
+            int result = cardBussiness.DeleteCardById(Id,"card");
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -76,6 +78,9 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult Inventory()
         {
             Inventory m = new Marbale.BusinessObject.Cards.Inventory();
+            m.User = Session["UserID"].ToString();
+            m.From = m.To = DateTime.Now;
+            m.RecievedDate = DateTime.Now.ToString();
             List<Inventory> data = cardBussiness.GetInventory(m);
             if (data.Count > 0)
             {
@@ -85,7 +90,7 @@ namespace MarbaleManagementStudio.Controllers
             {
                 ViewBag.TotalNumberOfCards = 0;
             }
-            return View();
+            return View(m);
         }
         public int AddDeleteInventory(Inventory inventory)
         {

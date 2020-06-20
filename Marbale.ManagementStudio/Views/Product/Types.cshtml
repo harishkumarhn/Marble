@@ -18,7 +18,7 @@
                 <tr>
                     <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
                     <td>
-                        <input class="fixedCol2" type="text" value="@item.Type"  />
+                        <input class="fixedCol2" type="text" value="@item.Type" disabled />
                     </td>
                     <td>
                         <input type="text" value="@item.Description"  />
@@ -44,8 +44,8 @@
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" id="saveproducttypes" onclick="SaveProductTypes()" disabled>Save</button>
     <button class="btn btn-primary btn-md" role="button" id="addRow">Add Product Type </button>
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();"  id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/index'"" >Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();"  id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'"" >Close</button>
 </div>
 <script>
     $(':input').on('change', function () {

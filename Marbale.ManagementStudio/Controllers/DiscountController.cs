@@ -12,19 +12,19 @@ namespace MarbaleManagementStudio.Controllers
     [AuthorizationFilter]
     public class DiscountController : Controller
     {
-        ProductBL b = new ProductBL();
+        ProductBL productBLObject = new ProductBL();
         //
         // GET: /Discount/
 
         public ActionResult Index()
         {
-           MasterDiscounts datatable= b.GetAllDiscounts();
+           MasterDiscounts datatable= productBLObject.GetAllDiscounts();
             return View("Discount", datatable);
         }
 
         public ActionResult SaveDiscount(TransactionDiscount data)
         {
-            int s = b.SaveDiscount(data);
+            int s = productBLObject.SaveDiscount(data);
            // return View();
            return Json(1, JsonRequestBehavior.AllowGet);
          

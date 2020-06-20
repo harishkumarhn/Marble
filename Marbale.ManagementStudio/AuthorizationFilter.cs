@@ -16,7 +16,7 @@ namespace MarbaleManagementStudio
             }
 
             // Check for authorization
-            if (HttpContext.Current.Session["UserID"] == null)
+            if (HttpContext.Current.Session["UserID"] == null || string.IsNullOrWhiteSpace(HttpContext.Current.Session["UserID"].ToString()))
             {
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary {

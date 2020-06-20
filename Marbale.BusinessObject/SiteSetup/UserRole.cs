@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Marbale.BusinessObject.SiteSetup
 {
@@ -15,7 +11,9 @@ namespace Marbale.BusinessObject.SiteSetup
         public bool AllowPOSAccess { get; set; }
         public bool POSClockInOut { get; set; }
         public bool AllowShiftOpenClose { get; set; }
-        public string AvalibleModuleActions { get; set; }
+        public string AvailableModuleActions { get; set; }
+        public bool ReadOnly { get; set; }
+
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDate { get; set; }
 

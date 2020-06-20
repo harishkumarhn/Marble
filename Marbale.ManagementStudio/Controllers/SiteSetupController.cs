@@ -11,7 +11,7 @@ using System;
 
 namespace MarbaleManagementStudio.Controllers
 {
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public class SiteSetupController : Controller
     {
         SiteSetupBL siteSetup = new SiteSetupBL();
@@ -239,7 +239,7 @@ namespace MarbaleManagementStudio.Controllers
         public JsonResult ModuleActionPermission(int roleId)
         {
             List<Module> moduleTree = new List<Module>();
-            var moduleActions = siteSetup.GetModuleActionsByRole(roleId);
+            var moduleActions = siteSetup.GetModuleActionsByRole(roleId,true);
             GetTreeViewModel(moduleTree, moduleActions);
             return Json(moduleTree, JsonRequestBehavior.AllowGet);
         }
@@ -319,16 +319,19 @@ namespace MarbaleManagementStudio.Controllers
             var message = string.Empty;
             try
             {
-                //if (ModelState.IsValid)
-                //{
+                ModelState.Remove("Roles");
+                ModelState.Remove("Statuses");
+
+                if (ModelState.IsValid)
+                {
                     siteSetup.InsertOrUpdateUsers(user);
-                //}
-                //else
-                //{
-                //    message = string.Join(" | ", ModelState.Values
-                //                  .SelectMany(v => v.Errors)
-                //                  .Select(e => e.ErrorMessage));
-                //}
+                }
+                else
+                {
+                    message = string.Join(" | ", ModelState.Values
+                                  .SelectMany(v => v.Errors)
+                                  .Select(e => e.ErrorMessage));
+                }
             }
             catch (Exception e)
             {
@@ -342,7 +345,19 @@ namespace MarbaleManagementStudio.Controllers
         {
             return InsertOrUpdateUserObject(user);
         }
-
+        public JsonResult DeleteUser(int id)
+        {
+            try
+            {
+                int result = siteSetup.DeleteUserbyId(id,"user");
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("DeleteUser", e);
+                throw;
+            }
+        }
         #endregion
         #region Customer
         public ActionResult Customer()
@@ -410,9 +425,235 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.FontNameList = new string[] { "auto", "cursive", "fantasy", "inherit", "monospace", "sans-serif", "serif", "unset" };
             return PartialView("~/Views/SiteSetup/Printer/PrintTemplateDataItems.cshtml");
         }
+        public ActionResult PrintPreview(int headerId)
+        {
+            var previewItems = siteSetup.GetPrintTemplates(headerId);
+            List<string> sections = new List<string>();
+            foreach(var item in previewItems)
+            {
+                if(!sections.Any(x => x.ToLower() == item.Section.ToLower()))
+                {
+                    sections.Add(item.Section);
+                }
+            }
+            string printHTML = "";
+            foreach(var section in sections)
+            {
+                var rowsBySection = previewItems.Where(x => x.Section == section.ToString()).OrderBy(o => o.Sequence).ToList();
+                int productRowCount = previewItems.Where(x => x.Section.ToLower() == "product").OrderBy(o => o.Sequence).ToList().Count;
+                string productPreviewRows = "";
+                foreach (var row in rowsBySection)
+                {
+                    string style = "";
+                    switch(row.Section.ToLower())
+                    {
+                        case "header":
+                            GetHeaderOrFooter(ref printHTML, row, ref style);
+                            break;
+                        case "product":
+                            productPreviewRows = productPreviewRows + "<tr>";
+                            if (!string.IsNullOrWhiteSpace(row.Col1Data))
+                            {
+                                style = GetStyle(row, 1);
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:40%;'";
+                                productPreviewRows = productPreviewRows + "<td "+ style + ">" + row.Col1Data + "</td>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col2Data))
+                            {
+                                style = GetStyle(row, 2);
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
+                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col2Data + "</td>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col3Data))
+                            {
+                                style = GetStyle(row, 3);
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
+                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col3Data + "</td>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col4Data))
+                            {
+                                style = GetStyle(row, 4);
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
+                                productPreviewRows = productPreviewRows + "<td "+ style + ">" + row.Col4Data + "</td>";
+                            }
+                            if (!string.IsNullOrWhiteSpace(row.Col5Data))
+                            {
+                                style = GetStyle(row, 5);
+                                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
+                                productPreviewRows = productPreviewRows + "<td " + style + ">" + row.Col5Data + "</td>";
+                            }
+                            productPreviewRows = productPreviewRows + "</tr>";
+                            productRowCount--;
+                            if (productRowCount <= 0)
+                            {
+                                printHTML = printHTML + "<table width='100%'>" + productPreviewRows + "</table>";
+                            }
+                            break;
+                        case "footer":
+                            GetHeaderOrFooter(ref printHTML, row, ref style);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(printHTML)) { printHTML = "<div style=''>" + printHTML + "</div>"; }
+
+            ViewBag.printHTML = printHTML;
+            return PartialView("~/Views/SiteSetup/Printer/PrintPreview.cshtml");
+        }
+
+        private void GetHeaderOrFooter(ref string printHTML, ReceiptPrintTemplate row, ref string style)
+        {
+            if (!string.IsNullOrWhiteSpace(row.Col1Data))
+            {
+                style = GetStyle(row, 1);
+                if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
+                printHTML = printHTML + "<p " + style + ">" + row.Col1Data + "</p>";
+            }
+            if (!string.IsNullOrWhiteSpace(row.Col2Data))
+            {
+                style = GetStyle(row, 2);
+                if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
+                printHTML = printHTML + "<p " + style + ">" + row.Col2Data + "</p>";
+            }
+            if (!string.IsNullOrWhiteSpace(row.Col3Data))
+            {
+                style = GetStyle(row, 3);
+                if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
+                printHTML = printHTML + "<p " + style + ">" + row.Col3Data + "</p>";
+            }
+            if (!string.IsNullOrWhiteSpace(row.Col4Data))
+            {
+                style = GetStyle(row, 4);
+                if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
+                printHTML = printHTML + "<p " + style + ">" + row.Col4Data + "</p>";
+            }
+            if (!string.IsNullOrWhiteSpace(row.Col5Data))
+            {
+                style = GetStyle(row, 5);
+                if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
+                printHTML = printHTML + "<p " + style + ">" + row.Col5Data + "</p>";
+            }
+        }
+
+        private string GetStyle(ReceiptPrintTemplate template,int columnNumber)
+        {
+            string style = "";
+            switch (columnNumber)
+            {
+                case 1:
+                    if (!string.IsNullOrWhiteSpace(template.Col1Alignment))
+                    {
+                        style = style + getAlignmentOrVisiblity(template.Col1Alignment) +";";
+                    }
+                    break;
+                case 2:
+                    if (!string.IsNullOrWhiteSpace(template.Col2Alignment))
+                    {
+                        style = style + getAlignmentOrVisiblity(template.Col2Alignment) + ";";
+                    }
+                    break;
+                case 3:
+                    if (!string.IsNullOrWhiteSpace(template.Col3Alignment))
+                    {
+                        style = style + getAlignmentOrVisiblity(template.Col3Alignment) + ";";
+                    }
+                    break;
+                case 4:
+                    if (!string.IsNullOrWhiteSpace(template.Col4Alignment))
+                    {
+                        style = style + getAlignmentOrVisiblity(template.Col4Alignment) + ";";
+                    }
+                    break;
+                case 5:
+                    if (!string.IsNullOrWhiteSpace(template.Col5Alignment))
+                    {
+                        style = style + getAlignmentOrVisiblity(template.Col5Alignment) + ";";
+                    }
+                    break;
+                default: break;
+
+            }
+            if (!string.IsNullOrWhiteSpace(template.FontName))
+            {
+                style = style + "font-family:" + template.FontName + ";";
+            }
+            if (template.FontSize > 0)
+            {
+                style = style + "font-size:" + template.FontSize.ToString() + ";";
+            }
+            return style;
+        }
+        private string getAlignmentOrVisiblity(string alignment)
+        {
+            string value;
+            switch (alignment.ToLower())
+            {
+                case "l": value = "text-align:left"; break;
+                case "c": value = "text-align:center"; break;
+                case "r": value = "text-align:right"; break;
+                case "h": value = "visibility:hidden;"; break;
+                default: value = ""; break;
+            }
+            return value;
+        }
+
         public int UpdatePrintTemplate(ReceiptPrintTemplateHeader template)
         {
             return siteSetup.InsertOrUpdatePrintTemplateHeaderAndItems(template);
+        }
+        #endregion
+        public ActionResult TaskType()
+        {
+            List<TaskTypeModel> tasktype = siteSetup.GetTaskType();
+            ViewBag.Tasktype = tasktype;
+            return View();
+        }
+
+        public int UpdateTaskType(List<TaskTypeModel> taskTypes)
+        {
+            int status = siteSetup.UpdateTaskType(taskTypes);
+            if (status == 1)
+            {
+                RedirectToAction("TaskType");
+            }
+            return 1;
+        }
+        public int DeletePrintTemplate(int templateId,bool isDataItem = false)
+        {
+            try
+            {
+                int result = siteSetup.DeletePrintTemplatebyId(templateId, "print", isDataItem);
+                return result;
+            }
+            catch (Exception e)
+            {
+                LogError.Instance.LogException("DeletePrintTemplatebyId", e);
+                throw;
+            }
+        }
+        #region lookUps
+        public ActionResult LookUps()
+        {
+            return View("~/Views/SiteSetup/LookUps/LookUps.cshtml");
+        }
+        public ActionResult LookUpData()
+        {
+            return View("~/Views/SiteSetup/LookUps/LookUpData.cshtml");
+        }
+        public ActionResult PaymentMode()
+        {
+            ViewBag.PaymentModes = siteSetup.GetPaymentModes();
+            return View("~/Views/SiteSetup/LookUps/PaymentMode.cshtml");
+        }
+        public ActionResult Sequence()
+        {
+            return View("~/Views/SiteSetup/LookUps/Sequence.cshtml");
+        }
+        public int UpdatePaymentMode(List<PaymentMode> paymentModes)
+        {
+            return siteSetup.InsertOrUpdatePaymentModes(paymentModes);
         }
         #endregion
     }

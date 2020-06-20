@@ -2,6 +2,11 @@
 @{
     ViewBag.Title = "Tax";
 }
+<style>
+    .highlight{
+        background-color:gray;
+    }
+</style>
 <div>
     <div class="taxsetmodel">
         <div id="taxvalidation" style="text-align: center; display: none">
@@ -23,10 +28,10 @@
            
                     <tr onchange="UpdatedList(this)">
                         <td onclick="Getvalues(@item1.TaxId)">
-                            <input type="text" id="TaxId@(count)" value="@item1.TaxId" disabled >
+                            <input type="number" value="@item1.TaxId" id="TaxId@(count)" disabled >
                         </td>
                         <td onclick="Getvalues(@item1.TaxId)">
-                            <input type="text" value="@item1.TaxId"  id="TaxName@(count)"/>
+                            <input type="text" value="@item1.TaxName" id="TaxName@(count)"/>
                         </td>
                         <td onclick="Getvalues(@item1.TaxId)">
                             <input type="number" value="@item1.TaxPercent" class="numberbox" id="TaxPercent@(count)" />
@@ -40,18 +45,19 @@
                 }
             </table>
         </div>
-        <div class="action">
-            <div style="float:right;margin-right:20px">
-                <button class="btn btn-primary btn-md" role="button" onclick="SaveTax()">Save</button>
-                <button class="btn btn-primary btn-md" role="button" onclick="history.back();">Back</button>
-                <button class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add</button>
-                <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
-            </div>
-        </div>
+        
     </div>
     <br />
     <br />
     <div id="taxstructure">
+    </div>
+</div>
+<div id = "TaxActions" class="action" style="width:50%;right:0vh;left:auto">
+    <div style="float:right;margin-right:20px">
+        <button class="btn btn-primary btn-md" role="button" onclick="SaveTax()">Save</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();">Back</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="AddProduct()">Add</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
     </div>
 </div>
 <script>
@@ -70,6 +76,7 @@
         $("#marbleTable tr").removeClass("highlight");
         if (!selected)
             $(this).addClass("highlight");
+        $("#TaxActions").css({"width":"100%","position":"relative"});
     });
 
     var GetvaluesList = [];
@@ -85,11 +92,11 @@
     function AddProduct() {
         var index = $("#marbleTable tbody tr").length + 1;
         var TaxId = "TaxId" + index;
-        var TaxId = "TaxName" + index;
+        var TaxName = "TaxName" + index;
         var TaxPercent = "TaxPercent" + index;
         var ActiveFlag = "ActiveFlag" + index;
-        var newRow = '<tr onchange=UpdatedList(this)> <td> <input type="text" disabled ></td>' +
-     '<td> <input type="text" id="' + TaxId + '" />  </td>' +
+        var newRow = '<tr onchange=UpdatedList(this)> <td> <input type="text"  id="' + TaxId + '" disabled ></td>' +
+     '<td> <input type="text"  id="' + TaxName + '" />  </td>' +
      '<td> <input type="number"  id="' + TaxPercent + '" />  </td>' +
      '<td> <input type="checkbox" id="' + ActiveFlag + '"/></td>' + '</tr>';
         $('#marbleTable tr:last').after(newRow);
@@ -106,7 +113,7 @@
         var ActiveFlag = $('#ActiveFlag' + id).val();
         var taxmaster = {
             TaxId: $('#TaxId' + id).val(),
-            TaxId: $('#TaxName' + id).val(),
+            TaxName: $('#TaxName' + id).val(),
             TaxPercent: $('#TaxPercent' + id).val(),
             ActiveFlag: $("#ActiveFlag" + id).is(':checked')
         };

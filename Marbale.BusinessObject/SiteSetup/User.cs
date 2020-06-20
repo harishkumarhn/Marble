@@ -33,7 +33,7 @@ namespace Marbale.BusinessObject.SiteSetup
         public string CreatedBy { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDate { get; set; }
-
+        public bool ReadOnly { get; set; }
         public List<IdValue> Roles { get; set; }
         public List<IdValue> Statuses { get; set; }
     }

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/Content/CSS/bootstrap.css">
     <link href="~/Content/CSS/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/CSS/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/select.dataTables.css" rel="stylesheet" />
     <link href="~/Content/CSS/Material/meterialIcon.css" rel="stylesheet" />
     <link href="~/Content/DatetimePicker/jquery.datepicker2.css" rel="stylesheet" />
     <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
@@ -22,13 +23,14 @@
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <script src="~/Content/JS/jquery.dataTables.min.js"></script>
+    <script src="~/Content/JS/jquery.dataTables.js"></script>
     <script src="~/Content/JS/dataTables.fixedColumns.min.js"></script>
+    <script src="~/Content/JS/dataTables.select.js"></script>
     <script src="~/Content/DatetimePicker/jquery.datepicker2.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/JS/popper.min.js"></script>
     <script src="~/Content/JS/bootstrap.min.js"></script>
 
-    <script src="~/Content/JS/popper.min.js"></script>
     <script defer src="~/Content/JS/fontawesome.solid.js"></script>
     <script defer src="~/Content/JS/fontawesome.js"></script>
 
@@ -37,10 +39,20 @@
 <body>
 
     <div class="wrapper">
-        <p style="cursor: pointer; float: right; margin: 21px"><a href="/Marble/logout">
-                <img src="~/Content/images/logout.png" height="30px" title="logout"/>
-            </a>
-        </p>
+        <div style="cursor: pointer; float: right;margin: 10px 10px 0px 20px;">
+            <div class="btn-group">
+                <div class="btn-group dropleft" role="group">
+                    <button type="button" style="border:none;line-height: 1;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons" style="cursor: pointer;font-size:40px">&#xe853;</i>
+                        <br /><lable>@Session["UserID"]</lable>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Change Password</a>
+                        <a class="dropdown-item" href="/Marble/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div id="dismiss">
@@ -51,84 +63,92 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product</a>
-                    <ul class="collapse list-unstyled" id="productSubmenu">
-                        <li>
-                            <a href="/product/Index">Products</a>
-                        </li>
-                        <li>
-                            <a href="/discount/Index" id="disc">Discounts</a>
-                        </li>
-                        <li>
-                            <a href="/Tax/Index">Tax</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="active">
-                    <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Communication</a>
-                    <ul class="collapse list-unstyled" id="gameSubmenu">
-                        <li>
-                            <a href="/game/hubs">Hubs</a>
-                        </li>
-                        <li>
-                            <a href="/game/profiles">Game Profile</a>
-                        </li>
-                        <li>
-                            <a href="/game/games">Games</a>
-                        </li>
-                        <li>
-                            <a href="/game/machines">Machines</a>
-                        </li>
-                        <li>
-                            <a href="#" id="configuration">Configuration</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#siteSetupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Site Setup</a>
-                    <ul class="collapse list-unstyled" id="siteSetupSubmenu">
-                        <li>
-                            <a href="/SiteSetup/configuration" id="config">Configaration</a>
-                        </li>
-                        <li>
-                            <a href="/SiteSetup/sites" id="site">Site</a>
-                        </li>
-                        <li>
-                            <a href="/SiteSetup/users" id="users">Users</a>
-                        </li>
-                        <li>
-                            <a href="/SiteSetup/userRoles" id="userRole">User Roles</a>
-                        </li>
-                        <li>
-                            <a href="/SiteSetup/Messages">Messages</a>
-                        </li>
-                        <li>
-                            <a href="/TaskType/TaskType/TaskType">Task-Type</a>
-                        </li>
-                        <li>
-                            <a id="productKey" data-target="#myModal">Product Key</a>
-                        </li>
-                        <li>
-                            <a href="/SiteSetup/printer">Printer</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#pageSubmenucards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cards</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenucards">
-                        <li>
-                            <a href="/Cards/ViewCards" id="viewcard">View Card</a>
-                        </li>
-                        <li>
-                            <a id="newcards">New Cards</a>
-                        </li>
-                        <li>
-                            <a href="/Cards/Inventory">Inventory</a>
-                        </li>
+                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Product"]).Count > 0)
+                {
+                    <li class="active">
+                        <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product</a>
+                        <ul class="collapse list-unstyled" id="productSubmenu">
+                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Product"])
+                            {
+                                <li>
+                                    <a href="@page.URL">@page.Page</a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"]).Count > 0)
+                {
+                    <li class="active">
+                        <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Communication</a>
+                        <ul class="collapse list-unstyled" id="gameSubmenu">
+                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"])
+                            {
+                                if (page.Page == "Configurations")
+                                {
+                                    <li>
+                                        <a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@page.URL">@page.Page</a>
+                                    </li>
 
-                    </ul>
-                </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"]).Count > 0)
+                {
+                    <li class="active">
+                        <a href="#siteSetupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Site Setup</a>
+                        <ul class="collapse list-unstyled" id="siteSetupSubmenu">
+                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"])
+                            {
+                                if (page.Page == "Product key")
+                                {
+                                    <li>
+                                        <a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@page.URL">@page.Page</a>
+                                    </li>
+
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"]).Count > 0)
+                {
+                    <li class="active">
+                        <a href="#pageSubmenucards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cards</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenucards">
+                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"])
+                            {
+                                if (page.Page == "New Card")
+                                {
+                                    <li>
+                                        <a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@page.URL">@page.Page</a>
+                                    </li>
+
+                                }
+                            }
+                        </ul>
+                    </li>
+                }                
             </ul>
         </nav>
 
@@ -182,36 +202,31 @@
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
         });
-        $('#inventery').click(function () {
-            $(".modal-body").html("");
-            $('#newcardmodel .modal-Content').css('height', 590);
-            $('#newcardmodel .modal-Content').css('width', 719);
-            $('#newupdatecardmodal').text("Inventory").addClass('modal-centre');
-            $('#newcardmodel').modal('show');
+        ////$('#inventery').click(function () {
+        ////    $(".modal-body").html("");
+        ////    $('#newcardmodel .modal-Content').css('height', 590);
+        ////    $('#newcardmodel .modal-Content').css('width', 719);
+        ////    $('#newupdatecardmodal').text("Inventory").addClass('modal-centre');
+        ////    $('#newcardmodel').modal('show');
 
-            $('#modelbody').load('/Cards/Inventory');
-        });
-        $('#newcards').click(function () {
+        ////    $('#modelbody').load('/Cards/Inventory');
+        ////});
+        function DisplayPopUp(page,url) {
             $('#myModal').modal('show');
-            $('#modelBody').css({
-                'left': '-30%',
-                'width': 900
-            });
-            $('#modelBody').load('/Cards/Cards');
-        });
-        $('#configuration').click(function () {
-            $('#myModal').modal('show');
-            $('#modelBody').css({
-                'left': '-30%',
-                'width': 800,
-            });
-            $('#modelBody').load('/game/configuration');
+            if(page == "Product key") {
+                $('#modelBody').css({
+                    'width': 640,
+                    'margin-top':70
+                });
+            } else {
+                $('#modelBody').css({
+                    'left': '-30%',
+                    'width': 800,
+                });
+            }
+            $('#modelBody').load(url);
+        }
 
-        });
-        $('#productKey').click(function () {
-            $('#myModal').modal('show');
-            $('#modelBody').load('/siteSetup/ProductKey');
-        });
         $("#myModal").draggable({
             handle: ".modal-header"
         });

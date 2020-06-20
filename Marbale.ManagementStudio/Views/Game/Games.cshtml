@@ -58,19 +58,19 @@
                 <input type="text" value="@item.GPVipPrice" disabled />
             </td>
             <td>
-                <input type="text" value="@item.NormalPrice"/>
+                <input type="text" value="@item.NormalPrice" style="width:9vw"/>
             </td>
             <td>
-                <input type="text" value="@item.VIPPrice"/>
+                <input type="text" value="@item.VIPPrice" style="width:9vw"/>
             </td>
             <td>
-                <input type="text" value="@item.RepeatPlayDiscountPercentage"/>
+                <input type="text" value="@item.RepeatPlayDiscountPercentage" style="width:7vw"/>
             </td>
             <td>
                 <input type="text" value="@item.GameCompanyName"/>
             </td>
             <td>
-                <input type="text" value="@item.Notes"/>
+                <input type="text" value="@item.Notes" style="width:9vw"/>
             </td>
             <td>
                 <input type="text" value="@item.LastUpdatedDate"disabled/>
@@ -83,10 +83,10 @@
     }
 </table>
 <div class="action">
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="SaveGames()" id="saveGame">Save</button>
     <button class="btn btn-primary btn-md" role="button" id="addRow">Add</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/index'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault();window.location = '/Marble/Index'">Close</button>
 
 </div>
 <script>

@@ -45,8 +45,8 @@
     <button class="btn btn-primary btn-md" role="button" id="SaveDisplayGroup" onclick="SaveDisplayGroup()" disabled>Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button">Add Product Category</button>
 
-    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/Marble/index'">Close</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
 </div>
 <script>
 
