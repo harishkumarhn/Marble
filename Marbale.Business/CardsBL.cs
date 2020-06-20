@@ -105,10 +105,10 @@ namespace Marble.Business
 
         public int AddDeleteInventory(Inventory inventory)
         {
-            var status = cardData.AddDeleteInventory(inventory);
-            var data = cardData.GetInventory(inventory);
-            int TotalNumberOfCards = GetTotalNumberOfCards(data);
-            return TotalNumberOfCards;
+            //var status = cardData.AddDeleteInventory(inventory);
+            //var data = cardData.GetInventory(inventory);
+            //int TotalNumberOfCards = GetTotalNumberOfCards(data);
+            return 0;// TotalNumberOfCards;
 
         }
         public int GetTotalNumberOfCards(DataTable data)
@@ -126,22 +126,22 @@ namespace Marble.Business
         public List<Inventory> GetInventory(Inventory inventory)
         {
             List<Inventory> inventorylist = new List<Inventory>();
-            var dataTable = cardData.GetInventory(inventory);
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                Inventory inv = new Inventory();
-                inv.NumberOfCards = dr.IsNull("NumberOfCards") ? 0 : int.Parse(dr["NumberOfCards"].ToString());
-                inv.User = dr.IsNull("User") ? "" : (dr["User"].ToString());
-                inv.ActionBy = dr.IsNull("ActionBy") ? "" : (dr["ActionBy"].ToString());
-                inv.ActionName = dr.IsNull("Action") ? "" : (dr["Action"].ToString());
-                inv.ActionDateString = dr.IsNull("ActionDate") ? "" : (dr["ActionDate"].ToString());
-                inv.ActionDate = Convert.ToDateTime(dr.IsNull("ActionDate") ? "01-01-2019" : (dr["ActionDate"].ToString()));
-                inv.TotalNumberOfCards = dr.IsNull("TotalNumberOfCards") ? 0 : int.Parse(dr["TotalNumberOfCards"].ToString());
-                //    inv.RecievedDate = dr.IsNull("RecievedDate") ? "01/01/2019" : (dr["RecievedDate"].ToString());
-                //    inv. = dr.IsNull("last_updated_user") ? "" : (dr["last_updated_user"].ToString());
+            //var dataTable = cardData.GetInventory(inventory);
+            //foreach (DataRow dr in dataTable.Rows)
+            //{
+            //    Inventory inv = new Inventory();
+            //    inv.NumberOfCards = dr.IsNull("NumberOfCards") ? 0 : int.Parse(dr["NumberOfCards"].ToString());
+            //    inv.User = dr.IsNull("User") ? "" : (dr["User"].ToString());
+            //    inv.ActionBy = dr.IsNull("ActionBy") ? "" : (dr["ActionBy"].ToString());
+            //    inv.ActionName = dr.IsNull("Action") ? "" : (dr["Action"].ToString());
+            //    inv.ActionDateString = dr.IsNull("ActionDate") ? "" : (dr["ActionDate"].ToString());
+            //    inv.ActionDate = Convert.ToDateTime(dr.IsNull("ActionDate") ? "01-01-2019" : (dr["ActionDate"].ToString()));
+            //    inv.TotalNumberOfCards = dr.IsNull("TotalNumberOfCards") ? 0 : int.Parse(dr["TotalNumberOfCards"].ToString());
+            //    //    inv.RecievedDate = dr.IsNull("RecievedDate") ? "01/01/2019" : (dr["RecievedDate"].ToString());
+            //    //    inv. = dr.IsNull("last_updated_user") ? "" : (dr["last_updated_user"].ToString());
 
-                inventorylist.Add(inv);
-            }
+            //    inventorylist.Add(inv);
+            //}
             return inventorylist;
         }
       

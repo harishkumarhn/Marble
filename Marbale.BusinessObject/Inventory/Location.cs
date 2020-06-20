@@ -8,30 +8,96 @@ namespace Marbale.BusinessObject.Inventory
 {
     public class Location
     {
-        public int LocationId { get; set; }
 
-        public string LocationName { get; set; }
+        private bool notifyingObjectIsChanged;
+        private readonly object notifyingObjectIsChangedSyncRoot = new Object();
 
-        public string BarCode { get; set; }
+        public enum SearchByLocationParameters
+        {
+            IS_ACTIVE = 0,
+            LOCATION_ID = 2
+        }
 
-        public int LocationTypeId { get; set; }
+        int locationId;
+        string name;
+        bool isActive;
+        bool isAvailableToSell;
+        string barcode;
+        bool isTurnInLocation;
+        bool isStore;
+        bool allowForMassUpdate;
+        int locationTypeId;
+        string createdBy;
+        string lastUpdatedBy;
+        DateTime createdDate;
+        DateTime lastUpdatedDate;
 
-        public bool IsActive { get; set; }
+        public Location()
+        {
+            locationId = -1;
+            locationTypeId = 0;
+            isActive = true;
+        }
+        public Location(int locationId,   string name, bool isActive, bool isAvailableToSell, string barcode, bool isTurnInLocation,
+        bool isStore, bool allowForMassUpdate, int locationTypeId, string createdBy, string lastUpdatedBy, DateTime createdDate, DateTime lastUpdatedDate)
+        {
+            this.locationId = locationId;
+            this.name = name;
+            this.isActive = isActive;
+            this.isAvailableToSell = isAvailableToSell;
+            this.barcode = barcode;
+            this.isTurnInLocation = isTurnInLocation;
+            this.isStore = isStore;
+            this.allowForMassUpdate = allowForMassUpdate;
+            this.locationTypeId = locationTypeId;
+            this.createdBy = createdBy;
+            this.lastUpdatedBy = lastUpdatedBy;
+            this.createdDate = createdDate;
+            this.lastUpdatedDate = lastUpdatedDate;
 
-        public bool IsStore { get; set; }
+        }
 
-        public bool AllowForMassUpdate { get; set; }
+        public int LocationId { get { return locationId; } set { locationId = value; this.IsChanged = true; } }
+        public string LocationName { get { return name; } set { name = value; this.IsChanged = true; } }
+        public bool IsActive { get { return isActive; } set { isActive = value; this.IsChanged = true; } }
+        public bool IsAvailableToSell { get { return isAvailableToSell; } set { isAvailableToSell = value; this.IsChanged = true; } }
+        public string BarCode { get { return barcode; } set { barcode = value; this.IsChanged = true; } }
+        public bool IsTurnInLocation { get { return isTurnInLocation; } set { isTurnInLocation = value; this.IsChanged = true; } }
+        public bool IsStore { get { return isStore; } set { isStore = value; this.IsChanged = true; } }
+        public bool AllowForMassUpdate { get { return allowForMassUpdate; } set { allowForMassUpdate = value; this.IsChanged = true; } }
+        public int LocationTypeId { get { return locationTypeId; } set { locationTypeId = value; this.IsChanged = true; } }
+        public string CreatedBy { get { return createdBy; } set { createdBy = value; this.IsChanged = true; } }
+        public string LastUpdatedBy { get { return lastUpdatedBy; } set { lastUpdatedBy = value; this.IsChanged = true; } }
+        public DateTime CreatedDate { get { return createdDate; } set { createdDate = value; this.IsChanged = true; } }
+        public DateTime LastUpdatedDate { get { return lastUpdatedDate; } set { lastUpdatedDate = value; this.IsChanged = true; } }
 
-        public bool IsTurnInLocation { get; set; }
+        public bool IsChanged
+        {
+            get
+            {
+                lock (notifyingObjectIsChangedSyncRoot)
+                {
+                    return notifyingObjectIsChanged;
+                }
+            }
 
-        public bool IsAvailableToSell { get; set; }
+            set
+            {
+                lock (notifyingObjectIsChangedSyncRoot)
+                {
+                    if (!Boolean.Equals(notifyingObjectIsChanged, value))
+                    {
+                        notifyingObjectIsChanged = value;
+                    }
+                }
+            }
+        }
 
-        public string CreatedBy { get; set; }
+       
+        public void AcceptChanges()
+        {
+            this.IsChanged = false;
+        }
 
-        public string LastUpdatedBy { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime LastUpdatedDate { get; set; }
     }
 }

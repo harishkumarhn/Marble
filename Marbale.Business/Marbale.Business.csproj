@@ -53,8 +53,20 @@
     <Compile Include="GameBL.cs" />
     <Compile Include="CardsBL.cs" />
     <Compile Include="Enum\TypeEnum.cs" />
+    <Compile Include="InventoryBL\InventoryAdjustmentsActivityBL.cs" />
+    <Compile Include="InventoryBL\InventoryAdjustmentsBL.cs" />
+    <Compile Include="InventoryBL\InventoryPhysicalCountBL.cs" />
+    <Compile Include="InventoryBL\InventoryPhysicalCountLogBL.cs" />
+    <Compile Include="InventoryBL\InventoryProductBarcodeBL.cs" />
+    <Compile Include="InventoryBL\InventoryProductBL.cs" />
+    <Compile Include="InventoryBL\InventoryReceiptBL.cs" />
+    <Compile Include="InventoryBL\InventoryStoreBL.cs" />
     <Compile Include="InventoryBL\LocationBL.cs" />
     <Compile Include="InventoryBL\LocationTypeBL.cs" />
+    <Compile Include="InventoryBL\PurchaseOrderBL.cs" />
+    <Compile Include="InventoryBL\PurchaseOrderLineBL.cs" />
+    <Compile Include="InventoryBL\PurchaseOrderReceiveLineBL.cs" />
+    <Compile Include="InventoryBL\PurchaseTaxBL.cs" />
     <Compile Include="InventoryBL\UnitOfMeasureBL.cs" />
     <Compile Include="InventoryBL\VendorBL.cs" />
     <Compile Include="ProductBL.cs" />
@@ -76,6 +88,9 @@
       <Project>{a05f1be2-c3f5-4502-8a28-f10b46f2b296}</Project>
       <Name>Marbale.Reports</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

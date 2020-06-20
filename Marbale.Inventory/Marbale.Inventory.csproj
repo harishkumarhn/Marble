@@ -34,12 +34,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=4.5.3.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +58,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adjustments\Form_InventoryStoreActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adjustments\Form_InventoryStoreActivity.Designer.cs">
+      <DependentUpon>Form_InventoryStoreActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adjustments\Frm_Adjustmnets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adjustments\Frm_Adjustmnets.Designer.cs">
+      <DependentUpon>Frm_Adjustmnets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adjustments\Frm_PhysicalCount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adjustments\Frm_PhysicalCount.Designer.cs">
+      <DependentUpon>Frm_PhysicalCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adjustments\Frm_PhysicalCountPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adjustments\Frm_PhysicalCountPopup.Designer.cs">
+      <DependentUpon>Frm_PhysicalCountPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,8 +142,57 @@
     <Compile Include="MenuPopups\MasterPopup.Designer.cs">
       <DependentUpon>MasterPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\BarcodeReader.cs" />
+    <Compile Include="Product\frmProductShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Product\frmProductShow.designer.cs">
+      <DependentUpon>frmProductShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Frm_Barcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Product\Frm_Barcode.Designer.cs">
+      <DependentUpon>Frm_Barcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Frm_GenerateBarcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Product\Frm_GenerateBarcode.Designer.cs">
+      <DependentUpon>Frm_GenerateBarcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Product\frm_ProductList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Product\frm_ProductList.Designer.cs">
+      <DependentUpon>frm_ProductList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recieve\Frm_Reciepts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recieve\Frm_Reciepts.Designer.cs">
+      <DependentUpon>Frm_Reciepts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Recieve\Frm_ReciewInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recieve\Frm_ReciewInventory.Designer.cs">
+      <DependentUpon>Frm_ReciewInventory.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Adjustments\Form_InventoryStoreActivity.resx">
+      <DependentUpon>Form_InventoryStoreActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adjustments\Frm_Adjustmnets.resx">
+      <DependentUpon>Frm_Adjustmnets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adjustments\Frm_PhysicalCount.resx">
+      <DependentUpon>Frm_PhysicalCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adjustments\Frm_PhysicalCountPopup.resx">
+      <DependentUpon>Frm_PhysicalCountPopup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmProduct.resx">
       <DependentUpon>frmProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,6 +223,18 @@
     <EmbeddedResource Include="MenuPopups\MasterPopup.resx">
       <DependentUpon>MasterPopup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Product\frmProductShow.resx">
+      <DependentUpon>frmProductShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Product\Frm_Barcode.resx">
+      <DependentUpon>Frm_Barcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Product\Frm_GenerateBarcode.resx">
+      <DependentUpon>Frm_GenerateBarcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Product\frm_ProductList.resx">
+      <DependentUpon>frm_ProductList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -153,6 +245,72 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Recieve\Frm_Reciepts.resx">
+      <DependentUpon>Frm_Reciepts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recieve\Frm_ReciewInventory.resx">
+      <DependentUpon>Frm_ReciewInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Marbale.BusinessObject.AppSetting.datasource" />
+    <None Include="Marbale.BusinessObject.Buttons.datasource" />
+    <None Include="Marbale.BusinessObject.Cards.Card.datasource" />
+    <None Include="Marbale.BusinessObject.Cards.CardsModel.datasource" />
+    <None Include="Marbale.BusinessObject.Cards.Inventory.datasource" />
+    <None Include="Marbale.BusinessObject.Customer.Customers.datasource" />
+    <None Include="Marbale.BusinessObject.customIDVa.datasource" />
+    <None Include="Marbale.BusinessObject.Discount.Discounts+DiscountLine.datasource" />
+    <None Include="Marbale.BusinessObject.Discount.Discounts.datasource" />
+    <None Include="Marbale.BusinessObject.DisplayGroup.DisplayGroup.datasource" />
+    <None Include="Marbale.BusinessObject.DisplayGroupModel.datasource" />
+    <None Include="Marbale.BusinessObject.Game.ActiveHubMachine.datasource" />
+    <None Include="Marbale.BusinessObject.Game.Game.datasource" />
+    <None Include="Marbale.BusinessObject.Game.GameProfile.datasource" />
+    <None Include="Marbale.BusinessObject.Game.Hub.datasource" />
+    <None Include="Marbale.BusinessObject.Game.Machine.datasource" />
+    <None Include="Marbale.BusinessObject.GameDiscount.datasource" />
+    <None Include="Marbale.BusinessObject.IdValue.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.Category.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryAdjustmentsActivity.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryProduct+SearchByProductParameters.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryProduct.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryProductBarcode.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryReceipt.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryStore.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.Location.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.LocationType+SearchByLocationTypeParameters.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.LocationType.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.PurchaseOrderReceiveLine.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.PurchaseTax+SearchByTaxParameters.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.PurchaseTax.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.UnitOfMeasure.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.Vendor+SearchByVendorParameters.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.Vendor.datasource" />
+    <None Include="Marbale.BusinessObject.KeyValue.datasource" />
+    <None Include="Marbale.BusinessObject.LoginModel.datasource" />
+    <None Include="Marbale.BusinessObject.MasterDiscounts.datasource" />
+    <None Include="Marbale.BusinessObject.Messages.MessagesModel.datasource" />
+    <None Include="Marbale.BusinessObject.NameValue.datasource" />
+    <None Include="Marbale.BusinessObject.POSModel.datasource" />
+    <None Include="Marbale.BusinessObject.POSTransaction.Transaction.datasource" />
+    <None Include="Marbale.BusinessObject.POSTransaction.TransactionLine.datasource" />
+    <None Include="Marbale.BusinessObject.Product.datasource" />
+    <None Include="Marbale.BusinessObject.ProductCategory.datasource" />
+    <None Include="Marbale.BusinessObject.ProductType.datasource" />
+    <None Include="Marbale.BusinessObject.Settings.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.AppModuleAction.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.Printer.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.ProductKey.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.ReceiptPrintTemplate.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.ReceiptPrintTemplateHeader.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.Site.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.TaskTypeModel.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.User.datasource" />
+    <None Include="Marbale.BusinessObject.SiteSetup.UserRole.datasource" />
+    <None Include="Marbale.BusinessObject.Tax.MasterTax.datasource" />
+    <None Include="Marbale.BusinessObject.Tax.TaxSet.datasource" />
+    <None Include="Marbale.BusinessObject.Tax.TaxStructure.datasource" />
+    <None Include="Marbale.BusinessObject.TransactionDiscount.datasource" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -174,6 +332,10 @@
     <ProjectReference Include="..\Marbale.Business\Marbale.Business.csproj">
       <Project>{D3791924-6C85-4AAD-8BAB-3E3CD23C22E6}</Project>
       <Name>Marbale.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Marbale.DataAccess\Marbale.DataAccess.csproj">
+      <Project>{6A6D1608-F1EC-435A-A3EC-10237AB280AF}</Project>
+      <Name>Marbale.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

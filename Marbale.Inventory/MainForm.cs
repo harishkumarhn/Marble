@@ -1,4 +1,8 @@
-﻿using Marbale.Inventory.Master;
+﻿using Marbale.BusinessObject.SiteSetup;
+using Marbale.Inventory.Adjustments;
+using Marbale.Inventory.Master;
+using Marbale.Inventory.Product;
+using Marbale.Inventory.Recieve;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +18,18 @@ namespace Marbale.Inventory
 {
     public partial class MainForm : Form
     {
+        public static User loggedInUser;
         public MainForm()
         {
             InitializeComponent();
+            loggedInUser = new User()
+            {
+                Id = 1,
+                LoginId = "rakshith",
+                Name = "rakshith"
+            };
+
+
         }
 
         private void categoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -51,6 +64,46 @@ namespace Marbale.Inventory
         {
             frmLocation frm = new frmLocation();
             frm.ShowDialog();
+        }
+
+        private void productToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_ProductList frm_ProductList = new Frm_ProductList();
+            frm_ProductList.MdiParent = this;
+            frm_ProductList.StartPosition = FormStartPosition.CenterScreen;
+            frm_ProductList.Show();
+
+            //frm_ProductList.Show(this);
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_AddProduct frm_AddProduct = new Frm_AddProduct(-1, "");
+            frm_AddProduct.ShowDialog();
+        }
+
+        private void listToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_ProductList frm_ProductList = new Frm_ProductList();
+            frm_ProductList.ShowDialog();
+        }
+
+        private void receiveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_ReciewInventory frm_Reciew = new Frm_ReciewInventory();
+            frm_Reciew.ShowDialog();
+        }
+
+        private void adjustmentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_Adjustmnets frm_Adjustmnets = new Frm_Adjustmnets();
+            frm_Adjustmnets.ShowDialog();
+        }
+
+        private void physicalCountingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_PhysicalCount frm_PhysicalCount = new Frm_PhysicalCount();
+            frm_PhysicalCount.ShowDialog();
         }
     }
 }

@@ -12,24 +12,42 @@ namespace Marbale.BusinessObject.Inventory
         private bool notifyingObjIsChanged;
         private readonly object notifyingObjIsChangedSyncRoot = new Object();
 
-        public int categoryId;
-        public bool isActive;
-        public string categoryName;
-
+        int categoryId;
+        bool isActive;
+        string categoryName;
+        string createdBy;
+        string lastUpdatedBy;
+        DateTime createdDate;
+        DateTime lastUpdatedDate;
 
         public int CategoryId { get { return categoryId; } set { categoryId = value; this.IsChanged = true; } }
-
+        public string CategoryName { get { return categoryName; } set { categoryName = value; this.IsChanged = true; } }
         public bool IsActive { get { return isActive; } set { isActive = value; this.IsChanged = true; } }
 
-        public string CategoryName { get { return categoryName; } set { categoryName = value; this.IsChanged = true; } }
+        public string CreatedBy { get { return createdBy; } set { createdBy = value; this.IsChanged = true; } }
+        public string LastUpdatedBy { get { return lastUpdatedBy; } set { lastUpdatedBy = value; this.IsChanged = true; } }
+        public DateTime CreatedDate { get { return createdDate; } set { createdDate = value; this.IsChanged = true; } }
+        public DateTime LastUpdatedDate { get { return lastUpdatedDate; } set { lastUpdatedDate = value; this.IsChanged = true; } }
 
-        public string CreatedBy { get; set; }
 
-        public string LastUpdatedBy { get; set; }
+        public Category()
+        {
+            categoryId = -1;
+            isActive = true;
+        }
 
-        public DateTime CreatedDate { get; set; }
 
-        public DateTime LastUpdatedDate { get; set; }
+        public Category(int categoryId, string name,
+                           bool isActive, string createdBy, string lastUpdatedBy, DateTime createdDate, DateTime lastUpdatedDate)
+        {
+            this.categoryId = categoryId;
+            this.categoryName = name;
+            this.isActive = isActive;
+            this.createdBy = createdBy;
+            this.lastUpdatedBy = lastUpdatedBy;
+            this.createdDate = createdDate;
+            this.lastUpdatedDate = lastUpdatedDate;
+        }
 
         public bool IsChanged
         {
