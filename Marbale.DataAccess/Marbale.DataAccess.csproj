@@ -50,6 +50,7 @@
     <Compile Include="Data\Inventory\InventoryAdjustmentsData.cs" />
     <Compile Include="Data\Inventory\InventoryPhysicalCountData.cs" />
     <Compile Include="Data\Inventory\InventoryPhysicalCountLogData.cs" />
+    <Compile Include="Data\Inventory\InventoryProductBarcodeData.cs" />
     <Compile Include="Data\Inventory\InventoryProductData.cs" />
     <Compile Include="Data\Inventory\InventoryReceiptData.cs" />
     <Compile Include="Data\Inventory\InventoryStoreData.cs" />

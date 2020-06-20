@@ -23,6 +23,7 @@ namespace Marbale.Inventory.Master
         private void frmVendor_Load(object sender, EventArgs e)
         {
             PopulateVendorGrid();
+            chkActive.Checked = true;
         }
 
         void PopulateVendorGrid()
@@ -90,6 +91,7 @@ namespace Marbale.Inventory.Master
             txtWebsite.Text = string.Empty;
             chkActive.Checked = true;
             txtPostalCode.Text = "";
+             
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -100,11 +102,16 @@ namespace Marbale.Inventory.Master
         {
             if (txtVendorName.Text == "")
             {
-                MessageBox.Show(" Vendor name Required");
+                MessageBox.Show("Vendor name is Required");
                 txtVendorName.Focus();
                 return false;
             }
-
+              if (txtCode.Text == "")
+            {
+                MessageBox.Show("Code is Required");
+                txtVendorName.Focus();
+                return false;
+            }
             return true;
         }
         private void btnSave_Click(object sender, EventArgs e)

@@ -12,7 +12,11 @@ namespace Marbale.BusinessObject.Inventory
         private bool notifyingObjectIsChanged;
         private readonly object notifyingObjectIsChangedSyncRoot = new Object();
 
-       
+        public enum SearchByLocationParameters
+        {
+            IS_ACTIVE = 0,
+            LOCATION_ID = 2
+        }
 
         int locationId;
         string name;
@@ -32,6 +36,7 @@ namespace Marbale.BusinessObject.Inventory
         {
             locationId = -1;
             locationTypeId = 0;
+            isActive = true;
         }
         public Location(int locationId,   string name, bool isActive, bool isAvailableToSell, string barcode, bool isTurnInLocation,
         bool isStore, bool allowForMassUpdate, int locationTypeId, string createdBy, string lastUpdatedBy, DateTime createdDate, DateTime lastUpdatedDate)

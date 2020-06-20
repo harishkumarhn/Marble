@@ -35,8 +35,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.grpUOM = new System.Windows.Forms.GroupBox();
             this.dgv_Location = new System.Windows.Forms.DataGridView();
-            this.lnkLocationType = new System.Windows.Forms.LinkLabel();
-            this.locationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.locationIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.locationNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -51,6 +49,8 @@
             this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.locationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lnkLocationType = new System.Windows.Forms.LinkLabel();
             this.grpUOM.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Location)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource)).BeginInit();
@@ -135,21 +135,6 @@
             this.dgv_Location.TabIndex = 0;
             this.dgv_Location.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_Location_DataError);
             this.dgv_Location.SelectionChanged += new System.EventHandler(this.dgvLocation_SelectionChanged);
-            // 
-            // lnkLocationType
-            // 
-            this.lnkLocationType.AutoSize = true;
-            this.lnkLocationType.Location = new System.Drawing.Point(760, 383);
-            this.lnkLocationType.Name = "lnkLocationType";
-            this.lnkLocationType.Size = new System.Drawing.Size(97, 13);
-            this.lnkLocationType.TabIndex = 21;
-            this.lnkLocationType.TabStop = true;
-            this.lnkLocationType.Text = "Add Location Type";
-            this.lnkLocationType.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLocationType_LinkClicked);
-            // 
-            // locationBindingSource
-            // 
-            this.locationBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.Location);
             // 
             // locationIdDataGridViewTextBoxColumn
             // 
@@ -248,6 +233,21 @@
             this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
             this.isChangedDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // locationBindingSource
+            // 
+            this.locationBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.Location);
+            // 
+            // lnkLocationType
+            // 
+            this.lnkLocationType.AutoSize = true;
+            this.lnkLocationType.Location = new System.Drawing.Point(760, 383);
+            this.lnkLocationType.Name = "lnkLocationType";
+            this.lnkLocationType.Size = new System.Drawing.Size(97, 13);
+            this.lnkLocationType.TabIndex = 21;
+            this.lnkLocationType.TabStop = true;
+            this.lnkLocationType.Text = "Add Location Type";
+            this.lnkLocationType.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLocationType_LinkClicked);
             // 
             // frmLocation
             // 

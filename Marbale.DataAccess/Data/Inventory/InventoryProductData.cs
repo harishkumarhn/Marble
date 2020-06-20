@@ -632,12 +632,36 @@ namespace Marbale.DataAccess.Data.Inventory
                 return null;
             }
         }
+        public DataTable GetInventoryDataExport()
+        {
+             
 
+            string selectQuery = @"select i.ProductId, Code,   Description, l.LocationId, l.Name Location_Name, 
+                                    i.Quantity Avl_Qty, '' New_Quantity,'' Remarks
+                                                            from InventoryProduct p 
+                                                            inner join InventoryStore i on p.ProductId = i.ProductId
+                                                            inner join Location l on i.LocationId = l.LocationId 
+                                                            
+                                                            and p.IsActive = 1
+                                                            order by 1
+                                        ";
+
+            DataTable dt = conn.executeSelectScript(selectQuery, null);
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return dt;
+            }
+
+        }
 
         public List<InventoryProduct> GetInventoryProductListWithStoreData(List<KeyValuePair<InventoryProduct.SearchByProductParameters, string>> searchParameters)
         {
             int count = 0;
-            string selectLocationQuery = @"select p.*,s.Quantity,s.AllocatedQuantity,s.LocationId StoreLocationId ,s.Remarks 'StoreRemarks',
+            string selectQuery = @"select p.*,s.Quantity,s.AllocatedQuantity,s.LocationId StoreLocationId ,s.Remarks 'StoreRemarks',
                                         (select top 1 BarCode from InventoryProductBarcode  b where b.IsActive=1) BarCode1
                                         from InventoryProduct p
                                         inner join  InventoryStore s on s.ProductId=p.ProductId
@@ -679,10 +703,10 @@ namespace Marbale.DataAccess.Data.Inventory
                     }
                 }
                 if (searchParameters.Count > 0)
-                    selectLocationQuery = selectLocationQuery + query;
+                    selectQuery = selectQuery + query;
             }
 
-            DataTable dt = conn.executeSelectScript(selectLocationQuery, null);
+            DataTable dt = conn.executeSelectScript(selectQuery, null);
             if (dt.Rows.Count > 0)
             {
                 List<InventoryProduct> pList = new List<InventoryProduct>();

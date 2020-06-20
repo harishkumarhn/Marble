@@ -60,6 +60,7 @@
     <Compile Include="InventoryBL\InventoryAdjustmentsBL.cs" />
     <Compile Include="InventoryBL\InventoryPhysicalCountBL.cs" />
     <Compile Include="InventoryBL\InventoryPhysicalCountLogBL.cs" />
+    <Compile Include="InventoryBL\InventoryProductBarcodeBL.cs" />
     <Compile Include="InventoryBL\InventoryProductBL.cs" />
     <Compile Include="InventoryBL\InventoryReceiptBL.cs" />
     <Compile Include="InventoryBL\InventoryStoreBL.cs" />

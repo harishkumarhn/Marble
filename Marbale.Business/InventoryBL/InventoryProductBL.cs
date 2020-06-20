@@ -44,6 +44,12 @@ namespace Marble.Business.InventoryBL
             return inventoryProductData.GetInventoryProductListWithStoreData(searchParameters);
 
         }
+        public DataTable GetInventoryDataExport()
+        {
+            return inventoryProductData.GetInventoryDataExport();
+
+        }
+
         public int Save(InventoryProduct inventoryProduct, string userId)
         {
             try

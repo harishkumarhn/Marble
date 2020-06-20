@@ -33,7 +33,6 @@
             this.uOMBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.taxBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btn_exit = new System.Windows.Forms.Button();
-            this.btn_Upload = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_duplicate = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
@@ -139,24 +138,13 @@
             // 
             this.btn_exit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_exit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_exit.Location = new System.Drawing.Point(309, 482);
+            this.btn_exit.Location = new System.Drawing.Point(303, 482);
             this.btn_exit.Name = "btn_exit";
-            this.btn_exit.Size = new System.Drawing.Size(75, 23);
+            this.btn_exit.Size = new System.Drawing.Size(97, 23);
             this.btn_exit.TabIndex = 31;
             this.btn_exit.Text = "Exit";
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.cb_exit_Click);
-            // 
-            // btn_Upload
-            // 
-            this.btn_Upload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Upload.Location = new System.Drawing.Point(610, 480);
-            this.btn_Upload.Name = "btn_Upload";
-            this.btn_Upload.Size = new System.Drawing.Size(83, 23);
-            this.btn_Upload.TabIndex = 37;
-            this.btn_Upload.Text = "   Upload";
-            this.btn_Upload.UseVisualStyleBackColor = true;
-            this.btn_Upload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // btn_delete
             // 
@@ -164,9 +152,9 @@
             this.btn_delete.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_delete.Enabled = false;
             this.btn_delete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_delete.Location = new System.Drawing.Point(397, 482);
+            this.btn_delete.Location = new System.Drawing.Point(400, 482);
             this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(86, 23);
+            this.btn_delete.Size = new System.Drawing.Size(97, 23);
             this.btn_delete.TabIndex = 36;
             this.btn_delete.Text = "Delete";
             this.btn_delete.UseVisualStyleBackColor = true;
@@ -175,9 +163,9 @@
             // btn_duplicate
             // 
             this.btn_duplicate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_duplicate.Location = new System.Drawing.Point(213, 482);
+            this.btn_duplicate.Location = new System.Drawing.Point(206, 482);
             this.btn_duplicate.Name = "btn_duplicate";
-            this.btn_duplicate.Size = new System.Drawing.Size(84, 23);
+            this.btn_duplicate.Size = new System.Drawing.Size(97, 23);
             this.btn_duplicate.TabIndex = 32;
             this.btn_duplicate.Text = "Duplicate";
             this.btn_duplicate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -187,9 +175,9 @@
             // btn_Save
             // 
             this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Save.Location = new System.Drawing.Point(106, 482);
+            this.btn_Save.Location = new System.Drawing.Point(109, 482);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(88, 23);
+            this.btn_Save.Size = new System.Drawing.Size(97, 23);
             this.btn_Save.TabIndex = 34;
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = true;
@@ -200,7 +188,7 @@
             this.btn_Add.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_Add.Location = new System.Drawing.Point(12, 482);
             this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(75, 23);
+            this.btn_Add.Size = new System.Drawing.Size(97, 23);
             this.btn_Add.TabIndex = 33;
             this.btn_Add.Text = "New";
             this.btn_Add.UseVisualStyleBackColor = true;
@@ -297,7 +285,7 @@
             // 
             this.btn_Refresh.Enabled = false;
             this.btn_Refresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Refresh.Location = new System.Drawing.Point(500, 482);
+            this.btn_Refresh.Location = new System.Drawing.Point(497, 482);
             this.btn_Refresh.Name = "btn_Refresh";
             this.btn_Refresh.Size = new System.Drawing.Size(97, 23);
             this.btn_Refresh.TabIndex = 43;
@@ -767,6 +755,7 @@
             this.btnGenerateBarCode.Text = "Edit Bar Codes";
             this.btnGenerateBarCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGenerateBarCode.UseVisualStyleBackColor = true;
+            this.btnGenerateBarCode.Click += new System.EventHandler(this.btnGenerateBarCode_Click);
             // 
             // label5
             // 
@@ -987,7 +976,6 @@
             this.ClientSize = new System.Drawing.Size(955, 522);
             this.Controls.Add(this.btn_Refresh);
             this.Controls.Add(this.cb_printBOM);
-            this.Controls.Add(this.btn_Upload);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnEdit);
@@ -1026,7 +1014,6 @@
         private System.Windows.Forms.Button btn_exit;
         private System.Windows.Forms.Button btn_duplicate;
         private System.Windows.Forms.Button btn_delete;
-        private System.Windows.Forms.Button btn_Upload;
         private System.Windows.Forms.BindingSource taxBindingSource;
         private System.Windows.Forms.BindingSource uOMBindingSource;
         private System.Windows.Forms.ContextMenuStrip BOMEditMenu;

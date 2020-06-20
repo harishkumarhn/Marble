@@ -23,8 +23,12 @@ namespace Marble.Business.InventoryBL
             LocationData = new LocationData();
         }
 
+        public List<Location> GetLocationList(List<KeyValuePair<Location.SearchByLocationParameters, string>> searchParameters)
+        {
+            return LocationData.GetLocationList(searchParameters);
+        }
 
-        public List<Location> GetLocation()
+            public List<Location> GetLocation()
         {
             DataTable dt = LocationData.GetLocation();
             List<Location> lstLocation = new List<Location>();

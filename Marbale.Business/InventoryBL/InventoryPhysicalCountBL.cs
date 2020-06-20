@@ -43,11 +43,11 @@ namespace Marble.Business.InventoryBL
 
             }
 
-            public int Save(InventoryPhysicalCount tax, string userId)
+            public int Save(InventoryPhysicalCount inventoryPhysicalCount, string userId)
             {
                 try
                 {
-                    return inventoryPhysicalCountData.InsertOrUpdateInventoryStore(tax, userId);
+                    return inventoryPhysicalCountData.InsertOrUpdateInventoryStore(inventoryPhysicalCount, userId);
                 }
                 catch (Exception e)
                 {

@@ -46,6 +46,10 @@ namespace Marbale.BusinessObject.Inventory
         {
             Id = -1;
             isActive = true;
+
+            this.fromLocationId = -1;
+            this.toLocationId = -1;
+
         }
 
 

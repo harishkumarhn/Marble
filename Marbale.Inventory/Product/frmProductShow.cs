@@ -14,6 +14,7 @@ using Marbale.BusinessObject.Inventory;
 using Marbale.Business;
 using Marbale.Inventory.Master;
 using Marble.Business.InventoryBL;
+using Marbale.Inventory.Model;
 
 namespace Marbale.Inventory.Product
 {
@@ -147,8 +148,8 @@ namespace Marbale.Inventory.Product
             populateTax();
             populateLocation();
 
-           
 
+            loadProduct(loadProductId);
             if (pmode == "duplicate")
             {
                 btn_duplicate.Enabled = true;
@@ -157,9 +158,12 @@ namespace Marbale.Inventory.Product
                 txtCode.Text = "";
                 txtCode.ReadOnly = false;
             }
+            else if(loadProductId>0)
+            {
+                txtCode.ReadOnly = true;
+            }
 
-
-            loadProduct(loadProductId);
+           
         }
         private void loadProduct(int pid)
         {
@@ -168,7 +172,7 @@ namespace Marbale.Inventory.Product
             if (pid > 0)
             {
                 inventoryProduct = inventoryProductBL.GetInventoryProduct(pid);
-                txtCode.ReadOnly = true;
+             
             }
             
             lb_productid.Text = inventoryProduct.ProductId.ToString();
@@ -692,6 +696,24 @@ namespace Marbale.Inventory.Product
         private void btn_Add_Click(object sender, EventArgs e)
         {
             loadProduct(-1);
+        }
+
+        private void btnGenerateBarCode_Click(object sender, EventArgs e)
+        {
+
+            if(loadProductId>0)
+            {
+                Frm_Barcode frm_Barcode = new Frm_Barcode(loadProductId,txtDescription.Text);
+    
+    
+                if (frm_Barcode.ShowDialog() == DialogResult.OK)
+                    tb_barcode.Text = BarcodeReader.Barcode;
+            }
+            else
+            {
+                MessageBox.Show("Please save the product First");
+            }
+           
         }
     }
 }

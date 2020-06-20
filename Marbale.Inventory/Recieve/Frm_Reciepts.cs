@@ -34,10 +34,10 @@ namespace Marbale.Inventory.Recieve
         {
 
             PurchaseTaxBL taxBL = new PurchaseTaxBL();
-            List<KeyValuePair<PurchaseTax.SearchByTaxParameters, string>> taxSearchParams = new List<KeyValuePair<PurchaseTax.SearchByTaxParameters, string>>();
-            taxSearchParams.Add(new KeyValuePair<PurchaseTax.SearchByTaxParameters, string>(PurchaseTax.SearchByTaxParameters.IS_ACTIVE, "1"));
+            List<KeyValuePair<PurchaseTax.SearchByTaxParameters, string>> searchParams = new List<KeyValuePair<PurchaseTax.SearchByTaxParameters, string>>();
+            searchParams.Add(new KeyValuePair<PurchaseTax.SearchByTaxParameters, string>(PurchaseTax.SearchByTaxParameters.IS_ACTIVE, "1"));
 
-            List<PurchaseTax> ListTax = taxBL.GetTaxList(taxSearchParams);
+            List<PurchaseTax> ListTax = taxBL.GetTaxList(searchParams);
 
 
             if (ListTax == null)

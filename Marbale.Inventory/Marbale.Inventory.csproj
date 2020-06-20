@@ -37,12 +37,19 @@
       <HintPath>..\packages\DevExpress.Data.19.1.3\lib\net452\DevExpress.Data.v19.1.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.3.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -138,11 +145,24 @@
     <Compile Include="MenuPopups\MasterPopup.Designer.cs">
       <DependentUpon>MasterPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\BarcodeReader.cs" />
     <Compile Include="Product\frmProductShow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Product\frmProductShow.designer.cs">
       <DependentUpon>frmProductShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Frm_Barcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Product\Frm_Barcode.Designer.cs">
+      <DependentUpon>Frm_Barcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Frm_GenerateBarcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Product\Frm_GenerateBarcode.Designer.cs">
+      <DependentUpon>Frm_GenerateBarcode.cs</DependentUpon>
     </Compile>
     <Compile Include="Product\frm_ProductList.cs">
       <SubType>Form</SubType>
@@ -209,6 +229,12 @@
     <EmbeddedResource Include="Product\frmProductShow.resx">
       <DependentUpon>frmProductShow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Product\Frm_Barcode.resx">
+      <DependentUpon>Frm_Barcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Product\Frm_GenerateBarcode.resx">
+      <DependentUpon>Frm_GenerateBarcode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Product\frm_ProductList.resx">
       <DependentUpon>frm_ProductList.cs</DependentUpon>
     </EmbeddedResource>
@@ -249,6 +275,7 @@
     <None Include="Marbale.BusinessObject.Inventory.InventoryAdjustmentsActivity.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.InventoryProduct+SearchByProductParameters.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.InventoryProduct.datasource" />
+    <None Include="Marbale.BusinessObject.Inventory.InventoryProductBarcode.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.InventoryReceipt.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.InventoryStore.datasource" />
     <None Include="Marbale.BusinessObject.Inventory.Location.datasource" />

@@ -38,15 +38,21 @@ namespace Marbale.Inventory.Master
         void PopulateLocationGrid()
         {
             PopulateLocationType();
-            LocationBL locationTypeBL = new LocationBL();
-            List<Location> lstLocation = locationTypeBL.GetLocation();
+            LocationBL locationBL = new LocationBL();
+          
+
+            List<KeyValuePair< Location.SearchByLocationParameters, string>> searchParameters = new List<KeyValuePair<Location.SearchByLocationParameters, string>>();
+            searchParameters.Add(new KeyValuePair<Location.SearchByLocationParameters, string>(BusinessObject.Inventory.Location.SearchByLocationParameters.IS_ACTIVE, "1"));
+
+            List<Location> lstLocation = locationBL.GetLocationList(searchParameters);
 
             locationListBS = new BindingSource();
-            if (locationListBS != null)
+            if (lstLocation != null)
                 locationListBS.DataSource = new SortableBindingList<Location>(lstLocation);
             else
             {
-                locationListBS.DataSource = new SortableBindingList<Location>();
+                lstLocation = new List<Location>();
+                locationListBS.DataSource = new SortableBindingList<Location>(lstLocation);
             }
 
 
@@ -116,6 +122,7 @@ namespace Marbale.Inventory.Master
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            bool saved = false;
             try
             {
                 LocationBL locationBL = new LocationBL();
@@ -127,13 +134,16 @@ namespace Marbale.Inventory.Master
                     {
                         if (location.IsChanged)
                         {
+                            location.IsActive = true;
                             locationBL.Save(location, "rakshith");
+                            saved = true;
                         }
                         else
                         {
-                            MessageBox.Show("nothing to delete");
+                            //MessageBox.Show("Nothing to save");
                         }
                     }
+                    if(saved)
                     PopulateLocationGrid();
                 }
             }

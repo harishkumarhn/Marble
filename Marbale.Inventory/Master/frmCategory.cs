@@ -112,7 +112,7 @@ namespace Marbale.Inventory.Master
                         }
                         else
                         {
-                            if ( MessageBox.Show("Do you wany to Delete", "Confirm Inactivation.", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            if ( MessageBox.Show("Do you want to Delete", "Confirm Inactivation.", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             {
                                 BindingSource categoryListBS = (BindingSource)dgvCategory.DataSource;
                                 var categoryList = (SortableBindingList<Category>)categoryListBS.DataSource;

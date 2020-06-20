@@ -460,7 +460,7 @@ namespace Marbale.Inventory.Product
 
             if(mode== "duplicate")
             {
-                frm_AddProduct = new Frm_AddProduct(pid, "");
+                frm_AddProduct = new Frm_AddProduct(pid, "duplicate");
             }
             else
             {
