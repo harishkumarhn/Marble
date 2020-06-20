@@ -10,22 +10,39 @@ using System.Threading.Tasks;
 using Marbale.DataAccess.Data;
 using Marble.Business;
 using Marbale.BusinessObject.Inventory;
+using Marbale.DataAccess.Data.Inventory;
 
 namespace Marble.Business.InventoryBL
 {
     public class VendorBL
     {
-        private VendorData VendorData;
+        private VendorData vendorData;
 
         public VendorBL()
         {
-            VendorData = new VendorData();
+            vendorData = new VendorData();
         }
-
-
+        public List<Vendor> GetVendorList(List<KeyValuePair<Vendor.SearchByVendorParameters, string>> searchParameters)
+        {
+            return vendorData.GetVendorList(searchParameters);
+        }
+        public  Vendor  GetVendor(int vendorId)
+        {
+            List<KeyValuePair<Vendor.SearchByVendorParameters, string>> searchParameters = new List<KeyValuePair<Vendor.SearchByVendorParameters, string>>();
+            searchParameters.Add(new KeyValuePair<Vendor.SearchByVendorParameters, string>(Vendor.SearchByVendorParameters.VENDOR_ID, vendorId.ToString()));
+            List<Vendor> vendors= vendorData.GetVendorList(searchParameters);
+            if(vendors==null || vendors.Count == 0)
+            {
+                return new Vendor();
+            }
+            else
+            {
+                return vendors.FirstOrDefault();
+            }
+        }
         public List<Vendor> GetVendor()
         {
-            DataTable dt = VendorData.GetVendorData();
+            DataTable dt = vendorData.GetVendorData();
             List<Vendor> lstVendor = new List<Vendor>();
             Vendor Vendor;
 
@@ -55,6 +72,18 @@ namespace Marble.Business.InventoryBL
             }
 
             return lstVendor;
+        }
+
+        public int Save(Vendor vendor, string userId)
+        {
+            try
+            {
+                return vendorData.InsertOrUpdateVendor(vendor, userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

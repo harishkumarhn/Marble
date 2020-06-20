@@ -41,6 +41,21 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\External References\System.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,8 +75,20 @@
     <Compile Include="Cards\Inventory.cs" />
     <Compile Include="Game\ActiveHubMachine.cs" />
     <Compile Include="Inventory\Category.cs" />
+    <Compile Include="Inventory\InventoryAdjustments.cs" />
+    <Compile Include="Inventory\InventoryAdjustmentsActivity.cs" />
+    <Compile Include="Inventory\InventoryPhysicalCount.cs" />
+    <Compile Include="Inventory\InventoryPhysicalCountLog.cs" />
+    <Compile Include="Inventory\InventoryProduct.cs" />
+    <Compile Include="Inventory\InventoryProductBarcode.cs" />
+    <Compile Include="Inventory\InventoryReceipt.cs" />
+    <Compile Include="Inventory\InventoryStore.cs" />
     <Compile Include="Inventory\Location.cs" />
     <Compile Include="Inventory\LocationType.cs" />
+    <Compile Include="Inventory\PurchaseOrder.cs" />
+    <Compile Include="Inventory\PurchaseOrderLine.cs" />
+    <Compile Include="Inventory\PurchaseOrderReceiveLine.cs" />
+    <Compile Include="Inventory\PurchaseTax.cs" />
     <Compile Include="Inventory\UnitOfMeasure.cs" />
     <Compile Include="Inventory\Vendor.cs" />
     <Compile Include="Messages\MessagesModel.cs" />
@@ -81,6 +108,7 @@
     <Compile Include="Setting\Settings.cs" />
     <Compile Include="Discount\TransactionDiscount.cs" />
     <Compile Include="SiteSetup\AppModuleAction.cs" />
+    <Compile Include="SiteSetup\PaymentMode.cs" />
     <Compile Include="SiteSetup\Printer.cs" />
     <Compile Include="SiteSetup\ReceiptPrintTemplateHeader.cs" />
     <Compile Include="SiteSetup\ReceiptPrintTemplate.cs" />

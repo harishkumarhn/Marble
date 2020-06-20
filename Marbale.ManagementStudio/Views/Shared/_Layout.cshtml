@@ -47,7 +47,6 @@
                         <br /><lable>@Session["UserID"]</lable>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Swith User</a>
                         <a class="dropdown-item" href="#">Change Password</a>
                         <a class="dropdown-item" href="/Marble/logout">Logout</a>
                     </div>
@@ -214,7 +213,12 @@
         ////});
         function DisplayPopUp(page,url) {
             $('#myModal').modal('show');
-            if(page != "Product key") {
+            if(page == "Product key") {
+                $('#modelBody').css({
+                    'width': 640,
+                    'margin-top':70
+                });
+            } else {
                 $('#modelBody').css({
                     'left': '-30%',
                     'width': 800,

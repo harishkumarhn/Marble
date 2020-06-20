@@ -633,6 +633,29 @@ namespace MarbaleManagementStudio.Controllers
                 throw;
             }
         }
+        #region lookUps
+        public ActionResult LookUps()
+        {
+            return View("~/Views/SiteSetup/LookUps/LookUps.cshtml");
+        }
+        public ActionResult LookUpData()
+        {
+            return View("~/Views/SiteSetup/LookUps/LookUpData.cshtml");
+        }
+        public ActionResult PaymentMode()
+        {
+            ViewBag.PaymentModes = siteSetup.GetPaymentModes();
+            return View("~/Views/SiteSetup/LookUps/PaymentMode.cshtml");
+        }
+        public ActionResult Sequence()
+        {
+            return View("~/Views/SiteSetup/LookUps/Sequence.cshtml");
+        }
+        public int UpdatePaymentMode(List<PaymentMode> paymentModes)
+        {
+            return siteSetup.InsertOrUpdatePaymentModes(paymentModes);
+        }
+        #endregion
     }
 
 }
