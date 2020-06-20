@@ -1,13 +1,6 @@
-﻿using Marbale.BusinessObject;
-using Marbale.BusinessObject.Messages;
-using Marbale.DataAccess;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Marbale.DataAccess
 {
@@ -18,6 +11,15 @@ namespace Marbale.DataAccess
         public CommonData()
         {
             conn = new DBConnection();
+        }
+        public int DeleteById(int Id, string from, bool isDataItem = false)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[3];
+            sqlParameters[0] = new SqlParameter("@Id", Id);
+            sqlParameters[1] = new SqlParameter("@from", from);
+            sqlParameters[2] = new SqlParameter("@isDataItem", isDataItem);
+
+            return conn.executeUpdateQuery("sp_DeleteById", sqlParameters);
         }
 
         public DataTable GetDefalutCashMode()
@@ -44,7 +46,6 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
-
 
     }
 }
