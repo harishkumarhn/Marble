@@ -26,9 +26,12 @@ namespace Marble.PrimaryServer
 
         private void HubForm_Load(object sender, EventArgs e)
         {
-            var machines = this.gameBL.GetActiveHubMachines(hubId);
+            this.machines = this.gameBL.GetActiveHubMachines(hubId);
             this.hub_dataGridView.DataSource = machines;
-            this.lab_Header.Text = this.machines[0].HubName;
+            if (this.machines.Count > 0)
+            {
+                this.lab_Header.Text = this.machines[0].HubName;
+            }
         }
 
         private void btn_shutDown_Click(object sender, EventArgs e)
