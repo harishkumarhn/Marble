@@ -336,6 +336,7 @@
     <Content Include="Views\SiteSetup\LookUps\LookUpData.cshtml" />
     <Content Include="Views\SiteSetup\LookUps\PaymentMode.cshtml" />
     <Content Include="Views\SiteSetup\LookUps\Sequence.cshtml" />
+    <Content Include="Views\Marble\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

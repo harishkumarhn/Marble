@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Marbale.BusinessObject.SiteSetup;
+using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace Marbale.DataAccess
 {
@@ -40,6 +42,21 @@ namespace Marbale.DataAccess
                 SqlParameter[] sqlParameters = new SqlParameter[1];
                 sqlParameters[0] = new SqlParameter("@groupId", groupId);
                 return conn.executeSelectQuery("sp_GetListItems", sqlParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public int ChangePassword(string UserId, string currentPassword, string NewPassword)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[3];
+                sqlParameters[0] = new SqlParameter("@userId", string.IsNullOrWhiteSpace(UserId) ? "" : UserId);
+                sqlParameters[1] = new SqlParameter("@currentPassword", Encoding.ASCII.GetBytes(currentPassword));
+                sqlParameters[2] = new SqlParameter("@password", Encoding.ASCII.GetBytes(NewPassword));
+                return conn.executeUpdateQuery("sp_ChangeUserPassword", sqlParameters);
             }
             catch (Exception e)
             {
