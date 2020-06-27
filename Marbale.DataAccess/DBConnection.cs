@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 using Microsoft.Win32;
 
 namespace Marbale.DataAccess
@@ -20,7 +17,7 @@ namespace Marbale.DataAccess
         public DBConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn = new SqlConnection(@"Data Source=ROCK\SQLSERVER;Initial Catalog=MarbleMg;Trusted_Connection=True;");
+            conn = new SqlConnection(@"Data Source=.;Initial Catalog=Marbale;Trusted_Connection=True;");
         }
 
 
@@ -125,7 +122,8 @@ namespace Marbale.DataAccess
                     cmd.Connection = openConnection();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddRange(sqlParameter);
-                    return Convert.ToInt32(cmd.ExecuteScalar());
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected;
                 }
             }
             catch (SqlException e)
@@ -219,7 +217,7 @@ namespace Marbale.DataAccess
             {
                 insertCommand.Connection = openConnection();
                 insertCommand.CommandText = query;
-                 insertCommand.Parameters.AddRange(sqlParameter);
+                insertCommand.Parameters.AddRange(sqlParameter);
                 myAdapter.InsertCommand = insertCommand;
                 int insertRecordId = (int)insertCommand.ExecuteScalar();
                 return insertRecordId;

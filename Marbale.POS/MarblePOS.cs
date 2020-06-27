@@ -1940,7 +1940,7 @@ namespace Marbale.POS
                 return;
             }
 
-            posBussiness.ChangeUserPassword(CurrentUser.Id, currentPassword, newPassword);
+            posBussiness.ChangeUserPassword(CurrentUser.Name, currentPassword, newPassword);
             MessageBox.Show("Password is Changed Successfully");
             txtCurrentPassword.Text = "";
             txtNewPassword.Text = "";

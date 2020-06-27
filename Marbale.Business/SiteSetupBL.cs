@@ -769,5 +769,16 @@ namespace Marble.Business
                 throw e;
             }
         }
+        public int ChangeUserPassword(string UserId, string CurrentPassword, string NewPassword)
+        {
+            try
+            {
+                return commonData.ChangePassword(UserId, CurrentPassword, NewPassword);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

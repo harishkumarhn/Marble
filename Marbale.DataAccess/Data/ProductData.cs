@@ -48,21 +48,7 @@ namespace Marbale.DataAccess
         }
 
 
-        public void ChangePassword(int UserId, string currentPassword, string NewPassword)
-        {
-            try
-            {
-                SqlParameter[] sqlParameters = new SqlParameter[3];
-                sqlParameters[0] = new SqlParameter("@userId", UserId);
-                sqlParameters[1] = new SqlParameter("@currentPassword", currentPassword);
-                sqlParameters[2] = new SqlParameter("@password", NewPassword);
-                conn.executeUpdateQuery("sp_ChangeUserPassword", sqlParameters);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
+        
 
 
         public DataTable GetAllDiscounts()
