@@ -56,7 +56,7 @@ namespace Marble.PrimaryServer
                     ////Define Server connection    
 
                     //ServerConnection connection = new ServerConnection(frm.serverName, frm.userName, frm.password);    
-                    ServerConnection connection = new ServerConnection("HARISH-PC\\SQLEXPRESS", "sa", "marble");
+                    ServerConnection connection = new ServerConnection("DESKTOP-6LG6FHB", "sa", "marble");
                     ////To Avoid TimeOut Exception    
                     Server sqlServer = new Server(connection);
                     sqlServer.ConnectionContext.StatementTimeout = 60 * 60;
