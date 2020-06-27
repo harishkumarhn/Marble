@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Common;
+using System.Data.SqlClient;
 
 namespace Marble.PrimaryServer
 {
@@ -52,34 +53,21 @@ namespace Marble.PrimaryServer
                     ////Declare a BackupDeviceItem    
                     string destinationPath = DestPath;
                     string backupfileName = DbName + ".bak";
-                    BackupDeviceItem deviceItem = new BackupDeviceItem(destinationPath + "\\" + backupfileName, DeviceType.File);
-                    ////Define Server connection    
+                    var sqlConStrBuilder = new SqlConnectionStringBuilder(@"Data Source=DESKTOP-6LG6FHB;Database=Marbale;Trusted_Connection=True;");
 
-                    //ServerConnection connection = new ServerConnection(frm.serverName, frm.userName, frm.password);    
-                    ServerConnection connection = new ServerConnection("DESKTOP-6LG6FHB", "sa", "marble");
-                    ////To Avoid TimeOut Exception    
-                    Server sqlServer = new Server(connection);
-                    sqlServer.ConnectionContext.StatementTimeout = 60 * 60;
-                    Database db = sqlServer.Databases[databaseName];
+                    // set backupfilename (you will get something like: "C:/temp/MyDatabase-2013-12-07.bak")
 
-                    sqlBackup.Initialize = true;
-                    sqlBackup.Checksum = true;
-                    sqlBackup.ContinueAfterError = true;
+                    using (var connection = new SqlConnection(sqlConStrBuilder.ConnectionString))
+                    {
+                        var query = String.Format("BACKUP DATABASE {0} TO DISK='{1}'",
+                            sqlConStrBuilder.InitialCatalog, destinationPath + "\\" + backupfileName);
 
-                    ////Add the device to the Backup object.    
-                    sqlBackup.Devices.Add(deviceItem);
-                    ////Set the Incremental property to False to specify that this is a full database backup.    
-                    sqlBackup.Incremental = false;
-
-                    sqlBackup.ExpirationDate = DateTime.Now.AddDays(3);
-                    ////Specify that the log must be truncated after the backup is complete.    
-                    sqlBackup.LogTruncation = BackupTruncateLogType.Truncate;
-
-                    sqlBackup.FormatMedia = false;
-                    ////Run SqlBackup to perform the full database backup on the instance of SQL Server.    
-                    sqlBackup.SqlBackup(sqlServer);
-                    ////Remove the backup device from the Backup object.    
-                    sqlBackup.Devices.Remove(deviceItem);
+                        using (var command = new SqlCommand(query, connection))
+                        {
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                        }
+                    }
                     this.richText_primaryServer.AppendText("Successful backup is created!\n");
                 }
             }
