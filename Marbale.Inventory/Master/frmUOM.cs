@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Marbale.DataAccess;
 using Marble.Business.InventoryBL;
+using Marbale.BusinessObject.SiteSetup;
 
 namespace Marbale.Inventory.Master
 {
@@ -81,7 +82,7 @@ namespace Marbale.Inventory.Master
                                 UnitOfMeasure objitem = datalist[row.Index];
                                 objitem.IsActive = false;
                                 UnitOfMeasureBL blObj = new UnitOfMeasureBL();
-                                blObj.Save(objitem, "rakshith");
+                                blObj.Save(objitem, LogedInUser.LoginId);
                             }
                         }
                     }
@@ -124,7 +125,7 @@ namespace Marbale.Inventory.Master
                                 MessageBox.Show("Please enter the Notes");
                                 return;
                             }
-                            uomBL.Save(unitOfMeasure, "rakshith");
+                            uomBL.Save(unitOfMeasure, LogedInUser.LoginId);
                         }
                         else
                         {

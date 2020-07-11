@@ -78,7 +78,7 @@
             // trxTypeDataGridViewTextBoxColumn
             // 
             this.trxTypeDataGridViewTextBoxColumn.DataPropertyName = "TrxType";
-            this.trxTypeDataGridViewTextBoxColumn.HeaderText = "TrxType";
+            this.trxTypeDataGridViewTextBoxColumn.HeaderText = "Type";
             this.trxTypeDataGridViewTextBoxColumn.Name = "trxTypeDataGridViewTextBoxColumn";
             this.trxTypeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -93,7 +93,7 @@
             // productNameDataGridViewTextBoxColumn
             // 
             this.productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
-            this.productNameDataGridViewTextBoxColumn.HeaderText = "ProductName";
+            this.productNameDataGridViewTextBoxColumn.HeaderText = "Product Name";
             this.productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
             this.productNameDataGridViewTextBoxColumn.ReadOnly = true;
             this.productNameDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -124,21 +124,21 @@
             // fromLocationDataGridViewTextBoxColumn
             // 
             this.fromLocationDataGridViewTextBoxColumn.DataPropertyName = "FromLocation";
-            this.fromLocationDataGridViewTextBoxColumn.HeaderText = "FromLocation";
+            this.fromLocationDataGridViewTextBoxColumn.HeaderText = "From Location";
             this.fromLocationDataGridViewTextBoxColumn.Name = "fromLocationDataGridViewTextBoxColumn";
             this.fromLocationDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // transferLocationDataGridViewTextBoxColumn
             // 
             this.transferLocationDataGridViewTextBoxColumn.DataPropertyName = "TransferLocation";
-            this.transferLocationDataGridViewTextBoxColumn.HeaderText = "TransferLocation";
+            this.transferLocationDataGridViewTextBoxColumn.HeaderText = "Transfer Location";
             this.transferLocationDataGridViewTextBoxColumn.Name = "transferLocationDataGridViewTextBoxColumn";
             this.transferLocationDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // lastUpdatedDateDataGridViewTextBoxColumn
             // 
             this.lastUpdatedDateDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedDate";
-            this.lastUpdatedDateDataGridViewTextBoxColumn.HeaderText = "LastUpdatedDate";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.HeaderText = "Last Updated Date";
             this.lastUpdatedDateDataGridViewTextBoxColumn.Name = "lastUpdatedDateDataGridViewTextBoxColumn";
             this.lastUpdatedDateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -176,6 +176,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgv_activity;
+        private System.Windows.Forms.BindingSource inventoryAdjustmentsActivityBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn trxTypeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
@@ -187,6 +188,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedByDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.BindingSource inventoryAdjustmentsActivityBindingSource;
     }
 }

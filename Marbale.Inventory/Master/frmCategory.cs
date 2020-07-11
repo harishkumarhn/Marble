@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject.Inventory;
+using Marbale.BusinessObject.SiteSetup;
 using Marbale.DataAccess;
 using Marble.Business;
 using Marble.Business.InventoryBL;
@@ -16,6 +17,7 @@ namespace Marbale.Inventory.Master
 {
     public partial class frmCategory : Form
     {
+        public static User loggedInUser;
         public frmCategory()
         {
             InitializeComponent();
@@ -69,7 +71,7 @@ namespace Marbale.Inventory.Master
                             }
                             else
                             {
-                                categoryBL.Save(category,"rakshith");
+                                categoryBL.Save(category, LogedInUser.LoginId);
                             }
                         }
 
@@ -119,7 +121,7 @@ namespace Marbale.Inventory.Master
                                 Category category = categoryList[row.Index];
                                 category.IsActive = false;
                                 CategoryBL categoryBL = new CategoryBL();
-                                categoryBL.Save(category, "rakshith");
+                                categoryBL.Save(category, LogedInUser.LoginId);
                             }
                         }
                     }

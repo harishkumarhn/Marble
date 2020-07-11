@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject.Inventory;
+using Marbale.BusinessObject.SiteSetup;
 using Marble.Business.InventoryBL;
 using System;
 using System.Collections.Generic;
@@ -181,14 +182,14 @@ namespace Marbale.Inventory.Adjustments
                             if (termpInventoryStore != null && termpInventoryStore.Id > 0)
                             {
 
-                                inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore, "Rakshith");
+                                inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore, LogedInUser.LoginId);
 
                             }
                             else
                             {
-                                inventoryStoreBL.Save(inventoryStore, "rakshith");
+                                inventoryStoreBL.Save(inventoryStore, LogedInUser.LoginId);
                             }
-                            inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore1, "Rakshith");
+                            inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore1, LogedInUser.LoginId);
 
 
                         }
@@ -213,14 +214,14 @@ namespace Marbale.Inventory.Adjustments
                             if (termpInventoryStore != null && termpInventoryStore.Id > 0)
                             {
 
-                                inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore1, "Rakshith");
+                                inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore1, LogedInUser.LoginId);
 
                             }
                             else
                             {
-                                inventoryStoreBL.Save(inventoryStore1, "rakshith");
+                                inventoryStoreBL.Save(inventoryStore1, LogedInUser.LoginId);
                             }
-                            inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore, "Rakshith");
+                            inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore, LogedInUser.LoginId);
 
                         }
 
@@ -228,7 +229,7 @@ namespace Marbale.Inventory.Adjustments
 
 
                         InventoryAdjustmentsBL inventoryAdjustmentsBL = new InventoryAdjustmentsBL();
-                        inventoryAdjustmentsBL.Save(inventoryAdjustments, "Rakshith");
+                        inventoryAdjustmentsBL.Save(inventoryAdjustments, LogedInUser.LoginId);
                         saved = true;
                     }
 
@@ -348,7 +349,7 @@ namespace Marbale.Inventory.Adjustments
                         InventoryStore termpInventoryStore = inventoryStoreBL.GetInventoryStore(inventoryStore.ProductId, inventoryStore.LocationId);
                         if (termpInventoryStore != null && termpInventoryStore.Id > 0)
                         {
-                            inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore, "Rakshith");
+                            inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore, LogedInUser.LoginId);
                         }
 
                         InventoryAdjustments inventoryAdjustments = new InventoryAdjustments()
@@ -362,7 +363,7 @@ namespace Marbale.Inventory.Adjustments
                         };
 
                         InventoryAdjustmentsBL inventoryAdjustmentsBL = new InventoryAdjustmentsBL();
-                        inventoryAdjustmentsBL.Save(inventoryAdjustments, "Rakshith");
+                        inventoryAdjustmentsBL.Save(inventoryAdjustments, LogedInUser.LoginId);
                         saved = true;
                     }
                 }

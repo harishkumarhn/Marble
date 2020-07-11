@@ -37,4 +37,12 @@ namespace Marbale.BusinessObject.SiteSetup
         public List<IdValue> Roles { get; set; }
         public List<IdValue> Statuses { get; set; }
     }
+    public static class LogedInUser
+    {
+        public static int Id { get; set; }
+        public static string LoginId { get; set; }
+        public static int RoleId { get; set; }
+        public static string Status { get; set; }
+        public static string Name{ get; set; }
+    }
 }

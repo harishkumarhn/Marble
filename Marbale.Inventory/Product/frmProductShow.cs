@@ -15,6 +15,7 @@ using Marbale.Business;
 using Marbale.Inventory.Master;
 using Marble.Business.InventoryBL;
 using Marbale.Inventory.Model;
+using Marbale.BusinessObject.SiteSetup;
 
 namespace Marbale.Inventory.Product
 {
@@ -37,7 +38,7 @@ namespace Marbale.Inventory.Product
             loadProductId = ProductId;
             //InitializeVariables();
             pmode = mode;
-            btn_duplicate.Enabled = false;
+            //btn_duplicate.Enabled = false;
             chk_active.Checked = true;
 
         }
@@ -152,7 +153,7 @@ namespace Marbale.Inventory.Product
             loadProduct(loadProductId);
             if (pmode == "duplicate")
             {
-                btn_duplicate.Enabled = true;
+               // btn_duplicate.Enabled = true;
                 loadProductId = -1;
                 lb_productid.Text = "";
                 txtCode.Text = "";
@@ -398,7 +399,7 @@ namespace Marbale.Inventory.Product
                     IsActive = true,
                     Quantity = 1
                 };
-                inventoryProductBL.Save(inventoryStore, "rakshith");
+                inventoryProductBL.Save(inventoryStore, LogedInUser.LoginId);
                 return true;
             }
             catch (Exception ex)
@@ -523,7 +524,7 @@ namespace Marbale.Inventory.Product
                     inventoryProduct.UpperLimitCost = Convert.ToDouble(txt_UpperCostLimit.Text);
                 inventoryProduct.TaxInclusiveCost = chkTaxInclusiveCost.Checked;
                 InventoryProductBL inventoryProductBL = new InventoryProductBL();
-                int id = inventoryProductBL.Save(inventoryProduct, "rakshith");
+                int id = inventoryProductBL.Save(inventoryProduct, LogedInUser.LoginId);
                 inventoryProduct.ProductId = id;
                 if (isNewProduct)
                 {

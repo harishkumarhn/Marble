@@ -31,8 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.lbl_header = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_updateProduct = new System.Windows.Forms.Button();
             this.dgv_barcodes = new System.Windows.Forms.DataGridView();
+            this.inventoryProductBarcodeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_New = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
@@ -42,7 +45,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_barcode = new System.Windows.Forms.TextBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,12 +54,10 @@
             this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.inventoryProductBarcodeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btn_updateProduct = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_barcodes)).BeginInit();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBarcodeBindingSource)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_header
@@ -80,6 +80,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " ";
+            // 
+            // btn_updateProduct
+            // 
+            this.btn_updateProduct.Location = new System.Drawing.Point(287, 228);
+            this.btn_updateProduct.Name = "btn_updateProduct";
+            this.btn_updateProduct.Size = new System.Drawing.Size(75, 23);
+            this.btn_updateProduct.TabIndex = 7;
+            this.btn_updateProduct.Text = "Save";
+            this.btn_updateProduct.UseVisualStyleBackColor = true;
+            this.btn_updateProduct.Click += new System.EventHandler(this.btn_updateProduct_Click);
             // 
             // dgv_barcodes
             // 
@@ -104,6 +114,10 @@
             this.dgv_barcodes.Size = new System.Drawing.Size(340, 150);
             this.dgv_barcodes.TabIndex = 1;
             // 
+            // inventoryProductBarcodeBindingSource
+            // 
+            this.inventoryProductBarcodeBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.InventoryProductBarcode);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.linkLabel1);
@@ -122,6 +136,17 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Create New Barcode";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(248, 44);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(93, 13);
+            this.linkLabel1.TabIndex = 7;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Generate barcode";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // btn_Save
             // 
@@ -205,17 +230,6 @@
             this.txt_barcode.Size = new System.Drawing.Size(100, 20);
             this.txt_barcode.TabIndex = 0;
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(248, 44);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(93, 13);
-            this.linkLabel1.TabIndex = 7;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Generate barcode";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // idDataGridViewTextBoxColumn
             // 
             this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
@@ -239,7 +253,7 @@
             // isActiveDataGridViewCheckBoxColumn
             // 
             this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
-            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "Active";
             this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
             // 
             // createdByDataGridViewTextBoxColumn
@@ -277,20 +291,6 @@
             this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
             this.isChangedDataGridViewCheckBoxColumn.Visible = false;
             // 
-            // inventoryProductBarcodeBindingSource
-            // 
-            this.inventoryProductBarcodeBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.InventoryProductBarcode);
-            // 
-            // btn_updateProduct
-            // 
-            this.btn_updateProduct.Location = new System.Drawing.Point(287, 228);
-            this.btn_updateProduct.Name = "btn_updateProduct";
-            this.btn_updateProduct.Size = new System.Drawing.Size(75, 23);
-            this.btn_updateProduct.TabIndex = 7;
-            this.btn_updateProduct.Text = "Save";
-            this.btn_updateProduct.UseVisualStyleBackColor = true;
-            this.btn_updateProduct.Click += new System.EventHandler(this.btn_updateProduct_Click);
-            // 
             // Frm_Barcode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -304,9 +304,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_barcodes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBarcodeBindingSource)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBarcodeBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -327,6 +327,8 @@
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.DataGridView dgv_barcodes;
         private System.Windows.Forms.BindingSource inventoryProductBarcodeBindingSource;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button btn_updateProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn barCodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn;
@@ -336,7 +338,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Button btn_updateProduct;
     }
 }

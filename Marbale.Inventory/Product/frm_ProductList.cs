@@ -13,6 +13,7 @@ using Marbale.BusinessObject;
 using Marble.Business;
 using Marbale.BusinessObject.Inventory;
 using Marble.Business.InventoryBL;
+using Marbale.BusinessObject.SiteSetup;
 
 namespace Marbale.Inventory.Product
 {
@@ -254,7 +255,7 @@ namespace Marbale.Inventory.Product
                 {
                     currentObject.IsActive = false;
                     InventoryProductBL inventoryProductBL = new InventoryProductBL();
-                    int id = inventoryProductBL.Save(currentObject, "rakshith");
+                    int id = inventoryProductBL.Save(currentObject, LogedInUser.LoginId);
 
                     dgvProducts.Rows.Remove(dgvProducts.CurrentRow);
 

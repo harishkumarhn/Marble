@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject.Inventory;
+using Marbale.BusinessObject.SiteSetup;
 using Marble.Business.InventoryBL;
 using System;
 using System.Collections.Generic;
@@ -398,7 +399,7 @@ namespace Marbale.Inventory.Recieve
                 //purchaseOrder.CreatedDate
 
                 PurchaseOrderBL purchaseOrderBL = new PurchaseOrderBL();
-                purchaseOrder.PurchaseOrderId = purchaseOrderBL.Save(purchaseOrder, "rakshith");
+                purchaseOrder.PurchaseOrderId = purchaseOrderBL.Save(purchaseOrder, LogedInUser.LoginId);
 
                 //XXXXXXXXX
                 //get Purchase order id
@@ -411,11 +412,11 @@ namespace Marbale.Inventory.Recieve
                 inventoryReceipt.PurchaseOrderId = purchaseOrder.PurchaseOrderId;
                 inventoryReceipt.Remarks = "";
                 inventoryReceipt.ReceiveDate = Convert.ToDateTime(dt_ReceiveDate.Text);
-                inventoryReceipt.ReceivedBy = "rakshith";
+                inventoryReceipt.ReceivedBy = LogedInUser.LoginId;
                 inventoryReceipt.IsActive = true;
 
                 InventoryReceiptBL inventoryReceiptBL = new InventoryReceiptBL();
-                inventoryReceipt.InventoryReceiptID = inventoryReceiptBL.Save(inventoryReceipt, "rakshith");
+                inventoryReceipt.InventoryReceiptID = inventoryReceiptBL.Save(inventoryReceipt, LogedInUser.LoginId);
 
                 for (int i = 0; i < dgv_receive.RowCount - 1; i++)
                 {
@@ -449,7 +450,7 @@ namespace Marbale.Inventory.Recieve
                         purchaseOrderLine.IsActive = true;
                         //purchaseOrderLine.CancelledDate
                         PurchaseOrderLineBL purchaseOrderLineBL = new PurchaseOrderLineBL();
-                        purchaseOrderLine.PurchaseOrderLineId = purchaseOrderLineBL.Save(purchaseOrderLine, "rakshith");
+                        purchaseOrderLine.PurchaseOrderLineId = purchaseOrderLineBL.Save(purchaseOrderLine, LogedInUser.LoginId);
 
 
                         PurchaseOrderReceiveLine purchaseOrderReceiveLine = new PurchaseOrderReceiveLine();
@@ -469,11 +470,11 @@ namespace Marbale.Inventory.Recieve
                         purchaseOrderReceiveLine.TaxId = dgv_receive["TaxId", i].Value != null ? -1 : Convert.ToInt32(dgv_receive["TaxId", i].Value);
                         purchaseOrderReceiveLine.ReceiptId = inventoryReceipt.InventoryReceiptID;
                         purchaseOrderReceiveLine.VendorBillNumber = txt_BillNo.Text;
-                        purchaseOrderReceiveLine.ReceivedBy = "rakshith";
+                        purchaseOrderReceiveLine.ReceivedBy = LogedInUser.LoginId;
                         purchaseOrderReceiveLine.IsActive = true;
 
                         PurchaseOrderReceiveLineBL purchaseOrderReceiveLineBL = new PurchaseOrderReceiveLineBL();
-                        purchaseOrderReceiveLine.PurchaseOrderLineId = purchaseOrderReceiveLineBL.Save(purchaseOrderReceiveLine, "rakshith");
+                        purchaseOrderReceiveLine.PurchaseOrderLineId = purchaseOrderReceiveLineBL.Save(purchaseOrderReceiveLine, LogedInUser.LoginId);
 
 
                     }

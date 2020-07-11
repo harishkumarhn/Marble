@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject.Inventory;
+using Marbale.BusinessObject.SiteSetup;
 using Marble.Business.InventoryBL;
 using OfficeOpenXml;
 using System;
@@ -129,9 +130,9 @@ namespace Marbale.Inventory.Adjustments
                     if (inventoryPhysicalCount != null && inventoryPhysicalCount.Id > 0)
                     {
                         inventoryPhysicalCount.Status = "Closed";
-                        inventoryPhysicalCount.ClosedBy = "rakshith";
+                        inventoryPhysicalCount.ClosedBy = LogedInUser.LoginId;
                         inventoryPhysicalCount.ClosedDate = DateTime.Now;
-                        inventoryPhysicalCountBL.Save(inventoryPhysicalCount, "rakshith");
+                        inventoryPhysicalCountBL.Save(inventoryPhysicalCount, LogedInUser.LoginId);
 
                     }
 
@@ -185,7 +186,7 @@ namespace Marbale.Inventory.Adjustments
                     InventoryStore termpInventoryStore = inventoryStoreBL.GetInventoryStore(inventoryStore.ProductId, inventoryStore.LocationId);
                     if (termpInventoryStore != null && termpInventoryStore.Id > 0)
                     {
-                        inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore, "Rakshith");
+                        inventoryStoreBL.UpdateInventoryStoreOnAdjustment(inventoryStore, LogedInUser.LoginId);
                     }
 
                     InventoryAdjustments inventoryAdjustments = new InventoryAdjustments()
@@ -199,7 +200,7 @@ namespace Marbale.Inventory.Adjustments
                     };
 
                     InventoryAdjustmentsBL inventoryAdjustmentsBL = new InventoryAdjustmentsBL();
-                    inventoryAdjustmentsBL.Save(inventoryAdjustments, "Rakshith");
+                    inventoryAdjustmentsBL.Save(inventoryAdjustments, LogedInUser.LoginId);
                     saved = true;
                     //  }
                 }
@@ -241,26 +242,43 @@ namespace Marbale.Inventory.Adjustments
 
             try
             {
-                SaveExcelWithData();
+
+
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                //saveFileDialog1.InitialDirectory = @ "C:\";      
+                saveFileDialog1.Title = "Save Products";
+                saveFileDialog1.CheckFileExists = false;
+                saveFileDialog1.CheckPathExists = true;
+                saveFileDialog1.DefaultExt = "xlxs";
+                saveFileDialog1.Filter = "Excel files (*.xlxs)|*.xlxs|All files (*.*)|*.*";
+                //saveFileDialog1.FilterIndex = 2;
+                saveFileDialog1.RestoreDirectory = true;
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string path= saveFileDialog1.FileName;
+                    SaveExcelWithData(path);
+                }
+                
             }
             catch (Exception ex) { }
 
         }
 
-        private void btn_upload_Click(object sender, EventArgs e)
+        private void UploadExcel(string path)
         {
             DataTable dt1 = null;
+
             try
             {
 
-                string basepath = System.AppDomain.CurrentDomain.BaseDirectory;
-                string foldername = "DownloadUpload";
-                if (!Directory.Exists(basepath + "\\" + foldername))
-                    Directory.CreateDirectory(basepath + foldername);
+                //string basepath = System.AppDomain.CurrentDomain.BaseDirectory;
+                //string foldername = "DownloadUpload";
+                //if (!Directory.Exists(basepath + "\\" + foldername))
+                //    Directory.CreateDirectory(basepath + foldername);
 
-                string filepath = basepath + foldername + "\\" + "Download.xlsx";
+                //string filepath = basepath + foldername + "\\" + "Download.xlsx";
 
-                byte[] bin = File.ReadAllBytes(filepath);
+                byte[] bin = File.ReadAllBytes(path);
 
                 using (MemoryStream stream = new MemoryStream(bin))
                 {
@@ -288,6 +306,41 @@ namespace Marbale.Inventory.Adjustments
             {
                 MessageBox.Show("Unable to Load Excel");
             }
+        }
+        private void btn_upload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+
+                OpenFileDialog openFileDialog1 = new OpenFileDialog
+                {
+                    //InitialDirectory = @"D:\",
+                    Title = "Browse Text Files",
+
+                    CheckFileExists = true,
+                    CheckPathExists = true,
+
+                    DefaultExt = "txt",
+                    Filter = "Excel files (*.xlsx)|*.xlsx",
+                    FilterIndex = 2,
+                    RestoreDirectory = true,
+
+                    //ReadOnlyChecked = true,
+                    //ShowReadOnly = true
+                };
+
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filename= openFileDialog1.FileName;
+                    UploadExcel(filename);
+                }
+            }
+            catch (Exception ex)
+            {
+             //   MessageBox.Show("Unable to Load Excel");
+            }
+
 
         }
 
@@ -347,7 +400,7 @@ namespace Marbale.Inventory.Adjustments
                                     inventoryStorenew.ProductId = Convert.ToInt32(dt.Rows[i]["ProductId"]);
                                     inventoryStorenew.LocationId = locationId;
 
-                                    inventoryStoreBL.Save(inventoryStorenew, "rakshith");
+                                    inventoryStoreBL.Save(inventoryStorenew, LogedInUser.LoginId);
                                 }
                                 else
                                 {
@@ -357,7 +410,7 @@ namespace Marbale.Inventory.Adjustments
                                     inventoryStore1.ProductId = Convert.ToInt32(dt.Rows[i]["ProductId"]);
                                     inventoryStore1.LocationId = locationId;
 
-                                    inventoryStoreBL.Save(inventoryStore1, "rakshith");
+                                    inventoryStoreBL.Save(inventoryStore1, LogedInUser.LoginId);
                                 }
 
 
@@ -368,7 +421,7 @@ namespace Marbale.Inventory.Adjustments
                                 inventoryAdjustments.Remarks = "Bulk Adjustment: " + dt.Rows[i]["Remarks"];
                                 inventoryAdjustments.ProductId = Convert.ToInt32(dt.Rows[i]["ProductId"]);
 
-                                inventoryAdjustmentsBL.Save(inventoryAdjustments, "rakshith");
+                                inventoryAdjustmentsBL.Save(inventoryAdjustments, LogedInUser.LoginId);
                                 //dt.Rows[i]["Status"] = "Success";
 
                                 successRowCount++;
@@ -536,7 +589,7 @@ namespace Marbale.Inventory.Adjustments
         //}
 
 
-        void SaveExcelWithData()
+        void SaveExcelWithData(string path)
         {
 
 
@@ -550,20 +603,20 @@ namespace Marbale.Inventory.Adjustments
                     MessageBox.Show("Unable to Download Excel");
                     return;
                 }
-                string basepath = System.AppDomain.CurrentDomain.BaseDirectory;
-                string foldername = "DownloadUpload";
-                if (!Directory.Exists(basepath + "\\" + foldername))
-                    Directory.CreateDirectory(basepath + foldername);
+                //string basepath = System.AppDomain.CurrentDomain.BaseDirectory;
+                //string foldername = "DownloadUpload";
+                //if (!Directory.Exists(basepath + "\\" + foldername))
+                //    Directory.CreateDirectory(basepath + foldername);
 
-                string filepath = basepath + "\\" + foldername + "\\" + "Download.xlsx";
-                FileInfo newFile = new FileInfo(filepath);
+                //string filepath = basepath + "\\" + foldername + "\\" + "Download.xlsx";
+                FileInfo newFile = new FileInfo(path);
 
                 using (ExcelPackage pck = new ExcelPackage(newFile))
                 {
                     ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Inventory1");
                     ws.Cells["A1"].LoadFromDataTable(dt, true);
                     pck.Save();
-                    MessageBox.Show("File Downloaded to DownloadUpload Folder");
+                    MessageBox.Show("File Downloaded");
                 }
 
             }
