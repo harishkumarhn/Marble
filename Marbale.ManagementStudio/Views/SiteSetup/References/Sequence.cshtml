@@ -1,0 +1,129 @@
+﻿@{
+    Layout = null;
+}
+
+<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+    <thead>
+        <tr>
+            <th>Sequence Id</th>
+            <th>Sequence Name</th>
+            <th>Seed</th>
+            <th>Increment</th>
+            <th>Current Value</th>
+            <th>Prefix</th>
+            <th>Suffinx</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Sequences)
+        {
+            <tr>
+                <td>
+                    <lable> @(item.SequenceId == 0 ? "" : item.SequenceId) </lable>
+                </td>
+                <td>
+                    <input type="text" value="@item.SequenceName" />
+                </td>
+                <td>
+                    <input type="number" value="@item.Seed" />
+                </td>
+                <td>
+                    <input type="number" value="@item.Increment" />
+                </td>
+                <td>
+                    <input type="text" value="@item.CurrentValue" />
+                </td>
+                <td>
+                    <input type="text" value="@item.Prefix" />
+                </td>
+                <td>
+                    <input type="text" value="@item.Suffix" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveSequence()">Save</button>
+    <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
+</div>
+<script>
+
+    $(document).ready(function () {
+        var table = $('#marbleTable').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            editable: true,
+            stateSave: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            bSort: false,
+            "createdRow": function (row, data, index) {
+                $('td', row).addClass('tblRow');
+            },
+            rowCallback: function (row, data) {
+                var element = $('td', row);
+                element.on("change", function (e) {
+                    UpdatedList($(this).parent().index());
+                });
+            }
+        });
+        var counter = 1;
+
+        $('#addRow').on('click', function () {
+            table.row.add([
+                '<lable></lable>',
+                '<input type="text" value="" />',
+                '<input type="number" value="" />',
+                '<input type="number" value="" />',
+                '<input type="number" value="" />',
+                '<input type="text" value="" />',
+                '<input type="text" value="" />'
+            ]).draw(false);
+        });
+        $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+    });
+    var updatedArray = [];
+    function UpdatedList(index) {
+        if (!updatedArray.includes(index)) {
+            updatedArray.push(index);
+        }
+    }
+    function SaveSequence() {
+        var sequences = [];
+        var table = document.getElementById('marbleTable');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+            if (updatedArray.includes(r)) {
+                debugger;
+                var rowIndex = r + 1;
+                sequences.push({
+                    SequenceId: table.rows[rowIndex].cells[0].children[0].innerHTML.trim(),
+                    SequenceName: table.rows[rowIndex].cells[1].children[0].value,
+                    Seed: table.rows[rowIndex].cells[2].children[0].value,
+                    Increment: table.rows[rowIndex].cells[3].children[0].value,
+                    CurrentValue: table.rows[rowIndex].cells[4].children[0].value,
+                    Prefix: table.rows[rowIndex].cells[5].children[0].value,
+                    Suffix: table.rows[rowIndex].cells[6].children[0].value,
+                });
+            }
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateSequence", "SiteSetup")',
+            data: JSON.stringify({ sequences: sequences }),
+            dataType: "json",
+            success: function (data) {
+                alert('Data Saved');
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+</script>
+
