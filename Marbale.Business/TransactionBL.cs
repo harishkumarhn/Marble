@@ -37,7 +37,7 @@ namespace Marble.Business
             if (dt != null && dt.Rows.Count > 0)
             {
                 customer.customer_id = dt.Rows[0]["CustomerId"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["CustomerId"]);
-                customer.first_name = dt.Rows[0]["CustomerName"] == DBNull.Value ? string.Empty: dt.Rows[0]["CustomerName"].ToString();
+                customer.first_name = dt.Rows[0]["CustomerName"] == DBNull.Value ? string.Empty : dt.Rows[0]["CustomerName"].ToString();
                 customer.last_name = dt.Rows[0]["LastName"] == DBNull.Value ? string.Empty : dt.Rows[0]["LastName"].ToString();
                 customer.contact_phone1 = dt.Rows[0]["ContactPhone1"] == DBNull.Value ? string.Empty : dt.Rows[0]["ContactPhone1"].ToString();
                 customer.address1 = dt.Rows[0]["Address1"] == DBNull.Value ? string.Empty : dt.Rows[0]["Address1"].ToString();
@@ -64,7 +64,7 @@ namespace Marble.Business
             {
                 card = new Card();
 
-                card.card_id = dt.Rows[0]["CardId"] == DBNull.Value ?  0 : Convert.ToInt32(dt.Rows[0]["CardId"]);
+                card.card_id = dt.Rows[0]["CardId"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["CardId"]);
                 card.CardNumber = dt.Rows[0]["CardNumber"] == DBNull.Value ? string.Empty : dt.Rows[0]["CardNumber"].ToString();
                 card.issue_date = dt.Rows[0]["IssueDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[0]["IssueDate"]);
 
@@ -98,7 +98,7 @@ namespace Marble.Business
                 card.ticket_count = dt.Rows[0]["TicketCount"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["TicketCount"]);
 
                 if (card.customer_id != 0)
-                card.customer = GetCustomer(card.customer_id, string.Empty);
+                    card.customer = GetCustomer(card.customer_id, string.Empty);
             }
             else
             {
@@ -149,7 +149,7 @@ namespace Marble.Business
                     trx.Discount_Percentage = rw["TrxDiscountPercentage"] == DBNull.Value ? 0 : Convert.ToDecimal(rw["TrxDiscountPercentage"]);
                     trx.Status = rw["status"] == DBNull.Value ? string.Empty : rw["status"].ToString();
                     trx.OriginalTrxId = rw["OriginalTrxId"] == DBNull.Value ? 0 : Convert.ToInt32(rw["OriginalTrxId"]);
-                    
+
 
                     trx.TransactionLines = GetTraxLines(trx.Trx_id, ds.Tables[1]);
                     lstTransaction.Add(trx);

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Marbale.DataAccess.Data;
 using Marble.Business;
 using Marbale.BusinessObject.Inventory;
+using Marbale.DataAccess.Data.Inventory;
 
 namespace Marble.Business.InventoryBL
 {
@@ -22,8 +23,12 @@ namespace Marble.Business.InventoryBL
             LocationData = new LocationData();
         }
 
+        public List<Location> GetLocationList(List<KeyValuePair<Location.SearchByLocationParameters, string>> searchParameters)
+        {
+            return LocationData.GetLocationList(searchParameters);
+        }
 
-        public List<Location> GetLocation()
+            public List<Location> GetLocation()
         {
             DataTable dt = LocationData.GetLocation();
             List<Location> lstLocation = new List<Location>();
@@ -50,5 +55,19 @@ namespace Marble.Business.InventoryBL
 
             return lstLocation;
         }
+
+
+        public int Save(Location location, string userId)
+        {
+            try
+            {
+                return LocationData.InsertOrUpdateLocation(location, userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

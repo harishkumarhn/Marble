@@ -676,7 +676,7 @@ namespace Marbale.DataAccess.Data
             }
         }
 
-        public void RefundCard(int cardId, decimal refundAmount, decimal credits, int faceValue,  bool valid, string lastUpdatedBy)
+        public void RefundCard(int cardId, decimal refundAmount, decimal credits, int faceValue, bool valid, string lastUpdatedBy)
         {
             try
             {

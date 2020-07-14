@@ -28,15 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.grpUOM = new System.Windows.Forms.GroupBox();
-            this.dgvLocation = new System.Windows.Forms.DataGridView();
+            this.dgv_Location = new System.Windows.Forms.DataGridView();
+            this.locationIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.locationNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.isAvailableToSellDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.barCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isTurnInLocationDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.isStoreDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.allowForMassUpdateDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.locationTypeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.createdByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastUpdatedByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.locationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lnkLocationType = new System.Windows.Forms.LinkLabel();
             this.grpUOM.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLocation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Location)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRefresh
@@ -57,6 +74,7 @@
             this.btnDelete.TabIndex = 18;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnClose
             // 
@@ -66,6 +84,7 @@
             this.btnClose.TabIndex = 17;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnSave
             // 
@@ -75,12 +94,13 @@
             this.btnSave.TabIndex = 16;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // grpUOM
             // 
             this.grpUOM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpUOM.Controls.Add(this.dgvLocation);
+            this.grpUOM.Controls.Add(this.dgv_Location);
             this.grpUOM.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.grpUOM.Location = new System.Drawing.Point(9, 12);
             this.grpUOM.Name = "grpUOM";
@@ -89,13 +109,134 @@
             this.grpUOM.TabStop = false;
             this.grpUOM.Text = "Location";
             // 
-            // dgvLocation
+            // dgv_Location
             // 
-            this.dgvLocation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLocation.Location = new System.Drawing.Point(7, 24);
-            this.dgvLocation.Name = "dgvLocation";
-            this.dgvLocation.Size = new System.Drawing.Size(862, 322);
-            this.dgvLocation.TabIndex = 0;
+            this.dgv_Location.AutoGenerateColumns = false;
+            this.dgv_Location.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Location.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.locationIdDataGridViewTextBoxColumn,
+            this.locationNameDataGridViewTextBoxColumn,
+            this.isActiveDataGridViewCheckBoxColumn,
+            this.isAvailableToSellDataGridViewCheckBoxColumn,
+            this.barCodeDataGridViewTextBoxColumn,
+            this.isTurnInLocationDataGridViewCheckBoxColumn,
+            this.isStoreDataGridViewCheckBoxColumn,
+            this.allowForMassUpdateDataGridViewCheckBoxColumn,
+            this.locationTypeIdDataGridViewTextBoxColumn,
+            this.createdByDataGridViewTextBoxColumn,
+            this.lastUpdatedByDataGridViewTextBoxColumn,
+            this.createdDateDataGridViewTextBoxColumn,
+            this.lastUpdatedDateDataGridViewTextBoxColumn,
+            this.isChangedDataGridViewCheckBoxColumn});
+            this.dgv_Location.DataSource = this.locationBindingSource;
+            this.dgv_Location.Location = new System.Drawing.Point(8, 24);
+            this.dgv_Location.Name = "dgv_Location";
+            this.dgv_Location.Size = new System.Drawing.Size(862, 322);
+            this.dgv_Location.TabIndex = 0;
+            this.dgv_Location.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_Location_DataError);
+            this.dgv_Location.SelectionChanged += new System.EventHandler(this.dgvLocation_SelectionChanged);
+            // 
+            // locationIdDataGridViewTextBoxColumn
+            // 
+            this.locationIdDataGridViewTextBoxColumn.DataPropertyName = "LocationId";
+            this.locationIdDataGridViewTextBoxColumn.HeaderText = "Location Id";
+            this.locationIdDataGridViewTextBoxColumn.Name = "locationIdDataGridViewTextBoxColumn";
+            this.locationIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // locationNameDataGridViewTextBoxColumn
+            // 
+            this.locationNameDataGridViewTextBoxColumn.DataPropertyName = "LocationName";
+            this.locationNameDataGridViewTextBoxColumn.HeaderText = "Location Name";
+            this.locationNameDataGridViewTextBoxColumn.Name = "locationNameDataGridViewTextBoxColumn";
+            this.locationNameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // isActiveDataGridViewCheckBoxColumn
+            // 
+            this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "Is Active";
+            this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            this.isActiveDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // isAvailableToSellDataGridViewCheckBoxColumn
+            // 
+            this.isAvailableToSellDataGridViewCheckBoxColumn.DataPropertyName = "IsAvailableToSell";
+            this.isAvailableToSellDataGridViewCheckBoxColumn.HeaderText = "Is Available To Sell";
+            this.isAvailableToSellDataGridViewCheckBoxColumn.Name = "isAvailableToSellDataGridViewCheckBoxColumn";
+            this.isAvailableToSellDataGridViewCheckBoxColumn.Width = 150;
+            // 
+            // barCodeDataGridViewTextBoxColumn
+            // 
+            this.barCodeDataGridViewTextBoxColumn.DataPropertyName = "BarCode";
+            this.barCodeDataGridViewTextBoxColumn.HeaderText = "Bar Code";
+            this.barCodeDataGridViewTextBoxColumn.Name = "barCodeDataGridViewTextBoxColumn";
+            // 
+            // isTurnInLocationDataGridViewCheckBoxColumn
+            // 
+            this.isTurnInLocationDataGridViewCheckBoxColumn.DataPropertyName = "IsTurnInLocation";
+            this.isTurnInLocationDataGridViewCheckBoxColumn.HeaderText = "Is TurnIn Location";
+            this.isTurnInLocationDataGridViewCheckBoxColumn.Name = "isTurnInLocationDataGridViewCheckBoxColumn";
+            this.isTurnInLocationDataGridViewCheckBoxColumn.Width = 150;
+            // 
+            // isStoreDataGridViewCheckBoxColumn
+            // 
+            this.isStoreDataGridViewCheckBoxColumn.DataPropertyName = "IsStore";
+            this.isStoreDataGridViewCheckBoxColumn.HeaderText = "Is Store";
+            this.isStoreDataGridViewCheckBoxColumn.Name = "isStoreDataGridViewCheckBoxColumn";
+            // 
+            // allowForMassUpdateDataGridViewCheckBoxColumn
+            // 
+            this.allowForMassUpdateDataGridViewCheckBoxColumn.DataPropertyName = "AllowForMassUpdate";
+            this.allowForMassUpdateDataGridViewCheckBoxColumn.HeaderText = "Allow For Mass Update";
+            this.allowForMassUpdateDataGridViewCheckBoxColumn.Name = "allowForMassUpdateDataGridViewCheckBoxColumn";
+            this.allowForMassUpdateDataGridViewCheckBoxColumn.Width = 150;
+            // 
+            // locationTypeIdDataGridViewTextBoxColumn
+            // 
+            this.locationTypeIdDataGridViewTextBoxColumn.DataPropertyName = "LocationTypeId";
+            this.locationTypeIdDataGridViewTextBoxColumn.HeaderText = "Location Type ";
+            this.locationTypeIdDataGridViewTextBoxColumn.Name = "locationTypeIdDataGridViewTextBoxColumn";
+            this.locationTypeIdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.locationTypeIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.locationTypeIdDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // createdByDataGridViewTextBoxColumn
+            // 
+            this.createdByDataGridViewTextBoxColumn.DataPropertyName = "CreatedBy";
+            this.createdByDataGridViewTextBoxColumn.HeaderText = "CreatedBy";
+            this.createdByDataGridViewTextBoxColumn.Name = "createdByDataGridViewTextBoxColumn";
+            this.createdByDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // lastUpdatedByDataGridViewTextBoxColumn
+            // 
+            this.lastUpdatedByDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedBy";
+            this.lastUpdatedByDataGridViewTextBoxColumn.HeaderText = "LastUpdatedBy";
+            this.lastUpdatedByDataGridViewTextBoxColumn.Name = "lastUpdatedByDataGridViewTextBoxColumn";
+            this.lastUpdatedByDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // createdDateDataGridViewTextBoxColumn
+            // 
+            this.createdDateDataGridViewTextBoxColumn.DataPropertyName = "CreatedDate";
+            this.createdDateDataGridViewTextBoxColumn.HeaderText = "CreatedDate";
+            this.createdDateDataGridViewTextBoxColumn.Name = "createdDateDataGridViewTextBoxColumn";
+            this.createdDateDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // lastUpdatedDateDataGridViewTextBoxColumn
+            // 
+            this.lastUpdatedDateDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedDate";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.HeaderText = "LastUpdatedDate";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.Name = "lastUpdatedDateDataGridViewTextBoxColumn";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // isChangedDataGridViewCheckBoxColumn
+            // 
+            this.isChangedDataGridViewCheckBoxColumn.DataPropertyName = "IsChanged";
+            this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
+            this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
+            this.isChangedDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // locationBindingSource
+            // 
+            this.locationBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.Location);
             // 
             // lnkLocationType
             // 
@@ -127,7 +268,8 @@
             this.Text = "Location";
             this.Load += new System.EventHandler(this.frmLocation_Load);
             this.grpUOM.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLocation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Location)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,7 +282,22 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.GroupBox grpUOM;
-        private System.Windows.Forms.DataGridView dgvLocation;
+        private System.Windows.Forms.DataGridView dgv_Location;
         private System.Windows.Forms.LinkLabel lnkLocationType;
+        private System.Windows.Forms.BindingSource locationBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn locationIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn locationNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isAvailableToSellDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn barCodeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isTurnInLocationDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isStoreDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn allowForMassUpdateDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn locationTypeIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdByDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedByDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
     }
 }

@@ -12,7 +12,7 @@ namespace Marbale.DataAccess
         {
             conn = new DBConnection();
         }
-        public int DeleteById(int Id, string from ,bool isDataItem = false)
+        public int DeleteById(int Id, string from, bool isDataItem = false)
         {
             SqlParameter[] sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@Id", Id);

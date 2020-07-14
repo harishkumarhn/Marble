@@ -157,12 +157,12 @@ namespace Marbale.DataAccess
                         if (role.AvailableModuleActions.Contains("-Module") || role.AvailableModuleActions.Contains("-Root"))
                         {
                             string[] arr = role.AvailableModuleActions.Split(',');
-                           // arr = arr.Skip(1).ToArray();
+                            // arr = arr.Skip(1).ToArray();
                             role.AvailableModuleActions = "";
                             foreach (var item in arr)
                             {
-                                if(!(item.Contains("-Module") || item.Contains("-Root")))
-                                role.AvailableModuleActions = role.AvailableModuleActions + item + ",";
+                                if (!(item.Contains("-Module") || item.Contains("-Root")))
+                                    role.AvailableModuleActions = role.AvailableModuleActions + item + ",";
                             }
                             role.AvailableModuleActions = role.AvailableModuleActions.Substring(0, role.AvailableModuleActions.Length - 1);
 
@@ -185,25 +185,25 @@ namespace Marbale.DataAccess
         {
             try
             {
-                    SqlParameter[] sqlParameters = new SqlParameter[16];
-                    sqlParameters[0] = new SqlParameter("@Id", user.Id);
-                    sqlParameters[1] = new SqlParameter("@Name", string.IsNullOrWhiteSpace(user.Name) ? "" : user.Name);
-                    sqlParameters[2] = new SqlParameter("@LoginId", string.IsNullOrWhiteSpace(user.LoginId) ? "" : user.LoginId);
-                    sqlParameters[3] = new SqlParameter("@Password", string.IsNullOrWhiteSpace(user.Password) ? Encoding.ASCII.GetBytes("") : Encoding.ASCII.GetBytes(user.Password));
-                    sqlParameters[4] = new SqlParameter("@RoleId", user.RoleId);
-                    sqlParameters[5] = new SqlParameter("@Email", string.IsNullOrWhiteSpace(user.Email) ? "" : user.Email);
-                    sqlParameters[6] = new SqlParameter("@Manager", string.IsNullOrWhiteSpace(user.Manager) ? "" : user.Manager);
-                    sqlParameters[7] = new SqlParameter("@Department", string.IsNullOrWhiteSpace(user.Department) ? "" : user.Department);
-                    sqlParameters[8] = new SqlParameter("@CompanyAdmin", user.CompanyAdmin);
-                    sqlParameters[9] = new SqlParameter("@EmpStartDate", user.EmpStartDate == new DateTime() ? DateTime.Now : user.EmpStartDate);
-                    sqlParameters[10] = new SqlParameter("@EmpEndDate", user.EmpEndDate == new DateTime() ? DateTime.Now : user.EmpEndDate);
-                    sqlParameters[11] = new SqlParameter("@EmpEndReason", string.IsNullOrWhiteSpace(user.EmpEndReason) ? "" : user.EmpEndReason);
-                    sqlParameters[12] = new SqlParameter("@CreatedBy", string.IsNullOrWhiteSpace(user.CreatedBy) ? "Harish" : user.CreatedBy);
-                    sqlParameters[13] = new SqlParameter("@LastUpdatedBy", user.LastUpdatedBy == null ? "Harish" : user.LastUpdatedBy);
-                    sqlParameters[14] = new SqlParameter("@Status", string.IsNullOrWhiteSpace(user.Status) ? "" : user.Status);
-                    sqlParameters[15] = new SqlParameter("@POSCounter", string.IsNullOrWhiteSpace(user.POSCounter) ? "" : user.POSCounter);
+                SqlParameter[] sqlParameters = new SqlParameter[16];
+                sqlParameters[0] = new SqlParameter("@Id", user.Id);
+                sqlParameters[1] = new SqlParameter("@Name", string.IsNullOrWhiteSpace(user.Name) ? "" : user.Name);
+                sqlParameters[2] = new SqlParameter("@LoginId", string.IsNullOrWhiteSpace(user.LoginId) ? "" : user.LoginId);
+                sqlParameters[3] = new SqlParameter("@Password", string.IsNullOrWhiteSpace(user.Password) ? Encoding.ASCII.GetBytes("") : Encoding.ASCII.GetBytes(user.Password));
+                sqlParameters[4] = new SqlParameter("@RoleId", user.RoleId);
+                sqlParameters[5] = new SqlParameter("@Email", string.IsNullOrWhiteSpace(user.Email) ? "" : user.Email);
+                sqlParameters[6] = new SqlParameter("@Manager", string.IsNullOrWhiteSpace(user.Manager) ? "" : user.Manager);
+                sqlParameters[7] = new SqlParameter("@Department", string.IsNullOrWhiteSpace(user.Department) ? "" : user.Department);
+                sqlParameters[8] = new SqlParameter("@CompanyAdmin", user.CompanyAdmin);
+                sqlParameters[9] = new SqlParameter("@EmpStartDate", user.EmpStartDate == new DateTime() ? DateTime.Now : user.EmpStartDate);
+                sqlParameters[10] = new SqlParameter("@EmpEndDate", user.EmpEndDate == new DateTime() ? DateTime.Now : user.EmpEndDate);
+                sqlParameters[11] = new SqlParameter("@EmpEndReason", string.IsNullOrWhiteSpace(user.EmpEndReason) ? "" : user.EmpEndReason);
+                sqlParameters[12] = new SqlParameter("@CreatedBy", string.IsNullOrWhiteSpace(user.CreatedBy) ? "Harish" : user.CreatedBy);
+                sqlParameters[13] = new SqlParameter("@LastUpdatedBy", user.LastUpdatedBy == null ? "Harish" : user.LastUpdatedBy);
+                sqlParameters[14] = new SqlParameter("@Status", string.IsNullOrWhiteSpace(user.Status) ? "" : user.Status);
+                sqlParameters[15] = new SqlParameter("@POSCounter", string.IsNullOrWhiteSpace(user.POSCounter) ? "" : user.POSCounter);
 
-                    return conn.executeUpdateQuery("sp_InsertOrUpdateUser", sqlParameters);
+                return conn.executeUpdateQuery("sp_InsertOrUpdateUser", sqlParameters);
             }
             catch (Exception e)
             {
@@ -273,7 +273,7 @@ namespace Marbale.DataAccess
             }
         }
 
-        public DataTable GetModuleActionsByRole(int roleId,bool isSuperUser = false)
+        public DataTable GetModuleActionsByRole(int roleId, bool isSuperUser = false)
         {
             try
             {
@@ -353,7 +353,7 @@ namespace Marbale.DataAccess
             {
                 SqlParameter[] sqlParameters = new SqlParameter[1];
                 sqlParameters[0] = new SqlParameter("@templateId", templateId);
-                return conn.executeSelectQuery("sp_GetPrintTemplatesById",sqlParameters);
+                return conn.executeSelectQuery("sp_GetPrintTemplatesById", sqlParameters);
             }
             catch (Exception e)
             {

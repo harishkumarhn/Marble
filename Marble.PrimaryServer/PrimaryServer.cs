@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Common;
+using System.Data.SqlClient;
 
 namespace Marble.PrimaryServer
 {
@@ -55,8 +56,8 @@ namespace Marble.PrimaryServer
                     BackupDeviceItem deviceItem = new BackupDeviceItem(destinationPath + "\\" + backupfileName, DeviceType.File);
                     ////Define Server connection    
 
-                    //ServerConnection connection = new ServerConnection(frm.serverName, frm.userName, frm.password);    
-                    ServerConnection connection = new ServerConnection("HARISH-PC\\SQLEXPRESS", "sa", "marble");
+                    //ServerConnection connection = new ServerConnection(frm.serverName, frm.userName, frm.password);                     
+                    ServerConnection connection = new ServerConnection(new SqlConnection(@"Data Source=DESKTOP-V5T880D\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;"));
                     ////To Avoid TimeOut Exception    
                     Server sqlServer = new Server(connection);
                     sqlServer.ConnectionContext.StatementTimeout = 60 * 60;
