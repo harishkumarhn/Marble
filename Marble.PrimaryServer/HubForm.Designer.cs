@@ -37,6 +37,7 @@
             this.btn_clearLog = new System.Windows.Forms.Button();
             this.btn_pause = new System.Windows.Forms.Button();
             this.hub_dataGridView = new System.Windows.Forms.DataGridView();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.hubLayout.SuspendLayout();
             this.headePanel.SuspendLayout();
             this.footerPanel.SuspendLayout();
@@ -48,15 +49,17 @@
             this.hubLayout.ColumnCount = 1;
             this.hubLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.hubLayout.Controls.Add(this.headePanel, 0, 0);
-            this.hubLayout.Controls.Add(this.footerPanel, 0, 2);
+            this.hubLayout.Controls.Add(this.footerPanel, 0, 3);
+            this.hubLayout.Controls.Add(this.richTextBox1, 0, 2);
             this.hubLayout.Controls.Add(this.hub_dataGridView, 0, 1);
             this.hubLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hubLayout.Location = new System.Drawing.Point(0, 0);
             this.hubLayout.Name = "hubLayout";
-            this.hubLayout.RowCount = 3;
+            this.hubLayout.RowCount = 4;
             this.hubLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.hubLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.hubLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.hubLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.hubLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 69.25795F));
+            this.hubLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.90106F));
             this.hubLayout.Size = new System.Drawing.Size(619, 428);
             this.hubLayout.TabIndex = 0;
             // 
@@ -66,7 +69,7 @@
             this.headePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.headePanel.Location = new System.Drawing.Point(3, 3);
             this.headePanel.Name = "headePanel";
-            this.headePanel.Size = new System.Drawing.Size(613, 58);
+            this.headePanel.Size = new System.Drawing.Size(613, 31);
             this.headePanel.TabIndex = 0;
             // 
             // lab_Header
@@ -86,9 +89,9 @@
             this.footerPanel.Controls.Add(this.btn_clearLog);
             this.footerPanel.Controls.Add(this.btn_pause);
             this.footerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.footerPanel.Location = new System.Drawing.Point(3, 388);
+            this.footerPanel.Location = new System.Drawing.Point(3, 391);
             this.footerPanel.Name = "footerPanel";
-            this.footerPanel.Size = new System.Drawing.Size(613, 37);
+            this.footerPanel.Size = new System.Drawing.Size(613, 34);
             this.footerPanel.TabIndex = 1;
             // 
             // btn_shutDown
@@ -141,10 +144,19 @@
             // 
             this.hub_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.hub_dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hub_dataGridView.Location = new System.Drawing.Point(3, 67);
+            this.hub_dataGridView.Location = new System.Drawing.Point(3, 40);
             this.hub_dataGridView.Name = "hub_dataGridView";
-            this.hub_dataGridView.Size = new System.Drawing.Size(613, 315);
+            this.hub_dataGridView.Size = new System.Drawing.Size(613, 174);
             this.hub_dataGridView.TabIndex = 2;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 220);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(613, 165);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
             // 
             // HubForm
             // 
@@ -175,5 +187,6 @@
         private System.Windows.Forms.Button btn_restart;
         private System.Windows.Forms.Button btn_clearLog;
         private System.Windows.Forms.Button btn_pause;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
