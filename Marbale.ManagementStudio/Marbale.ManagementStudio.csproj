@@ -332,10 +332,11 @@
     <Content Include="Views\Product\NonCardProductSetup.cshtml" />
     <Content Include="Views\Product\ProductSetup.cshtml" />
     <Content Include="Views\Product\Types.cshtml" />
-    <Content Include="Views\SiteSetup\LookUps\LookUps.cshtml" />
-    <Content Include="Views\SiteSetup\LookUps\LookUpData.cshtml" />
-    <Content Include="Views\SiteSetup\LookUps\PaymentMode.cshtml" />
-    <Content Include="Views\SiteSetup\LookUps\Sequence.cshtml" />
+    <Content Include="Views\SiteSetup\References\References.cshtml" />
+    <Content Include="Views\SiteSetup\References\LookUpData.cshtml" />
+    <Content Include="Views\SiteSetup\References\PaymentMode.cshtml" />
+    <Content Include="Views\SiteSetup\References\Sequence.cshtml" />
+    <Content Include="Views\Marble\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

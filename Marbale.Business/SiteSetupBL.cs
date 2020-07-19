@@ -769,5 +769,54 @@ namespace Marble.Business
                 throw e;
             }
         }
+        public List<Sequence> GetSequences()
+        {
+            DataTable dt = siteSetupData.GetSequences();
+            List<Sequence> sequences = new List<Sequence>();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Sequence seq = new Sequence();
+                    seq.SequenceId = dr.IsNull("SequenceId") ? 0 : int.Parse(dr["SequenceId"].ToString());
+                    seq.SequenceName = dr.IsNull("SeqName") ? "" : dr["SeqName"].ToString();
+                    seq.Seed = dr.IsNull("Seed") ? 0 : int.Parse(dr["Seed"].ToString());
+                    seq.Increment = dr.IsNull("Incr") ? 0 : int.Parse(dr["Incr"].ToString());
+                    seq.CurrentValue = dr.IsNull("Currval") ? 0 : int.Parse(dr["Currval"].ToString());
+                    seq.Prefix = dr.IsNull("Prefix") ? "" : dr["Prefix"].ToString();
+                    seq.Suffix = dr.IsNull("Suffix") ? "" : dr["Suffix"].ToString();
+
+                    sequences.Add(seq);
+                }
+
+            }
+            if (sequences.Count == 0)
+            {
+                sequences.Add(new Sequence());
+            }
+            return sequences;
+        }
+        public int InsertOrUpdateSequences(List<Sequence> sequences)
+        {
+            try
+            {
+                return siteSetupData.InsertOrUpdateSequence(sequences);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public int ChangeUserPassword(string UserId, string CurrentPassword, string NewPassword)
+        {
+            try
+            {
+                return commonData.ChangePassword(UserId, CurrentPassword, NewPassword);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

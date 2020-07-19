@@ -14,6 +14,8 @@ namespace Marbale.Business
    public class POSBL
     {
         private ProductData marbaleData;
+        private CommonData commonData;
+
         private SiteSetupData siteSetupdata;
 
         public POSBL()
@@ -70,9 +72,9 @@ namespace Marbale.Business
             }
         }
 
-        public void ChangeUserPassword(int userId, string currentPassword, string newPassword)
+        public void ChangeUserPassword(string userId, string currentPassword, string newPassword)
         {
-            marbaleData.ChangePassword(userId, currentPassword, newPassword);
+            commonData.ChangePassword(userId, currentPassword, newPassword);
         }
 
 

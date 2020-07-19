@@ -522,5 +522,41 @@ namespace Marbale.DataAccess
                 throw e;
             }
         }
+        public DataTable GetSequences()
+        {
+            try
+            {
+                return conn.executeSelectQuery("sp_GetSequences");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public int InsertOrUpdateSequence(List<Sequence> sequences)
+        {
+            int result = 0;
+            try
+            {
+                foreach (var seq in sequences)
+                {
+                    SqlParameter[] sqlParameters = new SqlParameter[7];
+                    sqlParameters[0] = new SqlParameter("@SequenceId", seq.SequenceId);
+                    sqlParameters[1] = new SqlParameter("@SequenceName", string.IsNullOrWhiteSpace(seq.SequenceName) ? "" : seq.SequenceName);
+                    sqlParameters[2] = new SqlParameter("@Seed", seq.Seed);
+                    sqlParameters[3] = new SqlParameter("@Increment", seq.Increment);
+                    sqlParameters[4] = new SqlParameter("@CurrentValue", seq.CurrentValue);
+                    sqlParameters[5] = new SqlParameter("@Prefix", string.IsNullOrWhiteSpace(seq.Prefix) ? "" : seq.Prefix);
+                    sqlParameters[6] = new SqlParameter("@Suffix", string.IsNullOrWhiteSpace(seq.Suffix) ? "" : seq.Suffix);
+
+                    result = conn.executeUpdateQuery("sp_InsertOrUpdateSequence", sqlParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return result;
+        }
     }
 }
