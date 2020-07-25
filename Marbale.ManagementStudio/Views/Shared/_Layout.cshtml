@@ -215,7 +215,8 @@
             if (preSelectedValue) {
                 $('#sidebar').addClass('active');
                 $('.overlay').addClass('active');                
-                document.querySelector("a[href='#" + preSelectedValue + "']").click();                
+                document.querySelector("a[href='#" + preSelectedValue + "']").click();
+                setSession(preSelectedValue);
             }
         });
         ////$('#inventery').click(function () {
@@ -253,6 +254,7 @@
                 document.cookie = "PreviousExpandedDropDown=" + selectedId;
             } else {
                 document.cookie = "PreviousExpandedDropDown=";
+                console.log(selectedId);
             }
         }
         
