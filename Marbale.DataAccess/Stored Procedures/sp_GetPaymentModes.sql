@@ -1,3 +1,4 @@
+Use [Marbale]
 -- ================================================
 -- Template generated from Template Explorer using:
 -- Create Procedure (New Menu).SQL
@@ -29,3 +30,4 @@ BEGIN
 	SELECT * from PaymentModes
 END
 GO
+ 

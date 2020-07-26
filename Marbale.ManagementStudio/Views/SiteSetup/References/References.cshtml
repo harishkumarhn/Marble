@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "References";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    @*<button id="lookupData" class="tablinks" onclick="getLookups()">Lookups</button>*@
+    <button class="tablinks" onclick="getPaymentMode()">Payment Mode</button>
+    <button class="tablinks" onclick="getSequence()">Sequence</button>
+</div>
+<div class="row" id="tabBody">
+</div>
+<script>
+    $(document).ready(function () {
+        $("#lookupData").addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+        getPaymentMode();
+    })
+    //function getLookups() {
+    //    $('#tabBody').load('/SiteSetup/LookUps');
+    //}
+    function getPaymentMode() {
+        $('#tabBody').load('/SiteSetup/PaymentMode');
+    }
+    function getSequence() {
+        $('#tabBody').load('/SiteSetup/Sequence');
+    }
+    $('.tablinks').click(function () {
+        $(this).addClass('buttoncolor-change').siblings().removeClass('buttoncolor-change');
+    });
+</script>
+
+
