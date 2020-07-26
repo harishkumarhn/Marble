@@ -212,10 +212,11 @@
             });
 
             let preSelectedValue = getCookie("PreviousExpandedDropDown");
-            if (preSelectedValue) {
+            if (preSelectedValue && window.location.pathname=="") {
                 $('#sidebar').addClass('active');
                 $('.overlay').addClass('active');                
                 document.querySelector("a[href='#" + preSelectedValue + "']").click();
+                console.log(window.location);
                 setSession(preSelectedValue);
             }
         });
