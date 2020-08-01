@@ -305,6 +305,7 @@
             for (var i = 0, j = fixedcolumn3values.length; i < j; i++) {
                 $('.DTFC_Cloned input.fixedCol3')[i].value = fixedcolumn3values[i].value;
             }
+            $(".dataTables_scrollBody").animate({ scrollTop: $(".dataTables_scrollBody").height() }, 1000);
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
     });
