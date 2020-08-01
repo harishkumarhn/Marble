@@ -75,21 +75,34 @@ namespace Marble.PrimaryServer
                     ////Declare a BackupDeviceItem    
                     string destinationPath = DestPath;
                     string backupfileName = DbName + ".bak";
-                    var sqlConStrBuilder = new SqlConnectionStringBuilder(@"Data Source=DESKTOP-6LG6FHB;Database=Marbale;Trusted_Connection=True;");
+                    BackupDeviceItem deviceItem = new BackupDeviceItem(destinationPath + "\\" + backupfileName, DeviceType.File);
+                    ////Define Server connection    
 
-                    // set backupfilename (you will get something like: "C:/temp/MyDatabase-2013-12-07.bak")
+                    //ServerConnection connection = new ServerConnection(frm.serverName, frm.userName, frm.password);                     
+                    ServerConnection connection = new ServerConnection(new SqlConnection(@"Data Source=DESKTOP-V5T880D\SQLEXPRESS;Initial Catalog=Marbale;Trusted_Connection=True;"));
+                    ////To Avoid TimeOut Exception    
+                    Server sqlServer = new Server(connection);
+                    sqlServer.ConnectionContext.StatementTimeout = 60 * 60;
+                    Database db = sqlServer.Databases[databaseName];
 
-                    using (var connection = new SqlConnection(sqlConStrBuilder.ConnectionString))
-                    {
-                        var query = String.Format("BACKUP DATABASE {0} TO DISK='{1}'",
-                            sqlConStrBuilder.InitialCatalog, destinationPath + "\\" + backupfileName);
+                    sqlBackup.Initialize = true;
+                    sqlBackup.Checksum = true;
+                    sqlBackup.ContinueAfterError = true;
 
-                        using (var command = new SqlCommand(query, connection))
-                        {
-                            connection.Open();
-                            command.ExecuteNonQuery();
-                        }
-                    }
+                    ////Add the device to the Backup object.    
+                    sqlBackup.Devices.Add(deviceItem);
+                    ////Set the Incremental property to False to specify that this is a full database backup.    
+                    sqlBackup.Incremental = false;
+
+                    sqlBackup.ExpirationDate = DateTime.Now.AddDays(3);
+                    ////Specify that the log must be truncated after the backup is complete.    
+                    sqlBackup.LogTruncation = BackupTruncateLogType.Truncate;
+
+                    sqlBackup.FormatMedia = false;
+                    ////Run SqlBackup to perform the full database backup on the instance of SQL Server.    
+                    sqlBackup.SqlBackup(sqlServer);
+                    ////Remove the backup device from the Backup object.    
+                    sqlBackup.Devices.Remove(deviceItem);
                     this.richText_primaryServer.AppendText("Successful backup is created!\n");
                 }
                 
