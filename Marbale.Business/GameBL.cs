@@ -221,7 +221,7 @@ namespace Marble.Business
                      machine.TicketAllowed = dr.IsNull("TicketAllowed") ? false : bool.Parse(dr["TicketAllowed"].ToString());
                      machine.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
                      machine.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                     machine.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                     machine.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
 
                      machine.AvalibleHubs = hubs;
                      machine.AvalibleReaders = readers;

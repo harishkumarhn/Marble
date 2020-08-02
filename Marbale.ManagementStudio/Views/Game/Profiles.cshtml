@@ -13,7 +13,7 @@
         <th>Bonus Allowed</th>
         <th>Courtesy Allowed</th>
         <th>Time Allowed</th>
-        <th>Configure</th>
+        <th>Config</th>
         <th>Tiket Allowed On Credit</th>
         <th>Tiket Allowed On Bonus</th>
         <th>Tiket Allowed On Courtesy</th>
@@ -47,7 +47,7 @@
                 <input type="checkbox"  @(item.TimeAllowed ? "checked='checked'" : "") value="@item.TimeAllowed" />
             </td>
             <td>
-                <button onclick="ConfigureGameProfile()">-</button>
+                <button onclick="ConfigureGameProfile()" style="width: 40%;min-width: 0px;">-</button>
             </td>
             <td>
                 <input type="checkbox"  @(item.TiketAllowedOnCredit ? "checked='checked'" : "") value="@item.TiketAllowedOnCredit" />
@@ -126,7 +126,7 @@
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
-                '<button onclick="ConfigureGameProfile()">-</button>',
+                '<button onclick="ConfigureGameProfile()" style="width: 40%;min-width: 0px;">-</button>',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',

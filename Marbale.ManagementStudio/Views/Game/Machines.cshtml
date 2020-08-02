@@ -32,7 +32,7 @@
         <th>Theme</th>
         <th>LastUpdatedBy</th>
         <th>LastUpdatedDate</th>
-        <th>Configure</th>
+        <th>Config</th>
     </thead>
     @foreach (var item in ViewBag.machines)
     {  
@@ -154,7 +154,7 @@
                 <input type="text" value="@item.LastUpdatedDate" disabled/>
             </td>
             <td>
-                <button onClick="ConfigureMachine(@item.Id)">-</button>
+                <button onClick="ConfigureMachine(@item.Id)" style="width:40%;min-width:0px">-</button>
             </td>
         </tr>  
     }
@@ -256,19 +256,31 @@
             var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
             var fixedcolumn2values = $('.DTFC_Cloned input.fixedCol2');
             var hubNames = '';
-              @foreach (var dow in ViewBag.machines[0].AvalibleHubs)
+            @foreach (var dow in ViewBag.machines[0].AvalibleHubs)
               {
                  @: hubNames = hubNames + '<option id="@dow.Id" value="" >@dow.Name</option>';
-              }
+                                      }
             hubNames = hubNames + '</select>';
+            var games = '';
+            @foreach(var dow in ViewBag.machines[0].AvailableGames)
+             {
+                 @: games = games + '<option id="@dow.Id" value="" >@dow.Name</option>';
+                         }
+            games = games + '</select>';
             var readerTypes = '';
-              @foreach (var dow in ViewBag.machines[0].AvalibleReaders)
+            @foreach (var dow in ViewBag.machines[0].AvalibleReaders)
               {
                  @: readerTypes = readerTypes + '<option id="@dow.Id" value="" >@dow.Value</option>';
               }
             readerTypes = readerTypes + '</select>';
+            var AvailableTicketModes = '';
+            @foreach (var dow in ViewBag.machines[0].AvailableTicketModes)
+             {
+                 @: AvailableTicketModes = AvailableTicketModes + '<option id="@dow.Id" value="" >@dow.Value</option>';
+             }
+            AvailableTicketModes = AvailableTicketModes + '</select>';
             var themes = '';
-              @foreach (var dow in ViewBag.machines[0].AvalibleThemes)
+            @foreach (var dow in ViewBag.machines[0].AvalibleThemes)
               {
                  @: themes = themes + '<option id="@dow.Id" value="" >@dow.Value</option>';
               }
@@ -277,23 +289,23 @@
             table.row.add([
                 '<lable class="fixedCol1"></lable>',
                 '<input class="fixedCol2" type="text" value="" />',
-                '<input type="text" value="" />',
+                '<select name="AvailableGames" id="AvailableGames">' + games,
                 '<select name="AvalibleHubs" id="AvalibleHubs">' + hubNames,
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
+                '<input type="text" value="" style="width:5vw"/>',
+                '<input type="text" value="" style="width:5vw"/>',
+                '<input type="text" value="" style="width:10vw"/>',
                 '<input type="checkbox" />',
                 '<select name="AvalibleReaders" id="AvalibleReaders">' + readerTypes,
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
+                '<input type="text" value="" style="width:5vw"/>',
+                '<select name="AvailableTicketModes" id="AvailableTicketModes">' + AvailableTicketModes,
+                '<input type="text" value="" style="width:9vw"/>',
                 '<input type="checkbox" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
+                '<input type="text" value="" style="width:10vw"/>',
+                '<input type="text" value="" style="width:10vw"/>',
                 '<select name="AvalibleThemes" id="AvalibleThemes">' + themes,
                 '<input type="text" value="" disabled/>',
                 '<input type="text" value="" disabled/>',
-                '<button onClick="ConfigureMachine(0)" disabled>-</button>'
+                '<button onClick="ConfigureMachine(0)" disabled style="width:40%;min-width:0px">-</button>'
 
             ]).draw(false);
 
@@ -316,7 +328,7 @@
         }
         // updating Effective Address = Hub Address + Machine Address
         var table = document.getElementById('marbleTable');
-        table.rows[index+1].cells[6].children[0].value = table.rows[index+1].cells[4].children[0].value + table.rows[index+1].cells[5].children[0].value;
+        table.rows[index + 1].cells[6].children[0].value = table.rows[index + 1].cells[4].children[0].value + table.rows[index + 1].cells[5].children[0].value;
     }
 
     function Filter() {
