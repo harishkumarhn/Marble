@@ -42,7 +42,7 @@ namespace Marbale.BusinessObject
         [DataType(DataType.Currency)]
         public decimal? EffectivePrice { get; set; }
         public string LastUpdatedBy { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public string LastUpdatedDate { get; set; }
         [DataType(DataType.Currency)]
         public decimal? Credits { get; set; }
         [DataType(DataType.Currency)]

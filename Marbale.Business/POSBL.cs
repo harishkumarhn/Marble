@@ -50,7 +50,7 @@ namespace Marbale.Business
                     product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
                     product.DisplayGroup = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
                     product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
                     product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();

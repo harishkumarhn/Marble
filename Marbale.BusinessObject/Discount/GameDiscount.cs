@@ -13,7 +13,7 @@ namespace Marbale.BusinessObject
         public int DiscountPercentage { get; set; }
         public float MinimumUsedCredits { get; set; }
         public bool ActiveFlag { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public string LastUpdatedDate { get; set; }
         public string LastUpdatedUser { get; set; }
     }
 }

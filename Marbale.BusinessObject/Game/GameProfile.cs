@@ -20,7 +20,7 @@ namespace Marbale.BusinessObject.Game
         public bool TiketAllowedOnBonus { get; set; }
         public bool TiketAllowedOnCourtesy { get; set; }
         public bool TiketAllowedOnTime { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public string LastUpdatedDate { get; set; }
         public string LastUpdatedBy { get; set; }
     }
 }
