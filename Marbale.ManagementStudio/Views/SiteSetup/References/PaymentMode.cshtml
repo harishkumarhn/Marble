@@ -38,7 +38,7 @@
                     <input type="checkbox" @(item.IsCreditCard ? "checked='checked'" : "") value="@item.IsCreditCard" />
                 </td>
                 <td>
-                    <input type="text" value="@item.CreditCardSurchargePercentage" />
+                    <input type="text" value="@item.CreditCardSurchargePercentage" style="width:10vw"/>
                 </td>
                 <td>
                     <input type="checkbox" @(item.ManagerApprovalRequired ? "checked='checked'" : "") value="@item.ManagerApprovalRequired" />
@@ -47,7 +47,7 @@
                     <input type="checkbox" @(item.POSAvailable ? "checked='checked'" : "") value="@item.POSAvailable" />
                 </td>
                 <td>
-                    <input type="text" value="@item.DisplayOrder" />
+                    <input type="text" value="@item.DisplayOrder" style="width:10vw"/>
                 </td>
                 <td>
                     <input type="text" value="@item.GateWay" />
@@ -94,10 +94,10 @@
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
-                '<input type="text" value="" />',
+                '<input type="text" value="" style="width:10vw"/>',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
-                '<input type="text" value="" />',
+                '<input type="text" value="" style="width:10vw"/>',
                 '<input type="text" value="" />'
             ]).draw(false);
         });
