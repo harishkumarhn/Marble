@@ -266,6 +266,7 @@ a:hover {
     background-image: url('/Content/Images/unmatch.png'); 
     background-position: right top;
     background-repeat: no-repeat;
+    background-size: 25px;
     -moz-box-shadow: none;
   }
   input:required:valid {

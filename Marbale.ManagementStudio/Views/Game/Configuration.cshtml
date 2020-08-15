@@ -40,30 +40,15 @@
                         </div>
                         <div class="editor-label">
                             @Html.LabelFor(model => model.ReverseDisplayDirection)
-                        </div>
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.DefaultTheme)
-                        </div>
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.StartScreenNumber)
-                        </div>
+                        </div>                       
                         <div class="editor-label" style="margin-bottom:-1vh">
                             @Html.LabelFor(model => model.BalanceDelay)
-                        </div>
-                        <div class="editor-label" style="margin-bottom:-0.2vh">
-                            @Html.LabelFor(model => model.EnableResetPulse)
                         </div>
                         <div class="editor-label" style="margin-bottom:-0.5vh">
                             @Html.LabelFor(model => model.MinSecondsBetweenRepeatPlay)
                         </div>
-                        <div class="editor-label" style="margin-bottom:-0.5vh">
-                            @Html.LabelFor(model => model.EnableExtAntenna)
-                        </div>
                         <div class="editor-label">
                             @Html.LabelFor(model => model.OutOfServiceTheme)
-                        </div>
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.FreePlayTheme)
                         </div>
                     </div>
                     <div style="width:90px;float:left">
@@ -86,38 +71,18 @@
                         <div class="editor-field">
                             @Html.EditorFor(model => model.ReverseDisplayDirection)
                             @Html.ValidationMessageFor(model => model.ReverseDisplayDirection)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.DefaultTheme)
-                            @Html.ValidationMessageFor(model => model.DefaultTheme)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.StartScreenNumber)
-                            @Html.ValidationMessageFor(model => model.StartScreenNumber)
-                        </div>
+                        </div>                       
                         <div class="editor-field">
                             @Html.EditorFor(model => model.BalanceDelay)
                             @Html.ValidationMessageFor(model => model.BalanceDelay)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.EnableResetPulse)
-                            @Html.ValidationMessageFor(model => model.EnableResetPulse)
                         </div>
                         <div class="editor-field" style="margin-top:0.5vh;margin-bottom:0.5vh">
                             @Html.EditorFor(model => model.MinSecondsBetweenRepeatPlay)
                             @Html.ValidationMessageFor(model => model.MinSecondsBetweenRepeatPlay)
                         </div>
                         <div class="editor-field">
-                            @Html.EditorFor(model => model.EnableExtAntenna)
-                            @Html.ValidationMessageFor(model => model.EnableExtAntenna)
-                        </div>
-                        <div class="editor-field">
                             @Html.EditorFor(model => model.OutOfServiceTheme)
                             @Html.ValidationMessageFor(model => model.OutOfServiceTheme)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.FreePlayTheme)
-                            @Html.ValidationMessageFor(model => model.FreePlayTheme)
                         </div>
                     </div>
                 </div>
@@ -146,15 +111,7 @@
                         <div class="editor-label" style="margin-bottom:-0.5vh">
                             @Html.LabelFor(model => model.DisableTickets)
                         </div>
-
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.CoinPusherMachine)
-                        </div>
-
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.DebugMode)
-                        </div>
-
+                        
                         <div class="editor-label">
                             @Html.LabelFor(model => model.CardRetries)
                         </div>
@@ -205,17 +162,7 @@
                             @Html.EditorFor(model => model.DisableTickets)
                             @Html.ValidationMessageFor(model => model.DisableTickets)
                         </div>
-
-                        <div class="editor-field" style="padding-top:1vh;">
-                            @Html.EditorFor(model => model.CoinPusherMachine)
-                            @Html.ValidationMessageFor(model => model.CoinPusherMachine)
-                        </div>
-
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.DebugMode)
-                            @Html.ValidationMessageFor(model => model.DebugMode)
-                        </div>
-
+                       
                         <div class="editor-field">
                             @Html.EditorFor(model => model.CardRetries)
                             @Html.ValidationMessageFor(model => model.CardRetries)

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_minimize = new System.Windows.Forms.Button();
             this.btn_shutDownExit = new System.Windows.Forms.Button();
             this.btn_ShoutDown = new System.Windows.Forms.Button();
             this.btn_restart = new System.Windows.Forms.Button();
@@ -36,7 +37,6 @@
             this.richText_primaryServer = new System.Windows.Forms.RichTextBox();
             this.lab_PrimaryServer = new System.Windows.Forms.Label();
             this.serverLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_minimize = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.serverLayout.SuspendLayout();
             this.SuspendLayout();
@@ -53,6 +53,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(767, 42);
             this.panel1.TabIndex = 2;
+            // 
+            // btn_minimize
+            // 
+            this.btn_minimize.BackColor = System.Drawing.Color.White;
+            this.btn_minimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_minimize.Location = new System.Drawing.Point(153, 3);
+            this.btn_minimize.Name = "btn_minimize";
+            this.btn_minimize.Size = new System.Drawing.Size(123, 32);
+            this.btn_minimize.TabIndex = 4;
+            this.btn_minimize.Text = "Minimize to Tray";
+            this.btn_minimize.UseVisualStyleBackColor = false;
+            this.btn_minimize.Click += new System.EventHandler(this.btn_minimize_Click);
             // 
             // btn_shutDownExit
             // 
@@ -103,7 +115,6 @@
             // 
             // richText_primaryServer
             // 
-            this.richText_primaryServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richText_primaryServer.Location = new System.Drawing.Point(3, 73);
             this.richText_primaryServer.Name = "richText_primaryServer";
             this.richText_primaryServer.Size = new System.Drawing.Size(767, 346);
@@ -113,10 +124,10 @@
             // lab_PrimaryServer
             // 
             this.lab_PrimaryServer.AutoSize = true;
-            this.lab_PrimaryServer.Font = new System.Drawing.Font("Modern No. 20", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lab_PrimaryServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lab_PrimaryServer.Location = new System.Drawing.Point(3, 0);
             this.lab_PrimaryServer.Name = "lab_PrimaryServer";
-            this.lab_PrimaryServer.Size = new System.Drawing.Size(265, 29);
+            this.lab_PrimaryServer.Size = new System.Drawing.Size(276, 31);
             this.lab_PrimaryServer.TabIndex = 0;
             this.lab_PrimaryServer.Text = "Marble PrimaryServer";
             // 
@@ -137,18 +148,6 @@
             this.serverLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.serverLayout.Size = new System.Drawing.Size(773, 470);
             this.serverLayout.TabIndex = 0;
-            // 
-            // btn_minimize
-            // 
-            this.btn_minimize.BackColor = System.Drawing.Color.White;
-            this.btn_minimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_minimize.Location = new System.Drawing.Point(153, 3);
-            this.btn_minimize.Name = "btn_minimize";
-            this.btn_minimize.Size = new System.Drawing.Size(123, 32);
-            this.btn_minimize.TabIndex = 4;
-            this.btn_minimize.Text = "Minimize to Tray";
-            this.btn_minimize.UseVisualStyleBackColor = false;
-            this.btn_minimize.Click += new System.EventHandler(this.btn_minimize_Click);
             // 
             // PrimaryServer
             // 

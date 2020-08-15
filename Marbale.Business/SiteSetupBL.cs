@@ -160,7 +160,7 @@ namespace Marble.Business
                 userRole.POSClockInOut = dr.IsNull("POSClockInOut") ? false : bool.Parse(dr["POSClockInOut"].ToString());
                 userRole.ReadOnly = dr.IsNull("ReadOnly") ? false : bool.Parse(dr["ReadOnly"].ToString());
                 userRole.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                userRole.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                userRole.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                 userRoles.Add(userRole);
             }
             return userRoles;
@@ -364,7 +364,7 @@ namespace Marble.Business
                 user.Status = dr.IsNull("Status") ? "" : dr["Status"].ToString();
                 user.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                 user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                 user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
                 user.ReadOnly = dr.IsNull("ReadOnly") ? false : bool.Parse(dr["ReadOnly"].ToString());
 
@@ -408,7 +408,7 @@ namespace Marble.Business
                     user.Status = dr.IsNull("Status") ? "" : dr["Status"].ToString();
                     user.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                    user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                     user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
 
                     user.Roles = rolesList;
@@ -489,7 +489,7 @@ namespace Marble.Business
                     user.Status = dr.IsNull("Status") ? "" : dr["Status"].ToString();
                     user.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                    user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                     user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
                     user.Password = password;
                     break;

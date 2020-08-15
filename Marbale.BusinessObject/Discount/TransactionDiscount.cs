@@ -19,7 +19,7 @@ namespace Marbale.BusinessObject
         public bool ActiveFlag { get; set; }
         public int SortOrder { get; set; }
         public bool ManagerApproval { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public string LastUpdatedDate { get; set; }
         public string LastUpdatedUser { get; set; }
         public string DiscountType { get; set; }
         public bool CouponMendatory { get; set; }
