@@ -222,7 +222,7 @@
             TaxInclusive: taxinclusive
         };
         if (TaxId == "") {
-            $('#EffectivePrice').val(Price);
+            $('#EffectivePrice').val((Price - FaceValue).toFixed(4));
             $('#FinalPrice').val(Price);
         }
             //JSON.stringify({ TaxId: TaxId, Price: Price, TaxInclusive: taxinclusive, FaceValue: FaceValue }),
@@ -235,7 +235,7 @@
                 data: JSON.stringify({ model: model }),
                 dataType: "json",
                 success: function (data) {
-                    $('#EffectivePrice').val(data.EffectivePrice);
+                    $('#EffectivePrice').val(parseFloat(data.EffectivePrice).toFixed(4));
                     $('#Taxpercent').val(data.Taxpercent);
                     $('#FinalPrice').val(data.FinalPrice);
                 },
