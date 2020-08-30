@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteConfiguaration", "SiteC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.ManagementStudio", "Marbale.ManagementStudio\Marbale.ManagementStudio.csproj", "{E05AFD8B-D133-49D8-AF2A-9A66628E4DF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marble.WebReports", "..\intrgration\Marble.WebReports\Marble.WebReports.csproj", "{DBA413BB-3EB3-456B-9646-F2973EFFC685}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marble.WebReports", "Marble.WebReports\Marble.WebReports.csproj", "{DBA413BB-3EB3-456B-9646-F2973EFFC685}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

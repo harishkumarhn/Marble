@@ -20,7 +20,7 @@ namespace Marbale.DataAccess
         public DBConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn = new SqlConnection(@"Data Source=ROCK\SQLSERVER;Initial Catalog=MarbleMg;Trusted_Connection=True;");
+            conn = new SqlConnection(@"Data Source=ROCK\SQLSERVER;Initial Catalog=Marblejuly26;Trusted_Connection=True;");
         }
 
 
