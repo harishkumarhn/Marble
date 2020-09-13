@@ -19,8 +19,8 @@
 
     <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/JS/popper.js"></script>
-    /
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
+
     <link href="/Content/css/style.css" rel="stylesheet" />
 
 
@@ -32,10 +32,18 @@
     <%--    <script src="/Scripts/JS/rocket-loader.min.js"></script>--%>
     <%--<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="7c07f463a923e0e8f10744f6-|49" defer=""></script>--%>
 
-       <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="/js/bootstrap.min.js" type="7c07f463a923e0e8f10744f6-text/javascript"></script>
+    <script src="Scripts/JS/bootstrap.min.js"></script>
 
+    <link href="Content/alertifyjs/css/alertify.min.css" rel="stylesheet" />
+    <script src="Content/alertifyjs/alertify.min.js"></script>
+
+    <style>
+        .alertify-notifier .ajs-message {
+            color: #fff;
+        }
+    </style>
     <script type="text/javascript">
         //  window.onload = (event) => {
         //console.log('page is fully loaded');
@@ -153,7 +161,7 @@
         /* Side Navigation */
 
         @media(min-width:768px) {
-            .side-nav {
+            /*.side-nav {
                 position: fixed;
                 top: 0px;
                 left: 225px;
@@ -164,21 +172,26 @@
                 border-top: 1px rgba(0,0,0,.5) solid;
                 overflow-y: auto;
                 background-color: #fff;
-                /*background-color: #5A6B7D;*/
+                
                 bottom: 0;
                 overflow-x: hidden;
                 padding-bottom: 40px;
-            }
+                z-index: 1;
+            }*/
 
                 .side-nav > li > a {
                     width: 225px;
                     border-bottom: 1px rgba(0,0,0,.3) solid;
+                        padding-top: 8px;
+    padding-bottom: 8px;
                 }
 
                 .side-nav li a:hover,
                 .side-nav li a:focus {
                     outline: none;
-                    background-color: #1a242f !important;
+                    /*background-color: #1a242f !important;*/
+                    background-color:#337ab7;
+                    color:#fff !important;
                 }
         }
 
@@ -189,14 +202,16 @@
 
             .side-nav > li > ul > li > a {
                 display: block;
-                padding: 10px 15px 10px 38px;
+                     padding: 4px 15px 4px 38px;
                 text-decoration: none;
                 color: #999;
                 /*color: #fff;*/
+                  font-size: smaller;
             }
 
                 .side-nav > li > ul > li > a:hover {
                     color: #fff;
+                      
                 }
 
         .navbar .nav > li > a > .label {
@@ -222,29 +237,64 @@
         .navbar-brand {
             padding: 5px 15px;
         }
-
+        .dtDiv
+        {
+                padding: 20px 10px 10px 10px;
+        }
         .wrapper {
-    width: 80%;
-    left: 224px;
-    position: absolute;
-}
+            width: 80%;
+            left: 260px;
+            position: absolute;
+        }
 
         li.active ul.collapse {
-    display: block;
-    
-}
+            display: block;
+        }
 
-     .side-nav > li > ul > li.active > a {
-     background-color: #1a242f !important;
-}
+        .side-nav > li > ul > li.active > a {
+            background-color: #337ab7;
+            color: #fff;
+        }
 
         .side-nav > li.active > a {
-    
- background-color: #1a242f !important;
-}
+            background-color:#337ab7;
+            color: #fff;
+        }
 
-       a active .collapse  {
-    display: block !important;
+        a active .collapse {
+            display: block !important;
+        }
+
+        .btn.btn-primary {
+            width: 100px;
+        }
+
+        .msb {
+            width: 250px;
+            background-color: #F5F7F9;
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: auto;
+            min-height: 100%;
+            overflow-y: auto;
+            white-space: nowrap;
+            height: 100%;
+            z-index: 1;
+            border-right: 1px solid #ddd;
+        }
+
+        .msb::-webkit-scrollbar {
+  width: 6px;
+}
+ 
+.msb::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.msb::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
     </style>
 
@@ -255,8 +305,8 @@
 </head>
 <body>
 
-   
-     
+
+
     <%-- <ul class="nav navbar-nav side-nav">
       <li><a>asdasd
 
@@ -292,14 +342,22 @@
 
     <% 
 
-                string currentHeader = "";
+        string currentHeader = "";
+
+        string customReport = "";
+
+        if(HttpContext.Current.Session["ReportKey"].ToString()=="custom")
+        {
+            customReport = "active";
+        }
     %>
+    <div class="msb">
     <ul class="nav navbar-nav side-nav">
         <li><a>Home
 
-          <i class="fa fa-bars  pull-right" aria-hidden="true"></i>
+       <%--   <i class="fa fa-bars  pull-right" aria-hidden="true"></i>--%>
         </a></li>
-        <li><a>Custom Report
+        <li><a href="CustomReportAdd.aspx?mn=custom" class="<%# Eval("customReport") %> ">Custom Report
 
            
         </a></li>
@@ -323,34 +381,34 @@
             </HeaderTemplate>
             <ItemTemplate>
 
-                <li class="  <%# Eval("ClassName") %> " >
-                    <a href="#" data-toggle="collapse" class="menu    " data-target="#submenu-1"><i class="fa fa-fw fa-search"></i><%# Eval("MenuName") %><i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                <li class=" <%# Eval("ClassName") %> ">
+                    <a href="#" data-toggle="collapse" class="menu    " data-target="#submenu-1"><i class="fa fa-angle-down">&nbsp</i><%# Eval("MenuName") %><i class="fa fa-fw fa-angle-down pull-right"></i></a>
 
-             
-                <asp:Repeater ID="rptSubMenu" runat="server" DataSource='<%# Eval("SubMenuList") %>'>
-                    <HeaderTemplate>
-                        <ul class="collapse">
-                    </HeaderTemplate>
-                    <ItemTemplate> 
-                        <li class="<%# Eval("SubClassName") %>"><a href="<%# Eval("Href") %>"  >
-                            
-                            <i class="fa fa-angle-double-right"></i><%# Eval("SubMenuName") %>
+
+                    <asp:Repeater ID="rptSubMenu" runat="server" DataSource='<%# Eval("SubMenuList") %>'>
+                        <HeaderTemplate>
+                            <ul class="collapse">
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <li class="<%# Eval("SubClassName") %>"><a href="<%# Eval("Href") %>">
+
+                                <i class="fa fa-angle-double-right"></i><%# Eval("SubMenuName") %>
                             </a>
-                        </li>
+                            </li>
 
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        </ul>
-                    </FooterTemplate>
-                </asp:Repeater>
-            </li>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </ul>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                </li>
             </ItemTemplate>
             <FooterTemplate>
             </FooterTemplate>
         </asp:Repeater>
 
     </ul>
-
+</div>
     <div class="wrapper d-flex align-items-stretch" style="display: none;">
 
 

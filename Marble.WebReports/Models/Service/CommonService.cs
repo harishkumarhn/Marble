@@ -11,12 +11,17 @@ namespace Marble.WebReports.Models.Service
     {
         DBWebConnection dBConnection = new DBWebConnection();
 
-        public DataTable GetReports()
+        public DataTable GetCustomReports(bool isall)
         {
             DataTable dt = null;
             try
             {
-                string sql = "select   * from Report where isactive=1";
+                string sql = "select   * from Report where isactive=1 and  IsCustomReport=1";
+                if (!isall)
+                {
+                    sql = "select   * from Report ";
+                }
+
                 SqlParameter[] sqlParameters = { };
                 dt = dBConnection.executeSelectScript(sql, sqlParameters);
             }
@@ -25,16 +30,186 @@ namespace Marble.WebReports.Models.Service
             }
             return dt;
         }
+        public Report GetReport(int id)
+        {
+            DataTable dt = null;
+            Report report = new Report();
+            try
+            {
+                string sql = "select   * from Report where Id=" + id;
+                SqlParameter[] sqlParameters = { };
+                dt = dBConnection.executeSelectScript(sql, sqlParameters);
+                if (dt != null && dt.Rows.Count == 1)
+                {
+                    report.Id = Convert.ToInt32(dt.Rows[0]["Id"].ToString());
+                    report.IsCustomReport = Convert.ToBoolean(dt.Rows[0]["IsCustomReport"].ToString());
+                    report.IsActive = Convert.ToBoolean(dt.Rows[0]["IsActive"].ToString());
+                    report.OutputFormat = dt.Rows[0]["OutputFormat"].ToString();
+                    report.ReportGroup = dt.Rows[0]["ReportGroup"].ToString();
+                    report.ReportKey = dt.Rows[0]["ReportKey"].ToString();
+                    report.ReportName = dt.Rows[0]["ReportName"].ToString();
+                    report.DBQuery = dt.Rows[0]["DBQuery"].ToString();
 
-        public List<UIMenu>  GetReportMenuList(string activemenu)
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return report;
+        }
+
+        public ResultStatus SaveReports(Report report)
+        {
+            ResultStatus resultStatus = new ResultStatus(0, "Failed to save");
+            if (report.Id > 0)
+            {
+                resultStatus = UpdateReports(report);
+            }
+            else
+            {
+                report.IsCustomReport = true;
+                report.ReportKey = report.ReportName.Replace(" ", "");
+                resultStatus = InsertReports(report);
+            }
+            return resultStatus;
+        }
+        private ResultStatus InsertReports(Report report)
+        {
+            ResultStatus resultStatus = new ResultStatus(0, "Failed to save");
+            //DataTable dt = null;
+            try
+            {
+                string sql = @"INSERT INTO  Report
+                                (ReportName
+                                ,ReportKey
+                                ,IsCustomReport
+                                ,OutputFormat
+                                ,DBQuery
+                                ,ReportGroup
+                                ,IsActive)
+                                VALUES
+                                (@ReportName
+                                ,@ReportKey 
+                                ,@IsCustomReport  
+                                ,@OutputFormat 
+                                ,@DBQuery 
+                                ,@ReportGroup 
+                                ,@IsActive  )SELECT CAST(scope_identity() AS int)";
+                List<SqlParameter> sqParameters = new List<SqlParameter>();
+
+                //sqParameters.Add(new SqlParameter("@Id", report.Id));
+                sqParameters.Add(new SqlParameter("@ReportName", report.ReportName));
+
+                sqParameters.Add(new SqlParameter("@IsCustomReport", Convert.ToBoolean(report.IsCustomReport)));
+                sqParameters.Add(new SqlParameter("@ReportKey", report.ReportKey));
+
+
+
+                if (string.IsNullOrEmpty(report.DBQuery))
+                {
+                    sqParameters.Add(new SqlParameter("@DBQuery", DBNull.Value));
+                }
+                else
+                {
+                    sqParameters.Add(new SqlParameter("@DBQuery", report.DBQuery));
+                }
+                if (string.IsNullOrEmpty(report.ReportGroup))
+                {
+                    sqParameters.Add(new SqlParameter("@ReportGroup", DBNull.Value));
+                }
+                else
+                {
+                    sqParameters.Add(new SqlParameter("@ReportGroup", report.ReportGroup));
+                }
+                if (string.IsNullOrEmpty(report.OutputFormat))
+                {
+                    sqParameters.Add(new SqlParameter("@OutputFormat", DBNull.Value));
+                }
+                else
+                {
+                    sqParameters.Add(new SqlParameter("@OutputFormat", report.OutputFormat));
+                }
+                sqParameters.Add(new SqlParameter("@IsActive", Convert.ToBoolean(report.IsActive)));
+
+                int i = dBConnection.executeInsertScript(sql, sqParameters.ToArray());
+                resultStatus = new ResultStatus(1, "Saved successfully");
+            }
+            catch (Exception ex)
+            {
+            }
+            return resultStatus;
+        }
+
+        private ResultStatus UpdateReports(Report report)
+        {
+            ResultStatus resultStatus = new ResultStatus(0, "Failed to save");
+            DataTable dt = null;
+            try
+            {
+                //-,ReportKey = @ReportKey ,IsCustomReport = @IsCustomReport
+
+                string sql = @"UPDATE  Report
+                                SET ReportName = @ReportName
+                                 
+                                
+                                ,OutputFormat = @OutputFormat  
+                                ,DBQuery = @DBQuery
+                                ,ReportGroup = @ReportGroup
+                                ,IsActive = @IsActive  
+                                WHERE Id=@Id";
+                List<SqlParameter> sqParameters = new List<SqlParameter>();
+                sqParameters.Add(new SqlParameter("@Id", report.Id));
+
+                sqParameters.Add(new SqlParameter("@ReportName", report.ReportName));
+
+                //sqParameters.Add(new SqlParameter("@IsCustomReport", Convert.ToBoolean(report.IsCustomReport)));
+                //sqParameters.Add(new SqlParameter("@ReportKey", report.ReportKey));
+
+
+
+                if (string.IsNullOrEmpty(report.DBQuery))
+                {
+                    sqParameters.Add(new SqlParameter("@DBQuery", DBNull.Value));
+                }
+                else
+                {
+                    sqParameters.Add(new SqlParameter("@DBQuery", report.DBQuery));
+                }
+                if (string.IsNullOrEmpty(report.ReportGroup))
+                {
+                    sqParameters.Add(new SqlParameter("@ReportGroup", DBNull.Value));
+                }
+                else
+                {
+                    sqParameters.Add(new SqlParameter("@ReportGroup", report.ReportGroup));
+                }
+                if (string.IsNullOrEmpty(report.OutputFormat))
+                {
+                    sqParameters.Add(new SqlParameter("@OutputFormat", DBNull.Value));
+                }
+                else
+                {
+                    sqParameters.Add(new SqlParameter("@OutputFormat", report.OutputFormat));
+                }
+                sqParameters.Add(new SqlParameter("@IsActive", Convert.ToBoolean(report.IsActive)));
+
+                int i = dBConnection.executeUpdateScript(sql, sqParameters.ToArray());
+                resultStatus = new ResultStatus(1, "Saved successfully");
+            }
+            catch (Exception ex)
+            {
+            }
+            return resultStatus;
+        }
+        public List<UIMenu> GetReportMenuList(string activemenu)
         {
             DataTable dt = null;
             List<UIMenu> menus = new List<UIMenu>();
             List<SubMenu> submenus = new List<SubMenu>();
             try
             {
-                
-                dt = GetReports();
+
+                dt = GetCustomReports(false);
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     string currentHeader = "";
@@ -58,9 +233,9 @@ namespace Marble.WebReports.Models.Service
                             currentHeader = dataRow["ReportGroup"].ToString();
                             //menus.Add(new Menu(dataRow["ReportGroup"].ToString()));
                             menu = new UIMenu(dataRow["ReportGroup"].ToString());
-                            SubMenu s1 = new SubMenu(dataRow["ReportName"].ToString(), Convert.ToBoolean(dataRow["IsCustomReport"].ToString()), dataRow["ReportKey"].ToString());
+                            SubMenu s1 = new SubMenu(dataRow["ReportGroup"].ToString(), dataRow["ReportName"].ToString(), Convert.ToBoolean(dataRow["IsCustomReport"].ToString()), dataRow["ReportKey"].ToString());
 
-                            if(activemenu== dataRow["ReportKey"].ToString())
+                            if (activemenu == dataRow["ReportKey"].ToString())
                             {
                                 s1.SubClassName = s1.SubClassName + " active";
                                 menu.ClassName = menu.ClassName + " active";
@@ -71,7 +246,7 @@ namespace Marble.WebReports.Models.Service
                         {
                             //submenus.Add(new SubMenu(dataRow["ReportName"].ToString(), Convert.ToBoolean(dataRow["IsCustomReport"].ToString()), dataRow["ReportKey"].ToString()));
 
-                            SubMenu s1 = new SubMenu(dataRow["ReportName"].ToString(), Convert.ToBoolean(dataRow["IsCustomReport"].ToString()), dataRow["ReportKey"].ToString());
+                            SubMenu s1 = new SubMenu(dataRow["ReportGroup"].ToString(), dataRow["ReportName"].ToString(), Convert.ToBoolean(dataRow["IsCustomReport"].ToString()), dataRow["ReportKey"].ToString());
 
                             if (activemenu == dataRow["ReportKey"].ToString())
                             {

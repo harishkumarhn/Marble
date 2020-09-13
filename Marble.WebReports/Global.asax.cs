@@ -17,5 +17,13 @@ namespace Marble.WebReports
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            Exception Ex = Server.GetLastError();
+            Server.ClearError();
+            //Response.Redirect("Error.aspx");
+        }
+
     }
 }

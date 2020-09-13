@@ -28,6 +28,8 @@ namespace Marble.WebReports.ReportPages
                
                 DateTime from = DateTime.Now.AddDays(-10) ;
                 DateTime to = DateTime.Now;
+                txtFromDate.Text = from.ToString("MM/dd/yyyy");
+                txtToDate.Text = to.ToString("MM/dd/yyyy");
                 ReportBinding(from,   to);
             }
             string reportkey = Request.Params["Report"] == null ? "" : Request.Params["Report"].ToString();

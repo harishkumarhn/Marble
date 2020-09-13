@@ -395,6 +395,7 @@
   <ItemGroup>
     <Content Include="Resources\0_pressed.png" />
     <Content Include="Resources\1.png" />
+    <None Include="Resources\MarbleLogo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -130,6 +130,9 @@
   <data name="Login_Button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Login_Button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="MarbleLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MarbleLogo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Password_16_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Password_16_25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

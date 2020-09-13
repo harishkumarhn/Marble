@@ -20,3 +20,7 @@
 /Marbale.BusinessObject/bin/Debug
 /.vs/Marbale/v15
 /Marble.WebReports/bin
+/Marbale.Inventory/bin
+/Marbale.KeyGen/bin
+/Marble.PrimaryServer/bin
+/SiteConfiguaration/bin

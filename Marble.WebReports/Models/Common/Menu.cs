@@ -44,7 +44,7 @@ namespace Marble.WebReports.Models
 
     public class SubMenu
     {
-        public SubMenu(string submenuName, bool isCustomReport, string reportKey)
+        public SubMenu(string mainmenuName, string submenuName, bool isCustomReport, string reportKey)
         {
             this.submenuName = submenuName;
             this.isCustomReport = isCustomReport;
@@ -53,11 +53,11 @@ namespace Marble.WebReports.Models
 
             if (isCustomReport)
             {
-                href = "/" + "CustomReport?Report=" + reportKey;
+                href = "/" + "CustomReport?mn="+ mainmenuName + "&Report=" + reportKey;
             }
             else
             {
-                href = "/" + reportKey;
+                href = "/" + reportKey+"?mn=" + mainmenuName + "&Report=" + reportKey;
             }
 
         }

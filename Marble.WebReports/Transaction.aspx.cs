@@ -19,6 +19,10 @@ namespace Marble.WebReports
         {
             if (!IsPostBack)
             {
+                DateTime from = DateTime.Now.AddDays(-10);
+                DateTime to = DateTime.Now;
+                txtFromDate.Text = from.ToString("MM/dd/yyyy");
+                txtDate.Text = to.ToString("MM/dd/yyyy");
                 loadData();
             }
         }

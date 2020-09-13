@@ -18,8 +18,12 @@ namespace Marble.WebReports
         {
             //LoadControl();
             string reportkey = Request.Params["Report"] == null ? "" : Request.Params["Report"].ToString();
+            string mainMenu = Request.Params["mn"] == null ? "" : Request.Params["mn"].ToString();
 
             HttpContext.Current.Session["ReportKey"] = "reportkey";
+            HttpContext.Current.Session["mainMenu"] = mainMenu;
+            //HttpContext.Current.Session["ReportKey"] = "reportkey";
+
             List<UIMenu> menus = commonService.GetReportMenuList(reportkey);
             rptmenu.DataSource = menus;
             rptmenu.DataBind();
@@ -30,7 +34,7 @@ namespace Marble.WebReports
         public void LoadControl()
         {
 
-            DataTable reportDt = commonService.GetReports();
+            DataTable reportDt = commonService.GetCustomReports(false);
 
             if(reportDt !=null &&  reportDt.Rows.Count>0)
             {

@@ -18,5 +18,5 @@
    <%-- <asp:Button  ID="btnExport" ClientIDMode="Static" runat="server"   OnClick="btnExport_Click" Text="Export"/>--%>
    
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <rsweb:ReportViewer ID="ReportViewer1" runat="server" AsyncRendering="false" OnDrillthrough="ReportViewer1_Drillthrough" Width="100%" ShowFindControls="false"></rsweb:ReportViewer>
+        <rsweb:ReportViewer ID="ReportViewer1" runat="server" AsyncRendering="false" OnDrillthrough="ReportViewer1_Drillthrough" Width="100%" Height="550" ShowFindControls="false"></rsweb:ReportViewer>
 </asp:Content>

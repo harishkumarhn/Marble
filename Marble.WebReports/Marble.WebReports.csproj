@@ -106,8 +106,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\..\Marble\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\Marble\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -142,16 +141,212 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Ajax\WebApp.aspx" />
+    <Content Include="Content\alertifyjs\alertify.js" />
+    <Content Include="Content\alertifyjs\alertify.min.js" />
+    <Content Include="Content\alertifyjs\css\alertify.css" />
+    <Content Include="Content\alertifyjs\css\alertify.min.css" />
+    <Content Include="Content\alertifyjs\css\alertify.rtl.css" />
+    <Content Include="Content\alertifyjs\css\alertify.rtl.min.css" />
+    <Content Include="Content\alertifyjs\css\themes\bootstrap.css" />
+    <Content Include="Content\alertifyjs\css\themes\bootstrap.min.css" />
+    <Content Include="Content\alertifyjs\css\themes\bootstrap.rtl.css" />
+    <Content Include="Content\alertifyjs\css\themes\bootstrap.rtl.min.css" />
+    <Content Include="Content\alertifyjs\css\themes\default.css" />
+    <Content Include="Content\alertifyjs\css\themes\default.min.css" />
+    <Content Include="Content\alertifyjs\css\themes\default.rtl.css" />
+    <Content Include="Content\alertifyjs\css\themes\default.rtl.min.css" />
+    <Content Include="Content\alertifyjs\css\themes\semantic.css" />
+    <Content Include="Content\alertifyjs\css\themes\semantic.min.css" />
+    <Content Include="Content\alertifyjs\css\themes\semantic.rtl.css" />
+    <Content Include="Content\alertifyjs\css\themes\semantic.rtl.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\style.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\DataTables\.gitignore" />
+    <Content Include="Content\DataTables\examples\advanced_init\column_render.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\complex_header.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\defaults.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\dom_multiple_elements.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\dom_toolbar.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\dt_events.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\events_live.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\footer_callback.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\html5-data-attributes.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\html5-data-options.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\index.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\language_file.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\length_menu.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\object_dom_read.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\row_callback.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\row_grouping.html" />
+    <Content Include="Content\DataTables\examples\advanced_init\sort_direction_control.html" />
+    <Content Include="Content\DataTables\examples\ajax\custom_data_flat.html" />
+    <Content Include="Content\DataTables\examples\ajax\custom_data_property.html" />
+    <Content Include="Content\DataTables\examples\ajax\data\arrays.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\arrays_custom_prop.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\arrays_subobjects.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\data_10k.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\data_1k.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\data_50k.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\data_5k.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\objects.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\objects_deep.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\objects_root_array.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\objects_salary.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\objects_subarrays.txt" />
+    <Content Include="Content\DataTables\examples\ajax\data\orthogonal.txt" />
+    <Content Include="Content\DataTables\examples\ajax\deep.html" />
+    <Content Include="Content\DataTables\examples\ajax\defer_render.html" />
+    <Content Include="Content\DataTables\examples\ajax\index.html" />
+    <Content Include="Content\DataTables\examples\ajax\null_data_source.html" />
+    <Content Include="Content\DataTables\examples\ajax\objects.html" />
+    <Content Include="Content\DataTables\examples\ajax\objects_subarrays.html" />
+    <Content Include="Content\DataTables\examples\ajax\orthogonal-data.html" />
+    <Content Include="Content\DataTables\examples\ajax\simple.html" />
+    <Content Include="Content\DataTables\examples\api\add_row.html" />
+    <Content Include="Content\DataTables\examples\api\api_in_init.html" />
+    <Content Include="Content\DataTables\examples\api\counter_columns.html" />
+    <Content Include="Content\DataTables\examples\api\form.html" />
+    <Content Include="Content\DataTables\examples\api\highlight.html" />
+    <Content Include="Content\DataTables\examples\api\index.html" />
+    <Content Include="Content\DataTables\examples\api\multi_filter.html" />
+    <Content Include="Content\DataTables\examples\api\multi_filter_select.html" />
+    <Content Include="Content\DataTables\examples\api\regex.html" />
+    <Content Include="Content\DataTables\examples\api\row_details.html" />
+    <Content Include="Content\DataTables\examples\api\select_row.html" />
+    <Content Include="Content\DataTables\examples\api\select_single_row.html" />
+    <Content Include="Content\DataTables\examples\api\show_hide.html" />
+    <Content Include="Content\DataTables\examples\api\tabs_and_scrolling.html" />
+    <Content Include="Content\DataTables\examples\basic_init\alt_pagination.html" />
+    <Content Include="Content\DataTables\examples\basic_init\comma-decimal.html" />
+    <Content Include="Content\DataTables\examples\basic_init\complex_header.html" />
+    <Content Include="Content\DataTables\examples\basic_init\data_rendering.html" />
+    <Content Include="Content\DataTables\examples\basic_init\dom.html" />
+    <Content Include="Content\DataTables\examples\basic_init\filter_only.html" />
+    <Content Include="Content\DataTables\examples\basic_init\flexible_width.html" />
+    <Content Include="Content\DataTables\examples\basic_init\hidden_columns.html" />
+    <Content Include="Content\DataTables\examples\basic_init\index.html" />
+    <Content Include="Content\DataTables\examples\basic_init\language.html" />
+    <Content Include="Content\DataTables\examples\basic_init\multiple_tables.html" />
+    <Content Include="Content\DataTables\examples\basic_init\multi_col_sort.html" />
+    <Content Include="Content\DataTables\examples\basic_init\scroll_x.html" />
+    <Content Include="Content\DataTables\examples\basic_init\scroll_xy.html" />
+    <Content Include="Content\DataTables\examples\basic_init\scroll_y.html" />
+    <Content Include="Content\DataTables\examples\basic_init\scroll_y_dynamic.html" />
+    <Content Include="Content\DataTables\examples\basic_init\state_save.html" />
+    <Content Include="Content\DataTables\examples\basic_init\table_sorting.html" />
+    <Content Include="Content\DataTables\examples\basic_init\zero_configuration.html" />
+    <Content Include="Content\DataTables\examples\data_sources\ajax.html" />
+    <Content Include="Content\DataTables\examples\data_sources\dom.html" />
+    <Content Include="Content\DataTables\examples\data_sources\index.html" />
+    <Content Include="Content\DataTables\examples\data_sources\js_array.html" />
+    <Content Include="Content\DataTables\examples\data_sources\server_side.html" />
+    <Content Include="Content\DataTables\examples\index.html" />
+    <Content Include="Content\DataTables\examples\plug-ins\api.html" />
+    <Content Include="Content\DataTables\examples\plug-ins\dom_sort.html" />
+    <Content Include="Content\DataTables\examples\plug-ins\index.html" />
+    <Content Include="Content\DataTables\examples\plug-ins\range_filtering.html" />
+    <Content Include="Content\DataTables\examples\plug-ins\sorting_auto.html" />
+    <Content Include="Content\DataTables\examples\plug-ins\sorting_manual.html" />
+    <Content Include="Content\DataTables\examples\resources\demo.css" />
+    <Content Include="Content\DataTables\examples\resources\demo.js" />
+    <Content Include="Content\DataTables\examples\resources\details_close.png" />
+    <Content Include="Content\DataTables\examples\resources\details_open.png" />
+    <Content Include="Content\DataTables\examples\resources\examples.php" />
+    <Content Include="Content\DataTables\examples\resources\syntax\shCore.css" />
+    <Content Include="Content\DataTables\examples\resources\syntax\shCore.js" />
+    <Content Include="Content\DataTables\examples\server_side\custom_vars.html" />
+    <Content Include="Content\DataTables\examples\server_side\defer_loading.html" />
+    <Content Include="Content\DataTables\examples\server_side\ids.html" />
+    <Content Include="Content\DataTables\examples\server_side\index.html" />
+    <Content Include="Content\DataTables\examples\server_side\jsonp.html" />
+    <Content Include="Content\DataTables\examples\server_side\object_data.html" />
+    <Content Include="Content\DataTables\examples\server_side\pipeline.html" />
+    <Content Include="Content\DataTables\examples\server_side\post.html" />
+    <Content Include="Content\DataTables\examples\server_side\row_details.html" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\firebird.sql" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\ids-arrays.php" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\ids-objects.php" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\jsonp.php" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\mysql.sql" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\objects.php" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\oracle.sql" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\post.php" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\postgres.sql" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\server_processing.php" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\sqlite.sql" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\sqlserver.sql" />
+    <Content Include="Content\DataTables\examples\server_side\scripts\ssp.class.php" />
+    <Content Include="Content\DataTables\examples\server_side\select_rows.html" />
+    <Content Include="Content\DataTables\examples\server_side\simple.html" />
+    <Content Include="Content\DataTables\examples\styling\bootstrap.html" />
+    <Content Include="Content\DataTables\examples\styling\bootstrap4.html" />
+    <Content Include="Content\DataTables\examples\styling\cell-border.html" />
+    <Content Include="Content\DataTables\examples\styling\compact.html" />
+    <Content Include="Content\DataTables\examples\styling\display.html" />
+    <Content Include="Content\DataTables\examples\styling\foundation.html" />
+    <Content Include="Content\DataTables\examples\styling\hover.html" />
+    <Content Include="Content\DataTables\examples\styling\index.html" />
+    <Content Include="Content\DataTables\examples\styling\jqueryUI.html" />
+    <Content Include="Content\DataTables\examples\styling\material.html" />
+    <Content Include="Content\DataTables\examples\styling\no-classes.html" />
+    <Content Include="Content\DataTables\examples\styling\order-column.html" />
+    <Content Include="Content\DataTables\examples\styling\row-border.html" />
+    <Content Include="Content\DataTables\examples\styling\semanticui.html" />
+    <Content Include="Content\DataTables\examples\styling\stripe.html" />
+    <Content Include="Content\DataTables\examples\styling\uikit.html" />
+    <Content Include="Content\DataTables\license.txt" />
+    <Content Include="Content\DataTables\media\css\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.foundation.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.material.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.semanticui.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.uikit.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTables\media\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\media\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\media\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\DataTables\media\images\favicon.ico" />
+    <Content Include="Content\DataTables\media\images\sort_asc.png" />
+    <Content Include="Content\DataTables\media\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\media\images\sort_both.png" />
+    <Content Include="Content\DataTables\media\images\sort_desc.png" />
+    <Content Include="Content\DataTables\media\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\media\js\dataTables.bootstrap.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.bootstrap4.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.dataTables.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.dataTables.min.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.foundation.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.foundation.min.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.jqueryui.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.jqueryui.min.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.material.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.material.min.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.semanticui.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.semanticui.min.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.uikit.js" />
+    <Content Include="Content\DataTables\media\js\dataTables.uikit.min.js" />
+    <Content Include="Content\DataTables\media\js\jquery.dataTables.js" />
+    <Content Include="Content\DataTables\media\js\jquery.dataTables.min.js" />
+    <Content Include="Content\DataTables\media\js\jquery.js" />
+    <Content Include="CustomReportAdd.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Login.aspx" />
     <Content Include="MarbaleDataSet.xsc">
       <DependentUpon>MarbaleDataSet.xsd</DependentUpon>
     </Content>
@@ -160,16 +355,36 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\DataTables\.datatables-commit-sync" />
+    <Content Include="Content\DataTables\bower.json" />
+    <Content Include="Content\DataTables\composer.json" />
+    <Content Include="Content\DataTables\Contributing.md" />
+    <Content Include="Content\DataTables\dataTables.jquery.json" />
+    <Content Include="Content\DataTables\examples\resources\syntax\Syntax Highlighter license" />
+    <Content Include="Content\DataTables\ISSUE_TEMPLATE.md" />
+    <Content Include="Content\DataTables\media\images\Sorting icons.psd" />
+    <Content Include="Content\DataTables\package.json" />
+    <Content Include="Content\DataTables\Readme.md" />
     <None Include="MarbaleDataSet.xsd" />
     <Content Include="MarbaleDataSet.xss">
       <DependentUpon>MarbaleDataSet.xsd</DependentUpon>
     </Content>
     <Content Include="CustomReport.aspx" />
     <Content Include="NewCustomReport.aspx" />
+    <Content Include="Scripts\JS\bootstrap.js" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Transaction.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -206,19 +421,6 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -226,6 +428,13 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ajax\WebApp.aspx.cs">
+      <DependentUpon>WebApp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\WebApp.aspx.designer.cs">
+      <DependentUpon>WebApp.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrap.Master.cs">
@@ -234,6 +443,13 @@
     </Compile>
     <Compile Include="Bootstrap.Master.designer.cs">
       <DependentUpon>Bootstrap.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CustomReportAdd.aspx.cs">
+      <DependentUpon>CustomReportAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomReportAdd.aspx.designer.cs">
+      <DependentUpon>CustomReportAdd.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -245,10 +461,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MarbaleDataSet.Designer.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Common\Extention.cs" />
     <Compile Include="Models\Common\Menu.cs" />
+    <Compile Include="Models\Data\Report.cs" />
+    <Compile Include="Models\Data\ResultStatus.cs" />
     <Compile Include="Models\ReportBuilder\ReportBuilder.cs" />
     <Compile Include="Models\ReportBuilder\ReportBuilderEngine.cs" />
     <Compile Include="Models\ReportMenuViewModel.cs" />
@@ -272,6 +497,7 @@
     <Compile Include="CustomReport.aspx.designer.cs">
       <DependentUpon>CustomReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Transaction.aspx.cs">
       <DependentUpon>Transaction.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -293,7 +519,6 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -304,6 +529,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Login\" />
     <Folder Include="ReportPages\" />
   </ItemGroup>
   <ItemGroup>
