@@ -1,5 +1,4 @@
 ﻿using Marbale.BusinessObject.Inventory;
-using Marbale.BusinessObject.SiteSetup;
 using Marble.Business;
 using Marble.Business.InventoryBL;
 using System;
@@ -139,7 +138,7 @@ namespace Marbale.Inventory.Master
                     vendor.Website = txtWebsite.Text;
 
                     VendorBL vendorBL = new VendorBL();
-                    int vendorId = vendorBL.Save(vendor, LogedInUser.LoginId);
+                    int vendorId = vendorBL.Save(vendor, "rakshith");
                     vendor.VendorId = vendorId;
                     MessageBox.Show("Saved successfully");
                     // ResetFields();
@@ -261,7 +260,7 @@ namespace Marbale.Inventory.Master
                         {
                             Vendor vendor = lstVendor.FirstOrDefault();
                             vendor.IsActive = false;
-                            vendorBl.Save(vendor, LogedInUser.LoginId);
+                            vendorBl.Save(vendor, "rakshith");
                             MessageBox.Show("Delete successfully");
                             PopulateVendorGrid();
                         }

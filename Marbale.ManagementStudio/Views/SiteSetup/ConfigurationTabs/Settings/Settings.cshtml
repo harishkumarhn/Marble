@@ -78,12 +78,13 @@
 
     <button class="btn btn-primary btn-md" role="button" onclick="SaveSettings()">Save</button>
     <button class="btn btn-primary btn-md" role="button" onclick="location.href='/'">Close</button>
-
+    <button class="btn btn-primary btn-md" role="button" onclick="AddSettings()">Add</button>
 </div>
 
 <script>
+    var table;
     $(document).ready(function () {
-        var table = $('#marbleTable').DataTable({
+        table = $('#marbleTable').DataTable({
             scrollY: "400px",
             scrollX: true,
             scrollCollapse: true,
@@ -113,7 +114,7 @@
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
     });
     function SaveSettings() {
-        
+
         $('#loading').show();
         var items = [];
         var table = document.getElementById('marbleTable');
@@ -158,10 +159,32 @@
     }
     var updatedArray = [];
     function UpdatedList(index) {
-        
+
         if (!updatedArray.includes(index)) {
             updatedArray.push(index);
         }
+    }
+
+    function AddSettings() {
+        var typeListOptions = '';
+        @foreach (var dow in ViewBag.GetSetting[0].BasicDataTypes)
+            {
+                @:typeListOptions = typeListOptions + '<option value="@dow.Value">@dow.Value</option>';
+            }
+        table.row.add([
+            '<lable class="fixedCol1"></lable>',
+            '<input class="fixedCol2" type="text" value=""/>',
+            '<input type="text" value="" />',
+            '<select name="TypeList" id="TypeList" >' + typeListOptions + '</select>',
+            '<input type="text" value="" />',
+            '<input type="text" value="" />',
+            '<input type="text" value="" />',
+            '<input type="checkbox" value="" />',
+            '<input type="checkbox"value="" />',
+            '<input type="checkbox" value="" />',
+            '<input type="text" value="" />',
+            '<input type="text" value="" />',
+        ]).draw(false);
     }
 
 </script>

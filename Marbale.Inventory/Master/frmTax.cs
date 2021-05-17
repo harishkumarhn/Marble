@@ -1,5 +1,4 @@
 ﻿using Marbale.BusinessObject.Inventory;
-using Marbale.BusinessObject.SiteSetup;
 using Marbale.DataAccess;
 using Marble.Business;
 using Marble.Business.InventoryBL;
@@ -76,7 +75,7 @@ namespace Marbale.Inventory.Master
 
                             }
 
-                            taxBL.Save(tax, LogedInUser.LoginId);
+                            taxBL.Save(tax, "rakshith");
                         }
                         //else
                         //{
@@ -145,7 +144,7 @@ namespace Marbale.Inventory.Master
                                 PurchaseTax objitem = datalist[row.Index];
                                 objitem.IsActive = false;
                                 PurchaseTaxBL blObj = new PurchaseTaxBL();
-                                blObj.Save(objitem, LogedInUser.LoginId);
+                                blObj.Save(objitem, "rakshith");
                             }
                         }
                     }

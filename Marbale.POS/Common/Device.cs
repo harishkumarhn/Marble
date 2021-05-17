@@ -49,7 +49,7 @@ namespace Marbale.POS.Common
                 Common.Devices.PrimaryCardReader.UnRegister();
         }
 
-        public static void DisposeAllDevices()
+        public static void ClearConnectedAllDevices()
         {
             foreach (DeviceClass device in POSDevices)
                 device.Dispose();

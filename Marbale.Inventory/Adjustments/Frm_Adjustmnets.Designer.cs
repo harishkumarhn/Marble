@@ -670,7 +670,7 @@
             // barCode1DataGridViewTextBoxColumn
             // 
             this.barCode1DataGridViewTextBoxColumn.DataPropertyName = "BarCode1";
-            this.barCode1DataGridViewTextBoxColumn.HeaderText = "Bar Code";
+            this.barCode1DataGridViewTextBoxColumn.HeaderText = "BarCode1";
             this.barCode1DataGridViewTextBoxColumn.Name = "barCode1DataGridViewTextBoxColumn";
             // 
             // btn_BarcodeD
@@ -688,13 +688,13 @@
             // 
             // txt_TQuantity
             // 
-            this.txt_TQuantity.HeaderText = "Transfer Quantity";
+            this.txt_TQuantity.HeaderText = "TransferQuantity";
             this.txt_TQuantity.Name = "txt_TQuantity";
             // 
             // Def
             // 
             this.Def.DataPropertyName = "DefaultLocationId";
-            this.Def.HeaderText = "Default Location";
+            this.Def.HeaderText = "DefaultLocationId";
             this.Def.Name = "Def";
             this.Def.ReadOnly = true;
             this.Def.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -704,7 +704,7 @@
             // availQuantityDataGridViewTextBoxColumn
             // 
             this.availQuantityDataGridViewTextBoxColumn.DataPropertyName = "Avail_Quantity";
-            this.availQuantityDataGridViewTextBoxColumn.HeaderText = "Available Quantity";
+            this.availQuantityDataGridViewTextBoxColumn.HeaderText = "Avail_Quantity";
             this.availQuantityDataGridViewTextBoxColumn.Name = "availQuantityDataGridViewTextBoxColumn";
             this.availQuantityDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -719,7 +719,7 @@
             // categoryIdDataGridViewTextBoxColumn
             // 
             this.categoryIdDataGridViewTextBoxColumn.DataPropertyName = "CategoryId";
-            this.categoryIdDataGridViewTextBoxColumn.HeaderText = "Category";
+            this.categoryIdDataGridViewTextBoxColumn.HeaderText = "CategoryId";
             this.categoryIdDataGridViewTextBoxColumn.Name = "categoryIdDataGridViewTextBoxColumn";
             this.categoryIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.categoryIdDataGridViewTextBoxColumn.Visible = false;
@@ -734,21 +734,21 @@
             // reorderPointDataGridViewTextBoxColumn
             // 
             this.reorderPointDataGridViewTextBoxColumn.DataPropertyName = "ReorderPoint";
-            this.reorderPointDataGridViewTextBoxColumn.HeaderText = "Reorder Point";
+            this.reorderPointDataGridViewTextBoxColumn.HeaderText = "ReorderPoint";
             this.reorderPointDataGridViewTextBoxColumn.Name = "reorderPointDataGridViewTextBoxColumn";
             this.reorderPointDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // reorderQuantityDataGridViewTextBoxColumn
             // 
             this.reorderQuantityDataGridViewTextBoxColumn.DataPropertyName = "ReorderQuantity";
-            this.reorderQuantityDataGridViewTextBoxColumn.HeaderText = "Reorder Quantity";
+            this.reorderQuantityDataGridViewTextBoxColumn.HeaderText = "ReorderQuantity";
             this.reorderQuantityDataGridViewTextBoxColumn.Name = "reorderQuantityDataGridViewTextBoxColumn";
             this.reorderQuantityDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // uomIdDataGridViewTextBoxColumn
             // 
             this.uomIdDataGridViewTextBoxColumn.DataPropertyName = "UomId";
-            this.uomIdDataGridViewTextBoxColumn.HeaderText = "Uom";
+            this.uomIdDataGridViewTextBoxColumn.HeaderText = "UomId";
             this.uomIdDataGridViewTextBoxColumn.Name = "uomIdDataGridViewTextBoxColumn";
             this.uomIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.uomIdDataGridViewTextBoxColumn.Visible = false;
@@ -780,7 +780,7 @@
             // storeLocationIdDgvColumn
             // 
             this.storeLocationIdDgvColumn.DataPropertyName = "StoreLocationId";
-            this.storeLocationIdDgvColumn.HeaderText = "Store Location";
+            this.storeLocationIdDgvColumn.HeaderText = "StoreLocationId";
             this.storeLocationIdDgvColumn.Name = "storeLocationIdDgvColumn";
             this.storeLocationIdDgvColumn.ReadOnly = true;
             this.storeLocationIdDgvColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;

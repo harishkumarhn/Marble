@@ -21,7 +21,7 @@
         <th>Active</th>
         <th>DisplayInPOS</th>
         <th>DisplayGroup</th>
-        <th>AutoGenerateCardNumber</th>
+        <th>Auto Generate Card Number</th>
         <th>OnlyVIP</th>
         <th>Price</th>
         <th>FaceValue</th>
@@ -112,22 +112,22 @@
                     </select>
                 </td>
                 <td>
-                    <input type="checkbox"  @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber"/>
+                    <input type="checkbox"  @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber" style="width: 2vw;margin-right: 77px;"/>
                 </td>
                 <td>
                     <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
                 </td>
                 <td>
-                    <input type="text" value="@item.Price" id="Price@(count)" />
+                    <input type="text" value="@item.Price" id="Price@(count)" style="width:7vw"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.FaceValue" id="FaceValue@(count)" />
+                    <input type="text" value="@item.FaceValue" id="FaceValue@(count)" style="width:7vw"/>
                 </td>
                 <td>
                     <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)"  />
                 </td>
                 <td>
-                    <input type="text" value="@item.TaxPercentage" id="TaxPercentage@(count)"/>
+                    <input type="text" value="@item.TaxPercentage" id="TaxPercentage@(count)" style="width:7vw"/>
                 </td>
                 <td>
                     <select name="taxlist" id="taxlist">
@@ -145,10 +145,10 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="FinalPrice@(count)"  value="@item.FinalPrice" />
+                    <input type="text" id="FinalPrice@(count)"  value="@item.FinalPrice" style="width:7vw"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.EffectivePrice" id="EffectivePrice@(count)" />
+                    <input type="text" value="@item.EffectivePrice" id="EffectivePrice@(count)" style="width:7vw"/>
                 </td>
                 <td>
                     <input type="text" value="@item.LastUpdatedBy" disabled/>
@@ -286,15 +286,15 @@
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
                 '<select name="displayGroupList" id="displayGroupList">' + displayGroupListOptions,
+                '<input type="checkbox" style="width: 2vw;margin-right: 77px;"/>',
                 '<input type="checkbox" />',
+                '<input type="text" value="" style="width:7vw"/>',
+                '<input type="text" value="" style="width:7vw"/>',
                 '<input type="checkbox" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="checkbox" />',
-                '<input type="text" value="" />',
+                '<input type="text" value="" style="width:7vw"/>',
                 '<select name="taxlist" id="taxlist">' + taxListOptions,
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
+                '<input type="text" value="" style="width:7vw"/>',
+                '<input type="text" value="" style="width:7vw"/>',
                 '<input type="text" value="" disabled/>',
                 '<input type="text" value="" disabled/>',
             ]).draw(false);
@@ -305,6 +305,7 @@
             for (var i = 0, j = fixedcolumn3values.length; i < j; i++) {
                 $('.DTFC_Cloned input.fixedCol3')[i].value = fixedcolumn3values[i].value;
             }
+            $(".dataTables_scrollBody").animate({ scrollTop: $(".dataTables_scrollBody").height() }, 1000);
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
     });

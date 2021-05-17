@@ -41,22 +41,6 @@
             this.inventoryReceiptBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgv_RecieptDetails = new System.Windows.Forms.DataGridView();
-            this.purchaseOrderReceiveLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.InventoryReceiptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vendorNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vendorBillNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gatePassNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gRNDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.purchaseOrderIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.remarksDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receiveDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receivedByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.createdByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastUpdatedByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.purchaseOrderReceiveLineIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.purchaseOrderIdDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,6 +64,22 @@
             this.createdDateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedDateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isChangedDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.purchaseOrderReceiveLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.InventoryReceiptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vendorNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vendorBillNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gatePassNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gRNDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchaseOrderIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.remarksDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receiveDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receivedByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.createdByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastUpdatedByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Reciepts)).BeginInit();
@@ -250,125 +250,10 @@
             this.dgv_RecieptDetails.TabIndex = 1;
             this.dgv_RecieptDetails.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_RecieptDetails_DataError);
             // 
-            // purchaseOrderReceiveLineBindingSource
-            // 
-            this.purchaseOrderReceiveLineBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.PurchaseOrderReceiveLine);
-            // 
-            // InventoryReceiptID
-            // 
-            this.InventoryReceiptID.DataPropertyName = "InventoryReceiptID";
-            this.InventoryReceiptID.HeaderText = "Inventory Receipt ID";
-            this.InventoryReceiptID.Name = "InventoryReceiptID";
-            this.InventoryReceiptID.ReadOnly = true;
-            // 
-            // vendorNameDataGridViewTextBoxColumn
-            // 
-            this.vendorNameDataGridViewTextBoxColumn.DataPropertyName = "VendorName";
-            this.vendorNameDataGridViewTextBoxColumn.HeaderText = "Vendor Name";
-            this.vendorNameDataGridViewTextBoxColumn.Name = "vendorNameDataGridViewTextBoxColumn";
-            this.vendorNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // vendorBillNumberDataGridViewTextBoxColumn
-            // 
-            this.vendorBillNumberDataGridViewTextBoxColumn.DataPropertyName = "VendorBillNumber";
-            this.vendorBillNumberDataGridViewTextBoxColumn.HeaderText = "Vendor BillNumber";
-            this.vendorBillNumberDataGridViewTextBoxColumn.Name = "vendorBillNumberDataGridViewTextBoxColumn";
-            this.vendorBillNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // gatePassNumberDataGridViewTextBoxColumn
-            // 
-            this.gatePassNumberDataGridViewTextBoxColumn.DataPropertyName = "GatePassNumber";
-            this.gatePassNumberDataGridViewTextBoxColumn.HeaderText = "GatePass Number";
-            this.gatePassNumberDataGridViewTextBoxColumn.Name = "gatePassNumberDataGridViewTextBoxColumn";
-            this.gatePassNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // gRNDataGridViewTextBoxColumn
-            // 
-            this.gRNDataGridViewTextBoxColumn.DataPropertyName = "GRN";
-            this.gRNDataGridViewTextBoxColumn.HeaderText = "GRN";
-            this.gRNDataGridViewTextBoxColumn.Name = "gRNDataGridViewTextBoxColumn";
-            this.gRNDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // purchaseOrderIdDataGridViewTextBoxColumn
-            // 
-            this.purchaseOrderIdDataGridViewTextBoxColumn.DataPropertyName = "PurchaseOrderId";
-            this.purchaseOrderIdDataGridViewTextBoxColumn.HeaderText = "Purchase Order Id";
-            this.purchaseOrderIdDataGridViewTextBoxColumn.Name = "purchaseOrderIdDataGridViewTextBoxColumn";
-            this.purchaseOrderIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.purchaseOrderIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // remarksDataGridViewTextBoxColumn
-            // 
-            this.remarksDataGridViewTextBoxColumn.DataPropertyName = "Remarks";
-            this.remarksDataGridViewTextBoxColumn.HeaderText = "Remarks";
-            this.remarksDataGridViewTextBoxColumn.Name = "remarksDataGridViewTextBoxColumn";
-            this.remarksDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // receiveDateDataGridViewTextBoxColumn
-            // 
-            this.receiveDateDataGridViewTextBoxColumn.DataPropertyName = "ReceiveDate";
-            this.receiveDateDataGridViewTextBoxColumn.HeaderText = "Receive Date";
-            this.receiveDateDataGridViewTextBoxColumn.Name = "receiveDateDataGridViewTextBoxColumn";
-            this.receiveDateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // receivedByDataGridViewTextBoxColumn
-            // 
-            this.receivedByDataGridViewTextBoxColumn.DataPropertyName = "ReceivedBy";
-            this.receivedByDataGridViewTextBoxColumn.HeaderText = "Received By";
-            this.receivedByDataGridViewTextBoxColumn.Name = "receivedByDataGridViewTextBoxColumn";
-            this.receivedByDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // isActiveDataGridViewCheckBoxColumn
-            // 
-            this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
-            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "Active";
-            this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
-            this.isActiveDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isActiveDataGridViewCheckBoxColumn.Visible = false;
-            // 
-            // createdByDataGridViewTextBoxColumn
-            // 
-            this.createdByDataGridViewTextBoxColumn.DataPropertyName = "CreatedBy";
-            this.createdByDataGridViewTextBoxColumn.HeaderText = "Created By";
-            this.createdByDataGridViewTextBoxColumn.Name = "createdByDataGridViewTextBoxColumn";
-            this.createdByDataGridViewTextBoxColumn.ReadOnly = true;
-            this.createdByDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // lastUpdatedByDataGridViewTextBoxColumn
-            // 
-            this.lastUpdatedByDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedBy";
-            this.lastUpdatedByDataGridViewTextBoxColumn.HeaderText = "Last Updated By";
-            this.lastUpdatedByDataGridViewTextBoxColumn.Name = "lastUpdatedByDataGridViewTextBoxColumn";
-            this.lastUpdatedByDataGridViewTextBoxColumn.ReadOnly = true;
-            this.lastUpdatedByDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // createdDateDataGridViewTextBoxColumn
-            // 
-            this.createdDateDataGridViewTextBoxColumn.DataPropertyName = "CreatedDate";
-            this.createdDateDataGridViewTextBoxColumn.HeaderText = "Created Date";
-            this.createdDateDataGridViewTextBoxColumn.Name = "createdDateDataGridViewTextBoxColumn";
-            this.createdDateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // lastUpdatedDateDataGridViewTextBoxColumn
-            // 
-            this.lastUpdatedDateDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedDate";
-            this.lastUpdatedDateDataGridViewTextBoxColumn.HeaderText = "Last Updated Date";
-            this.lastUpdatedDateDataGridViewTextBoxColumn.Name = "lastUpdatedDateDataGridViewTextBoxColumn";
-            this.lastUpdatedDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.lastUpdatedDateDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // isChangedDataGridViewCheckBoxColumn
-            // 
-            this.isChangedDataGridViewCheckBoxColumn.DataPropertyName = "IsChanged";
-            this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
-            this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
-            this.isChangedDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isChangedDataGridViewCheckBoxColumn.Visible = false;
-            // 
             // purchaseOrderReceiveLineIdDataGridViewTextBoxColumn
             // 
             this.purchaseOrderReceiveLineIdDataGridViewTextBoxColumn.DataPropertyName = "PurchaseOrderReceiveLineId";
-            this.purchaseOrderReceiveLineIdDataGridViewTextBoxColumn.HeaderText = "Purchase Order Receive Line Id";
+            this.purchaseOrderReceiveLineIdDataGridViewTextBoxColumn.HeaderText = "PurchaseOrderReceiveLineId";
             this.purchaseOrderReceiveLineIdDataGridViewTextBoxColumn.Name = "purchaseOrderReceiveLineIdDataGridViewTextBoxColumn";
             this.purchaseOrderReceiveLineIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.purchaseOrderReceiveLineIdDataGridViewTextBoxColumn.Visible = false;
@@ -399,7 +284,7 @@
             // vendorItemCodeDataGridViewTextBoxColumn
             // 
             this.vendorItemCodeDataGridViewTextBoxColumn.DataPropertyName = "VendorItemCode";
-            this.vendorItemCodeDataGridViewTextBoxColumn.HeaderText = "Vendor Item Code";
+            this.vendorItemCodeDataGridViewTextBoxColumn.HeaderText = "VendorItemCode";
             this.vendorItemCodeDataGridViewTextBoxColumn.Name = "vendorItemCodeDataGridViewTextBoxColumn";
             this.vendorItemCodeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -413,7 +298,7 @@
             // locationIdDataGridViewTextBoxColumn
             // 
             this.locationIdDataGridViewTextBoxColumn.DataPropertyName = "LocationId";
-            this.locationIdDataGridViewTextBoxColumn.HeaderText = "Location ";
+            this.locationIdDataGridViewTextBoxColumn.HeaderText = "LocationId";
             this.locationIdDataGridViewTextBoxColumn.Name = "locationIdDataGridViewTextBoxColumn";
             this.locationIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.locationIdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -444,7 +329,7 @@
             // taxPercentageDataGridViewTextBoxColumn
             // 
             this.taxPercentageDataGridViewTextBoxColumn.DataPropertyName = "TaxPercentage";
-            this.taxPercentageDataGridViewTextBoxColumn.HeaderText = "Tax Percentage";
+            this.taxPercentageDataGridViewTextBoxColumn.HeaderText = "TaxPercentage";
             this.taxPercentageDataGridViewTextBoxColumn.Name = "taxPercentageDataGridViewTextBoxColumn";
             this.taxPercentageDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -458,14 +343,14 @@
             // taxInclusiveDataGridViewCheckBoxColumn
             // 
             this.taxInclusiveDataGridViewCheckBoxColumn.DataPropertyName = "TaxInclusive";
-            this.taxInclusiveDataGridViewCheckBoxColumn.HeaderText = "Tax Inclusive";
+            this.taxInclusiveDataGridViewCheckBoxColumn.HeaderText = "TaxInclusive";
             this.taxInclusiveDataGridViewCheckBoxColumn.Name = "taxInclusiveDataGridViewCheckBoxColumn";
             this.taxInclusiveDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // taxIdDataGridViewTextBoxColumn
             // 
             this.taxIdDataGridViewTextBoxColumn.DataPropertyName = "TaxId";
-            this.taxIdDataGridViewTextBoxColumn.HeaderText = "Tax";
+            this.taxIdDataGridViewTextBoxColumn.HeaderText = "TaxId";
             this.taxIdDataGridViewTextBoxColumn.Name = "taxIdDataGridViewTextBoxColumn";
             this.taxIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.taxIdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -482,21 +367,21 @@
             // vendorBillNumberDataGridViewTextBoxColumn1
             // 
             this.vendorBillNumberDataGridViewTextBoxColumn1.DataPropertyName = "VendorBillNumber";
-            this.vendorBillNumberDataGridViewTextBoxColumn1.HeaderText = "Vendor BillNumber";
+            this.vendorBillNumberDataGridViewTextBoxColumn1.HeaderText = "VendorBillNumber";
             this.vendorBillNumberDataGridViewTextBoxColumn1.Name = "vendorBillNumberDataGridViewTextBoxColumn1";
             this.vendorBillNumberDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // receivedByDataGridViewTextBoxColumn1
             // 
             this.receivedByDataGridViewTextBoxColumn1.DataPropertyName = "ReceivedBy";
-            this.receivedByDataGridViewTextBoxColumn1.HeaderText = "Received By";
+            this.receivedByDataGridViewTextBoxColumn1.HeaderText = "ReceivedBy";
             this.receivedByDataGridViewTextBoxColumn1.Name = "receivedByDataGridViewTextBoxColumn1";
             this.receivedByDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // isActiveDataGridViewCheckBoxColumn1
             // 
             this.isActiveDataGridViewCheckBoxColumn1.DataPropertyName = "IsActive";
-            this.isActiveDataGridViewCheckBoxColumn1.HeaderText = "Active";
+            this.isActiveDataGridViewCheckBoxColumn1.HeaderText = "IsActive";
             this.isActiveDataGridViewCheckBoxColumn1.Name = "isActiveDataGridViewCheckBoxColumn1";
             this.isActiveDataGridViewCheckBoxColumn1.ReadOnly = true;
             this.isActiveDataGridViewCheckBoxColumn1.Visible = false;
@@ -504,14 +389,14 @@
             // createdByDataGridViewTextBoxColumn1
             // 
             this.createdByDataGridViewTextBoxColumn1.DataPropertyName = "CreatedBy";
-            this.createdByDataGridViewTextBoxColumn1.HeaderText = "Created By";
+            this.createdByDataGridViewTextBoxColumn1.HeaderText = "CreatedBy";
             this.createdByDataGridViewTextBoxColumn1.Name = "createdByDataGridViewTextBoxColumn1";
             this.createdByDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // lastUpdatedByDataGridViewTextBoxColumn1
             // 
             this.lastUpdatedByDataGridViewTextBoxColumn1.DataPropertyName = "LastUpdatedBy";
-            this.lastUpdatedByDataGridViewTextBoxColumn1.HeaderText = "Last Updated By";
+            this.lastUpdatedByDataGridViewTextBoxColumn1.HeaderText = "LastUpdatedBy";
             this.lastUpdatedByDataGridViewTextBoxColumn1.Name = "lastUpdatedByDataGridViewTextBoxColumn1";
             this.lastUpdatedByDataGridViewTextBoxColumn1.ReadOnly = true;
             this.lastUpdatedByDataGridViewTextBoxColumn1.Visible = false;
@@ -519,14 +404,14 @@
             // createdDateDataGridViewTextBoxColumn1
             // 
             this.createdDateDataGridViewTextBoxColumn1.DataPropertyName = "CreatedDate";
-            this.createdDateDataGridViewTextBoxColumn1.HeaderText = "Created Date";
+            this.createdDateDataGridViewTextBoxColumn1.HeaderText = "CreatedDate";
             this.createdDateDataGridViewTextBoxColumn1.Name = "createdDateDataGridViewTextBoxColumn1";
             this.createdDateDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // lastUpdatedDateDataGridViewTextBoxColumn1
             // 
             this.lastUpdatedDateDataGridViewTextBoxColumn1.DataPropertyName = "LastUpdatedDate";
-            this.lastUpdatedDateDataGridViewTextBoxColumn1.HeaderText = "Last Updated Date";
+            this.lastUpdatedDateDataGridViewTextBoxColumn1.HeaderText = "LastUpdatedDate";
             this.lastUpdatedDateDataGridViewTextBoxColumn1.Name = "lastUpdatedDateDataGridViewTextBoxColumn1";
             this.lastUpdatedDateDataGridViewTextBoxColumn1.ReadOnly = true;
             this.lastUpdatedDateDataGridViewTextBoxColumn1.Visible = false;
@@ -538,6 +423,120 @@
             this.isChangedDataGridViewCheckBoxColumn1.Name = "isChangedDataGridViewCheckBoxColumn1";
             this.isChangedDataGridViewCheckBoxColumn1.ReadOnly = true;
             this.isChangedDataGridViewCheckBoxColumn1.Visible = false;
+            // 
+            // purchaseOrderReceiveLineBindingSource
+            // 
+            this.purchaseOrderReceiveLineBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.PurchaseOrderReceiveLine);
+            // 
+            // InventoryReceiptID
+            // 
+            this.InventoryReceiptID.DataPropertyName = "InventoryReceiptID";
+            this.InventoryReceiptID.HeaderText = "InventoryReceiptID";
+            this.InventoryReceiptID.Name = "InventoryReceiptID";
+            this.InventoryReceiptID.ReadOnly = true;
+            // 
+            // vendorNameDataGridViewTextBoxColumn
+            // 
+            this.vendorNameDataGridViewTextBoxColumn.DataPropertyName = "VendorName";
+            this.vendorNameDataGridViewTextBoxColumn.HeaderText = "VendorName";
+            this.vendorNameDataGridViewTextBoxColumn.Name = "vendorNameDataGridViewTextBoxColumn";
+            this.vendorNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // vendorBillNumberDataGridViewTextBoxColumn
+            // 
+            this.vendorBillNumberDataGridViewTextBoxColumn.DataPropertyName = "VendorBillNumber";
+            this.vendorBillNumberDataGridViewTextBoxColumn.HeaderText = "VendorBillNumber";
+            this.vendorBillNumberDataGridViewTextBoxColumn.Name = "vendorBillNumberDataGridViewTextBoxColumn";
+            this.vendorBillNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // gatePassNumberDataGridViewTextBoxColumn
+            // 
+            this.gatePassNumberDataGridViewTextBoxColumn.DataPropertyName = "GatePassNumber";
+            this.gatePassNumberDataGridViewTextBoxColumn.HeaderText = "GatePassNumber";
+            this.gatePassNumberDataGridViewTextBoxColumn.Name = "gatePassNumberDataGridViewTextBoxColumn";
+            this.gatePassNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // gRNDataGridViewTextBoxColumn
+            // 
+            this.gRNDataGridViewTextBoxColumn.DataPropertyName = "GRN";
+            this.gRNDataGridViewTextBoxColumn.HeaderText = "GRN";
+            this.gRNDataGridViewTextBoxColumn.Name = "gRNDataGridViewTextBoxColumn";
+            this.gRNDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // purchaseOrderIdDataGridViewTextBoxColumn
+            // 
+            this.purchaseOrderIdDataGridViewTextBoxColumn.DataPropertyName = "PurchaseOrderId";
+            this.purchaseOrderIdDataGridViewTextBoxColumn.HeaderText = "PurchaseOrderId";
+            this.purchaseOrderIdDataGridViewTextBoxColumn.Name = "purchaseOrderIdDataGridViewTextBoxColumn";
+            this.purchaseOrderIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // remarksDataGridViewTextBoxColumn
+            // 
+            this.remarksDataGridViewTextBoxColumn.DataPropertyName = "Remarks";
+            this.remarksDataGridViewTextBoxColumn.HeaderText = "Remarks";
+            this.remarksDataGridViewTextBoxColumn.Name = "remarksDataGridViewTextBoxColumn";
+            this.remarksDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // receiveDateDataGridViewTextBoxColumn
+            // 
+            this.receiveDateDataGridViewTextBoxColumn.DataPropertyName = "ReceiveDate";
+            this.receiveDateDataGridViewTextBoxColumn.HeaderText = "ReceiveDate";
+            this.receiveDateDataGridViewTextBoxColumn.Name = "receiveDateDataGridViewTextBoxColumn";
+            this.receiveDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // receivedByDataGridViewTextBoxColumn
+            // 
+            this.receivedByDataGridViewTextBoxColumn.DataPropertyName = "ReceivedBy";
+            this.receivedByDataGridViewTextBoxColumn.HeaderText = "ReceivedBy";
+            this.receivedByDataGridViewTextBoxColumn.Name = "receivedByDataGridViewTextBoxColumn";
+            this.receivedByDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // isActiveDataGridViewCheckBoxColumn
+            // 
+            this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            this.isActiveDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isActiveDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // createdByDataGridViewTextBoxColumn
+            // 
+            this.createdByDataGridViewTextBoxColumn.DataPropertyName = "CreatedBy";
+            this.createdByDataGridViewTextBoxColumn.HeaderText = "CreatedBy";
+            this.createdByDataGridViewTextBoxColumn.Name = "createdByDataGridViewTextBoxColumn";
+            this.createdByDataGridViewTextBoxColumn.ReadOnly = true;
+            this.createdByDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // lastUpdatedByDataGridViewTextBoxColumn
+            // 
+            this.lastUpdatedByDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedBy";
+            this.lastUpdatedByDataGridViewTextBoxColumn.HeaderText = "LastUpdatedBy";
+            this.lastUpdatedByDataGridViewTextBoxColumn.Name = "lastUpdatedByDataGridViewTextBoxColumn";
+            this.lastUpdatedByDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lastUpdatedByDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // createdDateDataGridViewTextBoxColumn
+            // 
+            this.createdDateDataGridViewTextBoxColumn.DataPropertyName = "CreatedDate";
+            this.createdDateDataGridViewTextBoxColumn.HeaderText = "CreatedDate";
+            this.createdDateDataGridViewTextBoxColumn.Name = "createdDateDataGridViewTextBoxColumn";
+            this.createdDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // lastUpdatedDateDataGridViewTextBoxColumn
+            // 
+            this.lastUpdatedDateDataGridViewTextBoxColumn.DataPropertyName = "LastUpdatedDate";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.HeaderText = "LastUpdatedDate";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.Name = "lastUpdatedDateDataGridViewTextBoxColumn";
+            this.lastUpdatedDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lastUpdatedDateDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // isChangedDataGridViewCheckBoxColumn
+            // 
+            this.isChangedDataGridViewCheckBoxColumn.DataPropertyName = "IsChanged";
+            this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
+            this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
+            this.isChangedDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isChangedDataGridViewCheckBoxColumn.Visible = false;
             // 
             // Frm_Reciepts
             // 
@@ -575,23 +574,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgv_RecieptDetails;
         private System.Windows.Forms.BindingSource purchaseOrderReceiveLineBindingSource;
-        private System.Windows.Forms.BindingSource inventoryReceiptBindingSource;
-        private System.Windows.Forms.Button btn_Clear;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InventoryReceiptID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vendorNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vendorBillNumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gatePassNumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gRNDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn purchaseOrderIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn remarksDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn receiveDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn receivedByDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn createdByDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedByDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchaseOrderReceiveLineIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchaseOrderIdDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn;
@@ -615,5 +597,22 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.BindingSource inventoryReceiptBindingSource;
+        private System.Windows.Forms.Button btn_Clear;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InventoryReceiptID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vendorNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vendorBillNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gatePassNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gRNDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn purchaseOrderIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remarksDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn receiveDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn receivedByDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdByDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedByDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
     }
 }

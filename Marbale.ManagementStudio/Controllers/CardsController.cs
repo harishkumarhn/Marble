@@ -92,8 +92,12 @@ namespace MarbaleManagementStudio.Controllers
             }
             return View(m);
         }
-        public int AddDeleteInventory(Inventory inventory)
+        public int AddDeleteInventory(int NumberOfCards, string ActionName)
         {
+            var inventory = new Inventory();
+            inventory.NumberOfCards = NumberOfCards;
+            inventory.ActionName = ActionName;
+            inventory.ActionBy = Session["UserID"].ToString();
             int NoOfCards = cardBussiness.AddDeleteInventory(inventory);
             return NoOfCards;
         }

@@ -30,6 +30,20 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
+            this.productCodeToolStripLabel = new System.Windows.Forms.ToolStripLabel();
+            this.txt_searchCode = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
+            this.txt_searchProdName = new System.Windows.Forms.ToolStripTextBox();
+            this.btn_searchStrip = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbClear = new System.Windows.Forms.ToolStripButton();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.Btn_Duplicate = new System.Windows.Forms.Button();
             this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,23 +79,9 @@
             this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.inventoryProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
-            this.productCodeToolStripLabel = new System.Windows.Forms.ToolStripLabel();
-            this.txt_searchCode = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
-            this.txt_searchProdName = new System.Windows.Forms.ToolStripTextBox();
-            this.btn_searchStrip = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbClear = new System.Windows.Forms.ToolStripButton();
-            this.btnCreate = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.Btn_Duplicate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).BeginInit();
             this.fillByToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvProducts
@@ -138,6 +138,139 @@
             this.dgvProducts.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvProducts_DefaultValuesNeeded);
             this.dgvProducts.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgvProducts_RowStateChanged);
             this.dgvProducts.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvProducts_RowValidating);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRefresh.Location = new System.Drawing.Point(12, 242);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(78, 32);
+            this.btnRefresh.TabIndex = 5;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClose.Location = new System.Drawing.Point(96, 242);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(62, 32);
+            this.btnClose.TabIndex = 6;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelete.Location = new System.Drawing.Point(424, 242);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(72, 32);
+            this.btnDelete.TabIndex = 7;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // fillByToolStrip
+            // 
+            this.fillByToolStrip.CanOverflow = false;
+            this.fillByToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.productCodeToolStripLabel,
+            this.txt_searchCode,
+            this.toolStripLabel6,
+            this.txt_searchProdName,
+            this.btn_searchStrip,
+            this.toolStripSeparator2,
+            this.tsbClear});
+            this.fillByToolStrip.Location = new System.Drawing.Point(0, 289);
+            this.fillByToolStrip.Name = "fillByToolStrip";
+            this.fillByToolStrip.Size = new System.Drawing.Size(992, 25);
+            this.fillByToolStrip.TabIndex = 8;
+            this.fillByToolStrip.Text = "fillByToolStrip";
+            // 
+            // productCodeToolStripLabel
+            // 
+            this.productCodeToolStripLabel.Name = "productCodeToolStripLabel";
+            this.productCodeToolStripLabel.Size = new System.Drawing.Size(80, 22);
+            this.productCodeToolStripLabel.Text = "ProductCode:";
+            // 
+            // txt_searchCode
+            // 
+            this.txt_searchCode.Name = "txt_searchCode";
+            this.txt_searchCode.Size = new System.Drawing.Size(100, 25);
+            // 
+            // toolStripLabel6
+            // 
+            this.toolStripLabel6.Name = "toolStripLabel6";
+            this.toolStripLabel6.Size = new System.Drawing.Size(84, 22);
+            this.toolStripLabel6.Text = "ProductName:";
+            // 
+            // txt_searchProdName
+            // 
+            this.txt_searchProdName.Name = "txt_searchProdName";
+            this.txt_searchProdName.Size = new System.Drawing.Size(100, 25);
+            // 
+            // btn_searchStrip
+            // 
+            this.btn_searchStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn_searchStrip.Name = "btn_searchStrip";
+            this.btn_searchStrip.Size = new System.Drawing.Size(46, 22);
+            this.btn_searchStrip.Text = "Search";
+            this.btn_searchStrip.Click += new System.EventHandler(this.btn_searchStrip_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsbClear
+            // 
+            this.tsbClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbClear.Name = "tsbClear";
+            this.tsbClear.Size = new System.Drawing.Size(38, 22);
+            this.tsbClear.Text = "Clear";
+            this.tsbClear.Click += new System.EventHandler(this.tsbClear_Click);
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCreate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCreate.Location = new System.Drawing.Point(180, 242);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(62, 32);
+            this.btnCreate.TabIndex = 9;
+            this.btnCreate.Text = "New";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEdit.Location = new System.Drawing.Point(263, 242);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(62, 32);
+            this.btnEdit.TabIndex = 10;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // Btn_Duplicate
+            // 
+            this.Btn_Duplicate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Btn_Duplicate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_Duplicate.Location = new System.Drawing.Point(342, 242);
+            this.Btn_Duplicate.Name = "Btn_Duplicate";
+            this.Btn_Duplicate.Size = new System.Drawing.Size(62, 32);
+            this.Btn_Duplicate.TabIndex = 11;
+            this.Btn_Duplicate.Text = "Duplicate";
+            this.Btn_Duplicate.UseVisualStyleBackColor = true;
+            this.Btn_Duplicate.Click += new System.EventHandler(this.Btn_Duplicate_Click);
             // 
             // productNameDataGridViewTextBoxColumn
             // 
@@ -405,139 +538,6 @@
             // 
             this.inventoryProductBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.InventoryProduct);
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRefresh.Location = new System.Drawing.Point(12, 242);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(62, 32);
-            this.btnRefresh.TabIndex = 5;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(462, 242);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(62, 32);
-            this.btnClose.TabIndex = 6;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(372, 242);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(62, 32);
-            this.btnDelete.TabIndex = 7;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // fillByToolStrip
-            // 
-            this.fillByToolStrip.CanOverflow = false;
-            this.fillByToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.productCodeToolStripLabel,
-            this.txt_searchCode,
-            this.toolStripLabel6,
-            this.txt_searchProdName,
-            this.btn_searchStrip,
-            this.toolStripSeparator2,
-            this.tsbClear});
-            this.fillByToolStrip.Location = new System.Drawing.Point(0, 289);
-            this.fillByToolStrip.Name = "fillByToolStrip";
-            this.fillByToolStrip.Size = new System.Drawing.Size(992, 25);
-            this.fillByToolStrip.TabIndex = 8;
-            this.fillByToolStrip.Text = "fillByToolStrip";
-            // 
-            // productCodeToolStripLabel
-            // 
-            this.productCodeToolStripLabel.Name = "productCodeToolStripLabel";
-            this.productCodeToolStripLabel.Size = new System.Drawing.Size(80, 22);
-            this.productCodeToolStripLabel.Text = "ProductCode:";
-            // 
-            // txt_searchCode
-            // 
-            this.txt_searchCode.Name = "txt_searchCode";
-            this.txt_searchCode.Size = new System.Drawing.Size(100, 25);
-            // 
-            // toolStripLabel6
-            // 
-            this.toolStripLabel6.Name = "toolStripLabel6";
-            this.toolStripLabel6.Size = new System.Drawing.Size(84, 22);
-            this.toolStripLabel6.Text = "ProductName:";
-            // 
-            // txt_searchProdName
-            // 
-            this.txt_searchProdName.Name = "txt_searchProdName";
-            this.txt_searchProdName.Size = new System.Drawing.Size(100, 25);
-            // 
-            // btn_searchStrip
-            // 
-            this.btn_searchStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btn_searchStrip.Name = "btn_searchStrip";
-            this.btn_searchStrip.Size = new System.Drawing.Size(46, 22);
-            this.btn_searchStrip.Text = "Search";
-            this.btn_searchStrip.Click += new System.EventHandler(this.btn_searchStrip_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tsbClear
-            // 
-            this.tsbClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbClear.Name = "tsbClear";
-            this.tsbClear.Size = new System.Drawing.Size(38, 22);
-            this.tsbClear.Text = "Clear";
-            this.tsbClear.Click += new System.EventHandler(this.tsbClear_Click);
-            // 
-            // btnCreate
-            // 
-            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCreate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCreate.Location = new System.Drawing.Point(102, 242);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(62, 32);
-            this.btnCreate.TabIndex = 9;
-            this.btnCreate.Text = "New";
-            this.btnCreate.UseVisualStyleBackColor = true;
-            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEdit.Location = new System.Drawing.Point(192, 242);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(62, 32);
-            this.btnEdit.TabIndex = 10;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // Btn_Duplicate
-            // 
-            this.Btn_Duplicate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Btn_Duplicate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_Duplicate.Location = new System.Drawing.Point(282, 242);
-            this.Btn_Duplicate.Name = "Btn_Duplicate";
-            this.Btn_Duplicate.Size = new System.Drawing.Size(62, 32);
-            this.Btn_Duplicate.TabIndex = 11;
-            this.Btn_Duplicate.Text = "Duplicate";
-            this.Btn_Duplicate.UseVisualStyleBackColor = true;
-            this.Btn_Duplicate.Click += new System.EventHandler(this.Btn_Duplicate_Click);
-            // 
             // Frm_ProductList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,9 +559,9 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frm_ProductTabular_FormClosed);
             this.Load += new System.EventHandler(this.frm_ProductTabular_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).EndInit();
             this.fillByToolStrip.ResumeLayout(false);
             this.fillByToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

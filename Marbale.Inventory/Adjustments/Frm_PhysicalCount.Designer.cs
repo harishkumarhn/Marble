@@ -34,25 +34,6 @@
             this.chkSelectItem = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btn_BarcodeD = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txt_AdjQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_newQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_Download = new System.Windows.Forms.Button();
-            this.btn_upload = new System.Windows.Forms.Button();
-            this.btn_reload = new System.Windows.Forms.Button();
-            this.btnAdjust = new System.Windows.Forms.Button();
-            this.btn_initaiate = new System.Windows.Forms.Button();
-            this.txt_Barcode = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.chk_Purchaseable = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.drp_Location = new System.Windows.Forms.ComboBox();
-            this.btn_Search = new System.Windows.Forms.Button();
-            this.txt_PCode = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txt_Description = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.saveExcelFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.productIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,8 +62,16 @@
             this.upperLimitCostDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.costVariancePercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.turnInPriceInTicketsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lotControlledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.marketListItemDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.expiryTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.issuingApproachDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.expiryDaysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barCode1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_newQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemMarkupPercentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createdByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedByDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,11 +82,26 @@
             this.storeRemarksDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.inventoryProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.openExcelFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_upload = new System.Windows.Forms.Button();
+            this.btn_reload = new System.Windows.Forms.Button();
+            this.btnAdjust = new System.Windows.Forms.Button();
+            this.btn_initaiate = new System.Windows.Forms.Button();
+            this.txt_Barcode = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.chk_Purchaseable = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.drp_Location = new System.Windows.Forms.ComboBox();
+            this.btn_Search = new System.Windows.Forms.Button();
+            this.txt_PCode = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txt_Description = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btn_Download = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Products)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -148,10 +152,16 @@
             this.upperLimitCostDataGridViewTextBoxColumn,
             this.costVariancePercentageDataGridViewTextBoxColumn,
             this.turnInPriceInTicketsDataGridViewTextBoxColumn,
+            this.lotControlledDataGridViewCheckBoxColumn,
+            this.marketListItemDataGridViewCheckBoxColumn,
+            this.expiryTypeDataGridViewTextBoxColumn,
+            this.issuingApproachDataGridViewTextBoxColumn,
+            this.expiryDaysDataGridViewTextBoxColumn,
             this.barCodeDataGridViewTextBoxColumn,
             this.barCode1DataGridViewTextBoxColumn,
             this.txt_newQuantity,
             this.txt_Remarks,
+            this.itemMarkupPercentDataGridViewTextBoxColumn,
             this.productNameDataGridViewTextBoxColumn,
             this.createdByDataGridViewTextBoxColumn,
             this.lastUpdatedByDataGridViewTextBoxColumn,
@@ -185,186 +195,6 @@
             this.txt_AdjQuantity.HeaderText = "Adjustment Quantity";
             this.txt_AdjQuantity.Name = "txt_AdjQuantity";
             this.txt_AdjQuantity.Visible = false;
-            // 
-            // txt_newQuantity
-            // 
-            this.txt_newQuantity.HeaderText = "New Quantity";
-            this.txt_newQuantity.Name = "txt_newQuantity";
-            // 
-            // txt_Remarks
-            // 
-            this.txt_Remarks.HeaderText = "Remarks";
-            this.txt_Remarks.Name = "txt_Remarks";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btn_Download);
-            this.groupBox1.Controls.Add(this.btn_upload);
-            this.groupBox1.Controls.Add(this.btn_reload);
-            this.groupBox1.Controls.Add(this.btnAdjust);
-            this.groupBox1.Controls.Add(this.btn_initaiate);
-            this.groupBox1.Controls.Add(this.txt_Barcode);
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.chk_Purchaseable);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.drp_Location);
-            this.groupBox1.Controls.Add(this.btn_Search);
-            this.groupBox1.Controls.Add(this.txt_PCode);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txt_Description);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(40, 20);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1135, 145);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = " ";
-            // 
-            // btn_Download
-            // 
-            this.btn_Download.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Download.Location = new System.Drawing.Point(643, 98);
-            this.btn_Download.Name = "btn_Download";
-            this.btn_Download.Size = new System.Drawing.Size(191, 23);
-            this.btn_Download.TabIndex = 33;
-            this.btn_Download.Text = "Download";
-            this.btn_Download.UseVisualStyleBackColor = true;
-            this.btn_Download.Click += new System.EventHandler(this.btn_Download_Click);
-            // 
-            // btn_upload
-            // 
-            this.btn_upload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_upload.Location = new System.Drawing.Point(446, 98);
-            this.btn_upload.Name = "btn_upload";
-            this.btn_upload.Size = new System.Drawing.Size(191, 23);
-            this.btn_upload.TabIndex = 32;
-            this.btn_upload.Text = "Upload";
-            this.btn_upload.UseVisualStyleBackColor = true;
-            this.btn_upload.Click += new System.EventHandler(this.btn_upload_Click);
-            // 
-            // btn_reload
-            // 
-            this.btn_reload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_reload.Location = new System.Drawing.Point(776, 42);
-            this.btn_reload.Name = "btn_reload";
-            this.btn_reload.Size = new System.Drawing.Size(92, 23);
-            this.btn_reload.TabIndex = 31;
-            this.btn_reload.Text = "Reload";
-            this.btn_reload.UseVisualStyleBackColor = true;
-            this.btn_reload.Click += new System.EventHandler(this.btn_reload_Click);
-            // 
-            // btnAdjust
-            // 
-            this.btnAdjust.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAdjust.Location = new System.Drawing.Point(237, 98);
-            this.btnAdjust.Name = "btnAdjust";
-            this.btnAdjust.Size = new System.Drawing.Size(191, 23);
-            this.btnAdjust.TabIndex = 30;
-            this.btnAdjust.Text = "Adjust";
-            this.btnAdjust.UseVisualStyleBackColor = true;
-            this.btnAdjust.Click += new System.EventHandler(this.btnAdjust_Click);
-            // 
-            // btn_initaiate
-            // 
-            this.btn_initaiate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_initaiate.Location = new System.Drawing.Point(21, 98);
-            this.btn_initaiate.Name = "btn_initaiate";
-            this.btn_initaiate.Size = new System.Drawing.Size(191, 23);
-            this.btn_initaiate.TabIndex = 29;
-            this.btn_initaiate.Text = "Initiate Count";
-            this.btn_initaiate.UseVisualStyleBackColor = true;
-            this.btn_initaiate.Click += new System.EventHandler(this.btn_initaiate_Click);
-            // 
-            // txt_Barcode
-            // 
-            this.txt_Barcode.Location = new System.Drawing.Point(274, 45);
-            this.txt_Barcode.Name = "txt_Barcode";
-            this.txt_Barcode.Size = new System.Drawing.Size(115, 20);
-            this.txt_Barcode.TabIndex = 27;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(271, 29);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(47, 13);
-            this.label15.TabIndex = 28;
-            this.label15.Text = "Barcode";
-            // 
-            // chk_Purchaseable
-            // 
-            this.chk_Purchaseable.AutoSize = true;
-            this.chk_Purchaseable.Checked = true;
-            this.chk_Purchaseable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_Purchaseable.Location = new System.Drawing.Point(526, 48);
-            this.chk_Purchaseable.Name = "chk_Purchaseable";
-            this.chk_Purchaseable.Size = new System.Drawing.Size(122, 17);
-            this.chk_Purchaseable.TabIndex = 26;
-            this.chk_Purchaseable.Text = "Inventory Items Only";
-            this.chk_Purchaseable.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(395, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 13);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "Location";
-            // 
-            // drp_Location
-            // 
-            this.drp_Location.DisplayMember = "Name";
-            this.drp_Location.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.drp_Location.FormattingEnabled = true;
-            this.drp_Location.Location = new System.Drawing.Point(398, 45);
-            this.drp_Location.Name = "drp_Location";
-            this.drp_Location.Size = new System.Drawing.Size(121, 21);
-            this.drp_Location.TabIndex = 21;
-            this.drp_Location.ValueMember = "LocationId";
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Search.Location = new System.Drawing.Point(662, 43);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(92, 23);
-            this.btn_Search.TabIndex = 22;
-            this.btn_Search.Text = "Search";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
-            // 
-            // txt_PCode
-            // 
-            this.txt_PCode.Location = new System.Drawing.Point(21, 45);
-            this.txt_PCode.Name = "txt_PCode";
-            this.txt_PCode.Size = new System.Drawing.Size(115, 20);
-            this.txt_PCode.TabIndex = 19;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "Product Code";
-            // 
-            // txt_Description
-            // 
-            this.txt_Description.Location = new System.Drawing.Point(148, 45);
-            this.txt_Description.Name = "txt_Description";
-            this.txt_Description.Size = new System.Drawing.Size(115, 20);
-            this.txt_Description.TabIndex = 20;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(145, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "Description";
             // 
             // productIdDataGridViewTextBoxColumn
             // 
@@ -562,6 +392,41 @@
             this.turnInPriceInTicketsDataGridViewTextBoxColumn.Name = "turnInPriceInTicketsDataGridViewTextBoxColumn";
             this.turnInPriceInTicketsDataGridViewTextBoxColumn.Visible = false;
             // 
+            // lotControlledDataGridViewCheckBoxColumn
+            // 
+            this.lotControlledDataGridViewCheckBoxColumn.DataPropertyName = "LotControlled";
+            this.lotControlledDataGridViewCheckBoxColumn.HeaderText = "LotControlled";
+            this.lotControlledDataGridViewCheckBoxColumn.Name = "lotControlledDataGridViewCheckBoxColumn";
+            this.lotControlledDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // marketListItemDataGridViewCheckBoxColumn
+            // 
+            this.marketListItemDataGridViewCheckBoxColumn.DataPropertyName = "MarketListItem";
+            this.marketListItemDataGridViewCheckBoxColumn.HeaderText = "MarketListItem";
+            this.marketListItemDataGridViewCheckBoxColumn.Name = "marketListItemDataGridViewCheckBoxColumn";
+            this.marketListItemDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // expiryTypeDataGridViewTextBoxColumn
+            // 
+            this.expiryTypeDataGridViewTextBoxColumn.DataPropertyName = "ExpiryType";
+            this.expiryTypeDataGridViewTextBoxColumn.HeaderText = "ExpiryType";
+            this.expiryTypeDataGridViewTextBoxColumn.Name = "expiryTypeDataGridViewTextBoxColumn";
+            this.expiryTypeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // issuingApproachDataGridViewTextBoxColumn
+            // 
+            this.issuingApproachDataGridViewTextBoxColumn.DataPropertyName = "IssuingApproach";
+            this.issuingApproachDataGridViewTextBoxColumn.HeaderText = "IssuingApproach";
+            this.issuingApproachDataGridViewTextBoxColumn.Name = "issuingApproachDataGridViewTextBoxColumn";
+            this.issuingApproachDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // expiryDaysDataGridViewTextBoxColumn
+            // 
+            this.expiryDaysDataGridViewTextBoxColumn.DataPropertyName = "ExpiryDays";
+            this.expiryDaysDataGridViewTextBoxColumn.HeaderText = "ExpiryDays";
+            this.expiryDaysDataGridViewTextBoxColumn.Name = "expiryDaysDataGridViewTextBoxColumn";
+            this.expiryDaysDataGridViewTextBoxColumn.Visible = false;
+            // 
             // barCodeDataGridViewTextBoxColumn
             // 
             this.barCodeDataGridViewTextBoxColumn.DataPropertyName = "BarCode";
@@ -575,6 +440,23 @@
             this.barCode1DataGridViewTextBoxColumn.HeaderText = "BarCode1";
             this.barCode1DataGridViewTextBoxColumn.Name = "barCode1DataGridViewTextBoxColumn";
             this.barCode1DataGridViewTextBoxColumn.Visible = false;
+            // 
+            // txt_newQuantity
+            // 
+            this.txt_newQuantity.HeaderText = "New Quantity";
+            this.txt_newQuantity.Name = "txt_newQuantity";
+            // 
+            // txt_Remarks
+            // 
+            this.txt_Remarks.HeaderText = "Remarks";
+            this.txt_Remarks.Name = "txt_Remarks";
+            // 
+            // itemMarkupPercentDataGridViewTextBoxColumn
+            // 
+            this.itemMarkupPercentDataGridViewTextBoxColumn.DataPropertyName = "ItemMarkupPercent";
+            this.itemMarkupPercentDataGridViewTextBoxColumn.HeaderText = "ItemMarkupPercent";
+            this.itemMarkupPercentDataGridViewTextBoxColumn.Name = "itemMarkupPercentDataGridViewTextBoxColumn";
+            this.itemMarkupPercentDataGridViewTextBoxColumn.Visible = false;
             // 
             // productNameDataGridViewTextBoxColumn
             // 
@@ -643,9 +525,175 @@
             // 
             this.inventoryProductBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.InventoryProduct);
             // 
-            // openExcelFileDialog
+            // groupBox1
             // 
-            this.openExcelFileDialog.FileName = "openExcelFileDialog";
+            this.groupBox1.Controls.Add(this.btn_Download);
+            this.groupBox1.Controls.Add(this.btn_upload);
+            this.groupBox1.Controls.Add(this.btn_reload);
+            this.groupBox1.Controls.Add(this.btnAdjust);
+            this.groupBox1.Controls.Add(this.btn_initaiate);
+            this.groupBox1.Controls.Add(this.txt_Barcode);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.chk_Purchaseable);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.drp_Location);
+            this.groupBox1.Controls.Add(this.btn_Search);
+            this.groupBox1.Controls.Add(this.txt_PCode);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txt_Description);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Location = new System.Drawing.Point(40, 20);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1135, 145);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = " ";
+            // 
+            // btn_upload
+            // 
+            this.btn_upload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_upload.Location = new System.Drawing.Point(446, 98);
+            this.btn_upload.Name = "btn_upload";
+            this.btn_upload.Size = new System.Drawing.Size(191, 23);
+            this.btn_upload.TabIndex = 32;
+            this.btn_upload.Text = "Upload";
+            this.btn_upload.UseVisualStyleBackColor = true;
+            this.btn_upload.Click += new System.EventHandler(this.btn_upload_Click);
+            // 
+            // btn_reload
+            // 
+            this.btn_reload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_reload.Location = new System.Drawing.Point(776, 42);
+            this.btn_reload.Name = "btn_reload";
+            this.btn_reload.Size = new System.Drawing.Size(92, 23);
+            this.btn_reload.TabIndex = 31;
+            this.btn_reload.Text = "Reload";
+            this.btn_reload.UseVisualStyleBackColor = true;
+            this.btn_reload.Click += new System.EventHandler(this.btn_reload_Click);
+            // 
+            // btnAdjust
+            // 
+            this.btnAdjust.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAdjust.Location = new System.Drawing.Point(237, 98);
+            this.btnAdjust.Name = "btnAdjust";
+            this.btnAdjust.Size = new System.Drawing.Size(191, 23);
+            this.btnAdjust.TabIndex = 30;
+            this.btnAdjust.Text = "Adjust";
+            this.btnAdjust.UseVisualStyleBackColor = true;
+            this.btnAdjust.Click += new System.EventHandler(this.btnAdjust_Click);
+            // 
+            // btn_initaiate
+            // 
+            this.btn_initaiate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_initaiate.Location = new System.Drawing.Point(21, 98);
+            this.btn_initaiate.Name = "btn_initaiate";
+            this.btn_initaiate.Size = new System.Drawing.Size(191, 23);
+            this.btn_initaiate.TabIndex = 29;
+            this.btn_initaiate.Text = "Initiate Count";
+            this.btn_initaiate.UseVisualStyleBackColor = true;
+            this.btn_initaiate.Click += new System.EventHandler(this.btn_initaiate_Click);
+            // 
+            // txt_Barcode
+            // 
+            this.txt_Barcode.Location = new System.Drawing.Point(274, 45);
+            this.txt_Barcode.Name = "txt_Barcode";
+            this.txt_Barcode.Size = new System.Drawing.Size(115, 20);
+            this.txt_Barcode.TabIndex = 27;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(271, 29);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(47, 13);
+            this.label15.TabIndex = 28;
+            this.label15.Text = "Barcode";
+            // 
+            // chk_Purchaseable
+            // 
+            this.chk_Purchaseable.AutoSize = true;
+            this.chk_Purchaseable.Checked = true;
+            this.chk_Purchaseable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Purchaseable.Location = new System.Drawing.Point(526, 48);
+            this.chk_Purchaseable.Name = "chk_Purchaseable";
+            this.chk_Purchaseable.Size = new System.Drawing.Size(122, 17);
+            this.chk_Purchaseable.TabIndex = 26;
+            this.chk_Purchaseable.Text = "Inventory Items Only";
+            this.chk_Purchaseable.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(395, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Location";
+            // 
+            // drp_Location
+            // 
+            this.drp_Location.DisplayMember = "Name";
+            this.drp_Location.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.drp_Location.FormattingEnabled = true;
+            this.drp_Location.Location = new System.Drawing.Point(398, 45);
+            this.drp_Location.Name = "drp_Location";
+            this.drp_Location.Size = new System.Drawing.Size(121, 21);
+            this.drp_Location.TabIndex = 21;
+            this.drp_Location.ValueMember = "LocationId";
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Search.Location = new System.Drawing.Point(662, 43);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(92, 23);
+            this.btn_Search.TabIndex = 22;
+            this.btn_Search.Text = "Search";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            // 
+            // txt_PCode
+            // 
+            this.txt_PCode.Location = new System.Drawing.Point(21, 45);
+            this.txt_PCode.Name = "txt_PCode";
+            this.txt_PCode.Size = new System.Drawing.Size(115, 20);
+            this.txt_PCode.TabIndex = 19;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Product Code";
+            // 
+            // txt_Description
+            // 
+            this.txt_Description.Location = new System.Drawing.Point(148, 45);
+            this.txt_Description.Name = "txt_Description";
+            this.txt_Description.Size = new System.Drawing.Size(115, 20);
+            this.txt_Description.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(145, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "Description";
+            // 
+            // btn_Download
+            // 
+            this.btn_Download.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Download.Location = new System.Drawing.Point(643, 98);
+            this.btn_Download.Name = "btn_Download";
+            this.btn_Download.Size = new System.Drawing.Size(191, 23);
+            this.btn_Download.TabIndex = 33;
+            this.btn_Download.Text = "Download";
+            this.btn_Download.UseVisualStyleBackColor = true;
+            this.btn_Download.Click += new System.EventHandler(this.btn_Download_Click);
             // 
             // Frm_PhysicalCount
             // 
@@ -659,9 +707,9 @@
             this.Load += new System.EventHandler(this.Frm_PhysicalCount_Load);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Products)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryProductBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -737,7 +785,5 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
         private System.Windows.Forms.Button btn_upload;
         private System.Windows.Forms.Button btn_Download;
-        private System.Windows.Forms.SaveFileDialog saveExcelFileDialog;
-        private System.Windows.Forms.OpenFileDialog openExcelFileDialog;
     }
 }

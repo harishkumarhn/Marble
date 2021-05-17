@@ -11,6 +11,6 @@ namespace Marbale.BusinessObject
         public bool Active { get; set; }
         public bool CardSale  { get; set; }
         public string LastUpdatedBy { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public string LastUpdatedDate { get; set; }
     }
 }

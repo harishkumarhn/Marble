@@ -37,18 +37,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgv_receive = new System.Windows.Forms.DataGridView();
-            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TaxId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.purchaseTaxBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.TaxPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TaxInclusive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RequiredByDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkGrdRecieve = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txt_Address = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -83,11 +72,6 @@
             this.txt_prodcode = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.grd_products = new System.Windows.Forms.DataGridView();
-            this.inventoryProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btn_Receipts = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.cb_complete = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.productIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -122,6 +106,22 @@
             this.createdDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdatedDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isChangedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.inventoryProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_Receipts = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.cb_complete = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TaxId = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.TaxPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TaxInclusive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RequiredByDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkGrdRecieve = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.gb_receive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_receive)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.purchaseTaxBindingSource)).BeginInit();
@@ -232,86 +232,9 @@
             this.dgv_receive.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_receive_CellValueChanged);
             this.dgv_receive.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_receive_DataError);
             // 
-            // ProductId
-            // 
-            this.ProductId.HeaderText = "ProductId";
-            this.ProductId.Name = "ProductId";
-            this.ProductId.Width = 78;
-            // 
-            // ProductCode
-            // 
-            this.ProductCode.HeaderText = "Product Code";
-            this.ProductCode.Name = "ProductCode";
-            this.ProductCode.Width = 97;
-            // 
-            // Description
-            // 
-            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
-            // 
-            // Qty
-            // 
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.Width = 48;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.Width = 56;
-            // 
-            // TaxId
-            // 
-            this.TaxId.DataSource = this.purchaseTaxBindingSource;
-            this.TaxId.DisplayMember = "TaxName";
-            this.TaxId.HeaderText = "Tax";
-            this.TaxId.Name = "TaxId";
-            this.TaxId.ValueMember = "TaxId";
-            this.TaxId.Width = 39;
-            // 
             // purchaseTaxBindingSource
             // 
             this.purchaseTaxBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.PurchaseTax);
-            // 
-            // TaxPercentage
-            // 
-            this.TaxPercentage.HeaderText = "Tax %";
-            this.TaxPercentage.Name = "TaxPercentage";
-            this.TaxPercentage.ReadOnly = true;
-            this.TaxPercentage.Width = 61;
-            // 
-            // TaxInclusive
-            // 
-            this.TaxInclusive.FalseValue = "";
-            this.TaxInclusive.HeaderText = "Tax Incl";
-            this.TaxInclusive.Name = "TaxInclusive";
-            this.TaxInclusive.TrueValue = "";
-            this.TaxInclusive.Width = 51;
-            // 
-            // Amount
-            // 
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
-            this.Amount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Amount.Width = 49;
-            // 
-            // RequiredByDate
-            // 
-            this.RequiredByDate.HeaderText = "Required Date";
-            this.RequiredByDate.Name = "RequiredByDate";
-            this.RequiredByDate.ReadOnly = true;
-            this.RequiredByDate.Width = 101;
-            // 
-            // chkGrdRecieve
-            // 
-            this.chkGrdRecieve.HeaderText = "Recieve";
-            this.chkGrdRecieve.Name = "chkGrdRecieve";
-            this.chkGrdRecieve.Width = 53;
             // 
             // panel2
             // 
@@ -706,56 +629,6 @@
             this.grd_products.Size = new System.Drawing.Size(303, 384);
             this.grd_products.TabIndex = 0;
             // 
-            // inventoryProductBindingSource
-            // 
-            this.inventoryProductBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.InventoryProduct);
-            // 
-            // btn_Receipts
-            // 
-            this.btn_Receipts.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_Receipts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Receipts.Location = new System.Drawing.Point(358, 578);
-            this.btn_Receipts.Name = "btn_Receipts";
-            this.btn_Receipts.Size = new System.Drawing.Size(121, 23);
-            this.btn_Receipts.TabIndex = 44;
-            this.btn_Receipts.Text = "View Receipts";
-            this.btn_Receipts.UseVisualStyleBackColor = true;
-            this.btn_Receipts.Click += new System.EventHandler(this.btn_Receipts_Click);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRefresh.Location = new System.Drawing.Point(496, 578);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(97, 23);
-            this.btnRefresh.TabIndex = 46;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // cb_complete
-            // 
-            this.cb_complete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_complete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cb_complete.Location = new System.Drawing.Point(612, 578);
-            this.cb_complete.Name = "cb_complete";
-            this.cb_complete.Size = new System.Drawing.Size(86, 23);
-            this.cb_complete.TabIndex = 45;
-            this.cb_complete.Text = "Complete";
-            this.cb_complete.UseVisualStyleBackColor = true;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(716, 578);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(86, 23);
-            this.btnSave.TabIndex = 47;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // productIdDataGridViewTextBoxColumn
             // 
             this.productIdDataGridViewTextBoxColumn.DataPropertyName = "ProductId";
@@ -955,7 +828,7 @@
             // productNameDataGridViewTextBoxColumn
             // 
             this.productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
-            this.productNameDataGridViewTextBoxColumn.HeaderText = "Product Name";
+            this.productNameDataGridViewTextBoxColumn.HeaderText = "ProductName";
             this.productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
             this.productNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -993,6 +866,133 @@
             this.isChangedDataGridViewCheckBoxColumn.HeaderText = "IsChanged";
             this.isChangedDataGridViewCheckBoxColumn.Name = "isChangedDataGridViewCheckBoxColumn";
             this.isChangedDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // inventoryProductBindingSource
+            // 
+            this.inventoryProductBindingSource.DataSource = typeof(Marbale.BusinessObject.Inventory.InventoryProduct);
+            // 
+            // btn_Receipts
+            // 
+            this.btn_Receipts.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btn_Receipts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Receipts.Location = new System.Drawing.Point(358, 578);
+            this.btn_Receipts.Name = "btn_Receipts";
+            this.btn_Receipts.Size = new System.Drawing.Size(121, 23);
+            this.btn_Receipts.TabIndex = 44;
+            this.btn_Receipts.Text = "View Receipts";
+            this.btn_Receipts.UseVisualStyleBackColor = true;
+            this.btn_Receipts.Click += new System.EventHandler(this.btn_Receipts_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRefresh.Location = new System.Drawing.Point(496, 578);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(97, 23);
+            this.btnRefresh.TabIndex = 46;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // cb_complete
+            // 
+            this.cb_complete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_complete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cb_complete.Location = new System.Drawing.Point(612, 578);
+            this.cb_complete.Name = "cb_complete";
+            this.cb_complete.Size = new System.Drawing.Size(86, 23);
+            this.cb_complete.TabIndex = 45;
+            this.cb_complete.Text = "Complete";
+            this.cb_complete.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(716, 578);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(86, 23);
+            this.btnSave.TabIndex = 47;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // ProductId
+            // 
+            this.ProductId.HeaderText = "ProductId";
+            this.ProductId.Name = "ProductId";
+            this.ProductId.Width = 78;
+            // 
+            // ProductCode
+            // 
+            this.ProductCode.HeaderText = "Product Code";
+            this.ProductCode.Name = "ProductCode";
+            this.ProductCode.Width = 97;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
+            // Qty
+            // 
+            this.Qty.HeaderText = "Qty";
+            this.Qty.Name = "Qty";
+            this.Qty.Width = 48;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.Width = 56;
+            // 
+            // TaxId
+            // 
+            this.TaxId.DataSource = this.purchaseTaxBindingSource;
+            this.TaxId.DisplayMember = "TaxName";
+            this.TaxId.HeaderText = "Tax";
+            this.TaxId.Name = "TaxId";
+            this.TaxId.ValueMember = "TaxId";
+            this.TaxId.Width = 39;
+            // 
+            // TaxPercentage
+            // 
+            this.TaxPercentage.HeaderText = "Tax %";
+            this.TaxPercentage.Name = "TaxPercentage";
+            this.TaxPercentage.ReadOnly = true;
+            this.TaxPercentage.Width = 61;
+            // 
+            // TaxInclusive
+            // 
+            this.TaxInclusive.FalseValue = "";
+            this.TaxInclusive.HeaderText = "Tax Incl";
+            this.TaxInclusive.Name = "TaxInclusive";
+            this.TaxInclusive.TrueValue = "";
+            this.TaxInclusive.Width = 51;
+            // 
+            // Amount
+            // 
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
+            this.Amount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Amount.Width = 49;
+            // 
+            // RequiredByDate
+            // 
+            this.RequiredByDate.HeaderText = "Required Date";
+            this.RequiredByDate.Name = "RequiredByDate";
+            this.RequiredByDate.ReadOnly = true;
+            this.RequiredByDate.Width = 101;
+            // 
+            // chkGrdRecieve
+            // 
+            this.chkGrdRecieve.HeaderText = "Recieve";
+            this.chkGrdRecieve.Name = "chkGrdRecieve";
+            this.chkGrdRecieve.Width = 53;
             // 
             // Frm_ReciewInventory
             // 
@@ -1057,34 +1057,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView grd_products;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn lotControlledDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn marketListItemDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn expiryTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn issuingApproachDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn expiryDaysDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn itemMarkupPercentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource inventoryProductBindingSource;
-        private System.Windows.Forms.Button btn_search;
-        private System.Windows.Forms.TextBox txt_prodcode;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btn_Receipts;
-        private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Button cb_complete;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.TextBox txt_Address;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.BindingSource purchaseTaxBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewComboBoxColumn TaxId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TaxPercentage;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn TaxInclusive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RequiredByDate;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn chkGrdRecieve;
         private System.Windows.Forms.DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
@@ -1112,12 +1084,40 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn upperLimitCostDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn costVariancePercentageDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn turnInPriceInTicketsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn lotControlledDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn marketListItemDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn expiryTypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn issuingApproachDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn expiryDaysDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn barCodeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemMarkupPercentDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn createdByDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedByDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isChangedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.BindingSource inventoryProductBindingSource;
+        private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.TextBox txt_prodcode;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_Receipts;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button cb_complete;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox txt_Address;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.BindingSource purchaseTaxBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewComboBoxColumn TaxId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TaxPercentage;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn TaxInclusive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RequiredByDate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chkGrdRecieve;
     }
 }

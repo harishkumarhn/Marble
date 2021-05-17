@@ -1,5 +1,4 @@
 ﻿using Marbale.BusinessObject.Inventory;
-using Marbale.BusinessObject.SiteSetup;
 using Marble.Business.InventoryBL;
 using System;
 using System.Collections.Generic;
@@ -30,14 +29,14 @@ namespace Marbale.Inventory.Adjustments
             InventoryPhysicalCountBL inventoryPhysicalCountBL = new InventoryPhysicalCountBL();
             InventoryPhysicalCount inventoryPhysicalCount = new InventoryPhysicalCount()
             {
-                InitiatedBy = LogedInUser.LoginId,
+                InitiatedBy = "rakshith",
                 InitaitedDate = DateTime.Now,
                 Description = txt_Desc.Text,
                 IsActive = true,
                 Status = "Open",
 
             };
-            inventoryPhysicalCountBL.Save(inventoryPhysicalCount, LogedInUser.LoginId);
+            inventoryPhysicalCountBL.Save(inventoryPhysicalCount, "rakshith");
 
             this.Close();
         }

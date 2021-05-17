@@ -22,8 +22,13 @@ namespace MarbaleManagementStudio.Controllers
             ViewBag.appModules = appModules;
             return View();
         }
-        public ActionResult Login()
+
+        public ActionResult Login(string message = "")
         {
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                @ViewBag.Message = message;
+            }
             return View();
         }
         [HttpPost]
@@ -60,6 +65,29 @@ namespace MarbaleManagementStudio.Controllers
             Session["AllowedPages"] = null;
 
             return RedirectToAction("Login");
+        }
+        public ActionResult ChangePassword(string message="")
+        {
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                @ViewBag.Message = message;
+            }
+            return View();
+        }
+        public ActionResult UpdatePassword(ChangeUserPassword user)
+        {
+            var result = siteSetup.ChangeUserPassword(Session["UserId"].ToString(), user.CurrentPassword, user.NewPassword);
+            if (result > 0)
+            {
+                Session["UserID"] = null;
+                Session["UserName"] = null;
+                Session["AllowedPages"] = null;
+                return RedirectToAction("Login", new { message = "Password changed please login again" });
+            }
+            else
+            {
+                return RedirectToAction("ChangePassword", new { message = "Password change failed please try again" });
+            }
         }
 
     }

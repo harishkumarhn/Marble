@@ -14,6 +14,8 @@ namespace Marbale.Business
    public class POSBL
     {
         private ProductData marbaleData;
+        private CommonData commonData;
+
         private SiteSetupData siteSetupdata;
 
         public POSBL()
@@ -48,7 +50,7 @@ namespace Marbale.Business
                     product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
                     product.DisplayGroup = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
                     product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                     product.Name = dr.IsNull("Name") ? "" : dr["Name"].ToString();
                     product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
                     product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
@@ -70,9 +72,9 @@ namespace Marbale.Business
             }
         }
 
-        public void ChangeUserPassword(int userId, string currentPassword, string newPassword)
+        public void ChangeUserPassword(string userId, string currentPassword, string newPassword)
         {
-            marbaleData.ChangePassword(userId, currentPassword, newPassword);
+            commonData.ChangePassword(userId, currentPassword, newPassword);
         }
 
 

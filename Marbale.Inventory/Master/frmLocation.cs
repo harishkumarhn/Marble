@@ -1,5 +1,4 @@
 ﻿using Marbale.BusinessObject.Inventory;
-using Marbale.BusinessObject.SiteSetup;
 using Marbale.DataAccess;
 using Marble.Business;
 using Marble.Business.InventoryBL;
@@ -136,7 +135,7 @@ namespace Marbale.Inventory.Master
                         if (location.IsChanged)
                         {
                             location.IsActive = true;
-                            locationBL.Save(location, LogedInUser.LoginId);
+                            locationBL.Save(location, "rakshith");
                             saved = true;
                         }
                         else
@@ -188,7 +187,7 @@ namespace Marbale.Inventory.Master
                                 Location location = datalist[row.Index];
                                 location.IsActive = false;
                                 LocationBL locationBL = new LocationBL();
-                                locationBL.Save(location, LogedInUser.LoginId);
+                                locationBL.Save(location, "rakshith");
                             }
                         }
                     }

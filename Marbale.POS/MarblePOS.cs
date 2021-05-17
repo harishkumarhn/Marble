@@ -74,6 +74,8 @@ namespace Marbale.POS
 
         void registerAdditionalCardReaders()
         {
+
+            Devices.ClearConnectedAllDevices();
             string USBReaderVID = "VID_FFFF";
             string USBReaderPID = "PID_0035";
             string USBReaderOptionalString = "0000";
@@ -1940,7 +1942,7 @@ namespace Marbale.POS
                 return;
             }
 
-            posBussiness.ChangeUserPassword(CurrentUser.Id, currentPassword, newPassword);
+            posBussiness.ChangeUserPassword(CurrentUser.Name, currentPassword, newPassword);
             MessageBox.Show("Password is Changed Successfully");
             txtCurrentPassword.Text = "";
             txtNewPassword.Text = "";

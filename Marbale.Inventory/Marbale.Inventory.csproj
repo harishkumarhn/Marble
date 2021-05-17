@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Marbale.Inventory</RootNamespace>
     <AssemblyName>Marbale.Inventory</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -36,12 +36,6 @@
   <ItemGroup>
     <Reference Include="EPPlus, Version=4.5.3.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
-    </Reference>
-    <Reference Include="JTextBox">
-      <HintPath>..\External References\JTextBox.dll</HintPath>
-    </Reference>
-    <Reference Include="JTextBox2">
-      <HintPath>..\External References\JTextBox2.dll</HintPath>
     </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
@@ -87,18 +81,6 @@
     </Compile>
     <Compile Include="Adjustments\Frm_PhysicalCountPopup.Designer.cs">
       <DependentUpon>Frm_PhysicalCountPopup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmLogin1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmLogin1.Designer.cs">
-      <DependentUpon>frmLogin1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InventoryLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InventoryLogin.Designer.cs">
-      <DependentUpon>InventoryLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -211,17 +193,11 @@
     <EmbeddedResource Include="Adjustments\Frm_PhysicalCountPopup.resx">
       <DependentUpon>Frm_PhysicalCountPopup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin1.resx">
-      <DependentUpon>frmLogin1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmProduct.resx">
       <DependentUpon>frmProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InventoryHome.resx">
       <DependentUpon>InventoryHome.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InventoryLogin.resx">
-      <DependentUpon>InventoryLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -361,41 +337,6 @@
       <Project>{6A6D1608-F1EC-435A-A3EC-10237AB280AF}</Project>
       <Name>Marbale.DataAccess</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\CancelButton.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Cancel_Button1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Cancel_Button.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Login_Button1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Login_Button.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Password_16_251.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Password_16_25.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Username_16_25.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Username_16_251.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\0.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\0_pressed.png" />
-    <Content Include="Resources\1.png" />
-    <None Include="Resources\MarbleLogo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

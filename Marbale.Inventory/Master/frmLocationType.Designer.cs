@@ -130,7 +130,7 @@
             // locationTypeIdDataGridViewTextBoxColumn
             // 
             this.locationTypeIdDataGridViewTextBoxColumn.DataPropertyName = "LocationTypeId";
-            this.locationTypeIdDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.locationTypeIdDataGridViewTextBoxColumn.HeaderText = "Location Type Id";
             this.locationTypeIdDataGridViewTextBoxColumn.Name = "locationTypeIdDataGridViewTextBoxColumn";
             this.locationTypeIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.locationTypeIdDataGridViewTextBoxColumn.Width = 150;
@@ -138,7 +138,7 @@
             // locationTypeNameDataGridViewTextBoxColumn
             // 
             this.locationTypeNameDataGridViewTextBoxColumn.DataPropertyName = "LocationTypeName";
-            this.locationTypeNameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.locationTypeNameDataGridViewTextBoxColumn.HeaderText = "LocationType Name";
             this.locationTypeNameDataGridViewTextBoxColumn.Name = "locationTypeNameDataGridViewTextBoxColumn";
             this.locationTypeNameDataGridViewTextBoxColumn.Width = 150;
             // 

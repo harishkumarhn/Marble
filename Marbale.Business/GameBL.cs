@@ -89,7 +89,7 @@ namespace Marble.Business
                      gameProfile.TiketAllowedOnCredit = dr.IsNull("TiketAllowedOnCredit") ? false : bool.Parse(dr["TiketAllowedOnCredit"].ToString());
                      gameProfile.TiketAllowedOnTime = dr.IsNull("TiketAllowedOnTime") ? false : bool.Parse(dr["TiketAllowedOnTime"].ToString());
                      gameProfile.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                     gameProfile.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                     gameProfile.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
 
                      gameProfiles.Add(gameProfile);
                  }
@@ -142,7 +142,7 @@ namespace Marble.Business
                      game.RepeatPlayDiscountPercentage = dr.IsNull("RepeatPlayDiscountPercentage") ? 0 : int.Parse(dr["RepeatPlayDiscountPercentage"].ToString());
                      game.GameProfiles = profiles;
                      game.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                     game.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                     game.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
 
                      games.Add(game);
                  }
@@ -221,7 +221,7 @@ namespace Marble.Business
                      machine.TicketAllowed = dr.IsNull("TicketAllowed") ? false : bool.Parse(dr["TicketAllowed"].ToString());
                      machine.Notes = dr.IsNull("Notes") ? "" : dr["Notes"].ToString();
                      machine.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                     machine.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                     machine.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
 
                      machine.AvalibleHubs = hubs;
                      machine.AvalibleReaders = readers;

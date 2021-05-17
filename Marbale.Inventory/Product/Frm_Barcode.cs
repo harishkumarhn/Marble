@@ -1,5 +1,4 @@
 ﻿using Marbale.BusinessObject.Inventory;
-using Marbale.BusinessObject.SiteSetup;
 using Marbale.Inventory.Model;
 using Marble.Business.InventoryBL;
 using System;
@@ -94,7 +93,7 @@ namespace Marbale.Inventory.Product
                 ProductId = pid
             }; ;
 
-            int id= inventoryProductBarcodeBL.Save(inventoryProductBarcode, LogedInUser.LoginId);
+            int id= inventoryProductBarcodeBL.Save(inventoryProductBarcode, "rakshith");
             MessageBox.Show("Saved successfully");
 
             Clear();
@@ -120,7 +119,7 @@ namespace Marbale.Inventory.Product
             {
                 inventoryProduct = inventoryProductBL.GetInventoryProduct(pid);
                 inventoryProduct.BarCode = code;
-                inventoryProductBL.Save(inventoryProduct, LogedInUser.LoginId);
+                inventoryProductBL.Save(inventoryProduct, "rakshith");
                 BarcodeReader.Barcode = code;
                 this.DialogResult = DialogResult.OK;
                 MessageBox.Show("Barcode Updated");

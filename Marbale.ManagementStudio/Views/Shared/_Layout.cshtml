@@ -47,7 +47,7 @@
                         <br /><lable>@Session["UserID"]</lable>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Change Password</a>
+                        <a class="dropdown-item" href="/Marble/changePassword">Change Password</a>
                         <a class="dropdown-item" href="/Marble/logout">Logout</a>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                 @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Product"]).Count > 0)
                 {
                     <li class="active">
-                        <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product</a>
+                        <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onclick="setSession('productSubmenu')">Product</a>
                         <ul class="collapse list-unstyled" id="productSubmenu">
                             @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Product"])
                             {
@@ -80,7 +80,7 @@
                 @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"]).Count > 0)
                 {
                     <li class="active">
-                        <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Communication</a>
+                        <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onclick="setSession('gameSubmenu')">Communication</a>
                         <ul class="collapse list-unstyled" id="gameSubmenu">
                             @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"])
                             {
@@ -104,7 +104,7 @@
                 @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"]).Count > 0)
                 {
                     <li class="active">
-                        <a href="#siteSetupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Site Setup</a>
+                        <a href="#siteSetupSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle" onclick="setSession('siteSetupSubmenu')">Site Setup</a>
                         <ul class="collapse list-unstyled" id="siteSetupSubmenu">
                             @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"])
                             {
@@ -128,7 +128,7 @@
                 @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"]).Count > 0)
                 {
                     <li class="active">
-                        <a href="#pageSubmenucards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cards</a>
+                        <a href="#pageSubmenucards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onclick="setSession('pageSubmenucards')">Cards</a>
                         <ul class="collapse list-unstyled" id="pageSubmenucards">
                             @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"])
                             {
@@ -188,6 +188,15 @@
     </div>
 
     <script type="text/javascript">
+        function getCookie(name) {
+            var cookies = document.cookie.split(';');
+            for (var i = 0 ; i < cookies.length ; ++i) {
+                var pair = cookies[i].trim().split('=');
+                if (pair[0] == name)
+                    return pair[1];
+            }
+            return null;
+        }
         $(document).ready(function () {
 
             $('#dismiss, .overlay').on('click', function () {
@@ -201,6 +210,14 @@
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
+
+            let preSelectedValue = getCookie("PreviousExpandedDropDown");
+            if (preSelectedValue) {
+                $('#sidebar').addClass('active');
+                $('.overlay').addClass('active');                
+                document.querySelector("a[href='#" + preSelectedValue + "']").click();                
+                setSession(preSelectedValue);
+            }
         });
         ////$('#inventery').click(function () {
         ////    $(".modal-body").html("");
@@ -230,6 +247,17 @@
         $("#myModal").draggable({
             handle: ".modal-header"
         });
+
+        function setSession(selectedId) {
+            let preSelectedValue = getCookie("PreviousExpandedDropDown");
+            if (preSelectedValue != selectedId) {
+                document.cookie = "PreviousExpandedDropDown=" + selectedId;
+            } else {
+                document.cookie = "PreviousExpandedDropDown=";
+                console.log(selectedId);
+            }
+        }
+        
     </script>
 
 </body>

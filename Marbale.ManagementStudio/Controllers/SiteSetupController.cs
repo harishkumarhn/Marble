@@ -634,26 +634,31 @@ namespace MarbaleManagementStudio.Controllers
             }
         }
         #region lookUps
+        public ActionResult References()
+        {
+            return View("~/Views/SiteSetup/References/References.cshtml");
+        }
         public ActionResult LookUps()
         {
-            return View("~/Views/SiteSetup/LookUps/LookUps.cshtml");
-        }
-        public ActionResult LookUpData()
-        {
-            return View("~/Views/SiteSetup/LookUps/LookUpData.cshtml");
+            return View("~/Views/SiteSetup/References/LookUps.cshtml");
         }
         public ActionResult PaymentMode()
         {
             ViewBag.PaymentModes = siteSetup.GetPaymentModes();
-            return View("~/Views/SiteSetup/LookUps/PaymentMode.cshtml");
+            return View("~/Views/SiteSetup/References/PaymentMode.cshtml");
         }
         public ActionResult Sequence()
         {
-            return View("~/Views/SiteSetup/LookUps/Sequence.cshtml");
+            ViewBag.Sequences = siteSetup.GetSequences();
+            return View("~/Views/SiteSetup/References/Sequence.cshtml");
         }
         public int UpdatePaymentMode(List<PaymentMode> paymentModes)
         {
             return siteSetup.InsertOrUpdatePaymentModes(paymentModes);
+        }
+        public int UpdateSequence(List<Sequence> sequences)
+        {
+            return siteSetup.InsertOrUpdateSequences(sequences);
         }
         #endregion
     }

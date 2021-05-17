@@ -34,6 +34,7 @@
             this.taxBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btn_exit = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
+            this.btn_duplicate = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_Add = new System.Windows.Forms.Button();
             this.BOMEditMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -137,7 +138,7 @@
             // 
             this.btn_exit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_exit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_exit.Location = new System.Drawing.Point(200, 482);
+            this.btn_exit.Location = new System.Drawing.Point(303, 482);
             this.btn_exit.Name = "btn_exit";
             this.btn_exit.Size = new System.Drawing.Size(97, 23);
             this.btn_exit.TabIndex = 31;
@@ -151,13 +152,25 @@
             this.btn_delete.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_delete.Enabled = false;
             this.btn_delete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_delete.Location = new System.Drawing.Point(297, 482);
+            this.btn_delete.Location = new System.Drawing.Point(400, 482);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(97, 23);
             this.btn_delete.TabIndex = 36;
             this.btn_delete.Text = "Delete";
             this.btn_delete.UseVisualStyleBackColor = true;
             this.btn_delete.Visible = false;
+            // 
+            // btn_duplicate
+            // 
+            this.btn_duplicate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_duplicate.Location = new System.Drawing.Point(206, 482);
+            this.btn_duplicate.Name = "btn_duplicate";
+            this.btn_duplicate.Size = new System.Drawing.Size(97, 23);
+            this.btn_duplicate.TabIndex = 32;
+            this.btn_duplicate.Text = "Duplicate";
+            this.btn_duplicate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_duplicate.UseVisualStyleBackColor = true;
+            this.btn_duplicate.Click += new System.EventHandler(this.cb_duplicate_Click);
             // 
             // btn_Save
             // 
@@ -272,7 +285,7 @@
             // 
             this.btn_Refresh.Enabled = false;
             this.btn_Refresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Refresh.Location = new System.Drawing.Point(394, 482);
+            this.btn_Refresh.Location = new System.Drawing.Point(497, 482);
             this.btn_Refresh.Name = "btn_Refresh";
             this.btn_Refresh.Size = new System.Drawing.Size(97, 23);
             this.btn_Refresh.TabIndex = 43;
@@ -687,7 +700,7 @@
             this.btnAddTax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddTax.ForeColor = System.Drawing.Color.Black;
-            this.btnAddTax.Location = new System.Drawing.Point(578, 71);
+            this.btnAddTax.Location = new System.Drawing.Point(551, 76);
             this.btnAddTax.Name = "btnAddTax";
             this.btnAddTax.Size = new System.Drawing.Size(66, 23);
             this.btnAddTax.TabIndex = 102;
@@ -703,7 +716,7 @@
             this.cmbTax.FormattingEnabled = true;
             this.cmbTax.Location = new System.Drawing.Point(452, 74);
             this.cmbTax.Name = "cmbTax";
-            this.cmbTax.Size = new System.Drawing.Size(120, 21);
+            this.cmbTax.Size = new System.Drawing.Size(93, 21);
             this.cmbTax.TabIndex = 87;
             this.cmbTax.ValueMember = "TaxId";
             // 
@@ -827,7 +840,7 @@
             // 
             this.txt_pTicket.Location = new System.Drawing.Point(453, 131);
             this.txt_pTicket.Name = "txt_pTicket";
-            this.txt_pTicket.Size = new System.Drawing.Size(121, 20);
+            this.txt_pTicket.Size = new System.Drawing.Size(92, 20);
             this.txt_pTicket.TabIndex = 74;
             this.txt_pTicket.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -884,7 +897,7 @@
             // 
             this.tb_reorderquantity.Location = new System.Drawing.Point(453, 100);
             this.tb_reorderquantity.Name = "tb_reorderquantity";
-            this.tb_reorderquantity.Size = new System.Drawing.Size(120, 20);
+            this.tb_reorderquantity.Size = new System.Drawing.Size(92, 20);
             this.tb_reorderquantity.TabIndex = 89;
             this.tb_reorderquantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -901,7 +914,7 @@
             // 
             this.txtReorderpoint.Location = new System.Drawing.Point(452, 46);
             this.txtReorderpoint.Name = "txtReorderpoint";
-            this.txtReorderpoint.Size = new System.Drawing.Size(120, 20);
+            this.txtReorderpoint.Size = new System.Drawing.Size(93, 20);
             this.txtReorderpoint.TabIndex = 88;
             this.txtReorderpoint.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -967,6 +980,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btn_delete);
+            this.Controls.Add(this.btn_duplicate);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.btn_Add);
             this.Controls.Add(this.btn_Save);
@@ -998,6 +1012,7 @@
         private System.Windows.Forms.Button btn_Add;
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.Button btn_exit;
+        private System.Windows.Forms.Button btn_duplicate;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.BindingSource taxBindingSource;
         private System.Windows.Forms.BindingSource uOMBindingSource;

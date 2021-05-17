@@ -160,7 +160,7 @@ namespace Marble.Business
                 userRole.POSClockInOut = dr.IsNull("POSClockInOut") ? false : bool.Parse(dr["POSClockInOut"].ToString());
                 userRole.ReadOnly = dr.IsNull("ReadOnly") ? false : bool.Parse(dr["ReadOnly"].ToString());
                 userRole.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                userRole.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                userRole.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                 userRoles.Add(userRole);
             }
             return userRoles;
@@ -364,7 +364,7 @@ namespace Marble.Business
                 user.Status = dr.IsNull("Status") ? "" : dr["Status"].ToString();
                 user.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                 user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                 user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
                 user.ReadOnly = dr.IsNull("ReadOnly") ? false : bool.Parse(dr["ReadOnly"].ToString());
 
@@ -408,7 +408,7 @@ namespace Marble.Business
                     user.Status = dr.IsNull("Status") ? "" : dr["Status"].ToString();
                     user.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                    user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                     user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
 
                     user.Roles = rolesList;
@@ -489,7 +489,7 @@ namespace Marble.Business
                     user.Status = dr.IsNull("Status") ? "" : dr["Status"].ToString();
                     user.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
                     user.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                    user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
+                    user.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                     user.InvalidAttempts = dr.IsNull("InvalidAttempts") ? 0 : int.Parse(dr["InvalidAttempts"].ToString());
                     user.Password = password;
                     break;
@@ -763,6 +763,55 @@ namespace Marble.Business
             try
             {
                 return siteSetupData.InsertOrUpdatePaymentMode(paymentModes);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public List<Sequence> GetSequences()
+        {
+            DataTable dt = siteSetupData.GetSequences();
+            List<Sequence> sequences = new List<Sequence>();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Sequence seq = new Sequence();
+                    seq.SequenceId = dr.IsNull("SequenceId") ? 0 : int.Parse(dr["SequenceId"].ToString());
+                    seq.SequenceName = dr.IsNull("SeqName") ? "" : dr["SeqName"].ToString();
+                    seq.Seed = dr.IsNull("Seed") ? 0 : int.Parse(dr["Seed"].ToString());
+                    seq.Increment = dr.IsNull("Incr") ? 0 : int.Parse(dr["Incr"].ToString());
+                    seq.CurrentValue = dr.IsNull("Currval") ? 0 : int.Parse(dr["Currval"].ToString());
+                    seq.Prefix = dr.IsNull("Prefix") ? "" : dr["Prefix"].ToString();
+                    seq.Suffix = dr.IsNull("Suffix") ? "" : dr["Suffix"].ToString();
+
+                    sequences.Add(seq);
+                }
+
+            }
+            if (sequences.Count == 0)
+            {
+                sequences.Add(new Sequence());
+            }
+            return sequences;
+        }
+        public int InsertOrUpdateSequences(List<Sequence> sequences)
+        {
+            try
+            {
+                return siteSetupData.InsertOrUpdateSequence(sequences);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public int ChangeUserPassword(string UserId, string CurrentPassword, string NewPassword)
+        {
+            try
+            {
+                return commonData.ChangePassword(UserId, CurrentPassword, NewPassword);
             }
             catch (Exception e)
             {

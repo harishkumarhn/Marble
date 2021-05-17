@@ -32,17 +32,9 @@ namespace Marbale.BusinessObject.SiteSetup
         public bool CompanyAdmin { get; set; }
         public string CreatedBy { get; set; }
         public string LastUpdatedBy { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public string LastUpdatedDate { get; set; }
         public bool ReadOnly { get; set; }
         public List<IdValue> Roles { get; set; }
         public List<IdValue> Statuses { get; set; }
-    }
-    public static class LogedInUser
-    {
-        public static int Id { get; set; }
-        public static string LoginId { get; set; }
-        public static int RoleId { get; set; }
-        public static string Status { get; set; }
-        public static string Name{ get; set; }
     }
 }

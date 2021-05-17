@@ -20,7 +20,7 @@ namespace Marbale.BusinessObject.Game
         public int RepeatPlayDiscountPercentage { get; set; }
         public string GameCompanyName { get; set; }
         public string Notes { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public string LastUpdatedDate { get; set; }
         public string LastUpdatedBy { get; set; }
     }
 }

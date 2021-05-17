@@ -262,4 +262,16 @@ select {
 a:hover {
     cursor: pointer;
 }
+    input:required:invalid, input:focus:invalid {
+    background-image: url('/Content/Images/unmatch.png'); 
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    -moz-box-shadow: none;
+  }
+  input:required:valid {
+    background-image: url('/Content/Images/match.png');
+    background-position: right top;
+    background-repeat: no-repeat;
+  }
 /*end*/

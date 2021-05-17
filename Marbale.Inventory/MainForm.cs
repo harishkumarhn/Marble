@@ -25,8 +25,8 @@ namespace Marbale.Inventory
             loggedInUser = new User()
             {
                 Id = 1,
-                LoginId = LogedInUser.LoginId,
-                Name = LogedInUser.LoginId
+                LoginId = "rakshith",
+                Name = "rakshith"
             };
 
 
