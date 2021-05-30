@@ -25,7 +25,7 @@ namespace Marbale.POS
         double total_amount = 0;
         double TipAmount = 0;
 
-        Transaction Transaction;
+        Transaction transaction;
         Card CurrentCard;
         BusinessObject.Customer.Customers Customer;
         public static User CurrentUser;
@@ -237,7 +237,7 @@ namespace Marbale.POS
                     btnProduct.MouseUp += ProductButton_MouseUp;
                     btnProduct.Name = lstProducts[i].Name + '_' + lstProducts[i].Id;
                     btnProduct.Text = lstProducts[i].Name;
-
+                    btnProduct.Padding = new Padding(6);
                     btnProduct.Tag = lstProducts[i].Id;
                     btnProduct.Font = btnSampleProduct.Font;
                     btnProduct.ForeColor = btnSampleProduct.ForeColor;
@@ -329,19 +329,19 @@ namespace Marbale.POS
 
         bool createDiscountLine(TransactionDiscount discount)
         {
-            if (Transaction == null)
+            if (transaction == null)
                 return false;
 
             string couponNumber = string.Empty;
             Discounts.DiscountLine dl = new Discounts.DiscountLine();
 
-            if (Transaction.discounts == null)
-                Transaction.discounts = new Discounts();
-            if (Transaction.discounts.DiscountLines == null)
-                Transaction.discounts.DiscountLines = new List<Discounts.DiscountLine>();
+            if (transaction.discounts == null)
+                transaction.discounts = new Discounts();
+            if (transaction.discounts.DiscountLines == null)
+                transaction.discounts.DiscountLines = new List<Discounts.DiscountLine>();
 
             bool found = false;
-            foreach (Discounts.DiscountLine d in Transaction.discounts.DiscountLines)
+            foreach (Discounts.DiscountLine d in transaction.discounts.DiscountLines)
             {
                 if (d.DiscountId == discount.DiscountID)
                 {
@@ -352,7 +352,7 @@ namespace Marbale.POS
 
             if (!found)
             {
-                Transaction.discounts.DiscountLines.Add(dl);
+                transaction.discounts.DiscountLines.Add(dl);
                 dl.DiscountId = discount.DiscountID;
 
                 dl.DiscountName = discount.DiscountName;
@@ -366,7 +366,7 @@ namespace Marbale.POS
                     dl.DiscountName += " (Coupon:" + couponNumber + ")";
                 }
 
-                switch (Transaction.discounts.DiscountLines.Count % 5)
+                switch (transaction.discounts.DiscountLines.Count % 5)
                 {
                     case 1: dl.DisplayChar = "*"; break;
                     case 2: dl.DisplayChar = "^"; break;
@@ -380,25 +380,25 @@ namespace Marbale.POS
 
         public void ApplyDiscountToLines()
         {
-            if (Transaction == null)
+            if (transaction == null)
                 return;
 
-            for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+            for (int i = 0; i < transaction.TransactionLines.Count; i++)
             {
-                if (Transaction.TransactionLines[i].DBLineId <= 0)
-                    Transaction.TransactionLines[i].discountLines.Clear();
+                if (transaction.TransactionLines[i].DBLineId <= 0)
+                    transaction.TransactionLines[i].discountLines.Clear();
             }
 
-            foreach (Discounts.DiscountLine dl in Transaction.discounts.DiscountLines)
+            foreach (Discounts.DiscountLine dl in transaction.discounts.DiscountLines)
             {
                 if (dl.LineValid)
                 {
-                    for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+                    for (int i = 0; i < transaction.TransactionLines.Count; i++)
                     {
-                        if (Transaction.TransactionLines[i].LineValid)
+                        if (transaction.TransactionLines[i].LineValid)
                         {
-                            if (!Transaction.TransactionLines[i].discountLines.Contains(dl)) //Add discounts to line if not added already
-                                Transaction.TransactionLines[i].discountLines.Add(dl);
+                            if (!transaction.TransactionLines[i].discountLines.Contains(dl)) //Add discounts to line if not added already
+                                transaction.TransactionLines[i].discountLines.Add(dl);
                         }
                     }
                 }
@@ -412,68 +412,68 @@ namespace Marbale.POS
             decimal Pre_TaxAmount = 0;
             decimal Tax_Amount = 0;
             decimal Discount_Amount = 0;
-            if (Transaction == null)
+            if (transaction == null)
             {
                 ClearTransaction();
                 return;
             }
-            if (Transaction.discounts == null)
+            if (transaction.discounts == null)
             {
-                Transaction.discounts = new Discounts();
+                transaction.discounts = new Discounts();
             }
 
-            foreach (Discounts.DiscountLine dl in Transaction.discounts.DiscountLines)
+            foreach (Discounts.DiscountLine dl in transaction.discounts.DiscountLines)
             {
                 dl.DiscountAmount = 0;
             }
 
-            for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+            for (int i = 0; i < transaction.TransactionLines.Count; i++)
             {
-                if (Transaction.TransactionLines[i].LineValid && Transaction.TransactionLines[i].CancelledLine == false)
+                if (transaction.TransactionLines[i].LineValid && transaction.TransactionLines[i].CancelledLine == false)
                 {
                     decimal preTaxLineAmount = 0;
-                    if (Transaction.TransactionLines[i].quantity > 1)
+                    if (transaction.TransactionLines[i].quantity > 1)
                     {
-                        preTaxLineAmount = Transaction.TransactionLines[i].LineAmount = Transaction.TransactionLines[i].Price;
+                        preTaxLineAmount = transaction.TransactionLines[i].LineAmount = transaction.TransactionLines[i].Price;
                     }
                     else
                     {
-                        preTaxLineAmount = Transaction.TransactionLines[i].LineAmount = Transaction.TransactionLines[i].Price * Transaction.TransactionLines[i].quantity;
+                        preTaxLineAmount = transaction.TransactionLines[i].LineAmount = transaction.TransactionLines[i].Price * transaction.TransactionLines[i].quantity;
                     }
 
                     Pre_TaxAmount += preTaxLineAmount;
-                    if (Transaction.TransactionLines[i].quantity == 1)
-                        Transaction.TransactionLines[i].tax_amount = preTaxLineAmount * Transaction.TransactionLines[i].tax_percentage / 100;
+                    if (transaction.TransactionLines[i].quantity == 1)
+                        transaction.TransactionLines[i].tax_amount = preTaxLineAmount * transaction.TransactionLines[i].tax_percentage / 100;
 
 
 
-                    Tax_Amount += Transaction.TransactionLines[i].tax_amount;
-                    Transaction.TransactionLines[i].LineAmount += Transaction.TransactionLines[i].tax_amount;
-                    Transaction.TransactionLines[i].Discount_Percentage = 0;
+                    Tax_Amount += transaction.TransactionLines[i].tax_amount;
+                    transaction.TransactionLines[i].LineAmount += transaction.TransactionLines[i].tax_amount;
+                    transaction.TransactionLines[i].Discount_Percentage = 0;
 
-                    foreach (Discounts.DiscountLine dl in Transaction.TransactionLines[i].discountLines)
+                    foreach (Discounts.DiscountLine dl in transaction.TransactionLines[i].discountLines)
                     {
                         if (dl.LineValid)
                         {
-                            Transaction.TransactionLines[i].Discount_Percentage += dl.DiscountPercentage;
-                            dl.DiscountAmount += (preTaxLineAmount + Transaction.TransactionLines[i].tax_amount) * dl.DiscountPercentage / 100;
+                            transaction.TransactionLines[i].Discount_Percentage += dl.DiscountPercentage;
+                            dl.DiscountAmount += (preTaxLineAmount + transaction.TransactionLines[i].tax_amount) * dl.DiscountPercentage / 100;
                         }
                     }
-                    Discount_Amount += (preTaxLineAmount + Transaction.TransactionLines[i].tax_amount) * Transaction.TransactionLines[i].Discount_Percentage / 100;
+                    Discount_Amount += (preTaxLineAmount + transaction.TransactionLines[i].tax_amount) * transaction.TransactionLines[i].Discount_Percentage / 100;
                 }
             }
             Transaction_Amount = Pre_TaxAmount + Tax_Amount;
-            Transaction.Discount_Percentage = GetTransactionDiscountPercentage();
-            Transaction.Net_Transaction_Amount = Math.Round(Transaction_Amount - Discount_Amount, 2, MidpointRounding.AwayFromZero);
+            transaction.Discount_Percentage = GetTransactionDiscountPercentage();
+            transaction.Net_Transaction_Amount = Math.Round(Transaction_Amount - Discount_Amount, 2, MidpointRounding.AwayFromZero);
         }
 
         private decimal GetTransactionDiscountPercentage()
         {
             List<Discounts.DiscountLine> distinctDiscountLines = new List<Discounts.DiscountLine>();
 
-            if (Transaction != null && Transaction.discounts != null)
+            if (transaction != null && transaction.discounts != null)
             {
-                foreach (Discounts.DiscountLine d in Transaction.discounts.DiscountLines)
+                foreach (Discounts.DiscountLine d in transaction.discounts.DiscountLines)
                 {
                     if (d.LineValid && !distinctDiscountLines.Any(x => x.DiscountId == d.DiscountId && x.LineValid))
                         distinctDiscountLines.Add(d);
@@ -495,25 +495,47 @@ namespace Marbale.POS
             CreateTransactionLine(product);
         }
 
+        //public void ValidateProduct(Product product)
+        //{
+        //    if (product.TypeName == GlobalEnum.ProductType.NEW.DescriptionAttr())
+        //    {
+        //        if(CurrentCard.CardNumber=="")
+        //        {
+        //            MessageBox.Show("New card not tapped.");
+        //            return;
+
+        //        }
+        //        if (CurrentCard.CardStatus == GlobalEnum.CARD_STATUS.ISSUED.DescriptionAttr())
+        //        {
+        //            //lblCardStatustext.Text = CurrentCard.CardStatus;
+        //            MessageBox.Show("Please choose the new  card.");
+        //            return;
+        //        }
+                
+        //    }
+
+
+        //}
+
         public void CreateTransactionLine(Product product)
         {
-            if (Transaction == null)
+            if (transaction == null)
             {
-                Transaction = new Transaction();
+                transaction = new Transaction();
                 if (CurrentUser != null)
                 {
-                    Transaction.Username = CurrentUser.LoginId;
-                    Transaction.LoginID = CurrentUser.LoginId;
-                    Transaction.UserId = CurrentUser.Id;
+                    transaction.Username = CurrentUser.LoginId;
+                    transaction.LoginID = CurrentUser.LoginId;
+                    transaction.UserId = CurrentUser.Id;
                 }
             }
 
-            if (Transaction.TransactionLines == null)
-                Transaction.TransactionLines = new List<TransactionLine>();
+            if (transaction.TransactionLines == null)
+                transaction.TransactionLines = new List<TransactionLine>();
 
-            Transaction.TransactionDate = DateTime.Now;
+            transaction.TransactionDate = DateTime.Now;
 
-            if (product.Type == "NEW")
+            if (product.TypeName == GlobalEnum.ProductType.NEW.DescriptionAttr())
             {
                 if (CurrentCard == null)
                 {
@@ -528,9 +550,9 @@ namespace Marbale.POS
                 }
 
                 bool newProductExists = false;
-                for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+                for (int i = 0; i < transaction.TransactionLines.Count; i++)
                 {
-                    if (Transaction.TransactionLines[i].ProductType == "NEW" && Transaction.TransactionLines[i].CancelledLine == false)
+                    if (transaction.TransactionLines[i].ProductType == "NEW" && transaction.TransactionLines[i].CancelledLine == false)
                     {
                         newProductExists = true;
                         break;
@@ -575,9 +597,9 @@ namespace Marbale.POS
                 }
 
                 bool variableRechargeProductExists = false;
-                for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+                for (int i = 0; i < transaction.TransactionLines.Count; i++)
                 {
-                    if (Transaction.TransactionLines[i].ProductType == "VARIABLE_RECHARGE" && Transaction.TransactionLines[i].CancelledLine == false)
+                    if (transaction.TransactionLines[i].ProductType == "VARIABLE_RECHARGE" && transaction.TransactionLines[i].CancelledLine == false)
                     {
                         variableRechargeProductExists = true;
                         break;
@@ -630,7 +652,7 @@ namespace Marbale.POS
                 trxLine.CardNumber = CurrentCard != null ? CurrentCard.CardNumber : "";
             }
 
-            trxLine.ProductType = product.Type;
+            trxLine.ProductType = product.TypeName;
 
             trxLine.amount = productPrice - Convert.ToDecimal(product.FaceValue);
             trxLine.ProductTypeCode = product.Type;
@@ -642,13 +664,13 @@ namespace Marbale.POS
 
             //Transaction.Tax_Amount = 0;
             bool found = false;
-            for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+            for (int i = 0; i < transaction.TransactionLines.Count; i++)
             {
-                if (Transaction.TransactionLines[i].ProductID == product.Id && Transaction.TransactionLines[i].CancelledLine == false)
+                if (transaction.TransactionLines[i].ProductID == product.Id && transaction.TransactionLines[i].CancelledLine == false)
                 {
                     trxLine.LineValid = false;
-                    Transaction.TransactionLines.Add(trxLine);
-                    UpdateTrxLine(trxLine, Transaction.TransactionLines[i]);
+                    transaction.TransactionLines.Add(trxLine);
+                    UpdateTrxLine(trxLine, transaction.TransactionLines[i]);
                     found = true;
                     break;
                 }
@@ -656,12 +678,12 @@ namespace Marbale.POS
 
             if (!found)
             {
-                Transaction.TransactionLines.Add(trxLine);
+                transaction.TransactionLines.Add(trxLine);
                 //Transaction.Tax_Amount += trxLine.tax_amount;
                 trxLine.LineValid = true;
             }
 
-            if (Transaction.discounts != null && Transaction.discounts.DiscountLines != null)
+            if (transaction.discounts != null && transaction.discounts.DiscountLines != null)
             {
                 ApplyDiscountToLines();
             }
@@ -687,12 +709,12 @@ namespace Marbale.POS
             trxLine.amount = Convert.ToDecimal(product.FaceValue);
             trxLine.ProductTypeCode = product.Type;
             trxLine.LineAmount = Convert.ToDecimal(product.FaceValue);
-            trxLine.ProductType = product.Type;
+            trxLine.ProductType = product.TypeName;
 
             trxLine.CardNumber = CurrentCard.CardNumber;
             UpdateCardForTransaction(product);
 
-            Transaction.TransactionLines.Add(trxLine);
+            transaction.TransactionLines.Add(trxLine);
         }
 
         void UpdateCardForRechargeTransaction(Product product)
@@ -720,15 +742,15 @@ namespace Marbale.POS
 
         void UpdateTransactionAmount()
         {
-            Transaction.Tax_Amount = 0;
-            Transaction.Transaction_Amount = 0;
-            for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+            transaction.Tax_Amount = 0;
+            transaction.Transaction_Amount = 0;
+            for (int i = 0; i < transaction.TransactionLines.Count; i++)
             {
-                if (Transaction.TransactionLines[i].LineValid && Transaction.TransactionLines[i].CancelledLine == false)
+                if (transaction.TransactionLines[i].LineValid && transaction.TransactionLines[i].CancelledLine == false)
                 {
-                    Transaction.Tax_Amount += Transaction.TransactionLines[i].tax_amount;
+                    transaction.Tax_Amount += transaction.TransactionLines[i].tax_amount;
 
-                    Transaction.Transaction_Amount += Transaction.TransactionLines[i].LineAmount;
+                    transaction.Transaction_Amount += transaction.TransactionLines[i].LineAmount;
                 }
             }
         }
@@ -747,17 +769,17 @@ namespace Marbale.POS
         {
             dgvTransaction.Rows.Clear();
 
-            if (Transaction == null)
+            if (transaction == null)
                 return;
 
             UpdateTransactionAmount();
 
-            for (int i = 0; i < Transaction.TransactionLines.Count; i++)
+            for (int i = 0; i < transaction.TransactionLines.Count; i++)
             {
-                if (Transaction.TransactionLines[i].ProductTypeCode == "LOYALTY")
-                    Transaction.TransactionLines[i].LineProcessed = true;
+                if (transaction.TransactionLines[i].ProductTypeCode == "LOYALTY")
+                    transaction.TransactionLines[i].LineProcessed = true;
                 else
-                    Transaction.TransactionLines[i].LineProcessed = false;
+                    transaction.TransactionLines[i].LineProcessed = false;
             }
 
             dgvTransaction.Columns["Price"].DefaultCellStyle.Format =
@@ -765,14 +787,14 @@ namespace Marbale.POS
             dgvTransaction.Columns["Price"].DefaultCellStyle.Format = "#,##0.00";
 
             int rowcount = 0;
-            for (int i = 0; i < Transaction.TransactionLines.Count; i++) // display card lines
+            for (int i = 0; i < transaction.TransactionLines.Count; i++) // display card lines
             {
-                if (Transaction.TransactionLines[i].LineValid && !Transaction.TransactionLines[i].LineProcessed
-                    && Transaction.TransactionLines[i].CardNumber != null && !Transaction.TransactionLines[i].CancelledLine)
+                if (transaction.TransactionLines[i].LineValid && !transaction.TransactionLines[i].LineProcessed
+                    && transaction.TransactionLines[i].CardNumber != null && !transaction.TransactionLines[i].CancelledLine)
                 {
                     dgvTransaction.Rows.Add();
 
-                    string cardnumber = Transaction.TransactionLines[i].CardNumber;
+                    string cardnumber = transaction.TransactionLines[i].CardNumber;
                     if (cardnumber != null)
                     {
                         dgvTransaction.Rows[rowcount].Cells["Card_Number"].Value = cardnumber;
@@ -787,35 +809,35 @@ namespace Marbale.POS
 
                         rowcount++;
 
-                        for (int j = i; j < Transaction.TransactionLines.Count; j++)
+                        for (int j = i; j < transaction.TransactionLines.Count; j++)
                         {
-                            if (cardnumber == Transaction.TransactionLines[j].CardNumber && Transaction.TransactionLines[j].LineValid && Transaction.TransactionLines[j].LineProcessed == false)
+                            if (cardnumber == transaction.TransactionLines[j].CardNumber && transaction.TransactionLines[j].LineValid && transaction.TransactionLines[j].LineProcessed == false)
                             {
                                 dgvTransaction.Rows.Add();
-                                dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = Transaction.TransactionLines[j].ProductName + (string.IsNullOrEmpty(Transaction.TransactionLines[j].AttractionDetails) ? "" : "-" + Transaction.TransactionLines[j].AttractionDetails) + (string.IsNullOrEmpty(Transaction.TransactionLines[j].Remarks) ? "" : "-" + Transaction.TransactionLines[j].Remarks);
-                                dgvTransaction.Rows[rowcount].Cells["Quantity"].Value = Transaction.TransactionLines[j].quantity;
-                                dgvTransaction.Rows[rowcount].Cells["Price"].Value = Transaction.TransactionLines[j].Price;
-                                dgvTransaction.Rows[rowcount].Cells["Remarks"].Value = Transaction.TransactionLines[j].Remarks;
-                                //dgvTransaction.Rows[rowcount].Cells["AttractionDetails"].Value = Transaction.TransactionLines[j].AttractionDetails;
+                                dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = transaction.TransactionLines[j].ProductName + (string.IsNullOrEmpty(transaction.TransactionLines[j].AttractionDetails) ? "" : "-" + transaction.TransactionLines[j].AttractionDetails) + (string.IsNullOrEmpty(transaction.TransactionLines[j].Remarks) ? "" : "-" + transaction.TransactionLines[j].Remarks);
+                                dgvTransaction.Rows[rowcount].Cells["Quantity"].Value = transaction.TransactionLines[j].quantity;
+                                dgvTransaction.Rows[rowcount].Cells["Price"].Value = transaction.TransactionLines[j].Price;
+                                dgvTransaction.Rows[rowcount].Cells["Remarks"].Value = transaction.TransactionLines[j].Remarks;
+                                //dgvTransaction.Rows[rowcount].Cells["AttractionDetails"].Value = transaction.TransactionLines[j].AttractionDetails;
 
-                                dgvTransaction.Rows[rowcount].Cells["Tax"].Value = Transaction.TransactionLines[j].tax_amount;
-                                dgvTransaction.Rows[rowcount].Cells["TaxName"].Value = Transaction.TransactionLines[j].taxName;
-                                dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = Transaction.TransactionLines[j].LineAmount;
+                                dgvTransaction.Rows[rowcount].Cells["Tax"].Value = transaction.TransactionLines[j].tax_amount;
+                                dgvTransaction.Rows[rowcount].Cells["TaxName"].Value = transaction.TransactionLines[j].taxName;
+                                dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = transaction.TransactionLines[j].LineAmount;
                                 dgvTransaction.Rows[rowcount].Cells["LineId"].Value = j;
-                                dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = Transaction.TransactionLines[j].ProductTypeCode;
+                                dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = transaction.TransactionLines[j].ProductTypeCode;
                                 dgvTransaction.Rows[rowcount].Cells["Card_Number"].Value = cardnumber;
                                 rowcount++;
-                                Transaction.TransactionLines[j].LineProcessed = true;
+                                transaction.TransactionLines[j].LineProcessed = true;
                             }
                         }
                     }
                 }
             }
 
-            for (int i = 0; i < Transaction.TransactionLines.Count; i++) // display non-card Transaction lines
+            for (int i = 0; i < transaction.TransactionLines.Count; i++) // display non-card transaction lines
             {
-                if (Transaction.TransactionLines[i].LineValid && !Transaction.TransactionLines[i].LineProcessed
-                    && Transaction.TransactionLines[i].CardNumber == null && !Transaction.TransactionLines[i].CancelledLine)
+                if (transaction.TransactionLines[i].LineValid && !transaction.TransactionLines[i].LineProcessed
+                    && transaction.TransactionLines[i].CardNumber == null && !transaction.TransactionLines[i].CancelledLine)
                 {
                     dgvTransaction.Rows.Add();
 
@@ -830,9 +852,9 @@ namespace Marbale.POS
                     //    dgvTransaction.Rows[rowcount].Cells["Product_Type"].Value = "Card Sale";
                     //}
 
-                    dgvTransaction.Rows[rowcount].Cells["LineId"].Value = Transaction.TransactionLines[i].LineId = i;
-                    dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = Transaction.TransactionLines[i].ProductTypeCode;
-                    dgvTransaction.Rows[rowcount].Cells["ProductId"].Value = Transaction.TransactionLines[i].ProductID;
+                    dgvTransaction.Rows[rowcount].Cells["LineId"].Value = transaction.TransactionLines[i].LineId = i;
+                    dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = transaction.TransactionLines[i].ProductTypeCode;
+                    dgvTransaction.Rows[rowcount].Cells["ProductId"].Value = transaction.TransactionLines[i].ProductID;
 
 
                     dgvTransaction.Rows[rowcount].DefaultCellStyle = getSpecialGridRowFormat(dgvTransaction.DefaultCellStyle);
@@ -840,12 +862,12 @@ namespace Marbale.POS
 
                     rowcount++;
 
-                    for (int j = i; j < Transaction.TransactionLines.Count; j++)
+                    for (int j = i; j < transaction.TransactionLines.Count; j++)
                     {
-                        if (Transaction.TransactionLines[j].CardNumber == null && Transaction.TransactionLines[j].LineValid
-                            && !Transaction.TransactionLines[j].LineProcessed && !Transaction.TransactionLines[j].CancelledLine)
+                        if (transaction.TransactionLines[j].CardNumber == null && transaction.TransactionLines[j].LineValid
+                            && !transaction.TransactionLines[j].LineProcessed && !transaction.TransactionLines[j].CancelledLine)
                         {
-                            displayNonCardLine(dgvTransaction, Transaction, j, ref rowcount);
+                            displayNonCardLine(dgvTransaction, transaction, j, ref rowcount);
                         }
                     }
                 }
@@ -859,8 +881,8 @@ namespace Marbale.POS
             dgvTransaction.Rows.Add();
             dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = "Transaction Total";
             dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = "Transaction Total";
-            dgvTransaction.Rows[rowcount].Cells["Tax"].Value = Transaction.Tax_Amount;
-            dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = Transaction.Transaction_Amount;
+            dgvTransaction.Rows[rowcount].Cells["Tax"].Value = transaction.Tax_Amount;
+            dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = transaction.Transaction_Amount;
 
             DataGridViewCellStyle dgvtot = getSpecialGridRowFormat(dgvTransaction.DefaultCellStyle, 0);// new DataGridViewCellStyle();
             dgvtot.BackColor =
@@ -874,9 +896,9 @@ namespace Marbale.POS
             rowcount++;
 
             bool discFound = false;
-            if (Transaction.discounts != null && Transaction.discounts.DiscountLines != null)
+            if (transaction.discounts != null && transaction.discounts.DiscountLines != null)
             {
-                foreach (Discounts.DiscountLine dl in Transaction.discounts.DiscountLines)
+                foreach (Discounts.DiscountLine dl in transaction.discounts.DiscountLines)
                 {
                     if (dl.LineValid && dl.DiscountAmount != 0)
                     {
@@ -888,16 +910,16 @@ namespace Marbale.POS
             if (discFound)
             {
                 bool headerDone = false;
-                for (int i = 0; i < Transaction.discounts.DiscountLines.Count; i++) // display discount lines
+                for (int i = 0; i < transaction.discounts.DiscountLines.Count; i++) // display discount lines
                 {
-                    if (Transaction.discounts.DiscountLines[i].LineValid && Transaction.discounts.DiscountLines[i].DiscountAmount > 0)
+                    if (transaction.discounts.DiscountLines[i].LineValid && transaction.discounts.DiscountLines[i].DiscountAmount > 0)
                     {
                         if (!headerDone)
                         {
                             dgvTransaction.Rows.Add();
 
                             dgvTransaction.Rows[rowcount].Cells["Product_Type"].Value = "Discount";
-                            dgvTransaction.Rows[rowcount].Cells["LineId"].Value = Transaction.discounts.DiscountLines[i].DiscountId;
+                            dgvTransaction.Rows[rowcount].Cells["LineId"].Value = transaction.discounts.DiscountLines[i].DiscountId;
                             dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = "Discount";
 
                             dgvTransaction.Rows[rowcount].DefaultCellStyle = getSpecialGridRowFormat(dgvTransaction.DefaultCellStyle);
@@ -908,11 +930,11 @@ namespace Marbale.POS
                         }
 
                         dgvTransaction.Rows.Add();
-                        dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = Transaction.discounts.DiscountLines[i].DisplayChar + " " + Transaction.discounts.DiscountLines[i].DiscountName;
+                        dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = transaction.discounts.DiscountLines[i].DisplayChar + " " + transaction.discounts.DiscountLines[i].DiscountName;
                         dgvTransaction.Rows[rowcount].Cells["Quantity"].Value = 1;
-                        dgvTransaction.Rows[rowcount].Cells["Price"].Value = Transaction.discounts.DiscountLines[i].DiscountPercentage.ToString("#,##0.00") + "%";
-                        dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = Transaction.discounts.DiscountLines[i].DiscountAmount;//.ToString(ParafaitUtils.ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);
-                        dgvTransaction.Rows[rowcount].Cells["LineId"].Value = Transaction.discounts.DiscountLines[i].DiscountId;
+                        dgvTransaction.Rows[rowcount].Cells["Price"].Value = transaction.discounts.DiscountLines[i].DiscountPercentage.ToString("#,##0.00") + "%";
+                        dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = transaction.discounts.DiscountLines[i].DiscountAmount;//.ToString(ParafaitUtils.ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);
+                        dgvTransaction.Rows[rowcount].Cells["LineId"].Value = transaction.discounts.DiscountLines[i].DiscountId;
                         dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = "Discount";
                         rowcount++;
                     }
@@ -922,7 +944,7 @@ namespace Marbale.POS
             // display grand total
             dgvTransaction.Rows.Add();
             dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = "Grand Total";
-            dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = Transaction.Net_Transaction_Amount;// = Transaction.Transaction_Amount;
+            dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = transaction.Net_Transaction_Amount;// = Transaction.Transaction_Amount;
 
             DataGridViewCellStyle dgvgrandtot = getSpecialGridRowFormat(dgvTransaction.DefaultCellStyle, 2);// new DataGridViewCellStyle();
             dgvgrandtot.BackColor =
@@ -1192,7 +1214,7 @@ namespace Marbale.POS
 
         private void btnCancelTrxnLine_Click(object sender, EventArgs e)
         {
-            if (Transaction != null && Transaction.TransactionLines != null)
+            if (transaction != null && transaction.TransactionLines != null)
             {
                 if (dgvTransaction.SelectedRows.Count == 0)
                 {
@@ -1205,7 +1227,7 @@ namespace Marbale.POS
                     if (dgvTransaction.SelectedRows[i].Cells["LineId"].Value != null)
                     {
                         lineId = Convert.ToInt32(dgvTransaction.SelectedRows[i].Cells["LineId"].Value);
-                        TransactionLine trxLine = Transaction.TransactionLines.Find(x => x.LineId == lineId && x.LineValid == true &&
+                        TransactionLine trxLine = transaction.TransactionLines.Find(x => x.LineId == lineId && x.LineValid == true &&
                         x.CancelledLine == false);
 
                         if (trxLine != null)
@@ -1216,7 +1238,7 @@ namespace Marbale.POS
                         dgvTransaction.SelectedRows[i].Cells["Line_Type"].Value.ToString() == "Discount")
                     {
                         int discountId = Convert.ToInt32(dgvTransaction.SelectedRows[i].Cells["LineId"].Value);
-                        List<Discounts.DiscountLine> dscLines = Transaction.discounts.DiscountLines.FindAll(x => x.DiscountId == discountId);
+                        List<Discounts.DiscountLine> dscLines = transaction.discounts.DiscountLines.FindAll(x => x.DiscountId == discountId);
                         if (dscLines != null)
                         {
                             foreach (Discounts.DiscountLine ln in dscLines)
@@ -1227,7 +1249,7 @@ namespace Marbale.POS
                     }
                 }
 
-                List<TransactionLine> activeTrxLns = Transaction.TransactionLines.FindAll(x => x.LineValid == true && x.CancelledLine == false);
+                List<TransactionLine> activeTrxLns = transaction.TransactionLines.FindAll(x => x.LineValid == true && x.CancelledLine == false);
 
                 if (activeTrxLns != null && activeTrxLns.Count == 0)
                     ClearTransaction();
@@ -1304,7 +1326,7 @@ namespace Marbale.POS
         private void ClearTransaction()
         {
             dgvTransaction.Rows.Clear();
-            Transaction = null;
+            transaction = null;
             CurrentCard = null;
             ClearCustomer();
             ClearCard();
@@ -1313,24 +1335,24 @@ namespace Marbale.POS
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Transaction == null)
+            if (transaction == null)
                 return;
 
             if (Customer != null)
-                Transaction.customer = Customer;
+                transaction.customer = Customer;
 
             if (CurrentCard != null)
-                Transaction.Card = CurrentCard;
+                transaction.Card = CurrentCard;
 
             while (true)
             {
-                frmTender ft = new frmTender((double)Transaction.Net_Transaction_Amount);
+                frmTender ft = new frmTender((double)transaction.Net_Transaction_Amount);
                 ft.ShowDialog();
                 double varAmount = ft.TenderedAmount;
 
                 if (varAmount >= 0)
                 {
-                    if (varAmount >= (double)Transaction.Net_Transaction_Amount)
+                    if (varAmount >= (double)transaction.Net_Transaction_Amount)
                     {
                         tendered_amount = varAmount;
                         updateScreenAmounts();
@@ -1348,10 +1370,10 @@ namespace Marbale.POS
                 }
             }
 
-            Transaction.Status = "CLOSED";
+            transaction.Status = "CLOSED";
 
             TransactionBL trxBL = new TransactionBL();
-            int trxId = trxBL.SaveTransaction(Transaction);
+            int trxId = trxBL.SaveTransaction(transaction);
 
             if (trxId > 0)
                 MessageBox.Show("Transaction Saved Successfully");
@@ -1636,7 +1658,7 @@ namespace Marbale.POS
         {
             double balanceAmount = 0;
             double changeAmount = 0;
-            if (Transaction == null)
+            if (transaction == null)
             {
                 total_amount = 0;
                 tendered_amount = 0;
@@ -1645,15 +1667,15 @@ namespace Marbale.POS
             else
             {
                 //Begin Modification on 09-Nov-2015:Tip Amount Feature
-                total_amount = (double)Transaction.Net_Transaction_Amount + TipAmount;
+                total_amount = (double)transaction.Net_Transaction_Amount + TipAmount;
 
-                if (Transaction.TotalPaidAmount == 0)
-                    balanceAmount = total_amount - Transaction.TotalPaidAmount;
+                if (transaction.TotalPaidAmount == 0)
+                    balanceAmount = total_amount - transaction.TotalPaidAmount;
                 else
-                    balanceAmount = total_amount - (Transaction.TotalPaidAmount + Transaction.Tip_Amount);
+                    balanceAmount = total_amount - (transaction.TotalPaidAmount + transaction.Tip_Amount);
                 changeAmount = Math.Max(tendered_amount - balanceAmount, 0);
 
-                TipAmount = Transaction.Tip_Amount;
+                TipAmount = transaction.Tip_Amount;
             }
 
             textBoxTransactionTotal.Text = "Rs " + total_amount.ToString(); //.ToString("$"); //AMOUNT_WITH_CURRENCY_SYMBOL
@@ -1666,7 +1688,7 @@ namespace Marbale.POS
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            if (Transaction == null)
+            if (transaction == null)
             {
                 RefreshTabs();
             }

@@ -90,6 +90,7 @@
     <Compile Include="Inventory\PurchaseTax.cs" />
     <Compile Include="Inventory\UnitOfMeasure.cs" />
     <Compile Include="Inventory\Vendor.cs" />
+    <Compile Include="Common\GlobalEnum.cs" />
     <Compile Include="Messages\MessagesModel.cs" />
     <Compile Include="NameValue.cs" />
     <Compile Include="Product\DisplayGroupModel.cs" />
