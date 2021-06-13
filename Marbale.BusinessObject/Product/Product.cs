@@ -18,18 +18,17 @@ namespace Marbale.BusinessObject
         public int Id { get; set; }
         public string DisplayGroup { get; set; }
         [Required(ErrorMessage = "Enter Product name.")]
-        [Remote("IsAlreadySigned", "Product", AdditionalFields = "Id", HttpMethod = "POST", ErrorMessage = "Product Exist Already")]
+        //[Remote("IsAlreadySigned", "Product", AdditionalFields = "Id", HttpMethod = "POST", ErrorMessage = "Product Exist Already")]
         public string Name { get; set; }
+        [Required]
         public string Type { get; set; }
         public string POSCounter { get; set; }
         public bool Active { get; set; }
         public bool DisplayInPOS { get; set; }
         public int? DisplayGroupId { get; set; }
-        [Required(ErrorMessage = "Select Category")]
         public string Category { get; set; }
         public bool AutoGenerateCardNumber { get; set; }
         public bool OnlyVIP { get; set; }
-        [Required(ErrorMessage = "Enter Price.")]
         public decimal? Price { get; set; }
         [Range(0, double.MaxValue, ErrorMessage = "Please enter  Number")]
         public decimal? FaceValue { get; set; }

@@ -1,4 +1,4 @@
-USE [MarbleMg]
+USE [Marbale]
 GO
 --drop table  [PurchaseOrderReceiveLine] 
 /****** Object:  Table [dbo].[PurchaseOrderReceive_Line]    Script Date: 4/17/2020 9:21:31 PM ******/

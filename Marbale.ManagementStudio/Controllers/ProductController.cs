@@ -69,6 +69,8 @@ namespace MarbaleManagementStudio.Controllers
         {
             Product a = new Product();
             a.TaxList = Session["TaxList"] as List<TaxSet>;
+            Session["TypeList"] = a.TypeList;
+            a.Active = true;
             return View(a);
         }
 
@@ -96,11 +98,13 @@ namespace MarbaleManagementStudio.Controllers
             }
             return status;
         }
-        public ActionResult NonCardEdit(int id)
+        public ActionResult NonCardEdit(int id = 0)
         {
             try
             {
                 var product = productBl.GetProductById(id);
+                Session["TypeList"] = product.TypeList;
+                product.Active = id == 0 ? true : product.Active;
                 return View(product);
             }
             catch (Exception e)
@@ -119,6 +123,7 @@ namespace MarbaleManagementStudio.Controllers
                 Session["TypeList"] = product.TypeList;
                 Session["CategoryList"] = product.CategoryList;
                 Session["DisplayGroupList"] = product.DisplayGroupList;
+                product.Active = id == 0 ? true : product.Active;
                 return View(product);
             }
             catch (Exception e)

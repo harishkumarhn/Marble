@@ -20,7 +20,7 @@ CREATE TABLE [dbo].[Machine](
 	[ReaderType] [varchar](50) NULL,
 	[SoftwareVersion] [varchar](50) NULL,
 	[TicketMode] [varchar](50) NULL,
-	[VIPPrice] [int] NULL,s
+	[VIPPrice] [int] NULL,
 	[TicketAllowed] [bit] NULL,
 	[PurchasePrice] [int] NULL,
 	[Notes] [varchar](max) NULL,

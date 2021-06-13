@@ -127,7 +127,7 @@
                     <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)"  />
                 </td>
                 <td>
-                    <input type="text" value="@item.TaxPercentage" id="TaxPercentage@(count)" style="width:7vw"/>
+                    <input type="text" value="@item.TaxPercentage" id="TaxPercentage@(count)" style="width:7vw" readonly="readonly"/>
                 </td>
                 <td>
                     <select name="taxlist" id="taxlist">
@@ -145,10 +145,10 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="FinalPrice@(count)"  value="@item.FinalPrice" style="width:7vw"/>
+                    <input type="text" id="FinalPrice@(count)"  value="@item.FinalPrice" style="width:7vw" readonly="readonly"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.EffectivePrice" id="EffectivePrice@(count)" style="width:7vw"/>
+                    <input type="text" value="@item.EffectivePrice" id="EffectivePrice@(count)" style="width:7vw" readonly="readonly"/>
                 </td>
                 <td>
                     <input type="text" value="@item.LastUpdatedBy" disabled/>

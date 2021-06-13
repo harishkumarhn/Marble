@@ -57,16 +57,16 @@
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Tax %:</label>
-                                @Html.TextBoxFor(m => m.Taxpercent, new { @class = "col-md-6" })
+                                @Html.TextBoxFor(m => m.Taxpercent, new { @class = "col-md-6", @readonly = "readonly" })
                             </div>
 
                             <div class="col-md-13">
                                 <label class="col-md-5">Effective Price:</label>
-                                @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "col-md-6" })
+                                @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "col-md-6", @readonly = "readonly" })
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Final Price:</label>
-                                @Html.TextBoxFor(m => m.FinalPrice, new { @class = "col-md-6" })
+                                @Html.TextBoxFor(m => m.FinalPrice, new { @class = "col-md-6", @readonly = "readonly" })
                             </div>
                             @*<div class="col-md-13">
                                 <label class="col-md-5">Credits:</label>
@@ -95,7 +95,7 @@
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Product Type:</label>
-                                @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "col-md-6", @style = "font-size: 14px" })
+                                @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "col-md-6", @style = "font-size: 14px", @id = "productType"})
                             </div>
                             <div class="col-md-13">
                                 <button class="col-md-5 btn btn-success btn-md" role="button" style="width:fit-content;margin-left:1vw;margin-right:1.7vw">GetProducts</button>                                
@@ -209,13 +209,15 @@
     var duplicateClicked = false;
     function duplicateClick(value) {
         if (value == true) {
-            $('#productId').val(0);
+            $('#productId').val('');
+            $('#productType').val('');
         }
         duplicateClicked = value;
     }
     function displayMessage(response) {
         if (duplicateClicked == false) {
             if (response == '') {
+                alert('data successfully saved');
                 location.reload();
             } else {
                 alert(response);

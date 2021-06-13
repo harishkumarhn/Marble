@@ -56,16 +56,16 @@
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Tax %:</label>
-                                @Html.TextBoxFor(m => m.Taxpercent, new { @class = "col-md-6" })
+                                @Html.TextBoxFor(m => m.Taxpercent, new { @class = "col-md-6", @readonly = "readonly" })
                             </div>
 
                             <div class="col-md-13">
                                 <label class="col-md-5">Effective Price:</label>
-                                @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "col-md-6" })
+                                @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "col-md-6", @readonly = "readonly" })
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Final Price:</label>
-                                @Html.TextBoxFor(m => m.FinalPrice, new { @class = "col-md-6" })
+                                @Html.TextBoxFor(m => m.FinalPrice, new { @class = "col-md-6", @readonly = "readonly" })
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Credits:</label>
@@ -193,13 +193,14 @@
     var duplicateClicked = false;
     function duplicateClick(value) {
         if (value == true) {
-            $('#productId').val(0);
+            $('#productId').val('');
         }
         duplicateClicked = value;
     }
     function displayMessage(response) {
         if (duplicateClicked == false) {
             if (response == '') {
+                alert('data saved successfully');
                 location.reload();
             } else {
                 alert(response);

@@ -1,4 +1,4 @@
-USE [MarbleMg]
+USE [Marbale]
 GO
 
 --drop table PurchaseOrderLine

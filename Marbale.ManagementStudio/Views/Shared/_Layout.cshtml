@@ -214,7 +214,7 @@
             let preSelectedValue = getCookie("PreviousExpandedDropDown");
             if (preSelectedValue) {
                 $('#sidebar').addClass('active');
-                $('.overlay').addClass('active');                
+                $('.overlay').addClass('active');  
                 document.querySelector("a[href='#" + preSelectedValue + "']").click();                
                 setSession(preSelectedValue);
             }
@@ -253,8 +253,7 @@
             if (preSelectedValue != selectedId) {
                 document.cookie = "PreviousExpandedDropDown=" + selectedId;
             } else {
-                document.cookie = "PreviousExpandedDropDown=";
-                console.log(selectedId);
+                document.cookie = "PreviousExpandedDropDown=";                
             }
         }
         

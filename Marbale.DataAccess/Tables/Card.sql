@@ -45,7 +45,7 @@ CREATE TABLE [dbo].[Card](
 	[DownloadBatchId] [int] NULL,
 	[RefreshFromHQTime] [datetime] NULL,
 	[LastUpdatedTime] [datetime] NULL,
-	[Custemer] [varchar](100) NULL,
+	[Customer] [varchar](100) NULL,
 	[Note] [varchar](100) NULL,
 	[CreditPlus] [decimal](18, 2) NULL,
  CONSTRAINT [PK_Card] PRIMARY KEY CLUSTERED 
@@ -67,5 +67,4 @@ GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Card Master Table' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Card'
 GO
-
 
