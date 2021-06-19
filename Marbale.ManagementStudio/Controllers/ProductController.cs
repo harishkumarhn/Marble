@@ -69,7 +69,6 @@ namespace MarbaleManagementStudio.Controllers
         {
             Product a = new Product();
             a.TaxList = Session["TaxList"] as List<TaxSet>;
-            Session["TypeList"] = a.TypeList;
             a.Active = true;
             return View(a);
         }
