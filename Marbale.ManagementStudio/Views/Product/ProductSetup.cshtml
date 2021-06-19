@@ -162,7 +162,7 @@
 </table>
 <div class="action">
     <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
-    <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" disabled id="saveproduct">Save</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" id="saveproduct">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
     <button type="button" class="btn btn-primary" data-toggle="modal" onclick="EditProduct(0)">
         New
@@ -247,7 +247,6 @@
         var counter = 1;
 
         $('#addRow').on('click', function () {
-            $("#saveproduct").attr("disabled", false);
             var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
             var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol3');
 
