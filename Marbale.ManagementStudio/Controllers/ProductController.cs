@@ -104,6 +104,7 @@ namespace MarbaleManagementStudio.Controllers
                 var product = productBl.GetProductById(id);
                 Session["TypeList"] = product.TypeList;
                 product.Active = id == 0 ? true : product.Active;
+                product.TaxId = -1;
                 return View(product);
             }
             catch (Exception e)

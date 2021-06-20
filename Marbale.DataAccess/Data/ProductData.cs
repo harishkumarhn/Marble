@@ -176,13 +176,13 @@ namespace Marbale.DataAccess
                 sqlParameters[16] = new SqlParameter("@Bonus", product.Bonus);
                 sqlParameters[17] = new SqlParameter("@LastUpdatedBy", string.IsNullOrEmpty(product.LastUpdatedBy) ? "" : product.LastUpdatedBy);
                 sqlParameters[18] = new SqlParameter("@TaxName", product.TaxName);
-                sqlParameters[19] = new SqlParameter("@StartDate", product.StartDate);
+                sqlParameters[19] = new SqlParameter("@StartDate", string.IsNullOrEmpty(product.StartDate.Value.ToString()) || product.StartDate.Value.Year == 1 ? DateTime.Now : product.StartDate);
                 sqlParameters[20] = new SqlParameter("@Games", product.Games);
                 sqlParameters[21] = new SqlParameter("@CreditsPlus", product.CreditsPlus);
                 sqlParameters[22] = new SqlParameter("@Credits", product.Credits);
                 sqlParameters[23] = new SqlParameter("@CardValidFor", product.CardValidFor);
                 sqlParameters[24] = new SqlParameter("@Courtesy", product.Courtesy);
-                sqlParameters[25] = new SqlParameter("@ExpiryDate", product.ExpiryDate);
+                sqlParameters[25] = new SqlParameter("@ExpiryDate", string.IsNullOrEmpty(product.ExpiryDate.Value.ToString()) || product.ExpiryDate.Value.Year == 1 ? DateTime.Now : product.ExpiryDate);
                 sqlParameters[26] = new SqlParameter("@taxId", product.TaxId);
 
                 sqlParameters[27] = new SqlParameter("@Time", product.Time);
