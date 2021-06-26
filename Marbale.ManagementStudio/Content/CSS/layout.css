@@ -1,10 +1,34 @@
-﻿/*
-    DEMO STYLE
-*/
+﻿
+@font-face {
+    font-family: "Oswald-Bold";
+    src: url("../CSS/fonts/Oswald/static/Oswald-ExtraLight.ttf");
+}
+@font-face {
+    font-family: "Oswald-Light";
+    src: url("../CSS/fonts/Oswald/static/Oswald-Light.ttf");
+}
+@font-face {
+    font-family: "Oswald-Regular";
+    src: url("../CSS/fonts/Oswald/static/Oswald-Regular.ttf");
+}
+ 
+@font-face {
+    font-family: "NotoSansTC-Bold";
+    src: url("../CSS/fonts/Noto_Sans_TC/NotoSansTC-Bold.otf");
+}
 
+@font-face {
+    font-family: "NotoSansTC-Medium";
+    src: url("../CSS/fonts/Noto_Sans_TC/NotoSansTC-Medium.otf");
+}
+@font-face {
+    font-family: "NotoSansTC-Regular";
+    src: url("../CSS/fonts/Noto_Sans_TC/NotoSansTC-Regular.otf");
+}
 @import "/Content/CSS/fonts/font.css";
 body {
-    font-family: 'Poppins', sans-serif;
+    /*font-family: 'Poppins', sans-serif;*/
+    font-family: 'NotoSansTC-Regular';
     background: #fafafa;
 }
 

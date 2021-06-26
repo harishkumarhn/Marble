@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -208,6 +209,9 @@
     <Content Include="Content\CSS\fixedColumns.dataTables.min.css" />
     <Content Include="Content\CSS\fonts\font.css" />
     <Content Include="Content\CSS\fonts\font1.css" />
+    <Content Include="Content\CSS\fonts\Noto_Sans_TC\OFL.txt" />
+    <Content Include="Content\CSS\fonts\Oswald\OFL.txt" />
+    <Content Include="Content\CSS\fonts\Oswald\README.txt" />
     <Content Include="Content\CSS\jquery.dataTables.min.css" />
     <Content Include="Content\CSS\kendo.common-material.min.css" />
     <Content Include="Content\CSS\kendo.common.min.css" />
@@ -239,6 +243,19 @@
     <Content Include="Content\CSS\fonts\pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2" />
     <Content Include="Content\CSS\fonts\pxiEyp8kv8JHgFVrJJfecg.woff2" />
     <Content Include="Content\CSS\Material\flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
+    <Content Include="Content\CSS\fonts\Oswald\Oswald-VariableFont_wght.ttf" />
+    <Content Include="Content\CSS\fonts\Oswald\static\Oswald-Bold.ttf" />
+    <Content Include="Content\CSS\fonts\Oswald\static\Oswald-ExtraLight.ttf" />
+    <Content Include="Content\CSS\fonts\Oswald\static\Oswald-Light.ttf" />
+    <Content Include="Content\CSS\fonts\Oswald\static\Oswald-Medium.ttf" />
+    <Content Include="Content\CSS\fonts\Oswald\static\Oswald-Regular.ttf" />
+    <Content Include="Content\CSS\fonts\Oswald\static\Oswald-SemiBold.ttf" />
+    <Content Include="Content\CSS\fonts\Noto_Sans_TC\NotoSansTC-Black.otf" />
+    <Content Include="Content\CSS\fonts\Noto_Sans_TC\NotoSansTC-Bold.otf" />
+    <Content Include="Content\CSS\fonts\Noto_Sans_TC\NotoSansTC-Light.otf" />
+    <Content Include="Content\CSS\fonts\Noto_Sans_TC\NotoSansTC-Medium.otf" />
+    <Content Include="Content\CSS\fonts\Noto_Sans_TC\NotoSansTC-Regular.otf" />
+    <Content Include="Content\CSS\fonts\Noto_Sans_TC\NotoSansTC-Thin.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

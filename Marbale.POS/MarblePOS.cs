@@ -237,11 +237,12 @@ namespace Marbale.POS
                     btnProduct.MouseUp += ProductButton_MouseUp;
                     btnProduct.Name = lstProducts[i].Name + '_' + lstProducts[i].Id;
                     btnProduct.Text = lstProducts[i].Name;
-                    btnProduct.Padding = new Padding(6);
+                    btnProduct.Padding = new Padding(18);
                     btnProduct.Tag = lstProducts[i].Id;
                     btnProduct.Font = btnSampleProduct.Font;
                     btnProduct.ForeColor = btnSampleProduct.ForeColor;
                     btnProduct.Size = btnSampleProduct.Size;
+                    //btnProduct.Size = new Size(160, 127);
                     btnProduct.BackgroundImage = btnSampleProduct.BackgroundImage;
                     btnProduct.FlatStyle = btnSampleProduct.FlatStyle;
                     btnProduct.FlatAppearance.BorderColor = btnSampleProduct.FlatAppearance.BorderColor;
@@ -267,7 +268,7 @@ namespace Marbale.POS
                         ProductTab.Controls.Add(flpProducts);
 
                         cmbDisplayGroups.Items.Add(prev_display_group);
-                        int width = (int)(cmbDisplayGroups.CreateGraphics().MeasureString(prev_display_group, cmbDisplayGroups.Font).Width) + 20;
+                        int width = (int)(cmbDisplayGroups.CreateGraphics().MeasureString(prev_display_group, cmbDisplayGroups.Font).Width) + 40;
                         if (width > cmbDisplayGroups.Width)
                             cmbDisplayGroups.Width = width;
                     }
@@ -567,7 +568,7 @@ namespace Marbale.POS
                 if (product.FaceValue > 0)
                     CreateDepositLine(product);
             }
-            else if (product.Type == "RECHARGE")
+            else if (product.TypeName == "RECHARGE")
             {
                 if (CurrentCard == null)
                 {
@@ -583,7 +584,7 @@ namespace Marbale.POS
 
                 UpdateCardForRechargeTransaction(product);
             }
-            else if (product.Type == "VARIABLE_RECHARGE")
+            else if (product.TypeName == "VARIABLE_RECHARGE")
             {
                 if (CurrentCard == null)
                 {
@@ -1841,7 +1842,8 @@ namespace Marbale.POS
             }
             else
             {
-                cmbDisplayGroups.Location = new Point(btnDisplayGroupDropDown.Location.X + btnDisplayGroupDropDown.Width - cmbDisplayGroups.Width - 2, btnDisplayGroupDropDown.Location.Y + btnDisplayGroupDropDown.Height);
+                //cmbDisplayGroups.Location = new Point(btnDisplayGroupDropDown.Location.X + btnDisplayGroupDropDown.Width - cmbDisplayGroups.Width - 2, btnDisplayGroupDropDown.Location.Y + btnDisplayGroupDropDown.Height);
+                cmbDisplayGroups.Location = new Point(btnDisplayGroupDropDown.Location.X   , btnDisplayGroupDropDown.Location.Y + 50);
                 cmbDisplayGroups.BringToFront();
 
              
