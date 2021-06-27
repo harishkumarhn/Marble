@@ -2,223 +2,336 @@
 @{
     Layout = null;
 }
+<style>
+    .nav-link {
+        padding: 0.2rem 1rem;
+    }
 
+    .cardInlineItem {
+        display: inline-table;
+        margin: 0px 10px 0px 10px;
+    }
+
+    .newCardFont {
+        font-size: 13px;
+    }
+
+    .form-control, .modal-footer {
+        padding: 0px 0px 0px 0px;
+    }
+</style>
 <div class="modal-header">
     <h4 class="modal-title">New Card</h4>
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="min-width: 10px !important;">&times;</button>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 </div>
-<div class="modal-body">
+<div class="modal-body newCardFont">
     @using (Html.BeginForm("InsertOrUpdateCards", "Cards", FormMethod.Post, new { id = "cardForm" }))
     {
-        <div>
-            <b style="color: cadetblue">Main</b>
-            <div id="mainclass" style="border: 2px solid black; border-color: cadetblue">
-                <div class="form-group row" style="margin-bottom:0">
-
-                    <div class="col-md-1">
-                        <label for="ex1"><b>CardId:</b></label>
-                        @Html.TextBoxFor(m => m.CardId, new { @readonly = "readonly", @class = "form-control" })
-
-                    </div>
-                    <div class="col-md-3" style="padding:0 0 0 22px;margin-right:-2vw">
-                        <label for="ex2"><b>CardNumber:</b></label>
-                        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CardNumber), @style="width:82%"})
-                        @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="col-md-2">
-                        <label for="ex3"><b>IssueDate:</b></label>
-                        @Html.TextBoxFor(m => m.IssueDateP, new { @class = "form-control datepicker" })
-                    </div>
-                    <div class="col-md-2">
-                        <label for="ex3"><b>FaceValue:</b></label>
-                        @Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FaceValue, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-2">
-                        <label for="ex4"><b>Customer:</b></label>
-                        @Html.TextBoxFor(m => m.Customer, new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-2" style="padding:0">
-                        <label for="ex4"><b>VIP Customer:</b></label>
-                        @Html.CheckBoxFor(m => m.VIPCustomer, new { @class = "form-control", @style = "position:absolute;width:20px;" })
-                    </div>
-
+    <div class="row">
+        <div class="col-sm">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" role="tab" data-toggle="tab">Main</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="form-group row">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="ex1">CardId:</label>
+                            </td>
+                            <td>@Html.TextBoxFor(m => m.CardId, new { @readonly = "readonly", @class = "form-control" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex2">CardNumber:</label>
+                            </td>
+                            <td>@Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control"})
+                                @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex3">IssueDate:</label>
+                            </td>
+                            <td>@Html.TextBoxFor(m => m.IssueDateP, new { @class = "form-control datepicker" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex3">FaceValue:</label>
+                            </td>
+                            <td>@Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FaceValue, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex4">Customer:</label>
+                            </td>
+                            <td>@Html.TextBoxFor(m => m.Customer, new { @class = "form-control" })
+                            </td>
+                        </tr>
+                        <tr class="newCard">
+                            <td>
+                                <label for="ex4">VIP Customer:</label>
+                                @Html.CheckBoxFor(m => m.VIPCustomer, new { @class = "form-control cardInlineItem", @style = "position:absolute;width:20px;" })
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-
-            <b style="color: rosybrown">Value</b>
-            <div id="valueclass" style="border: 2px solid black; border-color: rosybrown">
-                <div class="form-group row" style="margin-bottom:0">
-
-                    <div class="col-md-2">
-                        <label for="ex1"><b>Credits:</b></label>
-                        @Html.TextBoxFor(m => m.Credits, new { @class = "form-control" })
+        </div>
+        <div class="col-sm">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" role="tab" data-toggle="tab">Value</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="form-group row">
+                    <table>
+                        <tr>
+                            <td>
+                                <label xfor="ex1">Credits:</label>
+                            </td>
+                            <td>@Html.TextBoxFor(m => m.Credits, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Credits, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex2">Credit Plus:</label></td>
+                            <td>@Html.TextBoxFor(m => m.CreditPlus, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CreditPlus, "", new { @class = "text-danger" })</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex3">Courtesy:</label></td>
+                            <td>@Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Courtesy, "", new { @class = "text-danger" })</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex3">Bonus:</label></td>
+                            <td>@Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Bonus, "", new { @class = "text-danger" })</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex4">CreditsPlayed:</label></td>
+                            <td>@Html.TextBoxFor(m => m.CreditsPlayed, new { @class = "form-control" })</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" role="tab" data-toggle="tab">Game Time/Refund/Expiry</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="form-group row">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="ex1">StartTime:</label></td>
+                            <td>@Html.TextBoxFor(m => m.StartTime, new { @class = "form-control datepicker" })</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex2">Last Play time:</label></td>
+                            <td>@Html.TextBoxFor(m => m.LastPlayTime, new { @class = "form-control datepicker"})</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex1">Expiry Date:</label></td>
+                            <td>@Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control datepicker" })</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex3">Refund Amount:</label></td>
+                            <td>@Html.TextBoxFor(m => m.RefundAmount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RefundAmount, "", new { @class = "text-danger" })</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ex2">Refund Date:</label></td>
+                            <td>@Html.TextBoxFor(m => m.RefundDate, new { @class = "form-control datepicker" })</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="row">
+                <div class="col-sm">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" role="tab" data-toggle="tab">Ticket</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="form-group row">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label for="ex1">Ticket Count:</label></td>
+                                    <td>@Html.TextBoxFor(m => m.TicketCount, new { @type = "number",@class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.TicketCount, "", new { @class = "text-danger" })</td>
+                                </tr>
+                                <tr class="newcard">
+                                    <td>
+                                        <label for="ex3">Ticket Allowed:</label>
+                                        @Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "form-control cardInlineItem" })
+                                    </td>
+                                    <td>
+                                        <label for="ex2">Real Ticket Mode:</label>@Html.CheckBoxFor(m => m.RealTicketMode, new { @class = "form-control cardInlineItem" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" role="tab" data-toggle="tab">Technical</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="form-group row">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label for="ex2">Tech Card Type:</label></td>
+                                    <td>@Html.DropDownListFor(m => m.TechCardType, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TechCardType"], "Id", "Value"), new { @class = "form-control" })    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="ex3">Tech Game:</label></td>
+                                    <td>@Html.TextBoxFor(m => m.TechGames, new { @class = "form-control" })</td>
+                                </tr>
+                                <tr class="newcard">
+                                    <td>
+                                        <label for="ex2">Timer Reset Card:</label>@Html.CheckBoxFor(m => m.TimerResetCard, new { @class = "form-control cardInlineItem" })</td>
+                                    <td>
+                                        <label for="ex1">Ticket Count:</label>@Html.TextBoxFor(m => m.TicketCount, new { @class = "form-control cardInlineItem" ,@style = "width:63%"})
+                        @Html.ValidationMessageFor(model => model.TicketCount, "", new { @class = "text-danger" })</td>
+                                </tr>
+                                <tr class="newcard">
+                                    <td>
+                                        <label for="ex3">Ticket Allowed:</label>@Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "form-control cardInlineItem" })</td>
 
+                                    <td>
+                                        <label for="ex2">Real Ticket Mode:</label>@Html.CheckBoxFor(m => m.RealTicketMode, new { @class = "form-control cardInlineItem" })</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <label for="ex2"><b>Credit Plus:</b></label>
-                        @Html.TextBoxFor(m => m.CreditPlus, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.CreditPlus) })
-                        @Html.ValidationMessageFor(model => model.CreditPlus, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="col-md-2">
-                        <label for="ex3"><b>Courtesy:</b></label>
-                        @Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Courtesy, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-2">
-                        <label for="ex3"><b>Bonus:</b></label>
-                        @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Bonus, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-2">
-                        <label for="ex4"><b>CreditsPlayed:</b></label>
-                        @Html.TextBoxFor(m => m.CreditsPlayed, new { @class = "form-control" })
-                    </div>
-
                 </div>
             </div>
 
-            <b style="color: chocolate">Game Time</b>  <b style="color: darkblue; position: absolute; right: 475px">Refund/Expiry</b>
+        </div>
 
-            <div id="gametimeclass" style="border: 2px solid black; border-color: chocolate">
-                <div class="form-group row" style="margin-bottom:0">
-                    <div class="col-md-2">
-                        <label for="ex1"><b>StartTime:</b></label>
-                        @Html.TextBoxFor(m => m.StartTime, new { @class = "form-control datepicker" })
-
-                    </div>
-                    <div class="col-md-3" style="padding:0 1vw 0 0;margin-right:-3vw">
-                        <label for="ex2"><b>Last Play time:</b></label>
-                        @Html.TextBoxFor(m => m.LastPlayTime, new { @class = "form-control datepicker", placeholder = @Html.DisplayNameFor(n => n.LastPlayTime), @style="width:75%" })
-                    </div>
-
-                    <div class="col-md-2" style="padding:0">
-                        <label for="ex1"><b>Expiry Date:</b></label>
-                        @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control datepicker" })
-
-                    </div>
-                    <div class="col-md-3">
-                        <label for="ex3"><b>Refund Amount:</b></label>
-                        @Html.TextBoxFor(m => m.RefundAmount, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.RefundAmount, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-2" style="padding:0">
-                        <label for="ex2"><b>Refund Date:</b></label>
-                        @Html.TextBoxFor(m => m.RefundDate, new { @class = "form-control datepicker" })
-                    </div>
-                </div>
-            </div>
-
-            <b style="color: deeppink">Ticket</b>
-            <div id="ticketclass" style="border: 2px solid black; border-color: deeppink">
-                <div class="form-group row" style="margin-bottom:0">
-                    <div class="col-md-3" style="padding:0;margin-left:1.5vw;margin-right:-5vw">
-                        <label for="ex1"><b>Ticket Count:</b></label>
-                        @Html.TextBoxFor(m => m.TicketCount, new { @class = "form-control" ,@style = "width:50%"})
-                        @Html.ValidationMessageFor(model => model.TicketCount, "", new { @class = "text-danger" })
-
-                    </div>
-                    <div class="col-md-3" style="padding:0;margin-right:-4vw">
-                        <label for="ex3"><b>Ticket Allowed:</b></label>
-                        @Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-3" style="padding:0;margin-right:-2vw">
-                        <label for="ex2"><b>Real Ticket Mode:</b></label>
-                        @Html.CheckBoxFor(m => m.RealTicketMode, new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-3" style="padding:0;margin-right:-2vw">
-                        <label for="ex2"><b>Timer Reset Card:</b></label>
-                        @Html.CheckBoxFor(m => m.TimerResetCard, new { @class = "form-control check-boxs" })
-                    </div>
-                    <div class="col-md-2" style="padding:0px">
-                        <label for="ex3"><b>Tech Game:</b></label>
-                        @Html.TextBoxFor(m => m.TechGames, new { @class = "form-control", @style = "width:70%" })
-                    </div>
-                </div>
-            </div>
-
-
-            <b style="color: lightseagreen">miscellaneous</b>
-            <div id="miscolaniuseclass" style="border: 2px solid black; border-color: lightseagreen">
-                <div class="form-group row" style="margin-bottom:0">
-                    <div class="col-md-3" style="padding:0 0 0 1.5vw">
-                        <label for="ex1"><b>Last Updated Time:</b></label>
-                        @Html.TextBoxFor(m => m.LastUpdatedTime, new { @class = "form-control datepicker" })
-
-                    </div>
-                    <div class="col-md-3">
-                        <label for="ex3"><b>Last Updated By:</b></label>
-                        @Html.TextBoxFor(m => m.LastUpdatedBy, new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-2">
-                        <label for="ex2"><b>Notes:</b></label>
-                        @Html.TextAreaFor(m => m.Note, 2, 10, new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-3" style="padding:0">
-                        <label for="ex2"><b>Tech Card Type:</b></label>
-                        @Html.DropDownListFor(m => m.TechCardType, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TechCardType"], "Id", "Value"), new { @class = "form-control", @style = "width:70%;max-height:none" })  
+    </div>
+    <div class="row" style="margin-top: -35px;">
+        <div class="col-sm">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" role="tab" data-toggle="tab">Miscellaneous</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="form-group row">
+                    <div>
+                        <div class="row" style="margin-top: 5px">
+                            <div class="col-sm-3">
+                                <label for="ex1">Last Updated Time:</label>
+                            </div>
+                            <div class="col-sm-3">@Html.TextBoxFor(m => m.LastUpdatedTime, new { @class = "form-control datepicker cardInlineItem" })</div>
+                            <div class="col-sm-3">
+                                <label for="ex3">Last Updated By:</label>
+                            </div>
+                            <div class="col-sm-3">@Html.TextBoxFor(m => m.LastUpdatedBy, new { @class = "form-control cardInlineItem" }) </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="ex2">Notes:</label></div>
+                            <div class="col-sm-8" style="margin-left: 10px">@Html.TextAreaFor(m => m.Note, 2, 10, new { @class = "form-control" }) </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+    </div>
     }
-</div>
-<div class="modal-footer">
-    <button id="update" type="submit" class="btn btn-primary" onclick="Save(this)">Save</button>
-    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-</div>
-@*<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.modal-body').css({
-            'width': '900px;',
-            'height': '500px',
-            'padding-bottom':'0px'
+    <div class="modal-footer">
+        <button id="update" type="submit" class="btn btn-primary" onclick="Save(this)">Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.modal-body').css({
+                'width': '900px;',
+                'height': '640px',
+                'padding-bottom': '0px'
+            });
+            $(document).off('focusin.modal');
+            //$('#newcardmodel').modal('show');
+        })
+        //var $j = jQuery.noConflict();
+        $(function () {
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                "setDate": new Date()
+            });
         });
-        $(document).off('focusin.modal');
-        //$('#newcardmodel').modal('show');
-    })
-    //var $j = jQuery.noConflict();
-    $(function () {
-        $(".datepicker").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            "setDate": new Date()
+        $('.close').click(function () {
+            location.reload();
+
         });
-    });
-    $('.close').click(function () {
-        location.reload();
-
-    });
-    //$j('#ExpiryDate').datepicker();
-    $('.check-boxs').change(function () {
-        if ($('#TimerResetCard').is(':checked')) {
-            $("#TechCardType").prop("disabled", true);
-        }
-        else {
-            $("#TechCardType").prop("disabled", false);
-        }
-
-    });
-    function Save(btnClicked) {
-        var $form = $('#cardForm');
-        $.ajax({
-            type: "POST",
-            url: $form.attr('action'),
-            data: $form.serialize(),
-            error: function (xhr, status, error) {
-                //do something about the error
-            },
-            success: function (response) {
-                //do something with response
-                alert('Data saved');
-
+        //$j('#ExpiryDate').datepicker();
+        $('.check-boxs').change(function () {
+            if ($('#TimerResetCard').is(':checked')) {
+                $("#TechCardType").prop("disabled", true);
             }
+            else {
+                $("#TechCardType").prop("disabled", false);
+            }
+
         });
-        return false;// if it's a link to prevent post
-    }
-</script>
+        function Save(btnClicked) {
+            var $form = $('#cardForm');
+            $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                error: function (xhr, status, error) {
+                    //do something about the error
+                },
+                success: function (response) {
+                    //do something with response
+                    alert('Data saved');
+
+                }
+            });
+            return false;// if it's a link to prevent post
+        }
+    </script>
