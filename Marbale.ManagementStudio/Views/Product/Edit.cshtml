@@ -156,7 +156,7 @@
 
                                 <div class="col-md-12" id="datetimepicker1">
                                     <label class="col-md-6">StartDate:</label>
-                                    @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
+                                    @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -193,10 +193,7 @@
 </div>
 
 <script type="text/javascript">
-    var duplicateClicked = false;
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
+    var duplicateClicked = false;    
     function duplicateClick(value) {
         if (value == true) {
             $('#productId').val('');

@@ -167,7 +167,7 @@ namespace Marbale.DataAccess
                 sqlParameters[7] = new SqlParameter("@displayGroupId", product.DisplayGroupId);
                 sqlParameters[8] = new SqlParameter("@displayInPOS", product.DisplayInPOS);
                 sqlParameters[9] = new SqlParameter("@autoGenerateCardNumber", product.AutoGenerateCardNumber);
-                sqlParameters[10] = new SqlParameter("@category", string.IsNullOrEmpty(product.Category) ? "" : product.Category);
+                sqlParameters[10] = new SqlParameter("@category",product.Category);
                 sqlParameters[11] = new SqlParameter("@onlyVIP", product.OnlyVIP);
                 sqlParameters[12] = new SqlParameter("@posCounter", string.IsNullOrEmpty(product.POSCounter) ? "" : product.POSCounter);
                 sqlParameters[13] = new SqlParameter("@taxInclusive", product.TaxInclusive);
@@ -183,7 +183,7 @@ namespace Marbale.DataAccess
                 sqlParameters[23] = new SqlParameter("@CardValidFor", product.CardValidFor);
                 sqlParameters[24] = new SqlParameter("@Courtesy", product.Courtesy);
                 sqlParameters[25] = new SqlParameter("@ExpiryDate", string.IsNullOrEmpty(product.ExpiryDate.Value.ToString()) || product.ExpiryDate.Value.Year == 1 ? DateTime.Now : product.ExpiryDate);
-                sqlParameters[26] = new SqlParameter("@taxId", product.TaxId);
+                sqlParameters[26] = new SqlParameter("@taxId", product.TaxId == null ? -1 : product.TaxId );
 
                 sqlParameters[27] = new SqlParameter("@Time", product.Time);
                 sqlParameters[28] = new SqlParameter("@Tickets", product.Tickets);

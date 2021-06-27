@@ -124,6 +124,8 @@ namespace MarbaleManagementStudio.Controllers
                 Session["CategoryList"] = product.CategoryList;
                 Session["DisplayGroupList"] = product.DisplayGroupList;
                 product.Active = id == 0 ? true : product.Active;
+                product.StartDate = DateTime.Now;
+                product.ExpiryDate = DateTime.Now;
                 return View(product);
             }
             catch (Exception e)
