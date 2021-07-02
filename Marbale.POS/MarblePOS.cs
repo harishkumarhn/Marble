@@ -648,7 +648,7 @@ namespace Marbale.POS
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
 
-            if (product.Type == "NEW" || product.Type == "RECHARGE" || product.Type == "VARIABLE_RECHARGE")
+            if (product.TypeName == "NEW" || product.TypeName == "RECHARGE" || product.TypeName == "VARIABLE_RECHARGE")
             {
                 trxLine.CardNumber = CurrentCard != null ? CurrentCard.CardNumber : "";
             }
