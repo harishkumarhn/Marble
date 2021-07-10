@@ -8,6 +8,7 @@ using Marbale.BusinessObject.SiteSetup;
 using Marbale.POS.CardDevice;
 using Marbale.POS.Common;
 using Marble.Business;
+using Marble.DataLoggerService;
 using Parafait_POS;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,12 @@ namespace Marbale.POS
 {
     public partial class MarblePOS : Form
     {
+
+        #region declaration
+
+        private readonly DataLogger dataLogger = new DataLogger();
+
+        #endregion
         POSBL posBussiness;
         double tendered_amount = 0;
         double total_amount = 0;
@@ -40,6 +47,8 @@ namespace Marbale.POS
 
         public MarblePOS()
         {
+            dataLogger.Debug("Begin MarblePOS");
+
             posBussiness = new POSBL();
             InitializeComponent();
             skinColor = Color.Gray;
@@ -52,6 +61,8 @@ namespace Marbale.POS
             //{
             //    CurrentUser = frmLogin.loggedInUser;
             //}
+
+            dataLogger.Debug("End MarblePOS");
         }
 
         private void POSHome_Load(object sender, EventArgs e)

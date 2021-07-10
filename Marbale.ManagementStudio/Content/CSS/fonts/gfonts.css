@@ -1,0 +1,118 @@
+﻿@font-face {
+    font-family: 'Bitter-Black';
+    src: URL('Bitter/static/Bitter-Black.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Bitter-BlackItalic';
+    src: URL('Bitter/static/Bitter-BlackItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bitter-Bold';
+    src: URL('Bitter/static/Bitter-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bitter-BoldItalic';
+    src: URL('Bitter/static/Bitter-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bitter-ExtraBold';
+    src: URL('Bitter/static/Bitter-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bitter-ExtraBoldItalic';
+    src: URL('Bitter/static/Bitter-ExtraBoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bitter-ExtraLight';
+    src: URL('Bitter/static/Bitter-ExtraLight.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Bitter-ExtraLightItalic';
+    src: URL('Bitter/static/Bitter-ExtraLightItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bitter-Italic';
+    src: URL('Bitter/static/Bitter-Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bitter-Light';
+    src: URL('Bitter/static/Bitter-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bitter-LightItalic';
+    src: URL('Bitter/static/Bitter-LightItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bitter-Medium';
+    src: URL('Bitter/static/Bitter-Medium.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Bitter-MediumItalic';
+    src: URL('Bitter/static/Bitter-MediumItalic.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Bitter-Regular';
+    src: URL('Bitter/static/Bitter-Regular.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Bitter-SemiBold';
+    src: URL('Bitter/static/Bitter-SemiBold.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Bitter-SemiBoldItalic';
+    src: URL('Bitter/static/Bitter-SemiBoldItalic.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Bitter-ThinItalic';
+    src: URL('Bitter/static/Bitter-ThinItalic.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: "Oswald-Bold";
+    src: url("../fonts/Oswald/static/Oswald-ExtraLight.ttf");
+}
+
+@font-face {
+    font-family: "Oswald-Light";
+    src: url("../fonts/Oswald/static/Oswald-Light.ttf");
+}
+
+@font-face {
+    font-family: "Oswald-Regular";
+    src: url("../fonts/Oswald/static/Oswald-Regular.ttf");
+}
+
+@font-face {
+    font-family: "NotoSansTC-Bold";
+    src: url("../fonts/Noto_Sans_TC/NotoSansTC-Bold.otf");
+}
+
+@font-face {
+    font-family: "NotoSansTC-Medium";
+    src: url("../fonts/Noto_Sans_TC/NotoSansTC-Medium.otf");
+}
+
+@font-face {
+    font-family: "NotoSansTC-Regular";
+    src: url('../fonts/fonts/Noto_Sans_TC/NotoSansTC-Regular.otf')
+}

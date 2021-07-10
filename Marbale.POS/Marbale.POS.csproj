@@ -254,6 +254,10 @@
       <Project>{6a6d1608-f1ec-435a-a3ec-10237ab280af}</Project>
       <Name>Marbale.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Marble.DataLoggerService\Marble.DataLoggerService.csproj">
+      <Project>{44665109-752f-4cf2-b750-bb5cbfa77050}</Project>
+      <Name>Marble.DataLoggerService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\left.png" />

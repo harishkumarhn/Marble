@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1382
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{C43FABDF-0E04-4A20-9E1B-5AB056991A36}"
 EndProject
@@ -35,6 +35,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteConfiguaration", "SiteConfiguaration\SiteConfiguaration.csproj", "{3E1CCD33-87B6-4EDD-8BCC-8D0993F27D76}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbale.ManagementStudio", "Marbale.ManagementStudio\Marbale.ManagementStudio.csproj", "{E05AFD8B-D133-49D8-AF2A-9A66628E4DF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marble.DataLoggerService", "Marble.DataLoggerService\Marble.DataLoggerService.csproj", "{44665109-752F-4CF2-B750-BB5CBFA77050}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +84,10 @@ Global
 		{E05AFD8B-D133-49D8-AF2A-9A66628E4DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E05AFD8B-D133-49D8-AF2A-9A66628E4DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E05AFD8B-D133-49D8-AF2A-9A66628E4DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44665109-752F-4CF2-B750-BB5CBFA77050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44665109-752F-4CF2-B750-BB5CBFA77050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44665109-752F-4CF2-B750-BB5CBFA77050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44665109-752F-4CF2-B750-BB5CBFA77050}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,5 +104,9 @@ Global
 		{1A252859-291E-4809-B3E0-16CD46C1949F} = {C43FABDF-0E04-4A20-9E1B-5AB056991A36}
 		{3E1CCD33-87B6-4EDD-8BCC-8D0993F27D76} = {C43FABDF-0E04-4A20-9E1B-5AB056991A36}
 		{E05AFD8B-D133-49D8-AF2A-9A66628E4DF4} = {C43FABDF-0E04-4A20-9E1B-5AB056991A36}
+		{44665109-752F-4CF2-B750-BB5CBFA77050} = {7E25C3EE-426C-409E-A6C5-FBB2556184BD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61E3D5A4-DA63-452F-80FE-15E8AE84DC29}
 	EndGlobalSection
 EndGlobal
