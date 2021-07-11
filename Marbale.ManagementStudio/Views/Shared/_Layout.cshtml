@@ -132,7 +132,7 @@
                         <ul class="collapse list-unstyled" id="pageSubmenucards">
                             @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"])
                             {
-                                if (page.Page == "New Card")
+                                if (page.Page != "View Card")
                                 {
                                     <li>
                                         <a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
@@ -198,7 +198,6 @@
             return null;
         }
         $(document).ready(function () {
-
             $('#dismiss, .overlay').on('click', function () {
                 $('#sidebar').removeClass('active');
                 $('.overlay').removeClass('active');
@@ -211,7 +210,7 @@
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
 
-            let preSelectedValue = getCookie("PreviousExpandedDropDown");
+            var preSelectedValue = getCookie("PreviousExpandedDropDown");
             if (preSelectedValue) {
                 $('#sidebar').addClass('active');
                 $('.overlay').addClass('active');  
@@ -219,18 +218,10 @@
                 setSession(preSelectedValue);
             }
         });
-        ////$('#inventery').click(function () {
-        ////    $(".modal-body").html("");
-        ////    $('#newcardmodel .modal-Content').css('height', 590);
-        ////    $('#newcardmodel .modal-Content').css('width', 719);
-        ////    $('#newupdatecardmodal').text("Inventory").addClass('modal-centre');
-        ////    $('#newcardmodel').modal('show');
 
-        ////    $('#modelbody').load('/Cards/Inventory');
-        ////});
         function DisplayPopUp(page,url) {
             $('#myModal').modal('show');
-            if(page == "Product key") {
+            if (page == "Product key" || page == 'Inventory') {
                 $('#modelBody').css({
                     'width': 640,
                     'margin-top':70
@@ -249,7 +240,7 @@
         });
 
         function setSession(selectedId) {
-            let preSelectedValue = getCookie("PreviousExpandedDropDown");
+            var preSelectedValue = getCookie("PreviousExpandedDropDown");
             if (preSelectedValue != selectedId) {
                 document.cookie = "PreviousExpandedDropDown=" + selectedId;
             } else {

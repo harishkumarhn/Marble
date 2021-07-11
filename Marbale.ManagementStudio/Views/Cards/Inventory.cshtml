@@ -2,157 +2,129 @@
 @model Marbale.BusinessObject.Cards.Inventory
 @{
     ViewBag.Title = "Inventory";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
-<div>
-<div class="tabGroup tabGroup1">
-  <ul class="swichtab-controller">
-    <li data-swichtab="controller"><a href="#tab1" id="addcardtab">Add Cards</a></li>
-    <li data-swichtab="controller"><a href="#tab2">Delete Cards</a></li>
-    <li data-swichtab="controller"><a href="#tab3">View Inventory</a></li>
-  </ul>
-     
-  <div class="swichtab-contents">
-                                
-    
-    <div id="tab1" class="swichtab-panel" data-swichtab="target">
- <div>
-        
-                                 
-        <label for="ex4"><b>User:</b></label>
-     @Html.LabelFor(m => m.User,Model.User,new { @class = "form-control"})
-    
-           
-        <label for="ex3"><b>Recieved Date:</b></label>
-     @Html.LabelFor(m => m.RecievedDate,Model.RecievedDate, new { @class = "form-control"})
-    
-                 
-        <label for="ex3"><b>Number Of Cards:</b></label>
+<link href="~/Content/DatetimePicker/jquery.datepicker2.css" rel="stylesheet" />
+<script src="~/Content/DatetimePicker/jquery.datepicker2.js"></script>
+<style>
+    #inventoryTabs {
+        font-weight: 600;
+    }
+    .modal-body {
+        font-size: 14px;
+        font-family: system-ui;
+    }
+    #modelBody {
+        width: 500px;
+    }    
+</style>
+
+<div class="modal-header">
+   <h5 class="modal-title" id="exampleModalLongTitle">Inventory</h5>
+   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
+ </div>
+ <div class="modal-body">
+    <ul class="nav nav-tabs" id="inventoryTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="addcardtab" data-toggle="tab" href="#tab1" role="tab" aria-controls="addCard" aria-selected="true">Add</a>
+        </li>
+        <li class="nav-item">
+             <a class="nav-link" id="deletecardtab" data-toggle="tab" href="#tab2" role="tab" aria-controls="deleteCard" aria-selected="false">Delete</a>
+        </li>
+        <li class="nav-item">
+             <a class="nav-link" id="viewInventirytab" data-toggle="tab" href="#tab3" role="tab" aria-controls="viewInventory" aria-selected="false">View</a>
+        </li>
+   </ul>
+    <div class="tab-content" id="myTabContent"> 
+        <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+        <label for="ex4">User:</label>
+     @Html.LabelFor(m => m.User,Model.User,new { @class = "form-control"}) 
+        <label for="ex3">Recieved Date:</label>
+     @Html.LabelFor(m => m.RecievedDate,Model.RecievedDate, new { @class = "form-control datepicker"})
+        <label for="ex3">Number Of Cards:</label>
      @Html.TextBoxFor(m => m.NumberOfCards, new { @id="NumberOfCardsAdd", @class = "form-control"})
-             
-
-    <div class="row">
-      <div class="col">
-             <input type="submit" id="inventoryAdd" name="submit" value="Submit" class="btn btn-primary form-control btn-block inventory" />
-            @*   <button id="btnSubmit" class="btn btn-primary form-control btn-block" type="submit" >Submit</button>*@
-
-      </div>
-
-      <div class="col">
-           <button class="btn btn-danger form-control  btn-block"data-dismiss="modal">Cancel</button></div>
-    </div>
-          
-  </div>
-          
+      <div class="modal-footer">
+          <button class="btn btn-primary" onclick="AddInventory()">Submit</button>
+          <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
        </div>
-      
-                                   
-
-
-    <div id="tab2" class="swichtab-panel" data-swichtab="target">
-
-        <div>
-                     
-                 
-        <label for="ex4"><b>User:</b></label>
+     </div>                        
+        <div id="tab2" class="tab-pane fade">
+                
+        <label for="ex4">User:</label>
      @Html.LabelFor(m => m.User,Model.User, new { @class = "form-control"})
     
            
-        <label for="ex3"><b>Recieved Date:</b></label>
-     @Html.LabelFor(m => m.RecievedDate,Model.RecievedDate, new { @class = "form-control"})
+        <label for="ex3">Recieved Date:</label>
+     @Html.LabelFor(m => m.RecievedDate,Model.RecievedDate, new { @class = "form-control datepicker"})
     
                  
-        <label for="ex3"><b>Number Of Cards:</b></label>
+        <label for="ex3">Number Of Cards:</label>
      @Html.TextBoxFor(m => m.NumberOfCards, new { @id="NumberOfCardsDel", @class = "form-control"})
-
-         
-      <div class="row">
-      <div class="col">
-               <button id="inventoryDel" class="btn btn-primary form-control btn-block inventory" type="submit" >Submit</button></div>
-
-      <div class="col">
-           <button class="btn btn-danger form-control  btn-block"data-dismiss="modal" >Cancel</button></div>
-    </div>
-  
-</div>
-    </div>
-  
- 
-    <div id="tab3" class="swichtab-panel" data-swichtab="target">
-  
-        <div>
-          
-           <div class="form-group row" >
-            <div class="col-md-3"> 
-                
-                Till Date  
-                @Html.RadioButtonFor(model => model.TillDate, "Till Date", new { @checked="true"})  
-                </div>
-               <div class="col-md-3"> 
-                For Period  
-                @Html.RadioButtonFor(model => model.TillDate, "For Period")  
- </div>
-
-       <div class="col-md-3 datepickers">
-         @Html.TextBoxFor(m => m.From,new {@class="form-control datapicker", data_select="datepicker",placeholder ="From Date"})
-           </div>
-    <div class="col-md-3 datepickers">
-   @Html.TextBoxFor(m => m.To, new {@class="form-control datapicker", data_select="datepicker",placeholder ="To Date"})
+      
+        <div class="modal-footer">
+           <button class="btn btn-primary" onclick="DeleteInventory()" >Submit</button>
+           <button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
         </div>
-                
-            </div>  
-          <input type="submit" name="submit" value="Generate" class="btn btn-primary btn-md" id="submitinventory" />
-              
-            </div>
+    </div>
+        <div id="tab3" class="tab-pane fade">
+         <div class="form-group row">
+            <div class="col-md-5">                
+                <lable>Till Date  </lable>
+                    @Html.RadioButtonFor(model => model.TillDate, "Till Date", new { @checked="true"})  
+              </div>
+             <div class="col-md-5"> 
+                 <lable>For Period </lable> 
+                @Html.RadioButtonFor(model => model.TillDate, "For Period")  
+             </div>               
+           </div>  
+        
+        <div class="form-group row">
+             <div class="col-md-5 datepickers">
+                @Html.TextBoxFor(m => m.From,new {@class="form-control datapicker", data_select="datepicker",placeholder ="From Date"})
+             </div>
+             <div class="col-md-5 datepickers">
+                @Html.TextBoxFor(m => m.To, new {@class="form-control datapicker", data_select="datepicker",placeholder ="To Date"})
+             </div>                
+           </div>  <div class="modal-footer">
+          <button class="btn btn-primary" onclick="SubmitInventory()">Submit</button>
+          <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        </div>
         </br>
-        <div>
-
-    <table id="cardtableinventory" class="table marbleTable" style="overflow-y:scroll;height:216px;width: 547px">
-        <thead class="thead-dark">
+          <table id="cardtableinventory" class="table marbleTable">
+           <thead class="thead-dark">
             <th>Number Of Cards</th>
             <th>Action</th>
             <th>Action Date</th>
             <th>Action By</th>
             </thead>
-      <tbody></tbody>
-            </table>
-            </div>
+            <tbody></tbody>
+           </table>
         </div>
-
-
     </div>
-  </div>
-       <div class="row">
+
+    <div class="row">
       <div class="col">
-             @Html.LabelFor(m => m.NumberOfCards,"Card inventory till date :", new { @class = "form-control ",@style="color: deepskyblue;bottom: -9px;right: 0px;border: none;"})
-          </div>
-            <div class="col">
-          <label for="lblName" style="position: absolute;
-        right: 47vw;
-        bottom: 6px;
-        color: coral;"></label> 
+             @Html.LabelFor(m => m.NumberOfCards,"Card inventory till date :")
           </div>
       <div class="col">
-      @Html.LabelFor(m => m.NumberOfCards,"Card balance in stock :", new { @class = "form-control",@style="color: deepskyblue;bottom: -9px;right: 0px;border: none;"})
-    </div>
-          </div>
+        @Html.LabelFor(m => m.NumberOfCards,"Card balance in stock :")
+      </div>
+   </div>
     @{
       <input type="hidden" id="Totalcards" value="@ViewBag.TotalNumberOfCards"/>
-        }
+     }
    
-  <!-- /.swichtab-contents -->
 </div>
-
-<!-- /.swichtab -->
-
-<link href="~/Content/PluginTab/src/css/swichTab.css" rel="stylesheet" />
-<link href="~/Content/DatetimePicker/jquery.datepicker2.css" rel="stylesheet" />
-<script src="~/Content/DatetimePicker/jquery.datepicker2.js"></script>
-<script src="~/Content/PluginTab/src/js/jquery.swichTab.js"></script>
 
 <script >
     $("document").ready(function () {
-        $('.datepickers').hide();
+        $(function () {
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                "setDate": new Date()
+            });
+        });
         var totalcards = $('#Totalcards').val();
 
         $("label[for='lblName']").text(totalcards);
@@ -161,61 +133,58 @@
         }, 10);
     });
     $('input:radio').click(function () {
-        debugger
         if ($(this).val() === 'For Period') {
             $('.datepickers').show();
         } else {
             $('.datepickers').hide();
         }
     });
-    $('#submitinventory').click(function () {
+    function submitInventory() {
         var myObject = {
             From: $('#From').val(),
-            To:$('#To').val()
+            To: $('#To').val()
         };
         var url = '@Url.Content("~/Cards/GetInventory")';
-        $.getJSON(url,myObject, function (data) {
+        $.getJSON(url, myObject, function (data) {
             $("#cardtableinventory tbody").html('');
             var html;
             $.each(data, function (i, item) {
                 html += "<tr><td>" + item.NumberOfCards + "</td>";
                 html += "<td>" + item.ActionName + "</td>";
                 html += "<td>" + item.ActionDateString + "</td>";
-                html += "<td>" + item.ActionBy + "</td>";                
+                html += "<td>" + item.ActionBy + "</td>";
             });
             $("#cardtableinventory tbody").html(html);
         });
 
-    });
-    $('#inventoryAdd').click(function () {
-      
+    }  
+
+
+    function AddInventory() {
         var inventory = {
             NumberOfCards: $('#NumberOfCardsAdd').val(),
             ActionName: "Add"
         };
         var url = '@Url.Content("~/Cards/AddDeleteInventory")';
         $.getJSON(url, inventory, function (data) {
-        
+
             $("label[for='lblName']").text(data);
         });
-    });
-    $('#inventoryDel').click(function () {
-       
+    }
+
+   function DeleteInventory() {
         var inventory = {
             NumberOfCards: $('#NumberOfCardsDel').val(),
             ActionName: "Reduce"
-
         };
         var url = '@Url.Content("~/Cards/AddDeleteInventory")';
         $.getJSON(url, inventory, function (data) {
             $("label[for='lblName']").text(data);
-
         });
-        });
+   }
 
-    $('.dropdown-toggle').collapse({
-        toggle: false
-    });
-    $('.tabGroup1').swichTab();
+   $('.dropdown-toggle').collapse({
+       toggle: false
+   });
 </script>
 
