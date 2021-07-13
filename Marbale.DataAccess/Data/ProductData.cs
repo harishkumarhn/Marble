@@ -156,7 +156,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[36];
+                SqlParameter[] sqlParameters = new SqlParameter[43];
                 sqlParameters[0] = new SqlParameter("@name", string.IsNullOrEmpty(product.Name) ? "" : product.Name);
                 sqlParameters[1] = new SqlParameter("@type", string.IsNullOrEmpty(product.Type) ? "" : product.Type);
                 sqlParameters[2] = new SqlParameter("@active", product.Active);
@@ -194,7 +194,13 @@ namespace Marbale.DataAccess
                 sqlParameters[33] = new SqlParameter("@ManagerApprovalRequired", product.ManagerApprovalRequired);
                 sqlParameters[34] = new SqlParameter("@AllowPriceOverride", product.AllowPriceOverride);
                 sqlParameters[35] = new SqlParameter("@MinimumQuantity", product.MinimumQuantity);
-
+                sqlParameters[36] = new SqlParameter("@DisplayOrder",product.DisplayOrder);
+                sqlParameters[37] = new SqlParameter("@CardExpiryDate", product.CardExpiryDate);
+                sqlParameters[38] = new SqlParameter("@MaximumQuantity", product.MaximumQuantity);
+                sqlParameters[39] = new SqlParameter("@HSNSACCode", product.HSNSACCode);
+                sqlParameters[40] = new SqlParameter("@vipCard", product.vipCard);
+                sqlParameters[41] = new SqlParameter("@LineRemarksMandatory", product.LineRemarksMandatory);
+                sqlParameters[42] = new SqlParameter("@InvokeCustomerRegistration", product.InvokeCustomerRegistration);
 
                 return conn.executeUpdateQuery("sp_InsertOrUpdateProduct", sqlParameters);
             }

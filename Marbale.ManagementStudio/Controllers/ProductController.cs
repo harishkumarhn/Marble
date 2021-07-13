@@ -287,7 +287,7 @@ namespace MarbaleManagementStudio.Controllers
                 {
                     model.EffectivePrice = model.Price;
                     var tempPrice = (model.Price - (model.FaceValue != null ? model.FaceValue : 0));
-                    model.FinalPrice = tempPrice + ( tempPrice* (TaxDetails[0].TaxPercent / 100));
+                    model.FinalPrice = model.Price + ( tempPrice* (TaxDetails[0].TaxPercent / 100));
                     model.Taxpercent = TaxDetails[0].TaxPercent;
                 }
             }
