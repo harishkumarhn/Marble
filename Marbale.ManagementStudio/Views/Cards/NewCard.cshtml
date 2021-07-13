@@ -231,18 +231,7 @@
                                     <td>@Html.TextBoxFor(m => m.TechGames, new { @class = "form-control" })</td>
                                 </tr>
                                 <tr class="newcard">
-                                    <td>
-                                        <label for="ex2">Timer Reset Card:</label>@Html.CheckBoxFor(m => m.TimerResetCard, new { @class = "form-control cardInlineItem" })</td>
-                                    <td>
-                                        <label for="ex1">Ticket Count:</label>@Html.TextBoxFor(m => m.TicketCount, new { @class = "form-control cardInlineItem" ,@style = "width:63%"})
-                        @Html.ValidationMessageFor(model => model.TicketCount, "", new { @class = "text-danger" })</td>
-                                </tr>
-                                <tr class="newcard">
-                                    <td>
-                                        <label for="ex3">Ticket Allowed:</label>@Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "form-control cardInlineItem" })</td>
-
-                                    <td>
-                                        <label for="ex2">Real Ticket Mode:</label>@Html.CheckBoxFor(m => m.RealTicketMode, new { @class = "form-control cardInlineItem" })</td>
+                                    <td> <label for="ex2">Timer Reset Card:</label>@Html.CheckBoxFor(m => m.TimerResetCard, new { @class = "form-control cardInlineItem" })</td>
                                 </tr>
                             </table>
                         </div>
@@ -293,14 +282,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.modal-body').css({
-                'width': '900px;',
-                'height': '640px',
+                'height': '600px',
                 'padding-bottom': '0px'
             });
             $(document).off('focusin.modal');
-            //$('#newcardmodel').modal('show');
         })
-        //var $j = jQuery.noConflict();
         $(function () {
             $(".datepicker").datepicker({
                 changeMonth: true,
@@ -310,9 +296,7 @@
         });
         $('.close').click(function () {
             location.reload();
-
         });
-        //$j('#ExpiryDate').datepicker();
         $('.check-boxs').change(function () {
             if ($('#TimerResetCard').is(':checked')) {
                 $("#TechCardType").prop("disabled", true);
