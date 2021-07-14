@@ -124,6 +124,8 @@ namespace MarbaleManagementStudio.Controllers
                 Session["CategoryList"] = product.CategoryList;
                 Session["DisplayGroupList"] = product.DisplayGroupList;
                 product.Active = id == 0 ? true : product.Active;
+                product.StartDate = DateTime.Now;
+                product.ExpiryDate = DateTime.Now;
                 return View(product);
             }
             catch (Exception e)
@@ -285,7 +287,7 @@ namespace MarbaleManagementStudio.Controllers
                 {
                     model.EffectivePrice = model.Price;
                     var tempPrice = (model.Price - (model.FaceValue != null ? model.FaceValue : 0));
-                    model.FinalPrice = tempPrice + ( tempPrice* (TaxDetails[0].TaxPercent / 100));
+                    model.FinalPrice = model.Price + ( tempPrice* (TaxDetails[0].TaxPercent / 100));
                     model.Taxpercent = TaxDetails[0].TaxPercent;
                 }
             }

@@ -71,6 +71,13 @@ namespace Marbale.BusinessObject
         public List<IdValue> CategoryList { get; set; }
         public List<TaxSet> TaxList { get; set; }
         public List<IdValue> DisplayGroupList { get; set; }
-        public int TaxId { get; set; }
+        public int? TaxId { get; set; }
+        public int? DisplayOrder { get; set; }
+        public DateTime? CardExpiryDate { get; set; }
+        public int MaximumQuantity { get; set; }
+        public string HSNSACCode { get; set; }
+        public bool vipCard { get; set; }
+        public bool LineRemarksMandatory { get; set; }
+        public bool InvokeCustomerRegistration { get; set; }
     }
 }

@@ -4,6 +4,24 @@
     ViewBag.Title = "Product";
     Layout = null;
 }
+<style>
+    .row{
+        margin-left:0px;
+        margin-right:0px;
+    }
+
+    input, select{
+        margin-left:1vw;
+    }
+
+    .product-checks label, .product-entitlement div, .product-entitlement input, .product-miscellaneous label{
+        padding: 0px 0px;
+    }
+
+    .form-group{
+        margin:3vh 0;
+    }
+</style>
 <div class="modal-header">
     @if (Model.Id > 0)
     {
@@ -19,242 +37,358 @@
 
     @using (Ajax.BeginForm("InsertOrUpdate", "Product", FormMethod.Post, new AjaxOptions { OnSuccess = "displayMessage" }))
     {
-        <div id="editpopup" style="height: 545px">
-            <form>
-                <div class="productEdit">
-                    <div class="row">
-                        <label class="col-md-2">Id:</label>
-                        @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "col-md-2", id = "productId" })
-                        <label class="col-md-1">Name:</label>
-                        @Html.TextBoxFor(m => m.Name, new { @class = "col-md-3", placeholder = @Html.DisplayNameFor(n => n.Name) })
-
-                        <label class="col-md-1">Active:</label>
-                        @Html.CheckBoxFor(m => m.Active, new { @class = "col-md-1" })
-
-                        <label class="col-md-1">DisplayIn POS:</label>
-                        @Html.CheckBoxFor(m => m.DisplayInPOS, new { @class = "col-md-1" })
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="col-md-13">
-                                <label class="col-md-5">Face Value</label>
-                                @Html.TextBoxFor(m => m.FaceValue, new { @class = "col-md-6" })
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Price:</label>
-                                @Html.TextBoxFor(m => m.Price, new { @class = "col-md-6" })
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">TaxInclusive:</label>
-                                @Html.CheckBoxFor(m => m.TaxInclusive, new { @class = "col-md-6", @onchange = "TaxDetails('', this.value)", @style = "position:absolute;width:20px;" })
-
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Tax:</label>
-                                @Html.DropDownListFor(m => m.TaxId, new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.TaxName) ? "SELECT" : Model.TaxName), new { @class = "col-md-6", @style = "height: 35px;font-size: 14px", @onchange = "TaxDetails(this.value)" })
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Tax %:</label>
-                                @Html.TextBoxFor(m => m.Taxpercent, new { @class = "col-md-6", @readonly = "readonly" })
-                            </div>
-
-                            <div class="col-md-13">
-                                <label class="col-md-5">Effective Price:</label>
-                                @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "col-md-6", @readonly = "readonly" })
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Final Price:</label>
-                                @Html.TextBoxFor(m => m.FinalPrice, new { @class = "col-md-6", @readonly = "readonly" })
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Credits:</label>
-                                @Html.TextBoxFor(m => m.Credits, new { @class = "col-md-6" })
-
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Courtesy:</label>
-                                @Html.TextBoxFor(m => m.Courtesy, new { @class = "col-md-6" })
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Bonus:</label>
-                                @Html.TextBoxFor(m => m.Bonus, new { @class = "col-md-6" })
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Tickets:</label>
-                                @Html.TextBoxFor(m => m.Tickets, new { @class = "col-md-6" })
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Time:</label>
-                                @Html.TextBoxFor(m => m.Time, "{0:HH:mm:ss}", new { type = "Time", @class = "col-md-6", @style = "padding-right: 0px;padding-left: 0px;" })
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Category:</label>
-                                @Html.DropDownListFor(m => m.Category, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Category) ? "SELECT" : Model.Category), new { @class = "col-md-6", @style = "font-size: 14px" })
-                            </div>
-                            <div class="col-md-13">
-                                <label class="col-md-5">Product Type:</label>
-                                @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "col-md-6", @style = "font-size: 14px" })
-                            </div>
-                        </div>
-                        <div class="col-md-7">
+        <div id="editpopup" class="row">
+            <div class="col-sm">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" role="tab" data-toggle="tab">Product</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="form-group row">
+                        <div>
                             <div class="row">
-                                <div class="col-md-5">
-                                    <div class="col-md-13">
-                                        <label class="col-md-11">Ticket Allowed:</label>
-                                        @Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                <div class="col-sm-2">
+                                    <label>Id:</label>
+                                    @Html.TextBoxFor(m => m.Id, new { @readonly = "readonly", @class = "col-md-6", id = "productId" })
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Active:</label>
+                                    @Html.CheckBoxFor(m => m.Active, new { @class = "col-md-2" })
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Display Group:</label>
+                                    @Html.DropDownListFor(m => m.DisplayGroupId, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.DisplayGroup) ? "SELECT" : Model.DisplayGroup), new { @class = "col-md-5" })
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Display Order:</label>
+                                    @Html.TextBoxFor(m => m.DisplayOrder, new { @class = "col-md-5", placeholder = @Html.DisplayNameFor(n => n.Name) })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Product Name:</label>
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "col-md-3", placeholder = @Html.DisplayNameFor(n => n.Name) })
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Category:</label>
+                                    @Html.DropDownListFor(m => m.Category, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Category) ? "SELECT" : Model.Category), new { @class = "col-md-6", @style = "font-size: 14px" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Product Type:</label>
+                                    @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type), new { @class = "col-md-6", @style = "font-size: 14px" })
+                                </div>
+                            </div>
+                            <div class="row product-checks">
+                                <div class="col-sm-2">
+                                    <div class="row">
+                                        <label class="col-sm-5">Display in Pos</label>
+                                        @Html.CheckBoxFor(m => m.DisplayInPOS, new { @class = "col-sm-5" })
                                     </div>
-
-                                    <div class="col-md-13">
-                                        <label class="col-md-11">OnlyVIP:</label>
-                                        @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
-                                    </div>
-
-                                    <div class="col-md-13">
-                                        <label class="col-md-11">Quantity Prompt</label>
-                                        @Html.CheckBoxFor(m => m.QuantityPrompt, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
-                                    </div>
-
-                                    <div class="col-md-13">
-                                        <label class="col-md-11">Allow Price Override</label>
-                                        @Html.CheckBoxFor(m => m.AllowPriceOverride, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="row">
+                                        <label class="col-sm-5">Quantity Prompt</label>
+                                        @Html.CheckBoxFor(m => m.QuantityPrompt, new { @class = "col-sm-5" })
                                     </div>
                                 </div>
-                                <div class="col-md-7">
-                                    <div class="col-md-13">
-                                        <label class="col-md-6">POS Counter:</label>
-                                        @Html.TextBoxFor(m => m.POSCounter, new { @class = "col-md-5" })
-                                    </div>
-                                    <div class="col-md-13">
-                                        <label class="col-md-6">DisplayGroup:</label>
-                                        @Html.DropDownListFor(m => m.DisplayGroupId, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.DisplayGroup) ? "SELECT" : Model.DisplayGroup), new { @class = "col-md-5" })
-                                    </div>
-                                    <div class="col-md-13">
-                                        <label class="col-md-6">CardValidFor:</label>
-                                        @Html.TextBoxFor(m => m.CardValidFor, new { @class = "col-md-5" })
-                                    </div>
-                                    <div class="col-md-13">
-                                        <label class="col-md-8">Minimum quantity:</label>
-                                        @Html.TextBoxFor(m => m.MinimumQuantity, new { @class = "col-md-3" })
+                                <div class="col-sm-2">
+                                    <div class="row">
+                                        <label class="col-sm-5">Auto Generate Card Number</label>
+                                        @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "col-sm-5" })
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <label class="col-md-8">Auto Generate Card Number:</label>
-                                    @Html.CheckBoxFor(m => m.AutoGenerateCardNumber, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                <div class="col-sm-2">
+                                    <div class="row">
+                                        <label class="col-sm-5">OnlyVIP:</label>
+                                        @Html.CheckBoxFor(m => m.OnlyVIP, new { @class = "col-sm-5" })
+                                    </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <label class="col-md-8">Manager Approval Required</label>
-                                    @Html.CheckBoxFor(m => m.ManagerApprovalRequired, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
+                                <div class="col-sm-2">
+                                    <div class="row">
+                                        <label class="col-sm-5">Allow Price Override</label>
+                                        @Html.CheckBoxFor(m => m.AllowPriceOverride, new { @class = "col-sm-5" })
+                                    </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <label class="col-md-8">Transaction Header Remarks Mandatory</label>
-                                    @Html.CheckBoxFor(m => m.TrxHeaderRemarksMandatory, new { @class = "col-md-4", @style = "position:absolute;width:20px;" })
-                                </div>
-                                <br />
-                                <br />
-                                <br />
-
-                                <div class="col-md-12" id="datetimepicker1">
-                                    <label class="col-md-6">StartDate:</label>
-                                    @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="col-md-6">ExpiryDate:</label>
-                                    @Html.TextBoxFor(m => m.ExpiryDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="col-md-6">Last Updated User:</label>
-                                    @Html.TextBoxFor(m => m.LastUpdatedBy, new { @class = "col-md-5", @readonly = "readonly" })
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="col-md-6">LastUpdatedDate:</label>
-                                    @Html.TextBoxFor(m => m.LastUpdatedDate, new { @class = "col-md-5", @readonly = "readonly" })
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-            <div style="float: right; padding-right: 50px">
-                <input type="submit" name="submit" value="Save" onclick="duplicateClick(false)" class="btn btn-primary btn-md" />
-                @if (Model.Id > 0)
-                {
-                    <button class="btn btn-primary btn-md" onclick="duplicateClick(true)">Duplicate</button>
-                }
-               <button class="btn btn-primary btn-md" role="button" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
         </div>
-  
+        <div id="editpopup" style="margin-top: -35px;" class="row">
+            <div class="col-sm">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" role="tab" data-toggle="tab">Price</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="form-group row">
+                        <div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label class="col-md-5">Face Value</label>
+                                    @Html.TextBoxFor(m => m.FaceValue, new { @class = "col-md-6" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label class="col-md-5">Price:</label>
+                                    @Html.TextBoxFor(m => m.Price, new { @class = "col-md-6" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label class="col-md-5">TaxInclusive:</label>
+                                    @Html.CheckBoxFor(m => m.TaxInclusive, new { @class = "col-md-6", @onchange = "TaxDetails('', this.value)", @style = "position:absolute;width:20px;" })
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label class="col-md-5">Tax:</label>
+                                    @Html.DropDownListFor(m => m.TaxId, new SelectList((List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.TaxName) ? "SELECT" : Model.TaxName), new { @class = "col-md-6", @style = "height: 35px;font-size: 14px", @onchange = "TaxDetails(this.value)" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label class="col-md-5">Tax %:</label>
+                                    @Html.TextBoxFor(m => m.Taxpercent, new { @class = "col-md-6", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label class="col-md-5">Effective Price:</label>
+                                    @Html.TextBoxFor(m => m.EffectivePrice, new { @class = "col-md-6", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label class="col-md-5">Final Price:</label>
+                                    @Html.TextBoxFor(m => m.FinalPrice, new { @class = "col-md-6", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" role="tab" data-toggle="tab">Entitlements</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="form-group row product-entitlement">
+                        <div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Credits:</label>
+                                    @Html.TextBoxFor(m => m.Credits, new { @class = "col-md-6" })
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>CardValidFor(In Days):</label>
+                                    @Html.TextBoxFor(m => m.CardValidFor, new { @class = "col-md-4" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Courtesy:</label>
+                                    @Html.TextBoxFor(m => m.Courtesy, new { @class = "col-md-6" })
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Card Expiry Date:</label>
+                                    @Html.TextBoxFor(m => m.CardExpiryDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-6", @style = "padding-right: 0px;padding-left: 0px;margin: 0px" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Bonus:</label>
+                                    @Html.TextBoxFor(m => m.Bonus, new { @class = "col-md-6" })
+                                </div>
+                                <div class="col-sm-6">
+                                    <a (onClick)="cardExpiryDateClear()">clear date</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Tickets:</label>
+                                    @Html.TextBoxFor(m => m.Tickets, new { @class = "col-md-6" })
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Maximum quantity:</label>
+                                    @Html.TextBoxFor(m => m.MaximumQuantity, new { @class = "col-md-3", @style = "margin: 0px" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Time:</label>
+                                    @Html.TextBoxFor(m => m.Time, "{0:HH:mm:ss}", new { type = "Time", @class = "col-md-6", @style = "padding-right: 0px;padding-left: 0px;" })
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>HSN / SAC Code:</label>
+                                    @Html.TextBoxFor(m => m.HSNSACCode, new { @class = "col-md-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <label class="col-md-5" style="padding:0">Ticket Allowed:</label>
+                                        @Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "col-md-5" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <label class="col-md-5" style="padding:0">VIP Card:</label>
+                                        @Html.CheckBoxFor(m => m.vipCard, new { @class = "col-md-5" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id ="editpopup" class="row" style="margin-top: -35px;">
+            <div class="col-sm">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" role="tab" data-toggle="tab">Miscellaneous</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="form-group row product-miscellaneous">
+                        <div>
+                            <div class="row" style="margin-top: 5px">
+                                    <label class="col-sm-1">StartDate:</label>
+                                    @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-sm-3", @style = "padding-right: 0px;padding-left: 0px; margin-left: 12px;margin-right: 12px; max-width:25%" })
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    <label class="col-md-1">LastUpdatedDate:</label>
+                                    @Html.TextBoxFor(m => m.LastUpdatedDate, new { @class = "col-md-2", @readonly = "readonly", @style= "margin-right: 10px;margin-left: 80px;max-width: 13%;" })                                
+                                    <label class="col-md-2">Last Updated User:</label>
+                                    @Html.TextBoxFor(m => m.LastUpdatedBy, new { @class = "col-md-2", @readonly = "readonly",  @style= "margin: 0;padding: 0;max-width: 12%;"})                                
+                            </div>
+                            <div class="row" style="margin-top:5px">
+                                <div class="col-sm-6" id="datetimepicker1">
+                                    <label class="col-md-6">ExpiryDate:</label>
+                                    @Html.TextBoxFor(m => m.ExpiryDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:5px">
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <label class="col-sm-4">Line Remarks Mandatory:</label>
+                                        @Html.CheckBoxFor(m => m.LineRemarksMandatory, new { @class = "col-md-4" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <label class="col-sm-4">Manager Approval Required</label>
+                                        @Html.CheckBoxFor(m => m.ManagerApprovalRequired, new { @class = "col-md-4" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <label class="col-sm-4">Trx Header Remarks Mandatory</label>
+                                        @Html.CheckBoxFor(m => m.TrxHeaderRemarksMandatory, new { @class = "col-md-4" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <label class="col-sm-4">Invoke Customer Registration:</label>
+                                        @Html.CheckBoxFor(m => m.InvokeCustomerRegistration, new { @class = "col-md-4" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="float: right; padding-right: 50px">
+            <input type="submit" name="submit" value="Save" onclick="duplicateClick(false)" class="btn btn-primary btn-md" />
+            @if (Model.Id > 0)
+                {
+                <button class="btn btn-primary btn-md" onclick="duplicateClick(true)">Duplicate</button>
+            }
+            <button class="btn btn-primary btn-md" role="button" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+
     }
 </div>
 
-<script type="text/javascript">
-    var duplicateClicked = false;
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
-    function duplicateClick(value) {
-        if (value == true) {
-            $('#productId').val('');
-        }
-        duplicateClicked = value;
-    }
-    function displayMessage(response) {
-        if (duplicateClicked == false) {
-            if (response == '') {
-                alert('data saved successfully');
-                location.reload();
-            } else {
-                alert(response);
-            }
-        }
-    }
 
-    function TaxDetails(TaxId1, taxinclusive) {
-        var TaxId = $('#TaxId option:selected').val();
-        var Price = $('#Price').val();
-        if (Price == "") {
-            Price = null;
-        }
-        var FaceValue = Number($('#FaceValue').val());
-        taxinclusive = $('#TaxInclusive').is(":checked");
-        var model = {
-            Id: TaxId,
-            Price: Price,
-            FaceValue: FaceValue,
-            TaxInclusive: taxinclusive
-        };
-        if (TaxId == "") {
-            $('#EffectivePrice').val((Price - FaceValue).toFixed(4));
-            $('#FinalPrice').val(Price);
-        }
-            //JSON.stringify({ TaxId: TaxId, Price: Price, TaxInclusive: taxinclusive, FaceValue: FaceValue }),
-        else {
+                <script type="text/javascript">
+                    var duplicateClicked = false;
+                    function duplicateClick(value) {
+                        if (value == true) {
+                            $('#productId').val('');
+                        }
+                        duplicateClicked = value;
+                    }
+                    function displayMessage(response) {
+                        if (duplicateClicked == false) {
+                            if (response == '') {
+                                alert('data saved successfully');
+                                location.reload();
+                            } else {
+                                alert(response);
+                            }
+                        }
+                    }
 
-            $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                url: '@Url.Action("TaxDetails", "Product")',
-                data: JSON.stringify({ model: model }),
-                dataType: "json",
-                success: function (data) {
-                    $('#EffectivePrice').val(parseFloat(data.EffectivePrice).toFixed(4));
-                    $('#Taxpercent').val(data.Taxpercent);
-                    $('#FinalPrice').val(data.FinalPrice);
-                },
-                error: function (e) {
-                    alert(e);
-                }
-            });
-        }
-    }
-</script>
-<style>
-    .modal-body {
-        padding: 5px;
-    }
-</style>
+                    function TaxDetails(TaxId1, taxinclusive) {
+                        var TaxId = $('#TaxId option:selected').val();
+                        var Price = $('#Price').val();
+                        if (Price == "") {
+                            Price = null;
+                        }
+                        var FaceValue = Number($('#FaceValue').val());
+                        taxinclusive = $('#TaxInclusive').is(":checked");
+                        var model = {
+                            Id: TaxId,
+                            Price: Price,
+                            FaceValue: FaceValue,
+                            TaxInclusive: taxinclusive
+                        };
+                        if (TaxId == "") {
+                            $('#EffectivePrice').val((Price - FaceValue).toFixed(4));
+                            $('#FinalPrice').val(Price);
+                        }
+                            //JSON.stringify({ TaxId: TaxId, Price: Price, TaxInclusive: taxinclusive, FaceValue: FaceValue }),
+                        else {
+
+                            $.ajax({
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                url: '@Url.Action("TaxDetails", "Product")',
+                                data: JSON.stringify({ model: model }),
+                                dataType: "json",
+                                success: function (data) {
+                                    $('#EffectivePrice').val(parseFloat(data.EffectivePrice).toFixed(4));
+                                    $('#Taxpercent').val(data.Taxpercent);
+                                    $('#FinalPrice').val(data.FinalPrice);
+                                },
+                                error: function (e) {
+                                    alert(e);
+                                }
+                            });
+                        }
+                    }
+                </script>
+                <style>
+                    .modal-body {
+                        padding: 5px;
+                    }
+                </style>
