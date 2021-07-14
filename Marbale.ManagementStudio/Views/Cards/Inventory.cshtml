@@ -45,7 +45,7 @@
      @Html.TextBoxFor(m => m.NumberOfCards, new { @id="NumberOfCardsAdd", @class = "form-control"})
       <div class="modal-footer">
           <button class="btn btn-primary" onclick="AddInventory()">Submit</button>
-          <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
        </div>
      </div>                        
         <div id="tab2" class="tab-pane fade">
@@ -63,7 +63,7 @@
       
         <div class="modal-footer">
            <button class="btn btn-primary" onclick="DeleteInventory()" >Submit</button>
-           <button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
+           <button class="btn btn-primary" data-dismiss="modal" >Cancel</button>
         </div>
     </div>
         <div id="tab3" class="tab-pane fade">
@@ -79,15 +79,15 @@
            </div>  
         
         <div class="form-group row">
-             <div class="col-md-5 datepickers">
-                @Html.TextBoxFor(m => m.From,new {@class="form-control datapicker", data_select="datepicker",placeholder ="From Date"})
+             <div class="col-md-5">
+                @Html.TextBoxFor(m => m.From,new {@class="form-control", type = "date",placeholder ="From Date"})
              </div>
-             <div class="col-md-5 datepickers">
-                @Html.TextBoxFor(m => m.To, new {@class="form-control datapicker", data_select="datepicker",placeholder ="To Date"})
+             <div class="col-md-5">
+                @Html.TextBoxFor(m => m.To, new {@class="form-control", type = "date",placeholder ="To Date"})
              </div>                
            </div>  <div class="modal-footer">
           <button class="btn btn-primary" onclick="SubmitInventory()">Submit</button>
-          <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
         </div>
         </br>
           <table id="cardtableinventory" class="table marbleTable">
@@ -117,20 +117,14 @@
 </div>
 
 <script >
+
     $("document").ready(function () {
-        $(function () {
-            $(".datepicker").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                "setDate": new Date()
-            });
-        });
         var totalcards = $('#Totalcards').val();
 
-        $("label[for='lblName']").text(totalcards);
-        setTimeout(function () {
-            $("#addcardtab").trigger('click');
-        }, 10);
+        //$("label[for='lblName']").text(totalcards);
+        //setTimeout(function () {
+        //    $("#addcardtab").trigger('click');
+        //}, 10);
     });
     $('input:radio').click(function () {
         if ($(this).val() === 'For Period') {
