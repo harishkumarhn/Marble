@@ -654,7 +654,7 @@ namespace Marbale.POS
             trxLine.quantity = 1;
 
             trxLine.tax_percentage = product.TaxPercentage;
-            trxLine.tax_id = product.TaxId;
+            trxLine.tax_id = (int )product.TaxId;
             trxLine.tax_amount = (decimal)((productPrice - product.FaceValue) * product.TaxPercentage) / 100;
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
