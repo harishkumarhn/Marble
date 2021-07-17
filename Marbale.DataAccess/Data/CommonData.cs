@@ -16,10 +16,10 @@ namespace Marbale.DataAccess
         }
         public int DeleteById(int Id, string from, bool isDataItem = false)
         {
-            SqlParameter[] sqlParameters = new SqlParameter[3];
+            SqlParameter[] sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@Id", Id);
             sqlParameters[1] = new SqlParameter("@from", from);
-            sqlParameters[2] = new SqlParameter("@isDataItem", isDataItem);
+            //sqlParameters[2] = new SqlParameter("@isDataItem", isDataItem);
 
             return conn.executeUpdateQuery("sp_DeleteById", sqlParameters);
         }

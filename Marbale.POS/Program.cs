@@ -18,8 +18,8 @@ namespace Marbale.POS
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new MarblePOS());
-                // Application.Run(new TestForm());
+                //Application.Run(new MarblePOS());
+               Application.Run(new FrmLogin());
                 Console.ReadLine();
             }
             catch (Exception ex)

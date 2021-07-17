@@ -13,12 +13,12 @@ using System.Windows.Forms;
 
 namespace Marbale.POS
 {
-    public partial class frmLogin : Form
+    public partial class FrmLogin : Form
     {
         public static User loggedInUser;
         public bool isLoginSuccess = false;
 
-        public frmLogin()
+        public FrmLogin()
         {
             InitializeComponent();
 
@@ -58,7 +58,11 @@ namespace Marbale.POS
             {
                 loggedInUser = userAdaptr;
                 isLoginSuccess = true;
-                this.Close();
+
+                 MarblePOS marblePOS = new MarblePOS();
+                this.Hide();
+                marblePOS.Show();
+                //Application.Run(new MarblePOS());
             }
             else
             {
