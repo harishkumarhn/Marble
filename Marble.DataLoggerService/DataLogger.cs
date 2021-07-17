@@ -56,6 +56,14 @@ namespace Marble.DataLoggerService
         {
             datalogger.Error(message, exception);
         }
+        public void BeginDebugLog(string message )
+        {
+            datalogger.Debug("----method Begin : "+ message);
+        }
+        public void EndDebugLog(string message )
+        {
+            datalogger.Debug("----method End :" + message);
+        }
         //public void LogInfo()
         //{
         //    datalogger.Error(message, exception);

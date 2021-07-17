@@ -53,7 +53,7 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-           frmLogin frmLogin = new frmLogin();
+           FrmLogin frmLogin = new FrmLogin();
             //frmLogin.ShowDialog();
             //if (!frmLogin.isLoginSuccess)
             //    Environment.Exit(0);

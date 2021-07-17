@@ -32,9 +32,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlLogin = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txtUsername = new JTextBox.JTextBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.txtPassword = new JTextBox.JTextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.pnlLogin.SuspendLayout();
@@ -88,20 +88,20 @@
             this.txtUsername.AutoSize = true;
             this.txtUsername.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("txtUsername.BackgroundImage")));
             this.txtUsername.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.txtUsername.BorderColor = System.Drawing.Color.Gray;
+            //this.txtUsername.BorderColor = System.Drawing.Color.Gray;
             this.txtUsername.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtUsername.Hint = "";
-            this.txtUsername.IsPassword = false;
-            this.txtUsername.Length = 0;
+            //this.txtUsername.Hint = "";
+            //this.txtUsername.IsPassword = false;
+            //this.txtUsername.Length = 0;
             this.txtUsername.Location = new System.Drawing.Point(49, 63);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(0);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.OnFocus = System.Drawing.Color.Black;
-            this.txtUsername.OnlyChar = false;
-            this.txtUsername.OnlyNumber = false;
+            //this.txtUsername.OnFocus = System.Drawing.Color.Black;
+            //this.txtUsername.OnlyChar = false;
+            //this.txtUsername.OnlyNumber = false;
             this.txtUsername.Size = new System.Drawing.Size(266, 36);
             this.txtUsername.TabIndex = 1;
-            this.txtUsername.TextValue = "";
+            //this.txtUsername.TextValue = "";
             // 
             // pictureBox3
             // 
@@ -119,19 +119,19 @@
             this.txtPassword.AutoSize = true;
             this.txtPassword.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("txtPassword.BackgroundImage")));
             this.txtPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.txtPassword.BorderColor = System.Drawing.Color.Gray;
+            //this.txtPassword.BorderColor = System.Drawing.Color.Gray;
             this.txtPassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtPassword.Hint = "";
-            this.txtPassword.IsPassword = true;
-            this.txtPassword.Length = 0;
+            //this.txtPassword.Hint = "";
+            //this.txtPassword.IsPassword = true;
+            //this.txtPassword.Length = 0;
             this.txtPassword.Location = new System.Drawing.Point(49, 128);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.OnFocus = System.Drawing.Color.Black;
-            this.txtPassword.OnlyChar = false;
-            this.txtPassword.OnlyNumber = false;
+            //this.txtPassword.OnFocus = System.Drawing.Color.Black;
+            //this.txtPassword.OnlyChar = false;
+            //this.txtPassword.OnlyNumber = false;
             this.txtPassword.Size = new System.Drawing.Size(266, 36);
             this.txtPassword.TabIndex = 2;
-            this.txtPassword.TextValue = "";
+            //this.txtPassword.TextValue = "";
 
             // 
             // btnCancel
@@ -199,8 +199,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlLogin;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private JTextBox.JTextBox txtPassword;
+        private System.Windows.Forms.TextBox  txtPassword;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private JTextBox.JTextBox txtUsername;
+        private System.Windows.Forms.TextBox txtUsername;
     }
 }
