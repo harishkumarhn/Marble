@@ -1,0 +1,1 @@
+insert into Tax values ('Select',0,1)
