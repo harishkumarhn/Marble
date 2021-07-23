@@ -21,8 +21,11 @@ namespace Marbale.POS
         public FrmLogin()
         {
             InitializeComponent();
+           
+
 
             txtPassword.KeyPress += TxtPassword_KeyPress;
+           
         }
 
         private void TxtPassword_KeyPress(object sender, KeyPressEventArgs e)
@@ -37,6 +40,9 @@ namespace Marbale.POS
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            this.txtUsername.TextValue = "marbale";
+            this.txtPassword.TextValue = "marbale";
+
             string username = txtUsername.TextValue;
             string password = txtPassword.TextValue;
 

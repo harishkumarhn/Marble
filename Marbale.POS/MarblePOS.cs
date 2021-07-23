@@ -624,7 +624,7 @@ namespace Marbale.POS
                     return;
                 }
 
-               // UpdateCardForRechargeTransaction(product);
+               UpdateCardForRechargeTransaction(product);
             }
 
             TransactionLine trxLine = new TransactionLine();
