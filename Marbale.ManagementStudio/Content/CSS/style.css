@@ -278,4 +278,11 @@ a:hover {
     background-position: right top;
     background-repeat: no-repeat;
   }
+
+.display-flex {
+    display: flex;
+}
+.display-flex label {
+    padding-right: 10px;
+}
 /*end*/
