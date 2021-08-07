@@ -46,35 +46,33 @@
                 </ul>
                 <div class="tab-content">                    
                             <div class="row">
-                                <div class="col-sm-2 display-flex">
-                                    <label>Id:</label>
-                                    @Html.TextBoxFor(m => m.Id, new { @class = "form-control",@readonly = "readonly", id = "productId" })
-                                </div>
-                                <div class="col-sm-2 display-flex">
-                                    <label>Active:</label>
+                                <div class="col-sm-4 display-flex">
+                                    <label class="col-sm-3">Id:</label>
+                                    @Html.TextBoxFor(m => m.Id, new { @class = "form-control col-sm-5",@readonly = "readonly", id = "productId" })
+                                   <label>Active:</label>
                                     @Html.CheckBoxFor(m => m.Active,new {@class = "form-control"})
                                 </div>
                                 <div class="col-sm-4 display-flex">
-                                    <label>Product Type:</label>
+                                    <label class="col-sm-5">Product Type:</label>
                                     @Html.DropDownListFor(m => m.Type, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["TypeList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Type) ? "SELECT" : Model.Type))
                                 </div>
                                 <div class="col-sm-4 display-flex">
-                                    <label>DisplayOrder:</label>
+                                    <label class="col-sm-5">DisplayOrder:</label>
                                     @Html.TextBoxFor(m => m.DisplayOrder, new {@class = "form-control",placeholder = @Html.DisplayNameFor(n => n.Name) })
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4 display-flex">
-                                    <label>Product Name:</label>
+                                    <label class="col-sm-3">Product Name:</label>
                                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.Name) })
                                 </div>
                                 <div class="col-sm-4 display-flex">
-                                    <label>Category:</label>
-                                    @Html.DropDownListFor(m => m.Category, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Category) ? "SELECT" : Model.Category), new { @style = "width:64%;margin-left: 25px;" })
+                                    <label class="col-sm-5">Category:</label>
+                                    @Html.DropDownListFor(m => m.Category, new SelectList((List<Marbale.BusinessObject.IdValue>)Session["CategoryList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.Category) ? "SELECT" : Model.Category), new { @style = "width:100%;" })
                                 </div>
                                 <div class="col-sm-4 display-flex">
-                                    <label>Display Group:</label>
-                                        @Html.DropDownListFor(m => m.DisplayGroupId,new SelectList((List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.DisplayGroup) ? "SELECT" : Model.DisplayGroup), new { @style = "width:58%" })
+                                    <label class="col-sm-5">Display Group:</label>
+                                        @Html.DropDownListFor(m => m.DisplayGroupId,new SelectList((List<Marbale.BusinessObject.IdValue>)Session["DisplayGroupList"], "Id", "Value", selectedValue: string.IsNullOrEmpty(Model.DisplayGroup) ? "SELECT" : Model.DisplayGroup), new {  @style = "width:100%;"})
                                 </div>
                             </div>
                             <div class="row">
@@ -150,29 +148,29 @@
                     <div class="row"> 
                         <div class="col-sm-6">
                             <div class="display-flex">
-              <label class="col-sm-3">Credits:</label>
+              <label class="col-sm-5">Credits:</label>
               @Html.TextBoxFor(m => m.Credits, new { @class = "form-control" })
           </div>
                             <div class="display-flex">
-            <label class="col-sm-3">Courtesy:</label>
+            <label class="col-sm-5">Courtesy:</label>
                @Html.TextBoxFor(m => m.Courtesy, new { @class = "form-control" })
           </div>
                             <div class="display-flex">
-            <label class="col-sm-3">Bonus:</label>
+            <label class="col-sm-5">Bonus:</label>
                  @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
             </div>
                             <div class="display-flex">
-                <label class="col-sm-3">Tickets:</label>
+                <label class="col-sm-5">Tickets:</label>
                 @Html.TextBoxFor(m => m.Tickets, new { @class = "form-control" })
         </div>
                             <div class="display-flex">
-                <label class="col-sm-3">Time:</label>
+                <label class="col-sm-5">Time:</label>
                     @Html.TextBoxFor(m => m.Time, "{0:HH:mm:ss}", new { type = "Time", @class = "form-control" })
           </div>
                             <div class="display-flex">
-                   <label class="col-sm-3">Ticket Allowed:</label>
+                   <label class="col-sm-5">Ticket Allowed:</label>
                     @Html.CheckBoxFor(m => m.TicketAllowed, new { @class = "form-control"})
-                 <label class="col-sm-3">VIP Card:</label>
+                 <label class="col-sm-4">VIP Card:</label>
                   @Html.CheckBoxFor(m => m.vipCard, new { @class = "form-control"})
           </div>
                        </div>
@@ -188,11 +186,11 @@
             </div>
         </div>
         <div class="display-flex">
-                  <label>Maximum quantity:</label>
+                  <label class="col-sm-4">Maximum quantity:</label>
                   @Html.TextBoxFor(m => m.MaximumQuantity, new { @class = "form-control" })
          </div>
         <div class="display-flex">
-           <label>HSN / SAC Code:</label>
+           <label class="col-sm-4">HSN / SAC Code:</label>
             @Html.TextBoxFor(m => m.HSNSACCode, new { @class = "form-control" })
         </div>
     </div>
