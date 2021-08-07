@@ -45,14 +45,14 @@
                     <table>
                         <tr>
                             <td>
-                                <label for="ex1">CardId:</label>
+                                <label>CardId:</label>
                             </td>
                             <td>@Html.TextBoxFor(m => m.CardId, new { @readonly = "readonly", @class = "form-control" })
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="ex2">CardNumber:</label>
+                                <label>CardNumber:</label>
                             </td>
                             <td>@Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control"})
                                 @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
@@ -60,14 +60,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="ex3">IssueDate:</label>
+                                <label>IssueDate:</label>
                             </td>
                             <td>@Html.TextBoxFor(m => m.IssueDateP, new { @class = "form-control datepicker" })
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="ex3">FaceValue:</label>
+                                <label>FaceValue:</label>
                             </td>
                             <td>@Html.TextBoxFor(m => m.FaceValue, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.FaceValue, "", new { @class = "text-danger" })
@@ -75,15 +75,20 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="ex4">Customer:</label>
+                                <label>Customer:</label>
                             </td>
-                            <td>@Html.TextBoxFor(m => m.Customer, new { @class = "form-control" })
+                            <td>
+                                  @Html.TextBoxFor(m => m.Customer, new { @class = "form-control" })
                             </td>
                         </tr>
                         <tr class="newCard">
                             <td>
-                                <label for="ex4">VIP Customer:</label>
-                                @Html.CheckBoxFor(m => m.VIPCustomer, new { @class = "form-control cardInlineItem", @style = "position:absolute;width:20px;" })
+                                <label>VIP Customer:</label>
+                                @Html.CheckBoxFor(m => m.VIPCustomer, new { @class = "form-control cardInlineItem"})
+                            </td>
+                            <td>
+                                <label>Valid:</label>
+                                @Html.CheckBoxFor(m => m.ValidFlag, new { @class = "form-control cardInlineItem" })
                             </td>
                         </tr>
                     </table>
@@ -238,9 +243,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
     <div class="row" style="margin-top: -35px;">
         <div class="col-sm">

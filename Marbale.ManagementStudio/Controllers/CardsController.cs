@@ -52,11 +52,11 @@ namespace MarbaleManagementStudio.Controllers
             CardsModel card = cardBussiness.getCardById(CardId);
             return View(card);
         }
-        public ActionResult InsertOrUpdateCards(CardsModel product)
+        public ActionResult InsertOrUpdateCards(CardsModel card)
         {
             try
             {
-                int result = cardBussiness.InsertOrUpdateCards(product);
+                int result = cardBussiness.InsertOrUpdateCards(card);
             }
             catch (Exception e)
             {
