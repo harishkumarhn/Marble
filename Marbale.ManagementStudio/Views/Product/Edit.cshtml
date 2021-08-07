@@ -9,7 +9,7 @@
         color: blue;
         font-size: 13px;
     }
-     .productTabs {
+    .productTabs {
         font-weight: 800;
     }
     .modal-body {
@@ -18,7 +18,7 @@
         font-weight: 500;
     }
     .form-control {
-        max-height:30px;
+        max-height: 30px;
     }
 </style>
 
@@ -176,13 +176,13 @@
                        </div>
                         <div class="col-sm-6">
         <div class="display-flex">
-              <label>Card Valid For(In Days):</label>
-               @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control",@style="width: 37%;" })
+              <label class="col-sm-8">Card Valid For(In Days):</label>
+               @Html.TextBoxFor(m => m.CardValidFor, new { @class = "form-control"})
           </div>
         <div class="display-flex">
             <div>
-                <label>Card Expiry Date:</label> <a class="clearDate" (onClick)="cardExpiryDateClear()"> clear date</a>
-                @Html.TextBoxFor(m => m.CardExpiryDate, "{0:yyyy-MM-ddTHH:mm:ss}",new { type = "datetime-local", @class = "form-control" })
+                <label class="col-sm-8">Card Expiry Date:</label> <a class="clearDate" (onClick)="cardExpiryDateClear()"> clear date</a>
+                @Html.TextBoxFor(m => m.CardExpiryDate, "{0:yyyy-MM-ddTHH:mm:ss}",new { type = "datetime-local", @class = "form-control col-sm-12" })
             </div>
         </div>
         <div class="display-flex">

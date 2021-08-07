@@ -154,24 +154,14 @@ namespace MarbaleManagementStudio.Controllers
 
         }
         [HttpPost]
-        public string InsertOrUpdate(Product pObject, string submit)
+        public string InsertOrUpdate(Product pObject)
         {
             var message = string.Empty;
             try
             {
                 if (ModelState.IsValid)
-                {
-                    switch (submit)
-                    {
-                        case "Save":
-                            var result = productBl.InsertOrUpdateProduct(pObject);
-                            break;
-                        case "Duplicate":
-                            pObject.Id = 0;
-                            var result1 = productBl.InsertOrUpdateProduct(pObject);
-                            break;
-
-                    }
+                {                    
+                    var result = productBl.InsertOrUpdateProduct(pObject);
                 }
                 else
                 {
