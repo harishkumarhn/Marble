@@ -100,6 +100,7 @@
     <Compile Include="frmGenericDataEntry.Designer.cs">
       <DependentUpon>frmGenericDataEntry.cs</DependentUpon>
     </Compile>
+    <Compile Include="Service\PosCodeBL.cs" />
     <Compile Include="Tasks\CommonTask.cs" />
     <Compile Include="Tasks\frmSelectProducts.cs">
       <SubType>Form</SubType>
@@ -352,6 +353,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

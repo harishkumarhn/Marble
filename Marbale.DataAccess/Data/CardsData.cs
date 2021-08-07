@@ -120,5 +120,13 @@ namespace Marbale.DataAccess.Data
 
             return conn.executeInsertQuery("DeleteCardById", sqlParameters);
         }
+
+
+        public DataTable CardTransactionSelect(int cardId)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@cardid", cardId);
+            return conn.executeSelectQuery("CardTransactionSelect", sqlParameters);
+        }
     }
 }

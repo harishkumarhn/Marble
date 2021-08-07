@@ -78,6 +78,7 @@
     <Content Include="Stored Procedures\GetInventory.sql" />
     <Content Include="Stored Procedures\GetTechCardType.sql" />
     <Content Include="Stored Procedures\SplitString.sql" />
+    <Content Include="Stored Procedures\sp_CardTransactionSelect.sql" />
     <Content Include="Stored Procedures\sp_GetActiveHubMachines.sql" />
     <Content Include="Stored Procedures\sp_GetAllCards.sql" />
     <Content Include="Stored Procedures\sp_GetAllValuesButtons.sql" />

@@ -25,8 +25,9 @@ namespace Marbale.POS
         #region declaration
 
         private readonly DataLogger dataLogger = new DataLogger();
+        PosCodeBL posCodeBL = new PosCodeBL();
 
-        #endregion
+
         POSBL posBussiness;
         double tendered_amount = 0;
         double total_amount = 0;
@@ -44,6 +45,10 @@ namespace Marbale.POS
         ListBox cmbDisplayGroups;
 
         public object TranscationBL { get; private set; }
+
+
+        #endregion
+
 
         public MarblePOS()
         {
@@ -82,7 +87,7 @@ namespace Marbale.POS
             internal string DeviceSubType;
             internal string VID, PID, OptString;
         }
-
+       
         void registerAdditionalCardReaders()
         {
 
@@ -547,7 +552,7 @@ namespace Marbale.POS
 
             transaction.TransactionDate = DateTime.Now;
 
-            if (product.TypeName == GlobalEnum.ProductType.NEW.DescriptionAttr())
+            if (product.TypeName == GlobalEnum.ProductType.NEW_CARD.DescriptionAttr())
             {
                 if (CurrentCard == null)
                 {
@@ -564,7 +569,7 @@ namespace Marbale.POS
                 bool newProductExists = false;
                 for (int i = 0; i < transaction.TransactionLines.Count; i++)
                 {
-                    if (transaction.TransactionLines[i].ProductType == "NEW" && transaction.TransactionLines[i].CancelledLine == false)
+                    if (transaction.TransactionLines[i].ProductType == GlobalEnum.ProductType.NEW_CARD.DescriptionAttr() && transaction.TransactionLines[i].CancelledLine == false)
                     {
                         newProductExists = true;
                         break;
@@ -1442,19 +1447,36 @@ namespace Marbale.POS
 
         private void tabControlCardAction_Selected(object sender, TabControlEventArgs e)
         {
-            if (tabControlCardAction.SelectedTab.Name == "tabPageCustomer")
+
+            LoadDetailCurrentTab(tabControlCardAction.SelectedTab.Name);
+        }
+
+        private void LoadDetailCurrentTab(string tabname)
+        {
+            if (tabname == "tabPageCustomer")
             {
                 lblCustomerMessage.Text = "";
                 if (cmbGender.Text == string.Empty)
                     cmbGender.SelectedIndex = 0;
             }
-            else if (tabControlCardAction.SelectedTab.Name == "tabPageMyTrx")
+            else if (tabname == "tabPageMyTrx")
             {
                 UpdateTransactionTab(0);
             }
+            else if (tabname == "tabPageActivities")
+            {
+                UpdatePurchaseTaskGrid();
+            }
+            else if (tabname == "tabPageCardInfo")
+            {
+                //UpdatePurchaseTaskGrid();
+            }
         }
 
-
+        private void UpdatePurchaseTaskGrid()
+        {
+            posCodeBL.BindPurchaseGrid(CurrentCard, ref dgvPurchases);
+        }
         private void UpdateTransactionTab(int userId)
         {
             TransactionBL trxBL = new TransactionBL();
@@ -1590,6 +1612,7 @@ namespace Marbale.POS
             if (!string.IsNullOrEmpty(frm.cardNumber) && frm.cardNumber.Length == 10)
             {
                 HandleCardRead(frm.cardNumber, null);
+                LoadDetailCurrentTab(tabControlCardAction.SelectedTab.Name);
             }
         }
 
@@ -1724,6 +1747,7 @@ namespace Marbale.POS
             updateCardDetailsGrid();
             registerAdditionalCardReaders();
             updateScreenAmounts();
+            UpdatePurchaseTaskGrid();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

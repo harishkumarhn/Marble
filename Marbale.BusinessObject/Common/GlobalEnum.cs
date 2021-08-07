@@ -14,7 +14,7 @@ namespace Marbale.BusinessObject
         public enum ProductType
         {
             [Description("New Card")]
-            NEW,
+            NEW_CARD,
             [Description("RECHARGE")]
             RECHARGE,
             [Description("MANUAL")]
