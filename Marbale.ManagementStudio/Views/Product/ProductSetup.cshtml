@@ -314,7 +314,7 @@
                 $('.DTFC_Cloned lable.fixedCol1')[i].innerHTML = fixedcolumn1values[i].innerHTML;
             }
             for (var i = 0, j = fixedcolumn3values.length; i < j; i++) {
-                $('.DTFC_Cloned input.fixedCol3')[i].value = fixedcolumn3values[i].value;
+                $('.DTFC_Cloned input.fixedCol2')[i].value = fixedcolumn3values[i].value;
             }
             $(".dataTables_scrollBody").animate({ scrollTop: $(".dataTables_scrollBody").height() }, 1000);
         });
@@ -325,7 +325,7 @@
             var items = [];
             var table = document.getElementById('marbleTable');
             var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
-            var fixedcolumn3 = $('.DTFC_Cloned input.fixedCol3');
+            var fixedcolumn3 = $('.DTFC_Cloned input.fixedCol2');
 
             for (var r = 0, n = table.rows.length; r < n; r++) {
                 if (updatedArray.includes(r)) {
@@ -373,11 +373,12 @@
                 data: JSON.stringify({ products: items }),
                 dataType: "json",
                 success: function (data) {
-                    alert('Data Saved');
-                    location.reload();
+                    notify('', '', () => {
+                        location.reload();
+                    });
                 },
                 error: function (e) {
-                    alert(e);
+                    notify('Error Message', 'Error in server');
                 }
             });
         }
