@@ -2,20 +2,33 @@
     ViewBag.Title = "Games";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+     table input {
+        font-size: 13px;
+    }
+    table.marbleTable thead th, table.marbleTable thead td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
 
-<table id="marbleTable" class="stripe row-border order-column">
+    table.marbleTable tbody th, table.marbleTable tbody td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
+</style>
+<table id="marbleTable" class="stripe row-border order-column marbleTable">
     <thead>
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
         <th>Game Profile</th>
         <th hidden>Game Profile ID</th>
-        <th>Game Profile Normal Price</th>
-        <th>Game Profile VIP Price</th>
+        <th>GPNP</th>
+        <th>GPVP</th>
         <th>Normal Price</th>
         <th>VIP Price</th>
         <th>Repeat Play Discount %</th>
-        <th>Game Company Name</th>
+        <th>GCN</th>
         <th>Notes</th>
         <th>Last UpdatedDate</th>
         <th>Last UpdatedBy</th>
@@ -27,10 +40,10 @@
                 <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
             </td>
             <td>
-                <input type="text" class="fixedCol2" value="@item.Name"/>
+                <input type="text" class="fixedCol2" value="@item.Name" style="width:6vw"/>
             </td>
             <td>
-                <input type="text" value="@item.Description"/>
+                <input type="text" value="@item.Description" style="width:7vw"/>
             </td>
             <td>
                 <select name="gameProfiles" id="gameProfile" onchange="onProfileChange(this)">
@@ -52,31 +65,31 @@
                 <input type="text" value="" />
             </td>
             <td>
-                <input type="text" style="width:10vw" value="@item.GPNormalPrice" disabled />
+                <label>@item.GPNormalPrice</label>
             </td>
             <td>
-                <input type="text" style="width:10vw" value="@item.GPVipPrice" disabled />
+                <label>@item.GPVipPrice</label>
             </td>
             <td>
-                <input type="text" value="@item.NormalPrice" style="width:9vw"/>
+                <input type="text" value="@item.NormalPrice" style="width:7vw"/>
             </td>
             <td>
-                <input type="text" value="@item.VIPPrice" style="width:9vw"/>
+                <input type="text" value="@item.VIPPrice" style="width:6vw"/>
             </td>
             <td>
                 <input type="text" value="@item.RepeatPlayDiscountPercentage" style="width:7vw"/>
             </td>
             <td>
-                <input type="text" value="@item.GameCompanyName"/>
+                <input type="text" value="@item.GameCompanyName" style="width:9vw"/>
             </td>
             <td>
-                <input type="text" value="@item.Notes" style="width:9vw"/>
+                <input type="text" value="@item.Notes" style="width:8vw"/>
             </td>
             <td>
-                <input type="text" value="@item.LastUpdatedDate"disabled/>
+                <label>@item.LastUpdatedDate</label>
             </td>
             <td>
-                <input type="text" value="@item.LastUpdatedBy"disabled/>
+                <label>@item.LastUpdatedBy</label>
             </td>
 
         </tr>  
@@ -204,19 +217,19 @@
             var radomId = Math.random();
             table.row.add([
                 '<lable class="fixedCol1"></lable>',
-                '<input class="fixedCol2" type="text" value="" />',
+                '<input class="fixedCol2" type="text" value="" style="width:6vw"/>',
                 '<input type="text" value="" />',
                 '<select name="gameProfiles" id="gameProfiles" onchange="onProfileChange(this)">' + gameProfiles,
                 '<input type="text" id="'+radomId+'" value=""/>',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
+                '<label></label>',
+                '<label></label>',
+                '<input type="text" value="" style="width:7vw"/>',
+                '<input type="text" value="" style="width:6vw"/>',
+                '<input type="text" value="" style="width:7vw"/>',
+                '<input type="text" value="" style="width:9vw"/>',
+                '<input type="text" value="" style="width:8vw"/>',
+                '<label></label>',
+                '<label></label>',
             ]).draw(false);
             document.getElementById(radomId).parentNode.hidden = true;
             for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {

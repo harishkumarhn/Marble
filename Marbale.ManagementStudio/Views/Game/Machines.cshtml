@@ -2,6 +2,20 @@
     ViewBag.Title = "Machines";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    table input {
+        font-size: 13px;
+    }
+    table.marbleTable thead th, table.marbleTable thead td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
+
+    table.marbleTable tbody th, table.marbleTable tbody td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
+</style>
 <label>Hub: </label>
 <select name="AvalibleHubs" id="Hubs" onchange="Filter()">
     @foreach (var dow in ViewBag.machines[0].AvalibleHubs)
@@ -12,15 +26,15 @@
 &nbsp&nbsp&nbsp&nbsp
 <input type="checkbox" id="activeBox" onchange="Filter()" />
 <label>Active Machines Only</label>
-<table id="marbleTable" class="stripe row-border order-column">
+<table id="marbleTable" class="stripe row-border order-column marbleTable">
     <thead>
         <th>ID</th>        
         <th>Game Name</th>
-        <th>Machine Name</th>
+        <th>Name</th>
         <th>Hub Name</th>
         <th>Hub Address</th>
-        <th>Machine Address</th>
-        <th>Effective Machine Address</th>
+        <th>Address</th>
+        <th>EMA</th>
         <th>Active</th>
         <th>Reader Type</th>
         <th>Software Version</th>
@@ -57,7 +71,7 @@
                 </select>
             </td>
             <td>
-                <input type="text"  value="@item.Name" />
+                <input type="text"  value="@item.Name" style="width:6vw"/>
             </td>
             <td>
                 <select name="AvalibleHubs" id="AvalibleHubs">
@@ -81,7 +95,7 @@
                 <input type="text" value="@item.MachineAddress" maxlength = "3" style="width:5vw"/>
             </td>
             <td>
-                <input type="text" value="@item.EffectiveMachineAddress" style="width:10vw"/>
+                <input type="text" value="@item.EffectiveMachineAddress" style="width:5vw"/>
             </td>
             <td>
                 <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
@@ -121,13 +135,13 @@
                 </select>      
             </td>
             <td>
-                <input type="text" value="@item.VIPPrice" style="width:9vw"/>
+                <input type="text" value="@item.VIPPrice" style="width:5vw"/>
             </td>
             <td>
                 <input type="checkbox"  @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
             </td>
             <td>
-                <input type="text" value="@item.PurchasePrice" style="width:10vw"/>
+                <input type="text" value="@item.PurchasePrice" style="width:5vw"/>
             </td>
             <td>
                 <input type="text" value="@item.Notes" style="width:10vw"/>
@@ -148,10 +162,10 @@
                 </select>
             </td>
             <td>
-                <input type="text" value="@item.LastUpdatedBy" disabled/>
+                <label>@item.LastUpdatedBy</label>
             </td>
             <td>
-                <input type="text" value="@item.LastUpdatedDate" disabled/>
+                <label>@item.LastUpdatedDate</label>
             </td>
             <td>
                 <button onClick="ConfigureMachine(@item.Id)" style="width:40%;min-width:0px">-</button>
@@ -290,22 +304,22 @@
             table.row.add([
                 '<lable class="fixedCol1"></lable>',                
                 '<select class="fixedCol2" name="AvailableGames" id="AvailableGames">' + games,
-                '<input  type="text" value="" />',
+                '<input  type="text" value="" style="width:6vw"/>',
                 '<select name="AvalibleHubs" id="AvalibleHubs">' + hubNames,
                 '<input type="text" value="" style="width:5vw"/>',
                 '<input type="text" value="" style="width:5vw"/>',
-                '<input type="text" value="" style="width:10vw"/>',
+                '<input type="text" value="" style="width:5vw"/>',
                 '<input type="checkbox" />',
                 '<select name="AvalibleReaders" id="AvalibleReaders">' + readerTypes,
                 '<input type="text" value="" style="width:5vw"/>',
                 '<select name="AvailableTicketModes" id="AvailableTicketModes">' + AvailableTicketModes,
-                '<input type="text" value="" style="width:9vw"/>',
+                '<input type="text" value="" style="width:5vw"/>',
                 '<input type="checkbox" />',
-                '<input type="text" value="" style="width:10vw"/>',
+                '<input type="text" value="" style="width:5vw"/>',
                 '<input type="text" value="" style="width:10vw"/>',
                 '<select name="AvalibleThemes" id="AvalibleThemes">' + themes,
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
+                '<label></label>',
+                '<label></label>',
                 '<button onClick="ConfigureMachine(0)" disabled style="width:40%;min-width:0px">-</button>'
 
             ]).draw(false);

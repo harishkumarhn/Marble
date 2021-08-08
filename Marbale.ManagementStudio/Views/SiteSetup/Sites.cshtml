@@ -2,10 +2,23 @@
     ViewBag.Title = "Sites";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+     table input {
+        font-size: 13px;
+    }
+    table.marbleTable thead th, table.marbleTable thead td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
 
+    table.marbleTable tbody th, table.marbleTable tbody td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
+</style>
 <div class="contentBody">
     
-<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+<table id="marbleTable" class="stripe row-border order-column marbleTable" style="width: 100%">
     <thead>
         <tr>
             <th>SiteID</th>
@@ -25,29 +38,29 @@
                 <tr>
                     <td> <lable>@(item.SiteId == 0 ? "" : item.SiteId) </lable> </td>
                     <td>
-                        <input type="text" value="@item.SiteName"  />
+                        <input type="text" value="@item.SiteName"  style="width:8vw"/>
                     </td>
                     <td>
-                        <input type="number" value="@(item.SiteCode == 0 ? "" : item.SiteCode)"  />
+                        <input type="number" value="@(item.SiteCode == 0 ? "" : item.SiteCode)"  style="width:5vw"/>
                     </td>
                     <td>
-                        <input type="text" value="@item.SiteAddress" />
+                        <input type="text" value="@item.SiteAddress" style="width:10vw"/>
                     </td>
                     <td>
-                        <input type="text" value="@item.Notes" />
+                        <input type="text" value="@item.Notes" style="width:10vw"/>
                     </td>
                     <td>
-                        <input type="text" value="@item.SiteGUID" disabled="disabled"/>
+                        <label>@item.SiteGUID</label>
                     </td>
                     @*<td>
                         <img alt="" src="@item.Logo" style="height:60px;width:60px;"/>
                         <button>Upload</button>
                     </td>*@
                     <td>
-                        <input type="text" value="@item.Version" />
+                        <input type="text" value="@item.Version" style="width:8vw"/>
                     </td>
                     <td>
-                        <input type="text" value="@item.CustomerKey" />
+                        <input type="text" value="@item.CustomerKey" style="width:8vw"/>
                     </td>
                 </tr>  
             }
@@ -95,14 +108,14 @@
             var fixedcolumn2values = $('.DTFC_Cloned input, select');
             table.row.add([
                 '<lable></lable>',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" disabled="disabled"/>',
+                '<input type="text" value="" style="width:8vw"/>',
+                '<input type="text" value="" style="width:5vw"/>',
+                '<input type="text" value="" style="width:10vw"/>',
+                '<input type="text" value="" style="width:10vw"/>',
+                '<label></label>',
                 //'<img alt="" src="" style="height:60px;width:60px;"/> <button>Upload</button>',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />'
+                '<input type="text" value="" style="width:8vw"/>',
+                '<input type="text" value="" style="width:8vw"/>'
 
             ]).draw(false);
             for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {

@@ -2,22 +2,35 @@
     ViewBag.Title = "Profiles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    table input {
+        font-size: 13px;
+    }
+    table.marbleTable thead th, table.marbleTable thead td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
 
-<table id="marbleTable" class="stripe row-border order-column">
+    table.marbleTable tbody th, table.marbleTable tbody td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
+</style>
+<table id="marbleTable" class="stripe row-border order-column marbleTable">
     <thead>
         <th>ID</th>
         <th>Name</th>
         <th>Normal Price</th>
         <th>VIP Price</th>
-        <th>Credit Allowed</th>
-        <th>Bonus Allowed</th>
-        <th>Courtesy Allowed</th>
-        <th>Time Allowed</th>
+        <th>Credit</th>
+        <th>Bonus</th>
+        <th>Courtesy</th>
+        <th>Time</th>
         <th>Config</th>
-        <th>Tiket Allowed On Credit</th>
-        <th>Tiket Allowed On Bonus</th>
-        <th>Tiket Allowed On Courtesy</th>
-        <th>Tiket Allowed On Time</th>
+        <th>Ticket On Credit</th>
+        <th>Ticket On Bonus</th>
+        <th>Ticket On Courtesy</th>
+        <th>Ticket On Time</th>
         <th>Last UpdatedBy</th>
         <th>Last UpdatedDate</th>
     </thead>
@@ -26,13 +39,13 @@
         <tr onchange="UpdatedList(this)">
             <td> <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable> </td>
             <td>
-                <input class="fixedCol2" type="text" value="@item.Name" />
+                <input class="fixedCol2" type="text" value="@item.Name" style="width:6vw"/>
             </td>
             <td>
-                <input type="number" value="@item.NormalPrice" style="width:9vw;"/>
+                <input type="number" value="@item.NormalPrice" style="width:7vw;"/>
             </td>
             <td>
-                <input type="number" value="@item.VIPPrice" style="width:7vw;"/>
+                <input type="number" value="@item.VIPPrice" style="width:6vw;"/>
             </td>
             <td>
                 <input type="checkbox"  @(item.CreditAllowed ? "checked='checked'" : "") value="@item.CreditAllowed" />
@@ -62,10 +75,10 @@
                 <input type="checkbox"  @(item.TiketAllowedOnTime ? "checked='checked'" : "") value="@item.TiketAllowedOnTime" />
             </td>
             <td>
-                <input type="text" value="@item.LastUpdatedBy" disabled/>
+                <label>@item.LastUpdatedBy</label>
             </td>
             <td>
-                <input type="text" value="@item.LastUpdatedDate" disabled/>
+                <label>@item.LastUpdatedDate</label>
             </td>
 
         </tr>  
@@ -119,9 +132,9 @@
 
             table.row.add([
                 '<lable class="fixedCol1"></lable>',
-                '<input class="fixedCol2" type="text" value="" />',
-                '<input type="number" value="" />',
-                '<input type="number" value="" />',
+                '<input class="fixedCol2" type="text" value="" style="width:6vw"/>',
+                '<input type="number" value="" style="width:7vw"/>',
+                '<input type="number" value="" style="width:6vw"/>',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
@@ -131,8 +144,8 @@
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
+                '<label></label>',
+                '<label></label>',
             ]).draw(false);
 
             for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
