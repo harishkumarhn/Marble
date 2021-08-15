@@ -96,11 +96,11 @@
                  data: JSON.stringify({ tasktype: tasktype }),
                  dataType: "json",
                  success: function (data) {
-                     $('#successMessages').text('Data Saved Successfully');
+                     notify('success', 'Success Message', 'Data Saved Successfully');
                  },
                  error: function (e) {
 
-                     alert(e);
+                     notify('error', 'Error Message', 'Error in server');
                  }
              });
          }

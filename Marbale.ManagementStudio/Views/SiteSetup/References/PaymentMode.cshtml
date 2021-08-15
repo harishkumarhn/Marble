@@ -2,8 +2,22 @@
     ViewBag.Title = "Payment Mode";
     Layout = null;
 }
+<style>
+    table input {
+        font-size: 13px;
+    }
 
-<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+    table.marbleTable thead th, table.marbleTable thead td {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    table.marbleTable tbody th, table.marbleTable tbody td {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+</style>
+<table id="marbleTable" class="stripe row-border order-column marbleTable" style="width: 100%">
     <thead>
         <tr>
             <th>Payment Mode ID</th>
@@ -26,7 +40,7 @@
                     <lable> @(item.PaymentModeId == 0 ? "" : item.PaymentModeId) </lable>
                 </td>
                 <td>
-                    <input type="text" value="@item.PaymentModeName" />
+                    <input type="text" value="@item.PaymentModeName" style="width:8vw"/>
                 </td>
                 <td>
                     <input type="checkbox" @(item.IsCash ? "checked='checked'" : "") value="@item.IsCash" />
@@ -47,10 +61,10 @@
                     <input type="checkbox" @(item.POSAvailable ? "checked='checked'" : "") value="@item.POSAvailable" />
                 </td>
                 <td>
-                    <input type="text" value="@item.DisplayOrder" style="width:10vw"/>
+                    <input type="text" value="@item.DisplayOrder" style="width:8vw"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.GateWay" />
+                    <input type="text" value="@item.GateWay" style="width:6vw"/>
                 </td>
             </tr>
         }
@@ -90,15 +104,15 @@
         $('#addRow').on('click', function () {
             table.row.add([
                 '<lable></lable>',
-                '<input type="text" value="" />',
+                '<input type="text" value="" style="width:8vw"/>',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
                 '<input type="text" value="" style="width:10vw"/>',
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
-                '<input type="text" value="" style="width:10vw"/>',
-                '<input type="text" value="" />'
+                '<input type="text" value="" style="width:8vw"/>',
+                '<input type="text" value="" style="width:6vw"/>'
             ]).draw(false);
         });
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
@@ -137,11 +151,12 @@
             data: JSON.stringify({ paymentModes: paymentModes }),
             dataType: "json",
             success: function (data) {
-                alert('Data Saved');
-                location.reload();
+                notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                    location.reload();
+                });
             },
             error: function (e) {
-                alert(e);
+                notify('error', 'Error Message', 'Error in server');
             }
         });
     }

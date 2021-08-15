@@ -58,10 +58,12 @@
             dataType: "json",
             beforeSend: function () { },
             success: function (data) {
-                alert('Updated successfully');
+                notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                    location.reload();
+                });
             },
             error: function () {
-                alert("Update Operation failed");
+                notify('error', 'Error Message', 'Error in server');
             }
         });
     }

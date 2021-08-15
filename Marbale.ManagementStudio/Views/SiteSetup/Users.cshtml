@@ -2,7 +2,22 @@
     ViewBag.Title = "Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+<style>
+    table input {
+        font-size: 13px;
+    }
+
+    table.marbleTable thead th, table.marbleTable thead td {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    table.marbleTable tbody th, table.marbleTable tbody td {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+</style>
+<table id="marbleTable" class="stripe row-border order-column marbleTable" style="width: 100%">
     <thead>
     <th>Id</th>
     <th>Edit</th>
@@ -43,7 +58,7 @@
                 </a>
             </td>
             <td>
-                <input class="fixedCol3" type="text" value="@item.Name" />
+                <input class="fixedCol2" type="text" value="@item.Name" style="width: 5vw;"/>
             </td>
             <td>
                 <select name="Roles" id="Roles">
@@ -64,10 +79,10 @@
                 <input type="text" value="@item.Email" />
             </td>
             <td>
-                <input type="text" value="@item.LoginId" />
+                <input type="text" value="@item.LoginId" style="width: 5vw;"/>
             </td>
             <td>
-                <input type="text" value="@item.Password" />
+                <input type="text" value="@item.Password" style="width: 6vw;"/>
             </td>
             <td>
                 <select name="Statuses" id="Statuses">
@@ -85,49 +100,49 @@
                 </select>
             </td>
             <td>
-                <input type="text" value="@item.POSCounter" />
+                <input type="text" value="@item.POSCounter" style="width: 7vw;"/>
             </td>
             <td>
-                <input type="text" value="@item.Department" />
+                <input type="text" value="@item.Department" style="width: 7vw;"/>
             </td>
             <td>
-                <input type="text" value="@item.Manager" />
+                <input type="text" value="@item.Manager" style="width: 6vw;"/>
             </td>
             <td>
                 <input type="checkbox" @(item.CompanyAdmin ? "checked='checked'" : "") value="@item.CompanyAdmin" />
             </td>
             <td>
-                <input type="text" value="@item.EmpStartDate" />
+                <input type="text" value="@item.EmpStartDate" style="width: 8vw;"/>
             </td>
             <td>
-                <input type="text" value="@item.EmpEndDate" />
+                <input type="text" value="@item.EmpEndDate" style="width: 8vw;"/>
             </td>
             <td>
-                <input type="text" value="@item.EmpEndReason" />
+                <input type="text" value="@item.EmpEndReason" style="width: 9vw;"/>
             </td>
             <td>
-                <input type="text" value="@item.PaswardChangeDate" disabled />
+                <label>@item.PaswardChangeDate</label>
             </td>
             <td>
-                <input type="text" value="@item.InvalidAttempts" disabled />
+                <label>@item.InvalidAttempts</label>
             </td>
             <td>
-                <input type="text" value="@item.LastLoginTime" disabled />
+                <label>@item.LastLoginTime</label>
             </td>
             <td>
-                <input type="text" value="@item.LastLogoutTime" disabled />
+                <label>@item.LastLogoutTime</label>
             </td>
             <td>
-                <input type="text" value="@item.CreationDate" disabled />
+                <label>@item.CreationDate</label>
             </td>
             <td>
-                <input type="text" value="@item.CreatedBy" disabled />
+                <label>@item.CreatedBy</label>
             </td>
             <td>
-                <input type="text" value="@item.LastUpdatedBy" disabled />
+                <label>@item.LastUpdatedBy</label>
             </td>
             <td>
-                <input type="text" value="@item.LastUpdatedDate" disabled />
+                <label>@item.LastUpdatedDate</label>
             </td>
         </tr>
     }
@@ -200,27 +215,27 @@
             table.row.add([
                 '<lable class="fixedCol1"></lable>',
                 '',
-                '<input class="fixedCol3" type="text" value="" />',
+                '<input class="fixedCol2" type="text" value="" style="width: 5vw;"/>',
                 '<select name="roles" id="roles">' + rolesOptions,
                 '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
+                '<input type="text" value="" style="width: 5vw;"/>',
+                '<input type="text" value="" style="width: 6vw;"/>',
                 '<select name="statuses" id="statuses">' + statusListOptions,
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
+                '<input type="text" value="" style="width: 7vw;"/>',
+                '<input type="text" value="" style="width: 7vw;"/>',
+                '<input type="text" value="" style="width: 6vw;"/>',
                 '<input type="checkbox" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" />',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
-                '<input type="text" value="" disabled/>',
+                '<input type="text" value="" style="width: 8vw;"/>',
+                '<input type="text" value="" style="width: 8vw;"/>',
+                '<input type="text" value="" style="width: 9vw;"/>',
+                '<label></label>',
+                '<label></label>',
+                '<label></label>',
+                '<label></label>',
+                '<label></label>',
+                '<label></label>',
+                '<label></label>',
+                '<label></label>',
             ]).draw(false);
 
             for (var i = 0, j = fixedcolumn1values.length; i < j; i++) {
@@ -274,11 +289,11 @@
                 dataType: "json",
                 success: function (returndata) {
                     if (returndata.ok) {
-                        alert("Data Saved")
+                        notify('success', 'Success Message', 'Data Saved Successfully');
                     }
                     else {
                         //this is an error from the server
-                        window.alert(' error : ' + returndata.message);
+                        notify('error', 'Error Message', returndata.message);
                     }
 
                 }

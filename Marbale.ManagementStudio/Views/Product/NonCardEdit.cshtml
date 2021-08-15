@@ -201,7 +201,16 @@
                 <button class="btn btn-primary btn-md" role="button" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
         </div>
-  
+        <div id="snackbar-modal" class="snackbar">
+            <div class="snackbar-container">
+                <div class="icon"><ion-icon name="checkmark-circle"></ion-icon></div>
+                <div class="snackbar-message">
+                    <div class="snackbar-header"><strong id="header">Success Message</strong></div>
+                    <div class="snackbar-content"><span id="message">Data Saved Successfully</span></div>
+                </div>
+                <div class="close" id="close-modal"><a onclick="notifyCloseinmodal()"><ion-icon name="close-outline"></ion-icon></a></div>
+            </div>
+        </div>
     }
 </div>
 
@@ -217,10 +226,11 @@
     function displayMessage(response) {
         if (duplicateClicked == false) {
             if (response == '') {
-                alert('data successfully saved');
-                location.reload();
+                notifyinmodal('success', 'Success Message', 'Data Saved Successfully', () => {
+                    location.reload();
+                });
             } else {
-                alert(response);
+                notifyinmodal('error', 'Error Message', response);
             }
         }
     }

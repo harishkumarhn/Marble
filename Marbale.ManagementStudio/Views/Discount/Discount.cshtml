@@ -78,8 +78,9 @@
                         beforeSend: function () { },
 
                         success: function (data) {
-                            location.reload();
-                            $('#displayMessage').text('data added succesfully').addClass('success');
+                            notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                                location.reload();
+                            });
                         }
                     });
                 }
@@ -129,8 +130,9 @@
                         beforeSend: function () { },
 
                         success: function (data) {
-
-                            location.reload();
+                            notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                                location.reload();
+                            });
                         }
                     });
                 }
@@ -305,7 +307,16 @@
         padding: 14px 16px;
         transition: 0.3s;
         font-size: 17px;
+    }   
+
+    table input {
+        font-size: 13px;
     }
+
+    .webGrid th, .webGrid td {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }    
 </style>
 
 @{

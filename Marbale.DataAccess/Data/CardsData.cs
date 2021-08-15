@@ -22,7 +22,7 @@ namespace Marbale.DataAccess.Data
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[25];
+                SqlParameter[] sqlParameters = new SqlParameter[26];
                 sqlParameters[0] = new SqlParameter("@CardId", cardmodel.CardId);
                 sqlParameters[1] = new SqlParameter("@CardNumber", cardmodel.CardNumber);
                 sqlParameters[2] = new SqlParameter("@Custemer", cardmodel.Customer);
@@ -50,6 +50,7 @@ namespace Marbale.DataAccess.Data
                 sqlParameters[22] = new SqlParameter("@CreditsPlayed", cardmodel.CreditsPlayed);
                 sqlParameters[23] = new SqlParameter("@Bonus", cardmodel.Bonus);
                 sqlParameters[24] = new SqlParameter("@ExpiryDate", cardmodel.ExpiryDate);
+                sqlParameters[25] = new SqlParameter("@Valid", cardmodel.ValidFlag);
 
                 return conn.executeInsertQuery("sp_InsertOrUpdateCards", sqlParameters);
             }

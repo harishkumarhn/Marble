@@ -6,6 +6,18 @@
     .highlight{
         background-color:gray;
     }
+    table input {
+        font-size: 13px;
+    }
+    table.marbleTable thead th, table.marbleTable thead td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
+
+    table.marbleTable tbody th, table.marbleTable tbody td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
 </style>
 <div>
     <div class="taxsetmodel">
@@ -124,11 +136,12 @@
             data: JSON.stringify({ taxmaster: taxmaster }),
             dataType: "json",
             success: function (data) {
-                alert('Data Saved');
-                location.reload();
+                notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                    location.reload();
+                });
             },
             error: function (e) {
-                alert(e);
+                notify('error', 'Error Message', 'Error in server');
             }
         });
     }
