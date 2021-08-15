@@ -373,12 +373,12 @@
                 data: JSON.stringify({ products: items }),
                 dataType: "json",
                 success: function (data) {
-                    notify('', '', () => {
+                    notify('success','Success Message', 'Data Saved Successfully', () => {
                         location.reload();
                     });
                 },
                 error: function (e) {
-                    notify('Error Message', 'Error in server');
+                    notify('error','Error Message', 'Error in server');
                 }
             });
         }

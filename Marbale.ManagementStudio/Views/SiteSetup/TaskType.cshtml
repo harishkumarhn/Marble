@@ -2,9 +2,6 @@
     ViewBag.Title = "TaskType";
 }
 
-<div>
-    <label id="successMessages" class="pos-text"></label>
-</div>
 <style>
     table input {
         font-size: 13px;
@@ -93,11 +90,12 @@
             data: JSON.stringify({ taskTypes: taskTypes }),
             dataType: "json",
             success: function (data) {
-                $('#successMessages').text('Data Saved Successfully');
+                notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                    location.reload();
+                });
             },
             error: function (e) {
-
-                alert(e);
+                notify('error', 'Error Message', 'Error in server');
             }
         });
     }

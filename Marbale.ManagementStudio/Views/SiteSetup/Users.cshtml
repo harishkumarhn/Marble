@@ -289,11 +289,11 @@
                 dataType: "json",
                 success: function (returndata) {
                     if (returndata.ok) {
-                        alert("Data Saved")
+                        notify('success', 'Success Message', 'Data Saved Successfully');
                     }
                     else {
                         //this is an error from the server
-                        window.alert(' error : ' + returndata.message);
+                        notify('error', 'Error Message', returndata.message);
                     }
 
                 }

@@ -38,26 +38,36 @@
      @Scripts.Render("~/bundles/modernizr")
 
     <style>
-        #snackbar {
-              visibility: hidden;
-              min-width: 312px;
+        #snackbar, #snackbar-modal, #close-modal {
+            visibility: hidden;
+        }              
+
+        .snackbar[data-type="success"] {
               background: linear-gradient(to bottom right,#28a745,#84b42d);
-              color: #f8f9fa;
-              text-align: center;
-              border-radius: 10px;
-              position: fixed;
-              z-index: 1;
-              right: 2%;
-              top: 12%;
-              font-size: 14px;
-              padding-top: 10px;
-              padding-bottom: 10px;
+        }
+
+        .snackbar[data-type="error"] {
+              background: linear-gradient(to bottom right,#FF2A68,#FF5E3A);
         }
 
         #snackbar.show {
           visibility: visible;
           -webkit-animation: fadein 0.5s linear, fadeout 0.5s 4s;
           animation: fadein 0.5s linear, fadeout 0.5s linear 4s;
+        }
+
+        .snackbar {
+            min-width: 312px;
+            color: #f8f9fa;
+            text-align: center;
+            border-radius: 10px;
+            position: fixed;
+            z-index: 1;
+            right: 2%;
+            top: 12%;
+            font-size: 14px;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
        .snackbar-container {
@@ -107,6 +117,60 @@
         @@keyframes fadeout {
           from {right: 2%; opacity: 1;} 
           to {right: -17%; opacity: 0;}
+        }
+
+        #snackbar-modal.show {
+            visibility: visible;
+            -webkit-animation: fadeintop 0.5s linear, fadeouttop 0.5s 4s;
+            animation: fadeintop 0.5s linear, fadeouttop 0.5s linear 4s;
+        }         
+
+        @@-webkit-keyframes fadeintop {
+            from {
+                top: 0%;
+                opacity: 0;
+            }
+
+            to {
+                top: 12%;
+                opacity: 1;
+            }
+        }
+
+        @@keyframes fadeintop {
+            from {
+                top: 0%;
+                opacity: 0;
+            }
+
+            to {
+                top: 12%;
+                opacity: 1;
+            }
+        }
+
+        @@-webkit-keyframes fadeouttop {
+            from {
+                top: 12%;
+                opacity: 1;
+            }
+
+            to {
+                top: 0%;
+                opacity: 0;
+            }
+        }
+
+        @@keyframes fadeouttop {
+            from {
+                top: 12%;
+                opacity: 1;
+            }
+
+            to {
+                top: 0%;
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -262,7 +326,7 @@
     </div>
 
     <!------ SnackBar -->
-    <div id="snackbar">
+    <div id="snackbar" class="snackbar">
         <div class="snackbar-container">
             <div class="icon"><ion-icon name="checkmark-circle"></ion-icon></div>
             <div class="snackbar-message">
@@ -334,22 +398,54 @@
             }
         }
 
-        function notify(header, message, callBack) {                    
+        function notify(dataType,header, message, callBack) {                    
             setTimeout(() => {
                 notifyClose();
                 if (callBack) {
                     callBack();
                 }
             }, 4400);
-            $('#header').html(header ? header : "Success Message");
-            $('#message').html(message ? message : "Data Saved Successfully");
-            $('#snackbar').addClass('show');
+            setSnackbarData(dataType, header, message);
+            $('#snackbar').attr('data-type', dataType.toLowerCase());            
+            $('#snackbar').addClass('show');            
             $('.close').css('visibility', 'visible');
         }
         
         function notifyClose() {
             $('#snackbar').removeClass('show');
             $('.close').css('visibility', 'hidden');
+        }
+
+        function notifyinmodal(dataType, header, message, callBack) {
+            setTimeout(() => {
+                notifyCloseinmodal();
+                if (callBack) {
+                    callBack();
+                }
+            }, 4400);
+            setSnackbarData(dataType, header, message);
+            $('#snackbar-modal').attr('data-type', dataType.toLowerCase())
+            $('#snackbar-modal').addClass('show');
+            $('#close-modal').css('visibility', 'visible');
+        }
+
+        function notifyCloseinmodal() {
+            $('#snackbar-modal').removeClass('show');
+            $('#close-modal').css('visibility', 'hidden');
+        }
+
+        function setSnackbarData(dataType, header, message) {
+            switch (dataType.toLowerCase()) {
+                case 'error':
+                    $('.icon ion-icon').attr("name", "close-circle-outline");
+                    break;
+                case 'success':
+                    $('.icon ion-icon').attr("name", "checkmark-circle");
+                    break;
+            }
+            
+            $('#header').html(header ? header : "Success Message");
+            $('#message').html(message ? message : "Data Saved Successfully");            
         }
     </script>
 

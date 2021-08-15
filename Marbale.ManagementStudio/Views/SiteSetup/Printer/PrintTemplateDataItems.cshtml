@@ -286,10 +286,12 @@
                 data: { templateId: id, isdataItem: true },
                 dataType: "json",
                 success: function (data) {
-                    $('#templateData').load('/SiteSetup/PrintTemplateDataItems?headerId=' + templateId);
+                    notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                        $('#templateData').load('/SiteSetup/PrintTemplateDataItems?headerId=' + templateId);
+                    });
                 },
                 error: function (e) {
-                    alert(e);
+                    notify('error', 'Error Message', 'Error in server');
                 }
             });
         }

@@ -78,8 +78,9 @@
                         beforeSend: function () { },
 
                         success: function (data) {
-                            location.reload();
-                            $('#displayMessage').text('data added succesfully').addClass('success');
+                            notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                                location.reload();
+                            });
                         }
                     });
                 }
@@ -129,8 +130,9 @@
                         beforeSend: function () { },
 
                         success: function (data) {
-
-                            location.reload();
+                            notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                                location.reload();
+                            });
                         }
                     });
                 }

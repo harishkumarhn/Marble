@@ -317,11 +317,13 @@
                 data: $form.serialize(),
                 error: function (xhr, status, error) {
                     //do something about the error
+                    notify('error', 'Error Message', 'Error in server');
                 },
                 success: function (response) {
                     //do something with response
-                    alert('Data saved');
-
+                    notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                        location.reload();
+                    });
                 }
             });
             return false;// if it's a link to prevent post

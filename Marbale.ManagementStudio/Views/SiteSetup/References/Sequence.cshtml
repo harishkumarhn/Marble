@@ -132,10 +132,10 @@
             data: JSON.stringify({ sequences: sequences }),
             dataType: "json",
             success: function (data) {
-                alert('Data Saved');
+                notify('success', 'Success Message', 'Data Saved Successfully');
             },
             error: function (e) {
-                alert(e);
+                notify('error', 'Error Message', 'Error in server');
             }
         });
     }

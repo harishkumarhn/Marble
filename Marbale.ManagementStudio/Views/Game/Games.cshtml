@@ -157,11 +157,12 @@
                 data: JSON.stringify({ games: items }),
                 dataType: "json",
                 success: function (data) {
-                    alert('Data Saved');
-                    location.reload();
+                    notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                        location.reload();
+                    });
                 },
                 error: function (e) {
-                    alert(e);
+                    notify('error', 'Error Message', 'Error in server');
                 }
             });
         }
