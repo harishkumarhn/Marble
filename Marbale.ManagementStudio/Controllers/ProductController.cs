@@ -159,6 +159,7 @@ namespace MarbaleManagementStudio.Controllers
             var message = string.Empty;
             try
             {
+                ModelState.Remove("Id");
                 if (ModelState.IsValid)
                 {                    
                     var result = productBl.InsertOrUpdateProduct(pObject);
