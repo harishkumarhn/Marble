@@ -15,10 +15,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Marbale.POS
 {
+    
+
     public partial class MarblePOS : Form
     {
 
@@ -26,6 +29,7 @@ namespace Marbale.POS
 
         private readonly DataLogger dataLogger = new DataLogger();
         PosCodeBL posCodeBL = new PosCodeBL();
+        SiteSetupBL siteSetup = new SiteSetupBL();
 
 
         POSBL posBussiness;
@@ -1405,7 +1409,7 @@ namespace Marbale.POS
             txtFirstname.Text = string.Empty;
             txtLastname.Text = string.Empty;
             txtPhoneno.Text = string.Empty;
-            txtAddress.Text = string.Empty;
+            txtAddress1.Text = string.Empty;
             txtCity.Text = string.Empty;
             txtState.Text = string.Empty;
             txtCountry.Text = string.Empty;
@@ -1424,10 +1428,15 @@ namespace Marbale.POS
             if (Customer == null)
                 Customer = new BusinessObject.Customer.Customers();
 
+            if(!ValidateCustomer())
+            {
+                return;
+            }
+
             Customer.first_name = txtFirstname.Text;
             Customer.last_name = txtLastname.Text;
             Customer.contact_phone1 = txtPhoneno.Text;
-            Customer.address1 = txtAddress.Text;
+            Customer.address1 = txtAddress1.Text;
             Customer.city = txtCity.Text;
             Customer.state = txtState.Text;
             Customer.country = txtCountry.Text;
@@ -1443,6 +1452,143 @@ namespace Marbale.POS
             Customer.birth_date = dtpDOB.Value;
 
             lblCustomerMessage.Text = "Customer will be saved after saving Transcation";
+        }
+
+        private bool ValidateCustomer()
+        {
+            bool Validate = false;
+            dataLogger.Debug("Begin POS ValidateCustomer");
+
+            try
+            {
+                List<AppSetting> appCustomerData = siteSetup.GetAppSettings("customer");
+
+                if(appCustomerData!=null && appCustomerData.Count>0)
+                {
+
+                    foreach( AppSetting appSetting in appCustomerData)
+                    {
+                        //if (appSetting.Name == "ADDRESS1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        //{
+                            if (string.IsNullOrEmpty(txtFirstname.Text))
+                            {
+                                MessageBox.Show("Please enter the First Name");
+                                return false;
+                            }
+                        //}
+                        //if (appSetting.Name == "ADDRESS1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        //{
+                            if (string.IsNullOrEmpty(txtLastname.Text))
+                            {
+                                MessageBox.Show("Please enter the Last Name");
+                                return false;
+                            }
+                        //}
+
+
+                        if (appSetting.Name == "CONTACT_PHONE1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtPhoneno.Text))
+                            {
+                                MessageBox.Show("Please enter the Mobile Number");
+                                return false;
+                            }
+
+                            bool Valid = new Regex(@"\(?\d{3}\)?[-\.]? *\d{3}[-\.]? *[-\.]?\d{4}").IsMatch(txtAddress1.Text);
+                            if (string.IsNullOrEmpty(txtPhoneno.Text))
+                            {
+                                MessageBox.Show("Please enter valid Mobile Number");
+                                return false;
+                            }
+
+
+
+                        }
+
+                        if (appSetting.Name == "GENDER" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(cmbGender.Text))
+                            {
+                                MessageBox.Show("Please enter the Gender");
+                                return false;
+                            }
+                        }
+
+                        if (appSetting.Name== "ADDRESS1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if(string.IsNullOrEmpty(txtAddress1.Text))
+                            {
+                                MessageBox.Show("Please enter the Address1");
+                                return false;
+                            }
+                        }
+
+
+                        if (appSetting.Name == "CITY" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtCity.Text))
+                            {
+                                MessageBox.Show("Please enter the City");
+                                return false;
+                            }
+                        }
+
+                        if (appSetting.Name == "STATE" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtState.Text))
+                            {
+                                MessageBox.Show("Please enter the State");
+                                return false;
+                            }
+                        }
+
+                        if (appSetting.Name == "COUNTRY" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtCountry.Text))
+                            {
+                                MessageBox.Show("Please enter the Country");
+                                return false;
+                            }
+                        }
+
+                        if (appSetting.Name == "EMAIL" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtEmail.Text))
+                            {
+                                MessageBox.Show("Please enter the Email");
+                                return false;
+                            }
+
+                            bool Valid = new Regex(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z").IsMatch(txtAddress1.Text);
+                            if (string.IsNullOrEmpty(txtEmail.Text))
+                            {
+                                MessageBox.Show("Please enter valid Mobile Number");
+                                return false;
+                            }
+
+
+
+                        }
+                        if (appSetting.Name == "BIRTH_DATE" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(dtpDOB.Text) && Convert.ToDateTime( dtpDOB.Text)==DateTime.MinValue)
+                            {
+                                MessageBox.Show("Please enter the Date of Birth");
+                                return false;
+                            }
+                        }
+                        Validate = true;
+                    }
+
+
+                }
+                dataLogger.Debug("END POS ValidateCustomer");
+            }
+            catch (Exception ex)
+            {
+                dataLogger.Error("Error POS ValidateCustomer",ex);
+            }
+            return Validate;
         }
 
         private void tabControlCardAction_Selected(object sender, TabControlEventArgs e)
@@ -1469,13 +1615,35 @@ namespace Marbale.POS
             }
             else if (tabname == "tabPageCardInfo")
             {
-                //UpdatePurchaseTaskGrid();
+                UpdateGamePlayCardGrid();
             }
         }
+        private void UpdateGamePlayCardGrid()
+        {
+            try
+            {
+                posCodeBL.BindGamePlayCardGrid(CurrentCard, ref dgvCardGames);
+            }
+            catch (Exception ex )
+            {
+                dataLogger.Error("On Pos :UpdateGamePlayCardGrid ", ex);
 
+            }
+           
+        }
         private void UpdatePurchaseTaskGrid()
         {
-            posCodeBL.BindPurchaseGrid(CurrentCard, ref dgvPurchases);
+            
+
+            try
+            {
+                posCodeBL.BindPurchaseGrid(CurrentCard, ref dgvPurchases);
+            }
+            catch (Exception ex)
+            {
+                dataLogger.Error("On Pos :UpdateGamePlayCardGrid ", ex);
+
+            }
         }
         private void UpdateTransactionTab(int userId)
         {
@@ -1550,7 +1718,7 @@ namespace Marbale.POS
                 txtFirstname.Text = Customer.first_name;
                 txtLastname.Text = Customer.last_name;
                 txtPhoneno.Text = Customer.contact_phone1;
-                txtAddress.Text = Customer.address1;
+                txtAddress1.Text = Customer.address1;
                 txtCity.Text = Customer.city;
                 txtState.Text = Customer.state;
                 txtCountry.Text = Customer.country;

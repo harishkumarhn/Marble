@@ -196,26 +196,64 @@
             }
             return null;
         }
-        $(document).ready(function () {
-            $('#dismiss, .overlay').on('click', function () {
-                $('#sidebar').removeClass('active');
-                $('.overlay').removeClass('active');
-            });
 
+		function SetSideMenu(flag)
+		{
+		 if (typeof(Storage) !== "undefined") 
+		 {
+				if (flag) 
+				{
+					sessionStorage.activemenu = true;
+					
+				} 
+				else 
+				{
+					sessionStorage.activemenu = false
+				}
+				console.log("Set	 "+ sessionStorage.activemenu  )
+			}
+		}
+
+		
             $('#sidebarCollapse').on('click', function () {
+				console.log("bbbbb");
                 $('#sidebar').addClass('active');
                 $('.overlay').addClass('active');
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+				SetSideMenu(true);
+            });
+			
+         
+            $('#dismiss, .overlay').on('click', function () {
+				$('#sidebar').removeClass('active');
+				$('.overlay').removeClass('active');
+				SetSideMenu(false);
             });
 
-            var preSelectedValue = getCookie("PreviousExpandedDropDown");
-            if (preSelectedValue) {
-                $('#sidebar').addClass('active');
-                $('.overlay').addClass('active');  
-                document.querySelector("a[href='#" + preSelectedValue + "']").click();                
-                setSession(preSelectedValue);
-            }
+        $(document).ready(function () {
+			console.log("a");
+
+			if (typeof(Storage) !== "undefined") 
+			{
+				console.log("AAAA	 "+ sessionStorage.activemenu  )
+
+				if( sessionStorage.activemenu =="true")
+				{
+					$('#sidebar').addClass('active');
+					//$('.overlay').addClass('active');  
+					       
+				}
+				 
+			}
+
+           // var preSelectedValue = getCookie("PreviousExpandedDropDown");
+			//console.log("preSelectedValue"+preSelectedValue);
+
+            //if (preSelectedValue) {
+                   
+              //  setSession(preSelectedValue);
+            //}
         });
 
         function DisplayPopUp(page,url) {
@@ -237,6 +275,8 @@
         $("#myModal").draggable({
             handle: ".modal-header"
         });
+
+
 
         function setSession(selectedId) {
             var preSelectedValue = getCookie("PreviousExpandedDropDown");

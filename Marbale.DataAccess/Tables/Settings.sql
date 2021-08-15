@@ -1,5 +1,5 @@
-USE [Marbale]
-GO
+--USE [Marbale]
+--GO
 
 /****** Object:  Table [dbo].[Settings]    Script Date: 1/16/2019 12:29:36 AM ******/
 SET ANSI_NULLS ON
@@ -8,8 +8,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+--drop table Settings
+
 CREATE TABLE [dbo].[Settings](
-	[Name] [nvarchar](255) NULL,
+ [ID] [int] IDENTITY(1,1) NOT NULL primary key,
+	[Name] [nvarchar](255)   ,
 	[Description] [nvarchar](255) NULL,
 	[DefaultValue] [varchar](200) NULL,
 	[Type] [varchar](100) NULL,
@@ -18,12 +21,11 @@ CREATE TABLE [dbo].[Settings](
 	[UserLevel] [bit] NULL,
 	[PosLevel] [bit] NULL,
 	[Protected] [bit] NULL,
+	[Caption] [varchar](250) NULL,
 	[LastUpdatedBy] [varchar](100) NULL,
-	[LastUpdatedDate] [datetime] NULL,
-	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[Caption] [varchar](250) NULL
-) ON [PRIMARY]
+	[LastUpdatedDate] [datetime] NULL 
+	
+)  
 GO
 
-
-select * from Settings
+ 

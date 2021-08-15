@@ -364,9 +364,9 @@ namespace MarbaleManagementStudio.Controllers
         {
             List<AppSetting> data = siteSetup.GetAppSettings("customer");
             var types = new List<customIDVa>();
-            types.Add(new customIDVa() { Value = 0, Text = "NotUsed" });
-            types.Add(new customIDVa() { Value = 1, Text = "Option" });
-            types.Add(new customIDVa() { Value = 2, Text = "Mendatory" });
+            types.Add(new customIDVa() { Value = (int)GlobalEnum.MadatoryOption.NotUsed, Text = GlobalEnum.MadatoryOption.NotUsed.DescriptionAttr() });
+            types.Add(new customIDVa() { Value = (int)GlobalEnum.MadatoryOption.Option, Text = GlobalEnum.MadatoryOption.Option.DescriptionAttr() });
+            types.Add(new customIDVa() { Value = (int)GlobalEnum.MadatoryOption.Mandatory, Text = GlobalEnum.MadatoryOption.Mandatory.DescriptionAttr() });
             //    ViewBag.PartialTypes = types;
             //   List<CustomDropdown> myLevels = Enum.GetValues(typeof(CustomDropdown)).Cast<CustomDropdown>().ToList();
             ViewBag.RequiredLevel = new SelectList(types);

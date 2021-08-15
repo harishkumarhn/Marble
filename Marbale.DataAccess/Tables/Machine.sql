@@ -1,5 +1,5 @@
-USE [Marbale]
-GO
+--USE [Marbale]
+--GO
 
 /****** Object:  Table [dbo].[GameProfile]    Script Date: 5/6/2019 8:27:32 AM ******/
 SET ANSI_NULLS ON
@@ -7,11 +7,17 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+ 
+--drop table Machine
+--drop table GamePlay
+--drop table Game
+--drop table GameProfile
 
 CREATE TABLE [dbo].[Machine](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL Primary key,
 	[Name] [varchar](50) NULL,
 	[GameName] [varchar](50) NULL,
+	[GameId] int foreign key references game(Id) ,
 	[HubName] [varchar](50) NULL,
 	[HubAddress] [varchar](50) NULL,
 	[MachineAddress] [varchar](50) NULL,
@@ -27,7 +33,5 @@ CREATE TABLE [dbo].[Machine](
 	[Theme] [varchar](100) NULL,
 	[LastUpdatedDate] [datetime] NULL,
 	[LastUpdatedBy] [varchar](50) NULL
-) ON [PRIMARY]
-GO
-
+) 
 

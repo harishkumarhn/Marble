@@ -8,6 +8,18 @@
     form label {
         font-weight: bold;
     }
+    table input {
+        font-size: 13px;
+    }
+    table.dataTable thead th, table.dataTable thead td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
+
+    table.dataTable tbody th, table.dataTable tbody td{
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
 </style>
 
 <table id="marbleTable" class="stripe row-border order-column">
@@ -17,12 +29,12 @@
         <th>Name</th>
         <th>Type</th>
         <th>Category</th>
-        <th>POSCounter</th>
+        <th>Counter</th>
         <th>Active</th>
-        <th>DisplayInPOS</th>
-        <th>DisplayGroup</th>
-        <th>Auto Generate Card Number</th>
-        <th>OnlyVIP</th>
+        <th>POS</th>
+        <th>Group</th>
+        <th>AGCN</th>
+        <th>VIP</th>
         <th>Price</th>
         <th>FaceValue</th>
         <th>TaxInclusive</th>
@@ -55,7 +67,7 @@
                     }
                 </td>
                 <td>
-                    <input type="text" class="fixedCol3" value="@item.Name"/>
+                    <input type="text" class="fixedCol2" value="@item.Name" style="width: 6vw;"/>
                 </td>
                 <td>
                     <select name="TypeList" id="TypeList">
@@ -88,7 +100,7 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" value="@item.POSCounter" />
+                    <input type="text" value="@item.POSCounter" style="width:6.2vw;"/>
                 </td>
                 <td>
                     <input type="checkbox"  @(item.Active ? "checked='checked'" : "") value="@item.Active" />
@@ -112,22 +124,22 @@
                     </select>
                 </td>
                 <td>
-                    <input type="checkbox"  @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber" style="width: 2vw;margin-right: 77px;"/>
+                    <input type="checkbox"  @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber" style="width: 2vw;margin-right: 30px;"/>
                 </td>
                 <td>
                     <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
                 </td>
                 <td>
-                    <input type="text" value="@item.Price" id="Price@(count)" style="width:7vw"/>
+                    <input type="text" value="@item.Price" id="Price@(count)" style="width:5vw"/>
                 </td>
                 <td>
-                    <input type="text" value="@item.FaceValue" id="FaceValue@(count)" style="width:7vw"/>
+                    <input type="text" value="@item.FaceValue" id="FaceValue@(count)" style="width:5vw"/>
                 </td>
                 <td>
                     <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)"  />
                 </td>
                 <td>
-                    <input type="text" value="@item.TaxPercentage" id="TaxPercentage@(count)" style="width:7vw" readonly="readonly"/>
+                    <label type="text" id="TaxPercentage@(count)" style="width:6vw" >@item.TaxPercentage</label>
                 </td>
                 <td>
                     <select name="taxlist" id="taxlist">
@@ -145,16 +157,16 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="FinalPrice@(count)"  value="@item.FinalPrice" style="width:7vw" readonly="readonly"/>
+                    <label  id="FinalPrice@(count)"  style="width:6vw" >@item.FinalPrice</label>
                 </td>
                 <td>
-                    <input type="text" value="@item.EffectivePrice" id="EffectivePrice@(count)" style="width:7vw" readonly="readonly"/>
+                    <label  id="EffectivePrice@(count)" style="width:6vw">@item.EffectivePrice</label>
                 </td>
                 <td>
-                    <input type="text" value="@item.LastUpdatedBy" disabled/>
+                    <label>@item.LastUpdatedBy</label>
                 </td>
                 <td>
-                    <input type="text" value="@item.LastUpdatedDate" disabled/>
+                    <label>@item.LastUpdatedDate</label>
                 </td>
             </tr> 
         }

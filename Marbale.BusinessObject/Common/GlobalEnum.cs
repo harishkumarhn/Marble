@@ -38,8 +38,16 @@ namespace Marbale.BusinessObject
             [Description("ISSUED")]
             ISSUED
         }
+        public enum MadatoryOption
+        {
+            [Description("NotUsed")]
+            NotUsed=0,
+            [Description("Option")]
+            Option=1,
+           [Description("Mandatory")]
+            Mandatory=2
+        }
 
-         
 
         public static string DescriptionAttr<T>(this T source)
         {

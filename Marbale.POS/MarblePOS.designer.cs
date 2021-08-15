@@ -98,7 +98,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtCity = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtAddress1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPhoneno = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -747,7 +747,7 @@
             // 
             this.dgvCardGames.AllowUserToAddRows = false;
             this.dgvCardGames.AllowUserToDeleteRows = false;
-            this.dgvCardGames.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCardGames.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvCardGames.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvCardGames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCardGames.Location = new System.Drawing.Point(4, 17);
@@ -756,8 +756,7 @@
             dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvCardGames.RowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvCardGames.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvCardGames.Size = new System.Drawing.Size(453, 210);
+            this.dgvCardGames.Size = new System.Drawing.Size(920, 310);
             this.dgvCardGames.TabIndex = 0;
             // 
             // tabPageCustomer
@@ -778,7 +777,7 @@
             this.tabPageCustomer.Controls.Add(this.label5);
             this.tabPageCustomer.Controls.Add(this.txtCity);
             this.tabPageCustomer.Controls.Add(this.label4);
-            this.tabPageCustomer.Controls.Add(this.txtAddress);
+            this.tabPageCustomer.Controls.Add(this.txtAddress1);
             this.tabPageCustomer.Controls.Add(this.label3);
             this.tabPageCustomer.Controls.Add(this.txtPhoneno);
             this.tabPageCustomer.Controls.Add(this.label2);
@@ -937,13 +936,13 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Address1 :";
             // 
-            // txtAddress
+            // txtAddress1
             // 
-            this.txtAddress.Location = new System.Drawing.Point(92, 93);
-            this.txtAddress.Multiline = true;
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(503, 47);
-            this.txtAddress.TabIndex = 6;
+            this.txtAddress1.Location = new System.Drawing.Point(92, 93);
+            this.txtAddress1.Multiline = true;
+            this.txtAddress1.Name = "txtAddress1";
+            this.txtAddress1.Size = new System.Drawing.Size(503, 47);
+            this.txtAddress1.TabIndex = 6;
             // 
             // label3
             // 
@@ -2413,7 +2412,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtCity;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.TextBox txtAddress1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPhoneno;
         private System.Windows.Forms.Label label2;

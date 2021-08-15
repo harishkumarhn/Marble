@@ -37,8 +37,8 @@ namespace Marbale.POS
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.TextValue;
-            string password = txtPassword.TextValue;
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
 
             if (string.IsNullOrEmpty(username))
             {
