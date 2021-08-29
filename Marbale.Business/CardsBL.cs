@@ -30,11 +30,11 @@ namespace Marble.Business
             }
         }
 
-        public List<CardsModel> GetAllCards(CardsModel c)
+        public List<CardsModel> GetAllCards(ViewCard cardSearchCriteria)
         {
-            if (c.IssueDate != null || c.ToDate != null)
+            if (cardSearchCriteria.IssueDate != null || cardSearchCriteria.ToDate != null)
             {
-                var cardslist = cardData.GetAllCards(c);
+                var cardslist = cardData.GetAllCards(cardSearchCriteria);
                 List<CardsModel> listcards = new List<CardsModel>();
                 listcards = getAllCardsProperties(cardslist);
                 return listcards;

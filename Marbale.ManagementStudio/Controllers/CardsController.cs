@@ -34,15 +34,22 @@ namespace MarbaleManagementStudio.Controllers
         }
 
         [HttpGet]
-        public ActionResult ViewCards(CardsModel c)
+        public ActionResult ViewCards(ViewCard cardSearchCriteria)
         {
-            
-            var data1 = cardBussiness.gettechcardtype();
-            Session["TechCardType"] = data1;
-            List<CardsModel> data = cardBussiness.GetAllCards(c);
-            c.IssueDate = c.ToDate = DateTime.Now;
-            ViewBag.cardsDetails = data;
-            return View(c);
+            bool isSearch = !string.IsNullOrWhiteSpace(Request.QueryString["submit"]);
+
+            if (isSearch)
+            {
+                List<CardsModel> data = cardBussiness.GetAllCards(cardSearchCriteria);
+                cardSearchCriteria.IssueDate = cardSearchCriteria.ToDate = DateTime.Now;
+                ViewBag.cardsDetails = data;
+                Session["TechCardType"] = Session["TechCardType"] ?? cardBussiness.gettechcardtype();
+            }
+            else
+            {
+                cardSearchCriteria.ValidFlag =true;
+            }
+            return View(cardSearchCriteria);
         }
 
         public ActionResult Cards(int CardId)
