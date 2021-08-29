@@ -63,15 +63,7 @@ namespace MarbaleManagementStudio.Controllers
                 throw;
             }
 
-        }
-        [HttpGet]
-        public ActionResult NonCardEdit()
-        {
-            Product a = new Product();
-            a.TaxList = Session["TaxList"] as List<TaxSet>;
-            a.Active = true;
-            return View(a);
-        }
+        }                
 
         [HttpPost]
         public JsonResult IsAlreadySigned(string Name, int Id)
@@ -97,14 +89,18 @@ namespace MarbaleManagementStudio.Controllers
             }
             return status;
         }
+        [HttpGet]
         public ActionResult NonCardEdit(int id = 0)
         {
             try
             {
-                var product = productBl.GetProductById(id);
-                Session["TypeList"] = product.TypeList;
+                var product = productBl.GetProductById(id);                
+                product.TaxList = Session["TaxList"] as List<TaxSet>;
                 product.Active = id == 0 ? true : product.Active;
                 product.TaxId = -1;
+                product.StartDate = DateTime.Now;
+                product.ExpiryDate = DateTime.Now;
+                product.CardExpiryDate = DateTime.Now;
                 return View(product);
             }
             catch (Exception e)
@@ -159,6 +155,7 @@ namespace MarbaleManagementStudio.Controllers
             var message = string.Empty;
             try
             {
+                ModelState.Remove("Id");
                 if (ModelState.IsValid)
                 {                    
                     var result = productBl.InsertOrUpdateProduct(pObject);

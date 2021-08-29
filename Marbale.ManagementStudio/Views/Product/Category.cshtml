@@ -1,7 +1,22 @@
 ﻿@{
     ViewBag.Title = "Product Category";
 }
-<table id="marbleTable" class="stripe row-border order-column" style="width: 100%">
+<style>
+    table input {
+        font-size: 13px;
+    }
+
+    table.marbleTable thead th, table.marbleTable thead td {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    table.marbleTable tbody th, table.marbleTable tbody td {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+</style>
+<table id="marbleTable" class="stripe row-border order-column marbleTable" style="width: 100%">
     <thead>
         <th>ID</th>
         <th>Name</th>
@@ -122,11 +137,12 @@
                 data: JSON.stringify({ categories: productCategories }),
                 dataType: "json",
                 success: function (data) {
-                    alert('Data Saved');
-                    location.reload();
+                    notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                        location.reload();
+                    });
                 },
                 error: function (e) {
-                    alert(e);
+                    notify('error', 'Error Message', 'Error in server');
                 }
             });
         }

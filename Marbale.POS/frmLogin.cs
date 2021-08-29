@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Marbale.POS
-{
+{    
     public partial class FrmLogin : Form
     {
         public static User loggedInUser;

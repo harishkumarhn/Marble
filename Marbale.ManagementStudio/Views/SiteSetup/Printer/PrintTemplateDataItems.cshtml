@@ -2,8 +2,22 @@
     ViewBag.Title = "PrintTemplateDataItems";
     Layout = null;
 }
+<style>
+    table input {
+        font-size: 13px;
+    }
 
-<table id="marbleTable_printTemplate" class="stripe row-border order-column" style="width: 100%">
+    table.marbleTable thead th, table.marbleTable thead td {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    table.marbleTable tbody th, table.marbleTable tbody td {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+</style>
+<table id="marbleTable_printTemplate" class="stripe row-border order-column marbleTable" style="width: 100%">
     <thead>
         <tr>
             <th>Id</th>
@@ -272,10 +286,12 @@
                 data: { templateId: id, isdataItem: true },
                 dataType: "json",
                 success: function (data) {
-                    $('#templateData').load('/SiteSetup/PrintTemplateDataItems?headerId=' + templateId);
+                    notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                        $('#templateData').load('/SiteSetup/PrintTemplateDataItems?headerId=' + templateId);
+                    });
                 },
                 error: function (e) {
-                    alert(e);
+                    notify('error', 'Error Message', 'Error in server');
                 }
             });
         }

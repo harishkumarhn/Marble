@@ -155,9 +155,11 @@
 <script>
     function displayMessage(response) {
         if (response == '' || response == 0) {
-            location.reload();
+            notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                location.reload();
+            });
         } else {
-            alert(response);
+            notify('error', 'Error Message', 'Error in server');
         }
     }
 </script>

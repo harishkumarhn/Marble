@@ -207,11 +207,12 @@
                 data: JSON.stringify({ template: template }),
                 dataType: "json",
                 success: function (data) {
-                    alert('Data Saved');
-                    $('#tabBody').load('/SiteSetup/printTemplate');
+                    notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                        $('#tabBody').load('/SiteSetup/printTemplate');
+                    });
                 },
                 error: function (e) {
-                    alert(e);
+                    notify('error', 'Error Message', 'Error in server');
                 }
             });
 

@@ -121,5 +121,21 @@ namespace Marbale.DataAccess.Data
 
             return conn.executeInsertQuery("DeleteCardById", sqlParameters);
         }
+
+
+        public DataTable CardTransactionSelect(int cardId)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@cardid", cardId);
+            return conn.executeSelectQuery("CardTransactionSelect", sqlParameters);
+        }
+
+        public DataTable CardGameplay_Select(string cardNumber)
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@CardNumber", cardNumber);
+            return conn.executeSelectQuery("CardGameplay_Select", sqlParameters);
+        }
+        
     }
 }

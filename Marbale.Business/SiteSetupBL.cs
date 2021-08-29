@@ -81,7 +81,6 @@ namespace Marble.Business
                     setting.Value = dr.IsNull("DefaultValue") ? "" : dr["DefaultValue"].ToString();// current values
                     setting.Type = dr.IsNull("Type") ? "" : dr["Type"].ToString();
                     setting.ScreenGroup = dr.IsNull("ScreenGroup") ? "" : dr["ScreenGroup"].ToString();
-
                     listSettings.Add(setting);
                 }
                 return listSettings;

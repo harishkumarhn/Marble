@@ -1,5 +1,4 @@
-USE [Marbale]
-GO
+ 
 
 /****** Object:  Table [dbo].[GameProfile]    Script Date: 4/18/2019 7:25:15 PM ******/
 SET ANSI_NULLS ON
@@ -9,7 +8,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[GameProfile](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id] [int] IDENTITY(1,1) primary key,
 	[Name] [varchar](50) NULL,
 	[NormalPrice] [int] NULL,
 	[VIPPrice] [int] NULL,
@@ -23,7 +22,7 @@ CREATE TABLE [dbo].[GameProfile](
 	[TiketAllowedOnTime] [bit] NULL,
 	[LastUpdatedDate] [datetime] NULL,
 	[LastUpdatedBy] [varchar](50) NULL
-) ON [PRIMARY]
+) 
 GO
 
 

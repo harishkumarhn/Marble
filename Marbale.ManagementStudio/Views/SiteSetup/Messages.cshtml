@@ -4,9 +4,6 @@
 }
 
 <div>
-    <label id="successMessages" class="pos-text"></label>
-</div>
-<div>
 <table id="messagesTable" class="table messagesTable table-bordered" style="display: block; height: 500px; overflow-x: auto">  
         <thead>  
             <th >MessageNo</th>  
@@ -65,11 +62,12 @@
                  data: JSON.stringify({ messageObject: messageObject }),
             dataType: "json",
             success: function (data) {
-                $('#successMessages').text('Data Saved Successfully');
-                window.location.reload();
+                notify('success', 'Success Message', 'Data Saved Successfully', () => {
+                    location.reload();
+                });
             },
             error: function (e) {              
-                alert(e);
+                notify('error', 'Error Message', 'Error in server');
             }
         });
     }

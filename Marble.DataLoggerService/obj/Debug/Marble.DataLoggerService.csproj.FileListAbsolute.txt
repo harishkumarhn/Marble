@@ -8,3 +8,13 @@ C:\Code\Marble rakshith Branch Working\Marble\Marble.DataLoggerService\obj\Debug
 C:\Code\Marble rakshith Branch Working\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.dll
 C:\Code\Marble rakshith Branch Working\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.pdb
 C:\Code\Marble rakshith Branch Working\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.csprojAssemblyReference.cache
+C:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\bin\Debug\Log4Net.config
+C:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\bin\Debug\Marble.DataLoggerService.dll
+C:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\bin\Debug\Marble.DataLoggerService.pdb
+C:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\bin\Debug\log4net.dll
+C:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\bin\Debug\log4net.xml
+C:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.csprojAssemblyReference.cache
+C:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.csproj.CoreCompileInputs.cache
+C:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.csproj.CopyComplete
+C:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.dll
+C:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.pdb
