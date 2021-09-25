@@ -16,7 +16,7 @@
     <h4 class="modal-title">Configuration</h4>
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="min-width: 10px !important;">&times;</button>
 </div>
-<div class="modal-body" style="width:900px;height:100px">
+<div class="modal-body" style="width:900px">
 
     @using (Html.BeginForm("UpdateConfiguration", "Game", FormMethod.Post))
     {
@@ -200,11 +200,16 @@
 
 
 <script>
-    $(document).ready(function () {
-        $('.modal-body').css({
-            'width': '798px',
-            'height': '500px',
-            'overflow-y': 'scroll'
+    $(document).ready(function () {        
+        if (!window.localStorage.getItem("currentWindow")) {
+            $('.modal-body').css({
+                'width': '900px',
+                'height': '500px',
+                'overflow-y': 'scroll'
+            });
+        }
+        $('.close').click(function () {
+            window.localStorage.removeItem('currentWindow');            
         });
     })
     function SaveConfiguration(btnClicked) {
