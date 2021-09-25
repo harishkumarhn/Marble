@@ -54,7 +54,7 @@
 
 
 <div class="action">
-    <button class="btn btn-primary btn-md" role="button" id="saveproductcat" onclick="SaveProductCategory()" disabled>Save</button>
+    <button class="btn btn-primary btn-md" role="button" id="saveproductcat" onclick="SaveProductCategory()">Save</button>
     <button id="addRow" class="btn btn-primary btn-md" role="button">Add Product Category</button>
     <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();"  id="back">Back</button>
     <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
@@ -91,7 +91,6 @@
             }
         });
         $('#addRow').on('click', function () {
-            $('#saveproductcat').removeAttr('disabled');
             var categoryListOptions = '';
 
               @foreach (var dow in ViewBag.categories[0].Categories)
@@ -108,7 +107,6 @@
 
         });
         $(".tblRow").on("change", function (e) {
-            $('#saveproductcat').removeAttr('disabled');
             UpdatedList($(this).parent().index());
         });
     });
