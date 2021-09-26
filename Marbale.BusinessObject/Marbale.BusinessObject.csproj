@@ -63,7 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cards\Card.cs" />
-    <Compile Include="Common\GlobalMessage.cs" />
+ 	<Compile Include="Cards\ViewCard.cs" />
+	<Compile Include="Common\GlobalMessage.cs" />
     <Compile Include="Customers\Customers.cs" />
     <Compile Include="Discount\Discounts.cs" />
     <Compile Include="DisplayGroup\DisplayGroup.cs" />
@@ -96,7 +97,7 @@
     <Compile Include="NameValue.cs" />
     <Compile Include="Product\DisplayGroupModel.cs" />
     <Compile Include="Setting\AppSetting.cs" />
-    <Compile Include="Card\CardDetail.cs" />
+    <Compile Include="KeyValue.cs" />
     <Compile Include="Product\ProductCategory.cs" />
     <Compile Include="Discount\GameDiscount.cs" />
     <Compile Include="IdValue.cs" />

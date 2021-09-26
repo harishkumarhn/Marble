@@ -104,9 +104,10 @@
     </div>
 
     <div class="row">
-      <div class="col">
-             @Html.LabelFor(m => m.NumberOfCards,"Card inventory till date :")
-          </div>
+        <div class="col">
+            @Html.LabelFor(m => m.NumberOfCards, "Card inventory till date :")
+            <label for="lblName"></label>
+        </div>
       <div class="col">
         @Html.LabelFor(m => m.NumberOfCards,"Card balance in stock :")
       </div>
@@ -134,7 +135,7 @@
             $('.datepickers').hide();
         }
     });
-    function submitInventory() {
+    function SubmitInventory() {
         var myObject = {
             From: $('#From').val(),
             To: $('#To').val()

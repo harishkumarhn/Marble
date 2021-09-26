@@ -60,18 +60,18 @@ namespace Marbale.DataAccess.Data
             }
         }
 
-        public DataTable GetAllCards(CardsModel cardmodel)
+        public DataTable GetAllCards(ViewCard cardSearchCriteria)
         {
             try
             {
                 
                 SqlParameter[] sqlParameters = new SqlParameter[6];
-                sqlParameters[0] = new SqlParameter("@TechnicianCard", cardmodel.TechnicianCard);
-                sqlParameters[1] = new SqlParameter("@CardNumber", cardmodel.CardNumber);
-                sqlParameters[2] = new SqlParameter("@Custemer", string.IsNullOrEmpty(cardmodel.Customer) ? "" : cardmodel.Customer);
-                sqlParameters[3] = new SqlParameter("@VIPCustomer", cardmodel.VIPCustomer);
-                sqlParameters[4] = new SqlParameter("@IssueDate", cardmodel.IssueDate);
-                sqlParameters[5] = new SqlParameter("@ToDate", cardmodel.ToDate);
+                sqlParameters[0] = new SqlParameter("@TechnicianCard", cardSearchCriteria.TechnicianCard);
+                sqlParameters[1] = new SqlParameter("@CardNumber", cardSearchCriteria.CardNumber);
+                sqlParameters[2] = new SqlParameter("@Custemer", string.IsNullOrEmpty(cardSearchCriteria.Customer) ? "" : cardSearchCriteria.Customer);
+                sqlParameters[3] = new SqlParameter("@VIPCustomer", cardSearchCriteria.VIPCustomer);
+                sqlParameters[4] = new SqlParameter("@IssueDate", cardSearchCriteria.IssueDate);
+                sqlParameters[5] = new SqlParameter("@ToDate", cardSearchCriteria.ToDate);
                 return conn.executeSelectQuery("sp_GetAllCards", sqlParameters);
             }
             catch (Exception e)
