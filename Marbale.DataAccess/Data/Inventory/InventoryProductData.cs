@@ -473,7 +473,7 @@ namespace Marbale.DataAccess.Data.Inventory
             param.Add(new SqlParameter("@TurnInPriceInTickets", inventoryProduct.TurnInPriceInTickets));
 
             
-            double verifyDouble = 0;
+             
          
             param.Add(new SqlParameter("@LastupdatedBy", userId));
             int rowsUpdated = conn.executeUpdateScript(query, param.ToArray());

@@ -68,17 +68,21 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.gpSwappedCards = new System.Windows.Forms.GroupBox();
-            this.dgvCards = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvloadCardsList = new System.Windows.Forms.DataGridView();
             this.gpSelectedProducts = new System.Windows.Forms.GroupBox();
             this.btnRemoveProduct = new System.Windows.Forms.Button();
             this.btnSelectProduct = new System.Windows.Forms.Button();
             this.dgvSelectedProducts = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Courtesy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbTransferCard = new System.Windows.Forms.TabPage();
+            this.btnTransferCardReset = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnTransferCardClose = new System.Windows.Forms.Button();
@@ -140,7 +144,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBonusCard)).BeginInit();
             this.tbLoadMultiple.SuspendLayout();
             this.gpSwappedCards.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCards)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvloadCardsList)).BeginInit();
             this.gpSelectedProducts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSelectedProducts)).BeginInit();
             this.tbTransferCard.SuspendLayout();
@@ -478,6 +482,7 @@
             this.btnGetCardDetails.TabIndex = 26;
             this.btnGetCardDetails.Text = "Add Details";
             this.btnGetCardDetails.UseVisualStyleBackColor = true;
+            this.btnGetCardDetails.Visible = false;
             // 
             // btnLoadMultipleOk
             // 
@@ -489,6 +494,7 @@
             this.btnLoadMultipleOk.TabIndex = 26;
             this.btnLoadMultipleOk.Text = "OK";
             this.btnLoadMultipleOk.UseVisualStyleBackColor = true;
+            this.btnLoadMultipleOk.Click += new System.EventHandler(this.btnLoadMultipleOk_Click);
             // 
             // textBox1
             // 
@@ -497,6 +503,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(161, 23);
             this.textBox1.TabIndex = 25;
+            this.textBox1.Visible = false;
             // 
             // label12
             // 
@@ -507,10 +514,11 @@
             this.label12.Size = new System.Drawing.Size(133, 15);
             this.label12.TabIndex = 24;
             this.label12.Text = "Enter CardNumber :";
+            this.label12.Visible = false;
             // 
             // gpSwappedCards
             // 
-            this.gpSwappedCards.Controls.Add(this.dgvCards);
+            this.gpSwappedCards.Controls.Add(this.dgvloadCardsList);
             this.gpSwappedCards.Location = new System.Drawing.Point(8, 50);
             this.gpSwappedCards.Name = "gpSwappedCards";
             this.gpSwappedCards.Size = new System.Drawing.Size(161, 265);
@@ -518,18 +526,16 @@
             this.gpSwappedCards.TabStop = false;
             this.gpSwappedCards.Text = "NEW Cards";
             // 
-            // dgvCards
+            // dgvloadCardsList
             // 
-            this.dgvCards.AllowUserToAddRows = false;
-            this.dgvCards.AllowUserToDeleteRows = false;
-            this.dgvCards.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCards.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn20});
-            this.dgvCards.Location = new System.Drawing.Point(6, 22);
-            this.dgvCards.MultiSelect = false;
-            this.dgvCards.Name = "dgvCards";
-            this.dgvCards.ReadOnly = true;
-            this.dgvCards.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvloadCardsList.AllowUserToAddRows = false;
+            this.dgvloadCardsList.AllowUserToDeleteRows = false;
+            this.dgvloadCardsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvloadCardsList.Location = new System.Drawing.Point(6, 22);
+            this.dgvloadCardsList.MultiSelect = false;
+            this.dgvloadCardsList.Name = "dgvloadCardsList";
+            this.dgvloadCardsList.ReadOnly = true;
+            this.dgvloadCardsList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
@@ -537,18 +543,11 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCards.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvCards.RowHeadersVisible = false;
-            this.dgvCards.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvCards.Size = new System.Drawing.Size(143, 237);
-            this.dgvCards.TabIndex = 27;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.HeaderText = "Card Number";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            this.dataGridViewTextBoxColumn20.Width = 140;
+            this.dgvloadCardsList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvloadCardsList.RowHeadersVisible = false;
+            this.dgvloadCardsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvloadCardsList.Size = new System.Drawing.Size(143, 237);
+            this.dgvloadCardsList.TabIndex = 27;
             // 
             // gpSelectedProducts
             // 
@@ -571,6 +570,7 @@
             this.btnRemoveProduct.TabIndex = 31;
             this.btnRemoveProduct.Text = "Remove Product";
             this.btnRemoveProduct.UseVisualStyleBackColor = true;
+            this.btnRemoveProduct.Click += new System.EventHandler(this.btnRemoveProduct_Click);
             // 
             // btnSelectProduct
             // 
@@ -589,10 +589,14 @@
             this.dgvSelectedProducts.AllowUserToDeleteRows = false;
             this.dgvSelectedProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSelectedProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
             this.dataGridViewTextBoxColumn21,
-            this.dataGridViewTextBoxColumn24,
             this.dataGridViewTextBoxColumn25,
-            this.Column4});
+            this.dataGridViewTextBoxColumn24,
+            this.Column4,
+            this.Courtesy,
+            this.Time,
+            this.Type});
             this.dgvSelectedProducts.Location = new System.Drawing.Point(6, 22);
             this.dgvSelectedProducts.MultiSelect = false;
             this.dgvSelectedProducts.Name = "dgvSelectedProducts";
@@ -611,19 +615,19 @@
             this.dgvSelectedProducts.Size = new System.Drawing.Size(527, 190);
             this.dgvSelectedProducts.TabIndex = 18;
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
             // dataGridViewTextBoxColumn21
             // 
             this.dataGridViewTextBoxColumn21.HeaderText = "Product Name";
             this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             this.dataGridViewTextBoxColumn21.ReadOnly = true;
             this.dataGridViewTextBoxColumn21.Width = 190;
-            // 
-            // dataGridViewTextBoxColumn24
-            // 
-            this.dataGridViewTextBoxColumn24.HeaderText = "Bonus";
-            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-            this.dataGridViewTextBoxColumn24.ReadOnly = true;
-            this.dataGridViewTextBoxColumn24.Width = 110;
             // 
             // dataGridViewTextBoxColumn25
             // 
@@ -632,6 +636,13 @@
             this.dataGridViewTextBoxColumn25.ReadOnly = true;
             this.dataGridViewTextBoxColumn25.Width = 110;
             // 
+            // dataGridViewTextBoxColumn24
+            // 
+            this.dataGridViewTextBoxColumn24.HeaderText = "Bonus";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            this.dataGridViewTextBoxColumn24.ReadOnly = true;
+            this.dataGridViewTextBoxColumn24.Width = 110;
+            // 
             // Column4
             // 
             this.Column4.HeaderText = "Credits";
@@ -639,8 +650,28 @@
             this.Column4.ReadOnly = true;
             this.Column4.Width = 110;
             // 
+            // Courtesy
+            // 
+            this.Courtesy.HeaderText = "Courtesy";
+            this.Courtesy.Name = "Courtesy";
+            this.Courtesy.ReadOnly = true;
+            // 
+            // Time
+            // 
+            this.Time.HeaderText = "Time";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            // 
+            // Type
+            // 
+            this.Type.HeaderText = "Type";
+            this.Type.Name = "Type";
+            this.Type.ReadOnly = true;
+            this.Type.Visible = false;
+            // 
             // tbTransferCard
             // 
+            this.tbTransferCard.Controls.Add(this.btnTransferCardReset);
             this.tbTransferCard.Controls.Add(this.textBox3);
             this.tbTransferCard.Controls.Add(this.label6);
             this.tbTransferCard.Controls.Add(this.btnTransferCardClose);
@@ -664,9 +695,21 @@
             this.tbTransferCard.Text = "Transfer card";
             this.tbTransferCard.UseVisualStyleBackColor = true;
             // 
+            // btnTransferCardReset
+            // 
+            this.btnTransferCardReset.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnTransferCardReset.Location = new System.Drawing.Point(286, 338);
+            this.btnTransferCardReset.Name = "btnTransferCardReset";
+            this.btnTransferCardReset.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnTransferCardReset.Size = new System.Drawing.Size(102, 39);
+            this.btnTransferCardReset.TabIndex = 28;
+            this.btnTransferCardReset.Text = "Reset";
+            this.btnTransferCardReset.UseVisualStyleBackColor = true;
+            this.btnTransferCardReset.Click += new System.EventHandler(this.btnTransferCardReset_Click);
+            // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(252, 275);
+            this.textBox3.Location = new System.Drawing.Point(252, 277);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(364, 42);
@@ -676,7 +719,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(176, 278);
+            this.label6.Location = new System.Drawing.Point(176, 288);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 15);
             this.label6.TabIndex = 26;
@@ -714,6 +757,7 @@
             this.btnGetTocard.TabIndex = 23;
             this.btnGetTocard.Text = "Get Details";
             this.btnGetTocard.UseVisualStyleBackColor = true;
+            this.btnGetTocard.Visible = false;
             this.btnGetTocard.Click += new System.EventHandler(this.btnGetTocard_Click);
             // 
             // txtTocardNumber
@@ -721,6 +765,7 @@
             this.txtTocardNumber.Location = new System.Drawing.Point(252, 152);
             this.txtTocardNumber.MaxLength = 10;
             this.txtTocardNumber.Name = "txtTocardNumber";
+            this.txtTocardNumber.ReadOnly = true;
             this.txtTocardNumber.Size = new System.Drawing.Size(161, 23);
             this.txtTocardNumber.TabIndex = 22;
             // 
@@ -743,6 +788,7 @@
             this.btnGetFromcard.TabIndex = 20;
             this.btnGetFromcard.Text = "Get Details";
             this.btnGetFromcard.UseVisualStyleBackColor = true;
+            this.btnGetFromcard.Visible = false;
             this.btnGetFromcard.Click += new System.EventHandler(this.btnGetFromcard_Click);
             // 
             // label4
@@ -781,7 +827,7 @@
             this.dgvToCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvToCard.RowHeadersVisible = false;
             this.dgvToCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvToCard.Size = new System.Drawing.Size(605, 50);
+            this.dgvToCard.Size = new System.Drawing.Size(605, 68);
             this.dgvToCard.TabIndex = 18;
             // 
             // dataGridViewTextBoxColumn7
@@ -852,7 +898,7 @@
             this.dgvFromCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvFromCard.RowHeadersVisible = false;
             this.dgvFromCard.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvFromCard.Size = new System.Drawing.Size(605, 50);
+            this.dgvFromCard.Size = new System.Drawing.Size(605, 75);
             this.dgvFromCard.TabIndex = 16;
             // 
             // dataGridViewTextBoxColumn4
@@ -892,6 +938,7 @@
             this.txtFromCardnumber.Location = new System.Drawing.Point(252, 21);
             this.txtFromCardnumber.MaxLength = 10;
             this.txtFromCardnumber.Name = "txtFromCardnumber";
+            this.txtFromCardnumber.ReadOnly = true;
             this.txtFromCardnumber.Size = new System.Drawing.Size(161, 23);
             this.txtFromCardnumber.TabIndex = 12;
             // 
@@ -953,6 +1000,7 @@
             this.btnGetConsolidateCard.TabIndex = 23;
             this.btnGetConsolidateCard.Text = "Get Details";
             this.btnGetConsolidateCard.UseVisualStyleBackColor = true;
+            this.btnGetConsolidateCard.Visible = false;
             this.btnGetConsolidateCard.Click += new System.EventHandler(this.btnGetConsolidateCard_Click);
             // 
             // txtConsolidateCard
@@ -960,6 +1008,7 @@
             this.txtConsolidateCard.Location = new System.Drawing.Point(211, 15);
             this.txtConsolidateCard.MaxLength = 10;
             this.txtConsolidateCard.Name = "txtConsolidateCard";
+            this.txtConsolidateCard.ReadOnly = true;
             this.txtConsolidateCard.Size = new System.Drawing.Size(161, 23);
             this.txtConsolidateCard.TabIndex = 22;
             // 
@@ -1056,6 +1105,7 @@
             this.tbRefundCard.Tag = "5";
             this.tbRefundCard.Text = "Refund Card";
             this.tbRefundCard.UseVisualStyleBackColor = true;
+            this.tbRefundCard.Click += new System.EventHandler(this.tbRefundCard_Click);
             // 
             // label11
             // 
@@ -1247,7 +1297,7 @@
             this.tbLoadMultiple.ResumeLayout(false);
             this.tbLoadMultiple.PerformLayout();
             this.gpSwappedCards.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCards)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvloadCardsList)).EndInit();
             this.gpSelectedProducts.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSelectedProducts)).EndInit();
             this.tbTransferCard.ResumeLayout(false);
@@ -1298,7 +1348,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dgvToCard;
-        private System.Windows.Forms.Button btnGetFromcard;
         private System.Windows.Forms.Button btnGetTocard;
         private System.Windows.Forms.TextBox txtTocardNumber;
         private System.Windows.Forms.Label label5;
@@ -1350,18 +1399,23 @@
         private System.Windows.Forms.Button btnGetCardDetails;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DataGridView dgvCards;
+        private System.Windows.Forms.DataGridView dgvloadCardsList;
         private System.Windows.Forms.GroupBox gpSwappedCards;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
         private System.Windows.Forms.GroupBox gpSelectedProducts;
         private System.Windows.Forms.DataGridView dgvSelectedProducts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Button btnMultipleClose;
         private System.Windows.Forms.Button btnLoadMultipleOk;
         private System.Windows.Forms.Button btnRemoveProduct;
         private System.Windows.Forms.Button btnSelectProduct;
+        private System.Windows.Forms.Button btnTransferCardReset;
+        private System.Windows.Forms.Button btnGetFromcard;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Courtesy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
     }
 }

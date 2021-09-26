@@ -1,4 +1,5 @@
-﻿using Marbale.BusinessObject.Cards;
+﻿using Marbale.BusinessObject;
+using Marbale.BusinessObject.Cards;
 using Marbale.BusinessObject.POSTransaction;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Marbale.POS.Common
 {
-    public class staticData
+    public class StaticData
     {
-        public int LoadMultipleProductPicked;
+        public int LoadMultipleProductSelected;
         public int[] LoadMultipleProducts;
         public Card[] LoadMultipleCards;
 
@@ -38,7 +39,7 @@ namespace Marbale.POS.Common
         public lastTransactionInfo LastTransactionInfo;
 
 
-        public staticData()
+        public StaticData()
         {
 
         }
@@ -550,7 +551,7 @@ namespace Marbale.POS.Common
             if (PaymentRoundOffAmount != 0)
             {
                 bool found = false;
-                foreach (staticData.PaymentModeDetail pd in PaymentModeDetails)
+                foreach (StaticData.PaymentModeDetail pd in PaymentModeDetails)
                 {
                     if (Convert.ToInt32(pd.PaymentModeId) == RoundOffPaymentModeId)
                     {
@@ -561,7 +562,7 @@ namespace Marbale.POS.Common
                 }
                 if (!found && RoundOffPaymentModeId != -1)
                 {
-                    staticData.PaymentModeDetail pd = new staticData.PaymentModeDetail();
+                    StaticData.PaymentModeDetail pd = new StaticData.PaymentModeDetail();
                     pd.PaymentModeId = RoundOffPaymentModeId;
                     pd.Reference = "";
                     pd.Amount = PaymentRoundOffAmount;
@@ -570,7 +571,7 @@ namespace Marbale.POS.Common
             }
             else
             {
-                foreach (staticData.PaymentModeDetail pd in PaymentModeDetails)
+                foreach (StaticData.PaymentModeDetail pd in PaymentModeDetails)
                 {
                     if (Convert.ToInt32(pd.PaymentModeId) == RoundOffPaymentModeId)
                     {
@@ -586,7 +587,7 @@ namespace Marbale.POS.Common
             PaymentOtherModeAmount -= PaymentRoundOffAmount;
             PaymentCashAmount += PaymentRoundOffAmount;
             PaymentRoundOffAmount = 0;
-            foreach (staticData.PaymentModeDetail pd in PaymentModeDetails)
+            foreach (StaticData.PaymentModeDetail pd in PaymentModeDetails)
             {
                 if (Convert.ToInt32(pd.PaymentModeId) == RoundOffPaymentModeId)
                 {

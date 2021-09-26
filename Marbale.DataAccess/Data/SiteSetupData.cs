@@ -311,6 +311,7 @@ namespace Marbale.DataAccess
             }
             catch (Exception ex)
             {
+            
                 throw;
             }
         }

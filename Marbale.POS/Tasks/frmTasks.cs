@@ -1,8 +1,11 @@
 ﻿using Marbale.Business;
+using Marbale.BusinessObject;
 using Marbale.BusinessObject.Cards;
 using Marbale.POS.CardDevice;
+using Marbale.POS.Common;
 using Marbale.POS.Tasks;
 using Marble.Business;
+using Marble.DataLoggerService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,25 +20,172 @@ namespace Marbale.POS
 {
     public partial class frmTasks : Form
     {
+        private readonly DataLogger dataLogger = new DataLogger();
         Card currentcard = new Card();
         int TaskId = 0;
         Card fromCard;
         Card toCard;
-        List<Card> lstConsolidateCard;
+        List<Card> lstOfCards;
         List<DataGridView> lstConsolidatedatagridView;
+        POSBL posBussiness = new POSBL();
+        StaticData staticData = new StaticData();
+        int[] LoadMultipleProducts;
+        TransactionBL trxBL = new TransactionBL();
 
-        public frmTasks(int taskId, Card card)
+        const int MAXLOADMULTIPLECARDS = 500;
+        //object paramData;
+        public frmTasks(int taskId, Card card, StaticData MainstaticData)
         {
             InitializeComponent();
             currentcard = card;
             this.TaskId = taskId;
-         
+            lstOfCards = new List<Card>();
+            staticData = MainstaticData;
         }
         private void frmTasks_Load(object sender, EventArgs e)
         {
             CardReader.RequiredByOthers = true;
             CardReader.setReceiveAction = TappedCard;
             PoplateForm();
+            lstOfCards = new List<Card>();
+            Common.Devices.RegisterCardReaders(new EventHandler(CardScanCompleteEventHandle));
+        }
+        private void CardScanCompleteEventHandle(object sender, EventArgs e)
+        {
+            dataLogger.Debug("Begin CardScanCompleteEventHandle()");
+
+            if (e is DeviceScannedEventArgs)
+            {
+                DeviceScannedEventArgs checkScannedEvent = e as DeviceScannedEventArgs;
+
+                string CardNumber = "";
+                try
+                {
+                    CardNumber = checkScannedEvent.Message;
+                    HandleCardRead(CardNumber, sender as DeviceClass);
+                }
+                catch (Exception ex)
+                {
+
+                    dataLogger.Error("Ends-CardScanCompleteEventHandle()  " + ex.Message);
+                }
+            }
+            dataLogger.Debug("Ends CardScanCompleteEventHandle()");
+        }
+
+        private void HandleCardRead(string CardNumber, DeviceClass readerDevice)
+        {
+            if (CardReader.CardSwiped)
+                CardReader.CardSwiped = false;
+
+            //ClearCard();
+
+            currentcard = null;
+
+            TransactionBL trxBL = new TransactionBL();
+            currentcard = trxBL.GetCard(0, CardNumber);
+
+            if (currentcard == null || currentcard.card_id == 0)
+                currentcard = new Card();
+
+
+
+
+            TabPage page = CardTabControl.SelectedTab;
+
+            if (page.Name == "tbLoadMultiple")
+            {
+                AddMultipleCardListBox(CardNumber);
+            }
+            else if (page.Name == "tbTransferCard")
+            {
+                PopulateTransferCard();
+            }
+            else if (page.Name == "tbConsilidated")
+            {
+                AddConsolidateCardLoad();
+            }
+
+        }
+
+        private void InitialMultipleCardListBox()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("Card Number", typeof(string)));
+
+            dgvloadCardsList.DataSource = dt;
+            dgvloadCardsList.Columns[0].Width = 150;
+        }
+
+
+
+        private void AddMultipleCardListBox(string cardnuber)
+        {
+
+            try
+            {
+                int CardCount = dgvloadCardsList.Rows.Count;
+                if (CardCount == MAXLOADMULTIPLECARDS)
+                {
+                    MessageBox.Show(GlobalMessage.MAXLOADMULTIPLECARDS_REACHED);
+                    return;
+                }
+
+
+                bool cardExist = false;
+                DataTable dt = new DataTable();
+                foreach (DataGridViewColumn col in dgvloadCardsList.Columns)
+                {
+                    dt.Columns.Add(col.Name);
+                }
+
+                foreach (DataGridViewRow row in dgvloadCardsList.Rows)
+                {
+                    DataRow dRow = dt.NewRow();
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        dRow[cell.ColumnIndex] = cell.Value;
+                    }
+                    if (dRow[0].ToString() == cardnuber)
+                    {
+                        cardExist = true;
+                    }
+                    dt.Rows.Add(dRow);
+
+                }
+
+
+                if (currentcard != null && currentcard.CardStatus == "NEW")
+                {
+                    DataRow dr = dt.NewRow();
+
+                    if (!cardExist)
+                    {
+                        dr[0] = cardnuber;
+                        dt.Rows.Add(dr);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(GlobalMessage.TAP_NEW_CARD);
+                }
+
+
+                dgvloadCardsList.DataSource = dt;
+
+                Card newCard = trxBL.GetCard(0, cardnuber);
+
+                lstOfCards.Add(newCard);
+                dgvloadCardsList.Refresh();
+
+            }
+            catch (Exception ex)
+            {
+                dataLogger.Error("Ends-AddMultipleCardListBox() " + ex.Message);
+            }
+
+
+
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -89,17 +239,19 @@ namespace Marbale.POS
                     PopulateCardBonusGrid();
                     break;
                 case (int)CommonTask.Task.LOADMULTIPLE:
+                    InitialMultipleCardListBox();
                     //PopulateCardBonusGrid();
                     break;
                 case (int)CommonTask.Task.TRANSFERCARD:
-                    //PopulateCardBonusGrid();
+                    PopulateTransferCard();
                     break;
                 case (int)CommonTask.Task.CANSOLIDATECARD:
                     {
-                        lstConsolidateCard = new List<Card>();
+                        lstOfCards = new List<Card>();
                         lstConsolidatedatagridView = new List<DataGridView>();
-                         //PopulateCardBonusGrid();
-                    break;
+                        //AddConsolidateCardLoad();
+                        //PopulateCardBonusGrid();
+                        break;
                     }
                 case (int)CommonTask.Task.REFUNDCARD:
                     PopulateRefundCardGrid();
@@ -125,34 +277,96 @@ namespace Marbale.POS
             }
         }
 
+        #region TransferCard
+
+
+        private void PopulateTransferCard()
+        {
+            if (currentcard != null && currentcard.CardNumber != "")
+            {
+
+
+                if (currentcard.CardNumber != "" && txtFromCardnumber.Text == "")
+                {
+
+                    PopulateRefundCardGrid();
+                }
+                else if (currentcard.CardNumber != "" && txtTocardNumber.Text == "")
+                {
+                    PopulateToTranferCard();
+                }
+            }
+        }
+        private void PopulateFromTranferCard()
+        {
+            fromCard = new Card();
+            if (Validatecard(txtFromCardnumber.Text))
+            {
+                fromCard = GetCard(txtFromCardnumber.Text.Trim());
+
+                if (fromCard != null && fromCard.CardStatus != "ISSUED")
+                {
+                    MessageBox.Show("Please Tap the issued card");
+                }
+                else
+                {
+                    if (fromCard != null && fromCard.card_id > 0)
+                    {
+                        string[] row1 = new string[] { fromCard.CardNumber, fromCard.issue_date.ToString(), fromCard.credits.ToString(), fromCard.bonus.ToString(), fromCard.ticket_count.ToString() };
+                        dgvFromCard.Rows.Add(row1);
+                    }
+
+                }
+            }
+        }
+        private void PopulateToTranferCard()
+        {
+            toCard = new Card();
+            if (Validatecard(currentcard.CardNumber))
+            {
+                toCard = GetCard(currentcard.CardNumber.Trim());
+
+                if (toCard == null || toCard.CardStatus != "NEW")
+                {
+
+                    txtTocardNumber.Text = "";
+                    MessageBox.Show(GlobalMessage.TAP_NEW_CARD);
+                }
+                else
+                {
+                    if (toCard != null && toCard.card_id <= 0)
+                    {
+
+                        txtTocardNumber.Text = currentcard.CardNumber;
+                        string[] row1 = new string[] { toCard.CardNumber, string.Empty, toCard.credits.ToString(), toCard.bonus.ToString(), toCard.ticket_count.ToString() };
+                        dgvToCard.Rows.Add(row1);
+                    }
+                }
+            }
+        }
+
+
+
+        #endregion
+
+
+
         void PopulateRefundCardGrid()
         {
             if (currentcard != null && currentcard.card_id > 0)
             {
+                txtFromCardnumber.Text = currentcard.CardNumber;
                 txtCardDeposit.Text = currentcard.face_value.ToString();
                 txtTotalCredits.Text = (currentcard.credits + currentcard.face_value).ToString();
 
                 string[] row1 = new string[] { currentcard.CardNumber, currentcard.issue_date.ToString(), currentcard.credits.ToString(), currentcard.bonus.ToString(), currentcard.ticket_count.ToString() };
-                dgvRefundCard.Rows.Add(row1);
+                dgvFromCard.Rows.Add(row1);
             }
             else
             {
+                txtFromCardnumber.Text = "";
                 txtCardDeposit.Text = "0".ToString();
                 txtTotalCredits.Text = "0".ToString();
-            }
-        }
-
-        void PopulateTransferFromCard(Card card)
-        {
-            if (card != null && card.card_id > 0)
-            {
-                string[] row1 = new string[] { card.CardNumber, card.issue_date.ToString(), card.credits.ToString(), card.bonus.ToString(), card.ticket_count.ToString() };
-                dgvFromCard.Rows.Add(row1);
-            }
-            else if (card != null && card.card_id <= 0)
-            {
-                string[] row1 = new string[] { card.CardNumber, string.Empty, card.credits.ToString(), card.bonus.ToString(), card.ticket_count.ToString() };
-                dgvToCard.Rows.Add(row1);
             }
         }
 
@@ -182,22 +396,12 @@ namespace Marbale.POS
             this.Close();
         }
 
+
         private void btnGetFromcard_Click(object sender, EventArgs e)
         {
-            fromCard = new Card();
-            if (Validatecard(txtFromCardnumber.Text))
-            {
-                fromCard = GetCard(txtFromCardnumber.Text.Trim());
 
-                if (fromCard != null && fromCard.CardStatus != "ISSUED")
-                {
-                    MessageBox.Show("Please Tap the issued card");
-                }
-                else
-                {
-                    PopulateTransferFromCard(fromCard);
-                }
-            }
+
+
         }
 
 
@@ -206,6 +410,8 @@ namespace Marbale.POS
             TransactionBL trxBL = new TransactionBL();
             return trxBL.GetCard(0, cardNumber);
         }
+
+
 
         bool Validatecard(string cardNumber)
         {
@@ -225,20 +431,7 @@ namespace Marbale.POS
 
         private void btnGetTocard_Click(object sender, EventArgs e)
         {
-            toCard = new Card();
-            if (Validatecard(txtTocardNumber.Text))
-            {
-                toCard = GetCard(txtTocardNumber.Text.Trim());
 
-                if (toCard == null || toCard.CardStatus != "NEW")
-                {
-                    MessageBox.Show("Please Tap the NEW card");
-                }
-                else
-                {
-                    PopulateTransferFromCard(toCard);
-                }
-            }
         }
 
         public void TransferCard(Card fromCard, Card toCard, string remarks)
@@ -317,9 +510,9 @@ namespace Marbale.POS
         private void PopulateConsoliDateCardGrid(Card card, ref DataGridView dataGridView, ref bool success)
         {
             bool found = false;
-            if(lstConsolidateCard != null && lstConsolidateCard.Count> 0)
+            if (lstOfCards != null && lstOfCards.Count > 0)
             {
-                foreach(Card swipedcard in lstConsolidateCard)
+                foreach (Card swipedcard in lstOfCards)
                 {
                     if (swipedcard.CardNumber == card.CardNumber)
                     {
@@ -328,7 +521,7 @@ namespace Marbale.POS
                     }
                 }
 
-                if(found)
+                if (found)
                 {
                     MessageBox.Show("Card is already Added");
                     return;
@@ -339,7 +532,7 @@ namespace Marbale.POS
             {
                 string[] row1 = new string[] { card.CardNumber, card.issue_date.ToString(), card.credits.ToString(), card.bonus.ToString(), card.ticket_count.ToString() };
                 dataGridView.Rows.Add(row1);
-                lstConsolidateCard.Add(card);
+                lstOfCards.Add(card);
                 lstConsolidatedatagridView.Add(dataGridView);
                 success = true;
             }
@@ -349,40 +542,45 @@ namespace Marbale.POS
             }
         }
 
-        private void btnGetConsolidateCard_Click(object sender, EventArgs e)
+        #region ConsolidateCard
+        private void AddConsolidateCardLoad()
         {
             try
             {
-                if (Validatecard(txtConsolidateCard.Text))
+                if (currentcard != null && currentcard.CardNumber != "")
                 {
-                    Card objCard = GetCard(txtConsolidateCard.Text);
-                    bool success = false;
-                    DataGridView dataGrid = GetConsolidateNewGrid();
-                    PopulateConsoliDateCardGrid(objCard, ref dataGrid, ref success);
-                    if (success)
+                    if (Validatecard(currentcard.CardNumber))
                     {
-                        if (lstConsolidatedatagridView != null && lstConsolidatedatagridView.Count > 1)
+                        txtConsolidateCard.Text = currentcard.CardNumber;
+                        Card objCard = GetCard(currentcard.CardNumber);
+                        bool success = false;
+                        DataGridView dataGrid = GetConsolidateNewGrid();
+                        PopulateConsoliDateCardGrid(objCard, ref dataGrid, ref success);
+                        if (success)
                         {
+                            if (lstConsolidatedatagridView != null && lstConsolidatedatagridView.Count > 1)
+                            {
 
-                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count-1].Location = new Point(dgvConsolidateCard.Location.X, lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 2].Location.Y+60);
+                                lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].Location = new Point(dgvConsolidateCard.Location.X, lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 2].Location.Y + 60);
 
-                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].BringToFront();
-                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].Refresh();
-                            lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].Show();
+                                lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].BringToFront();
+                                lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].Refresh();
+                                lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1].Show();
 
-                            tbConsilidated.Controls.Add(lstConsolidatedatagridView[lstConsolidatedatagridView.Count-1]);
+                                tbConsilidated.Controls.Add(lstConsolidatedatagridView[lstConsolidatedatagridView.Count - 1]);
 
-                            this.Refresh(); 
-                        }
-                        else
-                        {
-                            dataGrid.Location = dgvConsolidateCard.Location;
+                                this.Refresh();
+                            }
+                            else
+                            {
+                                dataGrid.Location = dgvConsolidateCard.Location;
 
-                            dataGrid.BringToFront();
-                            dataGrid.Refresh();
-                            dataGrid.Show();
-                            dataGrid.Visible = true;
-                            tbConsilidated.Controls.Add(dataGrid);
+                                dataGrid.BringToFront();
+                                dataGrid.Refresh();
+                                dataGrid.Show();
+                                dataGrid.Visible = true;
+                                tbConsilidated.Controls.Add(dataGrid);
+                            }
                         }
                     }
                 }
@@ -393,19 +591,25 @@ namespace Marbale.POS
             }
         }
 
+        #endregion
+        private void btnGetConsolidateCard_Click(object sender, EventArgs e)
+        {
+            AddConsolidateCardLoad();
+        }
+
 
         public DataGridView GetConsolidateNewGrid()
         {
             DataGridView grid = new DataGridView();
             grid.AllowUserToAddRows = dgvConsolidateCard.AllowUserToAddRows;
             grid.AllowUserToDeleteRows = dgvConsolidateCard.AllowUserToDeleteRows;
-            grid.AllowUserToResizeColumns  = dgvConsolidateCard.AllowUserToResizeColumns;
+            grid.AllowUserToResizeColumns = dgvConsolidateCard.AllowUserToResizeColumns;
             grid.Size = dgvConsolidateCard.Size;
             grid.MultiSelect = dgvConsolidateCard.MultiSelect;
             grid.ColumnHeadersVisible = dgvConsolidateCard.ColumnHeadersVisible;
             grid.RowHeadersVisible = dgvConsolidateCard.RowHeadersVisible;
             grid.ReadOnly = dgvConsolidateCard.ReadOnly;
-            
+
 
             grid.Columns.Add("Card_Number", "Card Number");
             grid.Columns["Card_Number"].Width = 150;
@@ -440,9 +644,9 @@ namespace Marbale.POS
             try
             {
                 TransactionBL trxBL = new TransactionBL();
-                if (lstConsolidateCard != null && lstConsolidateCard.Count > 0)
+                if (lstOfCards != null && lstOfCards.Count > 0)
                 {
-                    Card[] arrayCards = lstConsolidateCard.ToArray();
+                    Card[] arrayCards = lstOfCards.ToArray();
                     Card updateToCard = new Card();
                     Card tocard = new Card();
                     for (int i = 0; i < arrayCards.Count(); i++)
@@ -470,7 +674,7 @@ namespace Marbale.POS
                     MessageBox.Show("Card Consolidated successfully");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -495,7 +699,7 @@ namespace Marbale.POS
 
                 //Check for partially refund face value
                 //Partially face value refund is not allowed
-                if(Convert.ToInt32(txtCreditsToRefund.Text) > currentcard.credits 
+                if (Convert.ToInt32(txtCreditsToRefund.Text) > currentcard.credits
                     && Convert.ToInt32(txtCreditsToRefund.Text) < Convert.ToInt32(txtTotalCredits.Text))
                 {
                     MessageBox.Show("Partially face value Refund is not Allowed");
@@ -526,12 +730,12 @@ namespace Marbale.POS
                 MessageBox.Show("Card Refunded Successfully");
                 this.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
-       
+
 
         private void btnRefundCardClose_Click(object sender, EventArgs e)
         {
@@ -540,10 +744,124 @@ namespace Marbale.POS
 
         private void btnSelectProduct_Click(object sender, EventArgs e)
         {
-            frmSelectProducts frm = new frmSelectProducts();
-            frm.ShowDialog();
+            Form frmProductList = new Form();
+
+
+            frmProductList.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            frmProductList.Size = new Size(500, 600);
+            frmProductList.StartPosition = FormStartPosition.CenterScreen;
+            frmProductList.Text = "Load Multiple Card Products";
+            frmProductList.BackColor = Color.Gray;
+            frmProductList.BringToFront();
+            frmProductList.TopMost = true;
+
+            FlowLayoutPanel flpProducts = new FlowLayoutPanel();
+
+
+            flpProducts.FlowDirection = FlowDirection.LeftToRight;
+            flpProducts.WrapContents = true;
+            flpProducts.Size = new Size(frmProductList.Width - 7, frmProductList.Height - 80);
+            flpProducts.BorderStyle = BorderStyle.FixedSingle;
+            flpProducts.BackColor = Color.Gray;
+            flpProducts.AutoScroll = true;
+
+            frmProductList.Controls.Add(flpProducts);
+
+
+
+            List<Product> lstProducts = posBussiness.GetProductsByScreenGroup(0);
+
+            int i = 0;
+            if (lstProducts != null && lstProducts.Count > 0)
+            {
+                //flpProducts.Controls.Clear();
+                foreach (Product product in lstProducts)
+                {
+
+                    Button ProductButton = new Button();
+                    ProductButton.Click += new EventHandler(ProductSelectButton_Click);
+                    ProductButton.Name = "ProductButton" + i.ToString();
+                    ProductButton.Text = product.Name.ToString();
+                    ProductButton.Tag = product.Id;
+                    ProductButton.Font = new Font("arial", 10);
+                    ProductButton.ForeColor = Color.White;
+                    ProductButton.Size = new Size(150, 80);
+                    ProductButton.FlatStyle = FlatStyle.Flat;
+                    ProductButton.FlatAppearance.BorderColor = Color.White;
+                    //ProductButton.BringToFront();
+                    if (product.Type == "CARDSALE")
+                        ProductButton.BackColor = Color.MidnightBlue;
+                    else if (product.Type == "RECHARGE")
+                        ProductButton.BackColor = Color.Olive;
+                    else if (product.Type == "GAMETIME")
+                        ProductButton.BackColor = Color.Tan;
+                    else if (product.Type == GlobalEnum.ProductType.NEW_CARD.DescriptionAttr())
+                    {
+                        //ProductButton.BackColor = Color.SteelBlue;
+
+                    }
+
+                    flpProducts.Controls.Add(ProductButton);
+
+                    i++;
+                }
+
+
+                Button CancelButton = new Button();
+                CancelButton.Click += new EventHandler(CancelButton_Click);
+                CancelButton.Name = "CancelButton";
+                CancelButton.Text = "Cancel";
+                CancelButton.Font = new Font("arial", 10, FontStyle.Bold);
+                CancelButton.ForeColor = Color.Black;
+                CancelButton.Size = new Size(100, 36);
+                CancelButton.Location = new Point(frmProductList.Width / 2 - CancelButton.Width / 2, flpProducts.Bottom + 2);
+                CancelButton.BackColor = Color.White;
+                frmProductList.Controls.Add(CancelButton);
+
+                frmProductList.CancelButton = CancelButton;
+
+                //dgvSelectedProducts.Rows.Add(new object[] { productId,
+                //                                         DT.Rows[0]["product_name"],
+                //                                         DT.Rows[0]["price"],
+                //                                         DT.Rows[0]["credits"],
+                //                                         DT.Rows[0]["Bonus"],
+                //                                         DT.Rows[0]["courtesy"],
+                //                                         DT.Rows[0]["time"],
+                //                                         DT.Rows[0]["product_type"] });
+            }
+            if (frmProductList.ShowDialog() == DialogResult.OK)
+            {
+                //MessageBox.Show("selected");
+                int pid = staticData.LoadMultipleProductSelected;
+                Product product = posBussiness.GetProductsById(pid);
+
+                dgvSelectedProducts.Rows.Add(new object[] { product.Id,
+                                                         product.Name,
+                                                        product.Price,
+                                                        product.Credits,
+                                                        product.Bonus,
+                                                         product.Courtesy,
+                                                        product.Time,
+                                                        product.Type });
+            }
+            frmProductList.ShowDialog();
         }
 
+        void ProductSelectButton_Click(object sender, EventArgs e)
+        {
+            dataLogger.Debug("Begin ProductSelectButton_Click   ");
+            Form f = ((Button)sender).FindForm();
+            f.DialogResult = DialogResult.OK;
+            staticData.LoadMultipleProductSelected = Convert.ToInt32(((Button)sender).Tag);
+            f.Close();
+            dataLogger.Debug("Ends-ProductButton_Click() ");
+        }
+        void CancelButton_Click(object sender, EventArgs e)
+        {
+            dataLogger.Debug("Begin CancelButton_Click ");
+            ((Button)sender).FindForm().DialogResult = DialogResult.Cancel;
+            dataLogger.Debug("Ends CancelButton_Click ");
+        }
         private void txtCreditsToRefund_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
@@ -556,6 +874,112 @@ namespace Marbale.POS
             {
                 e.Handled = true;
             }
+        }
+
+        private void btnTransferCardReset_Click(object sender, EventArgs e)
+        {
+            ///dgvFromCard
+            dgvFromCard.Rows.Clear();
+            dgvToCard.Rows.Clear();
+            txtFromCardnumber.Text = "";
+            txtTocardNumber.Text = "";
+        }
+
+        private void tbRefundCard_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRemoveProduct_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedIndex = dgvSelectedProducts.CurrentCell.RowIndex;
+                if (selectedIndex > -1)
+                {
+                    dgvSelectedProducts.Rows.RemoveAt(selectedIndex);
+                    dgvSelectedProducts.Refresh(); // if needed
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnLoadMultipleOk_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+
+
+
+                if (lstOfCards.Count == 0)
+                {
+                    MessageBox.Show(GlobalMessage.NO_CARD_NOT_PRESENT);
+                    return;
+                }
+
+                //if (lstConsolidateCard.Count < Convert.ToInt32(parameters[1]))
+                //{
+                //    MessageBox.Show(GlobalMessage.ATLEAST_ONE_CARD_PRESENT);
+                //    return;
+                //}
+
+
+
+                //if (paramData != null)
+                //{
+                //    object[] parameters = paramData as object[];
+
+                //    
+                //}
+
+                //bool newProductFound = false;
+                //int newProductIndex = -1;
+                //for (int i = 0; i < dgvloadCardsList.Rows.Count; i++)
+                //{
+                //    string prodType = dgvloadCardsList.Rows[i].Cells["ProductType"].Value.ToString();
+                //    if (prodType == "NEW" || prodType == "GAMETIME" || prodType == "CARDSALE")
+                //    {
+                //        //newProductFound = true;
+                //        //newProductIndex = i;
+                //        break;
+                //    }
+                //}
+                //if (!newProductFound)
+                //{
+                //    MessageBox.Show(GlobalMessage.CHOOSE_NEW_CARD);
+                //    return;
+                //}
+
+                // new product should be the first product 
+                //lstConsolidateCard[0] = Convert.ToInt32(dgvloadCardsList.Rows[newProductIndex].Cells["ProductID"].Value);
+
+                int index = 0;
+                LoadMultipleProducts = new int[dgvSelectedProducts.Rows.Count];
+                for (int i = 0; i < dgvSelectedProducts.Rows.Count; i++)
+                {
+
+                    LoadMultipleProducts[index++] = Convert.ToInt32(dgvSelectedProducts.Rows[i].Cells["Id"].Value);
+
+                }
+
+
+                staticData.LoadMultipleCards = lstOfCards.ToArray();
+                staticData.LoadMultipleProducts = LoadMultipleProducts;
+
+            }
+            catch (Exception ex)
+            {
+                dataLogger.Error("Error on btnLoadMultipleOk_Click()", ex);
+                MessageBox.Show("Error");
+            }
+            //ReturnMessage = MessageUtils.getMessage(42);
+            //log.Info("Ends-buttonOK_Click() -LOADMULTIPLE- Multiple Card Issue");//Added for logger function on 08-Mar-2016
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Marbale.BusinessObject.Discount;
+﻿
+using Marbale.BusinessObject.Discount;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Marbale.BusinessObject.POSTransaction
 {
     public class Transaction
     {
-       
+
         public int Trx_id { get; set; }
         public DateTime TransactionDate { get; set; }
         public double CashAmount { get; set; }
@@ -65,9 +66,35 @@ namespace Marbale.BusinessObject.POSTransaction
 
         public Customer.Customers customer { get; set; }
 
-        public Cards.Card Card;
+        //public Cards.Card Card;
+        //public  List<Card> CardList { get; set; }
 
         public Discounts discounts;
+
+        public bool IsMultipleCard { get; set; } = false;
+
+        //public Transaction()
+        //{
+        //    CardList = new List<Card>();
+        //}
+
+        public Card GetCardEmptyOrFirst()
+        {
+            if(TransactionLines!=null && TransactionLines.Count>0)
+            {
+                Card card = TransactionLines[0].Card;
+                if(card==null)
+                {
+                    card = new Card();
+
+                }
+                return card;
+            }
+            else
+            {
+                return new Card();
+            }
+        }
 
     }
 
@@ -153,5 +180,9 @@ namespace Marbale.BusinessObject.POSTransaction
         public bool toBeSaved = false;
 
         public bool IsLineReversed { get; set; }
+
+        public Card Card;
+
+        public bool IsDepositLine { get; set; } = false;
     }
 }
