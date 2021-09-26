@@ -2687,6 +2687,11 @@ namespace Marbale.POS
             }
 
         }
+
+        private void pbRedeem_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
 

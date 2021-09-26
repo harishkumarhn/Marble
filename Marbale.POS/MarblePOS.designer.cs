@@ -308,7 +308,7 @@
             this.tabPageTrx.ImageIndex = 1;
             this.tabPageTrx.Location = new System.Drawing.Point(4, 44);
             this.tabPageTrx.Name = "tabPageTrx";
-            this.tabPageTrx.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageTrx.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageTrx.Size = new System.Drawing.Size(722, 472);
             this.tabPageTrx.TabIndex = 0;
             this.tabPageTrx.Text = "Transaction";
@@ -652,7 +652,7 @@
             this.tabPageMyTrx.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
             this.tabPageMyTrx.Location = new System.Drawing.Point(4, 44);
             this.tabPageMyTrx.Name = "tabPageMyTrx";
-            this.tabPageMyTrx.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageMyTrx.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageMyTrx.Size = new System.Drawing.Size(722, 472);
             this.tabPageMyTrx.TabIndex = 4;
             this.tabPageMyTrx.Text = "My Transactions";
@@ -742,7 +742,7 @@
             this.tabPageActivities.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
             this.tabPageActivities.Location = new System.Drawing.Point(4, 44);
             this.tabPageActivities.Name = "tabPageActivities";
-            this.tabPageActivities.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageActivities.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageActivities.Size = new System.Drawing.Size(722, 472);
             this.tabPageActivities.TabIndex = 1;
             this.tabPageActivities.Text = "Activities";
@@ -829,7 +829,7 @@
             this.tabPageCardInfo.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
             this.tabPageCardInfo.Location = new System.Drawing.Point(4, 44);
             this.tabPageCardInfo.Name = "tabPageCardInfo";
-            this.tabPageCardInfo.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageCardInfo.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageCardInfo.Size = new System.Drawing.Size(722, 472);
             this.tabPageCardInfo.TabIndex = 3;
             this.tabPageCardInfo.Text = "Card Details";
@@ -1979,7 +1979,7 @@
             this.tbPageProducts.ImageIndex = 3;
             this.tbPageProducts.Location = new System.Drawing.Point(4, 49);
             this.tbPageProducts.Name = "tbPageProducts";
-            this.tbPageProducts.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tbPageProducts.Padding = new System.Windows.Forms.Padding(3);
             this.tbPageProducts.Size = new System.Drawing.Size(467, 579);
             this.tbPageProducts.TabIndex = 0;
             this.tbPageProducts.Text = "Products";
@@ -2072,7 +2072,7 @@
             this.tabPageProductGroups.Controls.Add(this.flowLayoutPanelProducts);
             this.tabPageProductGroups.Location = new System.Drawing.Point(4, 44);
             this.tabPageProductGroups.Name = "tabPageProductGroups";
-            this.tabPageProductGroups.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageProductGroups.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageProductGroups.Size = new System.Drawing.Size(463, 531);
             this.tabPageProductGroups.TabIndex = 0;
             this.tabPageProductGroups.Text = "Group 1";
@@ -2102,9 +2102,9 @@
             this.btnSampleProduct.Font = new System.Drawing.Font("Tahoma", 9F);
             this.btnSampleProduct.ForeColor = System.Drawing.Color.Black;
             this.btnSampleProduct.Location = new System.Drawing.Point(2, 2);
-            this.btnSampleProduct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSampleProduct.Margin = new System.Windows.Forms.Padding(2);
             this.btnSampleProduct.Name = "btnSampleProduct";
-            this.btnSampleProduct.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnSampleProduct.Padding = new System.Windows.Forms.Padding(6);
             this.btnSampleProduct.Size = new System.Drawing.Size(168, 135);
             this.btnSampleProduct.TabIndex = 0;
             this.btnSampleProduct.Text = "New Card";
@@ -2119,8 +2119,8 @@
             this.tbPageDiscounts.Controls.Add(this.flowLayoutPanelDiscounts);
             this.tbPageDiscounts.Location = new System.Drawing.Point(4, 49);
             this.tbPageDiscounts.Name = "tbPageDiscounts";
-            this.tbPageDiscounts.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tbPageDiscounts.Size = new System.Drawing.Size(468, 583);
+            this.tbPageDiscounts.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPageDiscounts.Size = new System.Drawing.Size(467, 579);
             this.tbPageDiscounts.TabIndex = 1;
             this.tbPageDiscounts.Text = "Discounts";
             this.tbPageDiscounts.ToolTipText = "Apply Transaction Discounts";
@@ -2134,7 +2134,7 @@
             this.flowLayoutPanelDiscounts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelDiscounts.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanelDiscounts.Name = "flowLayoutPanelDiscounts";
-            this.flowLayoutPanelDiscounts.Size = new System.Drawing.Size(458, 573);
+            this.flowLayoutPanelDiscounts.Size = new System.Drawing.Size(457, 569);
             this.flowLayoutPanelDiscounts.TabIndex = 0;
             // 
             // SampleButtonDiscount
@@ -2160,8 +2160,8 @@
             this.tbPageFunctions.Controls.Add(this.flowLayoutPanelFunctions);
             this.tbPageFunctions.Location = new System.Drawing.Point(4, 49);
             this.tbPageFunctions.Name = "tbPageFunctions";
-            this.tbPageFunctions.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tbPageFunctions.Size = new System.Drawing.Size(468, 583);
+            this.tbPageFunctions.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPageFunctions.Size = new System.Drawing.Size(467, 579);
             this.tbPageFunctions.TabIndex = 2;
             this.tbPageFunctions.Text = "Tasks";
             this.tbPageFunctions.ToolTipText = "Card Tasks";
@@ -2179,7 +2179,7 @@
             this.flowLayoutPanelFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelFunctions.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanelFunctions.Name = "flowLayoutPanelFunctions";
-            this.flowLayoutPanelFunctions.Size = new System.Drawing.Size(458, 573);
+            this.flowLayoutPanelFunctions.Size = new System.Drawing.Size(457, 569);
             this.flowLayoutPanelFunctions.TabIndex = 0;
             // 
             // btnLoadTickets
@@ -2314,20 +2314,23 @@
             this.tbPageRedeem.Controls.Add(this.pbRedeem);
             this.tbPageRedeem.Location = new System.Drawing.Point(4, 49);
             this.tbPageRedeem.Name = "tbPageRedeem";
-            this.tbPageRedeem.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tbPageRedeem.Size = new System.Drawing.Size(468, 583);
+            this.tbPageRedeem.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPageRedeem.Size = new System.Drawing.Size(467, 579);
             this.tbPageRedeem.TabIndex = 4;
             this.tbPageRedeem.Text = "Redeem";
             this.tbPageRedeem.ToolTipText = "Redeem Tickets for Gifts";
             // 
             // pbRedeem
             // 
+            this.pbRedeem.ErrorImage = global::Marbale.POS.Properties.Resources.DiplayGroupButton;
+            this.pbRedeem.InitialImage = global::Marbale.POS.Properties.Resources.DiplayGroupButton;
             this.pbRedeem.Location = new System.Drawing.Point(110, 28);
             this.pbRedeem.Name = "pbRedeem";
             this.pbRedeem.Size = new System.Drawing.Size(130, 130);
             this.pbRedeem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbRedeem.TabIndex = 0;
             this.pbRedeem.TabStop = false;
+            this.pbRedeem.Click += new System.EventHandler(this.pbRedeem_Click);
             // 
             // tbPageSystem
             // 
@@ -2340,8 +2343,8 @@
             this.tbPageSystem.Controls.Add(this.panel3);
             this.tbPageSystem.Location = new System.Drawing.Point(4, 49);
             this.tbPageSystem.Name = "tbPageSystem";
-            this.tbPageSystem.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tbPageSystem.Size = new System.Drawing.Size(468, 583);
+            this.tbPageSystem.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPageSystem.Size = new System.Drawing.Size(467, 579);
             this.tbPageSystem.TabIndex = 3;
             this.tbPageSystem.Text = "Tools";
             this.tbPageSystem.ToolTipText = "System Functions such as Logout, Change Password";
