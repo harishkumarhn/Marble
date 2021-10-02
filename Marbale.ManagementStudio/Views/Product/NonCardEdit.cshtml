@@ -44,7 +44,7 @@
                             </div>*@
                             <div class="col-md-13">
                                 <label class="col-md-5">Price:</label>
-                                @Html.TextBoxFor(m => m.Price, new { @class = "col-md-6" })
+                                @Html.TextBoxFor(m => m.Price, new { @class = "col-md-6", @onchange = "setFinalPriceVal()" })
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">TaxInclusive:</label>
@@ -235,6 +235,14 @@
         }
     }
 
+    function setFinalPriceVal() {
+        var price = $('#Price').val();
+        if (price) {
+            $('#EffectivePrice').val(price);
+            $('#FinalPrice').val(price);
+        }
+    }
+
     function TaxDetails(TaxId1, taxinclusive) {
         var TaxId = $('#TaxId option:selected').val();
         var Price = $('#Price').val();
@@ -250,8 +258,7 @@
             TaxInclusive: taxinclusive
         };
         if (TaxId == "") {
-            $('#EffectivePrice').val(Price);
-            $('#FinalPrice').val(Price);
+            setFinalPriceVal();
         }
             //JSON.stringify({ TaxId: TaxId, Price: Price, TaxInclusive: taxinclusive, FaceValue: FaceValue }),
         else {
