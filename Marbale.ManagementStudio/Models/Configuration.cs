@@ -21,7 +21,7 @@ namespace MarbaleManagementStudio.Models
         [DisplayName("Balance Delay")]
         public int BalanceDelay { get; set; }
         [DisplayName("Min Seconds Between Repeat Play")]
-        public bool MinSecondsBetweenRepeatPlay { get; set; }
+        public int MinSecondsBetweenRepeatPlay { get; set; }
         [DisplayName("Out Of Service Theme")]
         public int OutOfServiceTheme { get; set; }
         [DisplayName("Coin Pulse Width")]
@@ -30,12 +30,25 @@ namespace MarbaleManagementStudio.Models
         public int CoinPulseGap { get; set; }
         [DisplayName("Sensor Interval")]
         public int SensorInterval { get; set; }
-        [DisplayName("Sensor Interval")]
+        [DisplayName("Disabled Tickets")]
         public bool DisableTickets { get; set; }
+        [DisplayName("Debug Mode")]
+        public int DebugMode { get; set; }
+        [DisplayName("Card Retries")]
         public int CardRetries { get; set; }
+        [DisplayName("Display Language")]
         public int DisplayLanguage { get; set; }
+        [DisplayName("Max Ticket Per Game Play")]
         public int MaxTicketPerGamePlay { get; set; }
+        [DisplayName("Out of Service")]
         public bool OutOfService { get; set; }
+        [DisplayName("Game Play Duration")]
         public int GamePlayDuration { get; set; }
+        [DisplayName("Default Theme")]
+        public int DefaultTheme { get; set; }
+        [DisplayName("Enable Ext Antenna")]
+        public bool EnableExtAntenna {get; set;}
+        [DisplayName("Free Play Theme")]
+        public int FreePlayTheme { get; set; }
     }
 }
