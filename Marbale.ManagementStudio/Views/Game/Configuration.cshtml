@@ -7,187 +7,328 @@
 
 <style>
     input.text-box {
-        width: 10vh;
-        height: 4vh;
+        width: 7vh;
+        height: 2.5vh;
         margin-bottom: 1vh;
+        font-size: 14px;
+        font-weight: 100;
+    }
+    input.text-box:hover,input.text-box:focus{
+        border:1px solid green;
+        outline:none;
+    }
+    button.clear{
+        background-color:transparent;
+        border:none;
+        outline:none;
+        color:red;
+        min-width: fit-content;
+    }
+    button.clear:focus{
+        border:none;
+    }
+    
+    .row{
+        width:100%;
+        margin:0;
+    }
+
+    .editor-label , .col-sm-2 , .col-md-2{
+        float:right !important;
+        padding: 0 !important;
+    }
+
+    .editor-label{
+        text-align:right
+    }
+
+    .editor-field{
+        text-align:left;
+        padding-left:1vw !important;
+        padding-right:0 !important;
+        padding-bottom:0 !important;
+        padding-top:0 !important;
     }
 </style>
 <div class="modal-header">
     <h4 class="modal-title">Configuration</h4>
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="min-width: 10px !important;">&times;</button>
 </div>
-<div class="modal-body" style="width:900px;height:100px">
+<div class="modal-body" style="width:900px">
 
     @using (Html.BeginForm("UpdateConfiguration", "Game", FormMethod.Post))
     {
         @Html.ValidationSummary(true)
 
         <fieldset>
-            <div style="width: 800px;">
-                <div style="width: 370px; float: left">
-                    <div style="width:280px; float:left">
-                        <div class="editor-label" style="margin-top:1vh">
+            <div class="row">
+                <div class="col-sm-6 col-md-6" style="width: 400px;">
+                    <div class="row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label" style="margin-top:1vh">
                             @Html.LabelFor(model => model.StartInPhysicalTicketMode)
                         </div>
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.NumberOfCoins)
-                        </div>
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.TicketPulseWidth)
-                        </div>
-                        <div class="editor-label" style="margin-bottom:-1vh;">
-                            @Html.LabelFor(model => model.TicketPulseGap)
-                        </div>
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.ReverseDisplayDirection)
-                        </div>                       
-                        <div class="editor-label" style="margin-bottom:-1vh">
-                            @Html.LabelFor(model => model.BalanceDelay)
-                        </div>
-                        <div class="editor-label" style="margin-bottom:-0.5vh">
-                            @Html.LabelFor(model => model.MinSecondsBetweenRepeatPlay)
-                        </div>
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.OutOfServiceTheme)
-                        </div>
-                    </div>
-                    <div style="width:90px;float:left">
-                        <div class="editor-field" style="margin-top:2vh;">
+                        <div class="col-sm-3 col-md-3  editor-field" style="margin-top:1.5vh;">
                             @Html.EditorFor(model => model.StartInPhysicalTicketMode)
                             @Html.ValidationMessageFor(model => model.StartInPhysicalTicketMode)
                         </div>
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2" style="margin-top:1vh">
+                            <button type="button" class="clear" onclick="ClearValue('StartInPhysicalTicketMode')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.NumberOfCoins)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.NumberOfCoins)
                             @Html.ValidationMessageFor(model => model.NumberOfCoins)
                         </div>
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('NumberOfCoins')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.TicketPulseWidth)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.TicketPulseWidth)
                             @Html.ValidationMessageFor(model => model.TicketPulseWidth)
                         </div>
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('TicketPulseWidth')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label" style="margin-bottom:-1vh;">
+                            @Html.LabelFor(model => model.TicketPulseGap)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.TicketPulseGap)
                             @Html.ValidationMessageFor(model => model.TicketPulseGap)
                         </div>
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('TicketPulseGap')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.ReverseDisplayDirection)
+                        </div>   
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.ReverseDisplayDirection)
                             @Html.ValidationMessageFor(model => model.ReverseDisplayDirection)
-                        </div>                       
-                        <div class="editor-field">
+                        </div> 
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('ReverseDisplayDirection')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">                    
+                        <div class="col-sm-7 col-md-7 editor-label" style="margin-bottom:-1vh">
+                            @Html.LabelFor(model => model.BalanceDelay)
+                        </div>
+                         <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.BalanceDelay)
                             @Html.ValidationMessageFor(model => model.BalanceDelay)
                         </div>
-                        <div class="editor-field" style="margin-top:0.5vh;margin-bottom:0.5vh">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('BalanceDelay')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label" style="margin-bottom:-0.5vh">
+                            @Html.LabelFor(model => model.MinSecondsBetweenRepeatPlay)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field" style="margin-top:0.5vh;margin-bottom:0.5vh">
                             @Html.EditorFor(model => model.MinSecondsBetweenRepeatPlay)
                             @Html.ValidationMessageFor(model => model.MinSecondsBetweenRepeatPlay)
                         </div>
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('MinSecondsBetweenRepeatPlay')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.OutOfServiceTheme)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.OutOfServiceTheme)
                             @Html.ValidationMessageFor(model => model.OutOfServiceTheme)
                         </div>
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('OutOfServiceTheme')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.DefaultTheme)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
+                            @Html.EditorFor(model => model.DefaultTheme)
+                            @Html.ValidationMessageFor(model => model.DefaultTheme)
+                        </div>
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('DefaultTheme')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div> 
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.EnableExtAntenna)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
+                            @Html.EditorFor(model => model.EnableExtAntenna)
+                            @Html.ValidationMessageFor(model => model.EnableExtAntenna)
+                        </div>
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('EnableExtAntenna')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.FreePlayTheme)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
+                            @Html.EditorFor(model => model.FreePlayTheme)
+                            @Html.ValidationMessageFor(model => model.FreePlayTheme)
+                        </div>
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('FreePlayTheme')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
                     </div>
                 </div>
-                <div style="width: 370px; float: left">
-                    <div style="width:200px;float:left">
-                        <div class="editor-label">
+                <div class="col-sm-6 col-md-6" style="width: 400px;">
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label" style="margin-top:1vh">
                             @Html.LabelFor(model => model.CoinPulseWidth)
                         </div>
-
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.CoinPulseWidth)
+                        <div class="col-sm-3 col-md-3  editor-field" style="margin-top:1vh">
+                            @Html.EditorFor(model => model.CoinPulseWidth)
+                            @Html.ValidationMessageFor(model => model.CoinPulseWidth)
                         </div>
-
-                        <div class="editor-label">
+                        <div class="col-sm-2 col-md-2" style="margin-top:1vh">
+                            <button type="button" class="clear" onclick="ClearValue('CoinPulseWidth')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>                    
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
                             @Html.LabelFor(model => model.CoinPulseGap)
                         </div>
-
-                        <div class="editor-label" style="margin-bottom:-1vh">
-                            @Html.LabelFor(model => model.SensorInterval)
-                        </div>
-
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.DisableTickets)
-                        </div>
-
-                        <div class="editor-label" style="margin-bottom:-0.5vh">
-                            @Html.LabelFor(model => model.DisableTickets)
-                        </div>
-                        
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.CardRetries)
-                        </div>
-
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.DisplayLanguage)
-                        </div>
-
-                        <div class="editor-label" style="margin-bottom:-1vh;">
-                            @Html.LabelFor(model => model.MaxTicketPerGamePlay)
-                        </div>
-
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.OutOfService)
-                        </div>
-
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.GamePlayDuration)
-                        </div>
-                    </div>
-                    <div style="width:170px;float:left">
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.CoinPulseWidth)
-                            @Html.ValidationMessageFor(model => model.CoinPulseWidth)
-                        </div>
-
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.CoinPulseWidth)
-                            @Html.ValidationMessageFor(model => model.CoinPulseWidth)
-                        </div>
-
-                        <div class="editor-field">
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.CoinPulseGap)
                             @Html.ValidationMessageFor(model => model.CoinPulseGap)
                         </div>
-
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('CoinPulseGap')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label" style="margin-bottom:-1vh">
+                            @Html.LabelFor(model => model.SensorInterval)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.SensorInterval)
                             @Html.ValidationMessageFor(model => model.SensorInterval)
                         </div>
-
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('SensorInterval')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.DisableTickets)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.DisableTickets)
                             @Html.ValidationMessageFor(model => model.DisableTickets)
                         </div>
-
-                        <div class="editor-field" style="padding-top:1vh;">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('DisableTickets')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label" style="margin-bottom:-0.5vh">
+                            @Html.LabelFor(model => model.DisableTickets)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field" style="padding-top:1vh;">
                             @Html.EditorFor(model => model.DisableTickets)
                             @Html.ValidationMessageFor(model => model.DisableTickets)
                         </div>
-                       
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('DisableTickets')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label" style="margin-top:1vh">
+                            @Html.LabelFor(model => model.DebugMode)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field" style="margin-top:1.5vh;">
+                            @Html.EditorFor(model => model.DebugMode)
+                            @Html.ValidationMessageFor(model => model.DebugMode)
+                        </div>
+                        <div class="col-sm-2 col-md-2" style="margin-top:1vh">
+                            <button type="button" class="clear" onclick="ClearValue('DebugMode')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.CardRetries)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.CardRetries)
                             @Html.ValidationMessageFor(model => model.CardRetries)
                         </div>
-
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('CardRetries')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.DisplayLanguage)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.DisplayLanguage)
                             @Html.ValidationMessageFor(model => model.DisplayLanguage)
                         </div>
-
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('DisplayLanguage')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label" style="margin-bottom:-1vh;">
+                            @Html.LabelFor(model => model.MaxTicketPerGamePlay)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.MaxTicketPerGamePlay)
                             @Html.ValidationMessageFor(model => model.MaxTicketPerGamePlay)
                         </div>
-
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('MaxTicketPerGamePlay')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.OutOfService)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.OutOfService)
                             @Html.ValidationMessageFor(model => model.OutOfService)
                         </div>
-
-                        <div class="editor-field">
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('OutOfService')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div> 
+                    <div class = "row" style="float:left">
+                        <div class="col-sm-7 col-md-7 editor-label">
+                            @Html.LabelFor(model => model.GamePlayDuration)
+                        </div>
+                        <div class="col-sm-3 col-md-3  editor-field">
                             @Html.EditorFor(model => model.GamePlayDuration)
                             @Html.ValidationMessageFor(model => model.GamePlayDuration)
                         </div>
-                    </div>
+                        <div class="col-sm-2 col-md-2">
+                            <button type="button" class="clear" onclick="ClearValue('GamePlayDuration')" title="clear value"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
+                    </div>                                                                           
                 </div>
             </div>
         </fieldset>
@@ -200,11 +341,19 @@
 
 
 <script>
-    $(document).ready(function () {
-        $('.modal-body').css({
-            'width': '798px',
-            'height': '500px',
-            'overflow-y': 'scroll'
+    $(document).ready(function () {        
+        if (!window.localStorage.getItem("currentWindow")) {
+            /*$('.modal-body').css({
+                'width': '900px',
+                'height': '500px',
+                'overflow-y': 'scroll'
+            });*/
+            $('.modal-content').css({
+                'width': '900px',
+            })
+        }
+        $('.close').click(function () {
+            window.localStorage.removeItem('currentWindow');            
         });
     })
     function SaveConfiguration(btnClicked) {
@@ -229,5 +378,13 @@
         if (!updatedArray.includes(x.rowIndex)) {
             updatedArray.push(x.rowIndex);
         }
+    }
+
+    function ClearValue(property){
+         if($('#'+property)[0].checked){
+             $('#'+property)[0].checked = false;
+         }else{
+             $('#'+property).val(null);
+         }
     }
 </script>

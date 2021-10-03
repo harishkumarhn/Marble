@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using Microsoft.Win32;
+using Marble.DataLoggerService;
 
 namespace Marbale.DataAccess
 {
@@ -11,7 +12,7 @@ namespace Marbale.DataAccess
         private SqlDataAdapter myAdapter;
         private SqlConnection conn;
         RegistryKey objRegistryKey = Registry.LocalMachine;
-
+        private readonly DataLogger dataLogger = new DataLogger();
         /// <constructor>
         /// Initialise Connection
         /// </constructor>
@@ -178,6 +179,7 @@ namespace Marbale.DataAccess
             }
             catch (SqlException ex)
             {
+                dataLogger.Error("Error on  executeSelectScript ", ex);
                 throw;
             }
             finally
@@ -202,6 +204,7 @@ namespace Marbale.DataAccess
             }
             catch (SqlException ex)
             {
+                dataLogger.Error("Error on  executeUpdateScript ", ex);
                 throw;
             }
             finally
@@ -224,6 +227,7 @@ namespace Marbale.DataAccess
             }
             catch (SqlException ex)
             {
+                dataLogger.Error("Error on  executeInsertScript ", ex);
                 throw;
             }
             finally

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marbale.BusinessObject.Cards
+namespace Marbale.BusinessObject
 {
     public class Card
     {
@@ -56,5 +56,10 @@ namespace Marbale.BusinessObject.Cards
         public double creditPlusItemPurchase;
         public string lastUpdatedBy;
         public bool TimerResetCard;
+
+        public Card()
+        {
+            customer_id = -1;
+        }
     }
 }

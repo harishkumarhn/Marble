@@ -12,7 +12,7 @@ namespace MarbaleManagementStudio.Controllers
 {
 
     // [LogCustomExceptionFilter]
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public class ProductController : Controller
     {
         public ProductBL productBl;
@@ -21,7 +21,10 @@ namespace MarbaleManagementStudio.Controllers
         {
             productBl = new ProductBL();
         }
-
+        public ActionResult Index1()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             return View();

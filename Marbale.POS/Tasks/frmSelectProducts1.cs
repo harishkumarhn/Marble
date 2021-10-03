@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Marbale.POS.Tasks
 {
-    public partial class frmSelectProducts : Form
+    public partial class frmSelectProducts1 : Form
     {
-        public frmSelectProducts()
+        public frmSelectProducts1()
         {
             InitializeComponent();
         }

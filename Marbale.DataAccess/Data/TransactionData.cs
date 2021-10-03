@@ -1,9 +1,11 @@
-﻿using Marbale.BusinessObject.Cards;
+﻿using Marbale.BusinessObject;
+using Marbale.BusinessObject.Cards;
 using Marbale.BusinessObject.Customer;
 using Marbale.BusinessObject.Discount;
 using Marbale.BusinessObject.Messages;
 using Marbale.BusinessObject.POSTransaction;
 using Marbale.BusinessObject.SiteSetup;
+using Marble.DataLoggerService;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,10 +19,106 @@ namespace Marbale.DataAccess.Data
     public class TransactionData
     {
         private DBConnection conn;
+        private readonly DataLogger dataLogger = new DataLogger();
 
         public TransactionData()
         {
             conn = new DBConnection();
+        }
+
+        public void SaveAllCards(ref Transaction trx)
+        {
+
+            try
+            {
+                bool firstOne = false;
+
+                if (trx.TransactionLines != null)
+                {
+                    for (int i = 0; i < trx.TransactionLines.Count; i++)
+                    {
+                        int cardid = -1;
+                        if (trx.TransactionLines[i].IsDepositLine != true)
+                        {
+                            firstOne = true;
+                            trx.TransactionLines[i].Card.customer_id = trx.CustomerId;
+                            cardid = SaveCard(trx.TransactionLines[i].Card);
+
+                            //Setting card Id
+                            trx.TransactionLines[i].cardId = cardid;
+                            trx.TransactionLines[i].Card.card_id = cardid;
+
+                            if (firstOne == true)
+                            {
+                                firstOne = false;
+                                trx.PrimaryCardId = cardid;
+                                if (!trx.IsMultipleCard)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+
+                    List<TransactionLine> lines = trx.TransactionLines.Where(x => x.IsDepositLine == false).ToList();
+
+                    if (lines != null)
+                    {
+                        for (int i = 0; i < lines.Count; i++)
+                        {
+                            ///setting up card id for deposit line
+                            for (int k = 0; k < trx.TransactionLines.Count; k++)
+                            {
+                                if (trx.TransactionLines[k].IsDepositLine == true && trx.TransactionLines[k].CardNumber == lines[i].CardNumber
+                                      )
+                                {
+
+                                    trx.TransactionLines[k].cardId = lines[i].cardId;
+                                    trx.TransactionLines[k].Card = lines[i].Card;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //Card primaryCard = new Card();
+                //if (trx.IsMultipleCard)
+                //{
+
+
+                //}
+                //else
+                //{
+                //    if (trx.TransactionLines != null)
+                //    {
+                //        for (int i = 0; i <= 1; i++)
+                //        {
+                //            if (trx.TransactionLines[i].IsDepositLine != true)
+                //            {
+                //                //Saving Card
+                //                trx.TransactionLines[i].Card.customer_id = trx.CustomerId;
+                //                int cardid = SaveCard(trx.TransactionLines[i].Card);
+
+                //                //Setting card Id
+                //                trx.TransactionLines[i].cardId = cardid;
+                //                trx.TransactionLines[i].Card.card_id = cardid;
+
+                //                if (i == 0)
+                //                {
+
+                //                    trx.PrimaryCardId = cardid;
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                dataLogger.Error("Error POS ValidateCustomer", ex);
+                throw;
+            }
         }
 
         public int SaveTransaction(Transaction trx)
@@ -30,11 +128,7 @@ namespace Marbale.DataAccess.Data
                 if (trx.customer != null)
                     trx.CustomerId = SaveCustomer(trx.customer);
 
-                if (trx.Card != null)
-                {
-                    trx.Card.customer_id = trx.CustomerId;
-                    trx.PrimaryCardId = SaveCard(trx.Card);
-                }
+                SaveAllCards(ref trx);
 
                 SqlParameter[] sqlParameters = new SqlParameter[27];
 
@@ -134,7 +228,7 @@ namespace Marbale.DataAccess.Data
                 conn.executeUpdateQuery("sp_InsertOrUpdateTrxHeader", sqlParameters);
 
                 int trxId = Convert.ToInt32(sqlParameters[26].Value);
-
+                trx.Trx_id = trxId;
                 //List<TransactionLine> activetrxLines = trx.TransactionLines.FindAll(x => x.LineValid = true && x.CancelledLine == false);
                 List<TransactionLine> activetrxLines = new List<TransactionLine>();
 
@@ -148,7 +242,7 @@ namespace Marbale.DataAccess.Data
                 //Save only active Trax
                 foreach (TransactionLine trxLn in activetrxLines)
                 {
-                    SaveTransactionLines(trxLn, trxId);
+                    SaveTransactionLines(trxLn, trx);
                     SaveTransactionTaxLines(trxLn, trxId);
                     SaveTransactionDiscountLines(trxLn, trxId);
                 }
@@ -161,14 +255,14 @@ namespace Marbale.DataAccess.Data
             }
         }
 
-        public void SaveTransactionLines(TransactionLine trxLine, int trxId)
+        public void SaveTransactionLines(TransactionLine trxLine, Transaction trx)
         {
             try
             {
                 SqlParameter[] sqlParameters = new SqlParameter[24];
 
                 sqlParameters[0] = new SqlParameter("@trxId", SqlDbType.Int);
-                sqlParameters[0].Value = trxId;
+                sqlParameters[0].Value = trx.Trx_id;
 
                 sqlParameters[1] = new SqlParameter("@LineId", trxLine.LineId);
                 sqlParameters[2] = new SqlParameter("@ProductId", trxLine.ProductID);

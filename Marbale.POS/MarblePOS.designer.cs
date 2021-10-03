@@ -41,11 +41,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControlCardAction = new System.Windows.Forms.TabControl();
             this.tabPageTrx = new System.Windows.Forms.TabPage();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -75,37 +80,62 @@
             this.dgvTrxHeader = new System.Windows.Forms.DataGridView();
             this.Cancel = new System.Windows.Forms.DataGridViewImageColumn();
             this.tabPageActivities = new System.Windows.Forms.TabPage();
+            this.dgvCardTransaction = new System.Windows.Forms.DataGridView();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.labelPurchases = new System.Windows.Forms.Label();
-            this.dgvPurchases = new System.Windows.Forms.DataGridView();
+            this.dgvGamePurchases = new System.Windows.Forms.DataGridView();
             this.dcBtnCardActivityTrxPrint = new System.Windows.Forms.DataGridViewImageColumn();
             this.tabPageCardInfo = new System.Windows.Forms.TabPage();
             this.lblCarddetails = new System.Windows.Forms.Label();
             this.dgvCardGames = new System.Windows.Forms.DataGridView();
             this.tabPageCustomer = new System.Windows.Forms.TabPage();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dtpDOB = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cmbGender = new System.Windows.Forms.ComboBox();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnSaveCustomer = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtLastname = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtCountry = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtState = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtCity = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtAddress1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtPhoneno = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtFirstname = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSaveCustomer = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnllastname = new System.Windows.Forms.Panel();
+            this.lblflatname = new System.Windows.Forms.Label();
+            this.lblLastname = new System.Windows.Forms.Label();
+            this.txtLastname = new System.Windows.Forms.TextBox();
+            this.pnlGender = new System.Windows.Forms.Panel();
+            this.lblfGender = new System.Windows.Forms.Label();
+            this.lblGender = new System.Windows.Forms.Label();
+            this.cmbGender = new System.Windows.Forms.ComboBox();
+            this.pnlEmail = new System.Windows.Forms.Panel();
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.lblfEmail = new System.Windows.Forms.Label();
+            this.pnlDOB = new System.Windows.Forms.Panel();
+            this.lblDOB = new System.Windows.Forms.Label();
+            this.dtpDOB = new System.Windows.Forms.DateTimePicker();
+            this.lblfDOB = new System.Windows.Forms.Label();
             this.lblCustomerMessage = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlFirstName = new System.Windows.Forms.Panel();
+            this.lblfFirstname = new System.Windows.Forms.Label();
+            this.LblFirstname = new System.Windows.Forms.Label();
+            this.txtFirstname = new System.Windows.Forms.TextBox();
+            this.pnlPhoneno = new System.Windows.Forms.Panel();
+            this.lblfphone = new System.Windows.Forms.Label();
+            this.lblPhoneno = new System.Windows.Forms.Label();
+            this.txtPhoneno = new System.Windows.Forms.TextBox();
+            this.pnlAddress1 = new System.Windows.Forms.Panel();
+            this.txtAddress1 = new System.Windows.Forms.TextBox();
+            this.lblAdress = new System.Windows.Forms.Label();
+            this.lblfaddress = new System.Windows.Forms.Label();
+            this.pnlCity = new System.Windows.Forms.Panel();
+            this.txtCity = new System.Windows.Forms.TextBox();
+            this.lblCity = new System.Windows.Forms.Label();
+            this.lblfCity = new System.Windows.Forms.Label();
+            this.pnlState = new System.Windows.Forms.Panel();
+            this.txtState = new System.Windows.Forms.TextBox();
+            this.lblState = new System.Windows.Forms.Label();
+            this.lblfState = new System.Windows.Forms.Label();
+            this.pnlCountry = new System.Windows.Forms.Panel();
+            this.txtCountry = new System.Windows.Forms.TextBox();
+            this.lblCountry = new System.Windows.Forms.Label();
+            this.lblfCountry = new System.Windows.Forms.Label();
             this.lblCardNotext = new System.Windows.Forms.TextBox();
             this.lblCardStatus = new System.Windows.Forms.Label();
             this.lblCardStatustext = new System.Windows.Forms.Label();
@@ -189,6 +219,7 @@
             this.posContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changeLayoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enterMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AutoClearTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControlCardAction.SuspendLayout();
             this.tabPageTrx.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransaction)).BeginInit();
@@ -196,11 +227,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrxLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrxHeader)).BeginInit();
             this.tabPageActivities.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPurchases)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCardTransaction)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGamePurchases)).BeginInit();
             this.tabPageCardInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardGames)).BeginInit();
             this.tabPageCustomer.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.pnllastname.SuspendLayout();
+            this.pnlGender.SuspendLayout();
+            this.pnlEmail.SuspendLayout();
+            this.pnlDOB.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.pnlFirstName.SuspendLayout();
+            this.pnlPhoneno.SuspendLayout();
+            this.pnlAddress1.SuspendLayout();
+            this.pnlCity.SuspendLayout();
+            this.pnlState.SuspendLayout();
+            this.pnlCountry.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardDetails)).BeginInit();
             this.pnlAmounts.SuspendLayout();
             this.pnlCardDetails.SuspendLayout();
@@ -244,7 +289,7 @@
             this.tabControlCardAction.Location = new System.Drawing.Point(0, 192);
             this.tabControlCardAction.Name = "tabControlCardAction";
             this.tabControlCardAction.SelectedIndex = 0;
-            this.tabControlCardAction.Size = new System.Drawing.Size(729, 520);
+            this.tabControlCardAction.Size = new System.Drawing.Size(730, 520);
             this.tabControlCardAction.TabIndex = 12;
             this.tabControlCardAction.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlCardAction_Selected);
             // 
@@ -264,7 +309,7 @@
             this.tabPageTrx.Location = new System.Drawing.Point(4, 44);
             this.tabPageTrx.Name = "tabPageTrx";
             this.tabPageTrx.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTrx.Size = new System.Drawing.Size(721, 472);
+            this.tabPageTrx.Size = new System.Drawing.Size(722, 472);
             this.tabPageTrx.TabIndex = 0;
             this.tabPageTrx.Text = "Transaction";
             // 
@@ -280,7 +325,7 @@
             this.btnPrint.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnPrint.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.ForeColor = System.Drawing.Color.White;
             this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnPrint.Location = new System.Drawing.Point(532, 406);
@@ -305,7 +350,7 @@
             this.btnSuspendOrder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnSuspendOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnSuspendOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSuspendOrder.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuspendOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSuspendOrder.ForeColor = System.Drawing.Color.White;
             this.btnSuspendOrder.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSuspendOrder.Location = new System.Drawing.Point(427, 406);
@@ -330,7 +375,7 @@
             this.btnCancelTrxnLine.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnCancelTrxnLine.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnCancelTrxnLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelTrxnLine.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelTrxnLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelTrxnLine.ForeColor = System.Drawing.Color.White;
             this.btnCancelTrxnLine.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCancelTrxnLine.Location = new System.Drawing.Point(321, 406);
@@ -356,7 +401,7 @@
             this.btnClearTrxn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnClearTrxn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnClearTrxn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearTrxn.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearTrxn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearTrxn.ForeColor = System.Drawing.Color.White;
             this.btnClearTrxn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnClearTrxn.Location = new System.Drawing.Point(216, 406);
@@ -382,7 +427,7 @@
             this.btnPayment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnPayment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayment.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPayment.ForeColor = System.Drawing.Color.White;
             this.btnPayment.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnPayment.Location = new System.Drawing.Point(110, 406);
@@ -407,7 +452,7 @@
             this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSave.Location = new System.Drawing.Point(3, 406);
@@ -440,6 +485,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvTransaction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvTransaction.ColumnHeadersHeight = 29;
             this.dgvTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Product_Type,
@@ -467,19 +513,21 @@
             this.dgvTransaction.Location = new System.Drawing.Point(3, 3);
             this.dgvTransaction.Name = "dgvTransaction";
             this.dgvTransaction.RowHeadersVisible = false;
+            this.dgvTransaction.RowHeadersWidth = 51;
             this.dgvTransaction.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dgvTransaction.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvTransaction.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
             this.dgvTransaction.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
             this.dgvTransaction.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTransaction.Size = new System.Drawing.Size(716, 395);
+            this.dgvTransaction.Size = new System.Drawing.Size(717, 395);
             this.dgvTransaction.TabIndex = 4;
             this.dgvTransaction.TabStop = false;
             // 
             // Product_Type
             // 
             this.Product_Type.HeaderText = "Type";
+            this.Product_Type.MinimumWidth = 6;
             this.Product_Type.Name = "Product_Type";
             this.Product_Type.Width = 130;
             // 
@@ -500,6 +548,7 @@
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.Quantity.DefaultCellStyle = dataGridViewCellStyle3;
             this.Quantity.HeaderText = "Quantity";
+            this.Quantity.MinimumWidth = 6;
             this.Quantity.Name = "Quantity";
             this.Quantity.ReadOnly = true;
             this.Quantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -513,6 +562,7 @@
             dataGridViewCellStyle4.NullValue = null;
             this.Price.DefaultCellStyle = dataGridViewCellStyle4;
             this.Price.HeaderText = "Price";
+            this.Price.MinimumWidth = 6;
             this.Price.Name = "Price";
             this.Price.ReadOnly = true;
             this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -525,6 +575,7 @@
             dataGridViewCellStyle5.Format = "N2";
             this.Tax.DefaultCellStyle = dataGridViewCellStyle5;
             this.Tax.HeaderText = "Tax";
+            this.Tax.MinimumWidth = 6;
             this.Tax.Name = "Tax";
             this.Tax.ReadOnly = true;
             this.Tax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -546,38 +597,50 @@
             // Remarks
             // 
             this.Remarks.HeaderText = "Remarks";
+            this.Remarks.MinimumWidth = 6;
             this.Remarks.Name = "Remarks";
             this.Remarks.Visible = false;
+            this.Remarks.Width = 125;
             // 
             // Line_Type
             // 
             this.Line_Type.HeaderText = "Line_Type";
+            this.Line_Type.MinimumWidth = 6;
             this.Line_Type.Name = "Line_Type";
             this.Line_Type.Visible = false;
+            this.Line_Type.Width = 125;
             // 
             // TaxName
             // 
             this.TaxName.HeaderText = "Tax Name";
+            this.TaxName.MinimumWidth = 6;
             this.TaxName.Name = "TaxName";
             this.TaxName.Visible = false;
+            this.TaxName.Width = 125;
             // 
             // Card_Number
             // 
             this.Card_Number.HeaderText = "Card Number";
+            this.Card_Number.MinimumWidth = 6;
             this.Card_Number.Name = "Card_Number";
             this.Card_Number.Visible = false;
+            this.Card_Number.Width = 125;
             // 
             // LineId
             // 
             this.LineId.HeaderText = "LineId";
+            this.LineId.MinimumWidth = 6;
             this.LineId.Name = "LineId";
             this.LineId.Visible = false;
+            this.LineId.Width = 125;
             // 
             // ProductId
             // 
             this.ProductId.HeaderText = "ProductId";
+            this.ProductId.MinimumWidth = 6;
             this.ProductId.Name = "ProductId";
             this.ProductId.Visible = false;
+            this.ProductId.Width = 125;
             // 
             // tabPageMyTrx
             // 
@@ -590,7 +653,7 @@
             this.tabPageMyTrx.Location = new System.Drawing.Point(4, 44);
             this.tabPageMyTrx.Name = "tabPageMyTrx";
             this.tabPageMyTrx.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMyTrx.Size = new System.Drawing.Size(721, 472);
+            this.tabPageMyTrx.Size = new System.Drawing.Size(722, 472);
             this.tabPageMyTrx.TabIndex = 4;
             this.tabPageMyTrx.Text = "My Transactions";
             // 
@@ -628,6 +691,7 @@
             this.dgvTrxLines.Name = "dgvTrxLines";
             this.dgvTrxLines.ReadOnly = true;
             this.dgvTrxLines.RowHeadersVisible = false;
+            this.dgvTrxLines.RowHeadersWidth = 51;
             this.dgvTrxLines.Size = new System.Drawing.Size(692, 185);
             this.dgvTrxLines.TabIndex = 1;
             this.dgvTrxLines.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrxLines_CellContentClick);
@@ -635,6 +699,7 @@
             // trxlnCancel
             // 
             this.trxlnCancel.HeaderText = "Cancel";
+            this.trxlnCancel.MinimumWidth = 6;
             this.trxlnCancel.Name = "trxlnCancel";
             this.trxlnCancel.ReadOnly = true;
             this.trxlnCancel.Width = 60;
@@ -651,6 +716,7 @@
             this.dgvTrxHeader.Name = "dgvTrxHeader";
             this.dgvTrxHeader.ReadOnly = true;
             this.dgvTrxHeader.RowHeadersVisible = false;
+            this.dgvTrxHeader.RowHeadersWidth = 51;
             this.dgvTrxHeader.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTrxHeader.Size = new System.Drawing.Size(692, 220);
             this.dgvTrxHeader.TabIndex = 0;
@@ -661,6 +727,7 @@
             // 
             this.Cancel.FillWeight = 40F;
             this.Cancel.HeaderText = "Cancel";
+            this.Cancel.MinimumWidth = 6;
             this.Cancel.Name = "Cancel";
             this.Cancel.ReadOnly = true;
             this.Cancel.Width = 60;
@@ -669,15 +736,47 @@
             // 
             this.tabPageActivities.AutoScroll = true;
             this.tabPageActivities.BackColor = System.Drawing.Color.Gray;
+            this.tabPageActivities.Controls.Add(this.dgvCardTransaction);
             this.tabPageActivities.Controls.Add(this.labelPurchases);
-            this.tabPageActivities.Controls.Add(this.dgvPurchases);
+            this.tabPageActivities.Controls.Add(this.dgvGamePurchases);
             this.tabPageActivities.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold);
             this.tabPageActivities.Location = new System.Drawing.Point(4, 44);
             this.tabPageActivities.Name = "tabPageActivities";
             this.tabPageActivities.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageActivities.Size = new System.Drawing.Size(721, 472);
+            this.tabPageActivities.Size = new System.Drawing.Size(722, 472);
             this.tabPageActivities.TabIndex = 1;
             this.tabPageActivities.Text = "Activities";
+            // 
+            // dgvCardTransaction
+            // 
+            this.dgvCardTransaction.AllowUserToAddRows = false;
+            this.dgvCardTransaction.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Gainsboro;
+            this.dgvCardTransaction.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvCardTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvCardTransaction.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvCardTransaction.BackgroundColor = System.Drawing.Color.Gray;
+            this.dgvCardTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCardTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewImageColumn1});
+            this.dgvCardTransaction.Location = new System.Drawing.Point(8, 32);
+            this.dgvCardTransaction.Name = "dgvCardTransaction";
+            this.dgvCardTransaction.ReadOnly = true;
+            this.dgvCardTransaction.RowHeadersVisible = false;
+            this.dgvCardTransaction.RowHeadersWidth = 51;
+            this.dgvCardTransaction.RowTemplate.ReadOnly = true;
+            this.dgvCardTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCardTransaction.Size = new System.Drawing.Size(820, 219);
+            this.dgvCardTransaction.TabIndex = 2;
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.HeaderText = "P";
+            this.dataGridViewImageColumn1.MinimumWidth = 6;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Width = 20;
             // 
             // labelPurchases
             // 
@@ -690,31 +789,33 @@
             this.labelPurchases.TabIndex = 1;
             this.labelPurchases.Text = "Purchases and Tasks";
             // 
-            // dgvPurchases
+            // dgvGamePurchases
             // 
-            this.dgvPurchases.AllowUserToAddRows = false;
-            this.dgvPurchases.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Gainsboro;
-            this.dgvPurchases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvPurchases.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvGamePurchases.AllowUserToAddRows = false;
+            this.dgvGamePurchases.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Gainsboro;
+            this.dgvGamePurchases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvGamePurchases.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvPurchases.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvPurchases.BackgroundColor = System.Drawing.Color.Gray;
-            this.dgvPurchases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPurchases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvGamePurchases.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvGamePurchases.BackgroundColor = System.Drawing.Color.Gray;
+            this.dgvGamePurchases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGamePurchases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dcBtnCardActivityTrxPrint});
-            this.dgvPurchases.Location = new System.Drawing.Point(4, 20);
-            this.dgvPurchases.Name = "dgvPurchases";
-            this.dgvPurchases.ReadOnly = true;
-            this.dgvPurchases.RowHeadersVisible = false;
-            this.dgvPurchases.RowTemplate.ReadOnly = true;
-            this.dgvPurchases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPurchases.Size = new System.Drawing.Size(820, 310);
-            this.dgvPurchases.TabIndex = 0;
+            this.dgvGamePurchases.Location = new System.Drawing.Point(8, 257);
+            this.dgvGamePurchases.Name = "dgvGamePurchases";
+            this.dgvGamePurchases.ReadOnly = true;
+            this.dgvGamePurchases.RowHeadersVisible = false;
+            this.dgvGamePurchases.RowHeadersWidth = 51;
+            this.dgvGamePurchases.RowTemplate.ReadOnly = true;
+            this.dgvGamePurchases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGamePurchases.Size = new System.Drawing.Size(820, 200);
+            this.dgvGamePurchases.TabIndex = 0;
             // 
             // dcBtnCardActivityTrxPrint
             // 
             this.dcBtnCardActivityTrxPrint.HeaderText = "P";
+            this.dcBtnCardActivityTrxPrint.MinimumWidth = 6;
             this.dcBtnCardActivityTrxPrint.Name = "dcBtnCardActivityTrxPrint";
             this.dcBtnCardActivityTrxPrint.ReadOnly = true;
             this.dcBtnCardActivityTrxPrint.Width = 20;
@@ -729,7 +830,7 @@
             this.tabPageCardInfo.Location = new System.Drawing.Point(4, 44);
             this.tabPageCardInfo.Name = "tabPageCardInfo";
             this.tabPageCardInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCardInfo.Size = new System.Drawing.Size(721, 472);
+            this.tabPageCardInfo.Size = new System.Drawing.Size(722, 472);
             this.tabPageCardInfo.TabIndex = 3;
             this.tabPageCardInfo.Text = "Card Details";
             // 
@@ -753,70 +854,145 @@
             this.dgvCardGames.Location = new System.Drawing.Point(4, 17);
             this.dgvCardGames.Name = "dgvCardGames";
             this.dgvCardGames.ReadOnly = true;
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCardGames.RowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvCardGames.Size = new System.Drawing.Size(920, 310);
+            this.dgvCardGames.RowHeadersWidth = 51;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCardGames.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvCardGames.Size = new System.Drawing.Size(950, 310);
             this.dgvCardGames.TabIndex = 0;
             // 
             // tabPageCustomer
             // 
-            this.tabPageCustomer.Controls.Add(this.label10);
-            this.tabPageCustomer.Controls.Add(this.dtpDOB);
-            this.tabPageCustomer.Controls.Add(this.label9);
-            this.tabPageCustomer.Controls.Add(this.cmbGender);
-            this.tabPageCustomer.Controls.Add(this.btnClear);
-            this.tabPageCustomer.Controls.Add(this.btnSaveCustomer);
-            this.tabPageCustomer.Controls.Add(this.label8);
-            this.tabPageCustomer.Controls.Add(this.txtEmail);
-            this.tabPageCustomer.Controls.Add(this.txtLastname);
-            this.tabPageCustomer.Controls.Add(this.label7);
-            this.tabPageCustomer.Controls.Add(this.txtCountry);
-            this.tabPageCustomer.Controls.Add(this.label6);
-            this.tabPageCustomer.Controls.Add(this.txtState);
-            this.tabPageCustomer.Controls.Add(this.label5);
-            this.tabPageCustomer.Controls.Add(this.txtCity);
-            this.tabPageCustomer.Controls.Add(this.label4);
-            this.tabPageCustomer.Controls.Add(this.txtAddress1);
-            this.tabPageCustomer.Controls.Add(this.label3);
-            this.tabPageCustomer.Controls.Add(this.txtPhoneno);
-            this.tabPageCustomer.Controls.Add(this.label2);
-            this.tabPageCustomer.Controls.Add(this.label1);
-            this.tabPageCustomer.Controls.Add(this.txtFirstname);
             this.tabPageCustomer.Controls.Add(this.panel2);
             this.tabPageCustomer.Location = new System.Drawing.Point(4, 44);
             this.tabPageCustomer.Name = "tabPageCustomer";
-            this.tabPageCustomer.Size = new System.Drawing.Size(721, 472);
+            this.tabPageCustomer.Size = new System.Drawing.Size(722, 472);
             this.tabPageCustomer.TabIndex = 5;
             this.tabPageCustomer.Text = "Customer";
             this.tabPageCustomer.UseVisualStyleBackColor = true;
             // 
-            // label10
+            // panel2
             // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label10.Location = new System.Drawing.Point(19, 300);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(70, 15);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "D. O. B :";
+            this.panel2.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.panel2.Controls.Add(this.flowLayoutPanel3);
+            this.panel2.Controls.Add(this.flowLayoutPanel2);
+            this.panel2.Controls.Add(this.lblCustomerMessage);
+            this.panel2.Controls.Add(this.flowLayoutPanel1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(722, 472);
+            this.panel2.TabIndex = 23;
             // 
-            // dtpDOB
+            // flowLayoutPanel3
             // 
-            this.dtpDOB.Location = new System.Drawing.Point(92, 297);
-            this.dtpDOB.Name = "dtpDOB";
-            this.dtpDOB.Size = new System.Drawing.Size(209, 23);
-            this.dtpDOB.TabIndex = 21;
+            this.flowLayoutPanel3.Controls.Add(this.btnSaveCustomer);
+            this.flowLayoutPanel3.Controls.Add(this.btnClear);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(9, 337);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(695, 77);
+            this.flowLayoutPanel3.TabIndex = 33;
             // 
-            // label9
+            // btnSaveCustomer
             // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label9.Location = new System.Drawing.Point(349, 61);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(63, 15);
-            this.label9.TabIndex = 20;
-            this.label9.Text = "Gender :";
+            this.btnSaveCustomer.Location = new System.Drawing.Point(3, 3);
+            this.btnSaveCustomer.Name = "btnSaveCustomer";
+            this.btnSaveCustomer.Size = new System.Drawing.Size(94, 45);
+            this.btnSaveCustomer.TabIndex = 17;
+            this.btnSaveCustomer.Text = "Save";
+            this.btnSaveCustomer.UseVisualStyleBackColor = true;
+            this.btnSaveCustomer.Click += new System.EventHandler(this.btnSaveCustomer_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(103, 3);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(94, 45);
+            this.btnClear.TabIndex = 18;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel2.Controls.Add(this.pnllastname);
+            this.flowLayoutPanel2.Controls.Add(this.pnlGender);
+            this.flowLayoutPanel2.Controls.Add(this.pnlEmail);
+            this.flowLayoutPanel2.Controls.Add(this.pnlDOB);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(357, 6);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(347, 324);
+            this.flowLayoutPanel2.TabIndex = 32;
+            // 
+            // pnllastname
+            // 
+            this.pnllastname.Controls.Add(this.lblflatname);
+            this.pnllastname.Controls.Add(this.lblLastname);
+            this.pnllastname.Controls.Add(this.txtLastname);
+            this.pnllastname.Location = new System.Drawing.Point(3, 3);
+            this.pnllastname.Name = "pnllastname";
+            this.pnllastname.Size = new System.Drawing.Size(337, 40);
+            this.pnllastname.TabIndex = 30;
+            // 
+            // lblflatname
+            // 
+            this.lblflatname.AutoSize = true;
+            this.lblflatname.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblflatname.ForeColor = System.Drawing.Color.Coral;
+            this.lblflatname.Location = new System.Drawing.Point(20, 9);
+            this.lblflatname.Name = "lblflatname";
+            this.lblflatname.Size = new System.Drawing.Size(14, 15);
+            this.lblflatname.TabIndex = 29;
+            this.lblflatname.Text = "*";
+            // 
+            // lblLastname
+            // 
+            this.lblLastname.AutoSize = true;
+            this.lblLastname.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblLastname.Location = new System.Drawing.Point(29, 8);
+            this.lblLastname.Name = "lblLastname";
+            this.lblLastname.Size = new System.Drawing.Size(77, 15);
+            this.lblLastname.TabIndex = 2;
+            this.lblLastname.Text = "Lastname :";
+            // 
+            // txtLastname
+            // 
+            this.txtLastname.Location = new System.Drawing.Point(122, 3);
+            this.txtLastname.Name = "txtLastname";
+            this.txtLastname.Size = new System.Drawing.Size(215, 23);
+            this.txtLastname.TabIndex = 14;
+            // 
+            // pnlGender
+            // 
+            this.pnlGender.Controls.Add(this.lblfGender);
+            this.pnlGender.Controls.Add(this.lblGender);
+            this.pnlGender.Controls.Add(this.cmbGender);
+            this.pnlGender.Location = new System.Drawing.Point(3, 49);
+            this.pnlGender.Name = "pnlGender";
+            this.pnlGender.Size = new System.Drawing.Size(337, 41);
+            this.pnlGender.TabIndex = 31;
+            // 
+            // lblfGender
+            // 
+            this.lblfGender.AutoSize = true;
+            this.lblfGender.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblfGender.ForeColor = System.Drawing.Color.Coral;
+            this.lblfGender.Location = new System.Drawing.Point(33, 14);
+            this.lblfGender.Name = "lblfGender";
+            this.lblfGender.Size = new System.Drawing.Size(14, 15);
+            this.lblfGender.TabIndex = 30;
+            this.lblfGender.Text = "*";
+            // 
+            // lblGender
+            // 
+            this.lblGender.AutoSize = true;
+            this.lblGender.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblGender.Location = new System.Drawing.Point(43, 13);
+            this.lblGender.Name = "lblGender";
+            this.lblGender.Size = new System.Drawing.Size(63, 15);
+            this.lblGender.TabIndex = 20;
+            this.lblGender.Text = "Gender :";
             // 
             // cmbGender
             // 
@@ -826,188 +1002,340 @@
             "None",
             "Male",
             "Female"});
-            this.cmbGender.Location = new System.Drawing.Point(425, 58);
+            this.cmbGender.Location = new System.Drawing.Point(122, 10);
             this.cmbGender.Name = "cmbGender";
-            this.cmbGender.Size = new System.Drawing.Size(201, 23);
+            this.cmbGender.Size = new System.Drawing.Size(212, 23);
             this.cmbGender.TabIndex = 19;
             // 
-            // btnClear
+            // pnlEmail
             // 
-            this.btnClear.Location = new System.Drawing.Point(184, 378);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(94, 45);
-            this.btnClear.TabIndex = 18;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.pnlEmail.Controls.Add(this.lblEmail);
+            this.pnlEmail.Controls.Add(this.txtEmail);
+            this.pnlEmail.Controls.Add(this.lblfEmail);
+            this.pnlEmail.Location = new System.Drawing.Point(3, 96);
+            this.pnlEmail.Name = "pnlEmail";
+            this.pnlEmail.Size = new System.Drawing.Size(334, 30);
+            this.pnlEmail.TabIndex = 32;
             // 
-            // btnSaveCustomer
+            // lblEmail
             // 
-            this.btnSaveCustomer.Location = new System.Drawing.Point(38, 378);
-            this.btnSaveCustomer.Name = "btnSaveCustomer";
-            this.btnSaveCustomer.Size = new System.Drawing.Size(94, 45);
-            this.btnSaveCustomer.TabIndex = 17;
-            this.btnSaveCustomer.Text = "Save";
-            this.btnSaveCustomer.UseVisualStyleBackColor = true;
-            this.btnSaveCustomer.Click += new System.EventHandler(this.btnSaveCustomer_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label8.Location = new System.Drawing.Point(33, 261);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 15);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Email :";
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblEmail.Location = new System.Drawing.Point(48, 6);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(56, 15);
+            this.lblEmail.TabIndex = 16;
+            this.lblEmail.Text = "Email :";
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(92, 258);
+            this.txtEmail.Location = new System.Drawing.Point(122, 6);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(209, 23);
             this.txtEmail.TabIndex = 15;
             // 
-            // txtLastname
+            // lblfEmail
             // 
-            this.txtLastname.Location = new System.Drawing.Point(425, 23);
-            this.txtLastname.Name = "txtLastname";
-            this.txtLastname.Size = new System.Drawing.Size(201, 23);
-            this.txtLastname.TabIndex = 14;
+            this.lblfEmail.AutoSize = true;
+            this.lblfEmail.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblfEmail.ForeColor = System.Drawing.Color.Coral;
+            this.lblfEmail.Location = new System.Drawing.Point(39, 7);
+            this.lblfEmail.Name = "lblfEmail";
+            this.lblfEmail.Size = new System.Drawing.Size(14, 15);
+            this.lblfEmail.TabIndex = 27;
+            this.lblfEmail.Text = "*";
             // 
-            // label7
+            // pnlDOB
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label7.Location = new System.Drawing.Point(19, 225);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 15);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Country :";
+            this.pnlDOB.Controls.Add(this.lblDOB);
+            this.pnlDOB.Controls.Add(this.dtpDOB);
+            this.pnlDOB.Controls.Add(this.lblfDOB);
+            this.pnlDOB.Location = new System.Drawing.Point(3, 132);
+            this.pnlDOB.Name = "pnlDOB";
+            this.pnlDOB.Size = new System.Drawing.Size(337, 37);
+            this.pnlDOB.TabIndex = 33;
             // 
-            // txtCountry
+            // lblDOB
             // 
-            this.txtCountry.Location = new System.Drawing.Point(92, 222);
-            this.txtCountry.Name = "txtCountry";
-            this.txtCountry.Size = new System.Drawing.Size(209, 23);
-            this.txtCountry.TabIndex = 12;
+            this.lblDOB.AutoSize = true;
+            this.lblDOB.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblDOB.Location = new System.Drawing.Point(34, 11);
+            this.lblDOB.Name = "lblDOB";
+            this.lblDOB.Size = new System.Drawing.Size(70, 15);
+            this.lblDOB.TabIndex = 22;
+            this.lblDOB.Text = "D. O. B :";
             // 
-            // label6
+            // dtpDOB
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label6.Location = new System.Drawing.Point(33, 191);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 15);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "State :";
+            this.dtpDOB.Location = new System.Drawing.Point(122, 8);
+            this.dtpDOB.Name = "dtpDOB";
+            this.dtpDOB.Size = new System.Drawing.Size(209, 23);
+            this.dtpDOB.TabIndex = 21;
             // 
-            // txtState
+            // lblfDOB
             // 
-            this.txtState.Location = new System.Drawing.Point(92, 188);
-            this.txtState.Name = "txtState";
-            this.txtState.Size = new System.Drawing.Size(209, 23);
-            this.txtState.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label5.Location = new System.Drawing.Point(40, 156);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 15);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "City :";
-            // 
-            // txtCity
-            // 
-            this.txtCity.Location = new System.Drawing.Point(92, 153);
-            this.txtCity.Name = "txtCity";
-            this.txtCity.Size = new System.Drawing.Size(209, 23);
-            this.txtCity.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label4.Location = new System.Drawing.Point(12, 96);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 15);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Address1 :";
-            // 
-            // txtAddress1
-            // 
-            this.txtAddress1.Location = new System.Drawing.Point(92, 93);
-            this.txtAddress1.Multiline = true;
-            this.txtAddress1.Name = "txtAddress1";
-            this.txtAddress1.Size = new System.Drawing.Size(503, 47);
-            this.txtAddress1.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label3.Location = new System.Drawing.Point(12, 61);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Phone no :";
-            // 
-            // txtPhoneno
-            // 
-            this.txtPhoneno.Location = new System.Drawing.Point(92, 58);
-            this.txtPhoneno.Name = "txtPhoneno";
-            this.txtPhoneno.Size = new System.Drawing.Size(209, 23);
-            this.txtPhoneno.TabIndex = 4;
-            this.txtPhoneno.Leave += new System.EventHandler(this.txtPhoneno_Leave);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label2.Location = new System.Drawing.Point(335, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Lastname :";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label1.Location = new System.Drawing.Point(5, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Firstname :";
-            // 
-            // txtFirstname
-            // 
-            this.txtFirstname.Location = new System.Drawing.Point(92, 23);
-            this.txtFirstname.Name = "txtFirstname";
-            this.txtFirstname.Size = new System.Drawing.Size(209, 23);
-            this.txtFirstname.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.panel2.Controls.Add(this.lblCustomerMessage);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(721, 472);
-            this.panel2.TabIndex = 23;
+            this.lblfDOB.AutoSize = true;
+            this.lblfDOB.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblfDOB.ForeColor = System.Drawing.Color.Coral;
+            this.lblfDOB.Location = new System.Drawing.Point(23, 11);
+            this.lblfDOB.Name = "lblfDOB";
+            this.lblfDOB.Size = new System.Drawing.Size(14, 15);
+            this.lblfDOB.TabIndex = 28;
+            this.lblfDOB.Text = "*";
             // 
             // lblCustomerMessage
             // 
             this.lblCustomerMessage.AutoSize = true;
             this.lblCustomerMessage.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCustomerMessage.Location = new System.Drawing.Point(38, 437);
+            this.lblCustomerMessage.Location = new System.Drawing.Point(2, 448);
             this.lblCustomerMessage.Name = "lblCustomerMessage";
             this.lblCustomerMessage.Size = new System.Drawing.Size(432, 19);
             this.lblCustomerMessage.TabIndex = 0;
             this.lblCustomerMessage.Text = "Customer will be saved after saving Transcation";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel1.Controls.Add(this.pnlFirstName);
+            this.flowLayoutPanel1.Controls.Add(this.pnlPhoneno);
+            this.flowLayoutPanel1.Controls.Add(this.pnlAddress1);
+            this.flowLayoutPanel1.Controls.Add(this.pnlCity);
+            this.flowLayoutPanel1.Controls.Add(this.pnlState);
+            this.flowLayoutPanel1.Controls.Add(this.pnlCountry);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 7);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(344, 323);
+            this.flowLayoutPanel1.TabIndex = 31;
+            // 
+            // pnlFirstName
+            // 
+            this.pnlFirstName.Controls.Add(this.lblfFirstname);
+            this.pnlFirstName.Controls.Add(this.LblFirstname);
+            this.pnlFirstName.Controls.Add(this.txtFirstname);
+            this.pnlFirstName.Location = new System.Drawing.Point(3, 3);
+            this.pnlFirstName.Name = "pnlFirstName";
+            this.pnlFirstName.Size = new System.Drawing.Size(325, 39);
+            this.pnlFirstName.TabIndex = 5;
+            // 
+            // lblfFirstname
+            // 
+            this.lblfFirstname.AutoSize = true;
+            this.lblfFirstname.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblfFirstname.ForeColor = System.Drawing.Color.Coral;
+            this.lblfFirstname.Location = new System.Drawing.Point(3, 11);
+            this.lblfFirstname.Name = "lblfFirstname";
+            this.lblfFirstname.Size = new System.Drawing.Size(14, 15);
+            this.lblfFirstname.TabIndex = 1;
+            this.lblfFirstname.Text = "*";
+            // 
+            // LblFirstname
+            // 
+            this.LblFirstname.AutoSize = true;
+            this.LblFirstname.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.LblFirstname.Location = new System.Drawing.Point(13, 8);
+            this.LblFirstname.Name = "LblFirstname";
+            this.LblFirstname.Size = new System.Drawing.Size(84, 15);
+            this.LblFirstname.TabIndex = 1;
+            this.LblFirstname.Text = "Firstname :";
+            // 
+            // txtFirstname
+            // 
+            this.txtFirstname.Location = new System.Drawing.Point(104, 3);
+            this.txtFirstname.Name = "txtFirstname";
+            this.txtFirstname.Size = new System.Drawing.Size(209, 23);
+            this.txtFirstname.TabIndex = 0;
+            // 
+            // pnlPhoneno
+            // 
+            this.pnlPhoneno.Controls.Add(this.lblfphone);
+            this.pnlPhoneno.Controls.Add(this.lblPhoneno);
+            this.pnlPhoneno.Controls.Add(this.txtPhoneno);
+            this.pnlPhoneno.Location = new System.Drawing.Point(3, 48);
+            this.pnlPhoneno.Name = "pnlPhoneno";
+            this.pnlPhoneno.Size = new System.Drawing.Size(325, 41);
+            this.pnlPhoneno.TabIndex = 6;
+            // 
+            // lblfphone
+            // 
+            this.lblfphone.AutoSize = true;
+            this.lblfphone.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblfphone.ForeColor = System.Drawing.Color.Coral;
+            this.lblfphone.Location = new System.Drawing.Point(9, 8);
+            this.lblfphone.Name = "lblfphone";
+            this.lblfphone.Size = new System.Drawing.Size(14, 15);
+            this.lblfphone.TabIndex = 2;
+            this.lblfphone.Text = "*";
+            // 
+            // lblPhoneno
+            // 
+            this.lblPhoneno.AutoSize = true;
+            this.lblPhoneno.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblPhoneno.Location = new System.Drawing.Point(19, 6);
+            this.lblPhoneno.Name = "lblPhoneno";
+            this.lblPhoneno.Size = new System.Drawing.Size(77, 15);
+            this.lblPhoneno.TabIndex = 5;
+            this.lblPhoneno.Text = "Phone no :";
+            // 
+            // txtPhoneno
+            // 
+            this.txtPhoneno.Location = new System.Drawing.Point(104, 3);
+            this.txtPhoneno.Name = "txtPhoneno";
+            this.txtPhoneno.Size = new System.Drawing.Size(209, 23);
+            this.txtPhoneno.TabIndex = 4;
+            this.txtPhoneno.Leave += new System.EventHandler(this.txtPhoneno_Leave);
+            // 
+            // pnlAddress1
+            // 
+            this.pnlAddress1.Controls.Add(this.txtAddress1);
+            this.pnlAddress1.Controls.Add(this.lblAdress);
+            this.pnlAddress1.Controls.Add(this.lblfaddress);
+            this.pnlAddress1.Location = new System.Drawing.Point(3, 95);
+            this.pnlAddress1.Name = "pnlAddress1";
+            this.pnlAddress1.Size = new System.Drawing.Size(328, 60);
+            this.pnlAddress1.TabIndex = 9;
+            // 
+            // txtAddress1
+            // 
+            this.txtAddress1.Location = new System.Drawing.Point(106, 3);
+            this.txtAddress1.Multiline = true;
+            this.txtAddress1.Name = "txtAddress1";
+            this.txtAddress1.Size = new System.Drawing.Size(211, 54);
+            this.txtAddress1.TabIndex = 6;
+            // 
+            // lblAdress
+            // 
+            this.lblAdress.AutoSize = true;
+            this.lblAdress.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblAdress.Location = new System.Drawing.Point(32, 10);
+            this.lblAdress.Name = "lblAdress";
+            this.lblAdress.Size = new System.Drawing.Size(77, 15);
+            this.lblAdress.TabIndex = 7;
+            this.lblAdress.Text = "Address1 :";
+            // 
+            // lblfaddress
+            // 
+            this.lblfaddress.AutoSize = true;
+            this.lblfaddress.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblfaddress.ForeColor = System.Drawing.Color.Coral;
+            this.lblfaddress.Location = new System.Drawing.Point(21, 12);
+            this.lblfaddress.Name = "lblfaddress";
+            this.lblfaddress.Size = new System.Drawing.Size(14, 15);
+            this.lblfaddress.TabIndex = 24;
+            this.lblfaddress.Text = "*";
+            // 
+            // pnlCity
+            // 
+            this.pnlCity.Controls.Add(this.txtCity);
+            this.pnlCity.Controls.Add(this.lblCity);
+            this.pnlCity.Controls.Add(this.lblfCity);
+            this.pnlCity.Location = new System.Drawing.Point(3, 161);
+            this.pnlCity.Name = "pnlCity";
+            this.pnlCity.Size = new System.Drawing.Size(325, 39);
+            this.pnlCity.TabIndex = 7;
+            // 
+            // txtCity
+            // 
+            this.txtCity.Location = new System.Drawing.Point(106, 7);
+            this.txtCity.Name = "txtCity";
+            this.txtCity.Size = new System.Drawing.Size(209, 23);
+            this.txtCity.TabIndex = 8;
+            // 
+            // lblCity
+            // 
+            this.lblCity.AutoSize = true;
+            this.lblCity.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblCity.Location = new System.Drawing.Point(43, 9);
+            this.lblCity.Name = "lblCity";
+            this.lblCity.Size = new System.Drawing.Size(49, 15);
+            this.lblCity.TabIndex = 9;
+            this.lblCity.Text = "City :";
+            // 
+            // lblfCity
+            // 
+            this.lblfCity.AutoSize = true;
+            this.lblfCity.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblfCity.ForeColor = System.Drawing.Color.Coral;
+            this.lblfCity.Location = new System.Drawing.Point(33, 10);
+            this.lblfCity.Name = "lblfCity";
+            this.lblfCity.Size = new System.Drawing.Size(14, 15);
+            this.lblfCity.TabIndex = 24;
+            this.lblfCity.Text = "*";
+            // 
+            // pnlState
+            // 
+            this.pnlState.Controls.Add(this.txtState);
+            this.pnlState.Controls.Add(this.lblState);
+            this.pnlState.Controls.Add(this.lblfState);
+            this.pnlState.Location = new System.Drawing.Point(3, 206);
+            this.pnlState.Name = "pnlState";
+            this.pnlState.Size = new System.Drawing.Size(325, 42);
+            this.pnlState.TabIndex = 8;
+            // 
+            // txtState
+            // 
+            this.txtState.Location = new System.Drawing.Point(107, 9);
+            this.txtState.Name = "txtState";
+            this.txtState.Size = new System.Drawing.Size(209, 23);
+            this.txtState.TabIndex = 10;
+            // 
+            // lblState
+            // 
+            this.lblState.AutoSize = true;
+            this.lblState.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblState.Location = new System.Drawing.Point(36, 8);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(56, 15);
+            this.lblState.TabIndex = 11;
+            this.lblState.Text = "State :";
+            // 
+            // lblfState
+            // 
+            this.lblfState.AutoSize = true;
+            this.lblfState.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblfState.ForeColor = System.Drawing.Color.Coral;
+            this.lblfState.Location = new System.Drawing.Point(25, 10);
+            this.lblfState.Name = "lblfState";
+            this.lblfState.Size = new System.Drawing.Size(14, 15);
+            this.lblfState.TabIndex = 25;
+            this.lblfState.Text = "*";
+            // 
+            // pnlCountry
+            // 
+            this.pnlCountry.Controls.Add(this.txtCountry);
+            this.pnlCountry.Controls.Add(this.lblCountry);
+            this.pnlCountry.Controls.Add(this.lblfCountry);
+            this.pnlCountry.Location = new System.Drawing.Point(3, 254);
+            this.pnlCountry.Name = "pnlCountry";
+            this.pnlCountry.Size = new System.Drawing.Size(328, 51);
+            this.pnlCountry.TabIndex = 10;
+            // 
+            // txtCountry
+            // 
+            this.txtCountry.Location = new System.Drawing.Point(108, 3);
+            this.txtCountry.Name = "txtCountry";
+            this.txtCountry.Size = new System.Drawing.Size(209, 23);
+            this.txtCountry.TabIndex = 12;
+            // 
+            // lblCountry
+            // 
+            this.lblCountry.AutoSize = true;
+            this.lblCountry.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblCountry.Location = new System.Drawing.Point(35, 6);
+            this.lblCountry.Name = "lblCountry";
+            this.lblCountry.Size = new System.Drawing.Size(70, 15);
+            this.lblCountry.TabIndex = 13;
+            this.lblCountry.Text = "Country :";
+            // 
+            // lblfCountry
+            // 
+            this.lblfCountry.AutoSize = true;
+            this.lblfCountry.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lblfCountry.ForeColor = System.Drawing.Color.Coral;
+            this.lblfCountry.Location = new System.Drawing.Point(25, 7);
+            this.lblfCountry.Name = "lblfCountry";
+            this.lblfCountry.Size = new System.Drawing.Size(14, 15);
+            this.lblfCountry.TabIndex = 26;
+            this.lblfCountry.Text = "*";
             // 
             // lblCardNotext
             // 
@@ -1065,23 +1393,41 @@
             this.dgvCardDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvCardDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvCardDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCardDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCardDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            this.dgvCardDetails.ColumnHeadersHeight = 29;
             this.dgvCardDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCardDetails.ColumnHeadersVisible = false;
             this.dgvCardDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnHeader,
             this.Value});
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCardDetails.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvCardDetails.EnableHeadersVisualStyles = false;
             this.dgvCardDetails.Location = new System.Drawing.Point(284, 0);
             this.dgvCardDetails.Name = "dgvCardDetails";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCardDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvCardDetails.RowHeadersVisible = false;
+            this.dgvCardDetails.RowHeadersWidth = 51;
             this.dgvCardDetails.RowTemplate.ReadOnly = true;
             this.dgvCardDetails.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgvCardDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -1091,25 +1437,27 @@
             // 
             // ColumnHeader
             // 
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White;
-            this.ColumnHeader.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White;
+            this.ColumnHeader.DefaultCellStyle = dataGridViewCellStyle12;
             this.ColumnHeader.HeaderText = "ColumnHeader";
+            this.ColumnHeader.MinimumWidth = 6;
             this.ColumnHeader.Name = "ColumnHeader";
-            this.ColumnHeader.Width = 5;
+            this.ColumnHeader.Width = 6;
             // 
             // Value
             // 
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
-            this.Value.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black;
+            this.Value.DefaultCellStyle = dataGridViewCellStyle13;
             this.Value.HeaderText = "Value";
+            this.Value.MinimumWidth = 6;
             this.Value.Name = "Value";
-            this.Value.Width = 5;
+            this.Value.Width = 6;
             // 
             // pnlAmounts
             // 
@@ -1126,7 +1474,7 @@
             this.pnlAmounts.Controls.Add(this.labelBalance);
             this.pnlAmounts.Controls.Add(this.textBoxTendered);
             this.pnlAmounts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.pnlAmounts.Location = new System.Drawing.Point(465, 0);
+            this.pnlAmounts.Location = new System.Drawing.Point(466, 0);
             this.pnlAmounts.Name = "pnlAmounts";
             this.pnlAmounts.Size = new System.Drawing.Size(265, 156);
             this.pnlAmounts.TabIndex = 14;
@@ -1270,6 +1618,7 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Location = new System.Drawing.Point(0, 712);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1214, 22);
@@ -1288,7 +1637,7 @@
             this.pnlCardDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCardDetails.Location = new System.Drawing.Point(0, 0);
             this.pnlCardDetails.Name = "pnlCardDetails";
-            this.pnlCardDetails.Size = new System.Drawing.Size(729, 712);
+            this.pnlCardDetails.Size = new System.Drawing.Size(730, 712);
             this.pnlCardDetails.TabIndex = 17;
             // 
             // txtCardStatus
@@ -1312,28 +1661,46 @@
             this.dgvCard.AllowUserToDeleteRows = false;
             this.dgvCard.AllowUserToResizeColumns = false;
             this.dgvCard.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.White;
-            this.dgvCard.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.White;
+            this.dgvCard.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvCard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvCard.BackgroundColor = System.Drawing.Color.White;
             this.dgvCard.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            this.dgvCard.ColumnHeadersHeight = 29;
             this.dgvCard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCard.ColumnHeadersVisible = false;
             this.dgvCard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCard.DefaultCellStyle = dataGridViewCellStyle20;
             this.dgvCard.EnableHeadersVisualStyles = false;
             this.dgvCard.Location = new System.Drawing.Point(3, 87);
             this.dgvCard.Name = "dgvCard";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCard.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.dgvCard.RowHeadersVisible = false;
+            this.dgvCard.RowHeadersWidth = 51;
             this.dgvCard.RowTemplate.ReadOnly = true;
             this.dgvCard.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgvCard.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -1343,25 +1710,27 @@
             // 
             // dataGridViewTextBoxColumn1
             // 
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.White;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewTextBoxColumn1.HeaderText = "ColumnHeader";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 5;
+            this.dataGridViewTextBoxColumn1.Width = 6;
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridViewTextBoxColumn2.HeaderText = "Value";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 5;
+            this.dataGridViewTextBoxColumn2.Width = 6;
             // 
             // pnlCardStatus
             // 
@@ -1426,7 +1795,7 @@
             // 
             this.MarbleSplitContainer.Panel2.Controls.Add(this.pnlCardDetails);
             this.MarbleSplitContainer.Size = new System.Drawing.Size(1214, 712);
-            this.MarbleSplitContainer.SplitterDistance = 481;
+            this.MarbleSplitContainer.SplitterDistance = 480;
             this.MarbleSplitContainer.TabIndex = 19;
             // 
             // panelButtons
@@ -1442,7 +1811,7 @@
             this.panelButtons.Controls.Add(this.btnRefresh);
             this.panelButtons.Location = new System.Drawing.Point(8, 631);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(464, 72);
+            this.panelButtons.Size = new System.Drawing.Size(463, 72);
             this.panelButtons.TabIndex = 24;
             // 
             // btnLogout
@@ -1953,12 +2322,15 @@
             // 
             // pbRedeem
             // 
+            this.pbRedeem.ErrorImage = global::Marbale.POS.Properties.Resources.DiplayGroupButton;
+            this.pbRedeem.InitialImage = global::Marbale.POS.Properties.Resources.DiplayGroupButton;
             this.pbRedeem.Location = new System.Drawing.Point(110, 28);
             this.pbRedeem.Name = "pbRedeem";
             this.pbRedeem.Size = new System.Drawing.Size(130, 130);
             this.pbRedeem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbRedeem.TabIndex = 0;
             this.pbRedeem.TabStop = false;
+            this.pbRedeem.Click += new System.EventHandler(this.pbRedeem_Click);
             // 
             // tbPageSystem
             // 
@@ -2217,6 +2589,7 @@
             // 
             // posContextMenu
             // 
+            this.posContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.posContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeLayoutToolStripMenuItem,
             this.enterMessageToolStripMenuItem});
@@ -2235,6 +2608,11 @@
             this.enterMessageToolStripMenuItem.Name = "enterMessageToolStripMenuItem";
             this.enterMessageToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.enterMessageToolStripMenuItem.Text = "Enter Message";
+            // 
+            // AutoClearTimer
+            // 
+            this.AutoClearTimer.Interval = 1000;
+            this.AutoClearTimer.Tick += new System.EventHandler(this.AutoClearTimer_Tick);
             // 
             // MarblePOS
             // 
@@ -2266,14 +2644,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrxHeader)).EndInit();
             this.tabPageActivities.ResumeLayout(false);
             this.tabPageActivities.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPurchases)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCardTransaction)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGamePurchases)).EndInit();
             this.tabPageCardInfo.ResumeLayout(false);
             this.tabPageCardInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardGames)).EndInit();
             this.tabPageCustomer.ResumeLayout(false);
-            this.tabPageCustomer.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.pnllastname.ResumeLayout(false);
+            this.pnllastname.PerformLayout();
+            this.pnlGender.ResumeLayout(false);
+            this.pnlGender.PerformLayout();
+            this.pnlEmail.ResumeLayout(false);
+            this.pnlEmail.PerformLayout();
+            this.pnlDOB.ResumeLayout(false);
+            this.pnlDOB.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.pnlFirstName.ResumeLayout(false);
+            this.pnlFirstName.PerformLayout();
+            this.pnlPhoneno.ResumeLayout(false);
+            this.pnlPhoneno.PerformLayout();
+            this.pnlAddress1.ResumeLayout(false);
+            this.pnlAddress1.PerformLayout();
+            this.pnlCity.ResumeLayout(false);
+            this.pnlCity.PerformLayout();
+            this.pnlState.ResumeLayout(false);
+            this.pnlState.PerformLayout();
+            this.pnlCountry.ResumeLayout(false);
+            this.pnlCountry.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardDetails)).EndInit();
             this.pnlAmounts.ResumeLayout(false);
             this.pnlAmounts.PerformLayout();
@@ -2318,7 +2719,7 @@
         private System.Windows.Forms.DataGridView dgvTransaction;
         private System.Windows.Forms.TabPage tabPageActivities;
         private System.Windows.Forms.Label labelPurchases;
-        private System.Windows.Forms.DataGridView dgvPurchases;
+        private System.Windows.Forms.DataGridView dgvGamePurchases;
         private System.Windows.Forms.DataGridViewImageColumn dcBtnCardActivityTrxPrint;
         private System.Windows.Forms.TabPage tabPageCardInfo;
         private System.Windows.Forms.Label lblCarddetails;
@@ -2405,28 +2806,28 @@
         private System.Windows.Forms.Button btnCancelTrxnLine;
         private System.Windows.Forms.Button btnClearTrxn;
         private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LblFirstname;
         private System.Windows.Forms.TextBox txtFirstname;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblState;
         private System.Windows.Forms.TextBox txtState;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblCity;
         private System.Windows.Forms.TextBox txtCity;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblAdress;
         private System.Windows.Forms.TextBox txtAddress1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblPhoneno;
         private System.Windows.Forms.TextBox txtPhoneno;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblLastname;
+        private System.Windows.Forms.Label lblCountry;
         private System.Windows.Forms.TextBox txtCountry;
         private System.Windows.Forms.TextBox txtLastname;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnSaveCustomer;
         private System.Windows.Forms.ComboBox cmbGender;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblGender;
         private System.Windows.Forms.DateTimePicker dtpDOB;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblDOB;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgvTrxLines;
         private System.Windows.Forms.DataGridView dgvTrxHeader;
@@ -2456,5 +2857,31 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Card_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn LineId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
+        private System.Windows.Forms.Label lblfFirstname;
+        private System.Windows.Forms.Label lblfGender;
+        private System.Windows.Forms.Label lblflatname;
+        private System.Windows.Forms.Label lblfDOB;
+        private System.Windows.Forms.Label lblfEmail;
+        private System.Windows.Forms.Label lblfCountry;
+        private System.Windows.Forms.Label lblfState;
+        private System.Windows.Forms.Label lblfCity;
+        private System.Windows.Forms.Label lblfaddress;
+        private System.Windows.Forms.Label lblfphone;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel pnlFirstName;
+        private System.Windows.Forms.Panel pnlPhoneno;
+        private System.Windows.Forms.Panel pnlAddress1;
+        private System.Windows.Forms.Panel pnlCity;
+        private System.Windows.Forms.Panel pnlState;
+        private System.Windows.Forms.Panel pnlCountry;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Panel pnllastname;
+        private System.Windows.Forms.Panel pnlGender;
+        private System.Windows.Forms.Panel pnlEmail;
+        private System.Windows.Forms.Panel pnlDOB;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.DataGridView dgvCardTransaction;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.Timer AutoClearTimer;
     }
 }

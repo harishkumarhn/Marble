@@ -20,17 +20,22 @@ using System.Windows.Forms;
 
 namespace Marbale.POS
 {
-    
+
 
     public partial class MarblePOS : Form
     {
 
         #region declaration
 
+        /// <summary>
+        /// Settings
+        /// </summary>
+        bool IsMultipleCard = false;
+
         private readonly DataLogger dataLogger = new DataLogger();
         PosCodeBL posCodeBL = new PosCodeBL();
         SiteSetupBL siteSetup = new SiteSetupBL();
-
+        StaticData staticData = new StaticData();
 
         POSBL posBussiness;
         double tendered_amount = 0;
@@ -45,13 +50,19 @@ namespace Marbale.POS
 
         Color skinColor;
         public Color POSBackColor;
-
+        TransactionBL trxBL = new TransactionBL();
         ListBox cmbDisplayGroups;
 
         public object TranscationBL { get; private set; }
 
+        List<AppSetting> appCustomerData = new List<AppSetting>();
 
+        int seconds = 0;
+        int maxSecCount = 30;
         #endregion
+
+
+        #region MainLoad
 
 
         public MarblePOS()
@@ -62,7 +73,7 @@ namespace Marbale.POS
             InitializeComponent();
             skinColor = Color.Gray;
 
-           FrmLogin frmLogin = new FrmLogin();
+            FrmLogin frmLogin = new FrmLogin();
             //frmLogin.ShowDialog();
             //if (!frmLogin.isLoginSuccess)
             //    Environment.Exit(0);
@@ -83,6 +94,12 @@ namespace Marbale.POS
             registerAdditionalCardReaders();
             updateScreenAmounts();
         }
+        #endregion
+
+
+
+
+        #region CardDeviceRegion
 
         class Device
         {
@@ -91,13 +108,13 @@ namespace Marbale.POS
             internal string DeviceSubType;
             internal string VID, PID, OptString;
         }
-       
+
         void registerAdditionalCardReaders()
         {
 
             Devices.ClearConnectedAllDevices();
-            string USBReaderVID = "VID_FFFF";
-            string USBReaderPID = "PID_0035";
+            string USBReaderVID = "";
+            string USBReaderPID = "";
             string USBReaderOptionalString = "0000";
 
             SiteSetupBL siteSetupBussiness = new SiteSetupBL();
@@ -182,6 +199,7 @@ namespace Marbale.POS
                         return;
                     }
                     CardReader.CardSwiped = true;
+                    
                     HandleCardRead(CardNumber, sender as DeviceClass);
                 }
             }
@@ -196,46 +214,169 @@ namespace Marbale.POS
 
             CurrentCard = null;
 
-            TransactionBL trxBL = new TransactionBL();
+           
             CurrentCard = trxBL.GetCard(0, CardNumber);
 
             if (CurrentCard == null || CurrentCard.card_id == 0)
                 CurrentCard = new Card();
 
+            
+
             DisplayCardDetails();
+            AutoClearTimer.Enabled = true;
+
+            readerDevice.beep(1);
         }
 
-        public List<KeyValue> GetDefaultCardInfo()
+        #endregion
+
+
+        #region Cards
+
+        private void DisplayCardDetails()
         {
-            List<KeyValue> cardDetails = new List<KeyValue>();
-            cardDetails.Add(new KeyValue() { Key = "Issue Date", Value = DateTime.Now.ToShortDateString() });
-            cardDetails.Add(new KeyValue() { Key = "Card Deposit", Value = "0.00" });
-            cardDetails.Add(new KeyValue() { Key = "Card Credit", Value = "0.00" });
-            cardDetails.Add(new KeyValue() { Key = "Courtesy", Value = "0.00" });
-            cardDetails.Add(new KeyValue() { Key = "Card Deposit", Value = "0.00" });
-            cardDetails.Add(new KeyValue() { Key = "Bonus", Value = "0.00" });
-            cardDetails.Add(new KeyValue() { Key = "Time", Value = "0.00" });
-            cardDetails.Add(new KeyValue() { Key = "Games", Value = "" });
-            cardDetails.Add(new KeyValue() { Key = "Credit Plus", Value = "0.00" });
-            cardDetails.Add(new KeyValue() { Key = "Tickets", Value = "0.00" });
-            cardDetails.Add(new KeyValue() { Key = "Loyality Points", Value = "0.00" });
-            cardDetails.Add(new KeyValue() { Key = "Recharged/Spent", Value = "0.0000" });
+            if (CurrentCard == null)
+                ClearCard();
+            else
+            {
+                lblCardNotext.Text = CurrentCard.CardNumber;
+                lblCardStatustext.Text = CurrentCard.CardStatus;
+                txtCardStatus.Text = CurrentCard.CardStatus;
 
-            return cardDetails;
+                //Issue date population
+                if (CurrentCard.issue_date == DateTime.MinValue)
+                {
+                    dgvCardDetails.Rows[0].Cells[1].Value = DateTime.Now;
+                    CurrentCard.issue_date = DateTime.Now;
+                }
+                else
+                {
+                    dgvCardDetails.Rows[0].Cells[1].Value = CurrentCard.issue_date;
+                }
 
+                //Card Deposit
+                dgvCardDetails.Rows[1].Cells[1].Value = CurrentCard.face_value;
+
+                //Credits
+                dgvCardDetails.Rows[2].Cells[1].Value = CurrentCard.credits;
+
+                //Courtesy
+                dgvCardDetails.Rows[3].Cells[1].Value = CurrentCard.courtesy;
+
+                //Bonus
+                dgvCardDetails.Rows[4].Cells[1].Value = CurrentCard.bonus;
+
+                //Time
+                dgvCardDetails.Rows[5].Cells[1].Value = CurrentCard.ticket_count; // CurrentCard.time;
+
+                //Games
+                dgvCardDetails.Rows[6].Cells[1].Value = CurrentCard.CardGames;
+
+                //Credit Plus
+                dgvCard.Rows[0].Cells[1].Value = CurrentCard.CreditPlusCredits;
+
+                //Loyalty Points
+                dgvCard.Rows[1].Cells[1].Value = CurrentCard.loyalty_points;
+
+                //Recharged / Spent
+                dgvCard.Rows[2].Cells[1].Value = CurrentCard.TotalRechargeAmount + " / " + CurrentCard.credits_played;
+
+                if (CurrentCard.customer != null)
+                {
+                    Customer = CurrentCard.customer;
+                }
+
+                PopulateCustomer();
+            }
         }
 
-        public List<KeyValue> GetDefaultCardSummary()
+
+        void UpdateCardForRechargeTransaction(Product product)
         {
-            List<KeyValue> cardSummary = new List<KeyValue>();
-            cardSummary.Add(new KeyValue() { Key = "Total", Value = DateTime.Now.ToShortDateString() });
-            cardSummary.Add(new KeyValue() { Key = "Balance", Value = "0.00" });
-            cardSummary.Add(new KeyValue() { Key = "Tendered", Value = "0.00" });
-            cardSummary.Add(new KeyValue() { Key = "Change", Value = "0.00" });
-            cardSummary.Add(new KeyValue() { Key = "Tip Amount", Value = "0.00" });
+            if (CurrentCard != null)
+            {
+                CurrentCard.credits = Convert.ToDecimal(product.Price);
+                CurrentCard.bonus = Convert.ToDecimal(product.Bonus);
+                CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
+                CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
+            }
+        }
 
-            return cardSummary;
+        void UpdateCardForTransaction(Product product)
+        {
+            if (CurrentCard != null)
+            {
+                CurrentCard.credits = Convert.ToDecimal(product.Credits);
+                CurrentCard.bonus = Convert.ToDecimal(product.Bonus);
+                CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
+                CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
+            }
+        }
+        private void CreateCardGrid()
+        {
+            dgvCard.RowsDefaultCellStyle = null;
+            dgvCard.Columns[1].DefaultCellStyle.SelectionBackColor = Color.White;
+            dgvCard.Columns[1].DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvCard.AlternatingRowsDefaultCellStyle = dgvCard.RowsDefaultCellStyle;
+            dgvCard.Columns[1].DefaultCellStyle.Font = new Font("arial", 12, FontStyle.Bold);
+            dgvCard.GridColor = Color.LightSteelBlue;
+            dgvCard.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvCard.BorderStyle = BorderStyle.None;
 
+            dgvCard.Rows.Clear();
+            dgvCard.Rows.Add();
+            dgvCard.Rows[0].Cells[0].Value = "Credit Plus";
+            dgvCard.Rows[0].Cells[1].Style.Font = new Font("arial", 11, FontStyle.Bold);
+
+
+            dgvCard.Rows.Add();
+            dgvCard.Rows[1].Cells[0].Value = "Loyalty Points";
+
+            dgvCard.Rows.Add();
+            dgvCard.Rows[2].Cells[0].Value = "Recharged / Spent";
+            dgvCard.Rows[2].Cells[1].Style.Font = new Font("arial", 11, FontStyle.Bold);
+        }
+
+        #endregion
+
+
+
+        #region Tabs
+        private void UpdateTransactionTab(int userId)
+        {
+            TransactionBL trxBL = new TransactionBL();
+            ListTransaction = trxBL.GetTransactionList(userId);
+
+            dgvTrxHeader.DataSource = new List<Transaction>();
+            if (ListTransaction != null)
+            {
+                dgvTrxHeader.DataSource = ListTransaction;
+
+                dgvTrxHeader.Columns["POSMachineId"].Visible = false;
+                dgvTrxHeader.Columns["POSTypeId"].Visible = false;
+                dgvTrxHeader.Columns["Pre_TaxAmount"].Visible = false;
+                dgvTrxHeader.Columns["Tax_Amount"].Visible = false;
+                dgvTrxHeader.Columns["Tip_Amount"].Visible = false;
+                dgvTrxHeader.Columns["TokenNumber"].Visible = false;
+                dgvTrxHeader.Columns["TotalPaidAmount"].Visible = false;
+                //dgvTrxHeader.Columns["DateTimeTransactionDate"].Visible = false;
+                dgvTrxHeader.Columns["Transaction_Amount"].Visible = false;
+                //dgvTrxHeader.Columns["DateTimeTrxDate"].Visible = false;
+                dgvTrxHeader.Columns["TrxProfileId"].Visible = false;
+                dgvTrxHeader.Columns["Username"].Visible = false;
+                dgvTrxHeader.Columns["UserId"].Visible = false;
+                dgvTrxHeader.Columns["CustomerId"].Visible = false;
+                dgvTrxHeader.Columns["CreditCardAmount"].Visible = false;
+                dgvTrxHeader.Columns["GameCardAmount"].Visible = false;
+                dgvTrxHeader.Columns["PrimaryCardId"].Visible = false;
+                dgvTrxHeader.Columns["OrderId"].Visible = false;
+                dgvTrxHeader.Columns["Remarks"].Visible = false;
+                dgvTrxHeader.Columns["ExternalSystemReference"].Visible = false;
+                //dgvTrxHeader.Columns["DateTimeLastUpdatedTime"].Visible = false;
+                dgvTrxHeader.Columns["Customer"].Visible = false;
+
+                ApplyColorsToMyTransactionGrid();
+            }
         }
 
         private void UpdateProductsTab()
@@ -335,18 +476,56 @@ namespace Marbale.POS
             }
         }
 
-        private void DiscountButton_Click(object sender, EventArgs e)
+
+        public void RefreshTabs()
         {
-            Button b = (Button)sender;
-            int discountId = Convert.ToInt32(b.Tag);
+            ClearTransaction();
+            updateScreenAmounts();
+            UpdateProductsTab();
+            UpdateDiscountsTab();
+            updateCardDetailsGrid();
+            registerAdditionalCardReaders();
+            updateScreenAmounts();
 
-            ProductBL productBL = new ProductBL();
-            TransactionDiscount discount = productBL.GetDiscountById(discountId);
-
-            createDiscountLine(discount);
-            ApplyDiscountToLines();
-            RefreshTransactionGrid();
+            BindPurchaMyDetailsGrid();
+            GamePlayMyReansactionGrid();
         }
+        private void updateScreenAmounts()
+        {
+            double balanceAmount = 0;
+            double changeAmount = 0;
+            if (transaction == null)
+            {
+                total_amount = 0;
+                tendered_amount = 0;
+                TipAmount = 0;//Modification on 09-Nov-2015:Tip Amount Feature
+            }
+            else
+            {
+                //Begin Modification on 09-Nov-2015:Tip Amount Feature
+                total_amount = (double)transaction.Net_Transaction_Amount + TipAmount;
+
+                if (transaction.TotalPaidAmount == 0)
+                    balanceAmount = total_amount - transaction.TotalPaidAmount;
+                else
+                    balanceAmount = total_amount - (transaction.TotalPaidAmount + transaction.Tip_Amount);
+                changeAmount = Math.Max(tendered_amount - balanceAmount, 0);
+
+                TipAmount = transaction.Tip_Amount;
+            }
+
+            textBoxTransactionTotal.Text = "Rs " + total_amount.ToString(); //.ToString("$"); //AMOUNT_WITH_CURRENCY_SYMBOL
+            textBoxBalance.Text = "Rs " + balanceAmount.ToString(); //.ToString("Rs");
+            textBoxTendered.Text = "Rs " + tendered_amount.ToString(); //.ToString("$"); //AMOUNT_WITH_CURRENCY_SYMBOL
+
+            txtChangeAmount.Text = "Rs " + changeAmount.ToString(); //.ToString(ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);
+            txtTipAmount.Text = "Rs " + TipAmount.ToString(); //(ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);
+        }
+
+        #endregion
+
+
+        #region Transaction
 
         bool createDiscountLine(TransactionDiscount discount)
         {
@@ -398,151 +577,12 @@ namespace Marbale.POS
             }
             return true;
         }
-
-        public void ApplyDiscountToLines()
-        {
-            if (transaction == null)
-                return;
-
-            for (int i = 0; i < transaction.TransactionLines.Count; i++)
-            {
-                if (transaction.TransactionLines[i].DBLineId <= 0)
-                    transaction.TransactionLines[i].discountLines.Clear();
-            }
-
-            foreach (Discounts.DiscountLine dl in transaction.discounts.DiscountLines)
-            {
-                if (dl.LineValid)
-                {
-                    for (int i = 0; i < transaction.TransactionLines.Count; i++)
-                    {
-                        if (transaction.TransactionLines[i].LineValid)
-                        {
-                            if (!transaction.TransactionLines[i].discountLines.Contains(dl)) //Add discounts to line if not added already
-                                transaction.TransactionLines[i].discountLines.Add(dl);
-                        }
-                    }
-                }
-            }
-            updateAmounts();
-        }
-
-        public void updateAmounts()
-        {
-            decimal Transaction_Amount = 0;
-            decimal Pre_TaxAmount = 0;
-            decimal Tax_Amount = 0;
-            decimal Discount_Amount = 0;
-            if (transaction == null)
-            {
-                ClearTransaction();
-                return;
-            }
-            if (transaction.discounts == null)
-            {
-                transaction.discounts = new Discounts();
-            }
-
-            foreach (Discounts.DiscountLine dl in transaction.discounts.DiscountLines)
-            {
-                dl.DiscountAmount = 0;
-            }
-
-            for (int i = 0; i < transaction.TransactionLines.Count; i++)
-            {
-                if (transaction.TransactionLines[i].LineValid && transaction.TransactionLines[i].CancelledLine == false)
-                {
-                    decimal preTaxLineAmount = 0;
-                    if (transaction.TransactionLines[i].quantity > 1)
-                    {
-                        preTaxLineAmount = transaction.TransactionLines[i].LineAmount = transaction.TransactionLines[i].Price;
-                    }
-                    else
-                    {
-                        preTaxLineAmount = transaction.TransactionLines[i].LineAmount = transaction.TransactionLines[i].Price * transaction.TransactionLines[i].quantity;
-                    }
-
-                    Pre_TaxAmount += preTaxLineAmount;
-                    if (transaction.TransactionLines[i].quantity == 1)
-                        transaction.TransactionLines[i].tax_amount = preTaxLineAmount * transaction.TransactionLines[i].tax_percentage / 100;
-
-
-
-                    Tax_Amount += transaction.TransactionLines[i].tax_amount;
-                    transaction.TransactionLines[i].LineAmount += transaction.TransactionLines[i].tax_amount;
-                    transaction.TransactionLines[i].Discount_Percentage = 0;
-
-                    foreach (Discounts.DiscountLine dl in transaction.TransactionLines[i].discountLines)
-                    {
-                        if (dl.LineValid)
-                        {
-                            transaction.TransactionLines[i].Discount_Percentage += dl.DiscountPercentage;
-                            dl.DiscountAmount += (preTaxLineAmount + transaction.TransactionLines[i].tax_amount) * dl.DiscountPercentage / 100;
-                        }
-                    }
-                    Discount_Amount += (preTaxLineAmount + transaction.TransactionLines[i].tax_amount) * transaction.TransactionLines[i].Discount_Percentage / 100;
-                }
-            }
-            Transaction_Amount = Pre_TaxAmount + Tax_Amount;
-            transaction.Discount_Percentage = GetTransactionDiscountPercentage();
-            transaction.Net_Transaction_Amount = Math.Round(Transaction_Amount - Discount_Amount, 2, MidpointRounding.AwayFromZero);
-        }
-
-        private decimal GetTransactionDiscountPercentage()
-        {
-            List<Discounts.DiscountLine> distinctDiscountLines = new List<Discounts.DiscountLine>();
-
-            if (transaction != null && transaction.discounts != null)
-            {
-                foreach (Discounts.DiscountLine d in transaction.discounts.DiscountLines)
-                {
-                    if (d.LineValid && !distinctDiscountLines.Any(x => x.DiscountId == d.DiscountId && x.LineValid))
-                        distinctDiscountLines.Add(d);
-                }
-            }
-
-            return distinctDiscountLines.Sum(x => x.DiscountPercentage);
-        }
-
-
-        private void ProductButton_Click(object sender, EventArgs e)
-        {
-            Button b = (Button)sender;
-            int product_id = Convert.ToInt32(b.Tag);
-
-            ProductBL productBL = new ProductBL();
-            Product product = productBL.GetProductById(product_id);
-
-            CreateTransactionLine(product);
-        }
-
-        //public void ValidateProduct(Product product)
-        //{
-        //    if (product.TypeName == GlobalEnum.ProductType.NEW.DescriptionAttr())
-        //    {
-        //        if(CurrentCard.CardNumber=="")
-        //        {
-        //            MessageBox.Show("New card not tapped.");
-        //            return;
-
-        //        }
-        //        if (CurrentCard.CardStatus == GlobalEnum.CARD_STATUS.ISSUED.DescriptionAttr())
-        //        {
-        //            //lblCardStatustext.Text = CurrentCard.CardStatus;
-        //            MessageBox.Show("Please choose the new  card.");
-        //            return;
-        //        }
-                
-        //    }
-
-
-        //}
-
         public void CreateTransactionLine(Product product)
         {
             if (transaction == null)
             {
                 transaction = new Transaction();
+                
                 if (CurrentUser != null)
                 {
                     transaction.Username = CurrentUser.LoginId;
@@ -550,13 +590,18 @@ namespace Marbale.POS
                     transaction.UserId = CurrentUser.Id;
                 }
             }
-
+            if(IsMultipleCard ==true)
+            {
+               
+                transaction.IsMultipleCard = true;
+            }
+          
             if (transaction.TransactionLines == null)
                 transaction.TransactionLines = new List<TransactionLine>();
 
             transaction.TransactionDate = DateTime.Now;
 
-            if (product.TypeName == GlobalEnum.ProductType.NEW_CARD.DescriptionAttr())
+            if (product.TypeName.ToUpper() == GlobalEnum.ProductType.NEW_CARD.DescriptionAttr().ToUpper())
             {
                 if (CurrentCard == null)
                 {
@@ -573,7 +618,9 @@ namespace Marbale.POS
                 bool newProductExists = false;
                 for (int i = 0; i < transaction.TransactionLines.Count; i++)
                 {
-                    if (transaction.TransactionLines[i].ProductType == GlobalEnum.ProductType.NEW_CARD.DescriptionAttr() && transaction.TransactionLines[i].CancelledLine == false)
+                    if (transaction.TransactionLines[i].ProductType.ToUpper() == GlobalEnum.ProductType.NEW_CARD.DescriptionAttr().ToUpper() && transaction.TransactionLines[i].CancelledLine == false
+                        && transaction.TransactionLines[i].CardNumber==CurrentCard.CardNumber
+                        )
                     {
                         newProductExists = true;
                         break;
@@ -588,7 +635,7 @@ namespace Marbale.POS
                 if (product.FaceValue > 0)
                     CreateDepositLine(product);
             }
-            else if (product.TypeName == "RECHARGE")
+            else if (product.TypeName.ToUpper() == GlobalEnum.ProductType.RECHARGE.DescriptionAttr().ToUpper())
             {
                 if (CurrentCard == null)
                 {
@@ -633,10 +680,11 @@ namespace Marbale.POS
                     return;
                 }
 
-               UpdateCardForRechargeTransaction(product);
+                UpdateCardForRechargeTransaction(product);
             }
 
             TransactionLine trxLine = new TransactionLine();
+            trxLine.Card = CurrentCard;
             trxLine.OriginalLineID = -1;
             trxLine.ProductID = product.Id;
             trxLine.ProductName = product.Name;
@@ -650,7 +698,7 @@ namespace Marbale.POS
                 double varAmount = NumberPadForm.ShowNumberPadForm("Enter Recharge Amount", '-');
                 productPrice = trxLine.Price = Convert.ToDecimal(varAmount);
 
-                if(productPrice <= 0)
+                if (productPrice <= 0)
                 {
                     MessageBox.Show("Please Enter the Recharge amount greater than zero");
                     return;
@@ -663,12 +711,12 @@ namespace Marbale.POS
             trxLine.quantity = 1;
 
             trxLine.tax_percentage = product.TaxPercentage;
-            trxLine.tax_id = (int )product.TaxId;
+            trxLine.tax_id = (int)product.TaxId;
             trxLine.tax_amount = (decimal)((productPrice - product.FaceValue) * product.TaxPercentage) / 100;
             trxLine.LineValid = true;
             trxLine.cardId = CurrentCard != null ? CurrentCard.card_id : 0;
 
-            if (product.TypeName == "NEW" || product.TypeName == "RECHARGE" || product.TypeName == "VARIABLE_RECHARGE")
+            if (product.TypeName.ToUpper() == GlobalEnum.ProductType.NEW_CARD.DescriptionAttr().ToUpper() || product.TypeName == "RECHARGE" || product.TypeName == "VARIABLE_RECHARGE")
             {
                 trxLine.CardNumber = CurrentCard != null ? CurrentCard.CardNumber : "";
             }
@@ -681,13 +729,15 @@ namespace Marbale.POS
             trxLine.Credits = Convert.ToDecimal(product.Credits);
             trxLine.Bonus = Convert.ToDecimal(product.Bonus);
             trxLine.Courtesy = Convert.ToDecimal(product.Courtesy);
-            
+
 
             //Transaction.Tax_Amount = 0;
             bool found = false;
             for (int i = 0; i < transaction.TransactionLines.Count; i++)
             {
-                if (transaction.TransactionLines[i].ProductID == product.Id && transaction.TransactionLines[i].CancelledLine == false)
+                if (transaction.TransactionLines[i].ProductID == product.Id && transaction.TransactionLines[i].CancelledLine == false
+                     && transaction.TransactionLines[i].CardNumber == CurrentCard.CardNumber
+                    )
                 {
                     trxLine.LineValid = false;
                     transaction.TransactionLines.Add(trxLine);
@@ -731,34 +781,13 @@ namespace Marbale.POS
             trxLine.ProductTypeCode = product.Type;
             trxLine.LineAmount = Convert.ToDecimal(product.FaceValue);
             trxLine.ProductType = product.TypeName;
-
+            trxLine.IsDepositLine = true;
             trxLine.CardNumber = CurrentCard.CardNumber;
             UpdateCardForTransaction(product);
 
             transaction.TransactionLines.Add(trxLine);
         }
 
-        void UpdateCardForRechargeTransaction(Product product)
-        {
-            if (CurrentCard != null)
-            {
-                CurrentCard.credits = Convert.ToDecimal(product.Price);
-                CurrentCard.bonus = Convert.ToDecimal(product.Bonus);
-                CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
-                CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
-            }
-        }
-
-        void UpdateCardForTransaction(Product product)
-        {
-            if (CurrentCard != null)
-            {
-                CurrentCard.credits = Convert.ToDecimal(product.Credits);
-                CurrentCard.bonus = Convert.ToDecimal(product.Bonus);
-                CurrentCard.courtesy = Convert.ToDecimal(product.Courtesy);
-                CurrentCard.face_value = Convert.ToDecimal(product.FaceValue);
-            }
-        }
 
 
         void UpdateTransactionAmount()
@@ -784,6 +813,294 @@ namespace Marbale.POS
             validTrxLine.tax_amount += newTrxline.tax_amount;
             validTrxLine.amount += newTrxline.amount;
             validTrxLine.LineAmount += newTrxline.LineAmount;
+        }
+        bool IsAnyTransactionLineCancelled(int trxId)
+        {
+            bool cancelledLineFound = false;
+
+            try
+            {
+                if (ListTransaction != null)
+                {
+                    TransactionLine trxLine = ListTransaction.Find(x => x.Trx_id == trxId).TransactionLines.Find(x => x.IsLineReversed);
+
+                    if (trxLine != null)
+                        cancelledLineFound = true;
+                }
+            }
+            catch { }
+
+            return cancelledLineFound;
+        }
+
+
+
+        private void LoadMultiple()
+        {
+           
+
+            if (transaction == null)
+            {
+                transaction = new Transaction();
+                IsMultipleCard = true;
+                 
+            }
+
+           
+
+            string message = "";
+           
+            for (int i = 0; i < staticData.LoadMultipleCards.Length; i++)
+            {
+                if (staticData.LoadMultipleCards[i] == null)
+                    break;
+                CurrentCard = staticData.LoadMultipleCards[i];
+                //transaction.CardList.Add(CurrentCard);
+
+                for (int j = 0; j < staticData.LoadMultipleProducts.Length; j++)
+                {
+                    if (staticData.LoadMultipleProducts[j] == -1)
+                        break;
+                    message = "";
+                    //decimal qty = 2;  
+
+                    ProductBL productBL = new ProductBL();
+                    Product product = productBL.GetProductById(staticData.LoadMultipleProducts[j]);
+
+                    CreateTransactionLine(product);
+
+                    //CreateProduct(staticData.LoadMultipleProducts[j], NewTrx.getProductDetails(staticData.LoadMultipleProducts[j]), ref qty);
+                    //if (0 != NewTrx.createTransactionLine(CurrentCard,
+                    //                                     staticData.LoadMultipleProducts[j],
+                    //                                     -1,
+                    //                                     1,
+                    //                                     ref message))
+                    //{
+                    //    displayMessageLine(message, ERROR);
+                    //    return;
+                    //}
+                }
+            }
+
+            //RefreshTrxDataGrid(NewTrx);
+            //displayButtonTexts();
+            //if (message != "")
+            //    displayMessageLine(message, ERROR);
+        }
+
+
+        //private void CreateProduct(int product_id, Product  product , ref decimal ProductQuantity)
+        //{
+        //    if (transaction == null)
+        //        return;
+
+        //    if (Customer != null)
+        //        transaction.customer = Customer;
+
+        //    if (CurrentCard != null)
+        //        transaction.Card = CurrentCard;
+
+        //    while (true)
+        //    {
+        //        frmTender ft = new frmTender((double)transaction.Net_Transaction_Amount);
+        //        ft.ShowDialog();
+        //        double varAmount = ft.TenderedAmount;
+
+        //        if (varAmount >= 0)
+        //        {
+        //            if (varAmount >= (double)transaction.Net_Transaction_Amount)
+        //            {
+        //                tendered_amount = varAmount;
+        //                updateScreenAmounts();
+
+        //                break;
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("Please enter amount equal or greater than total transaction amount", "Message");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            return;
+        //        }
+        //    }
+
+        //    transaction.Status = "CLOSED";
+
+        //    TransactionBL trxBL = new TransactionBL();
+        //    int trxId = trxBL.SaveTransaction(transaction);
+
+        //    if (trxId > 0)
+        //        MessageBox.Show("Transaction Saved Successfully");
+
+        //    ClearTransaction();
+        //}
+        #endregion
+
+
+        #region BindData
+        void ClearCard()
+        {
+            lblCardNotext.Text = string.Empty;
+            lblCardStatustext.Text = string.Empty;
+            txtCardStatus.Text = string.Empty;
+
+            //Issue date population
+            dgvCardDetails.Rows[0].Cells[1].Value = string.Empty;
+
+            //Card Deposit
+            dgvCardDetails.Rows[1].Cells[1].Value = string.Empty;
+
+            //Credits
+            dgvCardDetails.Rows[2].Cells[1].Value = string.Empty;
+
+            //Courtesy
+            dgvCardDetails.Rows[3].Cells[1].Value = string.Empty;
+
+            //Bonus
+            dgvCardDetails.Rows[4].Cells[1].Value = string.Empty;
+
+            //Time
+            dgvCardDetails.Rows[5].Cells[1].Value = string.Empty;
+
+            //Games
+            dgvCardDetails.Rows[6].Cells[1].Value = string.Empty;
+
+            //Credit Plus
+            dgvCard.Rows[0].Cells[1].Value = string.Empty;
+
+            //Loyalty Points
+            dgvCard.Rows[1].Cells[1].Value = string.Empty;
+
+            //Recharged / Spent
+            dgvCard.Rows[2].Cells[1].Value = string.Empty;
+        }
+
+        private void BindPurchaMyDetailsGrid()
+        {
+
+
+            try
+            {
+                posCodeBL.BindPurchaseGrid(CurrentCard, ref dgvCardTransaction);
+            }
+            catch (Exception ex)
+            {
+                dataLogger.Error("On Pos :UpdateGamePlayCardGrid ", ex);
+
+            }
+        }
+
+        private void LoadDetailCurrentTab(string tabname)
+        {
+            if (tabname == "tabPageCustomer")
+            {
+                lblCustomerMessage.Text = "";
+                if (cmbGender.Text == string.Empty)
+                    cmbGender.SelectedIndex = 0;
+                SetupCustomerForm();
+            }
+            else if (tabname == "tabPageMyTrx")
+            {
+                UpdateTransactionTab(0);
+            }
+            else if (tabname == "tabPageActivities")
+            {
+                BindPurchaMyDetailsGrid();
+                GamePlayMyReansactionGrid();
+            }
+            else if (tabname == "tabPageCardInfo")
+            {
+                UpdateGamePlayCardGrid();
+            }
+        }
+        private void ClearCustomer()
+        {
+            Customer = null;
+            txtFirstname.Text = string.Empty;
+            txtLastname.Text = string.Empty;
+            txtPhoneno.Text = string.Empty;
+            txtAddress1.Text = string.Empty;
+            txtCity.Text = string.Empty;
+            txtState.Text = string.Empty;
+            txtCountry.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            cmbGender.SelectedIndex = 0;
+            lblCustomerMessage.Text = string.Empty;
+        }
+        private void ClearTransaction()
+        {
+            dgvTransaction.Rows.Clear();
+            transaction = null;
+            CurrentCard = null;
+            ClearCustomer();
+            ClearCard();
+            updateScreenAmounts();
+        }
+        static void displayNonCardLine(DataGridView dgvTransaction, Transaction Trx, int j, ref int rowcount)
+        {
+
+            dgvTransaction.Rows.Add();
+            dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = Trx.TransactionLines[j].ProductName; // (string.IsNullOrEmpty(Trx.TransactionLines[j].AttractionDetails) ? "" : "-" + Trx.TransactionLines[j].AttractionDetails) + (string.IsNullOrEmpty(Trx.TransactionLines[j].Remarks) ? "" : "-" + Trx.TransactionLines[j].Remarks);
+            if (Trx.TransactionLines[j].ParentLine != null)
+            {
+                int offset = 1;
+                TransactionLine tl = Trx.TransactionLines[j].ParentLine;
+
+                while (tl.ParentLine != null)
+                {
+                    tl = tl.ParentLine;
+                    offset++;
+                }
+                string sOffset = "└";
+                sOffset = sOffset.PadLeft(offset * 3 + 1, ' ') + " ";
+                dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = sOffset + dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value;
+            }
+            else
+            {
+                string highlight = "";
+                foreach (Discounts.DiscountLine dl in Trx.TransactionLines[j].discountLines)
+                    highlight += dl.DisplayChar;
+                dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value
+                                    = highlight + " " + dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value.ToString();
+            }
+
+            dgvTransaction.Rows[rowcount].Cells["Quantity"].Value = Trx.TransactionLines[j].quantity;
+            dgvTransaction.Rows[rowcount].Cells["Price"].Value = Trx.TransactionLines[j].Price;
+
+            dgvTransaction.Rows[rowcount].Cells["Remarks"].Value = Trx.TransactionLines[j].Remarks;
+            //dgvTransaction.Rows[rowcount].Cells["AttractionDetails"].Value = Trx.TransactionLines[j].AttractionDetails;
+
+
+            dgvTransaction.Rows[rowcount].Cells["Tax"].Value = Trx.TransactionLines[j].tax_amount;
+            dgvTransaction.Rows[rowcount].Cells["TaxName"].Value = Trx.TransactionLines[j].taxName;
+            dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = Trx.TransactionLines[j].LineAmount;
+            dgvTransaction.Rows[rowcount].Cells["LineId"].Value = Trx.TransactionLines[j].LineId = j;
+            dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = Trx.TransactionLines[j].ProductTypeCode;
+
+            if (Trx.TransactionLines[j].ProductTypeCode == "MANUAL" && Trx.TransactionLines[j].AllowEdit && Trx.TransactionLines[j].DBLineId == 0)
+            {
+                dgvTransaction.Rows[rowcount].Cells["Quantity"].Style.BackColor =
+                dgvTransaction.Rows[rowcount].Cells["Quantity"].Style.SelectionBackColor = Color.LightBlue;
+                dgvTransaction.Rows[rowcount].Cells["Quantity"].Style.ForeColor =
+                dgvTransaction.Rows[rowcount].Cells["Quantity"].Style.SelectionForeColor = Color.Blue;
+            }
+
+            if (Trx.TransactionLines[j].discountLines.Count > 0 && Trx.TransactionLines[j].AllowEdit)
+            {
+                dgvTransaction.Rows[rowcount].Cells["Product_Name"].Style.SelectionForeColor =
+                    dgvTransaction.Rows[rowcount].Cells["Product_Name"].Style.ForeColor = Color.Green;
+            }
+
+            rowcount++;
+            Trx.TransactionLines[j].LineProcessed = true;
+
+            for (int k = j + 1; k < Trx.TransactionLines.Count; k++)
+            {
+                if (Trx.TransactionLines[j].Equals(Trx.TransactionLines[k].ParentLine) && Trx.TransactionLines[k].LineValid && !Trx.TransactionLines[k].LineProcessed)
+                    displayNonCardLine(dgvTransaction, Trx, k, ref rowcount);
+            }
         }
 
         public void RefreshTransactionGrid()
@@ -866,7 +1183,7 @@ namespace Marbale.POS
 
                     //if (Transaction.TransactionLines[i].ProductTypeCode == "NEW")
                     //{
-                        
+
                     //}
                     //else if (Transaction.TransactionLines[i].ProductTypeCode == "RECHARGE")
                     //{
@@ -989,122 +1306,110 @@ namespace Marbale.POS
 
             UpdateTransactionAmount();
         }
-
-        static void displayNonCardLine(DataGridView dgvTransaction, Transaction Trx, int j, ref int rowcount)
+        public void ApplyDiscountToLines()
         {
+            if (transaction == null)
+                return;
 
-            dgvTransaction.Rows.Add();
-            dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = Trx.TransactionLines[j].ProductName; // (string.IsNullOrEmpty(Trx.TransactionLines[j].AttractionDetails) ? "" : "-" + Trx.TransactionLines[j].AttractionDetails) + (string.IsNullOrEmpty(Trx.TransactionLines[j].Remarks) ? "" : "-" + Trx.TransactionLines[j].Remarks);
-            if (Trx.TransactionLines[j].ParentLine != null)
+            for (int i = 0; i < transaction.TransactionLines.Count; i++)
             {
-                int offset = 1;
-                TransactionLine tl = Trx.TransactionLines[j].ParentLine;
+                if (transaction.TransactionLines[i].DBLineId <= 0)
+                    transaction.TransactionLines[i].discountLines.Clear();
+            }
 
-                while (tl.ParentLine != null)
+            foreach (Discounts.DiscountLine dl in transaction.discounts.DiscountLines)
+            {
+                if (dl.LineValid)
                 {
-                    tl = tl.ParentLine;
-                    offset++;
+                    for (int i = 0; i < transaction.TransactionLines.Count; i++)
+                    {
+                        if (transaction.TransactionLines[i].LineValid)
+                        {
+                            if (!transaction.TransactionLines[i].discountLines.Contains(dl)) //Add discounts to line if not added already
+                                transaction.TransactionLines[i].discountLines.Add(dl);
+                        }
+                    }
                 }
-                string sOffset = "└";
-                sOffset = sOffset.PadLeft(offset * 3 + 1, ' ') + " ";
-                dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value = sOffset + dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value;
             }
-            else
+            updateAmounts();
+        }
+
+        public void updateAmounts()
+        {
+            decimal Transaction_Amount = 0;
+            decimal Pre_TaxAmount = 0;
+            decimal Tax_Amount = 0;
+            decimal Discount_Amount = 0;
+            if (transaction == null)
             {
-                string highlight = "";
-                foreach (Discounts.DiscountLine dl in Trx.TransactionLines[j].discountLines)
-                    highlight += dl.DisplayChar;
-                dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value
-                                    = highlight + " " + dgvTransaction.Rows[rowcount].Cells["Product_Name"].Value.ToString();
+                ClearTransaction();
+                return;
             }
-
-            dgvTransaction.Rows[rowcount].Cells["Quantity"].Value = Trx.TransactionLines[j].quantity;
-            dgvTransaction.Rows[rowcount].Cells["Price"].Value = Trx.TransactionLines[j].Price;
-
-            dgvTransaction.Rows[rowcount].Cells["Remarks"].Value = Trx.TransactionLines[j].Remarks;
-            //dgvTransaction.Rows[rowcount].Cells["AttractionDetails"].Value = Trx.TransactionLines[j].AttractionDetails;
-
-
-            dgvTransaction.Rows[rowcount].Cells["Tax"].Value = Trx.TransactionLines[j].tax_amount;
-            dgvTransaction.Rows[rowcount].Cells["TaxName"].Value = Trx.TransactionLines[j].taxName;
-            dgvTransaction.Rows[rowcount].Cells["Line_Amount"].Value = Trx.TransactionLines[j].LineAmount;
-            dgvTransaction.Rows[rowcount].Cells["LineId"].Value = Trx.TransactionLines[j].LineId = j;
-            dgvTransaction.Rows[rowcount].Cells["Line_Type"].Value = Trx.TransactionLines[j].ProductTypeCode;
-
-            if (Trx.TransactionLines[j].ProductTypeCode == "MANUAL" && Trx.TransactionLines[j].AllowEdit && Trx.TransactionLines[j].DBLineId == 0)
+            if (transaction.discounts == null)
             {
-                dgvTransaction.Rows[rowcount].Cells["Quantity"].Style.BackColor =
-                dgvTransaction.Rows[rowcount].Cells["Quantity"].Style.SelectionBackColor = Color.LightBlue;
-                dgvTransaction.Rows[rowcount].Cells["Quantity"].Style.ForeColor =
-                dgvTransaction.Rows[rowcount].Cells["Quantity"].Style.SelectionForeColor = Color.Blue;
+                transaction.discounts = new Discounts();
             }
 
-            if (Trx.TransactionLines[j].discountLines.Count > 0 && Trx.TransactionLines[j].AllowEdit)
+            foreach (Discounts.DiscountLine dl in transaction.discounts.DiscountLines)
             {
-                dgvTransaction.Rows[rowcount].Cells["Product_Name"].Style.SelectionForeColor =
-                    dgvTransaction.Rows[rowcount].Cells["Product_Name"].Style.ForeColor = Color.Green;
+                dl.DiscountAmount = 0;
             }
 
-            rowcount++;
-            Trx.TransactionLines[j].LineProcessed = true;
-
-            for (int k = j + 1; k < Trx.TransactionLines.Count; k++)
+            for (int i = 0; i < transaction.TransactionLines.Count; i++)
             {
-                if (Trx.TransactionLines[j].Equals(Trx.TransactionLines[k].ParentLine) && Trx.TransactionLines[k].LineValid && !Trx.TransactionLines[k].LineProcessed)
-                    displayNonCardLine(dgvTransaction, Trx, k, ref rowcount);
+                if (transaction.TransactionLines[i].LineValid && transaction.TransactionLines[i].CancelledLine == false)
+                {
+                    decimal preTaxLineAmount = 0;
+                    if (transaction.TransactionLines[i].quantity > 1)
+                    {
+                        preTaxLineAmount = transaction.TransactionLines[i].LineAmount = transaction.TransactionLines[i].Price;
+                    }
+                    else
+                    {
+                        preTaxLineAmount = transaction.TransactionLines[i].LineAmount = transaction.TransactionLines[i].Price * transaction.TransactionLines[i].quantity;
+                    }
+
+                    Pre_TaxAmount += preTaxLineAmount;
+                    if (transaction.TransactionLines[i].quantity == 1)
+                        transaction.TransactionLines[i].tax_amount = preTaxLineAmount * transaction.TransactionLines[i].tax_percentage / 100;
+
+
+
+                    Tax_Amount += transaction.TransactionLines[i].tax_amount;
+                    transaction.TransactionLines[i].LineAmount += transaction.TransactionLines[i].tax_amount;
+                    transaction.TransactionLines[i].Discount_Percentage = 0;
+
+                    foreach (Discounts.DiscountLine dl in transaction.TransactionLines[i].discountLines)
+                    {
+                        if (dl.LineValid)
+                        {
+                            transaction.TransactionLines[i].Discount_Percentage += dl.DiscountPercentage;
+                            dl.DiscountAmount += (preTaxLineAmount + transaction.TransactionLines[i].tax_amount) * dl.DiscountPercentage / 100;
+                        }
+                    }
+                    Discount_Amount += (preTaxLineAmount + transaction.TransactionLines[i].tax_amount) * transaction.TransactionLines[i].Discount_Percentage / 100;
+                }
             }
+            Transaction_Amount = Pre_TaxAmount + Tax_Amount;
+            transaction.Discount_Percentage = GetTransactionDiscountPercentage();
+            transaction.Net_Transaction_Amount = Math.Round(Transaction_Amount - Discount_Amount, 2, MidpointRounding.AwayFromZero);
         }
 
-        static DataGridViewCellStyle getSpecialGridRowFormat(DataGridViewCellStyle refDGV, float FontIncrement = 1.0f)
+        private decimal GetTransactionDiscountPercentage()
         {
-            DataGridViewCellStyle dgv;
-            if (refDGV != null)
-                dgv = new DataGridViewCellStyle(refDGV);
-            else
-                dgv = new DataGridViewCellStyle();
-            dgv.BackColor =
-            dgv.SelectionBackColor = Color.Gray;
-            dgv.ForeColor =
-            dgv.SelectionForeColor = Color.White;
-            dgv.Font = new Font(refDGV.Font.FontFamily, refDGV.Font.Size + FontIncrement, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (byte)(0));
+            List<Discounts.DiscountLine> distinctDiscountLines = new List<Discounts.DiscountLine>();
 
-            return dgv;
+            if (transaction != null && transaction.discounts != null)
+            {
+                foreach (Discounts.DiscountLine d in transaction.discounts.DiscountLines)
+                {
+                    if (d.LineValid && !distinctDiscountLines.Any(x => x.DiscountId == d.DiscountId && x.LineValid))
+                        distinctDiscountLines.Add(d);
+                }
+            }
+
+            return distinctDiscountLines.Sum(x => x.DiscountPercentage);
         }
-
-
-        private void DiscountButton_MouseDown(object sender, EventArgs e)
-        {
-
-        }
-        private void DiscountButton_MouseUp(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ProductButton_MouseDown(object sender, EventArgs e)
-        {
-
-        }
-        private void ProductButton_MouseUp(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pos_left_Selected(object sender, TabControlEventArgs e)
-        {
-
-        }
-
-        private void text_CardNumber_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //  e.Handled = true;
-        }
-
-        private void POSHome_new_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
 
         private void updateCardDetailsGrid()
         {
@@ -1152,207 +1457,125 @@ namespace Marbale.POS
 
             //dgvCardDetails.Location = new Point(0, panelCardSwipe.Height - dgvCardDetails.Rows.GetRowsHeight(DataGridViewElementStates.Displayed) - 3);
         }
+        #endregion
 
-        private void CreateCardGrid()
+
+
+
+
+
+        #region buttonEvents
+
+        private void DiscountButton_Click(object sender, EventArgs e)
         {
-            dgvCard.RowsDefaultCellStyle = null;
-            dgvCard.Columns[1].DefaultCellStyle.SelectionBackColor = Color.White;
-            dgvCard.Columns[1].DefaultCellStyle.SelectionForeColor = Color.Black;
-            dgvCard.AlternatingRowsDefaultCellStyle = dgvCard.RowsDefaultCellStyle;
-            dgvCard.Columns[1].DefaultCellStyle.Font = new Font("arial", 12, FontStyle.Bold);
-            dgvCard.GridColor = Color.LightSteelBlue;
-            dgvCard.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvCard.BorderStyle = BorderStyle.None;
+            Button b = (Button)sender;
+            int discountId = Convert.ToInt32(b.Tag);
 
-            dgvCard.Rows.Clear();
-            dgvCard.Rows.Add();
-            dgvCard.Rows[0].Cells[0].Value = "Credit Plus";
-            dgvCard.Rows[0].Cells[1].Style.Font = new Font("arial", 11, FontStyle.Bold);
+            ProductBL productBL = new ProductBL();
+            TransactionDiscount discount = productBL.GetDiscountById(discountId);
 
-
-            dgvCard.Rows.Add();
-            dgvCard.Rows[1].Cells[0].Value = "Loyalty Points";
-
-            dgvCard.Rows.Add();
-            dgvCard.Rows[2].Cells[0].Value = "Recharged / Spent";
-            dgvCard.Rows[2].Cells[1].Style.Font = new Font("arial", 11, FontStyle.Bold);
+            createDiscountLine(discount);
+            ApplyDiscountToLines();
+            RefreshTransactionGrid();
         }
-
-        private void ChangeLayout()
+        static DataGridViewCellStyle getSpecialGridRowFormat(DataGridViewCellStyle refDGV, float FontIncrement = 1.0f)
         {
-            //int panelWidth1 = MarbleSplitContainer.Panel1.Width;
-            //int panelWidth2 = MarbleSplitContainer.Panel2.Width;
-
-            //MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Width - MarbleSplitContainer.SplitterWidth-1000;
-
-            if (tbHomeControls.Parent == MarbleSplitContainer.Panel1)
-            {
-                //MarbleSplitContainer.Panel1.Width = panelWidth2;
-                //MarbleSplitContainer.Panel2.Width = panelWidth1;
-                MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Panel2.Width;
-
-                MarbleSplitContainer.Panel1.Controls.Remove(tbHomeControls);
-                MarbleSplitContainer.Panel1.Controls.Remove(panelButtons);
-                MarbleSplitContainer.Panel2.Controls.Add(tbHomeControls);
-                MarbleSplitContainer.Panel2.Controls.Add(panelButtons);
-
-                tbHomeControls.Width = MarbleSplitContainer.Panel2.Width;
-                //tbHomeControls.Height = 603; //MarbleSplitContainer.Panel2.Height - panelButtons.Height;
-
-                MarbleSplitContainer.Panel2.Controls.Remove(pnlCardDetails);
-                MarbleSplitContainer.Panel1.Controls.Add(pnlCardDetails);
-
-                pnlCardDetails.Size = MarbleSplitContainer.Panel1.ClientSize;
-            }
+            DataGridViewCellStyle dgv;
+            if (refDGV != null)
+                dgv = new DataGridViewCellStyle(refDGV);
             else
-            {
-                MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Panel2.Width;
-                MarbleSplitContainer.Panel1.Controls.Add(tbHomeControls);
-                MarbleSplitContainer.Panel1.Controls.Add(panelButtons);
-                MarbleSplitContainer.Panel2.Controls.Remove(tbHomeControls);
-                MarbleSplitContainer.Panel2.Controls.Remove(panelButtons);
+                dgv = new DataGridViewCellStyle();
+            dgv.BackColor =
+            dgv.SelectionBackColor = Color.Gray;
+            dgv.ForeColor =
+            dgv.SelectionForeColor = Color.White;
+            dgv.Font = new Font(refDGV.Font.FontFamily, refDGV.Font.Size + FontIncrement, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (byte)(0));
 
-                tbHomeControls.Width = MarbleSplitContainer.Panel1.Width;
-                //tbHomeControls.Height = 603; // MarbleSplitContainer.Panel1.Height - panelButtons.Height ;
-
-                MarbleSplitContainer.Panel2.Controls.Add(pnlCardDetails);
-                MarbleSplitContainer.Panel1.Controls.Remove(pnlCardDetails);
-
-                pnlCardDetails.Size = MarbleSplitContainer.Panel2.ClientSize;
-            }
+            return dgv;
         }
-
-        private void button3_Click(object sender, EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnTask_Click(object sender, EventArgs e)
-        {
-            posContextMenu.Show(btnTask, new Point(0, 0), ToolStripDropDownDirection.AboveLeft);
-            //ChangeLayout();
-        }
-
-        private void btnCancelTrxnLine_Click(object sender, EventArgs e)
-        {
-            if (transaction != null && transaction.TransactionLines != null)
-            {
-                if (dgvTransaction.SelectedRows.Count == 0)
-                {
-                    return;
-                }
-
-                for (int i = 0; i < dgvTransaction.SelectedRows.Count; i++)
-                {
-                    int lineId = 0;
-                    if (dgvTransaction.SelectedRows[i].Cells["LineId"].Value != null)
-                    {
-                        lineId = Convert.ToInt32(dgvTransaction.SelectedRows[i].Cells["LineId"].Value);
-                        TransactionLine trxLine = transaction.TransactionLines.Find(x => x.LineId == lineId && x.LineValid == true &&
-                        x.CancelledLine == false);
-
-                        if (trxLine != null)
-                            trxLine.CancelledLine = true;
-                    }
-
-                    if (dgvTransaction.SelectedRows[i].Cells["Line_Type"].Value != null && 
-                        dgvTransaction.SelectedRows[i].Cells["Line_Type"].Value.ToString() == "Discount")
-                    {
-                        int discountId = Convert.ToInt32(dgvTransaction.SelectedRows[i].Cells["LineId"].Value);
-                        List<Discounts.DiscountLine> dscLines = transaction.discounts.DiscountLines.FindAll(x => x.DiscountId == discountId);
-                        if (dscLines != null)
-                        {
-                            foreach (Discounts.DiscountLine ln in dscLines)
-                            {
-                                ln.LineValid = false;
-                            }
-                        }
-                    }
-                }
-
-                List<TransactionLine> activeTrxLns = transaction.TransactionLines.FindAll(x => x.LineValid == true && x.CancelledLine == false);
-
-                if (activeTrxLns != null && activeTrxLns.Count == 0)
-                    ClearTransaction();
-
-                updateAmounts();
-                RefreshTransactionGrid();
-                updateScreenAmounts();
-            }
-        }
-
-        private void btnClearTrxn_Click(object sender, EventArgs e)
-        {
-            ClearTransaction();
-            updateScreenAmounts();
-        }
-
-        private void DisplayCardDetails()
-        {
-            if (CurrentCard == null)
-                ClearCard();
-            else
-            {
-                lblCardNotext.Text = CurrentCard.CardNumber;
-                lblCardStatustext.Text = CurrentCard.CardStatus;
-                txtCardStatus.Text = CurrentCard.CardStatus;
-
-                //Issue date population
-                if (CurrentCard.issue_date == DateTime.MinValue)
-                {
-                    dgvCardDetails.Rows[0].Cells[1].Value = DateTime.Now;
-                    CurrentCard.issue_date = DateTime.Now;
-                }
-                else
-                {
-                    dgvCardDetails.Rows[0].Cells[1].Value = CurrentCard.issue_date;
-                }
-
-                //Card Deposit
-                dgvCardDetails.Rows[1].Cells[1].Value = CurrentCard.face_value;
-
-                //Credits
-                dgvCardDetails.Rows[2].Cells[1].Value = CurrentCard.credits;
-
-                //Courtesy
-                dgvCardDetails.Rows[3].Cells[1].Value = CurrentCard.courtesy;
-
-                //Bonus
-                dgvCardDetails.Rows[4].Cells[1].Value = CurrentCard.bonus;
-
-                //Time
-                dgvCardDetails.Rows[5].Cells[1].Value = CurrentCard.ticket_count; // CurrentCard.time;
-
-                //Games
-                dgvCardDetails.Rows[6].Cells[1].Value = CurrentCard.CardGames;
-
-                //Credit Plus
-                dgvCard.Rows[0].Cells[1].Value = CurrentCard.CreditPlusCredits;
-
-                //Loyalty Points
-                dgvCard.Rows[1].Cells[1].Value = CurrentCard.loyalty_points;
-
-                //Recharged / Spent
-                dgvCard.Rows[2].Cells[1].Value = CurrentCard.TotalRechargeAmount + " / " + CurrentCard.credits_played;
-
-                if (CurrentCard.customer != null)
-                {
-                    Customer = CurrentCard.customer;
-                }
-
-                PopulateCustomer();
-            }
-        }
-
-        private void ClearTransaction()
-        {
-            dgvTransaction.Rows.Clear();
-            transaction = null;
-            CurrentCard = null;
             ClearCustomer();
-            ClearCard();
-            updateScreenAmounts();
         }
+
+        private void btnSaveCustomer_Click(object sender, EventArgs e)
+        {
+            if (Customer == null)
+                Customer = new BusinessObject.Customer.Customers();
+
+            if (!ValidateCustomer())
+            {
+                return;
+            }
+
+            Customer.first_name = txtFirstname.Text;
+            Customer.last_name = txtLastname.Text;
+            Customer.contact_phone1 = txtPhoneno.Text;
+            Customer.address1 = txtAddress1.Text;
+            Customer.city = txtCity.Text;
+            Customer.state = txtState.Text;
+            Customer.country = txtCountry.Text;
+            Customer.email = txtEmail.Text;
+
+            if (cmbGender.Text == "Male")
+                Customer.gender = 'M';
+            else if (cmbGender.Text == "Female")
+                Customer.gender = 'F';
+            else
+                Customer.gender = 'N';
+
+            Customer.birth_date = dtpDOB.Value;
+
+            lblCustomerMessage.Text = "Customer will be saved after saving Transcation";
+        }
+
+
+
+        private void ProductButton_Click(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            int product_id = Convert.ToInt32(b.Tag);
+
+            ProductBL productBL = new ProductBL();
+            Product product = productBL.GetProductById(product_id);
+
+            CreateTransactionLine(product);
+        }
+
+        private void DiscountButton_MouseDown(object sender, EventArgs e)
+        {
+
+        }
+        private void DiscountButton_MouseUp(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductButton_MouseDown(object sender, EventArgs e)
+        {
+
+        }
+        private void ProductButton_MouseUp(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pos_left_Selected(object sender, TabControlEventArgs e)
+        {
+
+        }
+
+        private void text_CardNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //  e.Handled = true;
+        }
+
+        private void POSHome_new_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -1362,8 +1585,12 @@ namespace Marbale.POS
             if (Customer != null)
                 transaction.customer = Customer;
 
-            if (CurrentCard != null)
-                transaction.Card = CurrentCard;
+            //if(!MultipleCardSelect && CurrentCard != null)
+            //{
+            //    transaction.CardList.Add(CurrentCard);
+            //}
+
+             
 
             while (true)
             {
@@ -1403,301 +1630,70 @@ namespace Marbale.POS
         }
 
 
-        private void ClearCustomer()
+        private void button3_Click(object sender, EventArgs e)
         {
-            Customer = null;
-            txtFirstname.Text = string.Empty;
-            txtLastname.Text = string.Empty;
-            txtPhoneno.Text = string.Empty;
-            txtAddress1.Text = string.Empty;
-            txtCity.Text = string.Empty;
-            txtState.Text = string.Empty;
-            txtCountry.Text = string.Empty;
-            txtEmail.Text = string.Empty;
-            cmbGender.SelectedIndex = 0;
-            lblCustomerMessage.Text = string.Empty;
+
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        private void btnTask_Click(object sender, EventArgs e)
         {
-            ClearCustomer();
+            posContextMenu.Show(btnTask, new Point(0, 0), ToolStripDropDownDirection.AboveLeft);
+            //ChangeLayout();
         }
 
-        private void btnSaveCustomer_Click(object sender, EventArgs e)
+        private void btnCancelTrxnLine_Click(object sender, EventArgs e)
         {
-            if (Customer == null)
-                Customer = new BusinessObject.Customer.Customers();
-
-            if(!ValidateCustomer())
+            if (transaction != null && transaction.TransactionLines != null)
             {
-                return;
-            }
-
-            Customer.first_name = txtFirstname.Text;
-            Customer.last_name = txtLastname.Text;
-            Customer.contact_phone1 = txtPhoneno.Text;
-            Customer.address1 = txtAddress1.Text;
-            Customer.city = txtCity.Text;
-            Customer.state = txtState.Text;
-            Customer.country = txtCountry.Text;
-            Customer.email = txtEmail.Text;
-
-            if (cmbGender.Text == "Male")
-                Customer.gender = 'M';
-            else if (cmbGender.Text == "Female")
-                Customer.gender = 'F';
-            else
-                Customer.gender = 'N';
-
-            Customer.birth_date = dtpDOB.Value;
-
-            lblCustomerMessage.Text = "Customer will be saved after saving Transcation";
-        }
-
-        private bool ValidateCustomer()
-        {
-            bool Validate = false;
-            dataLogger.Debug("Begin POS ValidateCustomer");
-
-            try
-            {
-                List<AppSetting> appCustomerData = siteSetup.GetAppSettings("customer");
-
-                if(appCustomerData!=null && appCustomerData.Count>0)
+                if (dgvTransaction.SelectedRows.Count == 0)
                 {
+                    return;
+                }
 
-                    foreach( AppSetting appSetting in appCustomerData)
+                for (int i = 0; i < dgvTransaction.SelectedRows.Count; i++)
+                {
+                    int lineId = 0;
+                    if (dgvTransaction.SelectedRows[i].Cells["LineId"].Value != null)
                     {
-                        //if (appSetting.Name == "ADDRESS1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
-                        //{
-                            if (string.IsNullOrEmpty(txtFirstname.Text))
-                            {
-                                MessageBox.Show("Please enter the First Name");
-                                return false;
-                            }
-                        //}
-                        //if (appSetting.Name == "ADDRESS1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
-                        //{
-                            if (string.IsNullOrEmpty(txtLastname.Text))
-                            {
-                                MessageBox.Show("Please enter the Last Name");
-                                return false;
-                            }
-                        //}
+                        lineId = Convert.ToInt32(dgvTransaction.SelectedRows[i].Cells["LineId"].Value);
+                        TransactionLine trxLine = transaction.TransactionLines.Find(x => x.LineId == lineId && x.LineValid == true &&
+                        x.CancelledLine == false);
 
-
-                        if (appSetting.Name == "CONTACT_PHONE1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
-                        {
-                            if (string.IsNullOrEmpty(txtPhoneno.Text))
-                            {
-                                MessageBox.Show("Please enter the Mobile Number");
-                                return false;
-                            }
-
-                            bool Valid = new Regex(@"\(?\d{3}\)?[-\.]? *\d{3}[-\.]? *[-\.]?\d{4}").IsMatch(txtAddress1.Text);
-                            if (string.IsNullOrEmpty(txtPhoneno.Text))
-                            {
-                                MessageBox.Show("Please enter valid Mobile Number");
-                                return false;
-                            }
-
-
-
-                        }
-
-                        if (appSetting.Name == "GENDER" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
-                        {
-                            if (string.IsNullOrEmpty(cmbGender.Text))
-                            {
-                                MessageBox.Show("Please enter the Gender");
-                                return false;
-                            }
-                        }
-
-                        if (appSetting.Name== "ADDRESS1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
-                        {
-                            if(string.IsNullOrEmpty(txtAddress1.Text))
-                            {
-                                MessageBox.Show("Please enter the Address1");
-                                return false;
-                            }
-                        }
-
-
-                        if (appSetting.Name == "CITY" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
-                        {
-                            if (string.IsNullOrEmpty(txtCity.Text))
-                            {
-                                MessageBox.Show("Please enter the City");
-                                return false;
-                            }
-                        }
-
-                        if (appSetting.Name == "STATE" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
-                        {
-                            if (string.IsNullOrEmpty(txtState.Text))
-                            {
-                                MessageBox.Show("Please enter the State");
-                                return false;
-                            }
-                        }
-
-                        if (appSetting.Name == "COUNTRY" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
-                        {
-                            if (string.IsNullOrEmpty(txtCountry.Text))
-                            {
-                                MessageBox.Show("Please enter the Country");
-                                return false;
-                            }
-                        }
-
-                        if (appSetting.Name == "EMAIL" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
-                        {
-                            if (string.IsNullOrEmpty(txtEmail.Text))
-                            {
-                                MessageBox.Show("Please enter the Email");
-                                return false;
-                            }
-
-                            bool Valid = new Regex(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z").IsMatch(txtAddress1.Text);
-                            if (string.IsNullOrEmpty(txtEmail.Text))
-                            {
-                                MessageBox.Show("Please enter valid Mobile Number");
-                                return false;
-                            }
-
-
-
-                        }
-                        if (appSetting.Name == "BIRTH_DATE" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
-                        {
-                            if (string.IsNullOrEmpty(dtpDOB.Text) && Convert.ToDateTime( dtpDOB.Text)==DateTime.MinValue)
-                            {
-                                MessageBox.Show("Please enter the Date of Birth");
-                                return false;
-                            }
-                        }
-                        Validate = true;
+                        if (trxLine != null)
+                            trxLine.CancelledLine = true;
                     }
 
-
-                }
-                dataLogger.Debug("END POS ValidateCustomer");
-            }
-            catch (Exception ex)
-            {
-                dataLogger.Error("Error POS ValidateCustomer",ex);
-            }
-            return Validate;
-        }
-
-        private void tabControlCardAction_Selected(object sender, TabControlEventArgs e)
-        {
-
-            LoadDetailCurrentTab(tabControlCardAction.SelectedTab.Name);
-        }
-
-        private void LoadDetailCurrentTab(string tabname)
-        {
-            if (tabname == "tabPageCustomer")
-            {
-                lblCustomerMessage.Text = "";
-                if (cmbGender.Text == string.Empty)
-                    cmbGender.SelectedIndex = 0;
-            }
-            else if (tabname == "tabPageMyTrx")
-            {
-                UpdateTransactionTab(0);
-            }
-            else if (tabname == "tabPageActivities")
-            {
-                UpdatePurchaseTaskGrid();
-            }
-            else if (tabname == "tabPageCardInfo")
-            {
-                UpdateGamePlayCardGrid();
-            }
-        }
-        private void UpdateGamePlayCardGrid()
-        {
-            try
-            {
-                posCodeBL.BindGamePlayCardGrid(CurrentCard, ref dgvCardGames);
-            }
-            catch (Exception ex )
-            {
-                dataLogger.Error("On Pos :UpdateGamePlayCardGrid ", ex);
-
-            }
-           
-        }
-        private void UpdatePurchaseTaskGrid()
-        {
-            
-
-            try
-            {
-                posCodeBL.BindPurchaseGrid(CurrentCard, ref dgvPurchases);
-            }
-            catch (Exception ex)
-            {
-                dataLogger.Error("On Pos :UpdateGamePlayCardGrid ", ex);
-
-            }
-        }
-        private void UpdateTransactionTab(int userId)
-        {
-            TransactionBL trxBL = new TransactionBL();
-            ListTransaction = trxBL.GetTransactionList(userId);
-
-            dgvTrxHeader.DataSource = new List<Transaction>();
-            if (ListTransaction != null)
-            {
-                dgvTrxHeader.DataSource = ListTransaction;
-                
-                dgvTrxHeader.Columns["POSMachineId"].Visible = false;
-                dgvTrxHeader.Columns["POSTypeId"].Visible = false;
-                dgvTrxHeader.Columns["Pre_TaxAmount"].Visible = false;
-                dgvTrxHeader.Columns["Tax_Amount"].Visible = false;
-                dgvTrxHeader.Columns["Tip_Amount"].Visible = false;
-                dgvTrxHeader.Columns["TokenNumber"].Visible = false;
-                dgvTrxHeader.Columns["TotalPaidAmount"].Visible = false;
-                //dgvTrxHeader.Columns["DateTimeTransactionDate"].Visible = false;
-                dgvTrxHeader.Columns["Transaction_Amount"].Visible = false;
-                //dgvTrxHeader.Columns["DateTimeTrxDate"].Visible = false;
-                dgvTrxHeader.Columns["TrxProfileId"].Visible = false;
-                dgvTrxHeader.Columns["Username"].Visible = false;
-                dgvTrxHeader.Columns["UserId"].Visible = false;
-                dgvTrxHeader.Columns["CustomerId"].Visible = false;
-                dgvTrxHeader.Columns["CreditCardAmount"].Visible = false;
-                dgvTrxHeader.Columns["GameCardAmount"].Visible = false;
-                dgvTrxHeader.Columns["PrimaryCardId"].Visible = false;
-                dgvTrxHeader.Columns["OrderId"].Visible = false;
-                dgvTrxHeader.Columns["Remarks"].Visible = false;
-                dgvTrxHeader.Columns["ExternalSystemReference"].Visible = false;
-                //dgvTrxHeader.Columns["DateTimeLastUpdatedTime"].Visible = false;
-                dgvTrxHeader.Columns["Customer"].Visible = false;
-
-                ApplyColorsToMyTransactionGrid();
-            }
-        }
-
-        public void ApplyColorsToMyTransactionGrid()
-        {
-            if(dgvTrxHeader.DataSource != null && dgvTrxHeader.Rows.Count > 0)
-            {
-                foreach(DataGridViewRow rw in dgvTrxHeader.Rows)
-                {
-                    if(rw.Cells["status"].Value != null 
-                        && (rw.Cells["status"].Value.ToString().ToLower() == "cancelled" || Convert.ToInt32(rw.Cells["OriginalTrxId"].Value) > 0)
-                       )
+                    if (dgvTransaction.SelectedRows[i].Cells["Line_Type"].Value != null &&
+                        dgvTransaction.SelectedRows[i].Cells["Line_Type"].Value.ToString() == "Discount")
                     {
-                        rw.DefaultCellStyle.BackColor = Color.Red;
+                        int discountId = Convert.ToInt32(dgvTransaction.SelectedRows[i].Cells["LineId"].Value);
+                        List<Discounts.DiscountLine> dscLines = transaction.discounts.DiscountLines.FindAll(x => x.DiscountId == discountId);
+                        if (dscLines != null)
+                        {
+                            foreach (Discounts.DiscountLine ln in dscLines)
+                            {
+                                ln.LineValid = false;
+                            }
+                        }
                     }
                 }
+
+                List<TransactionLine> activeTrxLns = transaction.TransactionLines.FindAll(x => x.LineValid == true && x.CancelledLine == false);
+
+                if (activeTrxLns != null && activeTrxLns.Count == 0)
+                    ClearTransaction();
+
+                updateAmounts();
+                RefreshTransactionGrid();
+                updateScreenAmounts();
             }
         }
-    
+
+        private void btnClearTrxn_Click(object sender, EventArgs e)
+        {
+            ClearTransaction();
+            updateScreenAmounts();
+        }
 
         private void txtPhoneno_Leave(object sender, EventArgs e)
         {
@@ -1711,182 +1707,286 @@ namespace Marbale.POS
             }
         }
 
-        void PopulateCustomer()
+        private void tabControlCardAction_Selected(object sender, TabControlEventArgs e)
         {
-            if (Customer != null)
-            {
-                txtFirstname.Text = Customer.first_name;
-                txtLastname.Text = Customer.last_name;
-                txtPhoneno.Text = Customer.contact_phone1;
-                txtAddress1.Text = Customer.address1;
-                txtCity.Text = Customer.city;
-                txtState.Text = Customer.state;
-                txtCountry.Text = Customer.country;
-                txtEmail.Text = Customer.email;
 
-                if (Customer.gender == 'M')
-                    cmbGender.SelectedIndex = 1;
-                else if (Customer.gender == 'F')
-                    cmbGender.SelectedIndex = 2;
-                else
-                    cmbGender.SelectedIndex = 0;
-
-                //dtpDOB.Value = Customer.birth_date;
-            }
+            LoadDetailCurrentTab(tabControlCardAction.SelectedTab.Name);
         }
 
-        void ClearCard()
+
+        private void dgvTrxLines_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            lblCardNotext.Text = string.Empty;
-            lblCardStatustext.Text = string.Empty;
-            txtCardStatus.Text = string.Empty;
-
-            //Issue date population
-            dgvCardDetails.Rows[0].Cells[1].Value = string.Empty;
-
-            //Card Deposit
-            dgvCardDetails.Rows[1].Cells[1].Value = string.Empty;
-
-            //Credits
-            dgvCardDetails.Rows[2].Cells[1].Value = string.Empty;
-
-            //Courtesy
-            dgvCardDetails.Rows[3].Cells[1].Value = string.Empty;
-
-            //Bonus
-            dgvCardDetails.Rows[4].Cells[1].Value = string.Empty;
-
-            //Time
-            dgvCardDetails.Rows[5].Cells[1].Value = string.Empty;
-
-            //Games
-            dgvCardDetails.Rows[6].Cells[1].Value = string.Empty;
-
-            //Credit Plus
-            dgvCard.Rows[0].Cells[1].Value = string.Empty;
-
-            //Loyalty Points
-            dgvCard.Rows[1].Cells[1].Value = string.Empty;
-
-            //Recharged / Spent
-            dgvCard.Rows[2].Cells[1].Value = string.Empty;
-        }
-
-        private void lblCardNumber_Click(object sender, EventArgs e)
-        {
-            frmGenericDataEntry frm = new frmGenericDataEntry();
-            frm.ShowDialog();
-
-            if (!string.IsNullOrEmpty(frm.cardNumber) && frm.cardNumber.Length == 10)
+            if (e.ColumnIndex == 0)
             {
-                HandleCardRead(frm.cardNumber, null);
-                LoadDetailCurrentTab(tabControlCardAction.SelectedTab.Name);
-            }
-        }
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want Reverse the Transaction Line ?", "Confirmation Message", MessageBoxButtons.YesNo);
 
-        private void dgvTrxHeader_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            dgvTrxLines.DataSource = new List<TransactionLine>();
-            if (dgvTrxHeader["Trx_id", e.RowIndex].Value != null)
-            {
-                int TrxId = Convert.ToInt32(dgvTrxHeader["Trx_id", e.RowIndex].Value);
-                Transaction trx = ListTransaction.Find(x => x.Trx_id == TrxId);
-                if (trx != null)
+                if (dialogResult == DialogResult.Yes)
                 {
-                    dgvTrxLines.DataSource = trx.TransactionLines;
+                    if (dgvTrxLines[e.ColumnIndex + 1, e.RowIndex].Value != null)
+                    {
+                        if (dgvTrxLines["OriginalLineID", e.RowIndex].Value != null && Convert.ToInt32(dgvTrxLines["OriginalLineID", e.RowIndex].Value) < 0
+                            && !Convert.ToBoolean(dgvTrxLines["IsLineReversed", e.RowIndex].Value))
+                        {
+                            int trxId = Convert.ToInt32(dgvTrxLines[e.ColumnIndex + 1, e.RowIndex].Value);
+                            int lineId = Convert.ToInt32(dgvTrxLines["DBLineId", e.RowIndex].Value);
+                            TransactionBL traxBl = new TransactionBL();
+                            int reversedTrxId = traxBl.ReverseTransactionLine(trxId, lineId, 0, string.Empty, 0, string.Empty, string.Empty);
 
-                    dgvTrxLines.Columns["AllowCancel"].Visible = false;
-                    dgvTrxLines.Columns["AllowEdit"].Visible = false;
-                    dgvTrxLines.Columns["AllowPriceOverride"].Visible = false;
-                    dgvTrxLines.Columns["AttractionDetails"].Visible = false;
-                    dgvTrxLines.Columns["CancelledLine"].Visible = false;
-                    dgvTrxLines.Columns["CardTypeId"].Visible = false;
-                    dgvTrxLines.Columns["CategoryId"].Visible = false;
-                    dgvTrxLines.Columns["ComboChildLine"].Visible = false;
-                    dgvTrxLines.Columns["CreditPlusConsumptionApplied"].Visible = false;
-                    dgvTrxLines.Columns["CreditPlusConsumptionId"].Visible = false;
-                    dgvTrxLines.Columns["DBLineId"].Visible = false;
-                    dgvTrxLines.Columns["LineProcessed"].Visible = false;
-                    dgvTrxLines.Columns["LineValid"].Visible = false;
-                    dgvTrxLines.Columns["LockerAllocationId"].Visible = false;
-                    dgvTrxLines.Columns["LockerName"].Visible = false;
-                    dgvTrxLines.Columns["LockerNumber"].Visible = false;
-                    dgvTrxLines.Columns["ModifierLine"].Visible = false;
-                    dgvTrxLines.Columns["OriginalLineID"].Visible = false;
-                   // dgvTrxLines.Columns["doubleOriginalPrice"].Visible = false;
-                
-                  
-                    dgvTrxLines.Columns["productSplitTaxExists"].Visible = false;
-                    dgvTrxLines.Columns["TaxInclusivePrice"].Visible = false;
-                    dgvTrxLines.Columns["tax_structer_id"].Visible = false;
-                    dgvTrxLines.Columns["LineAmount"].Visible = false;
-                    dgvTrxLines.Columns["cardId"].Visible = false;
-                    dgvTrxLines.Columns["time"].Visible = false;
-                    dgvTrxLines.Columns["Customer"].Visible = false;
-                    dgvTrxLines.Columns["ModifierSetId"].Visible = false;
-                    //dgvTrxLines.Columns["TransactionLineParentLine"].Visible = false;
-                    dgvTrxLines.Columns["PrintKOT"].Visible = false;
-                    dgvTrxLines.Columns["ParentLine"].Visible = false;
-                    dgvTrxLines.Columns["loyaltyPoints"].Visible = false;
-                    dgvTrxLines.Columns["DBLineId"].Visible = true;
-                    dgvTrxLines.Columns["IsLineReversed"].Visible = true;
-
+                            MessageBox.Show("Reverse Transaction Line was successful, Reversed Transaction Id is : " + reversedTrxId, "Message");
+                            UpdateTransactionTab(0);
+                        }
+                        else
+                        {
+                            MessageBox.Show("This Transaction Line is Already Cancelled");
+                        }
+                    }
                 }
             }
         }
-
-        private void btnReConnectCardReader_Click(object sender, EventArgs e)
+        private void buttonSkinColorReset_Click(object sender, EventArgs e)
         {
-            registerAdditionalCardReaders();
+            POSBackColor = Color.Gray;
+            SetPOSBackgroundColor();
+            dgvTransaction.BackgroundColor = Color.LightBlue;
         }
 
-        private void btnKeypad_Click(object sender, EventArgs e)
+        private void btnLoadTickets_Click(object sender, EventArgs e)
         {
-            (sender as Button).FlatAppearance.BorderSize = 0;
-            showNumberPadForm('-');
-        }
-
-        void showNumberPadForm(char firstKey)
-        {
-            double varAmount = NumberPadForm.ShowNumberPadForm("Enter Amount", firstKey);
-            if (varAmount >= 0)
+            if (CurrentCard == null)
             {
-                tendered_amount = varAmount;
-                updateScreenAmounts();
+                MessageBox.Show("Please tap the card");
+                return;
+            }
+
+            if (CurrentCard.card_id <= 0)
+            {
+                MessageBox.Show("Can't Load tickets to the New card");
+                return;
+            }
+
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADTICKETS, CurrentCard,staticData);
+            frm.ShowDialog();
+            HandleCardRead(CurrentCard.CardNumber, null);
+
+            //if (frm.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+            //{
+            //    HandleCardRead(CurrentCard.CardNumber, null);
+            //}
+        }
+
+        private void btnLoadBonus_Click(object sender, EventArgs e)
+        {
+            if (CurrentCard == null)
+            {
+                MessageBox.Show("Please tap the card");
+                return;
+            }
+
+            if (CurrentCard.card_id <= 0)
+            {
+                MessageBox.Show("Can't Load Bonus to the New card");
+                return;
+            }
+
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADBONUS, CurrentCard,staticData);
+            frm.ShowDialog();
+            HandleCardRead(CurrentCard.CardNumber, null);
+
+            //if (frm.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+            //{
+            //    HandleCardRead(CurrentCard.CardNumber, null);
+            //}
+        }
+
+        private void btnTransferCard_Click(object sender, EventArgs e)
+        {
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.TRANSFERCARD, CurrentCard, staticData);
+            frm.ShowDialog();
+        }
+
+        private void btnLoadMultiple_Click(object sender, EventArgs e)
+        {
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADMULTIPLE, CurrentCard, staticData);
+
+            if (frm.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+            {
+                LoadMultiple();
+                //foreach (Transaction.TransactionLine tl in NewTrx.TrxLines)
+                //{
+                //    tl.AllowEdit = false;
+                //    tl.AllowCancel = false;
+                //}
+            }
+            //frm.ShowDialog();
+        }
+
+        private void btnCansolidateCard_Click(object sender, EventArgs e)
+        {
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.CANSOLIDATECARD, CurrentCard, staticData);
+            frm.ShowDialog();
+        }
+
+        private void btnRefund_Click(object sender, EventArgs e)
+        {
+            if (CurrentCard == null)
+            {
+                MessageBox.Show("Please tap the card");
+                return;
+            }
+
+            if (CurrentCard.card_id == -1 || CurrentCard.CardStatus == "NEW")
+            {
+                MessageBox.Show("Can't Refund New Card");
+                return;
+            }
+
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.REFUNDCARD, CurrentCard, staticData);
+            frm.ShowDialog();
+
+            HandleCardRead(CurrentCard.CardNumber, null);
+        }
+
+        private void dgvTrxHeader_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+
+                if (e.ColumnIndex == 0)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure you want Reverse the Transaction ?", "Confirmation Message", MessageBoxButtons.YesNo);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        if (dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value != null
+                            && dgvTrxHeader["status", e.RowIndex].Value != null)
+                        {
+                            int trxId = Convert.ToInt32(dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value);
+                            if (dgvTrxHeader["status", e.RowIndex].Value.ToString().ToLower() != "cancelled"
+                                && (dgvTrxHeader["OriginalTrxId", e.RowIndex].Value == null || Convert.ToInt32(dgvTrxHeader["OriginalTrxId", e.RowIndex].Value) == 0))
+                            {
+
+                                TransactionBL traxBl = new TransactionBL();
+                                int reversedTrxId = traxBl.ReverseTransaction(trxId, 0, string.Empty);
+
+                                MessageBox.Show("Reverse Transaction was successful, Reversed Transaction Id is : " + reversedTrxId, "Message");
+                                UpdateTransactionTab(0);
+                            }
+                            else
+                            {
+                                MessageBox.Show("This Transaction or Line Already Reversed, can not Reverse");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
-
-        private void updateScreenAmounts()
+        void cmbDisplayGroups_SelectedIndexChanged(object sender, EventArgs e)
         {
-            double balanceAmount = 0;
-            double changeAmount = 0;
-            if (transaction == null)
+            //tbPageProducts.select = cmbDisplayGroups.SelectedIndex;
+            cmbDisplayGroups.Visible = false;
+            tabControlProducts.SelectedIndex = cmbDisplayGroups.SelectedIndex;
+            lblTabText.Text = tabControlProducts.SelectedTab.Text;
+        }
+
+        void cmbDisplayGroups_LostFocus(object sender, EventArgs e)
+        {
+            if (!btnDisplayGroupDropDown.Focused)
+                cmbDisplayGroups.Visible = false;
+        }
+
+        private void btnPrevProductGroup_Click(object sender, EventArgs e)
+        {
+            try
             {
-                total_amount = 0;
-                tendered_amount = 0;
-                TipAmount = 0;//Modification on 09-Nov-2015:Tip Amount Feature
+                int i = tabControlProducts.SelectedIndex - 1;
+                if (i < 0)
+                    i = tabControlProducts.TabPages.Count - 1;
+
+                tabControlProducts.SelectedIndex = i;
+                lblTabText.Text = tabControlProducts.SelectedTab.Text;
             }
-            else
+            catch { }
+        }
+
+        private void btnNextProductGroup_Click(object sender, EventArgs e)
+        {
+
+            try
             {
-                //Begin Modification on 09-Nov-2015:Tip Amount Feature
-                total_amount = (double)transaction.Net_Transaction_Amount + TipAmount;
+                int i = tabControlProducts.SelectedIndex + 1;
+                if (i >= tabControlProducts.TabPages.Count)
+                    i = 0;
 
-                if (transaction.TotalPaidAmount == 0)
-                    balanceAmount = total_amount - transaction.TotalPaidAmount;
-                else
-                    balanceAmount = total_amount - (transaction.TotalPaidAmount + transaction.Tip_Amount);
-                changeAmount = Math.Max(tendered_amount - balanceAmount, 0);
+                tabControlProducts.SelectedIndex = i;
+                lblTabText.Text = tabControlProducts.SelectedTab.Text;
+            }
+            catch
+            {
+            }
+        }
 
-                TipAmount = transaction.Tip_Amount;
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            string currentPassword = txtCurrentPassword.Text;
+            string newPassword = txtNewPassword.Text;
+            string ReEnteredPassword = txtReEnterNewPassword.Text;
+
+
+            if (string.IsNullOrEmpty(currentPassword))
+            {
+                MessageBox.Show("Please Enter Current Password");
+                return;
             }
 
-            textBoxTransactionTotal.Text = "Rs " + total_amount.ToString(); //.ToString("$"); //AMOUNT_WITH_CURRENCY_SYMBOL
-            textBoxBalance.Text = "Rs " + balanceAmount.ToString(); //.ToString("Rs");
-            textBoxTendered.Text = "Rs " + tendered_amount.ToString(); //.ToString("$"); //AMOUNT_WITH_CURRENCY_SYMBOL
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                MessageBox.Show("Please Enter New Password");
+                return;
+            }
 
-            txtChangeAmount.Text = "Rs " + changeAmount.ToString(); //.ToString(ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);
-            txtTipAmount.Text = "Rs " + TipAmount.ToString(); //(ParafaitEnv.AMOUNT_WITH_CURRENCY_SYMBOL);
+            if (string.IsNullOrEmpty(ReEnteredPassword))
+            {
+                MessageBox.Show("Please Re Enter Password");
+                return;
+            }
+
+            if (newPassword != ReEnteredPassword)
+            {
+                MessageBox.Show("New Password and Re Entered Password not Matching");
+                return;
+            }
+
+            if (CurrentUser != null && CurrentUser.Password != currentPassword)
+            {
+                MessageBox.Show("Current Password is Incorrect");
+                return;
+            }
+
+            posBussiness.ChangeUserPassword(CurrentUser.Name, currentPassword, newPassword);
+            MessageBox.Show("Password is Changed Successfully");
+            txtCurrentPassword.Text = "";
+            txtNewPassword.Text = "";
+            txtReEnterNewPassword.Text = "";
+        }
+
+        private void btnChangeSkinColor_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ColorDialog colorDialogBox = new ColorDialog();
+            colorDialogBox.FullOpen = true;
+
+            DialogResult CDR = colorDialogBox.ShowDialog();
+
+            if (CDR == DialogResult.OK)
+            {
+                btnChangeSkinColor.ForeColor = colorDialogBox.Color;
+                POSBackColor = colorDialogBox.Color;
+                SetPOSBackgroundColor();
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -1906,17 +2006,6 @@ namespace Marbale.POS
             }
         }
 
-        public void RefreshTabs()
-        {
-            ClearTransaction();
-            updateScreenAmounts();
-            UpdateProductsTab();
-            UpdateDiscountsTab();
-            updateCardDetailsGrid();
-            registerAdditionalCardReaders();
-            updateScreenAmounts();
-            UpdatePurchaseTaskGrid();
-        }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -1933,10 +2022,10 @@ namespace Marbale.POS
 
         private void posContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-             if (e.ClickedItem.Equals(changeLayoutToolStripMenuItem))
-             {
+            if (e.ClickedItem.Equals(changeLayoutToolStripMenuItem))
+            {
                 ChangeLayout();
-             }
+            }
         }
 
         void trxButtonMouseUp(object sender, MouseEventArgs e)
@@ -2046,10 +2135,10 @@ namespace Marbale.POS
             else
             {
                 //cmbDisplayGroups.Location = new Point(btnDisplayGroupDropDown.Location.X + btnDisplayGroupDropDown.Width - cmbDisplayGroups.Width - 2, btnDisplayGroupDropDown.Location.Y + btnDisplayGroupDropDown.Height);
-                cmbDisplayGroups.Location = new Point(btnDisplayGroupDropDown.Location.X   , btnDisplayGroupDropDown.Location.Y + 50);
+                cmbDisplayGroups.Location = new Point(btnDisplayGroupDropDown.Location.X, btnDisplayGroupDropDown.Location.Y + 50);
                 cmbDisplayGroups.BringToFront();
 
-             
+
                 cmbDisplayGroups.Height = (int)(cmbDisplayGroups.Items.Count * cmbDisplayGroups.ItemHeight * 1.1);
 
                 if (cmbDisplayGroups.Height > tbPageProducts.Height - 40)
@@ -2066,8 +2155,179 @@ namespace Marbale.POS
             }
         }
 
+        private void lblCardNumber_Click(object sender, EventArgs e)
+        {
+            frmGenericDataEntry frm = new frmGenericDataEntry();
+            frm.ShowDialog();
+
+            if (!string.IsNullOrEmpty(frm.cardNumber) && frm.cardNumber.Length == 10)
+            {
+                HandleCardRead(frm.cardNumber, null);
+                LoadDetailCurrentTab(tabControlCardAction.SelectedTab.Name);
+            }
+        }
+
+        private void dgvTrxHeader_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            dgvTrxLines.DataSource = new List<TransactionLine>();
+            if (dgvTrxHeader["Trx_id", e.RowIndex].Value != null)
+            {
+                int TrxId = Convert.ToInt32(dgvTrxHeader["Trx_id", e.RowIndex].Value);
+                Transaction trx = ListTransaction.Find(x => x.Trx_id == TrxId);
+                if (trx != null)
+                {
+                    dgvTrxLines.DataSource = trx.TransactionLines;
+
+                    dgvTrxLines.Columns["AllowCancel"].Visible = false;
+                    dgvTrxLines.Columns["AllowEdit"].Visible = false;
+                    dgvTrxLines.Columns["AllowPriceOverride"].Visible = false;
+                    dgvTrxLines.Columns["AttractionDetails"].Visible = false;
+                    dgvTrxLines.Columns["CancelledLine"].Visible = false;
+                    dgvTrxLines.Columns["CardTypeId"].Visible = false;
+                    dgvTrxLines.Columns["CategoryId"].Visible = false;
+                    dgvTrxLines.Columns["ComboChildLine"].Visible = false;
+                    dgvTrxLines.Columns["CreditPlusConsumptionApplied"].Visible = false;
+                    dgvTrxLines.Columns["CreditPlusConsumptionId"].Visible = false;
+                    dgvTrxLines.Columns["DBLineId"].Visible = false;
+                    dgvTrxLines.Columns["LineProcessed"].Visible = false;
+                    dgvTrxLines.Columns["LineValid"].Visible = false;
+                    dgvTrxLines.Columns["LockerAllocationId"].Visible = false;
+                    dgvTrxLines.Columns["LockerName"].Visible = false;
+                    dgvTrxLines.Columns["LockerNumber"].Visible = false;
+                    dgvTrxLines.Columns["ModifierLine"].Visible = false;
+                    dgvTrxLines.Columns["OriginalLineID"].Visible = false;
+                    // dgvTrxLines.Columns["doubleOriginalPrice"].Visible = false;
+
+
+                    dgvTrxLines.Columns["productSplitTaxExists"].Visible = false;
+                    dgvTrxLines.Columns["TaxInclusivePrice"].Visible = false;
+                    dgvTrxLines.Columns["tax_structer_id"].Visible = false;
+                    dgvTrxLines.Columns["LineAmount"].Visible = false;
+                    dgvTrxLines.Columns["cardId"].Visible = false;
+                    dgvTrxLines.Columns["time"].Visible = false;
+                    dgvTrxLines.Columns["Customer"].Visible = false;
+                    dgvTrxLines.Columns["ModifierSetId"].Visible = false;
+                    //dgvTrxLines.Columns["TransactionLineParentLine"].Visible = false;
+                    dgvTrxLines.Columns["PrintKOT"].Visible = false;
+                    dgvTrxLines.Columns["ParentLine"].Visible = false;
+                    dgvTrxLines.Columns["loyaltyPoints"].Visible = false;
+                    dgvTrxLines.Columns["DBLineId"].Visible = true;
+                    dgvTrxLines.Columns["IsLineReversed"].Visible = true;
+
+                }
+            }
+        }
+
+        private void btnReConnectCardReader_Click(object sender, EventArgs e)
+        {
+            registerAdditionalCardReaders();
+        }
+
+        private void btnKeypad_Click(object sender, EventArgs e)
+        {
+            (sender as Button).FlatAppearance.BorderSize = 0;
+            showNumberPadForm('-');
+        }
+
+
+
+        #endregion
+
+
+
+        //public void ValidateProduct(Product product)
+        //{
+        //    if (product.TypeName == GlobalEnum.ProductType.NEW.DescriptionAttr())
+        //    {
+        //        if(CurrentCard.CardNumber=="")
+        //        {
+        //            MessageBox.Show("New card not tapped.");
+        //            return;
+
+        //        }
+        //        if (CurrentCard.CardStatus == GlobalEnum.CARD_STATUS.ISSUED.DescriptionAttr())
+        //        {
+        //            //lblCardStatustext.Text = CurrentCard.CardStatus;
+        //            MessageBox.Show("Please choose the new  card.");
+        //            return;
+        //        }
+
+        //    }
+
+
+        //}
+
+        #region Others
+        private void ChangeLayout()
+        {
+            //int panelWidth1 = MarbleSplitContainer.Panel1.Width;
+            //int panelWidth2 = MarbleSplitContainer.Panel2.Width;
+
+            //MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Width - MarbleSplitContainer.SplitterWidth-1000;
+
+            if (tbHomeControls.Parent == MarbleSplitContainer.Panel1)
+            {
+                //MarbleSplitContainer.Panel1.Width = panelWidth2;
+                //MarbleSplitContainer.Panel2.Width = panelWidth1;
+                MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Panel2.Width;
+
+                MarbleSplitContainer.Panel1.Controls.Remove(tbHomeControls);
+                MarbleSplitContainer.Panel1.Controls.Remove(panelButtons);
+                MarbleSplitContainer.Panel2.Controls.Add(tbHomeControls);
+                MarbleSplitContainer.Panel2.Controls.Add(panelButtons);
+
+                tbHomeControls.Width = MarbleSplitContainer.Panel2.Width;
+                //tbHomeControls.Height = 603; //MarbleSplitContainer.Panel2.Height - panelButtons.Height;
+
+                MarbleSplitContainer.Panel2.Controls.Remove(pnlCardDetails);
+                MarbleSplitContainer.Panel1.Controls.Add(pnlCardDetails);
+
+                pnlCardDetails.Size = MarbleSplitContainer.Panel1.ClientSize;
+            }
+            else
+            {
+                MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Panel2.Width;
+                MarbleSplitContainer.Panel1.Controls.Add(tbHomeControls);
+                MarbleSplitContainer.Panel1.Controls.Add(panelButtons);
+                MarbleSplitContainer.Panel2.Controls.Remove(tbHomeControls);
+                MarbleSplitContainer.Panel2.Controls.Remove(panelButtons);
+
+                tbHomeControls.Width = MarbleSplitContainer.Panel1.Width;
+                //tbHomeControls.Height = 603; // MarbleSplitContainer.Panel1.Height - panelButtons.Height ;
+
+                MarbleSplitContainer.Panel2.Controls.Add(pnlCardDetails);
+                MarbleSplitContainer.Panel1.Controls.Remove(pnlCardDetails);
+
+                pnlCardDetails.Size = MarbleSplitContainer.Panel2.ClientSize;
+            }
+        }
+        public void ApplyColorsToMyTransactionGrid()
+        {
+            if (dgvTrxHeader.DataSource != null && dgvTrxHeader.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow rw in dgvTrxHeader.Rows)
+                {
+                    if (rw.Cells["status"].Value != null
+                        && (rw.Cells["status"].Value.ToString().ToLower() == "cancelled" || Convert.ToInt32(rw.Cells["OriginalTrxId"].Value) > 0)
+                       )
+                    {
+                        rw.DefaultCellStyle.BackColor = Color.Red;
+                    }
+                }
+            }
+        }
+        void showNumberPadForm(char firstKey)
+        {
+            double varAmount = NumberPadForm.ShowNumberPadForm("Enter Amount", firstKey);
+            if (varAmount >= 0)
+            {
+                tendered_amount = varAmount;
+                updateScreenAmounts();
+            }
+        }
+
         void InitializeProductDisplayGroupDropDown()
-        {   
+        {
             cmbDisplayGroups = new ListBox();
             cmbDisplayGroups.Font = new Font("Arial", 14.0F);
             cmbDisplayGroups.SelectionMode = SelectionMode.One;
@@ -2087,109 +2347,7 @@ namespace Marbale.POS
             tbPageProducts.Controls.Add(cmbDisplayGroups);
         }
 
-        void cmbDisplayGroups_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //tbPageProducts.select = cmbDisplayGroups.SelectedIndex;
-            cmbDisplayGroups.Visible = false;
-            tabControlProducts.SelectedIndex = cmbDisplayGroups.SelectedIndex;
-            lblTabText.Text = tabControlProducts.SelectedTab.Text;
-        }
 
-        void cmbDisplayGroups_LostFocus(object sender, EventArgs e)
-        {
-            if (!btnDisplayGroupDropDown.Focused)
-                cmbDisplayGroups.Visible = false;
-        }
-
-        private void btnPrevProductGroup_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int i = tabControlProducts.SelectedIndex - 1;
-                if (i < 0)
-                    i = tabControlProducts.TabPages.Count - 1;
-
-                tabControlProducts.SelectedIndex = i;
-                lblTabText.Text = tabControlProducts.SelectedTab.Text;
-            }
-            catch{ }
-        }
-
-        private void btnNextProductGroup_Click(object sender, EventArgs e)
-        {
-          
-            try
-            {
-                int i = tabControlProducts.SelectedIndex + 1;
-                if (i >= tabControlProducts.TabPages.Count)
-                    i = 0;
-
-                tabControlProducts.SelectedIndex = i;
-                lblTabText.Text = tabControlProducts.SelectedTab.Text;
-            }
-            catch
-            {
-            }
-        }
-
-        private void btnChangePassword_Click(object sender, EventArgs e)
-        {
-            string currentPassword = txtCurrentPassword.Text;
-            string newPassword = txtNewPassword.Text;
-            string ReEnteredPassword = txtReEnterNewPassword.Text;
-
-
-            if (string.IsNullOrEmpty(currentPassword))
-            {
-                MessageBox.Show("Please Enter Current Password");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(newPassword))
-            {
-                MessageBox.Show("Please Enter New Password");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(ReEnteredPassword))
-            {
-                MessageBox.Show("Please Re Enter Password");
-                return;
-            }
-
-            if (newPassword != ReEnteredPassword)
-            {
-                MessageBox.Show("New Password and Re Entered Password not Matching");
-                return;
-            }
-
-            if(CurrentUser != null && CurrentUser.Password != currentPassword)
-            {
-                MessageBox.Show("Current Password is Incorrect");
-                return;
-            }
-
-            posBussiness.ChangeUserPassword(CurrentUser.Name, currentPassword, newPassword);
-            MessageBox.Show("Password is Changed Successfully");
-            txtCurrentPassword.Text = "";
-            txtNewPassword.Text = "";
-            txtReEnterNewPassword.Text = "";
-        }
-
-        private void btnChangeSkinColor_Click(object sender, EventArgs e)
-        {
-            System.Windows.Forms.ColorDialog colorDialogBox = new ColorDialog();
-            colorDialogBox.FullOpen = true;
-
-            DialogResult CDR = colorDialogBox.ShowDialog();
-
-            if (CDR == DialogResult.OK)
-            {
-                btnChangeSkinColor.ForeColor = colorDialogBox.Color;
-                POSBackColor = colorDialogBox.Color;
-                SetPOSBackgroundColor();
-            }
-        }
 
         private void SetPOSBackgroundColor()
         {
@@ -2208,186 +2366,366 @@ namespace Marbale.POS
             dgvTransaction.BackgroundColor = POSBackColor;
         }
 
-        private void buttonSkinColorReset_Click(object sender, EventArgs e)
-        {
-            POSBackColor = Color.Gray;
-            SetPOSBackgroundColor();
-            dgvTransaction.BackgroundColor = Color.LightBlue;
-        }
 
-        private void btnLoadTickets_Click(object sender, EventArgs e)
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #region Customer
+        private void SetupCustomerForm()
         {
-            if (CurrentCard == null)
+            dataLogger.Debug("Begin POS SetupCustomerForm");
+            appCustomerData = siteSetup.GetAppSettings("customer");
+            if (appCustomerData != null && appCustomerData.Count > 0)
             {
-                MessageBox.Show("Please tap the card");
-                return;
+
+                foreach (AppSetting appSetting in appCustomerData)
+                {
+                    if (appSetting.Name == "FIRST_NAME")
+                    {
+
+                        pnlFirstName.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.NotUsed ? false : true;
+                        lblfFirstname.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory ? true : false;
+
+                    }
+
+                    if (appSetting.Name == "LAST_NAME")
+                    {
+
+                        pnllastname.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.NotUsed ? false : true;
+                        lblflatname.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory ? true : false;
+                    }
+
+
+                    if (appSetting.Name == "CONTACT_PHONE1")
+                    {
+
+                        pnlPhoneno.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.NotUsed ? false : true;
+                        lblfphone.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory ? true : false;
+                    }
+
+                    if (appSetting.Name == "GENDER")
+                    {
+                        pnlGender.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.NotUsed ? false : true;
+                        lblfGender.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory ? true : false;
+                    }
+
+                    if (appSetting.Name == "ADDRESS1")
+                    {
+                        pnlAddress1.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.NotUsed ? false : true;
+                        lblfaddress.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory ? true : false;
+                    }
+                    if (appSetting.Name == "CITY")
+                    {
+                        pnlCity.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.NotUsed ? false : true;
+                        lblfCity.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory ? true : false;
+                    }
+
+                    if (appSetting.Name == "STATE")
+                    {
+                        pnlState.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.NotUsed ? false : true;
+                        lblfState.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory ? true : false;
+                    }
+
+                    if (appSetting.Name == "COUNTRY")
+                    {
+                        pnlCountry.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.NotUsed ? false : true;
+                        lblfCountry.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory ? true : false;
+                    }
+
+                    if (appSetting.Name == "EMAIL")
+                    {
+                        pnlState.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.NotUsed ? false : true;
+                        lblfState.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory ? true : false;
+                    }
+                    if (appSetting.Name == "BIRTH_DATE")
+                    {
+                        pnlDOB.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.NotUsed ? false : true;
+                        lblfDOB.Visible = appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory ? true : false;
+                    }
+
+                }
             }
-
-            if(CurrentCard.card_id <= 0)
-            {
-                MessageBox.Show("Can't Load tickets to the New card");
-                return;
-            }
-
-            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADTICKETS, CurrentCard);
-            frm.ShowDialog();
-            HandleCardRead(CurrentCard.CardNumber, null);
-
-            //if (frm.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
-            //{
-            //    HandleCardRead(CurrentCard.CardNumber, null);
-            //}
+            dataLogger.Debug("Begin POS SetupCustomerForm");
         }
 
-        private void btnLoadBonus_Click(object sender, EventArgs e)
+        private bool ValidateCustomer()
         {
-            if (CurrentCard == null)
-            {
-                MessageBox.Show("Please tap the card");
-                return;
-            }
+            bool Validate = false;
+            dataLogger.Debug("Begin POS ValidateCustomer");
 
-            if (CurrentCard.card_id <= 0)
-            {
-                MessageBox.Show("Can't Load Bonus to the New card");
-                return;
-            }
-
-            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADBONUS, CurrentCard);
-            frm.ShowDialog();
-            HandleCardRead(CurrentCard.CardNumber, null);
-
-            //if (frm.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
-            //{
-            //    HandleCardRead(CurrentCard.CardNumber, null);
-            //}
-        }
-
-        private void btnTransferCard_Click(object sender, EventArgs e)
-        {
-            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.TRANSFERCARD, CurrentCard);
-            frm.ShowDialog();
-        }
-
-        private void btnLoadMultiple_Click(object sender, EventArgs e)
-        {
-            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADMULTIPLE, CurrentCard);
-            frm.ShowDialog();
-        }
-
-        private void btnCansolidateCard_Click(object sender, EventArgs e)
-        {
-            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.CANSOLIDATECARD, CurrentCard);
-            frm.ShowDialog();
-        }
-
-        private void btnRefund_Click(object sender, EventArgs e)
-        {
-            if(CurrentCard == null)
-            {
-                MessageBox.Show("Please tap the card");
-                return;
-            }
-
-            if (CurrentCard.card_id == -1 || CurrentCard.CardStatus == "NEW")
-            {
-                MessageBox.Show("Can't Refund New Card");
-                return;
-            }
-
-            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.REFUNDCARD, CurrentCard);
-            frm.ShowDialog();
-
-            HandleCardRead(CurrentCard.CardNumber, null);
-        }
-
-        private void dgvTrxHeader_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
             try
             {
+                //List<AppSetting> appCustomerData = siteSetup.GetAppSettings("customer");
 
-                if (e.ColumnIndex == 0)
+                if (appCustomerData != null && appCustomerData.Count > 0)
                 {
-                    DialogResult dialogResult = MessageBox.Show("Are you sure you want Reverse the Transaction ?", "Confirmation Message", MessageBoxButtons.YesNo);
 
-                    if (dialogResult == DialogResult.Yes)
+                    foreach (AppSetting appSetting in appCustomerData)
                     {
-                        if (dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value != null 
-                            && dgvTrxHeader["status", e.RowIndex].Value != null )
+                        //if (appSetting.Name == "ADDRESS1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        //{
+                        if (string.IsNullOrEmpty(txtFirstname.Text))
                         {
-                            int trxId = Convert.ToInt32(dgvTrxHeader[e.ColumnIndex + 1, e.RowIndex].Value);
-                            if (dgvTrxHeader["status", e.RowIndex].Value.ToString().ToLower() != "cancelled"
-                                && (dgvTrxHeader["OriginalTrxId", e.RowIndex].Value == null || Convert.ToInt32(dgvTrxHeader["OriginalTrxId", e.RowIndex].Value) == 0))
-                            {
-                                
-                                TransactionBL traxBl = new TransactionBL();
-                                int reversedTrxId = traxBl.ReverseTransaction(trxId, 0, string.Empty);
+                            MessageBox.Show("Please enter the First Name");
+                            return false;
+                        }
+                        //}
+                        //if (appSetting.Name == "ADDRESS1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        //{
+                        if (string.IsNullOrEmpty(txtLastname.Text))
+                        {
+                            MessageBox.Show("Please enter the Last Name");
+                            return false;
+                        }
+                        //}
 
-                                MessageBox.Show("Reverse Transaction was successful, Reversed Transaction Id is : " + reversedTrxId, "Message");
-                                UpdateTransactionTab(0);
-                            }
-                            else
+
+                        if (appSetting.Name == "CONTACT_PHONE1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtPhoneno.Text))
                             {
-                                MessageBox.Show("This Transaction or Line Already Reversed, can not Reverse");
+                                MessageBox.Show("Please enter the Mobile Number");
+                                return false;
+                            }
+
+                            bool Valid = new Regex(@"\(?\d{3}\)?[-\.]? *\d{3}[-\.]? *[-\.]?\d{4}").IsMatch(txtAddress1.Text);
+                            if (string.IsNullOrEmpty(txtPhoneno.Text))
+                            {
+                                MessageBox.Show("Please enter valid Mobile Number");
+                                return false;
+                            }
+
+
+
+                        }
+
+                        if (appSetting.Name == "GENDER" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(cmbGender.Text))
+                            {
+                                MessageBox.Show("Please enter the Gender");
+                                return false;
                             }
                         }
+
+                        if (appSetting.Name == "ADDRESS1" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtAddress1.Text))
+                            {
+                                MessageBox.Show("Please enter the Address1");
+                                return false;
+                            }
+                        }
+
+
+                        if (appSetting.Name == "CITY" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtCity.Text))
+                            {
+                                MessageBox.Show("Please enter the City");
+                                return false;
+                            }
+                        }
+
+                        if (appSetting.Name == "STATE" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtState.Text))
+                            {
+                                MessageBox.Show("Please enter the State");
+                                return false;
+                            }
+                        }
+
+                        if (appSetting.Name == "COUNTRY" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtCountry.Text))
+                            {
+                                MessageBox.Show("Please enter the Country");
+                                return false;
+                            }
+                        }
+
+                        if (appSetting.Name == "EMAIL" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(txtEmail.Text))
+                            {
+                                MessageBox.Show("Please enter the Email");
+                                return false;
+                            }
+
+                            bool Valid = new Regex(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z").IsMatch(txtAddress1.Text);
+                            if (string.IsNullOrEmpty(txtEmail.Text))
+                            {
+                                MessageBox.Show("Please enter valid Mobile Number");
+                                return false;
+                            }
+
+
+
+                        }
+                        if (appSetting.Name == "BIRTH_DATE" && appSetting.Value.ToINT() == (int)GlobalEnum.MadatoryOption.Mandatory)
+                        {
+                            if (string.IsNullOrEmpty(dtpDOB.Text) && Convert.ToDateTime(dtpDOB.Text) == DateTime.MinValue)
+                            {
+                                MessageBox.Show("Please enter the Date of Birth");
+                                return false;
+                            }
+                        }
+                        Validate = true;
                     }
+
+
                 }
+                dataLogger.Debug("END POS ValidateCustomer");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                dataLogger.Error("Error POS ValidateCustomer", ex);
+            }
+            return Validate;
+        }
+
+        void PopulateCustomer()
+        {
+            if (Customer != null)
+            {
+                txtFirstname.Text = Customer.first_name;
+                txtLastname.Text = Customer.last_name;
+                txtPhoneno.Text = Customer.contact_phone1;
+                txtAddress1.Text = Customer.address1;
+                txtCity.Text = Customer.city;
+                txtState.Text = Customer.state;
+                txtCountry.Text = Customer.country;
+                txtEmail.Text = Customer.email;
+
+                if (Customer.gender == 'M')
+                    cmbGender.SelectedIndex = 1;
+                else if (Customer.gender == 'F')
+                    cmbGender.SelectedIndex = 2;
+                else
+                    cmbGender.SelectedIndex = 0;
+
+                //dtpDOB.Value = Customer.birth_date;
             }
         }
-        
-        bool IsAnyTransactionLineCancelled(int trxId)
-        {
-            bool cancelledLineFound = false;
 
+        #endregion
+
+
+
+        #region Gameplay       
+        private void GamePlayMyReansactionGrid()
+        {
             try
             {
-                if (ListTransaction != null)
-                {
-                    TransactionLine trxLine = ListTransaction.Find(x => x.Trx_id == trxId).TransactionLines.Find(x => x.IsLineReversed);
-
-                    if (trxLine != null)
-                        cancelledLineFound = true;
-                }
+                posCodeBL.BindGamePlayCardGrid(CurrentCard, ref dgvGamePurchases);
             }
-            catch { }
-
-            return cancelledLineFound;
-        }
-
-
-        private void dgvTrxLines_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 0)
+            catch (Exception ex)
             {
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want Reverse the Transaction Line ?", "Confirmation Message", MessageBoxButtons.YesNo);
+                dataLogger.Error("On Pos :UpdateGamePlayCardGrid ", ex);
 
-                if (dialogResult == DialogResult.Yes)
+            }
+
+        }
+        private void UpdateGamePlayCardGrid()
+        {
+            try
+            {
+                posCodeBL.BindGamePlayCardGrid(CurrentCard, ref dgvCardGames);
+            }
+            catch (Exception ex)
+            {
+                dataLogger.Error("On Pos :UpdateGamePlayCardGrid ", ex);
+
+            }
+
+        }
+
+        private void AutoClearTimer_Tick(object sender, EventArgs e)
+        {
+
+            if(seconds< maxSecCount)
+            {
+                seconds++;
+
+            }
+            else
+            {
+                AutoClearTimer.Stop();
+                seconds = 0;
+                    //AutoClearTimer.Enabled = false;
+                if (transaction == null)
                 {
-                    if (dgvTrxLines[e.ColumnIndex + 1, e.RowIndex].Value != null)
-                    {
-                        if (dgvTrxLines["OriginalLineID", e.RowIndex].Value !=null && Convert.ToInt32(dgvTrxLines["OriginalLineID", e.RowIndex].Value) < 0 
-                            && !Convert.ToBoolean(dgvTrxLines["IsLineReversed", e.RowIndex].Value))
-                        {
-                            int trxId = Convert.ToInt32(dgvTrxLines[e.ColumnIndex + 1, e.RowIndex].Value);
-                            int lineId = Convert.ToInt32(dgvTrxLines["DBLineId", e.RowIndex].Value);
-                            TransactionBL traxBl = new TransactionBL();
-                            int reversedTrxId = traxBl.ReverseTransactionLine(trxId, lineId, 0, string.Empty,0, string.Empty, string.Empty);
-
-                            MessageBox.Show("Reverse Transaction Line was successful, Reversed Transaction Id is : " + reversedTrxId, "Message");
-                            UpdateTransactionTab(0);
-                        }
-                        else
-                        {
-                            MessageBox.Show("This Transaction Line is Already Cancelled");
-                        }
-                    }
+                    RefreshTabs();
                 }
             }
+
         }
+
+        private void pbRedeem_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+
+
+        //private void UpdateCardTransactionViewGrid()
+        //{
+
+
+        //    try
+        //    {
+        //        posCodeBL.BindPurchaseGrid(CurrentCard, ref dgvCardTransaction);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        dataLogger.Error("On Pos :UpdateGamePlayCardGrid ", ex);
+
+        //    }
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

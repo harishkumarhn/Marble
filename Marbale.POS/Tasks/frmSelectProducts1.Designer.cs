@@ -1,6 +1,6 @@
 ﻿namespace Marbale.POS.Tasks
 {
-    partial class frmSelectProducts
+    partial class frmSelectProducts1
     {
         /// <summary>
         /// Required designer variable.
