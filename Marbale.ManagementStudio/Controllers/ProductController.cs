@@ -232,12 +232,16 @@ namespace MarbaleManagementStudio.Controllers
             return Json(1, JsonRequestBehavior.AllowGet);
         }
         public ActionResult DisplayGroup()
-        {
+        {            
             List<DisplayGroupModel> DispalyGroups = productBl.GetProductDisplayGroup();
             return View(DispalyGroups);
         }
         public int UpdateProductDispalyGroup(List<DisplayGroupModel> model)
         {
+            model.ForEach(el =>
+            {
+                el.LastUpdatedBy = Session["UserName"].ToString();
+            });
             return productBl.UpdateProductDispalyGroup(model);
 
         }

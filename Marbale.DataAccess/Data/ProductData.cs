@@ -330,11 +330,12 @@ namespace Marbale.DataAccess
             {
                 foreach (var dispaly in model)
                 {
-                    SqlParameter[] sqlParameters = new SqlParameter[4];
+                    SqlParameter[] sqlParameters = new SqlParameter[5];
                     sqlParameters[0] = new SqlParameter("@Id", dispaly.Id);
                     sqlParameters[1] = new SqlParameter("@DisplayGroup", dispaly.DisplayGroup);
                     sqlParameters[2] = new SqlParameter("@Description", dispaly.Description);
                     sqlParameters[3] = new SqlParameter("@SortOrder", dispaly.SortOrder);
+                    sqlParameters[4] = new SqlParameter("@LastUpdatedBy", dispaly.LastUpdatedBy);
                     conn.executeUpdateQuery("sp_InsertOrUpdateDisplayGroup", sqlParameters);
                 }
             }
