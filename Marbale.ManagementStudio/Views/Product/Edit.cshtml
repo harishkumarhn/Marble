@@ -299,6 +299,9 @@
                         if (Price) {
                             $('#EffectivePrice').val((Price - FaceValue).toFixed(4));
                             $('#FinalPrice').val(Price);
+                        } else {
+                            $('#EffectivePrice').val(0);
+                            $('#FinalPrice').val(null);
                         }
                     }
 
