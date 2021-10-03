@@ -419,7 +419,7 @@
             'width': 1000
         });
         if (id != 0) {
-            $('#modelBody').load('/Product/NonCardEdit', { "id": id });
+            $('#modelBody').load('/Product/NonCardEdit/'+id);
             $('.modal-title').text('Edit Product');
         } else {
             $('#modelBody').load('/Product/NonCardEdit');
