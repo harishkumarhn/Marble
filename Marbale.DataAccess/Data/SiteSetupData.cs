@@ -216,7 +216,6 @@ namespace Marbale.DataAccess
             SqlParameter[] sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@loginId", username);
             sqlParameters[1] = new SqlParameter("@password", Encoding.ASCII.GetBytes(password));
-
             return conn.executeSelectQuery("sp_GetUser", sqlParameters);
         }
 

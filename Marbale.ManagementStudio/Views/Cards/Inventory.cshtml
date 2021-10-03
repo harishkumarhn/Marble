@@ -106,11 +106,12 @@
     <div class="row">
         <div class="col">
             @Html.LabelFor(m => m.NumberOfCards, "Card inventory till date :")
-            <label for="lblName"></label>
+            <label for="lblCardInventoryTillDate"></label>
         </div>
-      <div class="col">
-        @Html.LabelFor(m => m.NumberOfCards,"Card balance in stock :")
-      </div>
+        <div class="col">
+            @Html.LabelFor(m => m.NumberOfCards, "Card balance in stock :")
+            <label for="lblCardBalanceInStock"></label>
+        </div>
    </div>
     @{
       <input type="hidden" id="Totalcards" value="@ViewBag.TotalNumberOfCards"/>
@@ -122,11 +123,7 @@
 
     $("document").ready(function () {
         var totalcards = $('#Totalcards').val();
-
-        //$("label[for='lblName']").text(totalcards);
-        //setTimeout(function () {
-        //    $("#addcardtab").trigger('click');
-        //}, 10);
+        $("label[for='lblCardInventoryTillDate']").text(totalcards);
     });
     $('input:radio').click(function () {
         if ($(this).val() === 'For Period') {
@@ -163,8 +160,7 @@
         };
         var url = '@Url.Content("~/Cards/AddDeleteInventory")';
         $.getJSON(url, inventory, function (data) {
-
-            $("label[for='lblName']").text(data);
+            $("label[for='lblCardInventoryTillDate']").text(data);
         });
     }
 
@@ -175,7 +171,7 @@
         };
         var url = '@Url.Content("~/Cards/AddDeleteInventory")';
         $.getJSON(url, inventory, function (data) {
-            $("label[for='lblName']").text(data);
+            $("label[for='lblCardInventoryTillDate']").text(data);
         });
    }
 

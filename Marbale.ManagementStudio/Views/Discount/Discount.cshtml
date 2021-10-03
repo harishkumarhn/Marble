@@ -332,35 +332,33 @@
 </div>
 
 <div id="tabs-1">
-
-    <div id="gridContent" style="overflow-x: scroll; overflow-y: hidden; float: left; width: 100%;">
+    <div id="gridContent" style="overflow-x: scroll; overflow-y: scroll; float: left; width: 100%; height: 400px">
         @grid.GetHtml(tableStyle: "webGrid",
                 headerStyle: "header",
                 htmlAttributes: new { id = "grid" },
-
                 selectedRowStyle: "select",
                 columns: grid.Columns(
-                 grid.Column("ID", format: @<text><input name="textbox" type="text" class="grid-row" style="width:2vw" DiscountId@(item.DiscountID)" value="@(item.DiscountID)" readonly / ></text>),
-                 grid.Column("Discount Name", format: @<text><input name="textbox" type="text" class="grid-row" style="width:9vw"DiscountName@(item.DiscountID)" value="@(item.DiscountName)" / ></text>),
-                 grid.Column("Discount Amount", format: @<text><input name="textbox" type="text" class="grid-row" style="width:5vw"id="DiscountAmount@(item.DiscountID)" value="@(item.DiscountAmount)"  /></text>),
-                 grid.Column("Coupon Mendatory", format: @<text><input name="chkbox" type="checkbox"@(item.CouponMendatory ? "checked='checked'" : "")  id="CouponMendatory@(item.DiscountID)" value="CouponMendatory" /></text>, style: "grid-row"),
-                 grid.Column("Discount Percentage", format: @<text><input name="textbox" type="text" class="grid-row" style="width:5vw" id="DiscountPercentage@(item.DiscountID)" value="@(item.DiscountPercentage)"  /></text>),
-                 grid.Column("Automatic Apply", format: @<text><input name="chkbox" type="checkbox"@(item.AutomaticApply ? "checked='checked'" : "") id="AutomaticApply@(item.DiscountID)" value="AutomaticApply" /></text>, style: "grid-row"),
-                 grid.Column("ActiveFlag", format: @<text><input name="chkbox" type="checkbox"@(item.ActiveFlag ? "checked='checked'" : "") id="ActiveFlag@(item.DiscountID)" value="ActiveFlag" /></text>, style: "grid-row"),
-                 grid.Column("Display Order", format: @<text><input name="textbox" type="text" class="grid-row" style="width:5vw" DisplayOrder@(item.DiscountID)" value="@(item.DisplayOrder)"  /></text>),
-                 grid.Column("LastUpdatedDate", format: @<text><input name="textbox" type="text" class="grid-row" id="LastUpdatedDate@(item.DiscountID)" value="@(item.LastUpdatedDate)" readonly /></text>),
-                 grid.Column("LastUpdatedUser", format: @<text><input name="textbox" type="text" class="grid-row" style="width:12vw"id="LastUpdatedUser@(item.DiscountID)" value="@(item.LastUpdatedUser)"  /></text>),
-                 grid.Column("Manager ApprovalRequired", format: @<text><input name="chkbox" style="width:5vw" type="checkbox"@(item.ManagerApproval ? "checked='checked'" : "") id="ManagerApproval@(item.DiscountID)" value="ManagerApprovalRequered" /></text>, style: "grid-row"),
-                 grid.Column("Minimum SaleAmount", format: @<text><input name="textbox" type="text" class="grid-row" style="width:5vw" MinimumSaleAmount@(item.DiscountID)" value="@(item.MinimumSaleAmount)"  /></text>),
-                grid.Column("Minimum UsedCredits", format: @<text><input name="textbox" type="text" class="grid-row" style="width:5vw" id="MinimumUsedCredits@(item.DiscountID)" value="@(item.MinimumUsedCredits)" /></text>),
-                grid.Column("Remark Mendatory", format: @<text><input name="chkbox" style="width:5vw" type="checkbox"@(item.RemarkMendatory ? "checked='checked'" : "") id="RemarkMendatory@(item.DiscountID)" value="RemarkMendatory"  /></text>, style: "grid-row")
-       ))
-        <div class="action">
-            <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
-            <button class="btn btn-primary btn-md" role="button" id="save">Save</button>
-            <button class="btn btn-primary btn-md" role="button" onclick="AddDiscount()">Add</button>
-            <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
-        </div>
+                 grid.Column("ID", format: @<text><input name="textbox" type="text" class="grid-row" style="width:2vw" DiscountId@(item.DiscountID)" value="@(item.DiscountID)" readonly /></text>),
+grid.Column("Discount Name", format: @<text><input name="textbox" type="text" class="grid-row" style="width:9vw" DiscountName@(item.DiscountID)" value="@(item.DiscountName)" /></text>),
+grid.Column("Discount Amount", format: @<text><input name="textbox" type="text" class="grid-row" style="width:5vw" id="DiscountAmount@(item.DiscountID)" value="@(item.DiscountAmount)" /></text>),
+grid.Column("Coupon Mendatory", format: @<text><input name="chkbox" type="checkbox" @(item.CouponMendatory ? "checked='checked'" : "") id="CouponMendatory@(item.DiscountID)" value="CouponMendatory" /></text>, style: "grid-row"),
+grid.Column("Discount Percentage", format: @<text><input name="textbox" type="text" class="grid-row" style="width:5vw" id="DiscountPercentage@(item.DiscountID)" value="@(item.DiscountPercentage)" /></text>),
+grid.Column("Automatic Apply", format: @<text><input name="chkbox" type="checkbox" @(item.AutomaticApply ? "checked='checked'" : "") id="AutomaticApply@(item.DiscountID)" value="AutomaticApply" /></text>, style: "grid-row"),
+grid.Column("ActiveFlag", format: @<text><input name="chkbox" type="checkbox" @(item.ActiveFlag ? "checked='checked'" : "") id="ActiveFlag@(item.DiscountID)" value="ActiveFlag" /></text>, style: "grid-row"),
+grid.Column("Display Order", format: @<text><input name="textbox" type="text" class="grid-row" style="width:5vw" DisplayOrder@(item.DiscountID)" value="@(item.DisplayOrder)" /></text>),
+grid.Column("LastUpdatedDate", format: @<text><input name="textbox" type="text" class="grid-row" id="LastUpdatedDate@(item.DiscountID)" value="@(item.LastUpdatedDate)" readonly /></text>),
+grid.Column("LastUpdatedUser", format: @<text><input name="textbox" type="text" class="grid-row" style="width:12vw" id="LastUpdatedUser@(item.DiscountID)" value="@(item.LastUpdatedUser)" /></text>),
+grid.Column("Manager ApprovalRequired", format: @<text><input name="chkbox" style="width:5vw" type="checkbox" @(item.ManagerApproval ? "checked='checked'" : "") id="ManagerApproval@(item.DiscountID)" value="ManagerApprovalRequered" /></text>, style: "grid-row"),
+grid.Column("Minimum SaleAmount", format: @<text><input name="textbox" type="text" class="grid-row" style="width:5vw" MinimumSaleAmount@(item.DiscountID)" value="@(item.MinimumSaleAmount)" /></text>),
+grid.Column("Minimum UsedCredits", format: @<text><input name="textbox" type="text" class="grid-row" style="width:5vw" id="MinimumUsedCredits@(item.DiscountID)" value="@(item.MinimumUsedCredits)" /></text>),
+grid.Column("Remark Mendatory", format: @<text><input name="chkbox" style="width:5vw" type="checkbox" @(item.RemarkMendatory ? "checked='checked'" : "") id="RemarkMendatory@(item.DiscountID)" value="RemarkMendatory" /></text>, style: "grid-row")
+))
+    </div>
+    <div class="action">
+        <button class="btn btn-primary btn-md" role="button" onclick="history.back();" id="back">Back</button>
+        <button class="btn btn-primary btn-md" role="button" id="save">Save</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="AddDiscount()">Add</button>
+        <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); window.location = '/Marble/Index'">Close</button>
     </div>
 </div>
 

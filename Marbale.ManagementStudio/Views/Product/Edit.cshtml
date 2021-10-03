@@ -160,6 +160,10 @@
                                 @Html.TextBoxFor(m => m.Bonus, new { @class = "form-control" })
                             </div>
                             <div class="display-flex">
+                                <label class="col-md-5">Discount:</label>
+                                @Html.TextBoxFor(m => m.Discount, new { @class = "form-control col-sm-7" })
+                            </div>
+                            <div class="display-flex">
                                 <label class="col-sm-5">Tickets:</label>
                                 @Html.TextBoxFor(m => m.Tickets, new { @class = "form-control" })
                             </div>
