@@ -265,7 +265,7 @@ namespace Marbale.Business
             foreach (DataRow dr in DisplayGroupDataTable.Rows)
             {
                 IdValue idValues = new IdValue();
-                idValues.Id = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
+                idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                 idValues.Value = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
                 DisplayGroupList.Add(idValues);
             }
