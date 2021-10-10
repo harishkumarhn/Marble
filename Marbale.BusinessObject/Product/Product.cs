@@ -79,5 +79,6 @@ namespace Marbale.BusinessObject
         public bool vipCard { get; set; }
         public bool LineRemarksMandatory { get; set; }
         public bool InvokeCustomerRegistration { get; set; }
+        public int Discount { get;set;}
     }
 }

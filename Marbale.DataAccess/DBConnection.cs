@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -21,7 +19,7 @@ namespace Marbale.DataAccess
         public DBConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn = new SqlConnection(@"Data Source=ROCK_LAPTOP\SQLEXPRESS;Initial Catalog=Marble_02;Trusted_Connection=True;");
+            conn = new SqlConnection(@"Data Source=DESKTOP-6LG6FHB;Initial Catalog=Marbale;Trusted_Connection=True;");
         }
 
 
@@ -160,9 +158,9 @@ namespace Marbale.DataAccess
             return ds;
         }
 
-        public DataTable executeSelectScript(String query , SqlParameter[] sqlParameter)
+        public DataTable executeSelectScript(String query, SqlParameter[] sqlParameter)
         {
-            
+
             SqlCommand sqlCommand = new SqlCommand();
             DataTable dataTable = new DataTable();
             dataTable = null;
@@ -170,7 +168,7 @@ namespace Marbale.DataAccess
             try
             {
                 sqlCommand.Connection = openConnection();
-               
+
                 sqlCommand.CommandText = query;
                 if (sqlParameter != null)
                     sqlCommand.Parameters.AddRange(sqlParameter);
@@ -186,7 +184,7 @@ namespace Marbale.DataAccess
             }
             finally
             {
-                    sqlCommand.Connection.Close();
+                sqlCommand.Connection.Close();
             }
             return dataTable;
         }
@@ -222,7 +220,7 @@ namespace Marbale.DataAccess
             {
                 insertCommand.Connection = openConnection();
                 insertCommand.CommandText = query;
-                 insertCommand.Parameters.AddRange(sqlParameter);
+                insertCommand.Parameters.AddRange(sqlParameter);
                 myAdapter.InsertCommand = insertCommand;
                 int insertRecordId = (int)insertCommand.ExecuteScalar();
                 return insertRecordId;

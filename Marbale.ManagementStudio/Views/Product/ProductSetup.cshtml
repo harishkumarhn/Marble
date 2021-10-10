@@ -5,20 +5,6 @@
 
 @*<link href="~/Content/css/product.css" rel="stylesheet" />*@
 <style>
-    .clsb1 {
-       
-      
-    }
-
-    #marbleTable th, #marbleTable td {
-        
-    }
-    .clsb11 {
-        width: 100%;
-        overflow: scroll;
-        min-height: 500px;
-        display:block;
-    }
     form label {
         font-weight: bold;
     }
@@ -35,173 +21,171 @@
         padding-bottom:0px !important;
     }
 </style>
- 
 
-
-    <table id="marbleTable" class="stripe row-border order-column">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th></th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Category</th>
-                <th>Counter</th>
-                <th>Active</th>
-                <th>POS</th>
-                <th>Group</th>
-                <th>AGCN</th>
-                <th>VIP</th>
-                <th>Price</th>
-                <th>FaceValue</th>
-                <th>TaxInclusive</th>
-                <th>TaxPercent</th>
-                <th>Tax</th>
-                <th>FinalPrice</th>
-                <th>EffectivePrice</th>
-                <th>LastUpdatedBy</th>
-                <th>LastUpdatedDate</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                var count = 0;
-            }
-            @foreach (var item in ViewBag.productDetails)
-            {
-                count++;
-                <tr id="@count">
-                    <td>
-                        <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
-                    </td>
-                    <td>
-                        @if (item.Id > 0)
+<table id="marbleTable" class="stripe row-border order-column">
+    <thead>
+        <th>ID</th>
+        <th></th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Category</th>
+        <th>Counter</th>
+        <th>Active</th>
+        <th>POS</th>
+        <th>Group</th>
+        <th>AGCN</th>
+        <th>VIP</th>
+        <th>Price</th>
+        <th>FaceValue</th>
+        <th>TaxInclusive</th>
+        <th>TaxPercent</th>
+        <th>Tax</th>
+        <th>FinalPrice</th>
+        <th>EffectivePrice</th>
+        <th>Discount</th>
+        <th>LastUpdatedBy</th>
+        <th>LastUpdatedDate</th>
+    </thead>
+    <tbody>
+        @{
+            var count = 0;
+        }
+        @foreach (var item in ViewBag.productDetails)
+        {
+            count++;
+        <tr id="@count">
+            <td>
+                <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
+            </td>
+            <td>
+                @if (item.Id > 0)
+                {
+                    <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
+                        <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
+                    </a>
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
+                        <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
+                    </a>
+                }
+            </td>
+            <td>
+                <input type="text" class="fixedCol2" value="@item.Name" style="width: 6vw;" />
+            </td>
+            <td>
+                <select name="TypeList" id="TypeList">
+                    @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
+                    {
+                        if (@item.Type == (@dow.Id).ToString())
                         {
-                            <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
-                                <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
-                            </a>
-                            <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
-                                <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
-                            </a>
+                            <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
                         }
-                    </td>
-                    <td>
-                        <input type="text" class="fixedCol2" value="@item.Name" style="width: 6vw;" />
-                    </td>
-                    <td>
-                        <select name="TypeList" id="TypeList">
-                            @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
-                            {
-                                if (@item.Type == (@dow.Id).ToString())
-                                {
-                                    <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                    <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <select name="categoryList" id="categoryList">
-                            @foreach (var dow in @item.CategoryList)
-                            {
-                                if (@dow.Id != null && @item.Category == (@dow.Id).ToString())
-                                {
-                                    <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                    <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" value="@item.POSCounter" style="width:6.2vw;" />
-                    </td>
-                    <td>
-                        <input type="checkbox" @(item.Active ? "checked='checked'" : "") value="@item.Active" />
-                    </td>
-                    <td>
-                        <input type="checkbox" @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />
-                    </td>
-                    <td>
-                        <select name="displayGroupList" id="displayGroupList">
-                            @foreach (var dow in (@item.DisplayGroupList))
-                            {
-                                if (@item.DisplayGroupId == (@dow.Id))
-                                {
-                                    <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                    <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="checkbox" @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber" style="width: 2vw;margin-right: 30px;" />
-                    </td>
-                    <td>
-                        <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.Price" id="Price@(count)" style="width:5vw" />
-                    </td>
-                    <td>
-                        <input type="text" value="@item.FaceValue" id="FaceValue@(count)" style="width:5vw" />
-                    </td>
-                    <td>
-                        <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)" />
-                    </td>
-                    <td>
-                        <label type="text" id="TaxPercentage@(count)" style="width:6vw">@item.TaxPercentage</label>
-                    </td>
-                    <td>
-                        <select name="taxlist" id="taxlist">
-                            @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
-                            {
-                                if (@item.TaxId == (@dow.Id))
-                                {
-                                    <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                                }
-                                else
-                                {
-                                    <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <label id="FinalPrice@(count)" style="width:6vw">@item.FinalPrice</label>
-                    </td>
-                    <td>
-                        <label id="EffectivePrice@(count)" style="width:6vw">@item.EffectivePrice</label>
-                    </td>
-                    <td>
-                        <label>@item.LastUpdatedBy</label>
-                    </td>
-                    <td>
-                        <label>@item.LastUpdatedDate</label>
-                    </td>
-                </tr>
-
-            }
-        </tbody>
-    </table>
-    <div class="action">
-        <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
-        <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" id="saveproduct">Save</button>
-        <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" onclick="EditProduct(0)">
-            New
-        </button>
-        <a href="/Marble/index" class="btn btn-primary">Close</a>
-    </div>
- 
+                        else
+                        {
+                            <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <select name="categoryList" id="categoryList">
+                    @foreach (var dow in @item.CategoryList)
+                    {
+                        if (@dow.Id != null && @item.Category == (@dow.Id).ToString())
+                        {
+                            <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <input type="text" value="@item.POSCounter" style="width:6.2vw;" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.Active ? "checked='checked'" : "") value="@item.Active" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />
+            </td>
+            <td>
+                <select name="displayGroupList" id="displayGroupList">
+                    @foreach (var dow in (@item.DisplayGroupList))
+                    {
+                        if (@item.DisplayGroupId == (@dow.Id))
+                        {
+                            <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <input type="checkbox" @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber" style="width: 2vw;margin-right: 30px;" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
+            </td>
+            <td>
+                <input type="text" value="@item.Price" id="Price@(count)" style="width:5vw" />
+            </td>
+            <td>
+                <input type="text" value="@item.FaceValue" id="FaceValue@(count)" style="width:5vw" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)" />
+            </td>
+            <td>
+                <label type="text" id="TaxPercentage@(count)" style="width:6vw">@item.TaxPercentage</label>
+            </td>
+            <td>
+                <select name="taxlist" id="taxlist">
+                    @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
+                    {
+                        if (@item.TaxId == (@dow.Id))
+                        {
+                            <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <label id="FinalPrice@(count)" style="width:6vw">@item.FinalPrice</label>
+            </td>
+            <td>
+                <label id="EffectivePrice@(count)" style="width:6vw">@item.EffectivePrice</label>
+            </td>
+            <td>
+                <label style="width:6vw">@item.Discount</label>
+            </td>
+            <td>
+                <label>@item.LastUpdatedBy</label>
+            </td>
+            <td>
+                <label>@item.LastUpdatedDate</label>
+            </td>
+        </tr> 
+        }
+    </tbody>
+</table>
+<div class="action">
+    <button class="btn btn-primary btn-md" role="button" onclick="event.preventDefault(); history.back();" id="back">Back</button>
+    <button class="btn btn-primary btn-md" role="button" onclick="SaveProducts()" id="saveproduct">Save</button>
+    <button id="addRow" class="btn btn-primary btn-md" role="button">Add</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="EditProduct(0)">
+        New
+    </button>
+    <a href="/Marble/index" class="btn btn-primary">Close</a>
+</div>
 <script>
     var updatedArray = [];
     function UpdatedList(index) {
@@ -255,9 +239,8 @@
         var table = $('#marbleTable').DataTable({
             scrollY: "400px",
             scrollX: true,
-             
-             scrollCollapse: true,
-             editable: true,
+            scrollCollapse: true,
+            editable: true,
             stateSave: true,
             // paging: true,
             bPaginate: false,
@@ -273,7 +256,7 @@
                     UpdatedList($(this).parent().index());
                 });
             },
-            order: [[ 0, "desc" ]],
+            //order: [[ 0, "desc" ]],
             fixedColumns: {
                 leftColumns: 3
             }
@@ -326,6 +309,7 @@
                 '<input type="checkbox" />',
                 '<label style="width:6vw"></label>',
                 '<select name="taxlist" id="taxlist">' + taxListOptions,
+                '<label style="width:6vw"></label>',
                 '<label style="width:6vw"></label>',
                 '<label style="width:6vw"></label>',
                 '<label></label>',
@@ -382,6 +366,7 @@
                         TaxId: table.rows[rowIndex].cells[15].children[0].options[selectedTaxIndex].id,
                         FinalPrice: table.rows[rowIndex].cells[16].children[0].value,
                         EffectivePrice: table.rows[rowIndex].cells[17].children[0].value,
+                        Discount: table.rows[rowIndex].cells[18].children[0].value,
                         ExpiryDate: '10/10/2020',
                         StartDate: '10/10/2020'
                     });

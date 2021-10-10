@@ -96,6 +96,7 @@ namespace Marbale.Business
                         product.vipCard = dr.IsNull("vipCard") ? false : bool.Parse(dr["vipCard"].ToString());
                         product.LineRemarksMandatory = dr.IsNull("LineRemarksMandatory") ? false : bool.Parse(dr["LineRemarksMandatory"].ToString());
                         product.InvokeCustomerRegistration = dr.IsNull("InvokeCustomerRegistration") ? false : bool.Parse(dr["InvokeCustomerRegistration"].ToString());
+                        product.Discount = dr.IsNull("Discount") ? 0 : Convert.ToInt32(dr["Discount"]);
 
                         product.CategoryList = categoryList;
                         product.TaxList = TaxList;
@@ -171,6 +172,7 @@ namespace Marbale.Business
                     product.vipCard = dr.IsNull("vipCard") ? false : bool.Parse(dr["vipCard"].ToString());
                     product.LineRemarksMandatory = dr.IsNull("LineRemarksMandatory") ? false : bool.Parse(dr["LineRemarksMandatory"].ToString());
                     product.InvokeCustomerRegistration = dr.IsNull("InvokeCustomerRegistration") ? false : bool.Parse(dr["InvokeCustomerRegistration"].ToString());
+                    product.Discount = dr.IsNull("Discount") ? 0 : Convert.ToInt32(dr["Discount"]);
 
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;
@@ -263,11 +265,12 @@ namespace Marbale.Business
             foreach (DataRow dr in DisplayGroupDataTable.Rows)
             {
                 IdValue idValues = new IdValue();
-                idValues.Id = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
+                idValues.Id = dr.IsNull("Id") ? 0 : int.Parse(dr["Id"].ToString());
                 idValues.Value = dr.IsNull("DisplayGroup") ? "" : dr["DisplayGroup"].ToString();
                 DisplayGroupList.Add(idValues);
             }
         }
+
         public int InsertOrUpdateProduct(Product product)
         {
             try
