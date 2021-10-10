@@ -97,6 +97,8 @@ namespace Marbale.Business
                         product.LineRemarksMandatory = dr.IsNull("LineRemarksMandatory") ? false : bool.Parse(dr["LineRemarksMandatory"].ToString());
                         product.InvokeCustomerRegistration = dr.IsNull("InvokeCustomerRegistration") ? false : bool.Parse(dr["InvokeCustomerRegistration"].ToString());
                         product.Discount = dr.IsNull("Discount") ? 0 : Convert.ToInt32(dr["Discount"]);
+                        product.InventoryProductCode = dr.IsNull("InventoryProductCode") ? 0 : Convert.ToInt32(dr["InventoryProductCode"]);
+                        product.Description = dr.IsNull("Description") ? "" : dr["Description"].ToString();
 
                         product.CategoryList = categoryList;
                         product.TaxList = TaxList;
@@ -173,6 +175,10 @@ namespace Marbale.Business
                     product.LineRemarksMandatory = dr.IsNull("LineRemarksMandatory") ? false : bool.Parse(dr["LineRemarksMandatory"].ToString());
                     product.InvokeCustomerRegistration = dr.IsNull("InvokeCustomerRegistration") ? false : bool.Parse(dr["InvokeCustomerRegistration"].ToString());
                     product.Discount = dr.IsNull("Discount") ? 0 : Convert.ToInt32(dr["Discount"]);
+                    product.InventoryProductCode = dr.IsNull("InventoryProductCode") ? 0 : Convert.ToInt32(dr["InventoryProductCode"]);
+                    product.Description = dr.IsNull("Description") ? "" : dr["Description"].ToString();
+                    product.StartDate = dr.IsNull("StartDate") ? new DateTime() : Convert.ToDateTime(dr["StartDate"]);
+                    product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
 
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;

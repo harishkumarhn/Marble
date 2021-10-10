@@ -80,5 +80,7 @@ namespace Marbale.BusinessObject
         public bool LineRemarksMandatory { get; set; }
         public bool InvokeCustomerRegistration { get; set; }
         public int Discount { get;set;}
+        public int InventoryProductCode { get; set; }
+        public string Description { get; set; }
     }
 }
