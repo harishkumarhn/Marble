@@ -1,23 +1,55 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
 <head>
-    <title>Marbale Dashboard</title>
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="~/Content/CSS/bootstrap.css">
-    <link href="~/Content/CSS/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="~/Content/CSS/fixedColumns.dataTables.min.css" rel="stylesheet" />
-    <link href="~/Content/CSS/select.dataTables.css" rel="stylesheet" />
-    <link href="~/Content/CSS/Material/meterialIcon.css" rel="stylesheet" />
-    <link href="~/Content/DatetimePicker/jquery.datepicker2.css" rel="stylesheet" />
-    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-    <!-- Our Custom CSS -->
-   
-    @*<link href="~/Content/CSS/StyleSheet1.css" rel="stylesheet" />*@
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@Page.Title</title>
+    <style>
+        /*body {
+            width: 1200px;*/
+            /*overflow: hidden;*/
+        /*}*/
+        .open aside.left-panel {
+            max-width: 83px;
+            width: 83px;
+            position: absolute;
+        }
+    </style>
+    @*@RenderSection("head", required: false)*@
+    @*<link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+        <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">*@
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+
+    <link href="~/Content/Theme1/assets/css/cs-skin-elastic.css" rel="stylesheet" />
+
+    <link href="~/Content/Theme1/assets/css/style.css" rel="stylesheet" />
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="~/Content/CSS/style.css">
+    <link rel="stylesheet" href="~/Content/CSS/layout.css">
+    <link href="~/Content/CSS/Material/meterialIcon.css" rel="stylesheet" />
+    <!-- -------------------------- script-------------------------------------------------------  -->
+    @*<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>*@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
@@ -26,34 +58,55 @@
     <script src="~/Content/JS/dataTables.fixedColumns.min.js"></script>
     <script src="~/Content/JS/dataTables.select.js"></script>
     <script src="~/Content/DatetimePicker/jquery.datepicker2.js"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script src="~/Content/JS/popper.min.js"></script>
-    <script src="~/Content/JS/bootstrap.min.js"></script>
-	 <link rel="stylesheet" href="~/Content/CSS/style.css">
-    <link rel="stylesheet" href="~/Content/CSS/layout.css">
-    <script defer src="~/Content/JS/fontawesome.solid.js"></script>
-    <script defer src="~/Content/JS/fontawesome.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-     @Scripts.Render("~/bundles/modernizr")
+
+    @*<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+
+    <script src="~/Content/Theme1/assets/js/main.js"></script>
+    <!--  Chart js -->
+    @*<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>*@
+
+    <!--Chartist Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+    @*<script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>*@
+
+
 
     <style>
+        /*body {
+            width: 1200px;
+            overflow: hidden;
+        }*/
+        .hide {
+            display: none;
+        }
+
+        .site-footer {
+            position: absolute;
+            bottom: 0px;
+            width: 80%;
+        }
         #snackbar, #snackbar-modal, #close-modal {
             visibility: hidden;
-        }              
+        }
 
         .snackbar[data-type="success"] {
-              background: linear-gradient(to bottom right,#28a745,#84b42d);
+            background: linear-gradient(to bottom right,#28a745,#84b42d);
         }
 
         .snackbar[data-type="error"] {
-              background: linear-gradient(to bottom right,#FF2A68,#FF5E3A);
+            background: linear-gradient(to bottom right,#FF2A68,#FF5E3A);
         }
 
         #snackbar.show {
-          visibility: visible;
-          -webkit-animation: fadein 0.5s linear, fadeout 0.5s 4s;
-          animation: fadein 0.5s linear, fadeout 0.5s linear 4s;
+            visibility: visible;
+            -webkit-animation: fadein 0.5s linear, fadeout 0.5s 4s;
+            animation: fadein 0.5s linear, fadeout 0.5s linear 4s;
         }
 
         .snackbar {
@@ -70,7 +123,7 @@
             padding-bottom: 10px;
         }
 
-       .snackbar-container {
+        .snackbar-container {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -80,7 +133,7 @@
             font-size: 40px;
             padding-left: 15px;
             padding-right: 15px;
-            display:flex;
+            display: flex;
         }
 
         .snackbar-message {
@@ -88,10 +141,10 @@
             text-align: start;
         }
 
-        .close{
-            position:absolute;
-            top:5%;
-            right:5%;
+        .close {
+            position: absolute;
+            top: 5%;
+            right: 5%;
             color: lightgray;
         }
 
@@ -100,30 +153,58 @@
         }
 
         @@-webkit-keyframes fadein {
-          from {right: -17%; opacity: 0;} 
-          to {right: 2%; opacity: 1;}
+            from {
+                right: -17%;
+                opacity: 0;
+            }
+
+            to {
+                right: 2%;
+                opacity: 1;
+            }
         }
 
         @@keyframes fadein {
-          from {right: -17%; opacity: 0;} 
-          to {right: 2%; opacity: 1;}
+            from {
+                right: -17%;
+                opacity: 0;
+            }
+
+            to {
+                right: 2%;
+                opacity: 1;
+            }
         }
 
         @@-webkit-keyframes fadeout {
-          from {right: 2%; opacity: 1;} 
-          to {right: -17%; opacity: 0;}
+            from {
+                right: 2%;
+                opacity: 1;
+            }
+
+            to {
+                right: -17%;
+                opacity: 0;
+            }
         }
 
         @@keyframes fadeout {
-          from {right: 2%; opacity: 1;} 
-          to {right: -17%; opacity: 0;}
+            from {
+                right: 2%;
+                opacity: 1;
+            }
+
+            to {
+                right: -17%;
+                opacity: 0;
+            }
         }
 
         #snackbar-modal.show {
             visibility: visible;
             -webkit-animation: fadeintop 0.5s linear, fadeouttop 0.5s 4s;
             animation: fadeintop 0.5s linear, fadeouttop 0.5s linear 4s;
-        }         
+        }
 
         @@-webkit-keyframes fadeintop {
             from {
@@ -174,158 +255,272 @@
         }
     </style>
 </head>
+
 <body>
-
-    <div class="wrapper">
-        <div style="cursor: pointer; float: right;margin: 10px 10px 0px 20px;">
-            <div class="btn-group">
-                <div class="btn-group dropleft" role="group">
-                    <button type="button" style="border:none;line-height: 1;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="material-icons" style="cursor: pointer;font-size:40px">&#xe853;</i>
-                        <br /><lable>@Session["UserID"]</lable>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/Marble/changePassword">Change Password</a>
-                        <a class="dropdown-item" href="/Marble/logout">Logout</a>
-                    </div>
+    <!-- Left Panel -->
+    <!-- /#left-panel -->
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+        <!-- Header-->
+        <header id="header" class="header">
+            <div class="top-left">
+                <div class="navbar-header">
+                    MARBALE
+                    @*<a class="navbar-brand" href="./"><img src="~/Content/Images/marbleHome.jpeg" alt="Logo"></a>*@
+                    @*<a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>*@
+                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
-        </div>
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div id="dismiss">
-                <i class="fas fa-arrow-left"></i>
-            </div>
-            <div class="sidebar-header">
-                <h3>Marbale Dashboard</h3>
-            </div>
+            <div class="top-right">
+                <div class="header-menu">
+                    <div class="header-left">
+                        <button class="search-trigger"><i class="fa fa-search"></i></button>
+                        <div class="form-inline">
+                            <form class="search-form">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                            </form>
+                        </div>
 
-            <ul class="list-unstyled components">
-                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Product"]).Count > 0)
-                {
-                    <li class="active">
-                        <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onclick="setSession('productSubmenu')">Product</a>
-                        <ul class="collapse list-unstyled" id="productSubmenu">
-                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Product"])
-                            {
-                                <li>
-                                    <a href="@page.URL">@page.Page</a>
-                                </li>
-                            }
-                        </ul>
-                    </li>
-                }
-                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"]).Count > 0)
-                {
-                    <li class="active">
-                        <a href="#gameSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onclick="setSession('gameSubmenu')">Communication</a>
-                        <ul class="collapse list-unstyled" id="gameSubmenu">
-                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"])
-                            {
-                                if (page.Page == "Configurations")
-                                {
-                                    <li>
-                                        <a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li>
-                                        <a href="@page.URL">@page.Page</a>
-                                    </li>
+                        <div class="dropdown for-notification">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell"></i>
+                                <span class="count bg-danger">3</span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="notification">
+                                <p class="red">You have 3 Notification</p>
+                                <a class="dropdown-item media" href="#">
+                                    <i class="fa fa-check"></i>
+                                    <p>Server #1 overloaded.</p>
+                                </a>
+                                <a class="dropdown-item media" href="#">
+                                    <i class="fa fa-info"></i>
+                                    <p>Server #2 overloaded.</p>
+                                </a>
+                                <a class="dropdown-item media" href="#">
+                                    <i class="fa fa-warning"></i>
+                                    <p>Server #3 overloaded.</p>
+                                </a>
+                            </div>
+                        </div>
 
-                                }
-                            }
-                        </ul>
-                    </li>
-                }
-                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"]).Count > 0)
-                {
-                    <li class="active">
-                        <a href="#siteSetupSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle" onclick="setSession('siteSetupSubmenu')">Site Setup</a>
-                        <ul class="collapse list-unstyled" id="siteSetupSubmenu">
-                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"])
-                            {
-                                if (page.Page == "Product key")
-                                {
-                                    <li>
-                                        <a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li>
-                                        <a href="@page.URL">@page.Page</a>
-                                    </li>
-
-                                }
-                            }
-                        </ul>
-                    </li>
-                }
-                @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"]).Count > 0)
-                {
-                    <li class="active">
-                        <a href="#pageSubmenucards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onclick="setSession('pageSubmenucards')">Cards</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenucards">
-                            @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"])
-                            {
-                                if (page.Page != "View Card")
-                                {
-                                    <li>
-                                        <a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li>
-                                        <a href="@page.URL">@page.Page</a>
-                                    </li>
-
-                                }
-                            }
-                        </ul>
-                    </li>
-                }                
-            </ul>
-        </nav>
-
-        <!-- Page Content  -->
-        <div id="Content">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Menu</span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <b style="margin-left: 20px; font-family: sans-serif;">@ViewBag.Title</b>
+                        <div class="dropdown for-message">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-envelope"></i>
+                                <span class="count bg-primary">4</span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="message">
+                                <p class="red">You have 4 Mails</p>
+                                <a class="dropdown-item media" href="#">
+                                    <span class="photo media-left">
+                                        <img alt="avatar" src="~/Content/Theme1/images/admin.jpg">
+                                    </span>
+                                    <div class="message media-body">
+                                        <span class="name float-left">Jonathan Smith</span>
+                                        <span class="time float-right">Just now</span>
+                                        <p>Hello, this is an example msg</p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item media" href="#">
+                                    <span class="photo media-left"><img alt="avatar" src="~/Content/Theme1/images/admin.jpg"></span>
+                                    <div class="message media-body">
+                                        <span class="name float-left">Jack Sanders</span>
+                                        <span class="time float-right">5 minutes ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item media" href="#">
+                                    <span class="photo media-left"><img alt="avatar" src="~/Content/Theme1/images/admin.jpg"></span>
+                                    <div class="message media-body">
+                                        <span class="name float-left">Cheryl Wheeler</span>
+                                        <span class="time float-right">10 minutes ago</span>
+                                        <p>Hello, this is an example msg</p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item media" href="#">
+                                    <span class="photo media-left"><img alt="avatar" src="~/Content/Theme1/images/admin.jpg"></span>
+                                    <div class="message media-body">
+                                        <span class="name float-left">Rachel Santos</span>
+                                        <span class="time float-right">15 minutes ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="~/Content/Theme1/images/admin.jpg" alt="User Avatar">
+
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+
+                            <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+
+                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+
+                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+        </header>
+        <!-- /#header -->
+
+        <aside id="left-panel" class="left-panel">
+            <nav class="navbar navbar-expand-sm navbar-default">
+                <div id="main-menu" class="main-menu collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                        </li>
+                        <li class="menu-title">Main</li><!-- /.menu-title -->
+                        <li class="menu-item-has-children dropdown">
+                            @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Product"]).Count > 0)
+                            {
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bookmark"></i>Product</a>
+
+                                <ul class="sub-menu children dropdown-menu">
+                                    @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Product"])
+                                    {
+
+                                        <li><i class="fa fa-puzzle-piece"></i><a href="@page.URL">@page.Page</a></li>
+                                    }
+                                </ul>
+
+                            }
+
+                        </li>
+                        <li class="menu-item-has-children dropdown">
+                            @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"]).Count > 0)
+                            {
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-address-book"></i>Communication</a>
+
+                                <ul class="sub-menu children dropdown-menu">
+                                    @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"])
+                                    {
+
+                                        <li><i class="fa fa-puzzle-piece"></i><a href="@page.URL">@page.Page</a></li>
+                                    }
+                                </ul>
+
+                            }
+
+                        </li>
+
+                        <li class="menu-item-has-children dropdown">
+                            @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"]).Count > 0)
+                            {
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Site Setup</a>
+
+                                <ul class="sub-menu children dropdown-menu">
+                                    @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["SiteSetup"])
+                                    {
+
+                                        <li><i class="fa fa-puzzle-piece"></i><a href="@page.URL">@page.Page</a></li>
+                                    }
+                                </ul>
+
+                            }
+
+                        </li>
+
+                        <li class="menu-title">Cards</li><!-- /.menu-title -->
+
+                        <li class="menu-item-has-children dropdown">
+                            @if (((List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"]).Count > 0)
+                            {
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-id-card-o"></i>Cards</a>
+
+                                <ul class="sub-menu children dropdown-menu">
+                                    @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Cards"])
+                                    {
+
+                                        <li><i class="fa fa-puzzle-piece"></i><a href="@page.URL">@page.Page</a></li>
+                                    }
+                                </ul>
+
+                            }
+
+                        </li>
+                        <!--<li>
+                            <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
+                        </li>
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
+                                <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
+                                <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
+                                <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">Extras</li>-->
+                        <!-- /.menu-title -->
+                        <!--<li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
+                                <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
+                                <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
+                            </ul>
+                        </li>-->
+                    </ul>
+                </div><!-- /.navbar-collapse -->
             </nav>
+        </aside>
 
-            <div id="pageContent">
-                <div id="container" class="pageContent">
-                    @RenderBody()
-                </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Animated -->
+            <div class="animated fadeIn">
+
+
+
+                @RenderBody()
+
+
             </div>
+            <!-- .animated -->
         </div>
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        @*<footer class="site-footer hide">
+                <div class="footer-inner bg-white">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            Copyright &copy; 2021
+                        </div>
+                        <div class="col-sm-6 text-right">
 
+                        </div>
+                    </div>
+                </div>
+            </footer>*@
+        <!-- /.site-footer -->
     </div>
+    <!-- /#right-panel -->
+    <!-- Scripts -->
+
     <div id="myModal" class="modal fade">
         <div class="modal-dialog modal-centre">
             <div id="modelBody" class="modal-content">
             </div>
         </div>
     </div>
-
-    <!------ SnackBar -->
     <div id="snackbar" class="snackbar">
         <div class="snackbar-container">
             <div class="icon"><ion-icon name="checkmark-circle"></ion-icon></div>
@@ -336,159 +531,8 @@
             <div class="close"><a onclick="notifyClose()"><ion-icon name="close-outline"></ion-icon></a></div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        function getCookie(name) {
-            var cookies = document.cookie.split(';');
-            for (var i = 0 ; i < cookies.length ; ++i) {
-                var pair = cookies[i].trim().split('=');
-                if (pair[0] == name)
-                    return pair[1];
-            }
-            return null;
-        }
-
-		function SetSideMenu(flag)
-		{
-		 if (typeof(Storage) !== "undefined") 
-		 {
-				if (flag) 
-				{
-					sessionStorage.activemenu = true;
-					
-				} 
-				else 
-				{
-					sessionStorage.activemenu = false
-				}
-				console.log("Set	 "+ sessionStorage.activemenu  )
-			}
-		}
-
-		
-            $('#sidebarCollapse').on('click', function () {
-				console.log("bbbbb");
-                $('#sidebar').addClass('active');
-                $('.overlay').addClass('active');
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-				SetSideMenu(true);
-            });
-			
-         
-            $('#dismiss, .overlay').on('click', function () {
-				$('#sidebar').removeClass('active');
-				$('.overlay').removeClass('active');
-				SetSideMenu(false);
-            });
-
-        $(document).ready(function () {
-			console.log("a");
-
-			if (typeof(Storage) !== "undefined") 
-			{
-				console.log("AAAA	 "+ sessionStorage.activemenu  )
-
-				if( sessionStorage.activemenu =="true")
-				{
-					$('#sidebar').addClass('active');
-					//$('.overlay').addClass('active');  
-					       
-				}
-				 
-			}
-
-           // var preSelectedValue = getCookie("PreviousExpandedDropDown");
-			//console.log("preSelectedValue"+preSelectedValue);
-
-            //if (preSelectedValue) {
-                   
-              //  setSession(preSelectedValue);
-            //}
-        });
-
-        function DisplayPopUp(page,url) {
-            $('#myModal').modal('show');
-            if (page == "Product key" || page == 'Inventory') {
-                $('#modelBody').css({
-                    'width': 640,
-                    'margin-top':70
-                });
-            } else {
-                $('#modelBody').css({
-                    'left': '-30%',
-                    'width': 800,
-                });
-            }
-            $('#modelBody').load(url);
-        }
-
-        $("#myModal").draggable({
-            handle: ".modal-header"
-        });
-
-
-
-        function setSession(selectedId) {
-            var preSelectedValue = getCookie("PreviousExpandedDropDown");
-            if (preSelectedValue != selectedId) {
-                document.cookie = "PreviousExpandedDropDown=" + selectedId;
-            } else {
-                document.cookie = "PreviousExpandedDropDown=";                
-            }
-        }
-
-        function notify(dataType,header, message, callBack) {                    
-            setTimeout(() => {
-                notifyClose();
-                if (callBack) {
-                    callBack();
-                }
-            }, 4400);
-            setSnackbarData(dataType, header, message);
-            $('#snackbar').attr('data-type', dataType.toLowerCase());            
-            $('#snackbar').addClass('show');            
-            $('.close').css('visibility', 'visible');
-        }
-        
-        function notifyClose() {
-            $('#snackbar').removeClass('show');
-            $('.close').css('visibility', 'hidden');
-        }
-
-        function notifyinmodal(dataType, header, message, callBack) {
-            setTimeout(() => {
-                notifyCloseinmodal();
-                if (callBack) {
-                    callBack();
-                }
-            }, 4400);
-            setSnackbarData(dataType, header, message);
-            $('#snackbar-modal').attr('data-type', dataType.toLowerCase())
-            $('#snackbar-modal').addClass('show');
-            $('#close-modal').css('visibility', 'visible');
-        }
-
-        function notifyCloseinmodal() {
-            $('#snackbar-modal').removeClass('show');
-            $('#close-modal').css('visibility', 'hidden');
-        }
-
-        function setSnackbarData(dataType, header, message) {
-            switch (dataType.toLowerCase()) {
-                case 'error':
-                    $('.icon ion-icon').attr("name", "close-circle-outline");
-                    break;
-                case 'success':
-                    $('.icon ion-icon').attr("name", "checkmark-circle");
-                    break;
-            }
-            
-            $('#header').html(header ? header : "Success Message");
-            $('#message').html(message ? message : "Data Saved Successfully");            
-        }
-    </script>
+    <!--Local Stuff-->
 
 </body>
-
 </html>
+

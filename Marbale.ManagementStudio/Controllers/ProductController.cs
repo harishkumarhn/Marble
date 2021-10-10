@@ -12,7 +12,7 @@ namespace MarbaleManagementStudio.Controllers
 {
 
     // [LogCustomExceptionFilter]
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public class ProductController : Controller
     {
         public ProductBL productBl;
