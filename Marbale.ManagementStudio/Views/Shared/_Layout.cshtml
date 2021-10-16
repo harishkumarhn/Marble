@@ -40,10 +40,10 @@
     <style>
         #snackbar, #snackbar-modal, #close-modal {
             visibility: hidden;
-        }              
+        }
 
-        .snackbar[data-type="success"] {
-              background: linear-gradient(to bottom right,#28a745,#84b42d);
+        .snackbar[data-type="success"], .snackbar[data-type="delete"] {
+            background: linear-gradient(to bottom right,#28a745,#84b42d);
         }
 
         .snackbar[data-type="error"] {
@@ -481,6 +481,11 @@
                     break;
                 case 'success':
                     $('.icon ion-icon').attr("name", "checkmark-circle");
+                    break;
+                case 'delete':
+                    $('.icon ion-icon').attr("name", "trash-sharp");
+                    header = header ? header : "Delete Message";
+                    message = message ? message : "Deleted Data Successfully";
                     break;
             }
             

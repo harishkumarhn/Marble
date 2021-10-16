@@ -430,7 +430,9 @@
                     data: { Id: id },
                     dataType: "json",
                     success: function (data) {
-                        location.reload();
+                        notify('delete', '', '', () => {
+                            location.reload();
+                        });
                     },
                     error: function (e) {
                         alert(e);
