@@ -158,6 +158,11 @@ namespace Marbale.Business
                     product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
                     product.TaxName = dr.IsNull("TaxId") ? "" : dr["TaxId"].ToString();
                     product.TypeName = dr.IsNull("TypeName") ? "" : dr["TypeName"].ToString();
+                    product.Credits = dr.IsNull("Credits") ? 0 : Convert.ToDecimal(dr["Credits"]);
+                    product.CardValidFor = dr.IsNull("CardValidFor") ? 0 : Convert.ToInt32(dr["CardValidFor"]);                    
+                    product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToDecimal(dr["Courtesy"]);
+                    product.Bonus = dr.IsNull("Bonus") ? 0 : decimal.Parse(dr["Bonus"].ToString());
+                    product.Time = dr.IsNull("Time") ? new DateTime() : Convert.ToDateTime(dr["Time"]);
                     product.TaxId = dr.IsNull("TaxId") ? 0 : Convert.ToInt32(dr["TaxId"].ToString());
                     product.TicketAllowed = dr.IsNull("TicketAllowed") ? false : bool.Parse(dr["TicketAllowed"].ToString());
                     product.ManagerApprovalRequired = dr.IsNull("ManagerApprovalRequired") ? false : bool.Parse(dr["ManagerApprovalRequired"].ToString());

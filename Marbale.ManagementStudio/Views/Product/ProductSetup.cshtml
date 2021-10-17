@@ -24,27 +24,46 @@
 
 <table id="marbleTable" class="stripe row-border order-column">
     <thead>
-        <th>ID</th>
-        <th></th>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Category</th>
-        <th>Counter</th>
-        <th>Active</th>
-        <th>POS</th>
-        <th>Group</th>
-        <th>AGCN</th>
-        <th>VIP</th>
-        <th>Price</th>
-        <th>FaceValue</th>
-        <th>TaxInclusive</th>
-        <th>TaxPercent</th>
-        <th>Tax</th>
-        <th>FinalPrice</th>
-        <th>EffectivePrice</th>
-        <th>Discount</th>
-        <th>LastUpdatedBy</th>
-        <th>LastUpdatedDate</th>
+    <th>ID</th>
+    <th></th>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Category</th>
+    <th>MaximumQuantity</th>
+    <th>Active</th>
+    <th>POS</th>
+    <th>Group</th>
+    <th>Order</th>
+    <th>AGCN</th>
+    <th>VIP</th>
+    <th>VIPCard</th>
+    <th>QTY</th>
+    <th>LineRemaksMandatory</th>
+    <th>ManagerApprovalRequired</th>
+    <th>Price</th>
+    <th>FaceValue</th>
+    <th>TaxInclusive</th>
+    <th>TaxPercent</th>
+    <th>Tax</th>
+    <th>FinalPrice</th>
+    <th>EffectivePrice</th>
+    <th>Credits</th>
+    <th>Courtesy</th>
+    <th>Bonus</th>
+    <th>Tickets</th>
+    <th>Time</th>
+    <th>TicketAllowed</th>
+    <th>Discount</th>
+    <th>AllowPriceOverride</th>
+    <th>CardValidFor(InDays)</th>
+    <th>CardExpiryDate</th>
+    <th>HSN/SAC Code</th>
+    <th>TrxHeaderRemarksReq</th>
+    <th>InvokeCustomerReg</th>
+    <th>LastUpdatedBy</th>
+    <th>LastUpdatedDate</th>
+    <th>StartDate</th>
+    <th>ExpiryDate</th>
     </thead>
     <tbody>
         @{
@@ -102,7 +121,7 @@
                 </select>
             </td>
             <td>
-                <input type="text" value="@item.POSCounter" style="width:6.2vw;" />
+                <input type="text" value="@item.MaximumQuantity" style="width:6.2vw;" />
             </td>
             <td>
                 <input type="checkbox" @(item.Active ? "checked='checked'" : "") value="@item.Active" />
@@ -126,10 +145,25 @@
                 </select>
             </td>
             <td>
+                <input type="number" value="@item.DisplayOrder"/>
+            </td>
+            <td>
                 <input type="checkbox" @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber" style="width: 2vw;margin-right: 30px;" />
             </td>
             <td>
                 <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.vipCard ? "checked='checked'" : "") value="@item.vipCard" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.QuantityPrompt ? "checked='checked'" : "") value="@item.QuantityPrompt" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.LineRemarksMandatory ? "checked='checked'" : "") value="@item.LineRemarksMandatory" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.ManagerApprovalRequired ? "checked='checked'" : "") value="@item.ManagerApprovalRequired" />
             </td>
             <td>
                 <input type="text" value="@item.Price" id="Price@(count)" style="width:5vw" />
@@ -165,7 +199,43 @@
                 <label id="EffectivePrice@(count)" style="width:6vw">@item.EffectivePrice</label>
             </td>
             <td>
+                <input type="text" value="@(item.Credits != null ? @item.Credits : 0)" />
+            </td>
+            <td>
+                <input type="text" value="@(item.Courtesy != null ? @item.Courtesy : 0)" />
+            </td>
+            <td>
+                <input type="text" value="@(item.Bonus != null ? @item.Bonus : 0)" />
+            </td>
+            <td>
+                <input type="number" value="@item.Tickets" />
+            </td>
+            <td>
+                <input type="datetime" value="@item.Time" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
+            </td>
+            <td>
                 <label style="width:6vw">@item.Discount</label>
+            </td>
+            <td>
+                <input type="checkbox" @(item.AllowPriceOverride ? "checked='checked'" : "") value="@item.AllowPriceOverride" />
+            </td>
+            <td>
+                <input type="number" value="@item.CardValidFor" />
+            </td>
+            <td>
+                <input type="datetime" value="@item.CardExpiryDate" />
+            </td>
+            <td>
+                <input type="text" value="@item.HSNSACCode" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.TrxHeaderRemarksMandatory ? "checked='checked'" : "") value="@item.TrxHeaderRemarksMandatory" />
+            </td>
+            <td>
+                <input type="checkbox" @(item.InvokeCustomerRegistration ? "checked='checked'" : "") value="@item.InvokeCustomerRegistration" />
             </td>
             <td>
                 <label>@item.LastUpdatedBy</label>
@@ -173,7 +243,14 @@
             <td>
                 <label>@item.LastUpdatedDate</label>
             </td>
-        </tr> 
+            <td>
+                <label>@item.StartDate</label>
+            </td>
+            <td>
+                <label>@item.ExpiryDate</label>
+            </td>
+        </tr>
+
         }
     </tbody>
 </table>
@@ -302,7 +379,12 @@
                 '<input type="checkbox" />',
                 '<input type="checkbox" />',
                 '<select name="displayGroupList" id="displayGroupList">' + displayGroupListOptions,
+                '<input type="number" />',
                 '<input type="checkbox" style="width: 2vw;margin-right: 30px;"/>',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
                 '<input type="checkbox" />',
                 '<input type="text" value="" style="width:5vw"/>',
                 '<input type="text" value="" style="width:5vw"/>',
@@ -311,7 +393,21 @@
                 '<select name="taxlist" id="taxlist">' + taxListOptions,
                 '<label style="width:6vw"></label>',
                 '<label style="width:6vw"></label>',
+                '<input type="text" />',
+                '<input type="text" />',
+                '<input type="text" />',
+                '<input type="number" />',
+                '<input type="datetime" />',
+                '<input type="checkbox" />',
                 '<label style="width:6vw"></label>',
+                '<input type="checkbox" />',
+                '<input type="number" />',
+                '<input type="datetime" />',
+                '<input type="text"/>',
+                '<input type="checkbox" />',
+                '<input type="checkbox" />',
+                '<label></label>',
+                '<label></label>',
                 '<label></label>',
                 '<label></label>',
             ]).draw(false);
@@ -347,26 +443,43 @@
                     var selectedTypeIndex = table.rows[rowIndex].cells[3].children[0].options["selectedIndex"];
                     var selectedCategoryIndex = table.rows[rowIndex].cells[4].children[0].options["selectedIndex"];
                     var selectedDisplayGroupIndex = table.rows[rowIndex].cells[8].children[0].options["selectedIndex"];
-                    var selectedTaxIndex = table.rows[rowIndex].cells[15].children[0].options["selectedIndex"];
+                    var selectedTaxIndex = table.rows[rowIndex].cells[20].children[0].options["selectedIndex"];
                     items.push({
                         Id: fixedcolumn1[r].innerHTML,
                         Name: fixedcolumn3[r].value,
                         Type: table.rows[rowIndex].cells[3].children[0].options[selectedTypeIndex].id,
                         Category: table.rows[rowIndex].cells[4].children[0].options[selectedCategoryIndex].id,
-                        POSCounter: table.rows[rowIndex].cells[5].children[0].value,
+                        MaximumQuantity: table.rows[rowIndex].cells[5].children[0].value,
                         Active: table.rows[rowIndex].cells[6].children[0].checked,
                         DisplayInPOS: table.rows[rowIndex].cells[7].children[0].checked,
                         DisplayGroupId: table.rows[rowIndex].cells[8].children[0].options[selectedDisplayGroupIndex].id,
-                        AutoGenerateCardNumber: table.rows[rowIndex].cells[9].children[0].checked,
-                        OnlyVIP: table.rows[rowIndex].cells[10].children[0].checked,
-                        Price: table.rows[rowIndex].cells[11].children[0].value,
-                        FaceValue: table.rows[rowIndex].cells[12].children[0].value,
-                        TaxInclusive: table.rows[rowIndex].cells[13].children[0].checked,
-                        Taxpercent: table.rows[rowIndex].cells[14].children[0].value,
-                        TaxId: table.rows[rowIndex].cells[15].children[0].options[selectedTaxIndex].id,
-                        FinalPrice: table.rows[rowIndex].cells[16].children[0].value,
-                        EffectivePrice: table.rows[rowIndex].cells[17].children[0].value,
-                        Discount: table.rows[rowIndex].cells[18].children[0].value,
+                        DisplayOrder: table.rows[rowIndex].cells[9].children[0].value,
+                        AutoGenerateCardNumber: table.rows[rowIndex].cells[10].children[0].checked,
+                        OnlyVIP: table.rows[rowIndex].cells[11].children[0].checked,
+                        vipCard: table.rows[rowIndex].cells[12].children[0].checked,
+                        QuantityPrompt: table.rows[rowIndex].cells[13].children[0].checked,
+                        LineRemarksMandatory: table.rows[rowIndex].cells[14].children[0].checked,
+                        ManagerApprovalRequired: table.rows[rowIndex].cells[15].children[0].checked,
+                        Price: table.rows[rowIndex].cells[16].children[0].value,
+                        FaceValue: table.rows[rowIndex].cells[17].children[0].value,
+                        TaxInclusive: table.rows[rowIndex].cells[18].children[0].checked,
+                        Taxpercent: table.rows[rowIndex].cells[19].children[0].value,
+                        TaxId: table.rows[rowIndex].cells[20].children[0].options[selectedTaxIndex].id,
+                        FinalPrice: table.rows[rowIndex].cells[21].children[0].value,
+                        EffectivePrice: table.rows[rowIndex].cells[22].children[0].value,
+                        Credits: table.rows[rowIndex].cells[23].children[0].value,
+                        Courtesy: table.rows[rowIndex].cells[24].children[0].value,
+                        Bonus: table.rows[rowIndex].cells[25].children[0].value,
+                        Tickets: table.rows[rowIndex].cells[26].children[0].value,
+                        Time: table.rows[rowIndex].cells[27].children[0].value,
+                        TicketAllowed: table.rows[rowIndex].cells[28].children[0].checked,
+                        Discount: table.rows[rowIndex].cells[29].children[0].value,
+                        AllowPriceOverride: table.rows[rowIndex].cells[30].children[0].checked,
+                        CardValidFor: table.rows[rowIndex].cells[31].children[0].value,
+                        CardExpiryDate: table.rows[rowIndex].cells[32].children[0].value,
+                        HSNSACCode: table.rows[rowIndex].cells[33].children[0].value,
+                        TrxHeaderRemarksMandatory: table.rows[rowIndex].cells[34].children[0].checked,
+                        InvokeCustomerRegistration: table.rows[rowIndex].cells[35].children[0].checked,
                         ExpiryDate: '10/10/2020',
                         StartDate: '10/10/2020'
                     });
