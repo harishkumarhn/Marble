@@ -91,9 +91,7 @@ namespace MarbaleManagementStudio.Controllers
         public ActionResult POS(string ValType)
         {
             var datatable = siteSetup.GetAppSettings(ValType);
-
             ViewBag.POSForm = datatable;
-
             return PartialView("~/Views/SiteSetup/ConfigurationTabs/Values/POS.cshtml");
         }
         public ActionResult Card()
@@ -139,6 +137,7 @@ namespace MarbaleManagementStudio.Controllers
             return View("~/Views/SiteSetup/ConfigurationTabs/Values/Limit.cshtml");
         }
         #endregion
+        
         #region Transaction
         public ActionResult Transaction()
         {
@@ -156,6 +155,7 @@ namespace MarbaleManagementStudio.Controllers
             return View("~/Views/SiteSetup/ConfigurationTabs/Values/Price.cshtml");
         }
         #endregion
+        
         #region Email
         public ActionResult Email()
         {
@@ -164,6 +164,7 @@ namespace MarbaleManagementStudio.Controllers
             return View("~/Views/SiteSetup/ConfigurationTabs/Values/Email.cshtml");
         }
         #endregion
+        
         #region Print
         public ActionResult Print()
         {
@@ -172,6 +173,7 @@ namespace MarbaleManagementStudio.Controllers
             return View("~/Views/SiteSetup/ConfigurationTabs/Values/Print.cshtml");
         }
         #endregion
+        
         #region Formats
         public ActionResult Formats()
         {
@@ -180,6 +182,7 @@ namespace MarbaleManagementStudio.Controllers
             return View("~/Views/SiteSetup/ConfigurationTabs/Values/Formats.cshtml");
         }
         #endregion
+        
         #region Inventory
         public ActionResult Inventory()
         {
@@ -189,6 +192,7 @@ namespace MarbaleManagementStudio.Controllers
 
         }
         #endregion
+        
         #region Redemption
         public ActionResult Redemption()
         {
@@ -197,6 +201,7 @@ namespace MarbaleManagementStudio.Controllers
             return View("~/Views/SiteSetup/ConfigurationTabs/Values/Redemption.cshtml");
         }
         #endregion
+        
         #region Payment
         public ActionResult Payment()
         {
@@ -205,6 +210,7 @@ namespace MarbaleManagementStudio.Controllers
             return View("~/Views/SiteSetup/ConfigurationTabs/Values/Payment.cshtml");
         }
         #endregion
+        
         #region Signage
         public ActionResult Signage()
         {
@@ -215,6 +221,7 @@ namespace MarbaleManagementStudio.Controllers
 
 
         #endregion
+        
         #region Server
         public ActionResult Server()
         {
@@ -290,6 +297,7 @@ namespace MarbaleManagementStudio.Controllers
             }
         }
         #endregion
+        
         #region Users
         public ActionResult Users()
         {
@@ -359,6 +367,7 @@ namespace MarbaleManagementStudio.Controllers
             }
         }
         #endregion
+        
         #region Customer
         public ActionResult Customer()
         {
@@ -604,6 +613,7 @@ namespace MarbaleManagementStudio.Controllers
             return siteSetup.InsertOrUpdatePrintTemplateHeaderAndItems(template);
         }
         #endregion
+        
         public ActionResult TaskType()
         {
             List<TaskTypeModel> tasktype = siteSetup.GetTaskType();
@@ -633,6 +643,7 @@ namespace MarbaleManagementStudio.Controllers
                 throw;
             }
         }
+        
         #region lookUps
         public ActionResult References()
         {

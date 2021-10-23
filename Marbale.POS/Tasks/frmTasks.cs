@@ -31,6 +31,8 @@ namespace Marbale.POS
         StaticData staticData = new StaticData();
         int[] LoadMultipleProducts;
         TransactionBL trxBL = new TransactionBL();
+        SiteSetupBL siteSetup = new SiteSetupBL();
+
 
         const int MAXLOADMULTIPLECARDS = 500;
         //object paramData;
@@ -360,7 +362,7 @@ namespace Marbale.POS
                 txtTotalCredits.Text = (currentcard.credits + currentcard.face_value).ToString();
 
                 string[] row1 = new string[] { currentcard.CardNumber, currentcard.issue_date.ToString(), currentcard.credits.ToString(), currentcard.bonus.ToString(), currentcard.ticket_count.ToString() };
-                dgvFromCard.Rows.Add(row1);
+                dgvRefundCard.Rows.Add(row1);
             }
             else
             {
@@ -684,18 +686,50 @@ namespace Marbale.POS
         {
             try
             {
+                dataLogger.Debug("Begin tasks btnRefundCardOk_Click");
+                List<AppSetting> appCards = new List<AppSetting>();
+                appCards = siteSetup.GetAppSettings("POS");
+
+
+                decimal creditsToRefund = 0;
+                decimal.TryParse(txtCreditsToRefund.Text, out creditsToRefund);
+
+                decimal faceValue = 0;
+                decimal.TryParse(txtCardDeposit.Text, out faceValue);
+                 
+                decimal totalAvailCredits = 0;
+                decimal.TryParse(txtTotalCredits.Text, out totalAvailCredits);
+
+                
 
                 if (string.IsNullOrEmpty(txtCreditsToRefund.Text) || Convert.ToInt32(txtCreditsToRefund.Text) < 0)
                 {
-                    MessageBox.Show("Enter credits greater than zero to Refund");
+                    MessageBox.Show(GlobalMessage.ENTER_CREDITS_GREATER_THAN_ZERO_TO_REFUND);
                     return;
                 }
 
-                if (Convert.ToInt32(txtCreditsToRefund.Text) > Convert.ToInt32(txtTotalCredits.Text))
+
+                //allowing partial refund
+                AppSetting partialRefundEnable = appCards.Where(x => x.Name == GlobalConstant.ALLOW_PARTIAL_REFUND).FirstOrDefault();
+                if (partialRefundEnable != null && partialRefundEnable.Value.ToLower() == "false")
                 {
-                    MessageBox.Show("Enter credits less than or equal to available credits");
-                    return;
+                    if ( creditsToRefund > Convert.ToInt32(txtTotalCredits.Text))
+                    {
+                        MessageBox.Show(GlobalMessage.ENTER_CREDITS_LESS_THAN_OR_EQUAL_TO_AVAILABLE_CREDITS);
+                        return;
+                    }
                 }
+
+
+                //Allow  Refund of Card Deposit
+                AppSetting partialRefundDepositEnable = appCards.Where(x => x.Name == GlobalConstant.ALLOW_REFUND_OF_CARD_DEPOSIT).FirstOrDefault();
+                if (partialRefundEnable != null && partialRefundEnable.Value.ToLower() == "false")
+                {
+                    
+                }
+
+
+
 
                 //Check for partially refund face value
                 //Partially face value refund is not allowed
@@ -707,9 +741,7 @@ namespace Marbale.POS
                 }
 
 
-                decimal creditsTorefund = Convert.ToInt32(txtCreditsToRefund.Text);
-                int faceValue = Convert.ToInt32(txtCardDeposit.Text);
-                decimal totalAvailableCredits = Convert.ToDecimal(txtTotalCredits.Text);
+      
 
                 TransactionBL trxBL = new TransactionBL();
 
@@ -728,6 +760,7 @@ namespace Marbale.POS
                 trxBL.RefundCard(currentcard.card_id, creditsTorefund, creditsTorefund, faceValue, valid, string.Empty);
 
                 MessageBox.Show("Card Refunded Successfully");
+                dataLogger.Debug("Ends tasks btnRefundCardOk_Click");
                 this.Close();
             }
             catch (Exception ex)

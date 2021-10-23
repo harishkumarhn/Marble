@@ -1,7 +1,7 @@
 ﻿@import "/Content/CSS/fonts/font.css";
 
 /* General Buttons */
-button {
+/*button {
     width: 130px;
     height: 40px;
     border: none;
@@ -16,12 +16,12 @@ button {
     text-align: left;
     text-indent: 5px;
     box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
-    cursor: pointer;
+    cursor: pointer;*/
     /* Just for presentation */
-    display: block;
+    /*display: block;
     margin: 0 auto;
     margin-bottom: 20px;
-}
+}*/
 
     button:active {
         box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);

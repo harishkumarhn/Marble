@@ -57,6 +57,8 @@ namespace Marbale.POS
 
         List<AppSetting> appCustomerData = new List<AppSetting>();
 
+
+
         int seconds = 0;
         int maxSecCount = 30;
         #endregion
@@ -87,12 +89,53 @@ namespace Marbale.POS
 
         private void POSHome_Load(object sender, EventArgs e)
         {
+            InitializePosMenu();
             InitializeProductDisplayGroupDropDown();
             UpdateProductsTab();
             UpdateDiscountsTab();
             updateCardDetailsGrid();
             registerAdditionalCardReaders();
             updateScreenAmounts();
+        }
+
+
+        public void InitializePosMenu()
+        {
+            //
+            btnTask.Visible = true;
+            btnRefund.Visible = true;
+
+            dataLogger.Debug("Begin POS InitializePosMenu");
+            List<AppSetting> appPosData = new List<AppSetting>();
+            appPosData = siteSetup.GetAppSettings("Card");
+
+            AppSetting taskEnable = appPosData.Where(x => x.Name == "Enale_Task_In_POS").FirstOrDefault();
+            if (taskEnable != null && taskEnable.Value.ToLower() == "false")
+            {
+                btnTask.Visible = false;
+            }
+            AppSetting refundEnable = appPosData.Where(x => x.Name == "Enale_Refund_In_POS").FirstOrDefault();
+            if (refundEnable != null && refundEnable.Value.ToLower() == "false")
+            {
+                btnRefund.Visible = false;
+            }
+            AppSetting discountEnable = appPosData.Where(x => x.Name == "Enale_Discount_In_POS").FirstOrDefault();
+            if (discountEnable != null && discountEnable.Value.ToLower() == "false")
+            {
+                tbHomeControls.TabPages.Remove(tbPageDiscounts);
+                // this.tbPageProducts.Hide();
+            }
+            AppSetting productEnable = appPosData.Where(x => x.Name == "Enale_Product_In_POS").FirstOrDefault();
+            if (discountEnable != null && discountEnable.Value.ToLower() == "false")
+            {
+              //  this.tbPageDiscounts.Hide();
+             tbHomeControls.TabPages.Remove(tbPageProducts);
+                // tbHomeControls.TabPages.Remove("tbPageProducts");
+            }
+            dataLogger.Debug("Ends POS InitializePosMenu");
+
+
+
         }
         #endregion
 
@@ -199,7 +242,7 @@ namespace Marbale.POS
                         return;
                     }
                     CardReader.CardSwiped = true;
-                    
+
                     HandleCardRead(CardNumber, sender as DeviceClass);
                 }
             }
@@ -214,18 +257,18 @@ namespace Marbale.POS
 
             CurrentCard = null;
 
-           
+
             CurrentCard = trxBL.GetCard(0, CardNumber);
 
             if (CurrentCard == null || CurrentCard.card_id == 0)
                 CurrentCard = new Card();
 
-            
+
 
             DisplayCardDetails();
             AutoClearTimer.Enabled = true;
 
-            readerDevice.beep(1);
+            //readerDevice.beep(1);
         }
 
         #endregion
@@ -392,53 +435,59 @@ namespace Marbale.POS
                 flowLayoutPanelProducts.Controls.Clear();
                 for (int i = 0; i < lstProducts.Count; i++)
                 {
-                    Button btnProduct = new Button();
-                    btnProduct.Click += new EventHandler(ProductButton_Click);
-                    btnProduct.MouseDown += ProductButton_MouseDown;
-                    btnProduct.MouseUp += ProductButton_MouseUp;
-                    btnProduct.Name = lstProducts[i].Name + '_' + lstProducts[i].Id;
-                    btnProduct.Text = lstProducts[i].Name;
-                    btnProduct.Padding = new Padding(18);
-                    btnProduct.Tag = lstProducts[i].Id;
-                    btnProduct.Font = btnSampleProduct.Font;
-                    btnProduct.ForeColor = btnSampleProduct.ForeColor;
-                    btnProduct.Size = btnSampleProduct.Size;
-                    //btnProduct.Size = new Size(160, 127);
-                    btnProduct.BackgroundImage = btnSampleProduct.BackgroundImage;
-                    btnProduct.FlatStyle = btnSampleProduct.FlatStyle;
-                    btnProduct.FlatAppearance.BorderColor = btnSampleProduct.FlatAppearance.BorderColor;
-                    btnProduct.FlatAppearance.BorderSize = btnSampleProduct.FlatAppearance.BorderSize;
-                    btnProduct.FlatAppearance.MouseDownBackColor = btnSampleProduct.FlatAppearance.MouseOverBackColor = Color.Transparent;
-                    btnProduct.BackgroundImageLayout = ImageLayout.Zoom;
-                    btnProduct.BackColor = Color.Transparent;
 
-                    string dispGroup = lstProducts[i].DisplayGroup;
-                    if (dispGroup != prev_display_group)
+                    if (lstProducts[i].DisplayInPOS == true)
                     {
-                        prev_display_group = dispGroup;
-                        ProductTab = new TabPage(prev_display_group);
-                        ProductTab.Name = prev_display_group;
-                        ProductTab.Text = prev_display_group;
-                        ProductTab.BackColor = Color.Gray;
-                        ProductTab.Text = prev_display_group.Replace("&", "&&");
-                        tabControlProducts.TabPages.Add(ProductTab);
-                        flpProducts = new FlowLayoutPanel();
-                        flpProducts.Dock = DockStyle.Fill;
-                        flpProducts.AutoScroll = true;
-                        flpProducts.BackColor = Color.Transparent;
-                        ProductTab.Controls.Add(flpProducts);
 
-                        cmbDisplayGroups.Items.Add(prev_display_group);
-                        int width = (int)(cmbDisplayGroups.CreateGraphics().MeasureString(prev_display_group, cmbDisplayGroups.Font).Width) + 40;
-                        if (width > cmbDisplayGroups.Width)
-                            cmbDisplayGroups.Width = width;
+
+                        Button btnProduct = new Button();
+                        btnProduct.Click += new EventHandler(ProductButton_Click);
+                        btnProduct.MouseDown += ProductButton_MouseDown;
+                        btnProduct.MouseUp += ProductButton_MouseUp;
+                        btnProduct.Name = lstProducts[i].Name + '_' + lstProducts[i].Id;
+                        btnProduct.Text = lstProducts[i].Name;
+                        btnProduct.Padding = new Padding(18);
+                        btnProduct.Tag = lstProducts[i].Id;
+                        btnProduct.Font = btnSampleProduct.Font;
+                        btnProduct.ForeColor = btnSampleProduct.ForeColor;
+                        btnProduct.Size = btnSampleProduct.Size;
+                        //btnProduct.Size = new Size(160, 127);
+                        btnProduct.BackgroundImage = btnSampleProduct.BackgroundImage;
+                        btnProduct.FlatStyle = btnSampleProduct.FlatStyle;
+                        btnProduct.FlatAppearance.BorderColor = btnSampleProduct.FlatAppearance.BorderColor;
+                        btnProduct.FlatAppearance.BorderSize = btnSampleProduct.FlatAppearance.BorderSize;
+                        btnProduct.FlatAppearance.MouseDownBackColor = btnSampleProduct.FlatAppearance.MouseOverBackColor = Color.Transparent;
+                        btnProduct.BackgroundImageLayout = ImageLayout.Zoom;
+                        btnProduct.BackColor = Color.Transparent;
+
+                        string dispGroup = lstProducts[i].DisplayGroup;
+                        if (dispGroup != prev_display_group)
+                        {
+                            prev_display_group = dispGroup;
+                            ProductTab = new TabPage(prev_display_group);
+                            ProductTab.Name = prev_display_group;
+                            ProductTab.Text = prev_display_group;
+                            ProductTab.BackColor = Color.Gray;
+                            ProductTab.Text = prev_display_group.Replace("&", "&&");
+                            tabControlProducts.TabPages.Add(ProductTab);
+                            flpProducts = new FlowLayoutPanel();
+                            flpProducts.Dock = DockStyle.Fill;
+                            flpProducts.AutoScroll = true;
+                            flpProducts.BackColor = Color.Transparent;
+                            ProductTab.Controls.Add(flpProducts);
+
+                            cmbDisplayGroups.Items.Add(prev_display_group);
+                            int width = (int)(cmbDisplayGroups.CreateGraphics().MeasureString(prev_display_group, cmbDisplayGroups.Font).Width) + 40;
+                            if (width > cmbDisplayGroups.Width)
+                                cmbDisplayGroups.Width = width;
+                        }
+
+                        flpProducts.Controls.Add(btnProduct);
                     }
-
-                    flpProducts.Controls.Add(btnProduct);
                     //flowLayoutPanelProducts.Controls.Add(btnProduct);
                 }
 
-                lblTabText.Text = tabControlProducts.SelectedTab.Text;
+                lblTabText.Text = tabControlProducts.SelectedTab?.Text;
             }
         }
 
@@ -582,7 +631,7 @@ namespace Marbale.POS
             if (transaction == null)
             {
                 transaction = new Transaction();
-                
+
                 if (CurrentUser != null)
                 {
                     transaction.Username = CurrentUser.LoginId;
@@ -590,12 +639,12 @@ namespace Marbale.POS
                     transaction.UserId = CurrentUser.Id;
                 }
             }
-            if(IsMultipleCard ==true)
+            if (IsMultipleCard == true)
             {
-               
+
                 transaction.IsMultipleCard = true;
             }
-          
+
             if (transaction.TransactionLines == null)
                 transaction.TransactionLines = new List<TransactionLine>();
 
@@ -619,7 +668,7 @@ namespace Marbale.POS
                 for (int i = 0; i < transaction.TransactionLines.Count; i++)
                 {
                     if (transaction.TransactionLines[i].ProductType.ToUpper() == GlobalEnum.ProductType.NEW_CARD.DescriptionAttr().ToUpper() && transaction.TransactionLines[i].CancelledLine == false
-                        && transaction.TransactionLines[i].CardNumber==CurrentCard.CardNumber
+                        && transaction.TransactionLines[i].CardNumber == CurrentCard.CardNumber
                         )
                     {
                         newProductExists = true;
@@ -837,19 +886,19 @@ namespace Marbale.POS
 
         private void LoadMultiple()
         {
-           
+
 
             if (transaction == null)
             {
                 transaction = new Transaction();
                 IsMultipleCard = true;
-                 
+
             }
 
-           
+
 
             string message = "";
-           
+
             for (int i = 0; i < staticData.LoadMultipleCards.Length; i++)
             {
                 if (staticData.LoadMultipleCards[i] == null)
@@ -1590,7 +1639,7 @@ namespace Marbale.POS
             //    transaction.CardList.Add(CurrentCard);
             //}
 
-             
+
 
             while (true)
             {
@@ -1764,7 +1813,7 @@ namespace Marbale.POS
                 return;
             }
 
-            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADTICKETS, CurrentCard,staticData);
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADTICKETS, CurrentCard, staticData);
             frm.ShowDialog();
             HandleCardRead(CurrentCard.CardNumber, null);
 
@@ -1788,7 +1837,7 @@ namespace Marbale.POS
                 return;
             }
 
-            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADBONUS, CurrentCard,staticData);
+            frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.LOADBONUS, CurrentCard, staticData);
             frm.ShowDialog();
             HandleCardRead(CurrentCard.CardNumber, null);
 
@@ -1843,7 +1892,10 @@ namespace Marbale.POS
             frmTasks frm = new frmTasks((int)Tasks.CommonTask.Task.REFUNDCARD, CurrentCard, staticData);
             frm.ShowDialog();
 
-            HandleCardRead(CurrentCard.CardNumber, null);
+            if (CurrentCard != null)
+            {
+                HandleCardRead(CurrentCard.CardNumber, null);
+            }
         }
 
         private void dgvTrxHeader_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -1991,6 +2043,7 @@ namespace Marbale.POS
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            InitializePosMenu();
             if (transaction == null)
             {
                 RefreshTabs();
@@ -2272,9 +2325,9 @@ namespace Marbale.POS
                 MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Panel2.Width;
 
                 MarbleSplitContainer.Panel1.Controls.Remove(tbHomeControls);
-                MarbleSplitContainer.Panel1.Controls.Remove(panelButtons);
+                MarbleSplitContainer.Panel1.Controls.Remove(flowLayoutPanel4);
                 MarbleSplitContainer.Panel2.Controls.Add(tbHomeControls);
-                MarbleSplitContainer.Panel2.Controls.Add(panelButtons);
+                MarbleSplitContainer.Panel2.Controls.Add(flowLayoutPanel4);
 
                 tbHomeControls.Width = MarbleSplitContainer.Panel2.Width;
                 //tbHomeControls.Height = 603; //MarbleSplitContainer.Panel2.Height - panelButtons.Height;
@@ -2288,9 +2341,9 @@ namespace Marbale.POS
             {
                 MarbleSplitContainer.SplitterDistance = MarbleSplitContainer.Panel2.Width;
                 MarbleSplitContainer.Panel1.Controls.Add(tbHomeControls);
-                MarbleSplitContainer.Panel1.Controls.Add(panelButtons);
+                MarbleSplitContainer.Panel1.Controls.Add(flowLayoutPanel4);
                 MarbleSplitContainer.Panel2.Controls.Remove(tbHomeControls);
-                MarbleSplitContainer.Panel2.Controls.Remove(panelButtons);
+                MarbleSplitContainer.Panel2.Controls.Remove(flowLayoutPanel4);
 
                 tbHomeControls.Width = MarbleSplitContainer.Panel1.Width;
                 //tbHomeControls.Height = 603; // MarbleSplitContainer.Panel1.Height - panelButtons.Height ;
@@ -2358,7 +2411,7 @@ namespace Marbale.POS
             flowLayoutPanelDiscounts.BackColor = POSBackColor;
             flowLayoutPanelFunctions.BackColor = POSBackColor;
 
-            panelButtons.BackColor = POSBackColor;
+            flowLayoutPanel4.BackColor = POSBackColor;
 
             foreach (TabPage tp in tbHomeControls.TabPages)
                 tp.BackColor = POSBackColor;
@@ -2670,7 +2723,7 @@ namespace Marbale.POS
         private void AutoClearTimer_Tick(object sender, EventArgs e)
         {
 
-            if(seconds< maxSecCount)
+            if (seconds < maxSecCount)
             {
                 seconds++;
 
@@ -2679,7 +2732,7 @@ namespace Marbale.POS
             {
                 AutoClearTimer.Stop();
                 seconds = 0;
-                    //AutoClearTimer.Enabled = false;
+                //AutoClearTimer.Enabled = false;
                 if (transaction == null)
                 {
                     RefreshTabs();
@@ -2692,6 +2745,8 @@ namespace Marbale.POS
         {
 
         }
+
+     
         #endregion
 
 

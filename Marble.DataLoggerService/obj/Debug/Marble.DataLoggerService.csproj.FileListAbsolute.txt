@@ -23,8 +23,8 @@ H:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\bin\Debug\Marble.DataL
 H:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\bin\Debug\Marble.DataLoggerService.pdb
 H:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\bin\Debug\log4net.dll
 H:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\bin\Debug\log4net.xml
-H:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.csproj.AssemblyReference.cache
 H:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.csproj.CoreCompileInputs.cache
 H:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.csproj.CopyComplete
 H:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.dll
 H:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.pdb
+H:\Code\Marble Dev branch\Marble\Marble.DataLoggerService\obj\Debug\Marble.DataLoggerService.csproj.AssemblyReference.cache

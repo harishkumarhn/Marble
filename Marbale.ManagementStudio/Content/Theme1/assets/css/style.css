@@ -1051,7 +1051,8 @@ header .form-inline {
           justify-content: flex-end; }
   .header-menu .dropdown {
     line-height: 55px;
-    margin-top: 0 !important; }
+    margin-top: 0 !important; }'
+                               '
     .header-menu .dropdown .dropdown-toggle {
       line-height: 55px; }
 
@@ -2503,3 +2504,10 @@ footer.site-footer {
     right: 20px !important; }
 
 /*# sourceMappingURL=style.css.map */
+
+
+
+.highlight {
+    border: 2px solid #3d3d9f;
+    background-color: #03a9f3;
+}

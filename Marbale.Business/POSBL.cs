@@ -61,6 +61,7 @@ namespace Marbale.Business
                     product.FinalPrice = dr.IsNull("FinalPrice") ? 0 : Convert.ToInt32(dr["FinalPrice"]);
                     product.TaxPercentage = dr.IsNull("TaxPercentage") ? 0 : Convert.ToInt32(dr["TaxPercentage"]);
                     product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
+                    product.DisplayInPOS = dr.IsNull("DisplayInPOS") ? false : bool.Parse(dr["DisplayInPOS"].ToString());
                     product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
                     products.Add(product);
                 }

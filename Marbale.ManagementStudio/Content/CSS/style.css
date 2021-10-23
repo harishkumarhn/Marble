@@ -240,13 +240,14 @@ thead {
     padding: 7px 12px;
     transition: 0.3s;
     font-size: 17px;
-    background-color: #7f7eb1;
+   /* background-color: #7f7eb1;*/
     border-style: ridge;
-    border-color: #e8e8f3;
+   /* border-color: #e8e8f3;*/
 }
 
 .buttoncolor-change {
     background-color: cornflowerblue;
+    color: #fff;
 }
 
 select {
@@ -284,3 +285,15 @@ a:hover {
     padding-right: 10px;
 }
 /*end*/
+
+.highlight {
+    border: 2px solid #3d3d9f;
+    background-color: #03a9f3;
+    color: #fff;
+}
+
+.tabstyle {
+    border: 2px solid #3d3d9f;
+    background-color: #03a9f3;
+    color: #fff;
+}
