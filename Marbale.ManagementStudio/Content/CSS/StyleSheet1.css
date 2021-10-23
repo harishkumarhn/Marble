@@ -21,6 +21,7 @@ button {
     display: block;
     margin: 0 auto;
     margin-bottom: 20px;
+    background-color: #0062ccc2;
 }
 
     button:active {
@@ -40,11 +41,11 @@ button {
         border-radius: 0 5px 5px 0;
     }
 
-    .large {
-        width: 225px !important;
-        height: 60px;
-        font-size: 20px;
-    }
+.large {
+    width: 225px !important;
+    height: 60px;
+    font-size: 20px;    
+}
 
 .medium {
     width: 180px !important;
