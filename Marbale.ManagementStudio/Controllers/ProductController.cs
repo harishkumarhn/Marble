@@ -126,6 +126,7 @@ namespace MarbaleManagementStudio.Controllers
                 product.StartDate = DateTime.Now;
                 product.ExpiryDate = DateTime.Now;
                 product.CardExpiryDate = DateTime.Now;
+                product.Time = DateTime.Now;
                 return View(product);
             }
             catch (Exception e)
