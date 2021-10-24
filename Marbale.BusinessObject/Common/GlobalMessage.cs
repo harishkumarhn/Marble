@@ -20,6 +20,11 @@ namespace Marbale.BusinessObject
 
 
         public static string ENTER_CREDITS_LESS_THAN_OR_EQUAL_TO_AVAILABLE_CREDITS = "Enter credits less than or equal to available credits";
+
+        public static string ENTER_CREDITS_EQUAL_TO_AVAILABLE_CREDITS = "Enter credits equal to available credits";
+
+        public static string ENTER_CREDITS_EQUAL_TO = "Enter credits equal to amount  : @amount ";
+        public static string ENTER_CREDITS_LESS_THAN_OR_EQUAL = "Enter credits less than or equal to amount  : @amount ";
     }
 
 
@@ -32,5 +37,6 @@ namespace Marbale.BusinessObject
 
         public static string   ALLOW_REFUND_OF_CARD_DEPOSIT ="Allow_Refund_Of_Card_Deposit";
 
+        public static string ALLOW_REFUND_OF_CARD_CREDITS = "Allow_Refund_of_Card_Credits";
     }
 }

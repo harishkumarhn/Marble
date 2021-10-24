@@ -521,6 +521,9 @@
             </div>
         </div>
     </div>
+     
+
+    <!------ SnackBar -->
     <div id="snackbar" class="snackbar">
         <div class="snackbar-container">
             <div class="icon"><ion-icon name="checkmark-circle"></ion-icon></div>
@@ -531,6 +534,153 @@
             <div class="close"><a onclick="notifyClose()"><ion-icon name="close-outline"></ion-icon></a></div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function getCookie(name) {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; ++i) {
+                var pair = cookies[i].trim().split('=');
+                if (pair[0] == name)
+                    return pair[1];
+            }
+            return null;
+        }
+
+        function SetSideMenu(flag) {
+            if (typeof (Storage) !== "undefined") {
+                if (flag) {
+                    sessionStorage.activemenu = true;
+
+                }
+                else {
+                    sessionStorage.activemenu = false
+                }
+                console.log("Set	 " + sessionStorage.activemenu)
+            }
+        }
+
+
+        $('#sidebarCollapse').on('click', function () {
+            console.log("bbbbb");
+            $('#sidebar').addClass('active');
+            $('.overlay').addClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            SetSideMenu(true);
+        });
+
+
+        $('#dismiss, .overlay').on('click', function () {
+            $('#sidebar').removeClass('active');
+            $('.overlay').removeClass('active');
+            SetSideMenu(false);
+        });
+
+        $(document).ready(function () {
+            console.log("a");
+
+            if (typeof (Storage) !== "undefined") {
+                console.log("AAAA	 " + sessionStorage.activemenu)
+
+                if (sessionStorage.activemenu == "true") {
+                    $('#sidebar').addClass('active');
+                    //$('.overlay').addClass('active');
+
+                }
+
+            }
+
+            // var preSelectedValue = getCookie("PreviousExpandedDropDown");
+            //console.log("preSelectedValue"+preSelectedValue);
+
+            //if (preSelectedValue) {
+
+            //  setSession(preSelectedValue);
+            //}
+        });
+
+        function DisplayPopUp(page, url) {
+            $('#myModal').modal('show');
+            if (page == "Product key" || page == 'Inventory') {
+                $('#modelBody').css({
+                    'width': 640,
+                    'margin-top': 70
+                });
+            } else {
+                $('#modelBody').css({
+                    'left': '-30%',
+                    'width': 800,
+                });
+            }
+            $('#modelBody').load(url);
+        }
+
+        $("#myModal").draggable({
+            handle: ".modal-header"
+        });
+
+
+
+        function setSession(selectedId) {
+            var preSelectedValue = getCookie("PreviousExpandedDropDown");
+            if (preSelectedValue != selectedId) {
+                document.cookie = "PreviousExpandedDropDown=" + selectedId;
+            } else {
+                document.cookie = "PreviousExpandedDropDown=";
+            }
+        }
+
+        function notify(dataType, header, message, callBack) {
+            setTimeout(() => {
+                notifyClose();
+                if (callBack) {
+                    callBack();
+                }
+            }, 4400);
+            setSnackbarData(dataType, header, message);
+            $('#snackbar').attr('data-type', dataType.toLowerCase());
+            $('#snackbar').addClass('show');
+            $('.close').css('visibility', 'visible');
+        }
+
+        function notifyClose() {
+            $('#snackbar').removeClass('show');
+            $('.close').css('visibility', 'hidden');
+        }
+
+        function notifyinmodal(dataType, header, message, callBack) {
+            setTimeout(() => {
+                notifyCloseinmodal();
+                if (callBack) {
+                    callBack();
+                }
+            }, 4400);
+            setSnackbarData(dataType, header, message);
+            $('#snackbar-modal').attr('data-type', dataType.toLowerCase())
+            $('#snackbar-modal').addClass('show');
+            $('#close-modal').css('visibility', 'visible');
+        }
+
+        function notifyCloseinmodal() {
+            $('#snackbar-modal').removeClass('show');
+            $('#close-modal').css('visibility', 'hidden');
+        }
+
+        function setSnackbarData(dataType, header, message) {
+            switch (dataType.toLowerCase()) {
+                case 'error':
+                    $('.icon ion-icon').attr("name", "close-circle-outline");
+                    break;
+                case 'success':
+                    $('.icon ion-icon').attr("name", "checkmark-circle");
+                    break;
+            }
+
+            $('#header').html(header ? header : "Success Message");
+            $('#message').html(message ? message : "Data Saved Successfully");
+        }
+    </script>
+
     <!--Local Stuff-->
 
 </body>
