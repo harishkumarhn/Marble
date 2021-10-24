@@ -156,7 +156,7 @@ namespace Marbale.DataAccess
         {
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[44];
+                SqlParameter[] sqlParameters = new SqlParameter[46];
                 sqlParameters[0] = new SqlParameter("@name", string.IsNullOrEmpty(product.Name) ? "" : product.Name);
                 sqlParameters[1] = new SqlParameter("@type", string.IsNullOrEmpty(product.Type) ? "" : product.Type);
                 sqlParameters[2] = new SqlParameter("@active", product.Active);
@@ -202,6 +202,8 @@ namespace Marbale.DataAccess
                 sqlParameters[41] = new SqlParameter("@LineRemarksMandatory", product.LineRemarksMandatory);
                 sqlParameters[42] = new SqlParameter("@InvokeCustomerRegistration", product.InvokeCustomerRegistration);
                 sqlParameters[43] = new SqlParameter("@Discount", product.Discount);
+                sqlParameters[44] = new SqlParameter("@InventoryProductCode",product.InventoryProductCode);
+                sqlParameters[45] = new SqlParameter("@Description",product.Description);
 
                 return conn.executeUpdateQuery("sp_InsertOrUpdateProduct", sqlParameters);
             }

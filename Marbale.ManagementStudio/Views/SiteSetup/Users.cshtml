@@ -198,7 +198,7 @@
         });
         $('#addRow').on('click', function () {
             var fixedcolumn1values = $('.DTFC_Cloned lable.fixedCol1');
-            var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol3');
+            var fixedcolumn3values = $('.DTFC_Cloned input.fixedCol2');
 
             var rolesOptions = '';
             @foreach (var dow in ViewBag.users[0].Roles)
@@ -256,7 +256,7 @@
             var items = [];
             var table = document.getElementById('marbleTable');
             var fixedcolumn1 = $('.DTFC_Cloned lable.fixedCol1');
-            var fixedcolumn3 = $('.DTFC_Cloned input.fixedCol3');
+            var fixedcolumn3 = $('.DTFC_Cloned input.fixedCol2');
 
             for (var r = 0, n = table.rows.length; r < n; r++) {
                 if (updatedArray.includes(r)) {
@@ -329,7 +329,9 @@
                 data: { Id: id },
                 dataType: "json",
                 success: function (data) {
-                    location.reload();
+                    notify('delete', '', '', () => {
+                        location.reload();
+                    });
                 },
                 error: function (e) {
                     alert(e);

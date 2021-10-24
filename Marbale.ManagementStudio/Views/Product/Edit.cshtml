@@ -185,7 +185,7 @@
                             </div>
                             <div class="display-flex">
                                 <div>
-                                    <label class="col-sm-8">Card Expiry Date:</label> <a class="clearDate" (onClick)="cardExpiryDateClear()"> clear date</a>
+                                    <label class="col-sm-8">Card Expiry Date:</label> <a class="clearDate" onclick="cardExpiryDateClear()"> clear date</a>
                                     @Html.TextBoxFor(m => m.CardExpiryDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "form-control col-sm-12" })
                                 </div>
                             </div>
@@ -282,6 +282,7 @@
                     function duplicateClick(value) {
                         if (value == true) {
                             $('#productId').val(0);
+                            $('#Name').val('');
                         }
                         duplicateClicked = value;
                     }
@@ -349,7 +350,7 @@
                     }
 
                     function cardExpiryDateClear() {
-                        $('#CardExpiryDate').val(null)
+                        $('#CardExpiryDate').val(null);
                     }
                 </script>
                 

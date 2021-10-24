@@ -170,8 +170,10 @@
             ActionName: "Reduce"
         };
         var url = '@Url.Content("~/Cards/AddDeleteInventory")';
-        $.getJSON(url, inventory, function (data) {
-            $("label[for='lblCardInventoryTillDate']").text(data);
+       $.getJSON(url, inventory, function (data) {
+           notify('delete', '', '', () => {
+               $("label[for='lblCardInventoryTillDate']").text(data);
+           });            
         });
    }
 

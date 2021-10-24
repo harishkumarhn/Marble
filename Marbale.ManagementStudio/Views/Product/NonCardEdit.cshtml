@@ -107,11 +107,11 @@
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Inventory Product Code:</label>
-                                @Html.TextBox("code", "",new { @class = "col-md-6" })     <!-- add attribute to model and change it to TextBoxFor-->                       
+                                @Html.TextBoxFor(m => m.InventoryProductCode, new { @class = "col-md-6" })     <!-- add attribute to model and change it to TextBoxFor-->                       
                             </div>
                             <div class="col-md-13">
                                 <label class="col-md-5">Description:</label>
-                                @Html.TextBox("Description","",new { @class = "col-md-6" })  <!-- add attribute to model and change it to TextBoxFor-->                           
+                                @Html.TextBoxFor(m => m.Description,new { @class = "col-md-6" })  <!-- add attribute to model and change it to TextBoxFor-->                           
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -220,6 +220,7 @@
         if (value == true) {
             $('#productId').val('');
             $('#productType').val('');
+            $('#Name').val('');
         }
         duplicateClicked = value;
     }
