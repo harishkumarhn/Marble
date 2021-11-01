@@ -403,8 +403,17 @@
                                 <ul class="sub-menu children dropdown-menu">
                                     @foreach (var page in (List<Marbale.BusinessObject.SiteSetup.AppModuleAction>)Session["Communication"])
                                     {
-
-                                        <li><i class="fa fa-puzzle-piece"></i><a href="@page.URL">@page.Page</a></li>
+                                        if (page.Page == "Configurations")
+                                        {
+                                            <li>
+                                                <i class="fa fa-puzzle-piece"></i><a href="#" onclick="DisplayPopUp('@page.Page','@page.URL')">@page.Page</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li><i class="fa fa-puzzle-piece"></i><a href="@page.URL">@page.Page</a></li>
+                                        }
+                                        
                                     }
                                 </ul>
 
