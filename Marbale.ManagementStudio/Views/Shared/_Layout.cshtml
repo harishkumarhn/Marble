@@ -102,7 +102,7 @@
             background: linear-gradient(to bottom right,#28a745,#84b42d);
         }
 
-        .snackbar[data-type="error"] {
+        .snackbar[data-type="error"], .snackbar[data-type="delete"] {
             background: linear-gradient(to bottom right,#FF2A68,#FF5E3A);
         }
 
@@ -686,8 +686,14 @@
                 case 'success':
                     $('.icon ion-icon').attr("name", "checkmark-circle");
                     break;
+                case 'delete':
+                    $('.icon ion-icon').attr("name", "trash");
+                    header = header ? header : "Deleted";
+                    console.log(header +"in switch");
+                    message = message ? message : "Deleted the Record";
+                    break;
             }
-
+            console.log(header ? header : "Success Message");
             $('#header').html(header ? header : "Success Message");
             $('#message').html(message ? message : "Data Saved Successfully");
         }
