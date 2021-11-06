@@ -32,11 +32,11 @@
             </div>
             <div class="col-md-3">
                 <label for="ex3"><b>IssueDate:</b></label>
-                @Html.TextBoxFor(m => m.IssueDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "form-control" })
+                @Html.TextBoxFor(m => m.IssueDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
             </div>
             <div class="col-md-3">
                 <label for="ex3"><b>To:</b></label>
-                @Html.TextBoxFor(m => m.ToDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "form-control" })
+                @Html.TextBoxFor(m => m.ToDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
             </div>
         </div>
         <div class="row">
