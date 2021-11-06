@@ -3,6 +3,7 @@ using Marbale.Business.Enum;
 using Marbale.BusinessObject;
 using Marbale.BusinessObject.Tax;
 using MarbaleManagementStudio.Models;
+using Marble.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,11 @@ namespace MarbaleManagementStudio.Controllers
     public class ProductController : Controller
     {
         public ProductBL productBl;
-
+        ConfigLoad configLoad;
         public ProductController()
         {
             productBl = new ProductBL();
+            configLoad = new ConfigLoad();
         }
         public ActionResult Index1()
         {
@@ -33,7 +35,7 @@ namespace MarbaleManagementStudio.Controllers
         {
             try
             {
-                var products = productBl.GetProducts((int)ProductTypeEnum.Card);
+                List<Product> products = productBl.GetProducts((int)ProductTypeEnum.Card);
                 Session["TaxList"] = products[0].TaxList;
                 Session["TypeList"] = products[0].TypeList;
                 Session["CategoryList"] = products[0].CategoryList;
@@ -118,6 +120,8 @@ namespace MarbaleManagementStudio.Controllers
             try
             {
                 var product = productBl.GetProductById(id);
+                configLoad.LoadProductDefaultValues(product);
+
                 Session["TaxList"] = product.TaxList;
                 Session["TypeList"] = product.TypeList;
                 Session["CategoryList"] = product.CategoryList;
@@ -127,6 +131,7 @@ namespace MarbaleManagementStudio.Controllers
                 product.ExpiryDate = DateTime.Now;
                 product.CardExpiryDate = DateTime.Now;
                 product.Time = DateTime.Now;
+               
                 return View(product);
             }
             catch (Exception e)

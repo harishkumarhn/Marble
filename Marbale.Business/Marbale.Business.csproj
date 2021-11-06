@@ -52,6 +52,7 @@
     <Compile Include="Common\Extention.cs" />
     <Compile Include="Common\MarbleEnvironment.cs" />
     <Compile Include="Common\Utility.cs" />
+    <Compile Include="ConfigLoad.cs" />
     <Compile Include="Enum\ProductTypeEnum.cs" />
     <Compile Include="Enum\ListItemGroup.cs" />
     <Compile Include="InventoryBL\CategoryBL.cs" />

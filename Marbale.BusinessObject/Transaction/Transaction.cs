@@ -77,6 +77,8 @@ namespace Marbale.BusinessObject.POSTransaction
         //{
         //    CardList = new List<Card>();
         //}
+        public bool CustomerRegistrationRequired { get; set; }
+
 
         public Card GetCardEmptyOrFirst()
         {

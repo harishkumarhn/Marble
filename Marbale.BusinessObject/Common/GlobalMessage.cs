@@ -25,6 +25,14 @@ namespace Marbale.BusinessObject
 
         public static string ENTER_CREDITS_EQUAL_TO = "Enter credits equal to amount  : @amount ";
         public static string ENTER_CREDITS_LESS_THAN_OR_EQUAL = "Enter credits less than or equal to amount  : @amount ";
+
+        public static string REQUIRED_TRANSACTION_HEADER_REMARKS = "Enter Transation Header Remarks";
+
+        public static string REQUIRED_TRANSACTION_LINE_REMARKS = "Enter Transation Line Remarks";
+
+        public static string REQUIRED_REMARKS = "Please Enter Remarks";
+
+        public static string COMPLETE_CUSTOMER_REGISTRATION = "Please Complete Customer registration";
     }
 
 
@@ -33,10 +41,14 @@ namespace Marbale.BusinessObject
 
         public static string TAP_NEW_CARD = "Please Tap the NEW card";
 
-        public static string ALLOW_PARTIAL_REFUND = "Allow_Partial_Refund";
+        public static string ALLOW_PARTIAL_REFUND = "ALLOW_PARTIAL_REFUND";
 
-        public static string   ALLOW_REFUND_OF_CARD_DEPOSIT ="Allow_Refund_Of_Card_Deposit";
+        public static string ALLOW_FULL_REFUND = "ALLOW_FULL_REFUND";
 
-        public static string ALLOW_REFUND_OF_CARD_CREDITS = "Allow_Refund_of_Card_Credits";
+       
+
+        //public static string   ALLOW_REFUND_OF_CARD_DEPOSIT ="Allow_Refund_Of_Card_Deposit";
+
+        //public static string ALLOW_REFUND_OF_CARD_CREDITS = "Allow_Refund_of_Card_Credits";
     }
 }

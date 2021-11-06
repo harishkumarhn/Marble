@@ -359,7 +359,7 @@ namespace Marbale.POS
             {
                 txtFromCardnumber.Text = currentcard.CardNumber;
                 txtCardDeposit.Text = currentcard.face_value.ToString();
-                txtTotalCredits.Text = (currentcard.credits + currentcard.face_value).ToString();
+                txtTotalCredits.Text = (currentcard.credits  ).ToString();
 
                 string[] row1 = new string[] { currentcard.CardNumber, currentcard.issue_date.ToString(), currentcard.credits.ToString(), currentcard.bonus.ToString(), currentcard.ticket_count.ToString() };
                 dgvRefundCard.Rows.Add(row1);
@@ -688,9 +688,11 @@ namespace Marbale.POS
             {
                 dataLogger.Debug("Begin tasks btnRefundCardOk_Click");
                 List<AppSetting> appCards = new List<AppSetting>();
-                appCards = siteSetup.GetAppSettings("POS");
+                appCards = siteSetup.GetAppSettings("card");
                 TransactionBL trxBL = new TransactionBL();
-                bool valid = true;
+                //bool isPartialRefund = false;
+                bool isFullRefund = false;
+
 
                 decimal creditsToRefund = 0;
                 decimal.TryParse(txtCreditsToRefund.Text, out creditsToRefund);
@@ -704,86 +706,102 @@ namespace Marbale.POS
                 decimal maxRefundValue = 0;
 
 
-                AppSetting refundDepositEnable = appCards.Where(x => x.Name == GlobalConstant.ALLOW_REFUND_OF_CARD_DEPOSIT).FirstOrDefault();
-                AppSetting partialRefundEnable = appCards.Where(x => x.Name == GlobalConstant.ALLOW_PARTIAL_REFUND).FirstOrDefault();
-                AppSetting RefundEnableCardCredits = appCards.Where(x => x.Name == GlobalConstant.ALLOW_REFUND_OF_CARD_CREDITS).FirstOrDefault();
-
-                if (RefundEnableCardCredits != null && RefundEnableCardCredits.Value.ToLower() == "true")
-                {
-                    maxRefundValue = availCredits;
-                }
-
-             
-                if (partialRefundEnable != null && partialRefundEnable.Value.ToLower() == "true")
-                {
-                    maxRefundValue += faceValue;
-                }
-            
-
-
                 
 
 
-                if (string.IsNullOrEmpty(txtCreditsToRefund.Text) || creditsToRefund < 0)
+                if (string.IsNullOrEmpty(txtRefundRemark.Text.Trim()))
                 {
-                    MessageBox.Show(GlobalMessage.ENTER_CREDITS_GREATER_THAN_ZERO_TO_REFUND);
+                    MessageBox.Show(GlobalMessage.REQUIRED_REMARKS);
                     return;
                 }
 
 
-                //allowing partial refund
-              
-                if (partialRefundEnable != null && partialRefundEnable.Value.ToLower() == "true")
+                //AppSetting refundDepositEnable = appCards.Where(x => x.Name == GlobalConstant.ALLOW_REFUND_OF_CARD_DEPOSIT).FirstOrDefault();
+                AppSetting partialRefundEnable = appCards.Where(x => x.Name == GlobalConstant.ALLOW_PARTIAL_REFUND).FirstOrDefault();
+                //AppSetting RefundEnableCardCredits = appCards.Where(x => x.Name == GlobalConstant.ALLOW_REFUND_OF_CARD_CREDITS).FirstOrDefault();
+
+
+                AppSetting fullrefundEnable = appCards.Where(x => x.Name == GlobalConstant.ALLOW_FULL_REFUND).FirstOrDefault();
+
+                ///Default : set available credits
+                maxRefundValue = availCredits;
+
+                /////set max face value and available credits 
+                if (fullrefundEnable != null && fullrefundEnable.Value.ToLower() == "true")
                 {
-                    if ( creditsToRefund > maxRefundValue    )
+                    maxRefundValue = faceValue+ availCredits;
+                    isFullRefund = true;
+                }
+
+
+
+                if (partialRefundEnable == null || partialRefundEnable.Value.ToLower() == "false")
+                {
+                    if (creditsToRefund != maxRefundValue)
                     {
-                        MessageBox.Show(GlobalMessage.ENTER_CREDITS_LESS_THAN_OR_EQUAL.Replace("@amount",maxRefundValue.ToString()) );
+                        MessageBox.Show(GlobalMessage.ENTER_CREDITS_EQUAL_TO_AVAILABLE_CREDITS);
                         return;
                     }
                 }
                 else
                 {
-                    if (creditsToRefund != maxRefundValue)
+                    if (  creditsToRefund < 0 || creditsToRefund > maxRefundValue)
                     {
-                        MessageBox.Show(GlobalMessage.ENTER_CREDITS_EQUAL_TO.Replace("@amount", maxRefundValue.ToString()));
+                        MessageBox.Show(GlobalMessage.ENTER_CREDITS_LESS_THAN_OR_EQUAL_TO_AVAILABLE_CREDITS);
                         return;
                     }
+
                 }
 
+                ////allowing partial refund
+              
+                //if (partialRefundEnable != null && partialRefundEnable.Value.ToLower() == "true")
+                //{
+                //    if ( creditsToRefund > maxRefundValue    )
+                //    {
+                //        MessageBox.Show(GlobalMessage.ENTER_CREDITS_LESS_THAN_OR_EQUAL.Replace("@amount",maxRefundValue.ToString()) );
+                //        return;
+                //    }
+                //}
+                //else
+                //{
+                //    if (creditsToRefund != maxRefundValue)
+                //    {
+                //        MessageBox.Show(GlobalMessage.ENTER_CREDITS_EQUAL_TO.Replace("@amount", maxRefundValue.ToString()));
+                //        return;
+                //    }
+                //}
 
-                ///check logic here
-                if ((availCredits + faceValue) == maxRefundValue)
+
+                
+
+
+                ////Check for partially refund face value
+                ////Partially face value refund is not allowed
+                //if (Convert.ToInt32(txtCreditsToRefund.Text) > currentcard.credits
+                //    && Convert.ToInt32(txtCreditsToRefund.Text) < Convert.ToInt32(txtTotalCredits.Text))
+                //{
+                //    MessageBox.Show("Partially face value Refund is not Allowed");
+                //    return;
+                //}
+
+
+
+
+                decimal faceValueRefund = faceValue;
+                bool valid = true;
+
+                if (isFullRefund )
+                {
+                    faceValueRefund = 0;
+                }
+                if (creditsToRefund==maxRefundValue)
                 {
                     valid = false;
-
                 }
 
 
-                    ////Check for partially refund face value
-                    ////Partially face value refund is not allowed
-                    //if (Convert.ToInt32(txtCreditsToRefund.Text) > currentcard.credits
-                    //    && Convert.ToInt32(txtCreditsToRefund.Text) < Convert.ToInt32(txtTotalCredits.Text))
-                    //{
-                    //    MessageBox.Show("Partially face value Refund is not Allowed");
-                    //    return;
-                    //}
-
-
-
-
-
-
-                    //if (creditsToRefund == maxRefundValue)
-                    //{
-                    //    valid = false;
-                    //}
-                    //else
-                    //{
-                    //    faceValue = 0;
-                    //}
-
-
-                    trxBL.RefundCard(currentcard.card_id, creditsToRefund, availCredits, faceValue, valid, string.Empty);
+                trxBL.RefundCard(currentcard.card_id, creditsToRefund, creditsToRefund, faceValue, valid, string.Empty);
 
                 MessageBox.Show("Card Refunded Successfully");
                 dataLogger.Debug("Ends tasks btnRefundCardOk_Click");

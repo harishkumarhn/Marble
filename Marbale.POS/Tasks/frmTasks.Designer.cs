@@ -124,7 +124,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtCardDeposit = new System.Windows.Forms.TextBox();
             this.txtTotalCredits = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtRefundRemark = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtCreditsToRefund = new System.Windows.Forms.TextBox();
             this.lblCredits = new System.Windows.Forms.Label();
@@ -1090,7 +1090,7 @@
             this.tbRefundCard.Controls.Add(this.label10);
             this.tbRefundCard.Controls.Add(this.txtCardDeposit);
             this.tbRefundCard.Controls.Add(this.txtTotalCredits);
-            this.tbRefundCard.Controls.Add(this.textBox2);
+            this.tbRefundCard.Controls.Add(this.txtRefundRemark);
             this.tbRefundCard.Controls.Add(this.label9);
             this.tbRefundCard.Controls.Add(this.txtCreditsToRefund);
             this.tbRefundCard.Controls.Add(this.lblCredits);
@@ -1145,13 +1145,13 @@
             this.txtTotalCredits.Size = new System.Drawing.Size(107, 23);
             this.txtTotalCredits.TabIndex = 34;
             // 
-            // textBox2
+            // txtRefundRemark
             // 
-            this.textBox2.Location = new System.Drawing.Point(284, 213);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(364, 42);
-            this.textBox2.TabIndex = 33;
+            this.txtRefundRemark.Location = new System.Drawing.Point(284, 213);
+            this.txtRefundRemark.Multiline = true;
+            this.txtRefundRemark.Name = "txtRefundRemark";
+            this.txtRefundRemark.Size = new System.Drawing.Size(364, 42);
+            this.txtRefundRemark.TabIndex = 33;
             // 
             // label9
             // 
@@ -1390,7 +1390,7 @@
         private System.Windows.Forms.Button btnRefundCardOk;
         private System.Windows.Forms.TextBox txtCreditsToRefund;
         private System.Windows.Forms.Label lblCredits;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtRefundRemark;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtTotalCredits;
         private System.Windows.Forms.TextBox txtCardDeposit;

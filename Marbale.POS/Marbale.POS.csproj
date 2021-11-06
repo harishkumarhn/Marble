@@ -83,6 +83,12 @@
     <Compile Include="Common\frmTender.Designer.cs">
       <DependentUpon>frmTender.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\GenericRemarkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\GenericRemarkForm.Designer.cs">
+      <DependentUpon>GenericRemarkForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\NumberPad.cs" />
     <Compile Include="Common\NumberPadForm.cs" />
     <Compile Include="Common\StaticData.cs" />
@@ -163,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Common\frmTender.resx">
       <DependentUpon>frmTender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\GenericRemarkForm.resx">
+      <DependentUpon>GenericRemarkForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

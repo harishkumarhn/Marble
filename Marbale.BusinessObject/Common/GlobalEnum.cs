@@ -59,5 +59,15 @@ namespace Marbale.BusinessObject
             if (attributes != null && attributes.Length > 0) return attributes[0].Description;
             else return source.ToString();
         }
+
+        public enum RemarksMode
+        {
+            [Description("TransactionHeader")]
+            TransactionHeader = 1,
+            [Description("TransactionLine")]
+            TransactionLine =2 
+         
+        }
+
     }
 }
