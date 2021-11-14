@@ -102,6 +102,7 @@ namespace MarbaleManagementStudio.Controllers
                 var product = productBl.GetProductById(id);                
                 product.TaxList = Session["TaxList"] as List<TaxSet>;
                 product.Active = id == 0 ? true : product.Active;
+                product.DisplayInPOS = id == 0 ? true : product.DisplayInPOS;
                 product.TaxId = -1;
                 product.StartDate = DateTime.Now;
                 product.ExpiryDate = DateTime.Now;
@@ -127,6 +128,7 @@ namespace MarbaleManagementStudio.Controllers
                 Session["CategoryList"] = product.CategoryList;
                 Session["DisplayGroupList"] = product.DisplayGroupList;
                 product.Active = id == 0 ? true : product.Active;
+                product.DisplayInPOS = id == 0 ? true : product.DisplayInPOS;
                 product.StartDate = DateTime.Now;
                 product.ExpiryDate = DateTime.Now;
                 product.CardExpiryDate = DateTime.Now;
