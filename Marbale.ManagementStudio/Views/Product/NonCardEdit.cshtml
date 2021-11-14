@@ -173,11 +173,11 @@
 
                                 <div class="col-md-12">
                                     <label class="col-md-6">StartDate:</label>
-                                    @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
+                                    @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
                                 </div>
                                 <div class="col-md-12">
                                     <label class="col-md-6">ExpiryDate:</label>
-                                    @Html.TextBoxFor(m => m.ExpiryDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { type = "datetime-local", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
+                                    @Html.TextBoxFor(m => m.ExpiryDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
                                 </div>
                                 <div class="col-md-12">
                                     <label class="col-md-6">Last Updated User:</label>
