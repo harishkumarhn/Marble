@@ -172,13 +172,13 @@
                                 <br />
 
                                 <div class="col-md-12">
-                                    <label class="col-md-6">StartDate:</label>
-                                    @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
+                                    <label class="col-md-6">StartDate:</label>                                    
+                                    <input class="col-md-5" style="padding-right: 0px; padding-left: 0px;" id="StartDate" name="StartDate" type="date" value="@(String.IsNullOrEmpty(Model.StartDate) == false ? DateTime.Parse(Model.StartDate).Date.ToString("yyyy-MM-dd") : "" )">
                                 </div>
                                 <div class="col-md-12">
                                     <label class="col-md-6">ExpiryDate:</label>
-                                    @Html.TextBoxFor(m => m.ExpiryDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-md-5", @style = "padding-right: 0px;padding-left: 0px;" })
-                                </div>
+                                    <input class="col-md-5" style="padding-right: 0px; padding-left: 0px;" id="ExpiryDate" name="ExpiryDate" type="date" value="@(String.IsNullOrEmpty(Model.ExpiryDate) == false ? DateTime.Parse(Model.ExpiryDate).Date.ToString("yyyy-MM-dd") : "")">
+                                </div>1
                                 <div class="col-md-12">
                                     <label class="col-md-6">Last Updated User:</label>
                                     @Html.TextBoxFor(m => m.LastUpdatedBy, new { @class = "col-md-5", @readonly = "readonly" })

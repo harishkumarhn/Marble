@@ -203,10 +203,10 @@
                 <input type="number" value="@item.MinimumQuantity" id="MinimumQuantity@(count)" style="width:5vw" />
             </td>
             <td>
-                <label>@(item.StartDate != null ? item.StartDate.Date.ToString("dd/MM/yyyy") : "")</label>
+                <label>@(item.StartDate != null ? item.StartDate.ToString() : "")</label>
             </td>
             <td>
-                <label>@(item.ExpiryDate != null ? item.ExpiryDate.Date.ToString("dd/MM/yyyy") : "")</label>
+                <label>@(item.ExpiryDate != null ? item.ExpiryDate.ToString() : "")</label>
             </td>
             <td>
                 <label>@item.LastUpdatedBy</label>

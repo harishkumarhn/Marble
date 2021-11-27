@@ -188,8 +188,8 @@
                             </div>
                             <div class="display-flex">
                                 <div>
-                                    <label class="col-sm-8">Card Expiry Date:</label> <a class="clearDate" onclick="cardExpiryDateClear()"> clear date</a>
-                                    @Html.TextBoxFor(m => m.CardExpiryDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control col-sm-12" })
+                                    <label class="col-sm-8">Card Expiry Date:</label> <a class="clearDate" onclick="cardExpiryDateClear()"> clear date</a>                                    
+                                    <input class="form-control col-sm-12" id="CardExpiryDate" name="CardExpiryDate" type="date" value="@(String.IsNullOrEmpty(Model.CardExpiryDate) == false ? DateTime.Parse(Model.CardExpiryDate).Date.ToString("yyyy-MM-dd"): "")">
                                 </div>
                             </div>
                             <div class="display-flex">
@@ -217,7 +217,7 @@
                     <div class="row">
                         <div class="col-sm-6 display-flex">
                             <label class="col-sm-5">StartDate:</label>
-                            @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+                            <input class="form-control" id="StartDate" name="StartDate" type="date" value="@(String.IsNullOrEmpty(Model.StartDate) == false ? DateTime.Parse(Model.StartDate).Date.ToString("yyyy-MM-dd") : "")">
                         </div>
                         <div class="col-sm-6 display-flex">
                             <label class="col-md-5">LastUpdatedDate:</label>
@@ -227,7 +227,7 @@
                     <div class="row">
                         <div class="col-sm-6 display-flex">
                             <label class="col-md-5">ExpiryDate:</label>
-                            @Html.TextBoxFor(m => m.ExpiryDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+                            <input class="form-control" id="ExpiryDate" name="ExpiryDate" type="date" value="@(String.IsNullOrEmpty(Model.ExpiryDate) == false ? DateTime.Parse(Model.ExpiryDate).Date.ToString("yyyy-MM-dd"): "")">
                         </div>
                         <div class="col-sm-6 display-flex">
                             <label class="col-sm-5">Last Updated User:</label>

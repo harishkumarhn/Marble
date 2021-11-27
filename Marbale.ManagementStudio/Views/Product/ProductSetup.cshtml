@@ -247,10 +247,10 @@
                 <label>@item.LastUpdatedDate</label>
             </td>
             <td>
-                <label>@(item.StartDate != null ? item.StartDate.Date.ToString("dd/MM/yyyy") : "")</label>
+                <label>@(item.StartDate != null ? item.StartDate.ToString() : "")</label>
             </td>
             <td>
-                <label>@(item.ExpiryDate != null ? item.ExpiryDate.Date.ToString("dd/MM/yyyy") : "")</label>
+                <label>@(item.ExpiryDate != null ? item.ExpiryDate.ToString() : "")</label>
             </td>
         </tr>
 
