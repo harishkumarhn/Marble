@@ -61,7 +61,7 @@ namespace Marbale.Business
                         product.Category = dr.IsNull("Category") ? "" : dr["Category"].ToString();
                         product.DisplayGroupId = dr.IsNull("DisplayGroupId") ? 0 : int.Parse(dr["DisplayGroupId"].ToString());
                         product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                        product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
+                        product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]) ;
                         product.TaxName = dr.IsNull("TaxName") ? "" : dr["TaxName"].ToString();
                         product.AutoGenerateCardNumber = dr.IsNull("AutoGenerateCardNumber") ? false : bool.Parse(dr["AutoGenerateCardNumber"].ToString());
                         product.POSCounter = dr.IsNull("POSCounter") ? "" : dr["POSCounter"].ToString();
@@ -155,7 +155,7 @@ namespace Marbale.Business
                     product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
                     product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
                     product.LastUpdatedBy = dr.IsNull("LastUpdatedBy") ? "" : dr["LastUpdatedBy"].ToString();
-                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime().ToString("MMMM dd yyyy HH:mm:ss") : Convert.ToDateTime(dr["LastUpdatedDate"]).ToString("MMMM dd yyyy HH:mm:ss");
+                    product.LastUpdatedDate = dr.IsNull("LastUpdatedDate") ? new DateTime() : Convert.ToDateTime(dr["LastUpdatedDate"]);
                     product.TaxName = dr.IsNull("TaxId") ? "" : dr["TaxId"].ToString();
                     product.TypeName = dr.IsNull("TypeName") ? "" : dr["TypeName"].ToString();
                     product.Credits = dr.IsNull("Credits") ? 0 : Convert.ToDecimal(dr["Credits"]);

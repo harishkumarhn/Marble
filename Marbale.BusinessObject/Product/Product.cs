@@ -20,9 +20,13 @@ namespace Marbale.BusinessObject
         [Required(ErrorMessage = "Enter Product name.")]
         //[Remote("IsAlreadySigned", "Product", AdditionalFields = "Id", HttpMethod = "POST", ErrorMessage = "Product Exist Already")]
         public string Name { get; set; }
-        [Required]
+
+        [Display(Name = "Product Type")]
+        [Required(ErrorMessage = "Enter Product Type.")]
         public string Type { get; set; }
+
         public string POSCounter { get; set; }
+
         public bool Active { get; set; }
         public bool DisplayInPOS { get; set; }
         public int? DisplayGroupId { get; set; }
@@ -41,7 +45,7 @@ namespace Marbale.BusinessObject
         [DataType(DataType.Currency)]
         public decimal? EffectivePrice { get; set; }
         public string LastUpdatedBy { get; set; }
-        public string LastUpdatedDate { get; set; }
+        public DateTime? LastUpdatedDate { get; set; }
         [DataType(DataType.Currency)]
         public decimal? Credits { get; set; }
         [DataType(DataType.Currency)]
@@ -72,7 +76,10 @@ namespace Marbale.BusinessObject
         public List<TaxSet> TaxList { get; set; }
         public List<IdValue> DisplayGroupList { get; set; }
         public int? TaxId { get; set; }
+
+        [Display(Name = "Display Order")]
         public int? DisplayOrder { get; set; }
+
         public DateTime? CardExpiryDate { get; set; }
         public int MaximumQuantity { get; set; }
         public string HSNSACCode { get; set; }

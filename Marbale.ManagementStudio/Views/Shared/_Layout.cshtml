@@ -142,6 +142,7 @@
         .snackbar-message {
             align-content: center;
             text-align: start;
+            padding: 0px 15px 6px 0px;
         }
 
         .close {
@@ -643,6 +644,7 @@
         }
 
         function notify(dataType, header, message, callBack) {
+            
             setTimeout(() => {
                 notifyClose();
                 if (callBack) {
@@ -661,6 +663,7 @@
         }
 
         function notifyinmodal(dataType, header, message, callBack) {
+             
             setTimeout(() => {
                 notifyCloseinmodal();
                 if (callBack) {
@@ -679,6 +682,7 @@
         }
 
         function setSnackbarData(dataType, header, message) {
+             
             switch (dataType.toLowerCase()) {
                 case 'error':
                     $('.icon ion-icon').attr("name", "close-circle-outline");
@@ -694,7 +698,9 @@
             }
             header = header ? header : "Success Message";
             $('.snackbar-header > #header').html(header);
-            $('#message').html(message ? message : "Data Saved Successfully");
+            $('.snackbar-content > #message').html(message ? message : "Data Saved Successfully");
+
+            //$('#message').html(message ? message : "Data Saved Successfully");
         }
     </script>
 

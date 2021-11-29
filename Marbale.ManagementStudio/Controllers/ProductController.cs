@@ -173,7 +173,7 @@ namespace MarbaleManagementStudio.Controllers
                 }
                 else
                 {
-                    message = string.Join(" | ", ModelState.Values
+                    message = string.Join(" <br/> ", ModelState.Values
                                   .SelectMany(v => v.Errors)
                                   .Select(e => e.ErrorMessage));
                 }

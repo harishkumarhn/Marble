@@ -274,6 +274,7 @@
     <Content Include="Content\Theme1\assets\js\lib\gmap\gmaps.js" />
     <Content Include="Content\Theme1\assets\js\lib\gmap\gmaps.min.js" />
     <Content Include="Content\Theme1\assets\js\main.js" />
+    <Content Include="Content\Theme1\assets\js\tableHeadFixer.js" />
     <Content Include="Content\Theme1\assets\js\vmap.sampledata.js" />
     <Content Include="Content\Theme1\assets\js\widgets.js" />
     <Content Include="Content\Theme1\images\admin.jpg" />

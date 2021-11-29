@@ -122,9 +122,10 @@ button.btn-settings {
 }
 
 .modal-centre {
-    position: absolute;
-    right: 440px;
+    left: 88px;
     top: -20px;
+    max-width: 85%;
+    display: block;
 }
 
 .modal-body {
