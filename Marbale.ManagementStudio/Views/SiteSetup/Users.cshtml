@@ -308,10 +308,10 @@
     }
     function EditUser(id) {
         $('#myModal').modal('show');
-        $('#modelBody').css({
-            'left': '-40%',
-            'width': 850
-        });
+        //$('#modelBody').css({
+        //    'left': '-40%',
+        //    'width': 850
+        //});
         if (id != 0) {
             $('#modelBody').load('/SiteSetup/EditUser', { "id": id });
             $('.modal-title').text('Edit Product');

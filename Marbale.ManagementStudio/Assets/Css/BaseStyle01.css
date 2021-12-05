@@ -573,7 +573,7 @@ aside.left-panel {
   left: 0;
   bottom: 0;
   top: 55px;
-  z-index: 999; }
+  z-index: 998; }
   aside.left-panel:hover {
     overflow-x: scroll; }
 
@@ -1082,9 +1082,15 @@ header .form-inline {
   -webkit-transform: none !important;
           transform: none !important; }
 
+
+    .dropdown-menu   .active  a {
+        color: #03a9f3 !important;
+    }
+
 .for-notification .dropdown-menu .dropdown-item {
-  padding: 5px 15px !important;
-  text-overflow: ellipsis; }
+    padding: 5px 15px !important;
+    text-overflow: ellipsis;
+}
   .for-notification .dropdown-menu .dropdown-item i {
     float: left;
     font-size: 14px;
@@ -2514,4 +2520,53 @@ footer.site-footer {
 .highlight {
     border: 2px solid #3d3d9f;
     background-color: #03a9f3;
+}
+
+#cover-spin {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.7);
+    z-index: 9999;
+    
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#cover-spin::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 48%;
+    top: 40%;
+    width: 40px;
+    height: 40px;
+    border-style: solid;
+    border-color: black;
+    border-top-color: transparent;
+    border-width: 4px;
+    border-radius: 50%;
+    -webkit-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
 }

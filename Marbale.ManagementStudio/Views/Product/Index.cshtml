@@ -2,40 +2,50 @@
     ViewBag.Title = "";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    .btn-standard1 {
-        width: 225px;
-        height: 60px;
-        background-image: linear-gradient( -180deg, #37AEE2 0%, #1E96C8 100%);
-        /* border-radius: 0.5rem; */
-        box-sizing: border-box;
-        color: #FFFFFF;
-        font-size: 20px;
-        justify-content: center;
-        padding: 1rem 1.75rem;
-        text-decoration: none;
-        /* width: 100%; */
-        border: 0;
-        cursor: pointer;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        border-top-left-radius: 0.5em;
-        border-top-right-radius: 0.5em;
-        margin-right: 10px;
-        margin-left: 10px;
-    }
-</style>
-<link href="~/Content/CSS/StyleSheet1.css" rel="stylesheet" />
-<div class="container">
+
+ <style>
+     .main .holder {
+         /*width: 400px;*/
+         background: #efefef;
+         padding: 30px 10px;
+         box-sizing: border-box;
+         margin: 0 auto;
+         margin-top: 20px;
+         text-align: center;
+     }
+
+
+     .main .sub {
+         background: #a8c7b41a;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         /*margin-right: 40px;*/
+     }
+
+     .main h1 {
+         font-weight: 600;
+         font-family: 'Open Sans', sans-serif;
+         text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+         font-size: 22px;
+         text-transform: uppercase;
+         color: #999;
+         text-shadow: 1px 1px 1px #fff;
+         margin-bottom: 30px;
+     }
+
+
+ </style>
+  
+<div class="container main">
     <div class="holder">
         <h1><b>Choose by product type</b></h1>
-        
+
         <button class="btn btn-standard1" onclick="location.href='/product/productsetup'">Cards</button>
         <button class="btn btn-standard1" onclick="location.href='/product/noncardProductSetup'">Non Card Product</button>
     </div>
-     <div class="holder sub">
-         <h1 style="margin-top: 18px;">Set up</h1>
+    <div class="holder sub">
+        <h1 style="margin-top: 18px;">Set up</h1>
         <button class="btn btn-standard1" onclick="location.href='/product/Types'">Product Type</button>
         <button class="btn btn-standard1" onclick="location.href='/product/Category'">Product Category</button>
         <button class="btn btn-standard1" onclick="location.href='/product/DisplayGroup'">Display Group</button>

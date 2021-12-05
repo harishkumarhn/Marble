@@ -5,24 +5,7 @@
 
 @*<link href="~/Content/css/product.css" rel="stylesheet" />*@
 <style>
-    .tblRow {
-        background: #f1f2f7;
-    }
-    form label {
-        font-weight: bold;
-    }
-    table input {
-        font-size: 13px;
-    }
-    table.dataTable thead th, table.dataTable thead td{
-        padding-top:0px !important;
-        padding-bottom:0px !important;
-    }
-
-    table.dataTable tbody th, table.dataTable tbody td{
-        padding-top:0px !important;
-        padding-bottom:0px !important;
-    }
+    
    /* .tblRow > p {
         padding: 0px;
         margin: 0px;
@@ -349,7 +332,7 @@
                     UpdatedList($(this).parent().index());
                 });
             },
-            //order: [[ 0, "desc" ]],
+            order: [[ 0, "desc" ]],
             fixedColumns: {
                 leftColumns: 3
             }
