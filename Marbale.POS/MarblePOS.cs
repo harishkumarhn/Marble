@@ -2330,6 +2330,10 @@ namespace Marbale.POS
             showNumberPadForm('-');
         }
 
+        private void btnShift_Click(object sender, EventArgs e)
+        {
+            showShiftForm();
+        }
 
 
         #endregion
@@ -2427,6 +2431,10 @@ namespace Marbale.POS
             }
         }
 
+        void showShiftForm()
+        {
+            ShiftForm.ShowShiftForm();
+        }
         void InitializeProductDisplayGroupDropDown()
         {
             cmbDisplayGroups = new ListBox();

@@ -291,6 +291,8 @@
     <None Include="Resources\Reset.jpg" />
     <None Include="Resources\changeColor.jpg" />
     <None Include="Resources\Password change.jpg" />
+    <Content Include="Resources\cashier-machine1.png" />
+    <None Include="Resources\cashier-machine11.png" />
     <Content Include="Resources\RightArrow.png" />
     <None Include="Resources\Transfer_Card_Pressed.png" />
     <None Include="Resources\Save_Transaction_Pressed.png" />
