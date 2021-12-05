@@ -3,6 +3,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
+    .gridStyle {
+        max-width: 75%;
+        float: left;
+    }
     table input {
         font-size: 13px;
     }
@@ -16,10 +20,15 @@
         padding-top: 0px !important;
         padding-bottom: 0px !important;
     }
+    .userModuleAccess {
+        height: 550px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
 </style>
 @*width: 1019px;*@
 <div class="userRoleContainer">
-    <div style="width: 81%; float: left;">
+    <div class="gridStyle">
         <table id="marbleTable" class="stripe row-border order-column marbleTable">
             <thead>
                 <th>ID</th>
@@ -77,7 +86,7 @@
             <div id="parent">
                 <div id="treeview"></div>
             </div>
-            <div id="result"></div>
+            @*<div id="result"></div>*@
         </div>
     </div>
 </div>
@@ -235,9 +244,10 @@
             },
             check: onCheck,
             dataBound: function (e) {
+                console.log("data bounded")
                 var treeView = $('#treeview').data('kendoTreeView');
                 treeView.expand(".k-item"); // in order to highlight the check boxes we need to expand and collpse
-                treeView.collapse(".k-item");
+               // treeView.collapse(".k-item");
                 if (disable == 'disable') {
                     $(".k-checkbox").attr("disabled", "disabled");
                 }
@@ -255,14 +265,18 @@
             }
         }
     }
+
+    //var treeView;
+    //treeView = $("#treeview").data("kendoTreeView")
     // show checked node IDs on datasource change  
     function onCheck() {
+        console.log("on check")
         var checkedNodes = [],
             treeView = $("#treeview").data("kendoTreeView"),
             message;
-
+     
         checkedNodeIds(treeView.dataSource.view(), checkedNodes);
-
+         
         if (checkedNodes.length > 0) {
             message = checkedNodes.join(",");
             selectedTreeItems = message;
@@ -270,6 +284,6 @@
             message = '';
         }
 
-        $("#result").html(message);
+      /*  $("#result").html(message);*/
     }
 </script>
