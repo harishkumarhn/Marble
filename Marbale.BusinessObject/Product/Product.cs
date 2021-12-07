@@ -55,8 +55,8 @@ namespace Marbale.BusinessObject
         public decimal Games { get; set; }
         [DataType(DataType.Currency)]
         public int? CreditsPlus { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? ExpiryDate { get; set; }
+        public string StartDate { get; set; }
+        public string ExpiryDate { get; set; }
         public string TaxName { get; set; }
         public string TypeName { get; set; }
         public decimal Taxpercent { get; set; }
@@ -79,7 +79,6 @@ namespace Marbale.BusinessObject
 
         [Display(Name = "Display Order")]
         public int? DisplayOrder { get; set; }
-
         public DateTime? CardExpiryDate { get; set; }
         public int MaximumQuantity { get; set; }
         public string HSNSACCode { get; set; }

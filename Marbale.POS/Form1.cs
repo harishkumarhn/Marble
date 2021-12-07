@@ -12,6 +12,13 @@ namespace Marbale.POS
 {
     public partial class ShiftForm : Form
     {
+        public static ShiftForm ShowShiftForm()
+        {
+            ShiftForm form = new ShiftForm();
+            form.Show();
+            return form;
+        }
+
         public ShiftForm()
         {
             InitializeComponent();
@@ -71,17 +78,12 @@ namespace Marbale.POS
         {
             e.Handled = !(Char.IsNumber(e.KeyChar) || e.KeyChar == 8);
         }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
 
         private void ShiftForm_Load(object sender, EventArgs e)
         {
             ShiftForm shift = new ShiftForm();
             shift.StartPosition = FormStartPosition.CenterScreen;
-            this.lblLoginTimes.Text = DateTime.Now.ToString();
         }
 
         private void btnCalculator_Click(object sender, EventArgs e)
@@ -99,7 +101,6 @@ namespace Marbale.POS
             ShiftForm shift = new ShiftForm();
             btnClosedShift.Enabled = false;
             shift.StartPosition = FormStartPosition.CenterScreen;
-            this.lblLoginTimes.Text = DateTime.Now.ToString();
-        }
+        }       
     }
 }

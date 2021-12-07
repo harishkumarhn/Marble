@@ -73,11 +73,11 @@ namespace Marbale.Business
                         product.TaxPercentage = product.Taxpercent = dr.IsNull("TaxPercentage") ? 0 : Convert.ToDecimal(dr["TaxPercentage"]);
                         product.OnlyVIP = dr.IsNull("OnlyVIP") ? false : bool.Parse(dr["OnlyVIP"].ToString());
                         product.TaxInclusive = dr.IsNull("TaxInclusive") ? false : bool.Parse(dr["TaxInclusive"].ToString());
-                        product.StartDate = dr.IsNull("StartDate") ? new DateTime() : Convert.ToDateTime(dr["StartDate"]);
+                        product.StartDate = dr["StartDate"].ToString();
                         product.Games = dr.IsNull("Games") ? 0 : Convert.ToDecimal(dr["Games"]);
                         product.Credits = dr.IsNull("Credits") ? 0 : Convert.ToDecimal(dr["Credits"]);
                         product.CardValidFor = dr.IsNull("CardValidFor") ? 0 : Convert.ToInt32(dr["CardValidFor"]);
-                        product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
+                        product.ExpiryDate = dr["ExpiryDate"].ToString();
                         product.Courtesy = dr.IsNull("Courtesy") ? 0 : Convert.ToDecimal(dr["Courtesy"]);
                         product.TaxId = dr.IsNull("Taxid") ? 0 : Convert.ToInt32(dr["Taxid"]);
                         product.TicketAllowed = dr.IsNull("TicketAllowed") ? false : bool.Parse(dr["TicketAllowed"].ToString());
@@ -90,7 +90,7 @@ namespace Marbale.Business
                         product.Time = dr.IsNull("Time") ? new DateTime() : Convert.ToDateTime(dr["Time"]);
                         product.MinimumQuantity = dr.IsNull("MinimumQuantity") ? 0 : Convert.ToInt32(dr["MinimumQuantity"]);
                         product.DisplayOrder = dr.IsNull("DisplayOrder") ? 0 : Convert.ToInt32(dr["DisplayOrder"]);
-                        product.CardExpiryDate = dr.IsNull("CardExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["CardExpiryDate"]);
+                        product.CardExpiryDate = dr["CardExpiryDate"].ToString();
                         product.MaximumQuantity = dr.IsNull("MaximumQuantity") ? 0 : Convert.ToInt32(dr["MaximumQuantity"]);
                         product.HSNSACCode = dr.IsNull("HSNSACCode") ? "" : dr["HSNSACCode"].ToString();
                         product.vipCard = dr.IsNull("vipCard") ? false : bool.Parse(dr["vipCard"].ToString());
@@ -173,7 +173,7 @@ namespace Marbale.Business
                     product.AllowPriceOverride = dr.IsNull("AllowPriceOverride") ? false : bool.Parse(dr["AllowPriceOverride"].ToString());
                     product.MinimumQuantity = dr.IsNull("MinimumQuantity") ? 0 : Convert.ToInt32(dr["MinimumQuantity"]);
                     product.DisplayOrder = dr.IsNull("DisplayOrder") ? 0 : Convert.ToInt32(dr["DisplayOrder"]);
-                    product.CardExpiryDate = dr.IsNull("CardExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["CardExpiryDate"]);
+                    product.CardExpiryDate = dr.IsNull("CardExpiryDate") ? null : dr["CardExpiryDate"].ToString();
                     product.MaximumQuantity = dr.IsNull("MaximumQuantity") ? 0 : Convert.ToInt32(dr["MaximumQuantity"]);
                     product.HSNSACCode = dr.IsNull("HSNSACCode") ? "" : dr["HSNSACCode"].ToString();
                     product.vipCard = dr.IsNull("vipCard") ? false : bool.Parse(dr["vipCard"].ToString());
@@ -182,8 +182,8 @@ namespace Marbale.Business
                     product.Discount = dr.IsNull("Discount") ? 0 : Convert.ToInt32(dr["Discount"]);
                     product.InventoryProductCode = dr.IsNull("InventoryProductCode") ? 0 : Convert.ToInt32(dr["InventoryProductCode"]);
                     product.Description = dr.IsNull("Description") ? "" : dr["Description"].ToString();
-                    product.StartDate = dr.IsNull("StartDate") ? new DateTime() : Convert.ToDateTime(dr["StartDate"]);
-                    product.ExpiryDate = dr.IsNull("ExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["ExpiryDate"]);
+                    product.StartDate = dr["StartDate"].ToString();
+                    product.ExpiryDate = dr["ExpiryDate"].ToString();
 
                     product.CategoryList = categoryList;
                     product.TaxList = TaxList;

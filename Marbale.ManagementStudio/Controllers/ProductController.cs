@@ -100,13 +100,10 @@ namespace MarbaleManagementStudio.Controllers
             try
             {
                 var product = productBl.GetProductById(id);                
-                product.TaxList = Session["TaxList"] as List<TaxSet>;
+                //product.TaxList = Session["TaxList"] as List<TaxSet>;
                 product.Active = id == 0 ? true : product.Active;
                 product.DisplayInPOS = id == 0 ? true : product.DisplayInPOS;
-                product.TaxId = -1;
-                product.StartDate = DateTime.Now;
-                product.ExpiryDate = DateTime.Now;
-                product.CardExpiryDate = DateTime.Now;
+                product.TaxId = product.TaxId == null ? -1:product.TaxId;                
                 return View(product);
             }
             catch (Exception e)
@@ -128,10 +125,7 @@ namespace MarbaleManagementStudio.Controllers
                 Session["CategoryList"] = product.CategoryList;
                 Session["DisplayGroupList"] = product.DisplayGroupList;
                 product.Active = id == 0 ? true : product.Active;
-                product.DisplayInPOS = id == 0 ? true : product.DisplayInPOS;
-                product.StartDate = DateTime.Now;
-                product.ExpiryDate = DateTime.Now;
-                product.CardExpiryDate = DateTime.Now;
+                product.DisplayInPOS = id == 0 ? true : product.DisplayInPOS;                
                 product.Time = DateTime.Now;
                
                 return View(product);
