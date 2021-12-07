@@ -93,10 +93,6 @@
       <Project>{6a6d1608-f1ec-435a-a3ec-10237ab280af}</Project>
       <Name>Marbale.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Marbale.Reports\Marbale.Reports.csproj">
-      <Project>{a05f1be2-c3f5-4502-8a28-f10b46f2b296}</Project>
-      <Name>Marbale.Reports</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Marble.DataLoggerService\Marble.DataLoggerService.csproj">
       <Project>{44665109-752F-4CF2-B750-BB5CBFA77050}</Project>
       <Name>Marble.DataLoggerService</Name>

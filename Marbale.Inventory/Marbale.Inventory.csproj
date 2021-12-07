@@ -82,6 +82,12 @@
     <Compile Include="Adjustments\Frm_PhysicalCountPopup.Designer.cs">
       <DependentUpon>Frm_PhysicalCountPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Adjustments\Frm_PhysicalCountPopup.resx">
       <DependentUpon>Frm_PhysicalCountPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin1.resx">
       <DependentUpon>frmLogin1.cs</DependentUpon>
