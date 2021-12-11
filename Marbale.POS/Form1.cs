@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Marbale.POS.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +28,7 @@ namespace Marbale.POS
         private void btnOpenShift_Click(object sender, EventArgs e)
         {
 
-            ValidationPopUp v = new ValidationPopUp();
+            /*ValidationPopUp v = new ValidationPopUp();
             v.StartPosition = FormStartPosition.CenterParent;
             string CashBalance = (txtcashblalance.Text).ToString();
             string CardCount = (txtCardCount.Text).ToString();
@@ -44,7 +45,10 @@ namespace Marbale.POS
             else
             {
 
-            }
+            }*/
+            this.Hide();
+            MarblePOS marblePOS = new MarblePOS();
+            marblePOS.Show();
 
 
         }
@@ -88,13 +92,10 @@ namespace Marbale.POS
 
         private void btnCalculator_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("calc");
+            //System.Diagnostics.Process.Start("calc");
+            NumberPadForm.ShowNumberPadForm("Enter Amount", '-');
         }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
 
         private void ShiftForm_Load_1(object sender, EventArgs e)
         {

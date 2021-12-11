@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
             this.btnCalculator = new System.Windows.Forms.Button();
             this.btnOpenShift = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -59,8 +61,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.formTitle = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -97,11 +97,30 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(-1, 46);
+            this.panel2.Location = new System.Drawing.Point(0, 46);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(612, 514);
+            this.panel2.Size = new System.Drawing.Size(612, 562);
             this.panel2.TabIndex = 2;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Marbale.POS.Properties.Resources.iconfinder_document_print_118913;
+            this.button1.Location = new System.Drawing.Point(442, 440);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(47, 49);
+            this.button1.TabIndex = 27;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(490, 107);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 16);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Net Shift";
             // 
             // btnCalculator
             // 
@@ -385,7 +404,7 @@
             this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Controls.Add(this.formTitle);
             this.panel3.Controls.Add(this.closebutton);
-            this.panel3.Location = new System.Drawing.Point(-1, -1);
+            this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(612, 52);
             this.panel3.TabIndex = 26;
@@ -409,26 +428,6 @@
             this.formTitle.Size = new System.Drawing.Size(143, 31);
             this.formTitle.TabIndex = 27;
             this.formTitle.Text = "MARBALE";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(490, 107);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 16);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "Net Shift";
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::Marbale.POS.Properties.Resources.iconfinder_document_print_118913;
-            this.button1.Location = new System.Drawing.Point(442, 440);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(47, 49);
-            this.button1.TabIndex = 27;
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // ShiftForm
             // 

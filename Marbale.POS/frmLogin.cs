@@ -64,10 +64,8 @@ namespace Marbale.POS
             {
                 loggedInUser = userAdaptr;
                 isLoginSuccess = true;
-
-                 MarblePOS marblePOS = new MarblePOS();
                 this.Hide();
-                marblePOS.Show();
+                ShiftForm.ShowShiftForm();
                 //Application.Run(new MarblePOS());
             }
             else
