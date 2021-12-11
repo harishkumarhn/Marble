@@ -5,24 +5,14 @@
 
 @*<link href="~/Content/css/product.css" rel="stylesheet" />*@
 <style>
-    .tblRow {
-        background: #f1f2f7;
-    }
-    form label {
-        font-weight: bold;
-    }
-    table input {
-        font-size: 13px;
-    }
-    table.dataTable thead th, table.dataTable thead td{
-        padding-top:0px !important;
-        padding-bottom:0px !important;
-    }
-
-    table.dataTable tbody th, table.dataTable tbody td{
-        padding-top:0px !important;
-        padding-bottom:0px !important;
-    }
+    
+   /* .tblRow > p {
+        padding: 0px;
+        margin: 0px;
+        line-height: 13px;
+        font-size: 15px;
+        font-weight: 800;
+    }*/
 </style>
 
 <table id="marbleTable" class="stripe row-border order-column">
@@ -244,7 +234,13 @@
                 <label>@item.LastUpdatedBy</label>
             </td>
             <td>
-                <label>@item.LastUpdatedDate</label>
+                <p>
+                    @(item.LastUpdatedDate != null ? item.LastUpdatedDate.Date.ToString("dd/MM/yyyy") : "")
+                </p>
+                <p>
+                    @(item.LastUpdatedDate != null ? item.LastUpdatedDate.ToString("HH:mm:ss") : "")
+                </p>
+                @*<label>@item.LastUpdatedDate</label>*@
             </td>
             <td>
                 <label>@(item.StartDate != null ? item.StartDate.ToString() : "")</label>
@@ -336,7 +332,7 @@
                     UpdatedList($(this).parent().index());
                 });
             },
-            //order: [[ 0, "desc" ]],
+            order: [[ 0, "desc" ]],
             fixedColumns: {
                 leftColumns: 3
             }
@@ -524,10 +520,10 @@
 
     function EditProduct(id) {
         $('#myModal').modal('show');
-        $('#modelBody').css({
-            'left': '-40%',
-            'width': 1000
-        });
+        //$('#modelBody').css({
+        //    'left': '-40%',
+        //    'width': 1000
+        //});
         if (id != 0) {
             $('#modelBody').load('/Product/Edit', { "id": id });
             $('.modal-title').text('Edit Product');

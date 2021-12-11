@@ -2,18 +2,53 @@
     ViewBag.Title = "";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Content/CSS/StyleSheet1.css" rel="stylesheet" />
-<div class="container">
+
+ <style>
+     .main .holder {
+         /*width: 400px;*/
+         background: #efefef;
+         padding: 30px 10px;
+         box-sizing: border-box;
+         margin: 0 auto;
+         margin-top: 20px;
+         text-align: center;
+     }
+
+
+     .main .sub {
+         background: #a8c7b41a;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         /*margin-right: 40px;*/
+     }
+
+     .main h1 {
+         font-weight: 600;
+         font-family: 'Open Sans', sans-serif;
+         text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+         font-size: 22px;
+         text-transform: uppercase;
+         color: #999;
+         text-shadow: 1px 1px 1px #fff;
+         margin-bottom: 30px;
+     }
+
+
+ </style>
+  
+<div class="container main">
     <div class="holder">
         <h1><b>Choose by product type</b></h1>
-        <button class="button large" onclick="location.href='/product/productsetup'">Cards</button>
-        <button class="button large" onclick="location.href='/product/noncardProductSetup'">Non Card Product</button>
+
+        <button class="btn btn-standard1" onclick="location.href='/product/productsetup'">Cards</button>
+        <button class="btn btn-standard1" onclick="location.href='/product/noncardProductSetup'">Non Card Product</button>
     </div>
-     <div class="holder sub">
-         <h1 style="margin-top: 18px;">Set up</h1>
-        <button class="button medium" onclick="location.href='/product/Types'">Product Type</button>
-        <button class="button medium" onclick="location.href='/product/Category'">Product Category</button>
-        <button class="button medium" onclick="location.href='/product/DisplayGroup'">Display Group</button>
+    <div class="holder sub">
+        <h1 style="margin-top: 18px;">Set up</h1>
+        <button class="btn btn-standard1" onclick="location.href='/product/Types'">Product Type</button>
+        <button class="btn btn-standard1" onclick="location.href='/product/Category'">Product Category</button>
+        <button class="btn btn-standard1" onclick="location.href='/product/DisplayGroup'">Display Group</button>
     </div>
 </div>
 

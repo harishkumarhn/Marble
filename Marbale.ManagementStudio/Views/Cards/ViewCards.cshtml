@@ -1,6 +1,7 @@
 ﻿@model Marbale.BusinessObject.Cards.ViewCard
 @{
     ViewBag.Title = "ViewCards";
+
 }
 <div>
     @using (Html.BeginForm("ViewCards", "Cards", new { @searchCards = true } ,FormMethod.Get))

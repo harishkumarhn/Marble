@@ -42,7 +42,20 @@
     }
     function getSettings() {
         $('#loading').fadeIn();
-        $('#container1').load('/SiteSetup/Settings');
+        //$('#container1').load('/SiteSetup/Settings');
+
+        $("#container1").load('/SiteSetup/Settings', function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success") {
+                LoadValueDatas();
+            }
+                
+            if (statusTxt == "error") {
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+            }
+                
+        });
+
+
         $('#loading').fadeOut();
         $('#settings').addClass('highlight');
         $('#values').removeClass('highlight');

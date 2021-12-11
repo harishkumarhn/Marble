@@ -84,6 +84,48 @@
 <script>
     var table;
     $(document).ready(function () {
+      //  $("#cover-spin").show();
+        //table = $('#marbleTable').DataTable({
+        //    scrollY: "400px",
+        //    scrollX: true,
+        //    scrollCollapse: true,
+        //    editable: true,
+        //    stateSave: true,
+        //    // paging: true,
+        //    bPaginate: false,
+        //    bInfo: false,
+        //    bFilter: false,
+        //    bSort: false,
+        //    "createdRow": function (row, data, index) {
+        //        $('td', row).addClass('tblRow');
+        //    },
+        //    rowCallback: function (row, data) {
+        //        var element = $('td', row);
+        //        element.on("change", function (e) {
+        //            UpdatedList($(this).parent().index());
+        //        });
+        //    },
+        //    //order: [[ 0, "desc" ]],
+        //    fixedColumns: {
+        //        leftColumns: 2
+        //    }
+        //    , "fnDrawCallback": function (oSettings) {
+        //        $("#cover-spin").hide();
+        //         console.log("draw completeqq 1 ");
+        //    }
+        //});
+        var counter = 1;
+
+       // $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
+
+        //table.on('draw', function () {
+        //    console.log("draw complete a "  );
+        //   // $("#cover-spin").hide();
+        //});
+    });
+
+    function LoadValueDatas() {
+          $("#cover-spin").show();
         table = $('#marbleTable').DataTable({
             scrollY: "400px",
             scrollX: true,
@@ -108,11 +150,20 @@
             fixedColumns: {
                 leftColumns: 2
             }
+            , "fnDrawCallback": function (oSettings) {
+                 $("#cover-spin").hide();
+                 console.log("draw completeqq 1 ");
+            }
         });
         var counter = 1;
 
         $(".tblRow").on("change", function (e) { UpdatedList($(this).parent().index()); });
-    });
+
+        table.on('draw', function () {
+            console.log("draw complete a "  );
+           // $("#cover-spin").hide();
+        });
+    }
     function SaveSettings() {
 
         $('#loading').show();

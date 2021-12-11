@@ -5,24 +5,7 @@
     Layout = null;
 }
 <style>
-    .clearDate {
-        color: blue;
-        font-size: 13px;
-    }
-    .productTabs {
-        font-weight: 800;
-    }
-    .modal-body {
-        font-size: 14px;
-        font-family: system-ui;
-        font-weight: 500;
-    }
-    .form-control {
-        max-height: 30px;
-    }
-    input[type='checkbox'].form-control:focus {
-        box-shadow: none;
-    }
+  
 </style>
 
 <div class="modal-header">
@@ -61,7 +44,7 @@
                         </div>
                         <div class="col-sm-4 display-flex">
                             <label class="col-sm-5">DisplayOrder:</label>
-                            @Html.TextBoxFor(m => m.DisplayOrder, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.Name) })
+                            @Html.TextBoxFor(m => m.DisplayOrder, new { @class = "form-control", placeholder = @Html.DisplayNameFor(n => n.DisplayOrder) })
                         </div>
                     </div>
                     <div class="row">
@@ -289,7 +272,9 @@
                         }
                         duplicateClicked = value;
                     }
-                    function displayMessage(response) {
+                    function displayMessage(response)
+                    {
+                         
                         if (duplicateClicked == false) {
                             if (response == '') {
                                 notifyinmodal('success', 'Success Message', 'Data Saved Successfully', () => {

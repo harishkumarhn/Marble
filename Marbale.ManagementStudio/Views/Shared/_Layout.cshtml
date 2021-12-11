@@ -17,249 +17,43 @@
             width: 1200px;*/
         /*overflow: hidden;*/
         /*}*/
-        .open aside.left-panel {
+       /* .open aside.left-panel {
             max-width: 83px;
             width: 83px;
             position: absolute;
-        }
-    </style>
-    @*@RenderSection("head", required: false)*@
-    @*<link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-        <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">*@
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-
-    <link href="~/Content/Theme1/assets/css/cs-skin-elastic.css" rel="stylesheet" />
-
-    <link href="~/Content/Theme1/assets/css/style.css" rel="stylesheet" />
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
-
-
-    <link rel="stylesheet" href="~/Content/CSS/style.css">
-    <link rel="stylesheet" href="~/Content/CSS/layout.css">
-    <link href="~/Content/CSS/Material/meterialIcon.css" rel="stylesheet" />
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <!-- -------------------------- script-------------------------------------------------------  -->
-    @*<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>*@
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <script src="~/Content/JS/jquery.dataTables.js"></script>
-    <script src="~/Content/JS/dataTables.fixedColumns.min.js"></script>
-    <script src="~/Content/JS/dataTables.select.js"></script>
-    <script src="~/Content/DatetimePicker/jquery.datepicker2.js"></script>
-
-    @*<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>*@
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-
-    <script src="~/Content/Theme1/assets/js/main.js"></script>
-    <!--  Chart js -->
-    @*<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>*@
-
-    <!--Chartist Chart-->
-    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
-
-    @*<script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>*@
-
-
-
-    <style>
-        /*body {
-            width: 1200px;
-            overflow: hidden;
         }*/
-        .hide {
-            display: none;
-        }
 
-        .site-footer {
-            position: absolute;
-            bottom: 0px;
-            width: 80%;
-        }
-
-        #snackbar, #snackbar-modal, #close-modal {
-            visibility: hidden;
-        }
-
-        .snackbar[data-type="success"] {
-            background: linear-gradient(to bottom right,#28a745,#84b42d);
-        }
-
-        .snackbar[data-type="error"], .snackbar[data-type="delete"] {
-            background: linear-gradient(to bottom right,#FF2A68,#FF5E3A);
-        }
-
-        #snackbar.show {
-            visibility: visible;
-            -webkit-animation: fadein 0.5s linear, fadeout 0.5s 4s;
-            animation: fadein 0.5s linear, fadeout 0.5s linear 4s;
-        }
-
-        .snackbar {
-            min-width: 312px;
-            color: #f8f9fa;
-            text-align: center;
-            border-radius: 10px;
-            position: fixed;
-            z-index: 1;
-            right: 2%;
-            top: 12%;
-            font-size: 14px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        .snackbar-container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-
-        .icon {
-            font-size: 40px;
-            padding-left: 15px;
-            padding-right: 15px;
-            display: flex;
-        }
-
-        .snackbar-message {
-            align-content: center;
-            text-align: start;
-        }
-
-        .close {
-            position: absolute;
-            top: 5%;
-            right: 5%;
-            color: lightgray;
-        }
-
-        ion-icon {
-            --ionicon-stroke-width: 70px;
-        }
-
-        @@-webkit-keyframes fadein {
-            from {
-                right: -17%;
-                opacity: 0;
-            }
-
-            to {
-                right: 2%;
-                opacity: 1;
-            }
-        }
-
-        @@keyframes fadein {
-            from {
-                right: -17%;
-                opacity: 0;
-            }
-
-            to {
-                right: 2%;
-                opacity: 1;
-            }
-        }
-
-        @@-webkit-keyframes fadeout {
-            from {
-                right: 2%;
-                opacity: 1;
-            }
-
-            to {
-                right: -17%;
-                opacity: 0;
-            }
-        }
-
-        @@keyframes fadeout {
-            from {
-                right: 2%;
-                opacity: 1;
-            }
-
-            to {
-                right: -17%;
-                opacity: 0;
-            }
-        }
-
-        #snackbar-modal.show {
-            visibility: visible;
-            -webkit-animation: fadeintop 0.5s linear, fadeouttop 0.5s 4s;
-            animation: fadeintop 0.5s linear, fadeouttop 0.5s linear 4s;
-        }
-
-        @@-webkit-keyframes fadeintop {
-            from {
-                top: 0%;
-                opacity: 0;
-            }
-
-            to {
-                top: 12%;
-                opacity: 1;
-            }
-        }
-
-        @@keyframes fadeintop {
-            from {
-                top: 0%;
-                opacity: 0;
-            }
-
-            to {
-                top: 12%;
-                opacity: 1;
-            }
-        }
-
-        @@-webkit-keyframes fadeouttop {
-            from {
-                top: 12%;
-                opacity: 1;
-            }
-
-            to {
-                top: 0%;
-                opacity: 0;
-            }
-        }
-
-        @@keyframes fadeouttop {
-            from {
-                top: 12%;
-                opacity: 1;
-            }
-
-            to {
-                top: 0%;
-                opacity: 0;
-            }
+        .dropdown .show {
+            display: block;
         }
     </style>
+    <link href="~/Assets/Css/bootstrap4.1.3.min.css" rel="stylesheet" />
+
+    <link href="~/Assets/font-awesome.4.7.0/font-awesome.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">*@
+    <link href="~/Assets/Css/BaseFonts.css" rel="stylesheet" />
+    <link href="~/Assets/Css/BaseStyle01.css" rel="stylesheet" />
+    <link href="~/Assets/Css/BaseStyle02.css" rel="stylesheet" />
+
+    <link href="~/Assets/Material/meterialIcon.css" rel="stylesheet" />
+    <!-- -------------------------- script-------------------------------------------------------  -->
+
+    <script src="~/Assets/Scripts/JQuery/jquery-3.3.1.js"></script>
+    <script src="~/Assets/Scripts/bootstrap4.1.3.min.js"></script>
+    <script src="~/Assets/Scripts/JQuery/jquery-ui-1.12.1.js"></script>
+    <script src="~/Assets/Scripts/JQuery/jquery.validate.js"></script>
+    <script src="~/Assets/Scripts/JQuery/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Assets/Scripts/DataTable/jquery.dataTables.js"></script>
+    <script src="~/Assets/Scripts/DataTable/dataTables.fixedColumns.min.js"></script>
+    <script src="~/Assets/Scripts/DataTable/dataTables.select.js"></script>
+    <script src="~/Assets/Scripts/jquery.datepicker2.js"></script>
+
+
+    <script src="~/Assets/Scripts/main.js"></script>
 </head>
 
 <body>
+    <div id="cover-spin" style="display:none;"></div>
     <!-- Left Panel -->
     <!-- /#left-panel -->
     <!-- Right Panel -->
@@ -316,8 +110,9 @@
                                 <p class="red">You have 4 Mails</p>
                                 <a class="dropdown-item media" href="#">
                                     <span class="photo media-left">
-                                        <img alt="avatar" src="~/Content/Theme1/images/admin.jpg">
+                                        <img alt="avatar" src="~/Assets/Images/admin.jpg">
                                     </span>
+
                                     <div class="message media-body">
                                         <span class="name float-left">Jonathan Smith</span>
                                         <span class="time float-right">Just now</span>
@@ -325,7 +120,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="~/Content/Theme1/images/admin.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="~/Assets/Images/admin.jpg"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Jack Sanders</span>
                                         <span class="time float-right">5 minutes ago</span>
@@ -333,7 +128,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="~/Content/Theme1/images/admin.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="~/Assets/Images/admin.jpg"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Cheryl Wheeler</span>
                                         <span class="time float-right">10 minutes ago</span>
@@ -341,7 +136,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="~/Content/Theme1/images/admin.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="~/Assets/Images/admin.jpg"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Rachel Santos</span>
                                         <span class="time float-right">15 minutes ago</span>
@@ -354,7 +149,7 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="~/Content/Theme1/images/admin.jpg" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="~/Assets/Images/admin.jpg" alt="User Avatar">
 
                         </a>
 
@@ -363,9 +158,9 @@
 
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
 
-                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+                            @*<a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>*@
 
-                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="@Url.Action("Logout","Marble")"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
@@ -379,7 +174,7 @@
                 <div id="main-menu" class="main-menu collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                            <a href="#"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                         </li>
                         <li class="menu-title">Main</li><!-- /.menu-title -->
                         <li class="menu-item-has-children dropdown">
@@ -416,7 +211,7 @@
                                         {
                                             <li><i class="fa fa-puzzle-piece"></i><a href="@page.URL">@page.Page</a></li>
                                         }
-                                        
+
                                     }
                                 </ul>
 
@@ -526,14 +321,17 @@
     </div>
     <!-- /#right-panel -->
     <!-- Scripts -->
-
+    <div class="hide">
+        <input type="hidden" id="acname" value="@ViewContext.RouteData.GetRequiredString("action")" />
+        <input type="hidden" id="cntname" value="@ViewContext.RouteData.GetRequiredString("controller")" />
+    </div>
     <div id="myModal" class="modal fade">
         <div class="modal-dialog modal-centre">
             <div id="modelBody" class="modal-content">
             </div>
         </div>
     </div>
-     
+
 
     <!------ SnackBar -->
     <div id="snackbar" class="snackbar">
@@ -558,58 +356,51 @@
             return null;
         }
 
-        function SetSideMenu(flag) {
-            if (typeof (Storage) !== "undefined") {
-                if (flag) {
-                    sessionStorage.activemenu = true;
+        //function SetSideMenu(flag) {
+        //    if (typeof (Storage) !== "undefined") {
+        //        if (flag) {
+        //            sessionStorage.activemenu = true;
 
-                }
-                else {
-                    sessionStorage.activemenu = false
-                }
-                console.log("Set	 " + sessionStorage.activemenu)
-            }
-        }
-
-
-        $('#sidebarCollapse').on('click', function () {
-            console.log("bbbbb");
-            $('#sidebar').addClass('active');
-            $('.overlay').addClass('active');
-            $('.collapse.in').toggleClass('in');
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            SetSideMenu(true);
-        });
+        //        }
+        //        else {
+        //            sessionStorage.activemenu = false
+        //        }
+        //        console.log("Set	 " + sessionStorage.activemenu)
+        //    }
+        //}
 
 
-        $('#dismiss, .overlay').on('click', function () {
-            $('#sidebar').removeClass('active');
-            $('.overlay').removeClass('active');
-            SetSideMenu(false);
-        });
 
-        $(document).ready(function () {
-            console.log("a");
 
-            if (typeof (Storage) !== "undefined") {
-                console.log("AAAA	 " + sessionStorage.activemenu)
 
-                if (sessionStorage.activemenu == "true") {
-                    $('#sidebar').addClass('active');
-                    //$('.overlay').addClass('active');
+        //$('#dismiss, .overlay').on('click', function () {
+        //    $('#sidebar').removeClass('active');
+        //    $('.overlay').removeClass('active');
+        //    SetSideMenu(false);
+        //});
 
-                }
+        //$(document).ready(function () {
+        //    console.log("a");
 
-            }
+        //    if (typeof (Storage) !== "undefined") {
 
-            // var preSelectedValue = getCookie("PreviousExpandedDropDown");
-            //console.log("preSelectedValue"+preSelectedValue);
 
-            //if (preSelectedValue) {
+        //        if (sessionStorage.activemenu == "true") {
+        //            $('#sidebar').addClass('active');
+        //            //$('.overlay').addClass('active');
 
-            //  setSession(preSelectedValue);
-            //}
-        });
+        //        }
+
+        //    }
+
+        //    // var preSelectedValue = getCookie("PreviousExpandedDropDown");
+        //    //console.log("preSelectedValue"+preSelectedValue);
+
+        //    //if (preSelectedValue) {
+
+        //    //  setSession(preSelectedValue);
+        //    //}
+        //});
 
         function DisplayPopUp(page, url) {
             $('#myModal').modal('show');
@@ -619,10 +410,10 @@
                     'margin-top': 70
                 });
             } else {
-                $('#modelBody').css({
-                    'left': '-30%',
-                    'width': 800,
-                });
+                //$('#modelBody').css({
+                //    'left': '-30%',
+                //    'width': 800,
+                //});
             }
             $('#modelBody').load(url);
         }
@@ -643,6 +434,7 @@
         }
 
         function notify(dataType, header, message, callBack) {
+
             setTimeout(() => {
                 notifyClose();
                 if (callBack) {
@@ -661,6 +453,7 @@
         }
 
         function notifyinmodal(dataType, header, message, callBack) {
+
             setTimeout(() => {
                 notifyCloseinmodal();
                 if (callBack) {
@@ -679,6 +472,7 @@
         }
 
         function setSnackbarData(dataType, header, message) {
+
             switch (dataType.toLowerCase()) {
                 case 'error':
                     $('.icon ion-icon').attr("name", "close-circle-outline");
@@ -694,7 +488,9 @@
             }
             header = header ? header : "Success Message";
             $('.snackbar-header > #header').html(header);
-            $('#message').html(message ? message : "Data Saved Successfully");
+            $('.snackbar-content > #message').html(message ? message : "Data Saved Successfully");
+
+            //$('#message').html(message ? message : "Data Saved Successfully");
         }
     </script>
 
