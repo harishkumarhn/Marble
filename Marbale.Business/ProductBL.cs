@@ -90,7 +90,9 @@ namespace Marbale.Business
                         product.Time = dr.IsNull("Time") ? new DateTime() : Convert.ToDateTime(dr["Time"]);
                         product.MinimumQuantity = dr.IsNull("MinimumQuantity") ? 0 : Convert.ToInt32(dr["MinimumQuantity"]);
                         product.DisplayOrder = dr.IsNull("DisplayOrder") ? 0 : Convert.ToInt32(dr["DisplayOrder"]);
-                        product.CardExpiryDate = dr["CardExpiryDate"].ToString();
+                        product.CardExpiryDate = dr.IsNull("CardExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["CardExpiryDate"]);
+                        
+                         
                         product.MaximumQuantity = dr.IsNull("MaximumQuantity") ? 0 : Convert.ToInt32(dr["MaximumQuantity"]);
                         product.HSNSACCode = dr.IsNull("HSNSACCode") ? "" : dr["HSNSACCode"].ToString();
                         product.vipCard = dr.IsNull("vipCard") ? false : bool.Parse(dr["vipCard"].ToString());
@@ -173,7 +175,9 @@ namespace Marbale.Business
                     product.AllowPriceOverride = dr.IsNull("AllowPriceOverride") ? false : bool.Parse(dr["AllowPriceOverride"].ToString());
                     product.MinimumQuantity = dr.IsNull("MinimumQuantity") ? 0 : Convert.ToInt32(dr["MinimumQuantity"]);
                     product.DisplayOrder = dr.IsNull("DisplayOrder") ? 0 : Convert.ToInt32(dr["DisplayOrder"]);
-                    product.CardExpiryDate = dr.IsNull("CardExpiryDate") ? null : dr["CardExpiryDate"].ToString();
+                   // product.CardExpiryDate = dr.IsNull("CardExpiryDate") ? null : dr["CardExpiryDate"].ToString();
+                    product.CardExpiryDate = dr.IsNull("CardExpiryDate") ? new DateTime() : Convert.ToDateTime(dr["CardExpiryDate"]);
+
                     product.MaximumQuantity = dr.IsNull("MaximumQuantity") ? 0 : Convert.ToInt32(dr["MaximumQuantity"]);
                     product.HSNSACCode = dr.IsNull("HSNSACCode") ? "" : dr["HSNSACCode"].ToString();
                     product.vipCard = dr.IsNull("vipCard") ? false : bool.Parse(dr["vipCard"].ToString());
