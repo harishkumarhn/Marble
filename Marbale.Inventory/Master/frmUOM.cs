@@ -19,6 +19,8 @@ namespace Marbale.Inventory.Master
         public frmUOM()
         {
             InitializeComponent();
+            InitialiseUI initialiseUI = new InitialiseUI();
+            initialiseUI.SetSubFormUI(this);
         }
 
 

@@ -19,9 +19,11 @@ namespace Marbale.Inventory.Master
         public frmTax()
         {
             InitializeComponent();
+            InitialiseUI initialiseUI = new InitialiseUI();
+            initialiseUI.SetSubFormUI(this);
         }
 
-         
+
         void PopulateTaxGrid()
         {
             PurchaseTaxBL taxBL = new PurchaseTaxBL();

@@ -22,6 +22,11 @@ namespace Marbale.Inventory
         public MainForm()
         {
             InitializeComponent();
+
+            InitialiseUI initialiseUI = new InitialiseUI();
+            initialiseUI.SetUI(this);
+             
+
             loggedInUser = new User()
             {
                 Id = 1,

@@ -18,6 +18,8 @@ namespace Marbale.Inventory.Master
         public frmVendor()
         {
             InitializeComponent();
+            InitialiseUI initialiseUI = new InitialiseUI();
+            initialiseUI.SetSubFormUI(this);
         }
 
         private void frmVendor_Load(object sender, EventArgs e)

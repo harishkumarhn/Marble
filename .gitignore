@@ -24,3 +24,5 @@
 /Marbale.Inventory/bin
 /Marble.PrimaryServer/bin
 /Marble.WebReports/bin
+/Marble.DataLoggerService/obj
+/Marble.DataLoggerService/bin

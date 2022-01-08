@@ -20,6 +20,8 @@ namespace Marbale.Inventory.Master
         public frmLocationType()
         {
             InitializeComponent();
+            InitialiseUI initialiseUI = new InitialiseUI();
+            initialiseUI.SetSubFormUI(this);
         }
 
         private void frmLocationType_Load(object sender, EventArgs e)

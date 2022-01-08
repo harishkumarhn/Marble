@@ -19,6 +19,9 @@ namespace Marbale.Inventory.Master
         public frmCategory()
         {
             InitializeComponent();
+            InitialiseUI initialiseUI = new InitialiseUI();
+            initialiseUI.SetSubFormUI(this);
+
         }
 
         private void frmCategory_Load(object sender, EventArgs e)
