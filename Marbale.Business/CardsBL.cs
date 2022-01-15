@@ -4,7 +4,10 @@ using Marbale.DataAccess;
 using Marbale.DataAccess.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Linq;
 
 namespace Marble.Business
 {
@@ -18,16 +21,63 @@ namespace Marble.Business
             cardData = new CardsData();
             commonData = new CommonData();
         }
-        public int InsertOrUpdateCards(CardsModel cardmodel)
+
+        public ResultStatus ValidateCardsModel(CardsModel cardmodel)
         {
+            ResultStatus resultStatus = new ResultStatus(1, GlobalMessage.SUCESS);
             try
             {
-                return cardData.InsertOrUpdateCards(cardmodel);
+                TypeDescriptor.AddProviderTransparent(
+                 new AssociatedMetadataTypeTypeDescriptionProvider(typeof(CardsModel), typeof(CardsModel)), typeof(CardsModel));
+                ValidationContext context = new ValidationContext(cardmodel);
+                List<ValidationResult> results = new List<ValidationResult>();
+                var isValid = Validator.TryValidateObject(cardmodel, context, results, true);
+
+                //results = results.Where(x => x.MemberNames.FirstOrDefault() != "CountryValues").ToList();
+                //results = results.Where(x => x.MemberNames.FirstOrDefault() != "VendorValues").ToList();
+                //results = results.Where(x => x.MemberNames.FirstOrDefault() != "Country" || x.MemberNames.FirstOrDefault 
+
+                if (results.Count > 0)
+                {
+                    resultStatus.Result = 0;
+                    var error = results.Where(x => x.MemberNames.FirstOrDefault()  == "CardNumber").FirstOrDefault();
+                    if (error!=null)
+                    {
+                        resultStatus.Message = error.ErrorMessage;
+                        
+                    }
+                    //var error = results.Where(x => x.MemberNames.FirstOrDefault() == "CardNumber").FirstOrDefault();
+                    //if (error != null)
+                    //{
+                    //    resultStatus.Message = error.ErrorMessage;
+                    //}
+                }
+                return resultStatus;
+            }
+            catch (Exception e)
+            {
+                return   new ResultStatus(0, GlobalMessage.FAILED);
+            }
+        }
+
+
+        public ResultStatus InsertOrUpdateCards(CardsModel cardmodel)
+        {
+            ResultStatus result = new ResultStatus(0, GlobalMessage.FAILED);
+            try
+            {
+                DataTable dt= cardData.InsertOrUpdateCards(cardmodel);
+                if(dt!=null && dt.Rows.Count>0)
+                {
+                    result.Result = dt.Rows[0][0].ToString().ToINT();
+                    result.Message = dt.Rows[0][1].ToString() ;
+                }
             }
             catch (Exception e)
             {
                 throw e;
             }
+            return result;
         }
 
         public List<CardsModel> GetAllCards(ViewCard cardSearchCriteria)
@@ -129,7 +179,7 @@ namespace Marble.Business
             var dataTable = cardData.GetInventory(inventory);
             foreach (DataRow dr in dataTable.Rows)
             {
-               Inventory inv = new Inventory();
+                Inventory inv = new Inventory();
                 inv.NumberOfCards = dr.IsNull("NumberOfCards") ? 0 : int.Parse(dr["NumberOfCards"].ToString());
                 inv.User = dr.IsNull("User") ? "" : (dr["User"].ToString());
                 inv.ActionBy = dr.IsNull("ActionBy") ? "" : (dr["ActionBy"].ToString());
@@ -143,7 +193,7 @@ namespace Marble.Business
             }
             return inventorylist;
         }
-      
+
         public int DeleteCardById(int Id, string from)
         {
             try

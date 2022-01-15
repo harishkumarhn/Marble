@@ -63,8 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cards\Card.cs" />
- 	<Compile Include="Cards\ViewCard.cs" />
-	<Compile Include="Common\GlobalMessage.cs" />
+    <Compile Include="Cards\ViewCard.cs" />
+    <Compile Include="Common\GlobalMessage.cs" />
+    <Compile Include="Common\ResultStatus.cs" />
     <Compile Include="Customers\Customers.cs" />
     <Compile Include="Discount\Discounts.cs" />
     <Compile Include="DisplayGroup\DisplayGroup.cs" />

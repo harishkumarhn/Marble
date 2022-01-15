@@ -216,9 +216,18 @@
             changeYear: true,
             "setDate": new Date()
         });
+
+       
     });
     var table;
     $(document).ready(function () {
+
+        $(".hasDatepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            "setDate": new Date()
+        });
+
          table = $('#cardtable').DataTable({
             scrollY: "400px",
             scrollX: "400px",
@@ -293,11 +302,11 @@
     $('#newcard').click(function (event) {
         event.preventDefault();
         $('#myModal').modal('show');
-        $('#modelBody').css({
-            'left': '-30%',
-            'width': 900
-        });
-        $('#modelBody').load('/Cards/NewCard');
+        //$('#modelBody').css({
+        //    'left': '-30%',
+        //    'width': 900
+        //});
+        $('#modelBody').load('/Cards/NewCardPartial');
     });
     function UpdatedList(x) {
         updatedArray = [];

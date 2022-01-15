@@ -12,7 +12,7 @@ using System.Web.Mvc;
 namespace MarbaleManagementStudio.Controllers
 {
 
-    // [LogCustomExceptionFilter]
+    //[LogCustomExceptionFilter]
     [AuthorizationFilter]
     public class ProductController : Controller
     {
@@ -124,6 +124,7 @@ namespace MarbaleManagementStudio.Controllers
                 Session["TypeList"] = product.TypeList;
                 Session["CategoryList"] = product.CategoryList;
                 Session["DisplayGroupList"] = product.DisplayGroupList;
+                
                 product.Active = id == 0 ? true : product.Active;
                 product.DisplayInPOS = id == 0 ? true : product.DisplayInPOS;                
                 product.Time = DateTime.Now;

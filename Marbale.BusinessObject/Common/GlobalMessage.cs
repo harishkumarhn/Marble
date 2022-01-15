@@ -33,6 +33,9 @@ namespace Marbale.BusinessObject
         public static string REQUIRED_REMARKS = "Please Enter Remarks";
 
         public static string COMPLETE_CUSTOMER_REGISTRATION = "Please Complete Customer registration";
+
+        public static string FAILED = "Failed";
+        public static string SUCESS = "Success";
     }
 
 

@@ -1,4 +1,5 @@
 ﻿using Marbale.Business;
+using Marbale.BusinessObject;
 using Marbale.BusinessObject.Cards;
 using Marble.Business;
 using System;
@@ -24,6 +25,15 @@ namespace MarbaleManagementStudio.Controllers
         }
 
         [HttpGet]
+        public ActionResult NewCardPartial()
+        {
+            var data = cardBussiness.gettechcardtype();
+            Session["TechCardType"] = data;
+            //var products = cardBussiness.GetProducts();
+            //Session["CategoryList"] = products[0].CategoryList;
+            return View();
+        }
+        [HttpGet]
         public ActionResult NewCard()
         {
             var data = cardBussiness.gettechcardtype();
@@ -32,12 +42,18 @@ namespace MarbaleManagementStudio.Controllers
             //Session["CategoryList"] = products[0].CategoryList;
             return View();
         }
-
         [HttpGet]
         public ActionResult ViewCards(ViewCard cardSearchCriteria)
         {
             bool isSearch = !string.IsNullOrWhiteSpace(Request.QueryString["submit"]);
-
+            if (cardSearchCriteria.IssueDate == null)
+            {
+                cardSearchCriteria.IssueDate = DateTime.Now.AddMonths(-1);
+            }
+            if (cardSearchCriteria.ToDate == null)
+            {
+                cardSearchCriteria.ToDate = DateTime.Now;
+            }
             if (isSearch)
             {
                 List<CardsModel> data = cardBussiness.GetAllCards(cardSearchCriteria);
@@ -48,6 +64,8 @@ namespace MarbaleManagementStudio.Controllers
             else
             {
                 cardSearchCriteria.ValidFlag =true;
+                
+
             }
             return View(cardSearchCriteria);
         }
@@ -59,19 +77,28 @@ namespace MarbaleManagementStudio.Controllers
             CardsModel card = cardBussiness.getCardById(CardId);
             return View(card);
         }
-        public ActionResult InsertOrUpdateCards(CardsModel card)
+        public JsonResult InsertOrUpdateCards(CardsModel card)
         {
+            ResultStatus resultStatus = new ResultStatus();
             try
             {
-                int result = cardBussiness.InsertOrUpdateCards(card);
+                  resultStatus = cardBussiness.ValidateCardsModel(card);
+                if(resultStatus.Result==1)
+                {
+                    resultStatus = cardBussiness.InsertOrUpdateCards(card);
+                     
+                }
+                
             }
             catch (Exception e)
             {
                 throw e;
             }
-            return RedirectToAction("ViewCards", "Cards");
+            //= return RedirectToAction("ViewCards", "Cards");
+            return Json(resultStatus, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region DeleteCard
         public JsonResult DeleteCard(int Id)
         {
@@ -80,6 +107,7 @@ namespace MarbaleManagementStudio.Controllers
         }
 
         #endregion
+
         #region Inventory
 
         public ActionResult Inventory()
