@@ -514,36 +514,38 @@ namespace MarbaleManagementStudio.Controllers
 
         private void GetHeaderOrFooter(ref string printHTML, ReceiptPrintTemplate row, ref string style)
         {
+            string headerOrFooter = "";
             if (!string.IsNullOrWhiteSpace(row.Col1Data))
             {
                 style = GetStyle(row, 1);
                 if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
-                printHTML = printHTML + "<p " + style + ">" + row.Col1Data + "</p>";
+                headerOrFooter = headerOrFooter + "<div class='col-md-2'><p " + style + ">" + row.Col1Data + "</p></div>";
             }
             if (!string.IsNullOrWhiteSpace(row.Col2Data))
             {
                 style = GetStyle(row, 2);
                 if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
-                printHTML = printHTML + "<p " + style + ">" + row.Col2Data + "</p>";
+                headerOrFooter = headerOrFooter + "<div class='col-md-2'><p " + style + ">" + row.Col2Data + "</p></div>";
             }
             if (!string.IsNullOrWhiteSpace(row.Col3Data))
             {
                 style = GetStyle(row, 3);
                 if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
-                printHTML = printHTML + "<p " + style + ">" + row.Col3Data + "</p>";
+                headerOrFooter = headerOrFooter + "<div class='col-md-2'><p " + style + ">" + row.Col3Data + "</p></div>";
             }
             if (!string.IsNullOrWhiteSpace(row.Col4Data))
             {
                 style = GetStyle(row, 4);
                 if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
-                printHTML = printHTML + "<p " + style + ">" + row.Col4Data + "</p>";
+                headerOrFooter = headerOrFooter + "<div class='col-md-2'><p " + style + ">" + row.Col4Data + "</p></div>";
             }
             if (!string.IsNullOrWhiteSpace(row.Col5Data))
             {
                 style = GetStyle(row, 5);
                 if (!string.IsNullOrWhiteSpace(style)) style = "style=margin:0;" + style;
-                printHTML = printHTML + "<p " + style + ">" + row.Col5Data + "</p>";
+                headerOrFooter = headerOrFooter + "<div class='col-md-2'><p " + style + ">" + row.Col5Data + "</p></div>";
             }
+            printHTML = printHTML + "<div class='row'>" + headerOrFooter + "</div>";
         }
 
         private string GetStyle(ReceiptPrintTemplate template,int columnNumber)
