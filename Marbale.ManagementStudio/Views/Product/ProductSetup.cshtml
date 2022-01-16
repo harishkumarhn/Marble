@@ -5,8 +5,8 @@
 
 @*<link href="~/Content/css/product.css" rel="stylesheet" />*@
 <style>
-    
-   /* .tblRow > p {
+
+    /* .tblRow > p {
         padding: 0px;
         margin: 0px;
         line-height: 13px;
@@ -65,190 +65,190 @@
         @foreach (var item in ViewBag.productDetails)
         {
             count++;
-        <tr id="@count">
-            <td>
-                <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
-            </td>
-            <td>
-                @if (item.Id > 0)
-                {
-                    <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
-                        <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
-                    </a>
-                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
-                        <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
-                    </a>
-                }
-            </td>
-            <td>
-                <input type="text" class="fixedCol2" value="@item.Name" style="width: 6vw;" />
-            </td>
-            <td>
-                <select name="TypeList" id="TypeList">
-                    @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
+            <tr id="@count">
+                <td>
+                    <lable class="fixedCol1">@(item.Id == 0 ? "" : item.Id) </lable>
+                </td>
+                <td>
+                    @if (item.Id > 0)
                     {
-                        if (@item.Type == (@dow.Id).ToString())
-                        {
-                            <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                        }
-                        else
-                        {
-                            <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                        }
+                        <a class="edit" title="Edit" data-toggle="tooltip" onclick="EditProduct('@item.Id')">
+                            <i class="material-icons" style="cursor: pointer;">&#xE254;</i>
+                        </a>
+                        <a class="delete" title="Delete" data-toggle="tooltip" onclick="DeleteProduct('@item.Id')">
+                            <i class="material-icons" style="cursor: pointer;">&#xE872;</i>
+                        </a>
                     }
-                </select>
-            </td>
-            <td>
-                <select name="categoryList" id="categoryList">
-                    @foreach (var dow in @item.CategoryList)
-                    {
-                        if (@dow.Id != null && @item.Category == (@dow.Id).ToString())
+                </td>
+                <td>
+                    <input type="text" class="fixedCol2" value="@item.Name" style="width: 6vw;" />
+                </td>
+                <td>
+                    <select name="TypeList" id="TypeList">
+                        @foreach (var dow in (List<Marbale.BusinessObject.IdValue>)Session["TypeList"])
                         {
-                            <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            if (@item.Type == (@dow.Id).ToString())
+                            {
+                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            }
                         }
-                        else
+                    </select>
+                </td>
+                <td>
+                    <select name="categoryList" id="categoryList">
+                        @foreach (var dow in @item.CategoryList)
                         {
-                            <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            if (@dow.Id != null && @item.Category == (@dow.Id).ToString())
+                            {
+                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            }
                         }
-                    }
-                </select>
-            </td>
-            <td>
-                <input type="text" value="@item.MaximumQuantity" style="width:6.2vw;" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.Active ? "checked='checked'" : "") value="@item.Active" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />
-            </td>
-            <td>
-                <select name="displayGroupList" id="displayGroupList">
-                    @foreach (var dow in (@item.DisplayGroupList))
-                    {
-                        if (@item.DisplayGroupId == (@dow.Id))
+                    </select>
+                </td>
+                <td>
+                    <input type="text" value="@item.MaximumQuantity" style="width:6.2vw;" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.Active ? "checked='checked'" : "") value="@item.Active" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.DisplayInPOS ? "checked='checked'" : "") value="@item.DisplayInPOS" />
+                </td>
+                <td>
+                    <select name="displayGroupList" id="displayGroupList">
+                        @foreach (var dow in (@item.DisplayGroupList))
                         {
-                            <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            if (@item.DisplayGroupId == (@dow.Id))
+                            {
+                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            }
                         }
-                        else
+                    </select>
+                </td>
+                <td>
+                    <input type="number" value="@item.DisplayOrder" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber" style="width: 2vw;margin-right: 30px;" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.vipCard ? "checked='checked'" : "") value="@item.vipCard" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.QuantityPrompt ? "checked='checked'" : "") value="@item.QuantityPrompt" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.LineRemarksMandatory ? "checked='checked'" : "") value="@item.LineRemarksMandatory" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.ManagerApprovalRequired ? "checked='checked'" : "") value="@item.ManagerApprovalRequired" />
+                </td>
+                <td>
+                    <input type="text" value="@item.Price" id="Price@(count)" style="width:5vw" />
+                </td>
+                <td>
+                    <input type="text" value="@item.FaceValue" id="FaceValue@(count)" style="width:5vw" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)" />
+                </td>
+                <td>
+                    <label type="text" id="TaxPercentage@(count)" style="width:6vw">@item.TaxPercentage</label>
+                </td>
+                <td>
+                    <select name="taxlist" id="taxlist">
+                        @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
                         {
-                            <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            if (@item.TaxId == (@dow.Id))
+                            {
+                                <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
+                            }
                         }
-                    }
-                </select>
-            </td>
-            <td>
-                <input type="number" value="@item.DisplayOrder"/>
-            </td>
-            <td>
-                <input type="checkbox" @(item.AutoGenerateCardNumber ? "checked='checked'" : "") value="@item.AutoGenerateCardNumber" style="width: 2vw;margin-right: 30px;" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.OnlyVIP ? "checked='checked'" : "") value="@item.OnlyVIP" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.vipCard ? "checked='checked'" : "") value="@item.vipCard" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.QuantityPrompt ? "checked='checked'" : "") value="@item.QuantityPrompt" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.LineRemarksMandatory ? "checked='checked'" : "") value="@item.LineRemarksMandatory" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.ManagerApprovalRequired ? "checked='checked'" : "") value="@item.ManagerApprovalRequired" />
-            </td>
-            <td>
-                <input type="text" value="@item.Price" id="Price@(count)" style="width:5vw" />
-            </td>
-            <td>
-                <input type="text" value="@item.FaceValue" id="FaceValue@(count)" style="width:5vw" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.TaxInclusive ? "checked='checked'" : "") value="@item.TaxInclusive" id="TaxInclusive@(count)" />
-            </td>
-            <td>
-                <label type="text" id="TaxPercentage@(count)" style="width:6vw">@item.TaxPercentage</label>
-            </td>
-            <td>
-                <select name="taxlist" id="taxlist">
-                    @foreach (var dow in (List<Marbale.BusinessObject.Tax.TaxSet>)Session["TaxList"])
-                    {
-                        if (@item.TaxId == (@dow.Id))
-                        {
-                            <option value="@dow.Value" id="@dow.Id" selected>@dow.Value</option>
-                        }
-                        else
-                        {
-                            <option value="@dow.Value" id="@dow.Id">@dow.Value</option>
-                        }
-                    }
-                </select>
-            </td>
-            <td>
-                <label id="FinalPrice@(count)" style="width:6vw">@item.FinalPrice</label>
-            </td>
-            <td>
-                <label id="EffectivePrice@(count)" style="width:6vw">@item.EffectivePrice</label>
-            </td>
-            <td>
-                <input type="text" value="@(item.Credits != null ? @item.Credits : 0)" />
-            </td>
-            <td>
-                <input type="text" value="@(item.Courtesy != null ? @item.Courtesy : 0)" />
-            </td>
-            <td>
-                <input type="text" value="@(item.Bonus != null ? @item.Bonus : 0)" />
-            </td>
-            <td>
-                <input type="number" value="@item.Tickets" />
-            </td>
-            <td>
-                <input type="datetime" value="@item.Time" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
-            </td>
-            <td>
-                <label style="width:6vw">@item.Discount</label>
-            </td>
-            <td>
-                <input type="checkbox" @(item.AllowPriceOverride ? "checked='checked'" : "") value="@item.AllowPriceOverride" />
-            </td>
-            <td>
-                <input type="number" value="@item.CardValidFor" />
-            </td>
-            <td>
-                <input type="datetime" value="@item.CardExpiryDate" />
-            </td>
-            <td>
-                <input type="text" value="@item.HSNSACCode" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.TrxHeaderRemarksMandatory ? "checked='checked'" : "") value="@item.TrxHeaderRemarksMandatory" />
-            </td>
-            <td>
-                <input type="checkbox" @(item.InvokeCustomerRegistration ? "checked='checked'" : "") value="@item.InvokeCustomerRegistration" />
-            </td>
-            <td>
-                <label>@item.LastUpdatedBy</label>
-            </td>
-            <td>
-                <p>
-                    @(item.LastUpdatedDate != null ? item.LastUpdatedDate.Date.ToString("dd/MM/yyyy") : "")
-                </p>
-                <p>
-                    @(item.LastUpdatedDate != null ? item.LastUpdatedDate.ToString("HH:mm:ss") : "")
-                </p>
-                @*<label>@item.LastUpdatedDate</label>*@
-            </td>
-            <td>
-                <label>@(item.StartDate != null ? item.StartDate.ToString() : "")</label>
-            </td>
-            <td>
-                <label>@(item.ExpiryDate != null ? item.ExpiryDate.ToString() : "")</label>
-            </td>
-        </tr>
+                    </select>
+                </td>
+                <td>
+                    <label id="FinalPrice@(count)" style="width:6vw">@item.FinalPrice</label>
+                </td>
+                <td>
+                    <label id="EffectivePrice@(count)" style="width:6vw">@item.EffectivePrice</label>
+                </td>
+                <td>
+                    <input type="text" value="@(item.Credits != null ? @item.Credits : 0)" />
+                </td>
+                <td>
+                    <input type="text" value="@(item.Courtesy != null ? @item.Courtesy : 0)" />
+                </td>
+                <td>
+                    <input type="text" value="@(item.Bonus != null ? @item.Bonus : 0)" />
+                </td>
+                <td>
+                    <input type="number" value="@item.Tickets" />
+                </td>
+                <td>
+                    <input type="datetime" value="@item.Time" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.TicketAllowed ? "checked='checked'" : "") value="@item.TicketAllowed" />
+                </td>
+                <td>
+                    <label style="width:6vw">@item.Discount</label>
+                </td>
+                <td>
+                    <input type="checkbox" @(item.AllowPriceOverride ? "checked='checked'" : "") value="@item.AllowPriceOverride" />
+                </td>
+                <td>
+                    <input type="number" value="@item.CardValidFor" />
+                </td>
+                <td>
+                    <input type="datetime" value="@item.CardExpiryDate" />
+                </td>
+                <td>
+                    <input type="text" value="@item.HSNSACCode" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.TrxHeaderRemarksMandatory ? "checked='checked'" : "") value="@item.TrxHeaderRemarksMandatory" />
+                </td>
+                <td>
+                    <input type="checkbox" @(item.InvokeCustomerRegistration ? "checked='checked'" : "") value="@item.InvokeCustomerRegistration" />
+                </td>
+                <td>
+                    <label>@item.LastUpdatedBy</label>
+                </td>
+                <td>
+                    <p>
+                        @(item.LastUpdatedDate != null ? item.LastUpdatedDate.Date.ToString("dd/MM/yyyy") : "")
+                    </p>
+                    <p>
+                        @(item.LastUpdatedDate != null ? item.LastUpdatedDate.ToString("HH:mm:ss") : "")
+                    </p>
+                    @*<label>@item.LastUpdatedDate</label>*@
+                </td>
+                <td>
+                    <label>@(item.StartDate != null ? item.StartDate.ToString() : "")</label>
+                </td>
+                <td>
+                    <label>@(item.ExpiryDate != null ? item.ExpiryDate.ToString() : "")</label>
+                </td>
+            </tr>
 
         }
     </tbody>
@@ -485,6 +485,7 @@
                 }
             }
 
+            debugger
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",

@@ -219,6 +219,8 @@
     <Content Include="Assets\Images\sort_both.png" />
     <Content Include="Assets\Images\unmatch.png" />
     <Content Include="Assets\Images\upload.png" />
+    <Content Include="Assets\Scripts\JQuery\jquery-1.10.2.js" />
+    <Content Include="Assets\Scripts\JQuery\jquery-1.10.2.min.js" />
     <Content Include="Assets\Scripts\bootstrap4.1.3.min.js" />
     <Content Include="Assets\Scripts\jquery.datepicker2.js" />
     <Content Include="Assets\fonts\font.css" />
