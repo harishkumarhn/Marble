@@ -2,10 +2,16 @@
     ViewBag.Title = "Printer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    table td {
+        font-size: 13px;
+        white-space: normal;
+    }
+</style>
 
 <div>
-   <button class="tablinks" id="printer" onclick="getPrinters()" title="Printers">Printers</button>
-   <button class="tablinks" id="template" onclick="getTemplates()" title="Templates">Templates</button>
+    <button class="tablinks" id="printer" onclick="getPrinters()" title="Printers">Printers</button>
+    <button class="tablinks" id="template" onclick="getTemplates()" title="Templates">Templates</button>
 </div>
 <div id="tabBody">
 </div>
