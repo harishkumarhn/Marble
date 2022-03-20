@@ -13,16 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@Page.Title</title>
     <style>
-        /*body {
-            width: 1200px;*/
-        /*overflow: hidden;*/
-        /*}*/
-        /* .open aside.left-panel {
-            max-width: 83px;
-            width: 83px;
-            position: absolute;
-        }*/
-
         .dropdown .show {
             display: block;
         }
@@ -170,7 +160,7 @@
 
                             @*<a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>*@
 
-                            <a class="nav-link" href="@Url.Action("Logout","Marble")"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="@Url.Action("Logout", "Marble")"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
@@ -420,19 +410,23 @@
                     'margin-top': 70
                 });
             } else {
-                //$('#modelBody').css({
-                //    'left': '-30%',
-                //    'width': 800,
-                //});
             }
+            $('#modelBody').load(url);
+        }
+
+        function DisplayPDF(page, url) {
+            $('#myModal').modal('show');
+                $('#modelBody').css({
+                    'width': 470,
+                    'margin-top': 70,
+                    'margin-left': '34%'
+                });
             $('#modelBody').load(url);
         }
 
         $("#myModal").draggable({
             handle: ".modal-header"
         });
-
-
 
         function setSession(selectedId) {
             var preSelectedValue = getCookie("PreviousExpandedDropDown");

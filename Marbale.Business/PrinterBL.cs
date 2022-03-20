@@ -1,4 +1,5 @@
 ﻿using Marbale.BusinessObject.SiteSetup;
+using SelectPdf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,11 +70,6 @@ namespace Marble.Business
                                 tableBody = tableBody + "<td " + style + ">" + row.Col5Data + "</td>";
                             }
                             tableBody = tableBody + "</tr>";
-                            //productRowCount--;
-                            //if (productRowCount <= 0)
-                            //{
-                            //    tableBody = "<table width='100%'>" + tableBody + "</table>";
-                            //}
                             break;
                         case "total":
                             tableBody = tableBody + "<tr>";
@@ -108,11 +104,9 @@ namespace Marble.Business
                                 tableBody = tableBody + "<td " + style + ">" + row.Col5Data + "</td>";
                             }
                             tableBody = tableBody + "</tr>";
-                            //totalRowCount--;                            
                             break;
                         case "footer":
                             this.GetTableBodyRow(ref tableBody, row, ref style);
-                            //GetHeaderOrFooter(ref printHTML, row, ref style);
                             break;
                         default:
                             break;
@@ -120,57 +114,76 @@ namespace Marble.Business
                 }
                 
             }
-            //if (!string.IsNullOrWhiteSpace(printHTML)) { printHTML = "<div style=''>" + printHTML + "</div>"; }
-
-            // printHTML = printHTML + this.BasicStyle();
-            string html = "<table width='100%'>" + tableBody + "</table>" + this.BasicStyle();
+            string html = "<table>" + tableBody + "</table>" + this.BasicStyle();
 
             return html;
         }
 
+        public byte[] GetPDF(int headerId)
+        {
+            try
+            {
+                // instantiate a html to pdf converter object
+                int pagesizeInPX = 295;
+                HtmlToPdf converter = new HtmlToPdf(pagesizeInPX);
+                // set converter options
+                //converter.Options.PdfPageSize = PdfPageSize.Custom;
+                converter.Options.PdfPageOrientation = PdfPageOrientation.Portrait;
+                converter.Options.MarginLeft = 10;
+                converter.Options.MarginRight = 10;
+                converter.Options.MarginTop = 20;
+                converter.Options.MarginBottom = 20;
+
+                // create a new pdf document converting an url
+                PdfDocument doc = converter.ConvertHtmlString(this.GetHTMLPreview(headerId));
+                return doc.Save();
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
         private void GetTableBodyRow(ref string printHTML, ReceiptPrintTemplate row, ref string style)
         {
-            int colCount = 0;
-            if (!string.IsNullOrWhiteSpace(row.Col1Data)) colCount++;
-            if (!string.IsNullOrWhiteSpace(row.Col2Data)) colCount++;
-            if (!string.IsNullOrWhiteSpace(row.Col3Data)) colCount++;
-            if (!string.IsNullOrWhiteSpace(row.Col4Data)) colCount++;
-            if (!string.IsNullOrWhiteSpace(row.Col5Data)) colCount++;
+            int colCount = 5;
+            //if (!string.IsNullOrWhiteSpace(row.Col1Data)) colCount++;
+            //if (!string.IsNullOrWhiteSpace(row.Col2Data)) colCount++;
+            //if (!string.IsNullOrWhiteSpace(row.Col3Data)) colCount++;
+            //if (!string.IsNullOrWhiteSpace(row.Col4Data)) colCount++;
+            //if (!string.IsNullOrWhiteSpace(row.Col5Data)) colCount++;
 
-            string width = (100 / colCount) + "%";
-
-            string tableBody = "<tr>";
+            string headerRow = "<tr>";
             if (!string.IsNullOrWhiteSpace(row.Col1Data))
             {
                 style = GetStyle(row, 1);
-                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:"+ width + ";'";
-                tableBody = tableBody + "<td " + style + ">" + row.Col1Data + "</td>";
+                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + ";'";
+                headerRow = headerRow + "<td colspan=" + colCount.ToString() + " " + style + ">" + row.Col1Data + "</td>";
             }
             if (!string.IsNullOrWhiteSpace(row.Col2Data))
             {
                 style = GetStyle(row, 2);
-                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:" + width + ";'";
-                tableBody = tableBody + "<td " + style + ">" + row.Col2Data + "</td>";
+                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + ";'";
+                headerRow = headerRow + "<td colspan="+ colCount.ToString() + " " + style + ">" + row.Col2Data + "</td>";
             }
             if (!string.IsNullOrWhiteSpace(row.Col3Data))
             {
                 style = GetStyle(row, 3);
-                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:" + width + ";'";
-                tableBody = tableBody + "<td " + style + ">" + row.Col3Data + "</td>";
+                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + ";'";
+                headerRow = headerRow + "<td colspan=" + colCount.ToString() + " " + style + ">" + row.Col3Data + "</td>";
             }
             if (!string.IsNullOrWhiteSpace(row.Col4Data))
             {
                 style = GetStyle(row, 4);
-                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:" + width + ";'";
-                tableBody = tableBody + "<td " + style + ">" + row.Col4Data + "</td>";
+                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style +";'";
+                headerRow = headerRow + "<td colspan=" + colCount.ToString() + " " + style + ">" + row.Col4Data + "</td>";
             }
             if (!string.IsNullOrWhiteSpace(row.Col5Data))
             {
                 style = GetStyle(row, 5);
-                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style + "width:20%;'";
-                tableBody = tableBody + "<td " + style + ">" + row.Col5Data + "</td>";
+                if (!string.IsNullOrWhiteSpace(style)) style = "style='" + style;
+                headerRow = headerRow + "<td colspan=" + colCount.ToString() + " " + style + ">" + row.Col5Data + "</td>";
             }
-            printHTML = tableBody + "</tr>";
+            printHTML = headerRow + "</tr>";
         }
        
 
@@ -238,7 +251,7 @@ namespace Marble.Business
 
         private string BasicStyle()
         {
-            string style = "<style>table td {}</style>";
+            string style = "<style>table td{  white-space: normal; }</style>";
             return style;
         }
     }

@@ -437,10 +437,9 @@ namespace MarbaleManagementStudio.Controllers
         }
         public ActionResult PrintPreview(int headerId)
         {
-           // ViewBag.printHTML = this.printerBL.PrintPreview(headerId);
+            ViewBag.printHTML = this.printerBL.GetHTMLPreview(headerId);
             return PartialView("~/Views/SiteSetup/Printer/PrintPreview.cshtml");
         }
-
 
         public int UpdatePrintTemplate(ReceiptPrintTemplateHeader template)
         {

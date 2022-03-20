@@ -42,10 +42,11 @@
                     <input type="text" value="@(item.FontSize == 0 ? 8 : @item.FontSize)" />
                 </td>
                 <td>
-                    <a class="preview" onclick ="Preview(@item.TemplateId)" title="preview" data-toggle="tooltip">
+                    @*<a class="preview" href="/SiteSetup/PrintPreview?headerId=@item.TemplateId" target="_blank" title="preview" data-toggle="tooltip">*@
+                    <a class="preview" onclick="Preview(@item.TemplateId)" title="preview" data-toggle="tooltip">
                         <i class="material-icons print" style="cursor: pointer;margin-left: 22px;">&#xe8ad;</i>
                     </a>
-                <td>
+<td>
                     <a class="add" title="add" onclick="addTemplateHeader()" data-toggle="tooltip">
                         <i class="material-icons" style="cursor: pointer;">&#xe145;</i>
                     </a>
@@ -130,7 +131,7 @@
     function Preview(index) {
         if (index != selectedItem) {
             var url = '/SiteSetup/PrintPreview?headerId=' + index;
-            DisplayPopUp("printPreview", url);
+            DisplayPDF("printPreview", url);
         }
     }
     function UpdatePrinterTemplateList(index) {
